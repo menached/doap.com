@@ -1,0 +1,25 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Check out the Repository
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      # Step 2: Copy Files to Apache vhost
+      - name: Copy Files to Apache vhost
+        run: |
+          echo "Copying files to /var/www/doap.com/"
+          #sudo rsync -avn --delete ./ /var/www/doap.com/
+          scp index.html deb1.doap.com:/var/www/doap.com/
