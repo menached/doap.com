@@ -1,0 +1,17 @@
+# Ignore everything first 
+/*
+# allow some files
+!.gitignore
+!index.html
+!index.html                         
+!readme.html                        
+!sitemap.xml                        
+!sitemap.html                       
+!.gitignore                         
+!*.png
+!*.jpg
+!*.svg
+!*.jpeg
+!*.webp
+.github/*                           # Ignore everything in .github
+!.github/workflows/                 # Allow the workflows directory
