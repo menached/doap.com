@@ -1,17 +1,22 @@
-# Ignore everything first 
+# Ignore everything first
 /*
-# allow some files
+
+# Allow specific files and directories
 !.gitignore
 !index.html
-!index.html                         
-!readme.html                        
-!sitemap.xml                        
-!sitemap.html                       
-!.gitignore                         
+!readme.html
+!sitemap.xml
+!sitemap.html
 !*.png
 !*.jpg
 !*.svg
 !*.jpeg
 !*.webp
-.github/*                           # Ignore everything in .github
-!.github/workflows/                 # Allow the workflows directory
+
+# Ignore everything in .github
+.github/*
+
+# Allow the workflows directory and its contents
+!.github/workflows/
+!.github/workflows/ci-cd.yml
+
