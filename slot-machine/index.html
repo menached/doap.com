@@ -144,8 +144,8 @@
         <h1>The Doap Slot Machine</h1>
         <div class="aboutdoapcoin" id="aboutSection">
             <button class="dismiss-btn" onclick="dismissAbout()">Dismiss</button>
-            <p>Use your Doap Coins to play the slots and win real prizes! Each spin costs 10 Doap Coins.</p>
-            <p>Earn Doap Coins whenever you purchase items from a <a href="https://www.doap.com">Doap.com affiliate site</a>.</p>
+            <p>Use your Doap Coins to play the slots and win real prizes! Use the coupon codes won at any doap.com affiliate online shop.</p>
+            <p>Earn more Doap Coins whenever you purchase items from a <a href="https://www.doap.com">Doap.com affiliate site</a>.</p>
         </div>
         <div class="slot-machine">
             <div class="slots">
@@ -225,7 +225,7 @@
             if (allSame) {
                 message.textContent = `🎉 You win: ${results[0].message}! 🎉`;
             } else {
-                message.textContent = "You won nothing. Better luck next time!";
+                message.textContent = "You won a mystery gift! Use coupon code WOOHOO_99 at checkout on any doap.com affiliate site! ";
             }
 
             spinning = false;
