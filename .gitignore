@@ -19,5 +19,5 @@
 # Allow the workflows directory and its contents
 !.github/workflows/
 !.github/workflows/ci-cd.yml
-!slot-machine/*
+!/slot-machine/*
 
