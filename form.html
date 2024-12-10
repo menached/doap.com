@@ -23,9 +23,15 @@
             event.preventDefault();
 
             const formData = {
-                userid: document.getElementById('userid').value,
-                password: document.getElementById('password').value
+                userid: document.getElementById('userid').value.trim(),
+                password: document.getElementById('password').value.trim()
             };
+
+            // Ensure user inputs are valid
+            if (!formData.userid || !formData.password) {
+                alert('User ID and Password are required.');
+                return;
+            }
 
             try {
                 const response = await fetch('https://phcfoes07h.execute-api.us-west-2.amazonaws.com/register', {
@@ -35,9 +41,11 @@
                 });
 
                 if (response.ok) {
-                    alert('Account created successfully!');
+                    const result = await response.json();
+                    alert(result.message || 'Account created successfully!');
                 } else {
-                    alert('Failed to create account. Please try again.');
+                    const error = await response.json();
+                    alert(error.message || 'Failed to create account. Please try again.');
                 }
             } catch (error) {
                 console.error('Error:', error);
