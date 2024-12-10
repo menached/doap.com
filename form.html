@@ -38,6 +38,7 @@
             }
 
             try {
+                console.log('Form Data:', formData);
                 const response = await fetch('https://phcfoes07h.execute-api.us-west-2.amazonaws.com/register/register', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
