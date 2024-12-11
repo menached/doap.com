@@ -30,7 +30,7 @@
         const totalDisplay = document.getElementById('total');
 
         cartForm.addEventListener('change', () => {
-            const items = Array.from(cartForm.elements['item'])
+            const items = Array.from(cartForm.elements['item'] || []) // Handle undefined gracefully
                 .filter(el => el.checked)
                 .map(el => parseFloat(el.value.split('|')[1]));
             const total = items.reduce((sum, price) => sum + price, 0);
@@ -38,7 +38,7 @@
         });
 
         async function submitCart() {
-            const items = Array.from(cartForm.elements['item'])
+            const items = Array.from(cartForm.elements['item'] || []) // Handle undefined gracefully
                 .filter(el => el.checked)
                 .map(el => el.value.split('|')[0]);
             const address = document.getElementById('address').value;
