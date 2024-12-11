@@ -30,17 +30,19 @@
         const totalDisplay = document.getElementById('total');
 
         cartForm.addEventListener('change', () => {
-            const items = Array.from(cartForm.elements['item'] || []) // Handle undefined gracefully
-                .filter(el => el.checked)
-                .map(el => parseFloat(el.value.split('|')[1]));
+            const itemElements = cartForm.querySelectorAll('input[name="item"]'); // Select all items by name
+            const items = Array.from(itemElements)
+                .filter(el => el.checked) // Filter checked items
+                .map(el => parseFloat(el.value.split('|')[1])); // Extract the price
             const total = items.reduce((sum, price) => sum + price, 0);
             totalDisplay.textContent = `$${total}`;
         });
 
         async function submitCart() {
-            const items = Array.from(cartForm.elements['item'] || []) // Handle undefined gracefully
-                .filter(el => el.checked)
-                .map(el => el.value.split('|')[0]);
+            const itemElements = cartForm.querySelectorAll('input[name="item"]'); // Select all items by name
+            const items = Array.from(itemElements)
+                .filter(el => el.checked) // Filter checked items
+                .map(el => el.value.split('|')[0]); // Extract the name
             const address = document.getElementById('address').value;
             const total = totalDisplay.textContent;
 
