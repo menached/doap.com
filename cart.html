@@ -26,38 +26,70 @@
     </form>
 
     <script>
-        const cartForm = document.getElementById('cartForm');
-        const totalDisplay = document.getElementById('total');
+const cartForm = document.getElementById('cartForm');
+const totalDisplay = document.getElementById('total');
 
-        cartForm.addEventListener('change', () => {
-            const items = Array.from(cartForm.elements['item'])
-                .filter(el => el.checked)
-                .map(el => parseFloat(el.value.split('|')[1]));
-            const total = items.reduce((sum, price) => sum + price, 0);
-            totalDisplay.textContent = `$${total}`;
-        });
+cartForm.addEventListener('change', () => {
+    const itemElements = cartForm.querySelectorAll('input[name="item"]'); // Select all items by name
+    if (!itemElements) {
+        console.error('No items found in the cart.');
+        totalDisplay.textContent = '$0';
+        return;
+    }
 
-        async function submitCart() {
-            const items = Array.from(cartForm.elements['item'])
-                .filter(el => el.checked)
-                .map(el => el.value.split('|')[0]);
-            const address = document.getElementById('address').value;
-            const total = totalDisplay.textContent;
+    const items = Array.from(itemElements)
+        .filter(el => el.checked) // Filter checked items
+        .map(el => parseFloat(el.value.split('|')[1])); // Extract the price
 
-            const data = { items, address, total };
+    const total = items.reduce((sum, price) => sum + price, 0);
+    totalDisplay.textContent = `$${total}`;
+});
 
-            const response = await fetch('https://nh4za4vqt3.execute-api.us-west-2.amazonaws.com/prod/checkout', {
+async function submitCart() {
+    try {
+        const itemElements = cartForm.querySelectorAll('input[name="item"]');
+        if (!itemElements) {
+            throw new Error('No items found in the cart.');
+        }
+
+        const items = Array.from(itemElements)
+            .filter(el => el.checked) // Filter checked items
+            .map(el => el.value.split('|')[0]); // Extract the name
+
+        if (items.length === 0) {
+            throw new Error('No items selected.');
+        }
+
+        const address = document.getElementById('address').value;
+        if (!address) {
+            throw new Error('Address is required.');
+        }
+
+        const total = totalDisplay.textContent;
+
+        const data = { items, address, total };
+
+        const response = await fetch(
+            'https://nh4za4vqt3.execute-api.us-west-2.amazonaws.com/prod/checkout',
+            {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data)
-            });
-
-            if (response.ok) {
-                alert('Order submitted successfully!');
-            } else {
-                alert('Error submitting order.');
+                body: JSON.stringify(data),
             }
+        );
+
+        if (response.ok) {
+            alert('Order submitted successfully!');
+        } else {
+            const errorText = await response.text();
+            console.error('Error submitting order:', errorText);
+            alert('Error submitting order.');
         }
+    } catch (error) {
+        console.error('Error:', error.message);
+        alert(error.message);
+    }
+}
     </script>
 </body>
 </html>
