@@ -7,25 +7,28 @@
 </head>
 <body>
     <h1>Shopping Cart</h1>
-    <form id="cartForm">
-        <label>
-            <input type="checkbox" name="item" value="Item1|10"> Item 1 - $10
-        </label><br>
-        <label>
-            <input type="checkbox" name="item" value="Item2|15"> Item 2 - $15
-        </label><br>
-        <label>
-            <input type="checkbox" name="item" value="Item3|20"> Item 3 - $20
-        </label><br><br>
+        <form id="cartForm">
+            <label>
+                <input type="checkbox" name="item" value="Item1|10"> Item 1 - $10
+            </label><br>
+            <label>
+                <input type="checkbox" name="item" value="Item2|15"> Item 2 - $15
+            </label><br>
+            <label>
+                <input type="checkbox" name="item" value="Item3|20"> Item 3 - $20
+            </label><br><br>
 
-        <label for="address">Address:</label><br>
-        <textarea id="address" name="address" autocomplete="address-line1" required></textarea>
+            <label for="email">Your Email:</label><br>
+            <input type="email" id="email" name="email" required><br><br>
 
-        <span>Total Price:</span>
-        <span id="total">$0</span><br><br>
+            <label for="address">Address:</label><br>
+            <textarea id="address" name="address" autocomplete="address-line1" required></textarea><br><br>
 
-        <button id="checkoutButton">Checkout</button>
-    </form>
+            <span>Total Price:</span>
+            <span id="total">$0</span><br><br>
+
+            <button id="checkoutButton">Checkout</button>
+        </form>
 
 </body>
 </html>
