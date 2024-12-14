@@ -19,6 +19,7 @@ cartForm.addEventListener('change', () => {
     totalDisplay.textContent = `$${total}`;
 });
 
+
 async function submitCart() {
     try {
         const itemElements = cartForm.querySelectorAll('input[name="item"]');
