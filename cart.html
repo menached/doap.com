@@ -2,7 +2,14 @@
 <html>
 <head>
     <title>Shopping Cart</title>
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://*.doap.com https://doap.com https://*.google-analytics.com https://analytics.google.com https://phcfoes07h.execute-api.us-west-2.amazonaws.com/register/register https://kzio8fb6h7.execute-api.us-west-2.amazonaws.com/prod/checkout https://nh4za4vqt3.execute-api.us-west-2.amazonaws.com;">
+    <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    script-src 'self';
+    connect-src 'self' https://*.doap.com https://nh4za4vqt3.execute-api.us-west-2.amazonaws.com;
+    style-src 'self';
+    img-src 'self' data:;
+    font-src 'self';">
+
 </head>
 <body>
     <h1>Shopping Cart</h1>
@@ -23,10 +30,12 @@
         <label for="total">Total Price:</label>
         <span id="total">$0</span><br><br>
 
-        <button type="button" onclick="submitCart()">Checkout</button>
+        <button id="checkoutButton">Checkout</button>
     </form>
 
     <script>
+document.getElementById("checkoutButton").addEventListener("click", submitCart);
+
 const cartForm = document.getElementById('cartForm');
 const totalDisplay = document.getElementById('total');
 
