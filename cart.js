@@ -33,6 +33,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 throw new Error("No items selected.");
             }
 
+            const email = document.getElementById("email").value;
+            if (!email) {
+                throw new Error("Email is required.");
+            }
+
             const address = document.getElementById("address").value;
             if (!address) {
                 throw new Error("Address is required.");
@@ -40,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const total = totalDisplay.textContent;
 
-            const data = { items, address, total };
+            const data = { items, email, address, total };
 
             const response = await fetch(
                 "https://eft3wrtpad.execute-api.us-west-2.amazonaws.com/prod/checkout",
