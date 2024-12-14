@@ -36,7 +36,6 @@
     <script>
 document.getElementById("checkoutButton").addEventListener("click", submitCart);
 
-<<<<<<< HEAD
 const cartForm = document.getElementById('cartForm');
 const totalDisplay = document.getElementById('total');
 
@@ -47,7 +46,6 @@ cartForm.addEventListener('change', () => {
         totalDisplay.textContent = '$0';
         return;
     }
-=======
         cartForm.addEventListener('change', () => {
             const itemElements = cartForm.querySelectorAll('input[name="item"]'); // Select all items by name
             const items = Array.from(itemElements)
@@ -64,7 +62,6 @@ cartForm.addEventListener('change', () => {
                 .map(el => el.value.split('|')[0]); // Extract the name
             const address = document.getElementById('address').value;
             const total = totalDisplay.textContent;
->>>>>>> refs/remotes/origin/main
 
     const items = Array.from(itemElements)
         .filter(el => el.checked) // Filter checked items
