@@ -14,7 +14,6 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
     }
 
-    // Calculate total price dynamically
     cartForm.addEventListener("change", () => {
         const itemElements = cartForm.querySelectorAll('input[name="item"]');
         const total = Array.from(itemElements)
@@ -22,10 +21,13 @@ document.addEventListener("DOMContentLoaded", () => {
             .reduce((sum, el) => sum + parseFloat(el.value.split('|')[1]), 0);
         totalDisplay.textContent = `$${total}`;
 
-        // Update the selected items dynamically
+        // Update the cart dynamically with item name and cost
         const checkedItems = Array.from(cartForm.querySelectorAll('input[name="item"]:checked'));
         selectedItemsList.innerHTML = checkedItems.length
-            ? checkedItems.map(item => `<li>${item.value.split('|')[0]}</li>`).join('')
+            ? checkedItems.map(item => {
+                const [itemName, itemCost] = item.value.split('|');
+                return `<li>${itemName} - $${itemCost}</li>`;
+              }).join('')
             : '<li>No items selected yet.</li>';
     });
 
