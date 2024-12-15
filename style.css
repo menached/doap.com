@@ -8,10 +8,53 @@ body {
     font-size: 16px; /* Base font size for all devices */
 }
 
-/* Default Font Size for body */
-body {
-    font-size: 16px;
+/* Customer Information */
+.customer-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;  /* Three equal columns on larger screens */
+    gap: 10px;  /* Space between the columns */
+    margin-bottom: 20px;
 }
+
+.customer-info label {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.customer-info input,
+.customer-info textarea {
+    width: 100%; /* Ensure inputs and textareas take up full width of their column */
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+/* Address and City fields are full width */
+.customer-info textarea,
+.customer-info input[type="text"] {
+    width: 100%;
+}
+
+.customer-info input[type="email"],
+.customer-info input[type="tel"] {
+    width: 100%;
+}
+
+/* For mobile and small screens (less than 768px) */
+@media (max-width: 767px) {
+    .customer-info {
+        grid-template-columns: 1fr;  /* Stack fields on top of each other */
+    }
+
+    /* Make Name, Phone, and Email full width */
+    .customer-info input,
+    .customer-info textarea {
+        width: 100%; /* Full width on mobile */
+    }
+}
+
 
 h1, h2, h3 {
     font-family: 'Marvel', sans-serif; /* Apply Marvel font to tab text */
