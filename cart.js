@@ -52,6 +52,23 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     };
 
+    const applyTabListeners = () => {
+        const tabs = document.querySelectorAll(".tab");
+        const tabContents = document.querySelectorAll(".tab-content");
+
+        tabs.forEach(tab => {
+            tab.addEventListener("click", () => {
+                tabs.forEach(t => t.classList.remove("active"));
+                tabContents.forEach(content => content.classList.remove("active"));
+                tab.classList.add("active");
+                document.getElementById(tab.dataset.tab).classList.add("active");
+            });
+        });
+    };
+
+    // Apply tab listeners initially
+    applyTabListeners();
+
     // Handle changes in cart (checkboxes or quantity)
     cartForm.addEventListener("change", () => {
         updateCart();
@@ -73,8 +90,8 @@ document.addEventListener("DOMContentLoaded", () => {
             const items = Array.from(checkedItems).map(item => {
                 const quantityInput = item.closest(".item").querySelector(".quantity");
                 const quantity = parseInt(quantityInput.value, 10) || 1;
-                const [itemName] = item.value.split('|');
-                return { name: itemName, quantity };
+                const [itemName, itemCost] = item.value.split('|');
+                return { name: itemName, quantity, price: parseFloat(itemCost) };
             });
 
             if (items.length === 0) throw new Error("No items selected!");
@@ -114,19 +131,6 @@ document.addEventListener("DOMContentLoaded", () => {
             console.error("Error:", error.message);
             alert(error.message);
         }
-    });
-
-    // Tab switching logic
-    const tabs = document.querySelectorAll(".tab");
-    const tabContents = document.querySelectorAll(".tab-content");
-
-    tabs.forEach(tab => {
-        tab.addEventListener("click", () => {
-            tabs.forEach(t => t.classList.remove("active"));
-            tabContents.forEach(content => content.classList.remove("active"));
-            tab.classList.add("active");
-            document.getElementById(tab.dataset.tab).classList.add("active");
-        });
     });
 });
 
