@@ -146,3 +146,39 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
+
+
+// Place this in cart.js
+function setAgencyPhoneNumber() {
+    const host = window.location.hostname;
+    let agencyUserId = '';
+    let phone = "(833)289-3627";  // Default phone number
+
+    if (host.includes('.doobiefinder.com')) {
+        agencyUserId = host.replace('.doobiefinder.com', '');
+    } else if (host.includes('.doap.com')) {
+        agencyUserId = host.replace('.doap.com', '');
+    } else if (host.includes('.dooberz.com')) {
+        agencyUserId = host.replace('.dooberz.com', '');
+    }
+
+    // Set phone number based on the agency
+    switch (agencyUserId) {
+        case 'alamo':
+            phone = "925-553-4710";
+            break;
+        case 'antioch':
+            phone = "(925)891-7800";
+            break;
+        // Add other cases here...
+        default:
+            phone = "(833)289-3627";  // Default phone number
+    }
+
+    // Update the title of the page with the phone number
+    document.title = `Call us at ${phone}`;
+}
+
+// Run the function when the page loads
+window.onload = setAgencyPhoneNumber;
+
