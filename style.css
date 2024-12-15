@@ -20,7 +20,7 @@ h1 i {
 
 /* Form Container */
 form {
-    max-width: 500px;
+    max-width: 100%; /* Ensure full width on mobile */
     margin: 0 auto;
     padding: 20px;
     background: #fff;
@@ -106,11 +106,12 @@ button:hover {
 /* Responsive Design */
 @media (max-width: 768px) {
     body {
-        padding: 10px;
+        padding: 0;
     }
 
     form {
-        padding: 15px;
+        padding: 10px;
+        width: 100%;
     }
 
     button {
@@ -119,6 +120,15 @@ button:hover {
 }
 
 @media (max-width: 480px) {
+    body {
+        padding: 0;
+    }
+
+    form {
+        padding: 10px;
+        width: 100%; /* Full width on small screens */
+    }
+
     h1 {
         font-size: 20px;
     }
@@ -127,10 +137,20 @@ button:hover {
         padding: 12px;
         font-size: 13px;
     }
+
+    .item {
+        flex-wrap: wrap; /* Stack content on smaller screens */
+    }
+
+    .item img {
+        max-width: 60px;
+        margin-right: 10px;
+    }
+
+    .cart-section {
+        padding: 10px;
+    }
 }
-
-
-
 
 /* Center logo and city name */
 .header {
@@ -138,7 +158,7 @@ button:hover {
     margin-bottom: 20px;
 }
 .header img {
-    max-width: 416px;
+    max-width: 100%; /* Make logo responsive */
     height: auto;
 }
 .header h1 {
@@ -192,32 +212,6 @@ button:hover {
     display: block; /* Show the active tab content */
 }
 
-/* Selected items list */
-.selected-items {
-    margin: 20px 0;
-    padding: 10px;
-    border: 1px solid #ccc;
-    background: #f9f9f9;
-}
-.selected-items ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-.selected-items li {
-    margin: 5px 0;
-}
-
-
-
-
-
-/* Center "Doap Menu" Title */
-.menu-title h2 {
-    text-align: center;
-    margin: 20px 0;
-}
-
 /* Cart Section */
 .cart-section {
     margin: 20px 0;
@@ -248,5 +242,11 @@ button:hover {
 }
 .cart-section .remove-item:hover {
     color: darkred;
+}
+
+/* Center "Doap Menu" Title */
+.menu-title h2 {
+    text-align: center;
+    margin: 20px 0;
 }
 
