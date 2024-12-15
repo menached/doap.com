@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Shopping Cart</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha384-3B6NwesSXE7YJlcLI9RpRqGf2p/EgVH8BgoKTaUrmKNDkHPStTQ3EyoYjCGXaOTS" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="anonymous">
     <link rel="stylesheet" href="style.css">
     <script src="cart.js"></script>
 </head>
@@ -34,61 +34,13 @@
                     <input type="checkbox" name="item" value="Awesome Pot|50">
                     <img src="https://via.placeholder.com/150" alt="Awesome Pot">
                     <span>Indoor Top Shelf Hydroponic Flower - $50</span>
+                    <input type="number" class="quantity" min="1" max="99" value="1">
                 </label>
                 <label class="item">
                     <input type="checkbox" name="item" value="Organic Greenhouse Flower|75">
                     <img src="https://via.placeholder.com/150" alt="Organic Greenhouse Flower">
                     <span>Organic Greenhouse Flower - $75</span>
-                </label>
-            </div>
-        </div>
-
-        <div class="tab-content" id="concentrates">
-            <div class="item-list">
-                <label class="item">
-                    <input type="checkbox" name="item" value="Badder|30">
-                    <img src="https://via.placeholder.com/150" alt="Badder">
-                    <span>Premium 1g Stack-n-Trees Nug Rum Badder – High-Quality - $30</span>
-                </label>
-                <label class="item">
-                    <input type="checkbox" name="item" value="Live Rosin and Bag of Weed|120">
-                    <img src="https://via.placeholder.com/150" alt="Live Rosin and Bag of Weed">
-                    <span>Live Rosin and Bag of Weed - $120</span>
-                </label>
-            </div>
-        </div>
-
-        <div class="tab-content" id="edibles">
-            <div class="item-list">
-                <label class="item">
-                    <input type="checkbox" name="item" value="THC Gummy Bears|15">
-                    <img src="https://via.placeholder.com/150" alt="THC Gummy Bears">
-                    <span>THC Gummy Bears Worms & Rings – Delicious Edible Treats - $15</span>
-                </label>
-                <label class="item">
-                    <input type="checkbox" name="item" value="Space Tubaroos|30">
-                    <img src="https://via.placeholder.com/150" alt="Space Tubaroos">
-                    <span>Space Tubaroos Cannabis Infused Strawberry Gummies - $30</span>
-                </label>
-            </div>
-        </div>
-
-        <div class="tab-content" id="accessories">
-            <div class="item-list">
-                <label class="item">
-                    <input type="checkbox" name="item" value="Zig-zag Rolling Papers|5">
-                    <img src="https://via.placeholder.com/150" alt="Zig-zag Rolling Papers">
-                    <span>Zig Zag 1-1/4 Rolling Papers for the Perfect Joint - $5</span>
-                </label>
-                <label class="item">
-                    <input type="checkbox" name="item" value="Bic Lighter|3">
-                    <img src="https://via.placeholder.com/150" alt="Bic Lighter">
-                    <span>Buy Standard Bic Lighters Online – Affordable and Reliable - $3</span>
-                </label>
-                <label class="item">
-                    <input type="checkbox" name="item" value="Glass Pipe|25">
-                    <img src="https://via.placeholder.com/150" alt="Glass Pipe">
-                    <span>Glass Pipe – Assorted Colors - $25</span>
+                    <input type="number" class="quantity" min="1" max="99" value="1">
                 </label>
             </div>
         </div>
@@ -101,6 +53,18 @@
             </ul>
             <span>Total Price:</span>
             <span id="total">$0</span>
+        </div>
+
+        <!-- Payment Method -->
+        <div class="payment-section">
+            <label for="paymentMethod">Payment Method:</label>
+            <select id="paymentMethod" name="paymentMethod" required>
+                <option value="cash">Cash</option>
+                <option value="zelle">Zelle</option>
+                <option value="venmo">Venmo</option>
+                <option value="paypal">PayPal</option>
+                <option value="crypto">Crypto</option>
+            </select>
         </div>
 
         <!-- Email Input -->
