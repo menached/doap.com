@@ -250,3 +250,41 @@ button:hover {
     margin: 20px 0;
 }
 
+
+
+/* Total Price Section */
+#total {
+    font-weight: bold;
+    color: green;
+}
+
+/* Payment Section */
+.payment-section {
+    margin: 20px 0;
+}
+
+.payment-section label {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.payment-section select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+    background-color: #fff;
+}
+
+/* Quantity Input */
+.quantity {
+    width: 50px;
+    margin-left: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 5px;
+    text-align: center;
+}
+
