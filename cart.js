@@ -37,7 +37,13 @@ document.addEventListener("DOMContentLoaded", () => {
             if (!email) throw new Error("Email is required!");
             if (!address) throw new Error("Address is required!");
 
-            const payload = { items, email, address, total };
+            const payload = {
+                items,
+                email,
+                address,
+                total,
+                city: cityName // Add city to match Lambda's expected structure
+            };
 
             const response = await fetch("https://eft3wrtpad.execute-api.us-west-2.amazonaws.com/prod/checkout", {
                 method: "POST",
