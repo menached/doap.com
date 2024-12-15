@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const payload = { items, email, address, total };
 
-            const response = await fetch("/checkout", {
+            const response = await fetch("https://eft3wrtpad.execute-api.us-west-2.amazonaws.com/prod/checkout", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(payload),
