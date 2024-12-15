@@ -129,3 +129,81 @@ button:hover {
     }
 }
 
+
+
+
+/* Center logo and city name */
+.header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.header img {
+    max-width: 416px;
+    height: auto;
+}
+.header h1 {
+    margin: 10px 0 0;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* Center tabs */
+.tab-container {
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 20px;
+}
+.tab {
+    padding: 10px 20px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    border-bottom: none;
+    background: #f9f9f9;
+    margin: 0 5px;
+}
+.tab.active {
+    background: #fff;
+    font-weight: bold;
+}
+
+/* Adjust item list */
+.item-list {
+    display: flex;
+    flex-wrap: wrap;
+}
+.item {
+    margin: 10px;
+    flex: 1 0 calc(33.33% - 20px);
+    box-sizing: border-box;
+}
+.item img {
+    max-width: 100px;
+    display: block;
+    margin-bottom: 10px;
+}
+.item span {
+    margin-left: 10px; /* Add margin to the left of item titles */
+}
+.tab-content {
+    display: none; /* Initially hide all tab contents */
+}
+.tab-content.active {
+    display: block; /* Show the active tab content */
+}
+
+/* Selected items list */
+.selected-items {
+    margin: 20px 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    background: #f9f9f9;
+}
+.selected-items ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.selected-items li {
+    margin: 5px 0;
+}
