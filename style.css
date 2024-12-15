@@ -89,6 +89,8 @@ form {
     background: #f9f9f9;
     margin: 0 5px;
     font-size: 1.1em;
+    font-family: 'Marvel', sans-serif; /* Apply Marvel font to tab text */
+
 }
 .tab.active {
     background: #fff;
