@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
     }
 
+    // Update the cart dynamically
     const updateCart = () => {
         const itemElements = cartForm.querySelectorAll('input[name="item"]');
         let total = 0;
@@ -52,25 +53,28 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     };
 
+    // Tab switching logic
     const applyTabListeners = () => {
         const tabs = document.querySelectorAll(".tab");
         const tabContents = document.querySelectorAll(".tab-content");
 
         tabs.forEach(tab => {
             tab.addEventListener("click", () => {
+                // Remove active class from all tabs and tab contents
                 tabs.forEach(t => t.classList.remove("active"));
                 tabContents.forEach(content => content.classList.remove("active"));
 
+                // Add active class to clicked tab and corresponding tab content
                 tab.classList.add("active");
                 document.getElementById(tab.dataset.tab).classList.add("active");
             });
         });
     };
 
-    // Apply tab listeners initially
+    // Apply tab listeners
     applyTabListeners();
 
-    // Handle changes in cart (checkboxes or quantity)
+    // Handle cart updates
     cartForm.addEventListener("change", () => {
         updateCart();
     });
