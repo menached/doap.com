@@ -21,14 +21,24 @@ document.addEventListener("DOMContentLoaded", () => {
             .reduce((sum, el) => sum + parseFloat(el.value.split('|')[1]), 0);
         totalDisplay.textContent = `$${total}`;
 
-        // Update the cart dynamically with item name and cost
+        // Update the cart dynamically with item name, cost, and a remove button
         const checkedItems = Array.from(cartForm.querySelectorAll('input[name="item"]:checked'));
         selectedItemsList.innerHTML = checkedItems.length
             ? checkedItems.map(item => {
                 const [itemName, itemCost] = item.value.split('|');
-                return `<li>${itemName} - $${itemCost}</li>`;
+                return `<li>${itemName} - $${itemCost} <span class="remove-item" data-value="${item.value}">x</span></li>`;
               }).join('')
             : '<li>No items selected yet.</li>';
+
+        // Add event listeners to remove buttons
+        document.querySelectorAll(".remove-item").forEach(button => {
+            button.addEventListener("click", () => {
+                const valueToRemove = button.getAttribute("data-value");
+                const itemToUncheck = cartForm.querySelector(`input[name="item"][value="${valueToRemove}"]`);
+                if (itemToUncheck) itemToUncheck.checked = false;
+                cartForm.dispatchEvent(new Event("change")); // Trigger change to update the cart
+            });
+        });
     });
 
     // Handle form submission
