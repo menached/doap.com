@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // Dynamically set the city name from the subdomain
     const subdomain = window.location.hostname.split('.')[0]; // Extract subdomain
     const cityName = subdomain.charAt(0).toUpperCase() + subdomain.slice(1).toLowerCase(); // Capitalize first letter
     document.getElementById("cityName").innerHTML = `<i class="fas fa-shopping-cart"></i> ${cityName} Doap Shopping Cart`;
@@ -47,6 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 email,
                 address,
                 total,
+                city: cityName, // Include the city name derived from the subdomain
             };
 
             const response = await fetch("https://Eft3wrtpad.execute-api.us-west-2.amazonaws.com/prod/checkout", {
