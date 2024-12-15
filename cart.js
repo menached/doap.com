@@ -3,6 +3,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const subdomain = window.location.hostname.split('.')[0]; // Extract subdomain
     const cityName = subdomain.charAt(0).toUpperCase() + subdomain.slice(1).toLowerCase(); // Capitalize first letter
     document.getElementById("cityName").innerHTML = `<i class="fas fa-shopping-cart"></i> ${cityName} Doap Shopping Cart`;
+    
+    // Update logo link
+    const logoLink = document.querySelector(".header a");
+    if (logoLink) {
+        logoLink.href = `https://${subdomain}.doap.com`; // Dynamically set link based on subdomain
+        logoLink.title = `Go to ${cityName} Doap homepage`; // Set hover text
+    }
 
     const cartForm = document.getElementById("cartForm");
     const totalDisplay = document.getElementById("total");
