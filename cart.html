@@ -12,7 +12,7 @@
             margin-bottom: 20px;
         }
         .header img {
-            max-width: 150px;
+            max-width: 416px;
             height: auto;
         }
         .header h1 {
@@ -65,12 +65,28 @@
         .tab-content.active {
             display: block; /* Show the active tab content */
         }
+
+        /* Selected items list */
+        .selected-items {
+            margin: 20px 0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            background: #f9f9f9;
+        }
+        .selected-items ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        .selected-items li {
+            margin: 5px 0;
+        }
     </style>
 </head>
 <body>
     <!-- Header Section -->
     <div class="header">
-        <img src="https://via.placeholder.com/150" alt="Doap Logo">
+        <img src="https://alamo.doap.com/wp-content/uploads/2023/11/doap-com-with-wording-1-416x135-1.png" alt="Doap Logo">
         <h1 id="cityName">Alamo Doap</h1>
     </div>
 
@@ -81,6 +97,14 @@
             <div class="tab" data-tab="concentrates">Concentrates</div>
             <div class="tab" data-tab="edibles">Edibles</div>
             <div class="tab" data-tab="accessories">Accessories</div>
+        </div>
+
+        <!-- Dynamic List of Selected Items -->
+        <div class="selected-items">
+            <h3>Selected Items:</h3>
+            <ul id="selectedItemsList">
+                <li>No items selected yet.</li>
+            </ul>
         </div>
 
         <!-- Tab content for Flower -->
@@ -172,14 +196,22 @@
 
         tabs.forEach(tab => {
             tab.addEventListener("click", () => {
-                // Remove active class from all tabs and contents
                 tabs.forEach(t => t.classList.remove("active"));
                 tabContents.forEach(content => content.classList.remove("active"));
-
-                // Add active class to the clicked tab and its content
                 tab.classList.add("active");
                 document.getElementById(tab.dataset.tab).classList.add("active");
             });
+        });
+
+        // Update selected items dynamically
+        const cartForm = document.getElementById("cartForm");
+        const selectedItemsList = document.getElementById("selectedItemsList");
+
+        cartForm.addEventListener("change", () => {
+            const checkedItems = Array.from(cartForm.querySelectorAll('input[name="item"]:checked'));
+            selectedItemsList.innerHTML = checkedItems.length
+                ? checkedItems.map(item => `<li>${item.value.split('|')[0]}</li>`).join('')
+                : '<li>No items selected yet.</li>';
         });
     </script>
 </body>
