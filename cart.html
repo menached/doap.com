@@ -16,10 +16,22 @@
     <form id="cartForm">
         <!-- Tabs -->
         <div class="tab-container">
+            <h2>Doap Menu</h2>
             <div class="tab active" data-tab="flower">Flower</div>
             <div class="tab" data-tab="concentrates">Concentrates</div>
             <div class="tab" data-tab="edibles">Edibles</div>
             <div class="tab" data-tab="accessories">Accessories</div>
+        </div>
+
+        <!-- Cart Section -->
+        <div class="cart-section">
+            <h3>Cart:</h3>
+            <ul id="selectedItemsList">
+                <li>No items selected yet.</li>
+            </ul>
+            <!-- Total Price -->
+            <span>Total Price:</span>
+            <span id="total">$0</span>
         </div>
 
         <!-- Tab content for items -->
@@ -95,18 +107,6 @@
         <!-- Address Input -->
         <label for="address">Address:</label><br>
         <textarea id="address" name="address" autocomplete="address-line1" required></textarea><br><br>
-
-        <!-- Selected Items -->
-        <div class="selected-items">
-            <h3>Selected Items:</h3>
-            <ul id="selectedItemsList">
-                <li>No items selected yet.</li>
-            </ul>
-        </div>
-
-        <!-- Total Price -->
-        <span>Total Price:</span>
-        <span id="total">$0</span><br><br>
 
         <!-- Submit Button -->
         <button id="checkoutButton">Checkout</button>
