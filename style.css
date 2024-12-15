@@ -17,6 +17,11 @@ h1, h2, h3 {
     font-family: 'Marvel', sans-serif; /* Apply Marvel font to tab text */
 }
 
+.menu-title-text{
+    font-family: 'Marvel', sans-serif; /* Apply Marvel font to tab text */
+}
+
+
 /* Form Container */
 form {
     margin: 0 auto;
