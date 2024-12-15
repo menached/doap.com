@@ -21,35 +21,25 @@ document.addEventListener("DOMContentLoaded", () => {
         totalDisplay.textContent = `$${total}`;
     });
 
-    // Handle checkout
     checkoutButton.addEventListener("click", async (event) => {
         event.preventDefault();
 
         try {
-            const itemElements = cartForm.querySelectorAll('input[name="item"]');
-            const items = Array.from(itemElements)
-                .filter(el => el.checked)
-                .map(el => el.value.split('|')[0]);
+            const checkedItems = cartForm.querySelectorAll('input[name="item"]:checked');
+            const items = Array.from(checkedItems).map(item => item.value.split('|')[0]);
 
             if (items.length === 0) throw new Error("No items selected!");
 
-            const email = document.getElementById("email").value;
-            if (!email) throw new Error("Email is required!");
-
-            const address = document.getElementById("address").value;
-            if (!address) throw new Error("Address is required!");
-
+            const email = document.getElementById("email").value.trim();
+            const address = document.getElementById("address").value.trim();
             const total = totalDisplay.textContent;
 
-            const payload = {
-                items,
-                email,
-                address,
-                total,
-                city: cityName, // Include the city name derived from the subdomain
-            };
+            if (!email) throw new Error("Email is required!");
+            if (!address) throw new Error("Address is required!");
 
-            const response = await fetch("https://Eft3wrtpad.execute-api.us-west-2.amazonaws.com/prod/checkout", {
+            const payload = { items, email, address, total };
+
+            const response = await fetch("/checkout", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(payload),
