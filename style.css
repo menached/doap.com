@@ -56,11 +56,14 @@ form {
 
 /* Header Section */
 .header {
+    width: 100%; /* Ensure it takes up full width */
+    max-width: 500px; /* Limit the header container */
+    margin: 0 auto;
     text-align: center;
-    margin-bottom: 20px;
 }
+
 .header img {
-    max-width: 50%; /* Resize the logo to half the current size */
+    max-width: 100%; /* Ensure image scales within the header */
     height: auto;
 }
 .header h1 {
