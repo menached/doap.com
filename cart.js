@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
+    // Set up city name dynamically in the header
     const subdomain = window.location.hostname.split('.')[0]; // Extract subdomain
     const cityName = subdomain.charAt(0).toUpperCase() + subdomain.slice(1).toLowerCase(); // Capitalize first letter
     document.getElementById("cityName").innerHTML = `<i class="fas fa-shopping-cart"></i> ${cityName} Doap Shopping Cart`;
@@ -6,21 +7,29 @@ document.addEventListener("DOMContentLoaded", () => {
     const cartForm = document.getElementById("cartForm");
     const totalDisplay = document.getElementById("total");
     const checkoutButton = document.getElementById("checkoutButton");
+    const selectedItemsList = document.getElementById("selectedItemsList");
 
     if (!cartForm || !totalDisplay || !checkoutButton) {
         console.error("Required DOM elements not found!");
         return;
     }
 
-    // Calculate total price
+    // Calculate total price dynamically
     cartForm.addEventListener("change", () => {
         const itemElements = cartForm.querySelectorAll('input[name="item"]');
         const total = Array.from(itemElements)
             .filter(el => el.checked)
             .reduce((sum, el) => sum + parseFloat(el.value.split('|')[1]), 0);
         totalDisplay.textContent = `$${total}`;
+
+        // Update the selected items dynamically
+        const checkedItems = Array.from(cartForm.querySelectorAll('input[name="item"]:checked'));
+        selectedItemsList.innerHTML = checkedItems.length
+            ? checkedItems.map(item => `<li>${item.value.split('|')[0]}</li>`).join('')
+            : '<li>No items selected yet.</li>';
     });
 
+    // Handle form submission
     checkoutButton.addEventListener("click", async (event) => {
         event.preventDefault();
 
@@ -63,31 +72,18 @@ document.addEventListener("DOMContentLoaded", () => {
             alert(error.message);
         }
     });
-});
 
+    // Tab switching logic
+    const tabs = document.querySelectorAll(".tab");
+    const tabContents = document.querySelectorAll(".tab-content");
 
-
-// Tab switching logic
-const tabs = document.querySelectorAll(".tab");
-const tabContents = document.querySelectorAll(".tab-content");
-
-tabs.forEach(tab => {
-    tab.addEventListener("click", () => {
-        tabs.forEach(t => t.classList.remove("active"));
-        tabContents.forEach(content => content.classList.remove("active"));
-        tab.classList.add("active");
-        document.getElementById(tab.dataset.tab).classList.add("active");
+    tabs.forEach(tab => {
+        tab.addEventListener("click", () => {
+            tabs.forEach(t => t.classList.remove("active"));
+            tabContents.forEach(content => content.classList.remove("active"));
+            tab.classList.add("active");
+            document.getElementById(tab.dataset.tab).classList.add("active");
+        });
     });
-});
-
-// Update selected items dynamically
-const cartForm = document.getElementById("cartForm");
-const selectedItemsList = document.getElementById("selectedItemsList");
-
-cartForm.addEventListener("change", () => {
-    const checkedItems = Array.from(cartForm.querySelectorAll('input[name="item"]:checked'));
-    selectedItemsList.innerHTML = checkedItems.length
-        ? checkedItems.map(item => `<li>${item.value.split('|')[0]}</li>`).join('')
-        : '<li>No items selected yet.</li>';
 });
 
