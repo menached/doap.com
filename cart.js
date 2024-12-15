@@ -99,19 +99,23 @@ document.addEventListener("DOMContentLoaded", () => {
                 return { name: itemName, quantity, price: parseFloat(itemCost) };
             });
 
-            if (items.length === 0) throw new Error("No items selected!");
-
+            const name = document.getElementById("name").value.trim();
+            const city = document.getElementById("city").value.trim();
+            const phone = document.getElementById("phone").value.trim();
             const email = document.getElementById("email").value.trim();
             const address = document.getElementById("address").value.trim();
             const total = totalDisplay.textContent;
             const paymentMethod = document.getElementById("paymentMethod").value;
 
-            if (!email) throw new Error("Email is required!");
-            if (!address) throw new Error("Address is required!");
+            if (!items.length) throw new Error("No items selected!");
+            if (!name || !city || !phone || !email || !address) throw new Error("All fields must be filled out!");
             if (!paymentMethod) throw new Error("Payment method is required!");
 
             const payload = {
                 items,
+                name,
+                city,
+                phone,
                 email,
                 address,
                 total,
@@ -130,12 +134,5 @@ document.addEventListener("DOMContentLoaded", () => {
             } else {
                 const error = await response.text();
                 console.error("Error submitting order:", error);
-                alert("Failed to submit order.");
-            }
-        } catch (error) {
-            console.error("Error:", error.message);
-            alert(error.message);
-        }
-    });
-});
+                alert("Failed
 
