@@ -10,20 +10,29 @@ body {
 
 /* Customer Information */
 .customer-info {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;  /* Three equal columns on larger screens */
-    gap: 15px;  /* Space between the columns */
+    display: flex;
+    flex-direction: column;  /* Stack fields vertically */
+    gap: 15px;  /* Space between form rows */
     margin-bottom: 20px;
 }
 
+/* Row structure for each form field */
+.info-row {
+    display: flex;
+    flex-direction: column;  /* Stack label and input vertically */
+    gap: 5px;  /* Space between label and input */
+}
+
+/* Label styles */
 .customer-info label {
     font-size: 1rem;
     font-weight: bold;
 }
 
+/* Input fields and textarea */
 .customer-info input,
 .customer-info textarea {
-    width: 100%; /* Ensure inputs and textareas take up full width of their column */
+    width: 100%;  /* Ensure inputs take up full width */
     padding: 10px;
     margin-top: 5px;
     border: 1px solid #ddd;
@@ -31,39 +40,34 @@ body {
     box-sizing: border-box;
 }
 
-/* Address and City fields are full width */
-.customer-info textarea,
-.customer-info input[type="text"] {
-    width: 100%;
+/* Adjust textarea for Address */
+.customer-info textarea {
+    resize: vertical; /* Allow vertical resizing */
+    height: 100px; /* Fix the height for the address field */
 }
 
 /* For mobile and small screens (less than 768px) */
 @media (max-width: 767px) {
     .customer-info {
-        grid-template-columns: 1fr;  /* Stack fields on top of each other */
+        flex-direction: column;  /* Stack fields vertically */
     }
 
-    /* Make Name, Phone, and Email full width */
-    .customer-info input,
-    .customer-info textarea {
-        width: 100%; /* Full width on mobile */
-        margin-bottom: 10px; /* Add space between stacked fields */
-    }
-    
-    .customer-info label {
-        font-size: 1.1rem; /* Adjust label size for better readability on mobile */
+    .info-row {
+        width: 100%;  /* Ensure full-width on mobile */
     }
 }
 
-/* For tablets and larger screens (768px+) */
+/* Adjust for tablets and larger screens (768px and up) */
 @media (min-width: 768px) {
     .customer-info {
-        grid-template-columns: 1fr 1fr 1fr; /* Keep 3 columns for larger screens */
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;  /* Three columns */
+        gap: 15px;
     }
 
-    .customer-info input,
-    .customer-info textarea {
-        width: 70%;
+    .info-row {
+        display: flex;
+        flex-direction: column;  /* Ensure the label and input stay stacked */
     }
 }
 
