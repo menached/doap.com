@@ -14,31 +14,54 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
     }
 
-    cartForm.addEventListener("change", () => {
+    const updateCart = () => {
         const itemElements = cartForm.querySelectorAll('input[name="item"]');
-        const total = Array.from(itemElements)
-            .filter(el => el.checked)
-            .reduce((sum, el) => sum + parseFloat(el.value.split('|')[1]), 0);
-        totalDisplay.textContent = `$${total}`;
+        let total = 0;
 
-        // Update the cart dynamically with item name, cost, and a remove button
-        const checkedItems = Array.from(cartForm.querySelectorAll('input[name="item"]:checked'));
-        selectedItemsList.innerHTML = checkedItems.length
-            ? checkedItems.map(item => {
+        // Update cart dynamically
+        const cartItems = Array.from(itemElements)
+            .filter(el => el.checked)
+            .map(item => {
+                const quantityInput = item.closest(".item").querySelector(".quantity");
+                const quantity = parseInt(quantityInput.value, 10) || 1;
                 const [itemName, itemCost] = item.value.split('|');
-                return `<li>${itemName} - $${itemCost} <span class="remove-item" data-value="${item.value}">x</span></li>`;
-              }).join('')
+                const cost = parseFloat(itemCost) * quantity;
+
+                total += cost;
+
+                return `<li>${itemName} (x${quantity}) - $${cost.toFixed(2)} 
+                    <span class="remove-item" data-value="${item.value}">x</span></li>`;
+            });
+
+        selectedItemsList.innerHTML = cartItems.length
+            ? cartItems.join("")
             : '<li>No items selected yet.</li>';
 
-        // Add event listeners to remove buttons
+        totalDisplay.textContent = `$${total.toFixed(2)}`;
+
+        // Add remove functionality to each "x"
         document.querySelectorAll(".remove-item").forEach(button => {
             button.addEventListener("click", () => {
                 const valueToRemove = button.getAttribute("data-value");
                 const itemToUncheck = cartForm.querySelector(`input[name="item"][value="${valueToRemove}"]`);
-                if (itemToUncheck) itemToUncheck.checked = false;
-                cartForm.dispatchEvent(new Event("change")); // Trigger change to update the cart
+                if (itemToUncheck) {
+                    itemToUncheck.checked = false;
+                    cartForm.dispatchEvent(new Event("change")); // Trigger change to update cart
+                }
             });
         });
+    };
+
+    // Handle changes in cart (checkboxes or quantity)
+    cartForm.addEventListener("change", () => {
+        updateCart();
+    });
+
+    // Handle quantity input
+    cartForm.addEventListener("input", (event) => {
+        if (event.target.classList.contains("quantity")) {
+            updateCart();
+        }
     });
 
     // Handle form submission
@@ -47,22 +70,30 @@ document.addEventListener("DOMContentLoaded", () => {
 
         try {
             const checkedItems = cartForm.querySelectorAll('input[name="item"]:checked');
-            const items = Array.from(checkedItems).map(item => item.value.split('|')[0]);
+            const items = Array.from(checkedItems).map(item => {
+                const quantityInput = item.closest(".item").querySelector(".quantity");
+                const quantity = parseInt(quantityInput.value, 10) || 1;
+                const [itemName] = item.value.split('|');
+                return { name: itemName, quantity };
+            });
 
             if (items.length === 0) throw new Error("No items selected!");
 
             const email = document.getElementById("email").value.trim();
             const address = document.getElementById("address").value.trim();
             const total = totalDisplay.textContent;
+            const paymentMethod = document.getElementById("paymentMethod").value;
 
             if (!email) throw new Error("Email is required!");
             if (!address) throw new Error("Address is required!");
+            if (!paymentMethod) throw new Error("Payment method is required!");
 
             const payload = {
                 items,
                 email,
                 address,
                 total,
+                paymentMethod,
                 city: cityName // Add city to match Lambda's expected structure
             };
 
