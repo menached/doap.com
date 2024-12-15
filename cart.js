@@ -49,7 +49,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 total,
             };
 
-            const response = await fetch("/checkout", {
+            //const response = await fetch("/checkout", {
+                //method: "POST",
+                //headers: { "Content-Type": "application/json" },
+                //body: JSON.stringify(payload),
+            //});
+            const response = await fetch("https://Eft3wrtpad.execute-api.us-west-2.amazonaws.com/prod/checkout", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(payload),
