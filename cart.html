@@ -99,15 +99,7 @@
             <div class="tab" data-tab="accessories">Accessories</div>
         </div>
 
-        <!-- Dynamic List of Selected Items -->
-        <div class="selected-items">
-            <h3>Selected Items:</h3>
-            <ul id="selectedItemsList">
-                <li>No items selected yet.</li>
-            </ul>
-        </div>
-
-        <!-- Tab content for Flower -->
+        <!-- Tab content for items -->
         <div class="tab-content active" id="flower">
             <div class="item-list">
                 <label class="item">
@@ -123,7 +115,6 @@
             </div>
         </div>
 
-        <!-- Tab content for Concentrates -->
         <div class="tab-content" id="concentrates">
             <div class="item-list">
                 <label class="item">
@@ -139,7 +130,6 @@
             </div>
         </div>
 
-        <!-- Tab content for Edibles -->
         <div class="tab-content" id="edibles">
             <div class="item-list">
                 <label class="item">
@@ -155,7 +145,6 @@
             </div>
         </div>
 
-        <!-- Tab content for Accessories -->
         <div class="tab-content" id="accessories">
             <div class="item-list">
                 <label class="item">
@@ -176,16 +165,27 @@
             </div>
         </div>
 
-        <br>
+        <!-- Email Input -->
         <label for="email">Your Email:</label><br>
         <input type="email" id="email" name="email" required><br><br>
 
+        <!-- Address Input -->
         <label for="address">Address:</label><br>
         <textarea id="address" name="address" autocomplete="address-line1" required></textarea><br><br>
 
+        <!-- Selected Items -->
+        <div class="selected-items">
+            <h3>Selected Items:</h3>
+            <ul id="selectedItemsList">
+                <li>No items selected yet.</li>
+            </ul>
+        </div>
+
+        <!-- Total Price -->
         <span>Total Price:</span>
         <span id="total">$0</span><br><br>
 
+        <!-- Submit Button -->
         <button id="checkoutButton">Checkout</button>
     </form>
 
