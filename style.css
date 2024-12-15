@@ -12,7 +12,7 @@ body {
 .customer-info {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;  /* Three equal columns on larger screens */
-    gap: 10px;  /* Space between the columns */
+    gap: 15px;  /* Space between the columns */
     margin-bottom: 20px;
 }
 
@@ -24,7 +24,7 @@ body {
 .customer-info input,
 .customer-info textarea {
     width: 100%; /* Ensure inputs and textareas take up full width of their column */
-    padding: 8px;
+    padding: 10px;
     margin-top: 5px;
     border: 1px solid #ddd;
     border-radius: 5px;
@@ -34,11 +34,6 @@ body {
 /* Address and City fields are full width */
 .customer-info textarea,
 .customer-info input[type="text"] {
-    width: 100%;
-}
-
-.customer-info input[type="email"],
-.customer-info input[type="tel"] {
     width: 100%;
 }
 
@@ -52,9 +47,25 @@ body {
     .customer-info input,
     .customer-info textarea {
         width: 100%; /* Full width on mobile */
+        margin-bottom: 10px; /* Add space between stacked fields */
+    }
+    
+    .customer-info label {
+        font-size: 1.1rem; /* Adjust label size for better readability on mobile */
     }
 }
 
+/* For tablets and larger screens (768px+) */
+@media (min-width: 768px) {
+    .customer-info {
+        grid-template-columns: 1fr 1fr 1fr; /* Keep 3 columns for larger screens */
+    }
+
+    .customer-info input,
+    .customer-info textarea {
+        width: 100%;
+    }
+}
 
 h1, h2, h3 {
     font-family: 'Marvel', sans-serif; /* Apply Marvel font to tab text */
