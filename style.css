@@ -7,20 +7,13 @@ body {
     color: #333;
 }
 
-/* Header */
-h1 {
-    text-align: center;
-    margin: 20px 0;
-    color: #444;
-}
-
-h1 i {
-    color: #ff6600;
+/* Default Font Size */
+body {
+    font-size: 16px; /* Base font size for all devices */
 }
 
 /* Form Container */
 form {
-    max-width: 100%; /* Ensure full width on mobile */
     margin: 0 auto;
     padding: 20px;
     background: #fff;
@@ -29,145 +22,53 @@ form {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Item List */
-.item-list {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.item {
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    background-color: #f4f4f4;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    transition: background-color 0.3s;
-}
-
-.item:hover {
-    background-color: #e8e8e8;
-}
-
-.item-icon {
-    max-width: 40px;
-    margin-right: 15px;
-}
-
-.item input[type="checkbox"] {
-    margin-right: 10px;
-}
-
-.item span {
-    font-size: 16px;
-    font-weight: bold;
-    color: #333;
-}
-
-/* Input Fields */
-input[type="email"],
-textarea {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    box-sizing: border-box;
-}
-
-textarea {
-    resize: none;
-    height: 80px;
-}
-
-/* Total Price Section */
-#total {
-    font-weight: bold;
-    color: #ff6600;
-}
-
-/* Button */
-button {
-    width: 100%;
-    padding: 10px;
-    background-color: #ff6600;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #e65a00;
-}
-
 /* Responsive Design */
-@media (max-width: 768px) {
+@media (min-width: 1025px) { /* Desktop */
     body {
-        padding: 0;
+        font-size: 20px; /* Larger fonts on desktops */
     }
-
     form {
-        padding: 10px;
-        width: 100%;
-    }
-
-    button {
-        font-size: 14px;
+        max-width: 800px; /* Larger width for desktops */
+        margin: 50px auto; /* Large margins */
     }
 }
 
-@media (max-width: 480px) {
+@media (min-width: 768px) and (max-width: 1024px) { /* Tablets */
     body {
-        padding: 0;
+        font-size: 18px; /* Medium-sized fonts on tablets */
     }
-
     form {
-        padding: 10px;
-        width: 100%; /* Full width on small screens */
-    }
-
-    h1 {
-        font-size: 20px;
-    }
-
-    button {
-        padding: 12px;
-        font-size: 13px;
-    }
-
-    .item {
-        flex-wrap: wrap; /* Stack content on smaller screens */
-    }
-
-    .item img {
-        max-width: 60px;
-        margin-right: 10px;
-    }
-
-    .cart-section {
-        padding: 10px;
+        max-width: 600px; /* Medium width for tablets */
+        margin: 30px auto; /* Medium margins */
     }
 }
 
-/* Center logo and city name */
+@media (max-width: 767px) { /* Mobile */
+    body {
+        font-size: 14px; /* Slightly larger default fonts for mobile */
+    }
+    form {
+        max-width: 100%; /* Full width for mobile */
+        margin: 10px; /* Tiny margins on mobile */
+    }
+}
+
+/* Header Section */
 .header {
     text-align: center;
     margin-bottom: 20px;
 }
 .header img {
-    max-width: 100%; /* Make logo responsive */
+    max-width: 100%;
     height: auto;
 }
 .header h1 {
     margin: 10px 0 0;
-    font-size: 24px;
+    font-size: 2rem; /* Adjusts with global font size */
     font-weight: bold;
 }
 
-/* Center tabs */
+/* Tab Container */
 .tab-container {
     display: flex;
     justify-content: center;
@@ -181,13 +82,14 @@ button:hover {
     border-bottom: none;
     background: #f9f9f9;
     margin: 0 5px;
+    font-size: 1.1em; /* Adjusts with global font size */
 }
 .tab.active {
     background: #fff;
     font-weight: bold;
 }
 
-/* Adjust item list */
+/* Item List */
 .item-list {
     display: flex;
     flex-wrap: wrap;
@@ -196,6 +98,7 @@ button:hover {
     margin: 10px;
     flex: 1 0 calc(33.33% - 20px);
     box-sizing: border-box;
+    font-size: 1em; /* Adjusts with global font size */
 }
 .item img {
     max-width: 100px;
@@ -204,12 +107,6 @@ button:hover {
 }
 .item span {
     margin-left: 10px; /* Add margin to the left of item titles */
-}
-.tab-content {
-    display: none; /* Initially hide all tab contents */
-}
-.tab-content.active {
-    display: block; /* Show the active tab content */
 }
 
 /* Cart Section */
@@ -229,45 +126,20 @@ button:hover {
 }
 .cart-section li {
     margin: 5px 0;
-    font-size: 14px;
+    font-size: 1em; /* Adjusts with global font size */
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
-.cart-section .remove-item {
-    color: red;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: bold;
-}
-.cart-section .remove-item:hover {
-    color: darkred;
-}
-
-/* Center "Doap Menu" Title */
-.menu-title h2 {
-    text-align: center;
-    margin: 20px 0;
-}
-
-
-
-/* Total Price Section */
-#total {
-    font-weight: bold;
-    color: green;
 }
 
 /* Payment Section */
 .payment-section {
     margin: 20px 0;
 }
-
 .payment-section label {
-    font-size: 16px;
+    font-size: 1.2em; /* Adjusts with global font size */
     font-weight: bold;
 }
-
 .payment-section select {
     width: 100%;
     padding: 10px;
@@ -278,13 +150,18 @@ button:hover {
     background-color: #fff;
 }
 
-/* Quantity Input */
-.quantity {
-    width: 50px;
-    margin-left: 10px;
-    border: 1px solid #ddd;
+/* Buttons */
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #ff6600;
+    color: #fff;
+    border: none;
     border-radius: 5px;
-    padding: 5px;
-    text-align: center;
+    font-size: 1em; /* Adjusts with global font size */
+    cursor: pointer;
+}
+button:hover {
+    background-color: #e65a00;
 }
 
