@@ -147,8 +147,6 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-
-// Place this in cart.js
 function setAgencyPhoneNumber() {
     const host = window.location.hostname;
     let agencyUserId = '';
@@ -170,13 +168,77 @@ function setAgencyPhoneNumber() {
         case 'antioch':
             phone = "(925)891-7800";
             break;
-        // Add other cases here...
+        case 'burlingame':
+            phone = "(650)293-0880";
+            break;
+        case 'campbell':
+            phone = "(408)645-6700";
+            break;
+        case 'castrovalley':
+            phone = "(925)263-9209";
+            break;
+        case 'concord':
+            phone = "(925)412-4880";
+            break;
+        case 'danville':
+            phone = "(925)725-6920";
+            break;
+        case 'discoverybay':
+            phone = "(925)891-7800";
+            break;
+        case 'dublin':
+            phone = "(925)587-6777";
+            break;
+        case 'hillsborough':
+            phone = "(650)293-0880";
+            break;
+        case 'livermore':
+            phone = "(925)718-6181";
+            break;
+        case 'lafayette':
+            phone = "(925)871-1333";
+            break;
+        case 'orinda':
+            phone = "(925)891-7800";
+            break;
+        case 'pittsburg':
+            phone = "(925)825-8555";
+            break;
+        case 'pleasanthill':
+            phone = "(925)891-7800";
+            break;
+        case 'pleasanton':
+            phone = "(925)587-6777";
+            break;
+        case 'sanramon':
+            phone = "(925)365-6030";
+            break;
+        case 'walnutcreek':
+            phone = "(925)464-2075";
+            break;
+        case 'sunol':
+            phone = "(925)718-6181";
+            break;
         default:
             phone = "(833)289-3627";  // Default phone number
     }
 
-    // Update the title of the page with the phone number
-    document.title = `Call us at ${phone}`;
+    // Update the title of the page with the city name and "Doap"
+    document.title = `${agencyUserId.charAt(0).toUpperCase() + agencyUserId.slice(1)} Doap`;
+
+    // Create a new div element to display the phone number below the "Delivering Organic Awesome Pot" text
+    const phoneDiv = document.createElement('div');
+    phoneDiv.style.textAlign = 'center';
+    phoneDiv.style.marginTop = '10px';
+    phoneDiv.style.fontSize = '18px';
+    phoneDiv.style.fontWeight = 'bold';
+    phoneDiv.innerHTML = `<a href="tel:${phone}" style="color: inherit; text-decoration: none;">Call us at ${phone}</a>`;
+
+    // Find the element with the class 'menu-title-text' and insert the phone number div after it
+    const menuTitle = document.querySelector('.menu-title-text');
+    if (menuTitle) {
+        menuTitle.insertAdjacentElement('afterend', phoneDiv);
+    }
 }
 
 // Run the function when the page loads
