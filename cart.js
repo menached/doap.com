@@ -65,3 +65,29 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
+
+
+// Tab switching logic
+const tabs = document.querySelectorAll(".tab");
+const tabContents = document.querySelectorAll(".tab-content");
+
+tabs.forEach(tab => {
+    tab.addEventListener("click", () => {
+        tabs.forEach(t => t.classList.remove("active"));
+        tabContents.forEach(content => content.classList.remove("active"));
+        tab.classList.add("active");
+        document.getElementById(tab.dataset.tab).classList.add("active");
+    });
+});
+
+// Update selected items dynamically
+const cartForm = document.getElementById("cartForm");
+const selectedItemsList = document.getElementById("selectedItemsList");
+
+cartForm.addEventListener("change", () => {
+    const checkedItems = Array.from(cartForm.querySelectorAll('input[name="item"]:checked'));
+    selectedItemsList.innerHTML = checkedItems.length
+        ? checkedItems.map(item => `<li>${item.value.split('|')[0]}</li>`).join('')
+        : '<li>No items selected yet.</li>';
+});
+
