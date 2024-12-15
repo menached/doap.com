@@ -18,7 +18,7 @@ h1, h2, h3 {
 }
 
 .menu-title-text{
-    font-family: 'Marvel', sans-serif; /* Apply Marvel font to tab text */
+    text-align:center;
 }
 
 
