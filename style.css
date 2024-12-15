@@ -8,6 +8,15 @@ body {
     font-size: 16px; /* Base font size for all devices */
 }
 
+
+
+
+
+
+
+
+
+
 /* Customer Information */
 .customer-info {
     display: flex;
@@ -40,10 +49,10 @@ body {
     box-sizing: border-box;
 }
 
-/* Adjust textarea for Address */
+/* Make Address input (textarea) the same height as City input */
 .customer-info textarea {
     resize: vertical; /* Allow vertical resizing */
-    height: 100px; /* Fix the height for the address field */
+    height: 40px;  /* Match the height of the city input */
 }
 
 /* For mobile and small screens (less than 768px) */
@@ -70,6 +79,7 @@ body {
         flex-direction: column;  /* Ensure the label and input stay stacked */
     }
 }
+
 
 h1, h2, h3, .Marvelfont {
     font-family: 'Marvel', sans-serif; /* Apply Marvel font to tab text */
