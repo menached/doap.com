@@ -123,6 +123,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 city: cityName // Add city to match Lambda's expected structure
             };
 
+            // Ensure the payload is a valid JSON string
+            console.log("Payload being sent:", JSON.stringify(payload));
+
             const response = await fetch("https://eft3wrtpad.execute-api.us-west-2.amazonaws.com/prod/checkout", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -134,5 +137,12 @@ document.addEventListener("DOMContentLoaded", () => {
             } else {
                 const error = await response.text();
                 console.error("Error submitting order:", error);
-                alert("Failed
+                alert("Failed to submit order.");
+            }
+        } catch (error) {
+            console.error("Error:", error.message);
+            alert(error.message);
+        }
+    });
+});
 
