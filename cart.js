@@ -60,6 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
             tab.addEventListener("click", () => {
                 tabs.forEach(t => t.classList.remove("active"));
                 tabContents.forEach(content => content.classList.remove("active"));
+
                 tab.classList.add("active");
                 document.getElementById(tab.dataset.tab).classList.add("active");
             });
