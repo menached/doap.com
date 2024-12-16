@@ -55,7 +55,7 @@
 /* Mobile portrait view */
 @media (max-width: 767px) {
     #cityName {
-        font-size: 90%!important; /* Shrinks text to half its normal size */
+        font-size: 1.2em!important; /* Shrinks text to half its normal size */
         text-align: center; /* Ensures the text stays centered */
         margin: 0;
     }
