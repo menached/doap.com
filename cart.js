@@ -82,9 +82,9 @@ document.addEventListener("DOMContentLoaded", () => {
         { property: "og:type", content: "website" },
         { property: "og:url", content: `https://${hostname}/cart.html` },
         { property: "og:description", content: defaultDescription },
-        { property: "og:image", content: `https://${domainName}.doap.com/${domainName}doapbanner.webp` },
+        { property: "og:image", content: `https://${subdomain}.doap.com/${subdomain}doapbanner.webp` },
         { name: "twitter:card", content: "summary_large_image" },
-        { name: "twitter:image", content: `https://${domainName}.doap.com/${domainName}doapbanner.png` },
+        { name: "twitter:image", content: `https://${subdomain}.doap.com/${subdomain}doapbanner.webp` },
         { name: "twitter:title", content: `${cityName} Doap - Call us today!` },
         { name: "twitter:description", content: defaultDescription },
         { name: "twitter:site", content: "@danvilledoap" }
