@@ -2,7 +2,50 @@ document.addEventListener("DOMContentLoaded", () => {
     // Subdomain and city name logic
     const hostname = window.location.hostname;
     const subdomain = hostname.split('.')[0];
-    const cityName = subdomain.charAt(0).toUpperCase() + subdomain.slice(1).toLowerCase();
+    #const cityName = subdomain.charAt(0).toUpperCase() + subdomain.slice(1).toLowerCase();
+
+    // Map of subdomain names to full city names
+    const cityMap = {
+        alamo: "Alamo",
+        antioch: "Antioch",
+        burlingame: "Burlingame",
+        campbell: "Campbell",
+        castrovalley: "Castro Valley",
+        concord: "Concord",
+        danville: "Danville",
+        discoverybay: "Discovery Bay",
+        dublin: "Dublin",
+        hillsborough: "Hillsborough",
+        livermore: "Livermore",
+        lafayette: "Lafayette",
+        orinda: "Orinda",
+        pittsburg: "Pittsburg",
+        pleasanthill: "Pleasant Hill",
+        pleasanton: "Pleasanton",
+        sanramon: "San Ramon",
+        walnutcreek: "Walnut Creek",
+        sunol: "Sunol"
+        // Add more subdomains as needed
+    };
+
+    // Get the city name based on the subdomain, default to "Unknown"
+    const cityName = cityMap[subdomain] || "Unknown";
+
+    // Update the city name dynamically in the header
+    document.getElementById("cityName").innerHTML = `<i class="fas fa-shopping-cart aligncenter"></i> ${cityName} Doap`;
+
+    // Update logo link dynamically (if applicable)
+    const logoLink = document.querySelector(".header a");
+    if (logoLink) {
+        logoLink.href = `https://${subdomain}.doap.com/cart.html`;
+        logoLink.title = `Go to ${cityName} Doap homepage`;
+    }
+
+    console.log(`City Name: ${cityName}`);
+});
+
+
+
     const defaultDescription = `${cityName} DOAP Delivers Organic Awesome Pot to ${cityName} and surrounding cities 9-9 daily.`;
 
     // Update the page title
