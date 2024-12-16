@@ -277,3 +277,28 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
+
+
+function showPopup(message, type = "success") {
+    const popup = document.getElementById("popupMessage");
+    const popupText = document.getElementById("popupText");
+    const dimBackground = document.createElement("div");
+    dimBackground.id = "popupDim";
+    dimBackground.classList.add("popup-dim");
+
+    // Set message and style based on type
+    popupText.textContent = message;
+    popup.className = `popup visible ${type}`;
+
+    // Append dim background
+    document.body.appendChild(dimBackground);
+    dimBackground.classList.add("visible");
+
+    // Hide popup after 3 seconds
+    setTimeout(() => {
+        popup.classList.remove("visible");
+        dimBackground.classList.remove("visible");
+        setTimeout(() => dimBackground.remove(), 300); // Remove after transition
+    }, 3000);
+}
+
