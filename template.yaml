@@ -1,0 +1,252 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: CloudFormation template to send HTML email alerts using SES and SNS, and store orders in S3.
+
+Resources:
+  LambdaExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+      Policies:
+        - PolicyName: lambda-s3-ses-role
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action:
+                  - s3:GetObject
+                  - s3:PutObject
+                  - s3:ListBucket
+                  - ses:SendEmail
+                  - ses:SendRawEmail
+                Resource: "*"
+
+  LambdaFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: doap-shop
+      Handler: index.handler
+      Role: !GetAtt LambdaExecutionRole.Arn
+      Runtime: nodejs16.x
+      Environment:
+        Variables:
+          SNS_TOPIC_ARN: !Ref NotificationTopic
+          SENDER_EMAIL: info@doap.com
+      Code:
+        ZipFile: |
+          const AWS = require('aws-sdk');
+          const s3 = new AWS.S3();
+          const ses = new AWS.SES();
+
+          exports.handler = async (event) => {
+              try {
+                  if (!event.body) {
+                      throw new Error("Request body is missing.");
+                  }
+
+                  const requestBody = JSON.parse(event.body);
+                  const { items, email, address, total, city } = requestBody;
+
+                  if (!items || !email || !address || !total || !city) {
+                      throw new Error("Missing required fields: items, email, address, total, or city.");
+                  }
+
+                  const timestamp = new Date().toISOString();
+                  const orderDetails = {
+                      city,
+                      timestamp,
+                      items,
+                      email,
+                      address,
+                      total,
+                  };
+
+                  // Save order to S3
+                  const bucketName = "doap";
+                  const fileName = `${city.toLowerCase()}-orders.txt`;
+
+                  let existingData = "";
+                  try {
+                      const data = await s3.getObject({ Bucket: bucketName, Key: fileName }).promise();
+                      existingData = data.Body.toString("utf-8");
+                  } catch (err) {
+                      if (err.code !== "NoSuchKey") {
+                          throw err;
+                      }
+                  }
+
+                  const updatedData = `${existingData}\n${JSON.stringify(orderDetails)}`;
+                  await s3.putObject({
+                      Bucket: bucketName,
+                      Key: fileName,
+                      Body: updatedData,
+                      ContentType: "text/plain",
+                  }).promise();
+
+                  // Send confirmation email to the customer
+                  const sesCustomerParams = {
+                      Source: process.env.SENDER_EMAIL,
+                      Destination: { ToAddresses: [email] },
+                      Message: {
+                          Subject: { Data: `${city} Doap - Order Confirmation` },
+                          Body: {
+                              Html: {
+                                  Data: `
+                                      <html>
+                                      <body>
+                                          <img src="https://doap.com/doap-logo-ind.png" alt="Doap Logo" style="width:150px;height:auto;">
+                                          <h2>Order Received</h2>
+                                          <p>Your order has been processed successfully!</p>
+                                          <p><strong>${city} Doap - Order Summary:</strong></p>
+                                          <ul>${items.map(item => `<li>${item}</li>`).join('')}</ul>
+                                          <p><strong>Total:</strong> ${total}</p>
+                                          <p>Thank you for shopping with ${city} Doap!</p>
+                                      </body>
+                                      </html>
+                                  `,
+                              },
+                          },
+                      },
+                  };
+                  await ses.sendEmail(sesCustomerParams).promise();
+
+                  // Send notification email to the backoffice team
+                  const sesBackofficeParams = {
+                      Source: process.env.SENDER_EMAIL,
+                      Destination: { ToAddresses: ["info@doap.com"] },
+                      Message: {
+                          Subject: { Data: `New Order Notification - ${city}` },
+                          Body: {
+                              Html: {
+                                  Data: `
+                                      <html>
+                                      <body>
+                                          <img src="https://doap.com/doap-logo-ind.png" alt="Doap Logo" style="width:150px;height:auto;">
+                                          <h2>New Order Notification</h2>
+                                          <p><strong>Customer Email:</strong> ${email}</p>
+                                          <p><strong>Delivery Address:</strong> ${address}</p>
+                                          <p><strong>Total:</strong> ${total}</p>
+                                          <h3>Order Details:</h3>
+                                          <ul>${items.map(item => `<li>${item}</li>`).join('')}</ul>
+                                          <p><strong>Timestamp:</strong> ${timestamp}</p>
+                                      </body>
+                                      </html>
+                                  `,
+                              },
+                          },
+                      },
+                  };
+                  await ses.sendEmail(sesBackofficeParams).promise();
+
+                  return {
+                      statusCode: 200,
+                      headers: { "Access-Control-Allow-Origin": "*" },
+                      body: JSON.stringify({ message: "Order processed successfully!" }),
+                  };
+              } catch (error) {
+                  return {
+                      statusCode: 500,
+                      headers: { "Access-Control-Allow-Origin": "*" },
+                      body: JSON.stringify({ error: error.message }),
+                  };
+              }
+          };
+
+  LambdaPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: "lambda:InvokeFunction"
+      FunctionName: !Ref LambdaFunction
+      Principal: apigateway.amazonaws.com
+
+  ApiGatewayRestApi:
+    Type: AWS::ApiGateway::RestApi
+    Properties:
+      Name: "DoapShopApi"
+
+  ApiGatewayResource:
+    Type: AWS::ApiGateway::Resource
+    Properties:
+      ParentId: !GetAtt ApiGatewayRestApi.RootResourceId
+      PathPart: "checkout"
+      RestApiId: !Ref ApiGatewayRestApi
+
+  ApiGatewayMethod:
+    Type: AWS::ApiGateway::Method
+    Properties:
+      HttpMethod: POST
+      ResourceId: !Ref ApiGatewayResource
+      RestApiId: !Ref ApiGatewayRestApi
+      AuthorizationType: NONE
+      Integration:
+        IntegrationHttpMethod: POST
+        Type: AWS_PROXY
+        Uri: !Sub "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${LambdaFunction.Arn}/invocations"
+      MethodResponses:
+        - StatusCode: 200
+          ResponseParameters:
+            method.response.header.Access-Control-Allow-Origin: true
+        - StatusCode: 400
+          ResponseParameters:
+            method.response.header.Access-Control-Allow-Origin: true
+
+  ApiGatewayOptionsMethod:
+    Type: AWS::ApiGateway::Method
+    Properties:
+      HttpMethod: OPTIONS
+      ResourceId: !Ref ApiGatewayResource
+      RestApiId: !Ref ApiGatewayRestApi
+      AuthorizationType: NONE
+      Integration:
+        IntegrationHttpMethod: OPTIONS
+        Type: MOCK
+        RequestTemplates:
+          application/json: '{ "statusCode": 200 }'
+        IntegrationResponses:
+          - StatusCode: 200
+            ResponseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+              method.response.header.Access-Control-Allow-Methods: "'POST,OPTIONS'"
+              method.response.header.Access-Control-Allow-Headers: "'Content-Type'"
+      MethodResponses:
+        - StatusCode: 200
+          ResponseParameters:
+            method.response.header.Access-Control-Allow-Origin: true
+            method.response.header.Access-Control-Allow-Methods: true
+            method.response.header.Access-Control-Allow-Headers: true
+
+  ApiGatewayDeployment:
+    Type: AWS::ApiGateway::Deployment
+    DependsOn: 
+      - ApiGatewayMethod
+      - ApiGatewayOptionsMethod
+    Properties:
+      RestApiId: !Ref ApiGatewayRestApi
+      StageName: prod
+
+  NotificationTopic:
+    Type: AWS::SNS::Topic
+    Properties:
+      TopicName: doap-notifications
+
+  NotificationTopicSubscription:
+    Type: AWS::SNS::Subscription
+    Properties:
+      Protocol: email
+      TopicArn: !Ref NotificationTopic
+      Endpoint: dmenache@doap.com
+
+Outputs:
+  ApiGatewayUrl:
+    Description: "API Gateway URL"
+    Value: !Sub "https://${ApiGatewayRestApi}.execute-api.${AWS::Region}.amazonaws.com/prod/checkout"
+
+  LambdaFunctionName:
+    Description: "The name of the created Lambda function"
+    Value: !Ref LambdaFunction
+
