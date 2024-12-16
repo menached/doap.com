@@ -8,6 +8,62 @@ body {
     font-size: 16px; /* Base font size for all devices */
 }
 
+/* Adjust overall header spacing */
+.header {
+    margin: 0;
+    padding: 0;
+}
+
+/* Reduce spacing between logo and text */
+.logo-title-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px; /* Space between logo and text */
+    margin: 0; /* Remove default margins */
+    padding: 0; /* Remove default padding */
+}
+
+/* Logo styling */
+.doap-logo {
+    width: 50px; /* Adjust logo size */
+    height: auto;
+    margin: 0; /* Remove extra margins */
+}
+
+/* City name styling */
+#cityName {
+    font-family: 'Marvel', sans-serif; /* Keep existing font */
+    font-size: 2rem; /* Adjust font size if needed */
+    margin: 0; /* Remove default margins */
+    line-height: 1; /* Adjust line height */
+}
+
+/* Menu title styling */
+.menu-title {
+    margin: 0; /* Remove top/bottom margins */
+    padding: 0; /* Remove extra padding */
+    text-align: center;
+}
+
+.menu-title-text {
+    margin: 0; /* Remove extra margins */
+    line-height: 1.2; /* Reduce line height */
+}
+
+/* Phone number styling */
+.menu-title a {
+    display: inline-block; /* Keep it aligned with other text */
+    margin-top: 5px; /* Reduce space between phone number and text above */
+    font-size: 0.9rem; /* Adjust font size */
+    color: #333; /* Default text color */
+    text-decoration: none; /* No underline */
+}
+
+.menu-title a:hover {
+    color: #007BFF; /* Optional hover effect */
+    text-decoration: underline;
+}
 
 
 /* Center alignment for the header */
