@@ -124,7 +124,6 @@ body {
     text-align: center; /* Center-align the phone number */
     font-size: 0.9rem; /* Smaller font size */
     margin-top: 5px; /* Space between the header and the phone number */
-    text-decoration:none;
 }
 
 .phone-number a {
@@ -136,6 +135,7 @@ body {
 .phone-number a:hover {
     color: #007BFF; /* Change color on hover for better UX */
     text-decoration: underline; /* Underline on hover */
+    text-decoration:none;
 }
 
 /* Style the remove-item "X" */
