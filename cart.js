@@ -258,9 +258,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const cryptoWallets = document.getElementById("cryptoWallets");
     const generalHelp = document.getElementById("generalHelp");
 
-    paymentMethodDropdown.addEventListener("change", (event) => {
-        const selectedMethod = event.target.value;
-
+    // Function to handle showing the appropriate section
+    const handlePaymentMethodChange = (selectedMethod) => {
         // Hide all sections initially
         creditCardForm.style.display = "none";
         cryptoWallets.style.display = "none";
@@ -274,31 +273,14 @@ document.addEventListener("DOMContentLoaded", () => {
         } else if (selectedMethod === "cash" || selectedMethod === "zelle" || selectedMethod === "venmo" || selectedMethod === "paypal") {
             generalHelp.style.display = "block";
         }
+    };
+
+    // Attach event listener for payment method changes
+    paymentMethodDropdown.addEventListener("change", (event) => {
+        handlePaymentMethodChange(event.target.value);
     });
+
+    // Trigger the default behavior on page load (default is "cash")
+    handlePaymentMethodChange(paymentMethodDropdown.value);
 });
-
-
-
-function showPopup(message, type = "success") {
-    const popup = document.getElementById("popupMessage");
-    const popupText = document.getElementById("popupText");
-    const dimBackground = document.createElement("div");
-    dimBackground.id = "popupDim";
-    dimBackground.classList.add("popup-dim");
-
-    // Set message and style based on type
-    popupText.textContent = message;
-    popup.className = `popup visible ${type}`;
-
-    // Append dim background
-    document.body.appendChild(dimBackground);
-    dimBackground.classList.add("visible");
-
-    // Hide popup after 3 seconds
-    setTimeout(() => {
-        popup.classList.remove("visible");
-        dimBackground.classList.remove("visible");
-        setTimeout(() => dimBackground.remove(), 300); // Remove after transition
-    }, 3000);
-}
 
