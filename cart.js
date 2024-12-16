@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const logoLink = document.querySelector(".header a");
     if (logoLink) {
         logoLink.href = `https://${subdomain}.doap.com/cart.html`; // Dynamically set link based on subdomain
-        logoLink.title = `Go to ${cityName} Doap homepage`; // Set hover text
+        logoLink.title = `Call ${cityName} Doap!`; // Set hover text
     }
 
     const cartForm = document.getElementById("cartForm");
