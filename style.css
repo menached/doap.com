@@ -188,6 +188,8 @@ body {
 .menu-title-text {
     margin: 0;
     line-height: 1.2;
+    position:relative;
+    top:-10px;
 }
 
 
