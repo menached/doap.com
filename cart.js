@@ -204,12 +204,26 @@ document.addEventListener("DOMContentLoaded", () => {
                     <span class="remove-item" data-value="${item.value}">x</span></li>`;
             });
 
+        // Update the selected items and total display
         selectedItemsList.innerHTML = cartItems.length
             ? cartItems.join("")
             : '<li>No items selected yet.</li>';
-
         totalDisplay.textContent = `$${total.toFixed(2)}`;
 
+        // Handle the minimum order message
+        const minOrderMessage = document.getElementById("minOrderMessage");
+        if (total === 0) {
+            minOrderMessage.textContent = "Minimum order is $50.";
+            minOrderMessage.style.color = "black";
+        } else if (total > 0 && total < 50) {
+            minOrderMessage.textContent = "Minimum order is $50.";
+            minOrderMessage.style.color = "red";
+        } else {
+            minOrderMessage.textContent = "You're good to go!";
+            minOrderMessage.style.color = "green";
+        }
+
+        // Add remove-item functionality
         document.querySelectorAll(".remove-item").forEach(button => {
             button.addEventListener("click", () => {
                 const valueToRemove = button.getAttribute("data-value");
