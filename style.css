@@ -238,11 +238,6 @@ form {
     flex-shrink: 0;
 }
 
-.item-details {
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-}
 
 .item-title {
     font-size: 1.1rem;
@@ -258,61 +253,41 @@ form {
     margin-bottom: 5px;
 }
 
-/* Align the quantity selector to the right */
-/*.item-quantity {*/
-    /*display: flex;*/
-    /*justify-content: flex-end; [> Align contents to the right <]*/
-    /*align-items: center; [> Vertically align contents <]*/
-    /*float: right; [> Make the entire block float to the right <]*/
-    /*margin-left: auto; [> Add spacing between other elements <]*/
-/*}*/
+
+/* Ensure the .item container is a horizontal flexbox */
+.item {
+    display: flex;
+    align-items: center; /* Vertically align all child elements */
+    gap: 15px; /* Add space between elements */
+}
+
+/* Ensure the .item-details and .item-quantity are inline */
+.item-details {
+    flex-grow: 1; /* Allow it to expand and take up available space */
+    display: flex;
+    flex-direction: column; /* Stack title and price vertically */
+    justify-content: center; /* Center content vertically */
+}
+
 .item-quantity {
     display: flex;
-    align-items: center; /* Center the label and input vertically */
-    margin-left: auto; /* Push the quantity selector to the far right */
+    align-items: center; /* Center vertically */
+    margin-left: auto; /* Push it to the far right */
 }
-/* Optional: Style the label and input for better appearance */
+
+/* Optional: Add spacing for the label and input */
 .item-quantity label {
-    margin-right: 5px; /* Add spacing between label and input */
+    margin-right: 5px;
 }
 
 .item-quantity input[type="number"] {
-    width: 60px; /* Adjust the input width */
+    width: 60px;
     padding: 5px;
-    text-align: center; /* Center-align the text */
+    text-align: center;
     border: 1px solid #ddd;
     border-radius: 5px;
 }
-/*.item-quantity input[type="number"] {*/
-    /*width: 60px; [> Adjust width <]*/
-    /*padding: 5px;*/
-    /*text-align: center; [> Center the text inside the input <]*/
-    /*border: 1px solid #ddd;*/
-    /*border-radius: 5px;*/
-/*}*/
 
-.item-quantity label {
-    margin-right: 5px; /* Space between label and input */
-}
-
-/*.item-quantity {*/
-    /*display: flex;*/
-    /*align-items: center;*/
-    /*margin-top: 5px;*/
-/*}*/
-
-/*.item-quantity label {*/
-    /*margin-right: 10px;*/
-    /*font-size: 0.9rem;*/
-/*}*/
-
-/*.item-quantity input[type="number"] {*/
-    /*width: 60px;*/
-    /*padding: 5px;*/
-    /*border: 1px solid #ddd;*/
-    /*border-radius: 5px;*/
-    /*text-align: center;*/
-/*}*/
 
 /* Cart Section */
 .cart-section {
