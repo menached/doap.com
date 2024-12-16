@@ -9,6 +9,7 @@ body {
 }
 
 
+
 /* Center alignment for the header */
 .logo-title-container {
     display: flex;
@@ -33,6 +34,23 @@ body {
 
 
 
+/* Phone number styling */
+.phone-number {
+    text-align: center; /* Center-align the phone number */
+    font-size: 0.9rem; /* Smaller font size */
+    margin-top: 5px; /* Space between the header and the phone number */
+}
+
+.phone-number a {
+    color: #333; /* Default text color */
+    text-decoration: none; /* Remove underline */
+    font-weight: bold; /* Make the number stand out */
+}
+
+.phone-number a:hover {
+    color: #007BFF; /* Change color on hover for better UX */
+    text-decoration: underline; /* Underline on hover */
+}
 
 /* Style the remove-item "X" */
 .remove-item {
