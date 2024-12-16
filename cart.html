@@ -71,7 +71,7 @@
         // Dynamically load products.html into #productsContainer
         document.addEventListener("DOMContentLoaded", () => {
             const productsContainer = document.getElementById("productsContainer");
-            fetch("products.html")
+            fetch("https://www.doap.com/products.html")
                 .then(response => response.text())
                 .then(data => {
                     productsContainer.innerHTML = data;
