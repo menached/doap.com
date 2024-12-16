@@ -23,7 +23,7 @@
                 <img src="https://www.doap.com/doap-logo-wording.png" alt="Doap Logo" class="doap-logo">
                 </a>
                 <div class="text-container">
-                    <h1 id="cityName">Doap Delivery!</h1>
+                    <h1 id="cityName"><?php include('city.php'); ?> Doap Delivery!</h1>
                     <a href="tel:8332893627" class="phone-number">Call us at (833) 289-3627</a>
                 </div>
             </div>
@@ -258,7 +258,7 @@
 
             <div class="info-row">
                 <label for="city">City:</label>
-                <input type="text" id="city" name="city" required>
+                <input type="text" id="city" name="city" value="<?php include('city.php'); ?>" required>
             </div>
     <!-- Submit Button -->
         <button id="checkoutButton">Checkout</button>
