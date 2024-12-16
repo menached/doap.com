@@ -8,35 +8,36 @@ body {
     font-size: 16px; /* Base font size for all devices */
 }
 
+
 /* Adjust overall header spacing */
 .header {
     margin: 0;
     padding: 0;
 }
 
-/* Reduce spacing between logo and text */
+/* Reduce space above and below the logo-title-container */
 .logo-title-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 10px; /* Space between logo and text */
-    margin: 0; /* Remove default margins */
-    padding: 0; /* Remove default padding */
+    gap: 10px; /* Space between the logo and text */
+    margin: 5px 0; /* Minimal top and bottom margin */
+    padding: 0; /* Remove any padding */
 }
 
-/* Logo styling */
+/* Style for the Doap logo */
 .doap-logo {
-    width: 50px; /* Adjust logo size */
-    height: auto;
-    margin: 0; /* Remove extra margins */
+    width: 50px; /* Adjust the size of the logo */
+    height: auto; /* Maintain aspect ratio */
+    margin: 0; /* Remove default margins */
 }
 
 /* City name styling */
 #cityName {
     font-family: 'Marvel', sans-serif; /* Keep existing font */
-    font-size: 2rem; /* Adjust font size if needed */
+    font-size: 2rem; /* Adjust font size */
     margin: 0; /* Remove default margins */
-    line-height: 1; /* Adjust line height */
+    line-height: 1; /* Compact line height */
 }
 
 /* Menu title styling */
@@ -50,6 +51,16 @@ body {
     margin: 0; /* Remove extra margins */
     line-height: 1.2; /* Reduce line height */
 }
+
+
+/* City name styling */
+#cityName {
+    font-family: 'Marvel', sans-serif; /* Keep existing font */
+    font-size: 2rem; /* Adjust font size if needed */
+    margin: 0; /* Remove default margins */
+    line-height: 1; /* Adjust line height */
+}
+
 
 /* Phone number styling */
 .menu-title a {
