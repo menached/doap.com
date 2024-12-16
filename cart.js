@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const hostname = window.location.hostname;
     const subdomain = hostname.split('.')[0].toLowerCase();
 
-    // Get the city name based on the subdomain
+    // Get the city name from the mapping
     const cityName = subdomainToCityName[subdomain] || subdomainToCityName.default;
 
     // Update the city name in the UI
@@ -35,8 +35,14 @@ document.addEventListener("DOMContentLoaded", () => {
         cityNameElement.textContent = `${cityName} Doap`; // Set the city name in the header
     }
 
+    // Update the page title
+    document.title = `${cityName} Doap`;
+
+    // Debugging
     console.log(`City name for ${subdomain}: ${cityName}`);
 });
+
+
 
 
 
@@ -50,13 +56,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Update the page title
     document.title = `${cityName} Doap`;
-
-
-
-
-
-
-
 
 
     // Update the header area without the shopping cart icon
