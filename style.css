@@ -251,24 +251,47 @@ form {
     margin-bottom: 5px;
 }
 
+/* Align the quantity selector to the right */
 .item-quantity {
     display: flex;
-    align-items: center;
-    margin-top: 5px;
+    justify-content: flex-end; /* Align contents to the right */
+    align-items: center; /* Vertically align contents */
+    float: right; /* Make the entire block float to the right */
+    margin-left: auto; /* Add spacing between other elements */
 }
 
+/* Optional: Style the label and input for better appearance */
 .item-quantity label {
-    margin-right: 10px;
-    font-size: 0.9rem;
+    margin-right: 5px; /* Add spacing between label and input */
 }
 
 .item-quantity input[type="number"] {
-    width: 60px;
+    width: 60px; /* Adjust width */
     padding: 5px;
+    text-align: center; /* Center the text inside the input */
     border: 1px solid #ddd;
     border-radius: 5px;
-    text-align: center;
 }
+
+
+/*.item-quantity {*/
+    /*display: flex;*/
+    /*align-items: center;*/
+    /*margin-top: 5px;*/
+/*}*/
+
+/*.item-quantity label {*/
+    /*margin-right: 10px;*/
+    /*font-size: 0.9rem;*/
+/*}*/
+
+/*.item-quantity input[type="number"] {*/
+    /*width: 60px;*/
+    /*padding: 5px;*/
+    /*border: 1px solid #ddd;*/
+    /*border-radius: 5px;*/
+    /*text-align: center;*/
+/*}*/
 
 /* Cart Section */
 .cart-section {
