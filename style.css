@@ -8,6 +8,19 @@ body {
     font-size: 16px; /* Base font size for all devices */
 }
 
+/* Style the remove-item "X" */
+.remove-item {
+    color: red; /* Set the text color to red */
+    font-weight: bold; /* Optional: Make it bold */
+    cursor: pointer; /* Ensure it looks clickable */
+    margin-left: 10px; /* Add some spacing */
+    font-size: 1.2rem; /* Optional: Adjust size */
+}
+
+.remove-item:hover {
+    color: darkred; /* Change to a darker red on hover for better UX */
+    text-decoration: underline; /* Optional: Add underline on hover */
+}
 
 
 
