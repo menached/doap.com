@@ -165,5 +165,75 @@ document.addEventListener("DOMContentLoaded", () => {
     applyTabListeners();
 
     console.log("Tab, payment, and cart logic applied!");
+
+        const checkoutButton = document.getElementById("checkoutButton");
+    const cartForm = document.getElementById("cartForm");
+    const totalDisplay = document.getElementById("total");
+
+    if (checkoutButton && cartForm) {
+        checkoutButton.addEventListener("click", async (event) => {
+            event.preventDefault();
+
+            try {
+                // Gather selected items
+                const checkedItems = cartForm.querySelectorAll('input[name="item"]:checked');
+                const items = Array.from(checkedItems).map(item => {
+                    const quantityInput = item.closest(".item").querySelector(".quantity");
+                    const quantity = parseInt(quantityInput.value, 10) || 1;
+                    const [itemName, itemCost] = item.value.split('|');
+                    return { name: itemName, quantity, price: parseFloat(itemCost) };
+                });
+
+                // Gather customer details
+                const name = document.getElementById("name").value.trim();
+                const city = document.getElementById("city").value.trim();
+                const phone = document.getElementById("phone").value.trim();
+                const email = document.getElementById("email").value.trim();
+                const address = document.getElementById("address").value.trim();
+                const total = totalDisplay.textContent;
+                const paymentMethod = document.getElementById("paymentMethod").value;
+
+                // Validation
+                if (!items.length) throw new Error("No items selected!");
+                if (!name || !city || !phone || !email || !address) {
+                    throw new Error("All fields must be filled out!");
+                }
+                if (!paymentMethod) throw new Error("Payment method is required!");
+
+                // Prepare payload for the API
+                const payload = {
+                    items,
+                    name,
+                    city,
+                    phone,
+                    email,
+                    address,
+                    total,
+                    paymentMethod,
+                };
+
+                console.log("Payload being sent:", payload);
+
+                // Send the payload to the API
+                const response = await fetch("https://eft3wrtpad.execute-api.us-west-2.amazonaws.com/prod/checkout", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(payload),
+                });
+
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    console.error("Error from API:", errorText);
+                    throw new Error("Failed to submit order.");
+                }
+
+                alert("Order submitted successfully!");
+            } catch (error) {
+                console.error("Error during checkout:", error);
+                alert(error.message);
+            }
+        });
+    }
+
 });
 
