@@ -14,6 +14,48 @@ document.addEventListener("DOMContentLoaded", () => {
         cityNameElement.textContent = `${cityName} Doap`;
     }
 
+
+
+
+        // Mapping of subdomains to agency phone numbers
+    const agencyPhoneNumbers = {
+        alamo: "(925) 553-4710",
+        antioch: "(925) 891-7800",
+        burlingame: "(650) 293-0880",
+        campbell: "(408) 645-6700",
+        castrovalley: "(925) 263-9209",
+        concord: "(925) 412-4880",
+        danville: "(925) 725-6920",
+        dublin: "(925) 587-6777",
+        hillsborough: "(650) 293-0880",
+        livermore: "(925) 718-6181",
+        lafayette: "(925) 871-1333",
+        orinda: "(925) 891-7800",
+        pittsburg: "(925) 825-8555",
+        pleasanthill: "(925) 891-7800",
+        pleasanton: "(925) 587-6777",
+        sanramon: "(925) 365-6030",
+        walnutcreek: "(925) 464-2075",
+        sunol: "(925) 718-6181",
+        default: "(833) 289-3627" // Fallback phone number
+    };
+
+    // Extract the subdomain from the hostname
+    const hostname = window.location.hostname;
+    const subdomain = hostname.split('.')[0];
+
+    // Get the phone number for the current subdomain
+    const agencyPhone = agencyPhoneNumbers[subdomain.toLowerCase()] || agencyPhoneNumbers.default;
+
+    // Update the phone number in the UI
+    const phoneElement = document.querySelector(".phone-number");
+    if (phoneElement) {
+        phoneElement.textContent = agencyPhone; // Set the correct phone number
+    }
+
+    console.log(`Phone number for ${subdomain}: ${agencyPhone}`);
+
+
     // Update logo link
     const logoLink = document.querySelector(".header a");
     if (logoLink) {
