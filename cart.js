@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const defaultDescription = `${cityName} DOAP Delivers Organic Awesome Pot to ${cityName} and surrounding cities 9-9 daily.`;
 
     // Update the page title
-    document.title = `${cityName} Doap`;
+    //document.title = `${cityName} Doap`;
 
 
     // Update the header area without the shopping cart icon
