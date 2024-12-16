@@ -239,7 +239,7 @@ function setAgencyPhoneNumber() {
     phoneDiv.style.marginTop = '10px';
     phoneDiv.style.fontSize = '18px';
     phoneDiv.style.fontWeight = 'bold';
-    phoneDiv.innerHTML = `<a href="tel:${phone}" style="color: inherit; text-decoration: none;">Call us at ${phone}</a>`;
+    phoneDiv.innerHTML = `<a href="tel:${phone}" style="color: inherit; text-decoration: none;">${phone}</a>`;
 
     // Find the element with the class 'menu-title-text' and insert the phone number div after it
     const menuTitle = document.querySelector('.menu-title-text');
