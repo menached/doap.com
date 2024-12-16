@@ -5,10 +5,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const cityName = subdomain.charAt(0).toUpperCase() + subdomain.slice(1).toLowerCase();
     const defaultDescription = `${cityName} DOAP Delivers Organic Awesome Pot to ${cityName} and surrounding cities 9-9 daily.`;
 
-    // Update city name in header
+    // Update the page title
+    document.title = `${cityName} Doap`;
+
+    // Update the header area without the shopping cart icon
     const cityNameElement = document.getElementById("cityName");
     if (cityNameElement) {
-        cityNameElement.innerHTML = `<i class="fas fa-shopping-cart"></i> ${cityName} Doap `;
+        cityNameElement.textContent = `${cityName} Doap`;
     }
 
     // Update logo link
@@ -102,6 +105,10 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
     };
+
+    applyTabListeners();
+
+    console.log("Tab logic applied successfully!");
 
     // Cart update logic
     const cartForm = document.getElementById("cartForm");
