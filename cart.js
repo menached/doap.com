@@ -219,5 +219,27 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }
+    const agencyPhoneNumbers = {
+        danville: "(925) 725-6920",
+        alamo: "(925) 553-4710",
+        antioch: "(925) 891-7800",
+        burlingame: "(650) 293-0880",
+        campbell: "(408) 645-6700",
+        castrovalley: "(925) 263-9209",
+        concord: "(925) 412-4880",
+        dublin: "(925) 587-6777",
+        hillsborough: "(650) 293-0880",
+        livermore: "(925) 718-6181",
+        lafayette: "(925) 871-1333",
+        orinda: "(925) 891-7800",
+        pittsburg: "(925) 825-8555",
+        pleasanthill: "(925) 891-7800",
+        pleasanton: "(925) 587-6777",
+        sanramon: "(925) 365-6030",
+        walnutcreek: "(925) 464-2075",
+        sunol: "(925) 718-6181",
+        default: "(833) 289-3627" // Fallback phone number
+    };
+
 });
 
