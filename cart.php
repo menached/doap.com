@@ -226,9 +226,15 @@
         <!-- Cart Section -->
         <div class="cart-section">
             <h3>Cart:</h3>
-            <ul id="selectedItemsList">
-                <li>No items selected yet.</li>
-            </ul>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <ul id="selectedItemsList">
+                    <li>No items selected yet.</li>
+                </ul>
+                <!-- Minimum Order Message -->
+                <div id="minOrderMessage" style="font-size: 0.9rem; font-weight: bold; color: black;">
+                    Minimum order is $50.
+                </div>
+            </div>
             <div id="totalPriceRow">
                 <span>Total Price:</span>
                 <span id="total">$0</span>
