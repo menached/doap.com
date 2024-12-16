@@ -106,9 +106,58 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     };
 
+    // Cart update logic
+    const cartForm = document.getElementById("cartForm");
+    const totalDisplay = document.getElementById("total");
+    const selectedItemsList = document.getElementById("selectedItemsList");
+
+    const updateCart = () => {
+        const itemElements = cartForm.querySelectorAll('input[name="item"]');
+        let total = 0;
+
+        const cartItems = Array.from(itemElements)
+            .filter(el => el.checked)
+            .map(item => {
+                const quantityInput = item.closest(".item").querySelector(".quantity");
+                const quantity = parseInt(quantityInput.value, 10) || 1;
+                const [itemName, itemCost] = item.value.split('|');
+                const cost = parseFloat(itemCost) * quantity;
+
+                total += cost;
+
+                return `<li>${itemName} (x${quantity}) - $${cost.toFixed(2)} 
+                    <span class="remove-item" data-value="${item.value}">x</span></li>`;
+            });
+
+        selectedItemsList.innerHTML = cartItems.length
+            ? cartItems.join("")
+            : '<li>No items selected yet.</li>';
+
+        totalDisplay.textContent = `$${total.toFixed(2)}`;
+
+        document.querySelectorAll(".remove-item").forEach(button => {
+            button.addEventListener("click", () => {
+                const valueToRemove = button.getAttribute("data-value");
+                const itemToUncheck = cartForm.querySelector(`input[name="item"][value="${valueToRemove}"]`);
+                if (itemToUncheck) {
+                    itemToUncheck.checked = false;
+                    cartForm.dispatchEvent(new Event("change"));
+                }
+            });
+        });
+    };
+
+    // Event listeners for cart updates
+    cartForm.addEventListener("change", updateCart);
+    cartForm.addEventListener("input", (event) => {
+        if (event.target.classList.contains("quantity")) {
+            updateCart();
+        }
+    });
+
     // Apply tab listeners
     applyTabListeners();
 
-    console.log("Tab switching logic applied!");
+    console.log("Tab and cart logic applied!");
 });
 
