@@ -127,11 +127,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 address,
                 total,
                 paymentMethod,
-                city: cityName // Add city to match Lambda's expected structure
             };
-
-            // Ensure the payload is a valid JSON string
-            console.log("Payload being sent:", JSON.stringify(payload));
 
             const response = await fetch("https://eft3wrtpad.execute-api.us-west-2.amazonaws.com/prod/checkout", {
                 method: "POST",
@@ -140,18 +136,17 @@ document.addEventListener("DOMContentLoaded", () => {
             });
 
             if (response.ok) {
-                alert("Order submitted successfully!");
+                showPopup("Order Processed Successfully!", "success");
             } else {
                 const error = await response.text();
                 console.error("Error submitting order:", error);
-                alert("Failed to submit order.");
+                showPopup("Failed to submit order. Please try again.", "error");
             }
         } catch (error) {
             console.error("Error:", error.message);
-            alert(error.message);
+            showPopup(error.message, "error");
         }
     });
-});
 
 
 function setAgencyPhoneNumber() {
