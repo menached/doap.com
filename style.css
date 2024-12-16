@@ -52,6 +52,19 @@
 }
 
 
+/* Mobile portrait view */
+@media (max-width: 767px) {
+    #cityName {
+        font-size: 50%; /* Shrinks text to half its normal size */
+        text-align: center; /* Ensures the text stays centered */
+    }
+
+    .phone-number {
+        display: none; /* Hides the "Call us at" text */
+    }
+}
+
+
 
 
 
