@@ -160,6 +160,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     console.log("Cart logic applied successfully!");
 
+    // Remove "Call us at" from the phone number
+    const phone = document.querySelector(".phone-number");
+    if (phone) {
+        phone.textContent = phone.textContent.replace(/Call us at\s*/, '');
+    }
+
+
     // Checkout button logic
     const checkoutButton = document.getElementById("checkoutButton");
     if (checkoutButton && cartForm) {
