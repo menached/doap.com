@@ -4,8 +4,9 @@
     <script>
         const hostname = window.location.hostname;
         const subdomain = hostname.split('.')[0];
-        const cityName = subdomain.charAt(0).toUpperCase() + subdomain.slice(1).toLowerCase();
-        document.title = `${cityName} Doap`;
+        //const cityName = subdomain.charAt(0).toUpperCase() + subdomain.slice(1).toLowerCase();
+        const cityName = "<?php include('city.php'); ?>";
+        //document.title = `${cityName} Doap`;
     </script>
         <title><?php include('city.php'); ?> Doap</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="anonymous">
