@@ -157,7 +157,7 @@ form {
     height: auto; /* Maintain aspect ratio */
     max-width: 100%; /* Ensure it doesn't overflow the parent container */
     position:relative;
-    top:10px;
+    top:-10px;
 }
 .header h1 {
     margin: 10px 0 0;
