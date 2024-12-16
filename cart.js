@@ -300,6 +300,65 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 document.addEventListener("DOMContentLoaded", () => {
+    const cartSection = document.querySelector(".cart-section");
+    const cartForm = document.getElementById("cartForm");
+    const selectedItemsList = document.getElementById("selectedItemsList");
+    const totalDisplay = document.getElementById("total");
+
+    // Initially hide the cart
+    cartSection.style.display = "none";
+
+    // Function to update cart and toggle visibility
+    const updateCart = () => {
+        const itemElements = cartForm.querySelectorAll('input[name="item"]');
+        let total = 0;
+
+        // Update cart dynamically
+        const cartItems = Array.from(itemElements)
+            .filter(el => el.checked)
+            .map(item => {
+                const quantityInput = item.closest(".item").querySelector(".quantity");
+                const quantity = parseInt(quantityInput.value, 10) || 1;
+                const [itemName, itemCost] = item.value.split('|');
+                const cost = parseFloat(itemCost) * quantity;
+
+                total += cost;
+
+                return `<li>${itemName} (x${quantity}) - $${cost.toFixed(2)}</li>`;
+            });
+
+        // Update cart list and total
+        selectedItemsList.innerHTML = cartItems.length
+            ? cartItems.join("")
+            : '<li>No items selected yet.</li>';
+        totalDisplay.textContent = `$${total.toFixed(2)}`;
+
+        // Show the cart if an item is selected
+        if (cartItems.length > 0 || cartSection.style.display === "none") {
+            cartSection.style.display = "block"; // Show cart
+        }
+    };
+
+    // Event listener for form changes
+    cartForm.addEventListener("change", () => {
+        updateCart();
+    });
+
+    // Event listener for quantity input changes
+    cartForm.addEventListener("input", (event) => {
+        if (event.target.classList.contains("quantity")) {
+            updateCart();
+        }
+    });
+
+    // Initial update (to ensure cart remains hidden on load)
+    updateCart();
+});
+
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
     const paymentMethodDropdown = document.getElementById("paymentMethod");
     const creditCardForm = document.getElementById("creditCardForm");
     const cryptoWallets = document.getElementById("cryptoWallets");
