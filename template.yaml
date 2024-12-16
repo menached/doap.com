@@ -24,6 +24,7 @@ Resources:
                   - s3:ListBucket
                   - ses:SendEmail
                   - ses:SendRawEmail
+                  - sns:Publish
                 Resource: "*"
 
   LambdaFunction:
@@ -46,47 +47,90 @@ Resources:
           exports.handler = async (event) => {
               try {
                   if (!event.body) {
+                      console.log("Request body is missing.");
                       throw new Error("Request body is missing.");
                   }
 
                   const requestBody = JSON.parse(event.body);
-                  const { items, email, address, total, city } = requestBody;
+                  const { items, name, city, phone, email, address, total, paymentMethod } = requestBody;
 
-                  if (!items || !email || !address || !total || !city) {
-                      throw new Error("Missing required fields: items, email, address, total, or city.");
+                  if (!items || !name || !city || !phone || !email || !address || !total || !paymentMethod) {
+                      console.log("Missing required fields:", { items, name, city, phone, email, address, total, paymentMethod });
+                      throw new Error("Missing required fields: items, name, city, phone, email, address, total, or payment method.");
                   }
 
                   const timestamp = new Date().toISOString();
-                  const orderDetails = {
-                      city,
-                      timestamp,
-                      items,
-                      email,
-                      address,
-                      total,
-                  };
 
-                  // Save order to S3
+                  // Step 1: Get the current order count from ordercount.txt
                   const bucketName = "doap";
-                  const fileName = `${city.toLowerCase()}-orders.txt`;
+                  const orderCountKey = "ordercount.txt";
+                  let orderCount = 0;
 
-                  let existingData = "";
                   try {
-                      const data = await s3.getObject({ Bucket: bucketName, Key: fileName }).promise();
-                      existingData = data.Body.toString("utf-8");
+                      const data = await s3.getObject({ Bucket: bucketName, Key: orderCountKey }).promise();
+                      orderCount = parseInt(data.Body.toString('utf-8'), 10);
+                      console.log("Fetched order count:", orderCount);
                   } catch (err) {
-                      if (err.code !== "NoSuchKey") {
-                          throw err;
+                      if (err.code === "NoSuchKey") {
+                          console.log("ordercount.txt not found, initializing order count to 1.");
+                          orderCount = 1;
+                      } else {
+                          console.error("Error reading from S3:", err);
+                          throw new Error("Error reading from S3");
                       }
                   }
 
-                  const updatedData = `${existingData}\n${JSON.stringify(orderDetails)}`;
+                  // Step 2: Generate the new order number
+                  const orderNumber = orderCount;
+
+                  // Step 3: Update ordercount.txt with the new order count
                   await s3.putObject({
                       Bucket: bucketName,
-                      Key: fileName,
-                      Body: updatedData,
-                      ContentType: "text/plain",
+                      Key: orderCountKey,
+                      Body: (orderNumber + 1).toString(),
+                      ContentType: "text/plain"
                   }).promise();
+
+                  console.log("Updated order count:", orderNumber + 1);
+
+                  // Add the order number and payment method to the order details
+                  const orderDetails = {
+                      orderNumber,
+                      city,
+                      timestamp,
+                      items,
+                      name,
+                      phone,
+                      email,
+                      address,
+                      total,
+                      paymentMethod,
+                  };
+
+                  // Step 4: Write the order details to a file named after the city (e.g., pleasanthill-orders.txt)
+                  const orderFileName = `${city.toLowerCase()}-orders.txt`;
+                  let existingData = "";
+                  try {
+                      const data = await s3.getObject({ Bucket: bucketName, Key: orderFileName }).promise();
+                      existingData = data.Body.toString('utf-8');
+                  } catch (err) {
+                      if (err.code !== "NoSuchKey") {
+                          console.error("Error reading order file:", err);
+                          throw new Error("Error reading order file");
+                      }
+                  }
+
+                  // Step 5: Append the new order details to the file
+                  const updatedData = `${existingData}\nOrder Number: ${orderNumber}\nCustomer: ${name}\nPhone: ${phone}\nEmail: ${email}\nAddress: ${address}, ${city}\nPayment Method: ${paymentMethod}\nOrder Summary:\n${items.map(item => `${item.name} (x${item.quantity}) - $${(item.quantity * item.price).toFixed(2)}`).join('\n')}\nTotal: $${total}\nTimestamp: ${timestamp}\n`;
+
+                  await s3.putObject({
+                      Bucket: bucketName,
+                      Key: orderFileName,
+                      Body: updatedData,
+                      ContentType: "text/plain"
+                  }).promise();
+
+                  console.log(`Order details saved to ${orderFileName}`);
 
                   // Send confirmation email to the customer
                   const sesCustomerParams = {
@@ -98,14 +142,86 @@ Resources:
                               Html: {
                                   Data: `
                                       <html>
+                                      <head>
+                                          <style>
+                                              /* Make sure the Marvel font is applied */
+                                              @import url('https://fonts.googleapis.com/css2?family=Marvel&display=swap');
+                                              
+                                              body {
+                                                  font-family: 'Marvel', sans-serif; /* Apply Marvel font to the email body */
+                                                  font-size: 16px;
+                                                  color: #333;
+                                                  margin: 0;
+                                                  padding: 0;
+                                              }
+
+                                              h2 {
+                                                  font-family: 'Marvel', sans-serif; /* Ensure Marvel font for the title */
+                                                  font-size: 2rem;
+                                                  margin: 0;
+                                              }
+
+                                              /* Flexbox for right-aligning the logo and content */
+                                              .email-container {
+                                                  display: flex;
+                                                  justify-content: space-between; /* Spread the content */
+                                                  align-items: flex-start; /* Align items at the top */
+                                                  margin-bottom: 20px; /* Space between logo and content */
+                                              }
+
+                                              .email-logo {
+                                                  width: 75px;
+                                                  height: auto;
+                                                  margin-left: 20px; /* Ensure there’s space between logo and content */
+                                              }
+
+                                              .content {
+                                                  max-width: 600px;
+                                              }
+
+                                              .phone-number {
+                                                  font-size: 0.9rem;
+                                                  margin-top: 5px;
+                                                  color: #333;
+                                                  text-decoration: none;
+                                                  font-weight: normal;
+                                              }
+                                          </style>
+                                      </head>
                                       <body>
-                                          <img src="https://doap.com/doap-logo-ind.png" alt="Doap Logo" style="width:150px;height:auto;">
-                                          <h2>Order Received</h2>
-                                          <p>Your order has been processed successfully!</p>
-                                          <p><strong>${city} Doap - Order Summary:</strong></p>
-                                          <ul>${items.map(item => `<li>${item}</li>`).join('')}</ul>
-                                          <p><strong>Total:</strong> ${total}</p>
-                                          <p>Thank you for shopping with ${city} Doap!</p>
+                                          <div class="email-container">
+                                              <!-- Right-align logo -->
+                                              <img src="https://doap.com/doap-logo-ind.png" alt="Doap Logo" class="email-logo">
+                                              <div class="content">
+                                                  <h2>${city} Doap</h2> <!-- Use dynamic city name -->
+                                                  <p>Your order is being processed! Expect delivery in about an hour. To check on your order, call <strong>${city} Doap</strong> at <strong>${phone}</strong>.</p>
+                                                  <p><strong>Order Number:</strong> ${orderNumber}</p>
+                                                  <p><strong>Name:</strong> ${name}</p>
+                                                  <p><strong>Phone:</strong> ${phone}</p>
+                                                  <p><strong>Delivery Address:</strong> ${address}, ${city}</p>
+                                                  <p><strong>Order Summary:</strong></p>
+                                                  <ul>
+                                                      ${items.map(item => `<li>${item.name} (x${item.quantity}) - $${(item.quantity * item.price).toFixed(2)}</li>`).join('')}
+                                                  </ul>
+                                                  <p><strong>Total:</strong> ${total}</p>
+                                                  ${
+                                                      paymentMethod === "crypto"
+                                                          ? `
+                                                          <h3>Crypto Payment Instructions</h3>
+                                                          <p>Please send your payment to one of the following addresses:</p>
+                                                          <ul>
+                                                              <li><strong>Bitcoin (BTC):</strong> bc1q28m9z95qzfjap7tamagnhlrk8nu332l7mlyjzr</li>
+                                                              <li><strong>Ethereum (ETH):</strong> 0xf38ab68ae630bacd769cfc34fbcf3f7c0504f97a</li>
+                                                              <li><strong>Doge (DOGE):</strong> DKx7uayMeVmd8Zuy3PgGSRB8XjUVt3ndeT</li>
+                                                              <li><strong>Litecoin (LTC):</strong> ltc1q97cz898tgwqh23j44kf5nsaggg84j2vw666jqr</li>
+                                                          </ul>
+                                                          <p>Once your payment is sent, please send a screenshot of the transaction to hank@doap.com or call us at <strong>${phone}</strong> to verify your order.</p>
+                                                          `
+                                                          : ""
+                                                  }
+                                                  <p>Thank you for shopping with ${city} Doap!</p>
+                                              </div>
+                                          </div>
                                       </body>
                                       </html>
                                   `,
@@ -120,19 +236,66 @@ Resources:
                       Source: process.env.SENDER_EMAIL,
                       Destination: { ToAddresses: ["info@doap.com"] },
                       Message: {
-                          Subject: { Data: `New Order Notification - ${city}` },
+                          Subject: { Data: `${city} Doap - New Order Alert` },
                           Body: {
                               Html: {
                                   Data: `
                                       <html>
+                                      <head>
+                                        <style>
+                                            @import url('https://fonts.googleapis.com/css2?family=Marvel&display=swap');
+
+                                            body {
+                                                font-family: Arial, sans-serif;
+                                                line-height: 1.6;
+                                                color: #333;
+                                            }
+
+                                            h2 {
+                                                font-family: 'Marvel', sans-serif;
+                                                font-size: 2rem;
+                                                color: #333;
+                                            }
+
+                                            p {
+                                                font-size: 1rem;
+                                                margin: 5px 0;
+                                            }
+
+                                            ul {
+                                                padding: 0;
+                                                margin: 10px 0;
+                                                list-style: none;
+                                            }
+
+                                            ul li {
+                                                margin: 5px 0;
+                                            }
+
+                                            strong {
+                                                font-weight: bold;
+                                            }
+                                            #messageItem .b-text-part.html img {
+                                                max-width: 100%;
+                                                height: auto;
+                                                position: relative;
+                                                float: right;
+                                            }
+                                        </style>
+                                    </head>
                                       <body>
-                                          <img src="https://doap.com/doap-logo-ind.png" alt="Doap Logo" style="width:150px;height:auto;">
-                                          <h2>New Order Notification</h2>
+                                          <img src="https://doap.com/doap-logo-ind.png" alt="Doap Logo" style="width:75px;height:auto;">
+                                          <h2> ${city} Doap</h2>
+                                          <p>A new order has been received</p>
+                                          <p><strong>Order Number:</strong> ${orderNumber}</p>
+                                          <p><strong>Payment Method:</strong> ${paymentMethod}</p>
+                                          <p><strong>Customer Name:</strong> ${name}</p>
+                                          <p><strong>Phone:</strong> ${phone}</p>
                                           <p><strong>Customer Email:</strong> ${email}</p>
-                                          <p><strong>Delivery Address:</strong> ${address}</p>
+                                          <p><strong>Delivery Address:</strong> ${address}, ${city}</p>
                                           <p><strong>Total:</strong> ${total}</p>
                                           <h3>Order Details:</h3>
-                                          <ul>${items.map(item => `<li>${item}</li>`).join('')}</ul>
+                                          <ul>${items.map(item => `<li>${item.name} (x${item.quantity}) - $${(item.quantity * item.price).toFixed(2)}</li>`).join('')}</ul>
                                           <p><strong>Timestamp:</strong> ${timestamp}</p>
                                       </body>
                                       </html>
@@ -146,9 +309,10 @@ Resources:
                   return {
                       statusCode: 200,
                       headers: { "Access-Control-Allow-Origin": "*" },
-                      body: JSON.stringify({ message: "Order processed successfully!" }),
+                      body: JSON.stringify({ message: "Order processed successfully!", orderNumber }),
                   };
               } catch (error) {
+                  console.error("Error in order processing:", error);
                   return {
                       statusCode: 500,
                       headers: { "Access-Control-Allow-Origin": "*" },
