@@ -2,6 +2,121 @@ document.addEventListener("DOMContentLoaded", () => {
     // Set up city name dynamically in the header
     const subdomain = window.location.hostname.split('.')[0]; // Extract subdomain
     const cityName = subdomain.charAt(0).toUpperCase() + subdomain.slice(1).toLowerCase(); // Capitalize first letter
+        const cityData = {
+        burlingame: {
+            cityName: "Burlingame",
+            description: "delivers organic awesome pot to Burlingame and surrounding cities from 9-9 daily! 650-293-0880",
+            phone: "650-293-0880",
+            logo: "https://burlingame.doap.com/wp-content/uploads/2023/11/doap-com-with-wording-1-416x135-1-150x135.png",
+            url: "https://burlingame.doap.com/",
+        },
+        pittsburg: {
+            cityName: "Pittsburg",
+            description: "delivers organic awesome pot to Pittsburg and surrounding cities from 9-9 daily! 925-825-8555",
+            phone: "925-825-8555",
+            logo: "https://pittsburg.doap.com/wp-content/uploads/2023/11/doap-com-with-wording-1-416x135-1-150x135.png",
+            url: "https://pittsburg.doap.com/",
+        },
+        // Add more cities here
+    };
+
+    const city = cityData[subdomain] || cityData['burlingame']; // Fallback to default city
+    if (!city) return;
+
+
+
+
+        // Helper function to create or update meta tags
+    const updateOrCreateMeta = (name, content, isProperty = false) => {
+        let meta = document.querySelector(`${isProperty ? 'meta[property="' + name + '"]' : 'meta[name="' + name + '"]'}`);
+        if (meta) {
+            meta.setAttribute("content", content);
+        } else {
+            meta = document.createElement("meta");
+            meta.setAttribute(isProperty ? "property" : "name", name);
+            meta.setAttribute("content", content);
+            document.head.appendChild(meta);
+        }
+    };
+
+    // Add meta tags dynamically
+    updateOrCreateMeta("description", city.description);
+    updateOrCreateMeta("robots", "follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large");
+    updateOrCreateMeta("og:locale", "en_US", true);
+    updateOrCreateMeta("og:type", "website", true);
+    updateOrCreateMeta("og:title", `${city.cityName} Doap`, true);
+    updateOrCreateMeta("og:description", city.description, true);
+    updateOrCreateMeta("og:url", city.url, true);
+    updateOrCreateMeta("og:site_name", "Doap", true);
+    updateOrCreateMeta("twitter:card", "summary_large_image");
+    updateOrCreateMeta("twitter:title", `${city.cityName} Doap`);
+    updateOrCreateMeta("twitter:description", city.description);
+
+    // Add canonical and next links
+    const addLink = (rel, href) => {
+        let link = document.querySelector(`link[rel="${rel}"]`);
+        if (!link) {
+            link = document.createElement("link");
+            link.setAttribute("rel", rel);
+            link.setAttribute("href", href);
+            document.head.appendChild(link);
+        }
+    };
+    addLink("canonical", city.url);
+    addLink("next", `${city.url}page/2/`);
+
+    // Add JSON-LD structured data
+    const jsonLdData = {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "Person",
+                "@id": `${city.url}#person`,
+                name: "Doap",
+                url: city.url,
+                image: {
+                    "@type": "ImageObject",
+                    "@id": `${city.url}#logo`,
+                    url: city.logo,
+                    contentUrl: city.logo,
+                    caption: "Doap",
+                    inLanguage: "en-US"
+                }
+            },
+            {
+                "@type": "WebSite",
+                "@id": `${city.url}#website`,
+                url: city.url,
+                name: "Doap",
+                publisher: { "@id": `${city.url}#person` },
+                inLanguage: "en-US",
+                potentialAction: {
+                    "@type": "SearchAction",
+                    target: `${city.url}?s={search_term_string}`,
+                    "query-input": "required name=search_term_string"
+                }
+            },
+            {
+                "@type": "CollectionPage",
+                "@id": `${city.url}#webpage`,
+                url: city.url,
+                name: `${city.cityName} Doap`,
+                about: { "@id": `${city.url}#person` },
+                isPartOf: { "@id": `${city.url}#website` },
+                inLanguage: "en-US"
+            }
+        ]
+    };
+    const jsonLdScript = document.createElement("script");
+    jsonLdScript.type = "application/ld+json";
+    jsonLdScript.textContent = JSON.stringify(jsonLdData);
+    document.head.appendChild(jsonLdScript);
+
+    // Update the page title
+    document.title = `${city.cityName} Doap`;
+});
+
+
     document.getElementById("cityName").innerHTML = `<i class="fas fa-shopping-cart"></i> ${cityName} Doap Shopping Cart`;
     
     // Update logo link
