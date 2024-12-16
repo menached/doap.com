@@ -122,7 +122,15 @@ document.addEventListener("DOMContentLoaded", () => {
             creditCardForm.style.display = "block";
         } else if (selectedMethod === "crypto") {
             cryptoWallets.style.display = "block";
-        } else if (["cash", "zelle", "venmo", "paypal"].includes(selectedMethod)) {
+        } else if (["cash"].includes(selectedMethod)) {
+        generalHelp.style.display = "block";
+        // Update the message for "Cash" payment method
+        generalHelp.innerHTML = `
+            <h3><i class="fas fa-money-bill-wave"></i> Cash Payment Instructions</h3>
+            <p>Cash on delivery is an easy option and requires no signups, accounts, or applications. 
+            Just be ready to show an ID to the driver as you must be 21 or older to purchase Cannabis in California.</p>
+        `;
+    } else if (["zelle", "venmo", "paypal"].includes(selectedMethod)) {
             generalHelp.style.display = "block";
         }
     };
