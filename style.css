@@ -57,16 +57,14 @@
     #cityName {
         font-size: 50%; /* Shrinks text to half its normal size */
         text-align: center; /* Ensures the text stays centered */
+        font-size: 1.2rem;
+        margin: 0;
     }
 
     .phone-number {
         display: none; /* Hides the "Call us at" text */
     }
 }
-
-
-
-
 
 
 
@@ -194,15 +192,6 @@ body {
     transform: translateY(-10px); /* Move up by 15px */
     position: relative; /* Ensure positioning does not affect layout */
 }
-
-
-/* Style for the city name */
-#cityName {
-    font-family: 'Marvel', sans-serif; /* Match the style */
-    font-size: 2rem; /* Adjust font size */
-    margin: 0; /* Remove default margin */
-}
-
 
 
 /* Phone number styling */
