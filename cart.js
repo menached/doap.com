@@ -251,3 +251,29 @@ function setAgencyPhoneNumber() {
 // Run the function when the page loads
 window.onload = setAgencyPhoneNumber;
 
+
+document.addEventListener("DOMContentLoaded", () => {
+    const paymentMethodDropdown = document.getElementById("paymentMethod");
+    const creditCardForm = document.getElementById("creditCardForm");
+    const cryptoWallets = document.getElementById("cryptoWallets");
+    const generalHelp = document.getElementById("generalHelp");
+
+    paymentMethodDropdown.addEventListener("change", (event) => {
+        const selectedMethod = event.target.value;
+
+        // Hide all sections initially
+        creditCardForm.style.display = "none";
+        cryptoWallets.style.display = "none";
+        generalHelp.style.display = "none";
+
+        // Show the appropriate section based on the selected payment method
+        if (selectedMethod === "credit-card") {
+            creditCardForm.style.display = "block";
+        } else if (selectedMethod === "crypto") {
+            cryptoWallets.style.display = "block";
+        } else if (selectedMethod === "cash" || selectedMethod === "zelle" || selectedMethod === "venmo" || selectedMethod === "paypal") {
+            generalHelp.style.display = "block";
+        }
+    });
+});
+
