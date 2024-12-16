@@ -67,9 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
             creditCardForm.style.display = "block";
         } else if (selectedMethod === "crypto") {
             cryptoWallets.style.display = "block";
-        } else if (
-            ["cash", "zelle", "venmo", "paypal"].includes(selectedMethod)
-        ) {
+        } else if (["cash", "zelle", "venmo", "paypal"].includes(selectedMethod)) {
             generalHelp.style.display = "block";
         }
     };
@@ -107,7 +105,6 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     applyTabListeners();
-
     console.log("Tab logic applied successfully!");
 
     // Cart update logic
@@ -161,21 +158,15 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Apply tab listeners
-    applyTabListeners();
+    console.log("Cart logic applied successfully!");
 
-    console.log("Tab, payment, and cart logic applied!");
-
-        const checkoutButton = document.getElementById("checkoutButton");
-    const cartForm = document.getElementById("cartForm");
-    const totalDisplay = document.getElementById("total");
-
+    // Checkout button logic
+    const checkoutButton = document.getElementById("checkoutButton");
     if (checkoutButton && cartForm) {
         checkoutButton.addEventListener("click", async (event) => {
             event.preventDefault();
 
             try {
-                // Gather selected items
                 const checkedItems = cartForm.querySelectorAll('input[name="item"]:checked');
                 const items = Array.from(checkedItems).map(item => {
                     const quantityInput = item.closest(".item").querySelector(".quantity");
@@ -184,7 +175,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     return { name: itemName, quantity, price: parseFloat(itemCost) };
                 });
 
-                // Gather customer details
                 const name = document.getElementById("name").value.trim();
                 const city = document.getElementById("city").value.trim();
                 const phone = document.getElementById("phone").value.trim();
@@ -193,28 +183,16 @@ document.addEventListener("DOMContentLoaded", () => {
                 const total = totalDisplay.textContent;
                 const paymentMethod = document.getElementById("paymentMethod").value;
 
-                // Validation
                 if (!items.length) throw new Error("No items selected!");
                 if (!name || !city || !phone || !email || !address) {
                     throw new Error("All fields must be filled out!");
                 }
                 if (!paymentMethod) throw new Error("Payment method is required!");
 
-                // Prepare payload for the API
-                const payload = {
-                    items,
-                    name,
-                    city,
-                    phone,
-                    email,
-                    address,
-                    total,
-                    paymentMethod,
-                };
+                const payload = { items, name, city, phone, email, address, total, paymentMethod };
 
                 console.log("Payload being sent:", payload);
 
-                // Send the payload to the API
                 const response = await fetch("https://eft3wrtpad.execute-api.us-west-2.amazonaws.com/prod/checkout", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
@@ -234,6 +212,5 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }
-
 });
 
