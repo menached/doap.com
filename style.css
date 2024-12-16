@@ -100,12 +100,12 @@ body {
 }
 
 /* Style for the Doap logo */
-/* Move the logo up by 15px */
+/* Move the logo up by 10px */
 .doap-logo {
     width: 50px; /* Keep the logo size */
     height: auto; /* Maintain aspect ratio */
     margin: 0; /* Ensure no extra margins */
-    transform: translateY(-15px); /* Move up by 15px */
+    transform: translateY(-10px); /* Move up by 15px */
     position: relative; /* Ensure positioning does not affect layout */
 }
 
