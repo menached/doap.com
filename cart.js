@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Update city name in header
     const cityNameElement = document.getElementById("cityName");
     if (cityNameElement) {
-        cityNameElement.innerHTML = `${cityName} Doap `;
+        cityNameElement.innerHTML = `<i class="fas fa-shopping-cart"></i> ${cityName} Doap `;
     }
 
     // Update logo link
