@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Set up city name dynamically in the header
     const subdomain = window.location.hostname.split('.')[0]; // Extract subdomain
     const cityName = subdomain.charAt(0).toUpperCase() + subdomain.slice(1).toLowerCase(); // Capitalize first letter
-    document.getElementById("cityName").innerHTML = `<i class="fas fa-shopping-cart"></i> ${cityName} Doap Shopping Cart`;
+    document.getElementById("cityName").innerHTML = `<i class="fas fa-shopping-cart aligncenter"></i> ${cityName} Doap `;
     
     // Update logo link
     const logoLink = document.querySelector(".header a");
