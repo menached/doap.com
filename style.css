@@ -134,7 +134,6 @@ body {
 
 .phone-number a:hover {
     color: #007BFF; /* Change color on hover for better UX */
-    text-decoration: underline; /* Underline on hover */
     text-decoration:none;
 }
 
