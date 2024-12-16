@@ -127,15 +127,24 @@ document.addEventListener("DOMContentLoaded", () => {
         // Update the message for "Cash" payment method
         generalHelp.innerHTML = `
             <h3 style="display: flex; justify-content: space-between; align-items: center;">
-                <span><i class="fas fa-phone-alt"></i> Need Assistance?</span>
+                <span><i class="fas fa-phone-alt"></i> Cash on Delivery</span>
                 <i class="fas fa-question-circle" style="color: green; cursor: pointer;" title="Need more help? Click here!"></i>
             </h3>
-            <p>After placing your order, please check your email for further instructions on how to complete your payment. 
+            <p>After placing your order, please check your email for further instructions on how to track your order. 
             Feel free to call us at <strong>(833) 289-3627</strong> for assistance. We're standing by to help!</p>
         `;
     } else if (["zelle", "venmo", "paypal"].includes(selectedMethod)) {
             generalHelp.style.display = "block";
-        }
+            // Update the message for other payment methods.
+            generalHelp.innerHTML = `
+                <h3 style="display: flex; justify-content: space-between; align-items: center;">
+                    <span><i class="fas fa-phone-alt"></i> Need Assistance?</span>
+                    <i class="fas fa-question-circle" style="color: green; cursor: pointer;" title="Need more help? Click here!"></i>
+                </h3>
+                <p>After placing your order, please check your email for further instructions on how to complete your payment. 
+                Feel free to call us at <strong>(833) 289-3627</strong> for assistance. We're standing by to help!</p>
+            `;
+            }
     };
 
     if (paymentMethodDropdown) {
