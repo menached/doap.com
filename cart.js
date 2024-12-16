@@ -292,7 +292,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const phoneNumberElement = document.querySelector(".phone-number");
     if (phoneNumberElement) {
         phoneNumberElement.href = `tel:${phone}`; // Set the tel link
-        phoneNumberElement.textContent = `Call us at (${phone.slice(0, 3)}) ${phone.slice(3, 6)}-${phone.slice(6)}`; // Format and set the text
+        phoneNumberElement.textContent = `(${phone.slice(0, 3)}) ${phone.slice(3, 6)}-${phone.slice(6)}`; // Format and set the text
     }
 });
 
