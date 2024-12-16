@@ -9,57 +9,70 @@ body {
 }
 
 
-/* Adjust overall header spacing */
+/* Adjust the header section */
 .header {
     margin: 0;
     padding: 0;
 }
 
-/* Reduce space above and below the logo-title-container */
+/* Align logo and text side by side */
 .logo-title-container {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px; /* Space between the logo and text */
-    margin: 5px 0; /* Minimal top and bottom margin */
-    padding: 0; /* Remove any padding */
+    align-items: flex-start; /* Align items at the top */
+    gap: 10px; /* Space between logo and text */
+    margin: 5px 0;
 }
 
-/* Style for the Doap logo */
+/* Style for the logo */
 .doap-logo {
-    width: 50px; /* Adjust the size of the logo */
-    height: auto; /* Maintain aspect ratio */
-    margin: 0; /* Remove default margins */
+    width: 50px; /* Adjust logo size */
+    height: auto;
+    margin: 0; /* Remove extra margins */
 }
 
-/* City name styling */
+/* Text container for CityName and phone */
+.text-container {
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+}
+
+/* Style for CityName Doap */
 #cityName {
-    font-family: 'Marvel', sans-serif; /* Keep existing font */
-    font-size: 2rem; /* Adjust font size */
-    margin: 0; /* Remove default margins */
-    line-height: 1; /* Compact line height */
+    font-family: 'Marvel', sans-serif;
+    font-size: 2rem;
+    margin: 0;
+    line-height: 1;
 }
 
-/* Menu title styling */
+/* Style for the phone number */
+.phone-number {
+    font-size: 0.8rem; /* Smaller font size */
+    margin: 5px 0 0; /* Small margin above the text */
+    color: #333; /* Default text color */
+    text-decoration: none; /* Remove underline */
+    font-weight: normal; /* Adjust font weight */
+}
+
+.phone-number:hover {
+    color: #007BFF; /* Add hover effect for better UX */
+    text-decoration: underline; /* Underline on hover */
+}
+
+/* Style for the menu title */
 .menu-title {
-    margin: 0; /* Remove top/bottom margins */
-    padding: 0; /* Remove extra padding */
+    margin: 0;
+    padding: 0;
     text-align: center;
 }
 
 .menu-title-text {
-    margin: 0; /* Remove extra margins */
-    line-height: 1.2; /* Reduce line height */
+    margin: 0;
+    line-height: 1.2;
 }
 
 
-/* City name styling */
-#cityName {
-    font-family: 'Marvel', sans-serif; /* Keep existing font */
-    font-size: 2rem; /* Adjust font size if needed */
-    margin: 0; /* Remove default margins */
-    line-height: 1; /* Adjust line height */
-}
+
+
 
 
 /* Phone number styling */
