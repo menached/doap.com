@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Update the city name in the UI
     const cityNameElement = document.getElementById("cityName");
     if (cityNameElement) {
-        cityNameElement.textContent = `${cityName} Doap`; // Set the city name in the header
+        cityNameElement.textContent = `${cityNameElement} Doap`; // Set the city name in the header
     }
 
     console.log(`City name for ${subdomain}: ${cityName}`);
