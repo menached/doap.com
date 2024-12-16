@@ -334,3 +334,36 @@ document.addEventListener("DOMContentLoaded", () => {
     handlePaymentMethodChange(paymentMethodDropdown.value);
 });
 
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    const hostname = window.location.hostname;
+    const subdomain = hostname.split('.')[0]; // Extract subdomain
+    const cityName = subdomain.charAt(0).toUpperCase() + subdomain.slice(1).toLowerCase(); // Capitalize first letter
+    const defaultDescription = `${cityName} DOAP Delivers Organic Awesome Pot to ${cityName} and surrounding cities 9-9 daily.`;
+
+    const ogMetaTags = [
+        { property: "og:title", content: `${cityName} Doap - Call us today!` },
+        { property: "og:type", content: "website" },
+        { property: "og:url", content: `https://${hostname}/cart.html` },
+        { property: "og:description", content: defaultDescription },
+        { property: "og:image", content: `https://${subdomain}.doap.com/${subdomain}doapbanner.webp` },
+        { name: "twitter:card", content: "summary_large_image" },
+        { name: "twitter:image", content: `https://${subdomain}.doap.com/${subdomain}doapbanner.png` },
+        { name: "twitter:title", content: `${cityName} Doap - Call us today!` },
+        { name: "twitter:description", content: defaultDescription },
+        { name: "twitter:site", content: "@danvilledoap" }
+    ];
+
+    // Dynamically append meta tags to the document head
+    ogMetaTags.forEach(tagData => {
+        const tag = document.createElement("meta");
+        Object.keys(tagData).forEach(key => {
+            tag.setAttribute(key, tagData[key]);
+        });
+        document.head.appendChild(tag);
+    });
+
+    console.log("Open Graph and Twitter meta tags added successfully!");
+});
+
