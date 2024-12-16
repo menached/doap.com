@@ -71,6 +71,24 @@
 
 
 
+/* Style for individual product items */
+.item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px; /* Add some internal padding */
+    background: #fff; /* Ensure a white background for contrast */
+    border: 1px dashed #ccc; /* Thin, light, dashed border */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    transition: box-shadow 0.3s ease; /* Smooth shadow transition on hover */
+}
+
+/* Add hover effect for better interactivity */
+.item:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Slightly deeper shadow on hover */
+    border-color: #bbb; /* Darken the border slightly on hover */
+}
 
 
 
