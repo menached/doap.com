@@ -3,36 +3,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const hostname = window.location.hostname;
     const subdomain = hostname.split('.')[0];
     const cityName = subdomain.charAt(0).toUpperCase() + subdomain.slice(1).toLowerCase();
-
-    // Initial default capitalization for single-word names
-    let cityName = subdomain.charAt(0).toUpperCase() + subdomain.slice(1).toLowerCase();
-
-    // Map of subdomains to full city names
-    const cityMap = {
-        pleasanthill: "Pleasant Hill",
-        walnutcreek: "Walnut Creek",
-        castrovalley: "Castro Valley",
-        sanramon: "San Ramon",
-        discoverybay: "Discovery Bay",
-        // Add other two-word city names or overrides here
-    };
-
-    // Check if the subdomain exists in the city map
-    if (cityMap[subdomain]) {
-        cityName = cityMap[subdomain];
-    }
-
-    // Dynamically update city name in the header
-    const cityNameElement = document.getElementById("cityName");
-    if (cityNameElement) {
-        cityNameElement.textContent = `${cityName} Doap`;
-    }
-
-    // Optionally update the document title
-    document.title = `${cityName} Doap`;
-
-    console.log(`City Name: ${cityName}`);
-
     const defaultDescription = `${cityName} DOAP Delivers Organic Awesome Pot to ${cityName} and surrounding cities 9-9 daily.`;
 
     // Update the page title
