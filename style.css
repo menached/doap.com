@@ -661,3 +661,17 @@ button:hover {
     background-color: #e65a00;
 }
 
+
+
+
+
+/* Style for the Total Price row */
+#totalPriceRow {
+    background-color: black; /* Black background */
+    color: white; /* White text */
+    font-weight: bold; /* Bold text */
+    padding: 10px; /* Add some padding for better spacing */
+    border-radius: 5px; /* Optional: rounded corners */
+    text-align: center; /* Center-align the text */
+}
+
