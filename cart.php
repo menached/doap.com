@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="style.css">
     <script src="cart.js" defer></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+<?php include('https://sanramon.doap.com/og_meta.php'); ?>
 </head>
 <body>
 <form id="cartForm">
