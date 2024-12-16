@@ -72,7 +72,7 @@ body {
 
 
 
-
+.menu-title > div:nth-child(2) {display:none;}
 
 
 /* Phone number styling */
