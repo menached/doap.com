@@ -1,4 +1,77 @@
 /* General Reset */
+
+/* For mobile and small screens (less than 768px) */
+@media (max-width: 767px) {
+    body {
+        margin: 0; /* Remove extra margin */
+        padding: 0; /* Remove padding */
+        font-size: 14px; /* Slightly larger default fonts for better readability */
+    }
+
+    form {
+        max-width: 100%; /* Make the form take the full width */
+        margin: 0; /* Remove automatic centering margin */
+        padding: 10px; /* Add padding inside the form */
+        box-sizing: border-box; /* Ensure padding doesn't overflow */
+    }
+
+    .header {
+        width: 100%; /* Make the header take full width */
+        max-width: 100%; /* Prevent restricting the width */
+        margin: 0 auto; /* Center the header content */
+        padding: 10px; /* Add some padding */
+        text-align: center; /* Align content centrally */
+    }
+
+    .tab-container {
+        flex-wrap: wrap; /* Allow tabs to wrap on smaller screens */
+        padding: 10px; /* Add padding */
+        justify-content: space-between; /* Spread tabs out evenly */
+    }
+
+    .tab {
+        flex: 1; /* Make each tab take equal space */
+        text-align: center; /* Center text in each tab */
+        margin: 5px; /* Add space between tabs */
+    }
+
+    .cart-section,
+    .payment-section {
+        width: 100%; /* Ensure sections stretch to full width */
+        padding: 10px; /* Add internal padding */
+        box-sizing: border-box; /* Prevent overflow */
+    }
+
+    .info-row {
+        width: 100%; /* Ensure each row takes full width */
+    }
+
+    .customer-info {
+        gap: 10px; /* Reduce gap for smaller screens */
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 body {
     margin: 0;
     font-family: Arial, sans-serif;
