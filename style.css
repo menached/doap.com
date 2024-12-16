@@ -1,5 +1,17 @@
 /* General Reset */
 
+
+h3 i.fa-phone-alt {
+    color: #007bff; /* Icon color */
+    margin-right: 8px; /* Space between icon and text */
+    font-size: 1.2rem; /* Adjust icon size */
+    vertical-align: middle; /* Align icon with text */
+    position:relative;
+    float:right;
+}
+
+
+
 /* For mobile and small screens (less than 768px) */
 @media (max-width: 767px) {
     body {
