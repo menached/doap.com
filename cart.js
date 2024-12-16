@@ -305,6 +305,31 @@ document.addEventListener("DOMContentLoaded", () => {
     const cryptoWallets = document.getElementById("cryptoWallets");
     const generalHelp = document.getElementById("generalHelp");
 
+    // Function to toggle cart visibility based on items
+    const toggleCartVisibility = () => {
+        const cartSection = document.querySelector(".cart-section");
+        const selectedItemsList = document.getElementById("selectedItemsList");
+        const noItemsSelected = selectedItemsList.innerHTML.includes("No items selected yet.");
+
+        // Show or hide the cart section
+        if (noItemsSelected) {
+            cartSection.style.display = "none"; // Hide the cart if empty
+        } else {
+            cartSection.style.display = "block"; // Show the cart if items are selected
+        }
+    };
+
+    // Call toggleCartVisibility whenever the cart is updated
+    cartForm.addEventListener("change", () => {
+        updateCart();
+        toggleCartVisibility();
+    });
+
+    // Initial check on page load
+    toggleCartVisibility();
+
+
+
     // Function to handle showing the appropriate section
     const handlePaymentMethodChange = (selectedMethod) => {
         // Hide all sections initially
@@ -330,29 +355,4 @@ document.addEventListener("DOMContentLoaded", () => {
     // Trigger the default behavior on page load (default is "cash")
     handlePaymentMethodChange(paymentMethodDropdown.value);
 });
-
-
-
-// Function to toggle cart visibility based on items
-const toggleCartVisibility = () => {
-    const cartSection = document.querySelector(".cart-section");
-    const selectedItemsList = document.getElementById("selectedItemsList");
-    const noItemsSelected = selectedItemsList.innerHTML.includes("No items selected yet.");
-
-    // Show or hide the cart section
-    if (noItemsSelected) {
-        cartSection.style.display = "none"; // Hide the cart if empty
-    } else {
-        cartSection.style.display = "block"; // Show the cart if items are selected
-    }
-};
-
-// Call toggleCartVisibility whenever the cart is updated
-cartForm.addEventListener("change", () => {
-    updateCart();
-    toggleCartVisibility();
-});
-
-// Initial check on page load
-toggleCartVisibility();
 
