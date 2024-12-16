@@ -64,6 +64,10 @@
         display: visible; /* Hides the "Call us at" text */
         font-size: 80%!important; /* Shrinks text to half its normal size */
     }
+    .tab-container {
+        position:relative;
+        top:10px;
+    }
 }
 
 
