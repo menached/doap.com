@@ -1,4 +1,47 @@
 document.addEventListener("DOMContentLoaded", () => {
+    // Mapping of subdomains to city names
+    const subdomainToCityName = {
+        alamo: "Alamo",
+        antioch: "Antioch",
+        burlingame: "Burlingame",
+        campbell: "Campbell",
+        castrovalley: "Castro Valley",
+        concord: "Concord",
+        danville: "Danville",
+        dublin: "Dublin",
+        hillsborough: "Hillsborough",
+        livermore: "Livermore",
+        lafayette: "Lafayette",
+        orinda: "Orinda",
+        pittsburg: "Pittsburg",
+        pleasanthill: "Pleasant Hill",
+        pleasanton: "Pleasanton",
+        sanramon: "San Ramon",
+        walnutcreek: "Walnut Creek",
+        sunol: "Sunol",
+        default: "Default City" // Fallback city name
+    };
+
+    // Extract the subdomain from the hostname
+    const hostname = window.location.hostname;
+    const subdomain = hostname.split('.')[0].toLowerCase();
+
+    // Get the city name based on the subdomain
+    const cityName = subdomainToCityName[subdomain] || subdomainToCityName.default;
+
+    // Update the city name in the UI
+    const cityNameElement = document.getElementById("cityName");
+    if (cityNameElement) {
+        cityNameElement.textContent = `${cityName} Doap`; // Set the city name in the header
+    }
+
+    console.log(`City name for ${subdomain}: ${cityName}`);
+});
+
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
     // Subdomain and city name logic
     const hostname = window.location.hostname;
     const subdomain = hostname.split('.')[0];
