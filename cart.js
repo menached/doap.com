@@ -8,77 +8,48 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Map of subdomains to full city names
     const cityMap = {
-        alamo: "Alamo",
-        anaheim: "Anaheim",
-        antioch: "Antioch",
-        belmont: "Belmont",
-        benicia: "Benicia",
-        berkeley: "Berkeley",
-        burlingame: "Burlingame",
-        campbell: "Campbell",
-        castrovalley: "Castro Valley",
-        concord: "Concord",
-        costaMesa: "Costa Mesa",
-        cupertino: "Cupertino",
-        dalycity: "Daly City",
-        danville: "Danville",
-        discoverybay: "Discovery Bay",
-        dublin: "Dublin",
-        emeryville: "Emeryville",
-        fairfield: "Fairfield",
-        fremont: "Fremont",
-        hayward: "Hayward",
-        healdsburg: "Healdsburg",
-        hillsborough: "Hillsborough",
-        huntingtonbeach: "Huntington Beach",
-        irvine: "Irvine",
-        lagunabeach: "Laguna Beach",
-        lafayette: "Lafayette",
-        livermore: "Livermore",
-        losaltos: "Los Altos",
-        losgatos: "Los Gatos",
-        martinez: "Martinez",
-        menlopark: "Menlo Park",
-        millbrae: "Millbrae",
-        milpitas: "Milpitas",
-        mountainview: "Mountain View",
-        napa: "Napa",
-        newportbeach: "Newport Beach",
-        novato: "Novato",
-        oakland: "Oakland",
-        orinda: "Orinda",
-        pacifica: "Pacifica",
-        paloalto: "Palo Alto",
-        petaluma: "Petaluma",
-        pittsburg: "Pittsburg",
         pleasanthill: "Pleasant Hill",
-        pleasanton: "Pleasanton",
-        redwoodcity: "Redwood City",
-        rohnertpark: "Rohnert Park",
-        sanbruno: "San Bruno",
-        sanfrancisco: "San Francisco",
-        sanjose: "San Jose",
-        sanleandro: "San Leandro",
-        sanmateo: "San Mateo",
-        sanrafael: "San Rafael",
-        sanramon: "San Ramon",
-        santaRosa: "Santa Rosa",
-        santaana: "Santa Ana",
-        sebastopol: "Sebastopol",
-        southsanfrancisco: "South San Francisco",
-        sunnyvale: "Sunnyvale",
-        sunol: "Sunol",
-        unioncity: "Union City",
-        vacaville: "Vacaville",
-        vallejo: "Vallejo",
         walnutcreek: "Walnut Creek",
-        windsor: "Windsor"
+        castrovalley: "Castro Valley",
+        sanramon: "San Ramon",
+        discoverybay: "Discovery Bay",
+        alamo: "Alamo",
+        antioch: "Antioch",
+        dublin: "Dublin",
+        lafayette: "Lafayette",
+        pleasanton: "Pleasanton",
+        danville: "Danville",
+        concord: "Concord",
+        livermore: "Livermore",
+        orinda: "Orinda"
+    };
+
+    // Map of subdomains to phone numbers
+    const phoneMap = {
+        pleasanthill: "925-891-7800",
+        walnutcreek: "925-464-2075",
+        castrovalley: "925-263-9209",
+        sanramon: "925-365-6030",
+        discoverybay: "925-891-7800",
+        alamo: "925-553-4710",
+        antioch: "925-891-7800",
+        dublin: "925-587-6777",
+        lafayette: "925-871-1333",
+        pleasanton: "925-587-6777",
+        danville: "925-725-6920",
+        concord: "925-412-4880",
+        livermore: "925-718-6181",
+        orinda: "925-891-7800"
     };
 
     // Update cityName if the domain exists in the map
     if (cityMap[domainName]) {
         cityName = cityMap[domainName];
     }
+
+    // Get the phone number based on the subdomain, default to the general number
+    const defaultPhoneNumber = "833-289-3627";
+    const phoneNumber = phoneMap[domainName] || defaultPhoneNumber;
 
     const defaultDescription = `${cityName} DOAP Delivers Organic Awesome Pot to ${cityName} and surrounding cities 9-9 daily.`;
 
@@ -89,6 +60,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const cityNameElement = document.getElementById("cityName");
     if (cityNameElement) {
         cityNameElement.textContent = `${cityName} Doap`;
+    }
+
+        // Update the phone number dynamically in the header
+    const phoneNumberElement = document.querySelector(".phone-number");
+    if (phoneNumberElement) {
+        phoneNumberElement.textContent = phoneNumber;
+        phoneNumberElement.href = `tel:${phoneNumber.replace(/-/g, '')}`;
     }
 
     // Update logo link
