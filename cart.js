@@ -1,13 +1,30 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // Subdomain and city name logic
+    // Extract the subdomain
     const hostname = window.location.hostname;
-    const subdomain = hostname.split('.')[0];
-    const cityName = subdomain.charAt(0).toUpperCase() + subdomain.slice(1).toLowerCase();
+    const domainName = hostname.split('.')[0]; // Raw subdomain
+
+    // Default cityName for single-word subdomains
+    let cityName = domainName.charAt(0).toUpperCase() + domainName.slice(1).toLowerCase();
+
+    // Map of subdomains to full city names
+    const cityMap = {
+        pleasanthill: "Pleasant Hill",
+        walnutcreek: "Walnut Creek",
+        castrovalley: "Castro Valley",
+        sanramon: "San Ramon",
+        discoverybay: "Discovery Bay",
+        // Add other city mappings here
+    };
+
+    // Update cityName if the domain exists in the map
+    if (cityMap[domainName]) {
+        cityName = cityMap[domainName];
+    }
+
     const defaultDescription = `${cityName} DOAP Delivers Organic Awesome Pot to ${cityName} and surrounding cities 9-9 daily.`;
 
     // Update the page title
-    //document.title = `${cityName} Doap`;
-
+    document.title = `${cityName} Doap`;
 
     // Update the header area without the shopping cart icon
     const cityNameElement = document.getElementById("cityName");
@@ -18,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Update logo link
     const logoLink = document.querySelector(".header a");
     if (logoLink) {
-        logoLink.href = `https://${subdomain}.doap.com/cart.html`;
+        logoLink.href = `https://${domainName}.doap.com/cart.html`;
         logoLink.title = `Call ${cityName} Doap!`;
     }
 
@@ -28,9 +45,9 @@ document.addEventListener("DOMContentLoaded", () => {
         { property: "og:type", content: "website" },
         { property: "og:url", content: `https://${hostname}/cart.html` },
         { property: "og:description", content: defaultDescription },
-        { property: "og:image", content: `https://${subdomain}.doap.com/${subdomain}doapbanner.webp` },
+        { property: "og:image", content: `https://${domainName}.doap.com/${domainName}doapbanner.webp` },
         { name: "twitter:card", content: "summary_large_image" },
-        { name: "twitter:image", content: `https://${subdomain}.doap.com/${subdomain}doapbanner.png` },
+        { name: "twitter:image", content: `https://${domainName}.doap.com/${domainName}doapbanner.png` },
         { name: "twitter:title", content: `${cityName} Doap - Call us today!` },
         { name: "twitter:description", content: defaultDescription },
         { name: "twitter:site", content: "@danvilledoap" }
@@ -69,19 +86,18 @@ document.addEventListener("DOMContentLoaded", () => {
         } else if (selectedMethod === "crypto") {
             cryptoWallets.style.display = "block";
         } else if (["cash"].includes(selectedMethod)) {
-        generalHelp.style.display = "block";
-        // Update the message for "Cash" payment method
-        generalHelp.innerHTML = `
-            <h3 style="display: flex; justify-content: space-between; align-items: center;">
-                <span><i class="fas fa-phone-alt"></i> Cash on Delivery</span>
-                <i class="fas fa-question-circle" style="color: green; cursor: pointer;" title="Need more help? Click here!"></i>
-            </h3>
-            <p>After placing your order, please check your email for further instructions on how to track your order. 
-            Feel free to call us at <strong>(833) 289-3627</strong> for assistance. We're standing by to help!</p>
-        `;
-    } else if (["zelle", "venmo", "paypal"].includes(selectedMethod)) {
             generalHelp.style.display = "block";
-            // Update the message for other payment methods.
+            // Update the message for "Cash" payment method
+            generalHelp.innerHTML = `
+                <h3 style="display: flex; justify-content: space-between; align-items: center;">
+                    <span><i class="fas fa-phone-alt"></i> Cash on Delivery</span>
+                    <i class="fas fa-question-circle" style="color: green; cursor: pointer;" title="Need more help? Click here!"></i>
+                </h3>
+                <p>After placing your order, please check your email for further instructions on how to track your order. 
+                Feel free to call us at <strong>(833) 289-3627</strong> for assistance. We're standing by to help!</p>
+            `;
+        } else if (["zelle", "venmo", "paypal"].includes(selectedMethod)) {
+            generalHelp.style.display = "block";
             generalHelp.innerHTML = `
                 <h3 style="display: flex; justify-content: space-between; align-items: center;">
                     <span><i class="fas fa-phone-alt"></i> Need Assistance?</span>
@@ -90,7 +106,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <p>After placing your order, please check your email for further instructions on how to complete your payment. 
                 Feel free to call us at <strong>(833) 289-3627</strong> for assistance. We're standing by to help!</p>
             `;
-            }
+        }
     };
 
     if (paymentMethodDropdown) {
@@ -186,7 +202,6 @@ document.addEventListener("DOMContentLoaded", () => {
     if (phone) {
         phone.textContent = phone.textContent.replace(/Call us at\s*/, '');
     }
-
 
     // Checkout button logic
     const checkoutButton = document.getElementById("checkoutButton");
