@@ -47,43 +47,40 @@ document.addEventListener("DOMContentLoaded", () => {
 
     console.log("Open Graph and Twitter meta tags added successfully!");
 
-    // Update phone number dynamically
-    const cityPhoneMap = {
-        alamo: "9255534710",
-        antioch: "9258917800",
-        burlingame: "6502930880",
-        campbell: "4086456700",
-        castrovalley: "9252639209",
-        concord: "9254124880",
-        danville: "9257256920",
-        discoverybay: "9258917800",
-        dublin: "9255876777",
-        hillsborough: "6502930880",
-        livermore: "9257186181",
-        lafayette: "9258711333",
-        orinda: "9258917800",
-        pittsburg: "9258258555",
-        pleasanthill: "9258917800",
-        pleasanton: "9255876777",
-        sanramon: "9253656030",
-        walnutcreek: "9254642075",
-        sunol: "9257186181",
+    // Payment method handling
+    const paymentMethodDropdown = document.getElementById("paymentMethod");
+    const creditCardForm = document.getElementById("creditCardForm");
+    const cryptoWallets = document.getElementById("cryptoWallets");
+    const generalHelp = document.getElementById("generalHelp");
+
+    const handlePaymentMethodChange = (selectedMethod) => {
+        // Hide all sections initially
+        creditCardForm.style.display = "none";
+        cryptoWallets.style.display = "none";
+        generalHelp.style.display = "none";
+
+        // Show the appropriate section based on the selected payment method
+        if (selectedMethod === "credit-card") {
+            creditCardForm.style.display = "block";
+        } else if (selectedMethod === "crypto") {
+            cryptoWallets.style.display = "block";
+        } else if (
+            ["cash", "zelle", "venmo", "paypal"].includes(selectedMethod)
+        ) {
+            generalHelp.style.display = "block";
+        }
     };
 
-    const defaultPhone = "8332893627";
-    const phone = cityPhoneMap[subdomain] || defaultPhone;
+    if (paymentMethodDropdown) {
+        paymentMethodDropdown.addEventListener("change", (event) => {
+            handlePaymentMethodChange(event.target.value);
+        });
 
-    const phoneDiv = document.createElement('div');
-    phoneDiv.style.textAlign = 'center';
-    phoneDiv.style.marginTop = '10px';
-    phoneDiv.style.fontSize = '18px';
-    phoneDiv.style.fontWeight = 'bold';
-    phoneDiv.innerHTML = `<a href="tel:${phone}" style="color: inherit; text-decoration: none;">Call us at (${phone.slice(0, 3)}) ${phone.slice(3, 6)}-${phone.slice(6)}</a>`;
-
-    const menuTitle = document.querySelector('.menu-title-text');
-    if (menuTitle) {
-        menuTitle.insertAdjacentElement('afterend', phoneDiv);
+        // Trigger default behavior on page load
+        handlePaymentMethodChange(paymentMethodDropdown.value);
     }
+
+    console.log("Payment method logic applied!");
 
     // Tab switching logic
     const applyTabListeners = () => {
@@ -105,55 +102,6 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
     };
-
-    // Cart update logic
-    const cartForm = document.getElementById("cartForm");
-    const totalDisplay = document.getElementById("total");
-    const selectedItemsList = document.getElementById("selectedItemsList");
-
-    const updateCart = () => {
-        const itemElements = cartForm.querySelectorAll('input[name="item"]');
-        let total = 0;
-
-        const cartItems = Array.from(itemElements)
-            .filter(el => el.checked)
-            .map(item => {
-                const quantityInput = item.closest(".item").querySelector(".quantity");
-                const quantity = parseInt(quantityInput.value, 10) || 1;
-                const [itemName, itemCost] = item.value.split('|');
-                const cost = parseFloat(itemCost) * quantity;
-
-                total += cost;
-
-                return `<li>${itemName} (x${quantity}) - $${cost.toFixed(2)} 
-                    <span class="remove-item" data-value="${item.value}">x</span></li>`;
-            });
-
-        selectedItemsList.innerHTML = cartItems.length
-            ? cartItems.join("")
-            : '<li>No items selected yet.</li>';
-
-        totalDisplay.textContent = `$${total.toFixed(2)}`;
-
-        document.querySelectorAll(".remove-item").forEach(button => {
-            button.addEventListener("click", () => {
-                const valueToRemove = button.getAttribute("data-value");
-                const itemToUncheck = cartForm.querySelector(`input[name="item"][value="${valueToRemove}"]`);
-                if (itemToUncheck) {
-                    itemToUncheck.checked = false;
-                    cartForm.dispatchEvent(new Event("change"));
-                }
-            });
-        });
-    };
-
-    // Event listeners for cart updates
-    cartForm.addEventListener("change", updateCart);
-    cartForm.addEventListener("input", (event) => {
-        if (event.target.classList.contains("quantity")) {
-            updateCart();
-        }
-    });
 
     // Apply tab listeners
     applyTabListeners();
