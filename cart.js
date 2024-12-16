@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Set up city name dynamically in the header
     const subdomain = window.location.hostname.split('.')[0]; // Extract subdomain
     const cityName = subdomain.charAt(0).toUpperCase() + subdomain.slice(1).toLowerCase(); // Capitalize first letter
-    document.getElementById("cityName").innerHTML = `<i class="fas fa-shopping-cart aligncenter"></i> ${cityName} Doap `;
+    document.getElementById("cityName").innerHTML = `<i class="fas fa-shopping-cart"></i> ${cityName} Doap `;
     
     // Update logo link
     const logoLink = document.querySelector(".header a");
@@ -250,6 +250,53 @@ function setAgencyPhoneNumber() {
 
 // Run the function when the page loads
 window.onload = setAgencyPhoneNumber;
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    // Extract city or subdomain to determine the phone number
+    const subdomain = window.location.hostname.split('.')[0]; // Get the subdomain
+    const cityName = subdomain.charAt(0).toUpperCase() + subdomain.slice(1).toLowerCase(); // Capitalize city name
+    const cityPhoneMap = {
+        alamo: "9255534710",
+        antioch: "9258917800",
+        burlingame: "6502930880",
+        campbell: "4086456700",
+        castrovalley: "9252639209",
+        concord: "9254124880",
+        danville: "9257256920",
+        discoverybay: "9258917800",
+        dublin: "9255876777",
+        hillsborough: "6502930880",
+        livermore: "9257186181",
+        lafayette: "9258711333",
+        orinda: "9258917800",
+        pittsburg: "9258258555",
+        pleasanthill: "9258917800",
+        pleasanton: "9255876777",
+        sanramon: "9253656030",
+        walnutcreek: "9254642075",
+        sunol: "9257186181",
+    };
+
+    const defaultPhone = "8332893627"; // Default phone number if no match is found
+    const phone = cityPhoneMap[subdomain] || defaultPhone;
+
+    // Update the city name in the header
+    const cityNameElement = document.getElementById("cityName");
+    if (cityNameElement) {
+        cityNameElement.textContent = `${cityName} Doap`;
+    }
+
+    // Update the phone number link
+    const phoneNumberElement = document.querySelector(".phone-number");
+    if (phoneNumberElement) {
+        phoneNumberElement.href = `tel:${phone}`; // Set the tel link
+        phoneNumberElement.textContent = `Call us at (${phone.slice(0, 3)}) ${phone.slice(3, 6)}-${phone.slice(6)}`; // Format and set the text
+    }
+});
+
+
 
 
 document.addEventListener("DOMContentLoaded", () => {
