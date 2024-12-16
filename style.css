@@ -8,6 +8,32 @@ body {
     font-size: 16px; /* Base font size for all devices */
 }
 
+
+/* Center alignment for the header */
+.logo-title-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px; /* Space between the logo and text */
+    margin: 20px 0; /* Optional: Add some margin to separate from other elements */
+}
+
+/* Style for the Doap logo */
+.doap-logo {
+    width: 50px; /* Adjust the size of the logo */
+    height: auto; /* Maintain aspect ratio */
+}
+
+/* Style for the city name */
+#cityName {
+    font-family: 'Marvel', sans-serif; /* Match the style */
+    font-size: 2rem; /* Adjust font size */
+    margin: 0; /* Remove default margin */
+}
+
+
+
+
 /* Style the remove-item "X" */
 .remove-item {
     color: red; /* Set the text color to red */
