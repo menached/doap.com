@@ -26,24 +26,29 @@ document.addEventListener("DOMContentLoaded", () => {
     const hostname = window.location.hostname;
     const subdomain = hostname.split('.')[0].toLowerCase();
 
+    // Debugging: Check the extracted hostname and subdomain
+    console.log("Hostname:", hostname);
+    console.log("Subdomain:", subdomain);
+
     // Get the city name from the mapping
     const cityName = subdomainToCityName[subdomain] || subdomainToCityName.default;
+
+    // Debugging: Verify the resolved city name
+    console.log(`Resolved cityName: ${cityName} from subdomain: ${subdomain}`);
 
     // Update the city name in the UI
     const cityNameElement = document.getElementById("cityName");
     if (cityNameElement) {
         cityNameElement.textContent = `${cityName} Doap`; // Set the city name in the header
+        console.log("City name updated in the UI.");
+    } else {
+        console.warn("Element with ID 'cityName' not found!");
     }
 
     // Update the page title
     document.title = `${cityName} Doap`;
-
-    // Debugging
-    console.log(`City name for ${subdomain}: ${cityName}`);
+    console.log(`Page title updated to: ${document.title}`);
 });
-
-
-
 
 
 
