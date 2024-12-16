@@ -126,9 +126,12 @@ document.addEventListener("DOMContentLoaded", () => {
         generalHelp.style.display = "block";
         // Update the message for "Cash" payment method
         generalHelp.innerHTML = `
-            <h3><i class="fas fa-money-bill-wave"></i> Cash Payment Instructions</h3>
-            <p>Cash on delivery is an easy option and requires no signups, accounts, or applications. 
-            Just be ready to show an ID to the driver as you must be 21 or older to purchase Cannabis in California.</p>
+            <h3 style="display: flex; justify-content: space-between; align-items: center;">
+                <span><i class="fas fa-phone-alt"></i> Need Assistance?</span>
+                <i class="fas fa-question-circle" style="color: green; cursor: pointer;" title="Need more help? Click here!"></i>
+            </h3>
+            <p>After placing your order, please check your email for further instructions on how to complete your payment. 
+            Feel free to call us at <strong>(833) 289-3627</strong> for assistance. We're standing by to help!</p>
         `;
     } else if (["zelle", "venmo", "paypal"].includes(selectedMethod)) {
             generalHelp.style.display = "block";
