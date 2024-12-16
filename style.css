@@ -55,14 +55,13 @@
 /* Mobile portrait view */
 @media (max-width: 767px) {
     #cityName {
-        font-size: 50%!important; /* Shrinks text to half its normal size */
+        font-size: 80%!important; /* Shrinks text to half its normal size */
         text-align: center; /* Ensures the text stays centered */
-        font-size: 1.2rem;
         margin: 0;
     }
 
     .phone-number {
-        display: none; /* Hides the "Call us at" text */
+        display: visible; /* Hides the "Call us at" text */
     }
 }
 
