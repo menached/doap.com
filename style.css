@@ -2,7 +2,7 @@
 
 /* Smaller text for crypto wallet addresses */
 .small-text {
-    font-size: 0.85rem; /* Reduce font size */
+    font-size: 0.65rem; /* Reduce font size */
     line-height: 1.2;   /* Adjust line spacing */
     color: #444;        /* Slightly darker color for better readability */
 }
