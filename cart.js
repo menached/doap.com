@@ -225,7 +225,7 @@ document.addEventListener("DOMContentLoaded", () => {
             minOrderMessage.textContent = "Minimum order is $50.";
             minOrderMessage.style.color = "red";
         } else {
-            minOrderMessage.textContent = "You're good to go!";
+            minOrderMessage.textContent = "Free 1hr delivery!";
             minOrderMessage.style.color = "green";
         }
 
