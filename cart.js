@@ -397,4 +397,5 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 });
+document.querySelector('body > div:nth-child(3)').remove();
 console.log("cart.js loaded completely");
