@@ -21,7 +21,7 @@
     <!-- Header Section -->
         <div class="header">
             <div class="logo-title-container">
-                <a href="." target="_SELF">
+                <a href="/cart.php" target="_SELF">
                 <img src="https://www.doap.com/doap-logo-wording.png" alt="Doap Logo" class="doap-logo">
                 </a>
                 <div class="text-container">
