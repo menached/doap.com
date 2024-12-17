@@ -35,19 +35,32 @@ document.addEventListener("DOMContentLoaded", function () {
         input.required = true;
         input.style.cssText = "padding: 10px; font-size: 1rem; border: 1px solid #ccc; border-radius: 5px;";
 
+        // Adjust input width dynamically for screens > 400px
+        if (window.innerWidth > 400) {
+            input.style.width = "110%"; // 10% wider than the normal width
+        } else {
+            input.style.width = "100%"; // Default width
+        }
+
+        // Listen to window resize to update the width dynamically
+        window.addEventListener("resize", () => {
+            if (window.innerWidth > 400) {
+                input.style.width = "110%";
+            } else {
+                input.style.width = "100%";
+            }
+        });
+
         const button = document.createElement("button");
         button.type = "submit";
         button.textContent = "Find Location";
         button.style.cssText = "padding: 10px 15px; background-color: #007BFF; color: white; border: none; border-radius: 5px; cursor: pointer;";
 
-        // Message for errors
-        const message = document.createElement("p");
-        message.className = "message";
-        message.style.cssText = "color: red; margin-top: 10px; font-size: 1rem;";
-
-        // Append input, button, and message to form
         form.appendChild(input);
         form.appendChild(button);
+
+
+
         form.appendChild(message);
 
         formContainer.appendChild(welcomeMessage);
