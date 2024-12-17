@@ -108,17 +108,7 @@ document.addEventListener("DOMContentLoaded", () => {
     //if (cityNameElement) {
         //cityNameElement.textContent = cityName;
     //}
-    if (cityNameElement) {
-        // Check if the hostname starts with "www" (e.g., www.doap.com)
-        if (hostname === "www.doap.com") {
-            cityNameElement.textContent = cityNameElement.textContent.replace(/^www\s*/i, "").trim();
-            console.log("Removed 'www' from the site heading.");
-        }
-        // Else: do nothing for agency pages like "alamo.doap.com"
-        else {
-            console.log("Preserved city name:", cityNameElement.textContent);
-        }
-    }
+
         // Update the phone number dynamically in the header
     const phoneNumberElement = document.querySelector(".phone-number");
     if (phoneNumberElement) {
