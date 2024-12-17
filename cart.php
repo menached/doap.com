@@ -317,7 +317,7 @@
                     <label for="zip">
                         Zip:
                     </label>
-                    <input type="text" id="cardZip" placeholder="MM/YY"  class="cardElement"/>
+                    <input type="text" id="cardZip" placeholder="94XXX"  class="cardElement"/>
                 </p>
             </div>
 
