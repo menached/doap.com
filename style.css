@@ -25,7 +25,7 @@
 .input-icon input {
     width: 100%;
     padding-right: 30px; /* Ensure space for the lock icon */
-    border: 1px solid #ccc;
+    border: 0px solid #ccc;
     border-radius: 5px;
     box-sizing: border-box;
 }
