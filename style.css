@@ -1,14 +1,19 @@
 /* General Reset */
-
 @media (max-width: 400px) {
     #zipFormContainer > form {
-        transform: scale(0.8); /* Scale down the form to 80% */
-        transform-origin: center; /* Keep scaling centered */
-        max-width: 90%; /* Ensure the form doesn't overflow */
-        margin: 0 auto; /* Center the form horizontally */
+        transform: scale(0.8);
+        transform-origin: center;
+        max-width: 90%;
+        margin: 0 auto;
+        padding: 5px; /* Reduce padding for smaller screens */
+        font-size: 0.9rem; /* Adjust font size */
+    }
+
+    #zipFormContainer input, #zipFormContainer button {
+        padding: 8px; /* Smaller input/button padding */
+        font-size: 0.8rem; /* Smaller font size for inputs/buttons */
     }
 }
-
 
 .cardbits input {
     width:50px;
