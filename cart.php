@@ -291,7 +291,7 @@
 
         <div id="accordionContent" style="margin-top: 20px;">
             <div id="creditCardForm" class="accordion-section" style="display: none;">
-                <h3><i class="fas fa-credit-card"></i> Enter Your Credit Card Details</h3>
+                <h3><i class="fas fa-credit-card alignright"></i> Enter Your Credit Card Details</h3>
                 <p class="aligncenter"> 
                     <label for="cardNumber">
                         Card Number:
