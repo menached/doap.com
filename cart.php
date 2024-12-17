@@ -300,13 +300,13 @@
                 </p>
                 <p class="aligncenter">
                     <label for="expiryDate">
-                        <i class="fas fa-calendar-alt"></i> Expiration Date:
+                        Expiration Date:
                     </label>
                     <input type="text" id="expiryDate" placeholder="MM/YY" />
                 </p>
                 <p class="aligncenter">
                     <label for="cvv">
-                        <i class="fas fa-shield-alt"></i> CVV:
+                        CVV:
                     </label>
                     <input type="text" id="cvv" placeholder="123" />
                 </p>
