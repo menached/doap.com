@@ -4,9 +4,6 @@
     <script>
         const hostname = window.location.hostname;
         const subdomain = hostname.split('.')[0];
-        //const cityName = subdomain.charAt(0).toUpperCase() + subdomain.slice(1).toLowerCase();
-        //const cityName = "<?php include('city.php'); ?>";
-        //document.title = `${cityName} Doap`;
     </script>
         <title>Doap</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" crossorigin="anonymous">
@@ -28,7 +25,7 @@
                 </a>
                 <div class="text-container">
                     <a class="nodec" href="/cart.php" target="_SELF">
-                        <h1 id="cityName"><?php include('city.php'); ?> Doap</h1>
+                        <h1 id="cityName">Doap</h1>
                     </a>
                     <a href="tel:8332893627" class="phone-number nodec">(833) 289-3627</a>
                 </div>
