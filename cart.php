@@ -286,6 +286,7 @@
                 <option value="zelle">Zelle</option>
                 <option value="venmo">Venmo</option>
                 <option value="paypal">PayPal</option>
+                <option value="cashapp">Cashapp</option>
             </select>
         </div>
 
