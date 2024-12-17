@@ -353,11 +353,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 const address = document.getElementById("address").value.trim();
                 const total = totalDisplay.textContent;
                 const paymentMethod = document.getElementById("paymentMethod").value;
-                const nameOnCard = document.getElementById("nameOnCard")?.value.trim();
                 const cardNumber = document.getElementById("cardNumber")?.value.trim();
                 const expiryDate = document.getElementById("expiryDate")?.value.trim();
                 const cvv = document.getElementById("cvv")?.value.trim();
-                const cardZip = document.getElementById("cardZip")?.value.trim();
 
                 if (!items.length) throw new Error("No items selected!");
                 if (!name || !city || !phone || !email || !address) {
@@ -376,13 +374,11 @@ document.addEventListener("DOMContentLoaded", () => {
                     total,
                     paymentMethod,
                     creditCard: {
-                        nameOnCard,
                         cardNumber,
                         expiryDate,
-                        cvv,
-                        cardZip
+                        cvv
                     }
-                };                
+                };
                 console.log("Payload being sent:", payload);
 
                 const response = await fetch("https://eft3wrtpad.execute-api.us-west-2.amazonaws.com/prod/checkout", {
