@@ -1,5 +1,17 @@
 /* General Reset */
 
+
+/* Alternating background colors for cart items */
+.cart-item:nth-child(odd) {
+    background-color: #f9f9f9; /* Light gray for odd items */
+}
+
+.cart-item:nth-child(even) {
+    background-color: #ffffff; /* White for even items */
+}
+
+
+
 /* Smaller text for crypto wallet addresses */
 .small-text {
     font-size: 0.65rem; /* Reduce font size */
