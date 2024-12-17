@@ -1,5 +1,7 @@
 /* General Reset */
-.alignright {
+
+
+#cartForm > div.payment-section > label > i, .alignright {
     position:relative;
     float:right;
 }
