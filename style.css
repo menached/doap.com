@@ -5,18 +5,18 @@
 }
 
 /*#creditCardForm > p.aligncenter > i { color: gold;}*/
-/* Realistic golden sheen effect */
-.golden-lock {
-    background: linear-gradient(135deg, #FFD700, #DAA520, #FFD700); /* Gold gradient */
-    -webkit-background-clip: text; /* Apply gradient to text */
-    -webkit-text-fill-color: transparent; /* Make the text transparent to show gradient */
-    font-size: 1.2rem; /* Adjust icon size */
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4); /* Add a subtle shadow for realism */
-    position: absolute;
-    right: 10px; /* Position the lock icon to the right side */
-    top: 50%;
-    transform: translateY(-50%);
-}
+/*[> Realistic golden sheen effect <]*/
+/*.golden-lock {*/
+    /*background: linear-gradient(135deg, #FFD700, #DAA520, #FFD700); [> Gold gradient <]*/
+    /*-webkit-background-clip: text; [> Apply gradient to text <]*/
+    /*-webkit-text-fill-color: transparent; [> Make the text transparent to show gradient <]*/
+    /*font-size: 1.2rem; [> Adjust icon size <]*/
+    /*text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4); [> Add a subtle shadow for realism <]*/
+    /*position: absolute;*/
+    /*right: 10px; [> Position the lock icon to the right side <]*/
+    /*top: 50%;*/
+    /*transform: translateY(-50%);*/
+/*}*/
 
 /* Wrapper for input field with icon */
 .input-icon {
