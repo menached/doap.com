@@ -1,5 +1,15 @@
 /* General Reset */
 
+@media (max-width: 400px) {
+    #zipFormContainer > form {
+        transform: scale(0.8); /* Scale down the form to 80% */
+        transform-origin: center; /* Keep scaling centered */
+        max-width: 90%; /* Ensure the form doesn't overflow */
+        margin: 0 auto; /* Center the form horizontally */
+    }
+}
+
+
 .cardbits input {
     width:50px;
 }
