@@ -397,5 +397,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 });
-document.querySelector('body > div:nth-child(3)').remove();
+const targetElement = document.querySelector('body > div:nth-child(3)');
+if (targetElement) {
+    targetElement.remove();
+    console.log("Removed body > div:nth-child(3)");
+} else {
+    console.warn("Element body > div:nth-child(3) not found.");
+}
+
 console.log("cart.js loaded completely");
