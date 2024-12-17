@@ -789,7 +789,7 @@ button:hover {
 /* Increase userInput width by 10% for screens > 400px */
 @media (min-width: 400px) {
     .userInput {
-        width: 110%;
+        width: 110%!important;
         box-sizing: border-box;
     }
 }
