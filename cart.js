@@ -103,11 +103,11 @@ document.addEventListener("DOMContentLoaded", () => {
     // Update the page title
     document.title = `${cityName} Doap`;
 
-    // Update the header text dynamically
-    const cityNameElement = document.getElementById("cityName");
-    if (cityNameElement) {
-        cityNameElement.textContent = cityName;
-    }
+    //// Update the header text dynamically
+    //const cityNameElement = document.getElementById("cityName");
+    //if (cityNameElement) {
+        //cityNameElement.textContent = cityName;
+    //}
 
         // Update the phone number dynamically in the header
     const phoneNumberElement = document.querySelector(".phone-number");
