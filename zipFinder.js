@@ -1,9 +1,12 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // Get the hostname of the current page
+    // Debug: Log the hostname to confirm
     const hostname = window.location.hostname;
+    console.log("Current hostname:", hostname);
 
-    // Check if hostname is 'www.doap.com' or 'doap.com'
-    if (hostname === "www.doap.com" || hostname === "doap.com") {
+    // Allow slight variations in hostname (e.g., with or without www)
+    if (/^(www\.)?doap\.com$/.test(hostname)) {
+        console.log("ZIP form will be displayed on this page.");
+
         // Function to create and return the ZIP form
         function createZipForm() {
             const formContainer = document.createElement("div");
@@ -60,7 +63,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 const zipData = [
                     { zip: [94507], city: ["Alamo"], url: "https://alamo.doap.com/cart.php" },
                     { zip: [94568], city: ["Dublin"], url: "https://dublin.doap.com/cart.php" },
-                    // Add more mappings as needed
                 ];
 
                 let matchedURL = null;
@@ -90,6 +92,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const zipForm = createZipForm(); // Call the form creation function
         mainContainer.appendChild(zipForm);
+    } else {
+        console.log("ZIP form will NOT be displayed on this page.");
     }
 });
 
