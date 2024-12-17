@@ -299,7 +299,7 @@
                     <label for="nameOnCard">
                         Name on card:
                     </label>
-                    <input type="text" id="cardName" placeholder="Joe Q. Public" /> <i class="cardElement"></i> 
+                    <input type="text" id="nameOnCard" placeholder="Joe Q. Public" /> <i class="cardElement"></i> 
                 </p>
                 <p class="aligncenter"> 
                     <label for="cardNumber">
