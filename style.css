@@ -4,8 +4,33 @@
     width:50px;
 }
 
-#creditCardForm > p.aligncenter > i {
-color: gold;}
+/*#creditCardForm > p.aligncenter > i { color: gold;}*/
+/* Wrapper for input field with icon */
+.input-icon {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    max-width: 300px; /* Adjust input width */
+}
+
+.input-icon input {
+    width: 100%;
+    padding-right: 30px; /* Ensure space for the lock icon */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.input-icon .green-lock {
+    position: absolute;
+    right: 10px; /* Position the lock to the right side */
+    top: 50%;
+    transform: translateY(-50%);
+    color: green; /* Green color for the lock icon */
+    font-size: 1rem;
+}
+
+
 
 /* Wrapper for input field with icon */
 .input-icon {
