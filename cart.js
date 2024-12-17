@@ -71,7 +71,6 @@ document.addEventListener("DOMContentLoaded", () => {
     if (cityMap[domainName]) {
         cityName = cityMap[domainName];
     }
-     Update cityName if the domain exists in the map
 
     // Get the phone number based on the subdomain, default to the general number
     const defaultPhoneNumber = "833-289-3627";
