@@ -3,29 +3,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const hostname = window.location.hostname;
     const domainName = hostname.split('.')[0]; // Raw subdomain
     // Define the minimum order amount at the beginning
+    const MINIMUM_ORDER_AMOUNT = 100;
 
-    //const MINIMUM_ORDER_AMOUNT = 100;
-    // Define area-based minimum order amounts
-    const areaMinimum = {
-        alamo: 50,
-        burlingame: 120,
-        campbell: 120,
-        dublin: 50,
-    };
-
-    // Extract the current area (subdomain) from the hostname
-    const hostname = window.location.hostname;
-    const area = hostname.split('.')[0].toLowerCase();
-
-    // Set MINIMUM_ORDER_AMOUNT based on the area, default to 100 if area not found
-    const MINIMUM_ORDER_AMOUNT = areaMinimum[area] || 100;
-
-    // Log the minimum order amount for debugging
-    console.log(`Minimum order for ${area}: $${MINIMUM_ORDER_AMOUNT}`);
     // Default cityName for single-word subdomains
     let cityName = domainName.charAt(0).toUpperCase() + domainName.slice(1).toLowerCase();
-
-
 
     // Map of subdomains to full city names
     const cityMap = {
@@ -237,21 +218,44 @@ document.addEventListener("DOMContentLoaded", () => {
             : '<li>No items selected yet.</li>';
         totalDisplay.textContent = `$${total.toFixed(2)}`;
 
-        // Handle minimum order message
-        handleOrderMessage(total);
+        const handleOrderMessage = (total) => {
+            if (total === 0) {
+                minOrderMessage.textContent = `Minimum order is $${MINIMUM_ORDER_AMOUNT}.`;
+                minOrderMessage.style.color = "black";
+            } else if (total > 0 && total < MINIMUM_ORDER_AMOUNT) {
+                minOrderMessage.textContent = `Minimum order is $${MINIMUM_ORDER_AMOUNT}.`;
+                minOrderMessage.style.color = "red";
+            } else {
+                minOrderMessage.textContent = "Free 1hr delivery!";
+                minOrderMessage.style.color = "green";
+            }
+        };
 
-        // Add remove-item functionality
-        document.querySelectorAll(".remove-item").forEach(button => {
-            button.addEventListener("click", () => {
-                const valueToRemove = button.getAttribute("data-value");
-                const itemToUncheck = cartForm.querySelector(`input[name="item"][value="${valueToRemove}"]`);
-                if (itemToUncheck) {
-                    itemToUncheck.checked = false;
-                    cartForm.dispatchEvent(new Event("change"));
-                }
+
+        // Example cart update logic (placeholder for your actual cart logic)
+        const updateCart = () => {
+            let total = parseFloat(totalDisplay.textContent.replace('$', '')) || 0;
+            handleOrderMessage(total);
+        };
+
+        // Call the function when the cart updates
+        updateCart();
+
+        document.getElementById("cartForm").addEventListener("change", updateCart);
+
+
+            // Add remove-item functionality
+            document.querySelectorAll(".remove-item").forEach(button => {
+                button.addEventListener("click", () => {
+                    const valueToRemove = button.getAttribute("data-value");
+                    const itemToUncheck = cartForm.querySelector(`input[name="item"][value="${valueToRemove}"]`);
+                    if (itemToUncheck) {
+                        itemToUncheck.checked = false;
+                        cartForm.dispatchEvent(new Event("change"));
+                    }
+                });
             });
-        });
-    };
+        };
 
     // Event listeners for cart updates
     if (cartForm) {
@@ -263,9 +267,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Initial cart update on page load
-    updateCart();
-
+    console.log("Cart logic applied successfully!");
 
     // Remove "Call us at" from the phone number
     const phone = document.querySelector(".phone-number");
