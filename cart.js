@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => {
-
     // Map subdomains to minimum order amounts
     const areaMinimum = {
         alamo: 40,
@@ -20,7 +19,6 @@ document.addEventListener("DOMContentLoaded", () => {
     // Extract the subdomain
     const hostname = window.location.hostname;
     const domainName = hostname.split('.')[0].toLowerCase();
-    const subdomain = hostname.split('.')[0].toLowerCase();
 
     // Determine the minimum order amount based on the subdomain, default to 60
     const MINIMUM_ORDER_AMOUNT = areaMinimum[domainName] || 60;
@@ -70,23 +68,23 @@ document.addEventListener("DOMContentLoaded", () => {
     // Update cityName if the domain exists in the map
     if (cityMap[domainName]) {
         cityName = cityMap[domainName];
+    } else if (hostname === "www.doap.com" || hostname === "doap.com") {
+        cityName = "Norcal Doap";
     }
 
     // Get the phone number based on the subdomain, default to the general number
     const defaultPhoneNumber = "833-289-3627";
-    const defaultCityName = "Doap";
     const phoneNumber = phoneMap[domainName] || defaultPhoneNumber;
-    const cityName = phoneMap[domainName] || defaultCityName;
 
     const defaultDescription = `${cityName} DOAP Delivers Organic Awesome Pot to ${cityName} and surrounding cities 9-9 daily.`;
 
     // Update the page title
     document.title = `${cityName} Doap`;
 
-    // Update the header area without the shopping cart icon
+    // Update the header text dynamically
     const cityNameElement = document.getElementById("cityName");
     if (cityNameElement) {
-        cityNameElement.textContent = `${cityName} Doap`;
+        cityNameElement.textContent = cityName;
     }
 
         // Update the phone number dynamically in the header
