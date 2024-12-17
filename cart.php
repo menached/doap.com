@@ -32,7 +32,7 @@
                 </div>
             </div>
             <div class="menu-title nodec">
-                    <a class="nodec" href="/cart.php" target="_SELF">
+                    <a style="text-decoration:none!important;" class="nodec" href="/cart.php" target="_SELF">
                 <h2 class="menu-title-text nodec">Delivering Organic Awesome Pot</h2>
                     </a>
             </div>
