@@ -73,13 +73,23 @@ h3 i.fa-phone-alt {
 }
 
 
-/* Move the horizontal line up by 10px on screens <= 768px */
+/* Move only the border-bottom up by 10px on screens <= 768px */
 @media (max-width: 768px) {
-    .tab-container {
-        margin-bottom: 0px; /* Reduce space below the tabs */
-        transform: translateY(-30px); /* Move the whole container up */
+    #cartForm > div.tab-container {
+        position: relative;
+        margin-bottom: 10px; /* Optional: Adjust spacing below */
+    }
+
+    #cartForm > div.tab-container::after {
+        content: "";
+        position: absolute;
+        bottom: -10px; /* Moves the border 10px up */
+        left: 0;
+        width: 100%;
+        border-bottom: 1px solid #ccc; /* The border line */
     }
 }
+
 
 
 /* Mobile portrait view */
@@ -510,7 +520,7 @@ form {
 .tab-container {
     display: flex;
     justify-content: center;
-    border-bottom: 0px solid #ccc;
+    border-bottom: 1px solid #ccc;
     margin-bottom: 20px;
 }
 .tab {
