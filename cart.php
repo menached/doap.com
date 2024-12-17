@@ -304,8 +304,8 @@
                 <h3>Crypto Wallet Addresses</h3>
                 <p><i class="fab fa-bitcoin"></i> Bitcoin (BTC): bc1q28m9z95qzfjap7tamagnhlrk8nu332l7mlyjzr</p>
                 <p><i class="fab fa-ethereum"></i>Ethereum (ETH): 0xf38ab68ae630bacd769cfc34fbcf3f7c0504f97a</p>
-                <p><i class="fab fa-dogecoin"></i>Doge (DOGE): DKx7uayMeVmd8Zuy3PgGSRB8XjUVt3ndeT</p>
-                <p><i class="fab fa-ltc"></i>Litecoin (LTC): ltc1q97cz898tgwqh23j44kf5nsaggg84j2vw666jqr</p>
+                <p><i class="fab fa-dog"></i>Doge (DOGE): DKx7uayMeVmd8Zuy3PgGSRB8XjUVt3ndeT</p>
+                <p><i class="fab fa-wallet"></i>Litecoin (LTC): ltc1q97cz898tgwqh23j44kf5nsaggg84j2vw666jqr</p>
             </div>
 
             <div id="generalHelp" class="accordion-section" style="display: none;">
