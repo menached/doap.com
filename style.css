@@ -594,7 +594,7 @@ form {
     padding: 10px 20px;
     cursor: pointer;
     border: 1px solid #ccc;
-    border-bottom: none;
+    /*border-bottom: none;*/
     background: #f9f9f9;
     margin: 0 5px;
     font-size: 1.1em;
