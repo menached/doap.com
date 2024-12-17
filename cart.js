@@ -163,7 +163,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <p>COD is the easiest payment method.  No sign-up required.  Show proof of age upon delivery.  Check your email after placing your order to verify your order details. 
                 If you need to make changes, call us at <strong>(833) 289-3627</strong> for assistance. We're standing by to help!</p>
             `;
-        } else if (["zelle", "venmo", "paypal"].includes(selectedMethod)) {
+        } else if (["zelle", "venmo", "paypal", "cashapp"].includes(selectedMethod)) {
             generalHelp.style.display = "block";
             generalHelp.innerHTML = `
                 <h3 style="display: flex; justify-content: space-between; align-items: center;">
@@ -171,7 +171,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     <i class="fas fa-question-circle" style="color: green; cursor: pointer;" title="Need more help? Click here!"></i>
                 </h3>
                 <p>After placing your order, please check your email for further instructions on how to complete your payment. 
-                Feel free to call us at <strong>(833) 289-3627</strong> for assistance. We're standing by to help!</p>
+                For zelle send payment to zelle@doap.com, for venmo, venmo@doap.com, for paypal, paypal@doap.com, and cashapp is cashapp@doap.com.  Feel free to call us at <strong>(833) 289-3627</strong> for assistance. We're standing by to help!</p>
             `;
         }
     };
