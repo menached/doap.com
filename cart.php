@@ -5,7 +5,7 @@
         const hostname = window.location.hostname;
         const subdomain = hostname.split('.')[0];
         //const cityName = subdomain.charAt(0).toUpperCase() + subdomain.slice(1).toLowerCase();
-        const cityName = "<?php include('city.php'); ?>";
+        //const cityName = "<?php include('city.php'); ?>";
         //document.title = `${cityName} Doap`;
     </script>
         <title>Doap</title>
