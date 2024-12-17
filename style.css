@@ -1,5 +1,9 @@
 /* General Reset */
 
+.cardbits input {
+    width:40px;
+}
+
 /* Wrapper for input field with icon */
 .input-icon {
     position: relative;
