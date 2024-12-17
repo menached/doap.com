@@ -3,10 +3,29 @@ document.addEventListener("DOMContentLoaded", () => {
     const hostname = window.location.hostname;
     const domainName = hostname.split('.')[0]; // Raw subdomain
     // Define the minimum order amount at the beginning
-    //const MINIMUM_ORDER_AMOUNT = 100;
 
+    //const MINIMUM_ORDER_AMOUNT = 100;
+    // Define area-based minimum order amounts
+    const areaMinimum = {
+        alamo: 50,
+        burlingame: 120,
+        campbell: 120,
+        dublin: 50,
+    };
+
+    // Extract the current area (subdomain) from the hostname
+    const hostname = window.location.hostname;
+    const area = hostname.split('.')[0].toLowerCase();
+
+    // Set MINIMUM_ORDER_AMOUNT based on the area, default to 100 if area not found
+    const MINIMUM_ORDER_AMOUNT = areaMinimum[area] || 100;
+
+    // Log the minimum order amount for debugging
+    console.log(`Minimum order for ${area}: $${MINIMUM_ORDER_AMOUNT}`);
     // Default cityName for single-word subdomains
     let cityName = domainName.charAt(0).toUpperCase() + domainName.slice(1).toLowerCase();
+
+
 
     // Map of subdomains to full city names
     const cityMap = {
