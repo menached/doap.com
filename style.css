@@ -4,6 +4,9 @@
     width:50px;
 }
 
+#creditCardForm > p.aligncenter > i {
+color: gold;}
+
 /* Wrapper for input field with icon */
 .input-icon {
     position: relative;
