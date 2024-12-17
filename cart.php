@@ -25,7 +25,9 @@
                 <img src="https://www.doap.com/doap-logo-wording.png" alt="Doap Logo" class="doap-logo">
                 </a>
                 <div class="text-container">
-                    <h1 id="cityName"><?php include('city.php'); ?> Doap</h1>
+                    <a href="/cart.php" target="_SELF">
+                        <h1 id="cityName"><?php include('city.php'); ?> Doap</h1>
+                    </a>
                     <a href="tel:8332893627" class="phone-number">(833) 289-3627</a>
                 </div>
             </div>
