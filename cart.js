@@ -75,6 +75,12 @@ document.addEventListener("DOMContentLoaded", () => {
         logoLink.href = `https://${domainName}.doap.com/cart.php`;
         logoLink.title = `Call ${cityName} Doap!`;
     }
+    // Update header text
+    const headerLink = document.querySelector("#cityName a");
+    if (headerLink) {
+        headerLink.href = `https://${domainName}.doap.com/cart.php`;
+        headerLink.title = `Call ${cityName} Doap!`;
+    }
 
     // Set up Open Graph and Twitter meta tags
     const ogMetaTags = [
