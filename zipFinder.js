@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (window.innerWidth > 400) {
             input.style.width = "97%";
         } else {
-            input.style.width = "97%";
+            input.style.width = "94%";
         }
     }
     adjustInputWidth(); // Initial width check
