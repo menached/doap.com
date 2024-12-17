@@ -8,7 +8,7 @@
         const cityName = "<?php include('city.php'); ?>";
         //document.title = `${cityName} Doap`;
     </script>
-        <title><?php include('city.php'); ?> Doap</title>
+        <title>Doap</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" crossorigin="anonymous">
 
     <link href="https://fonts.googleapis.com/css2?family=Marvel&display=swap" rel="stylesheet">
