@@ -31,7 +31,7 @@
                     <a href="tel:8332893627" class="phone-number">(833) 289-3627</a>
                 </div>
             </div>
-            <div class="menu-title">
+            <div class="menu-title nodec">
                     <a class="nodec" href="/cart.php" target="_SELF">
                 <h2 class="menu-title-text nodec">Delivering Organic Awesome Pot</h2>
                     </a>
