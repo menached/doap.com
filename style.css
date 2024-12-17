@@ -1,4 +1,8 @@
 /* General Reset */
+.alignright {
+    position:relative;
+    float:right;
+}
 .nodec, .nodec:hover, #cartForm > div.header > div.logo-title-container > div > a.phone-number.nodec {
     text-decoration: none;
     color:#000;
