@@ -296,7 +296,7 @@
                     <label for="cardNumber">
                         Card Number:
                     </label>
-                    <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" /> <i class="fas fa-lock"></i> 
+                    <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" /> <i class="fas fa-lock golden-lock"></i> 
                 </p>
                 <p class="cardbits">
                     <label for="expiryDate">
