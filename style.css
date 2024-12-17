@@ -1,17 +1,23 @@
 /* General Reset */
 @media (max-width: 400px) {
     #zipFormContainer > form {
-        transform: scale(0.8);
-        transform-origin: center;
-        max-width: 90%;
-        margin: 0 auto;
-        padding: 5px; /* Reduce padding for smaller screens */
-        font-size: 0.9rem; /* Adjust font size */
+        transform: scale(0.8); /* Scale down the form */
+        transform-origin: center; /* Center the scaling */
+        max-width: 90%; /* Prevent overflow */
+        margin: 0 auto; /* Center the form */
     }
 
-    #zipFormContainer input, #zipFormContainer button {
-        padding: 8px; /* Smaller input/button padding */
-        font-size: 0.8rem; /* Smaller font size for inputs/buttons */
+    /* Adjust input box size */
+    #zipFormContainer input {
+        width: 100%; /* Make the input take full width */
+        padding: 6px; /* Reduce padding */
+        font-size: 0.8rem; /* Smaller font size */
+    }
+
+    /* Adjust button size and font */
+    #zipFormContainer button {
+        padding: 8px 12px; /* Smaller padding for the button */
+        font-size: 0.8rem; /* Reduce font size */
     }
 }
 
