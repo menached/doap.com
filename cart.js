@@ -46,9 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
         danville: "Danville",
         concord: "Concord",
         livermore: "Livermore",
-        orinda: "Orinda",
-        www: "",
-        doap.com: ""
+        orinda: "Orinda"
     };
 
     // Map of subdomains to phone numbers
@@ -70,8 +68,14 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     // Update cityName if the domain exists in the map
+    //if (cityMap[domainName]) {
+        //cityName = cityMap[domainName];
+    //}
+    // Update cityName if the domain exists in the map
     if (cityMap[domainName]) {
         cityName = cityMap[domainName];
+    } else if (hostname === "www.doap.com" || hostname === "doap.com") {
+        cityName = "Norcal";
     }
 
     // Get the phone number based on the subdomain, default to the general number
