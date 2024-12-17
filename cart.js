@@ -237,44 +237,21 @@ document.addEventListener("DOMContentLoaded", () => {
             : '<li>No items selected yet.</li>';
         totalDisplay.textContent = `$${total.toFixed(2)}`;
 
-        const handleOrderMessage = (total) => {
-            if (total === 0) {
-                minOrderMessage.textContent = `Minimum order is $${MINIMUM_ORDER_AMOUNT}.`;
-                minOrderMessage.style.color = "black";
-            } else if (total > 0 && total < MINIMUM_ORDER_AMOUNT) {
-                minOrderMessage.textContent = `Minimum order is $${MINIMUM_ORDER_AMOUNT}.`;
-                minOrderMessage.style.color = "red";
-            } else {
-                minOrderMessage.textContent = "Free 1hr delivery!";
-                minOrderMessage.style.color = "green";
-            }
-        };
+        // Handle minimum order message
+        handleOrderMessage(total);
 
-
-        // Example cart update logic (placeholder for your actual cart logic)
-        const updateCart = () => {
-            let total = parseFloat(totalDisplay.textContent.replace('$', '')) || 0;
-            handleOrderMessage(total);
-        };
-
-        // Call the function when the cart updates
-        updateCart();
-
-        document.getElementById("cartForm").addEventListener("change", updateCart);
-
-
-            // Add remove-item functionality
-            document.querySelectorAll(".remove-item").forEach(button => {
-                button.addEventListener("click", () => {
-                    const valueToRemove = button.getAttribute("data-value");
-                    const itemToUncheck = cartForm.querySelector(`input[name="item"][value="${valueToRemove}"]`);
-                    if (itemToUncheck) {
-                        itemToUncheck.checked = false;
-                        cartForm.dispatchEvent(new Event("change"));
-                    }
-                });
+        // Add remove-item functionality
+        document.querySelectorAll(".remove-item").forEach(button => {
+            button.addEventListener("click", () => {
+                const valueToRemove = button.getAttribute("data-value");
+                const itemToUncheck = cartForm.querySelector(`input[name="item"][value="${valueToRemove}"]`);
+                if (itemToUncheck) {
+                    itemToUncheck.checked = false;
+                    cartForm.dispatchEvent(new Event("change"));
+                }
             });
-        };
+        });
+    };
 
     // Event listeners for cart updates
     if (cartForm) {
@@ -286,7 +263,9 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    console.log("Cart logic applied successfully!");
+    // Initial cart update on page load
+    updateCart();
+
 
     // Remove "Call us at" from the phone number
     const phone = document.querySelector(".phone-number");
