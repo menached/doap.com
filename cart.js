@@ -19,9 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Extract the subdomain
     const hostname = window.location.hostname;
-    const parts = hostname.split('.');
-    const domainName = parts[0].toLowerCase(); // Subdomain or "www" if present
-    #const domainName = hostname.split('.')[0].toLowerCase();
+    const domainName = hostname.split('.')[0].toLowerCase();
     const subdomain = hostname.split('.')[0].toLowerCase();
 
     // Determine the minimum order amount based on the subdomain, default to 60
