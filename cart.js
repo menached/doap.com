@@ -1,3 +1,4 @@
+console.log("cart.js started loading");
 document.addEventListener("DOMContentLoaded", () => {
     // Map subdomains to minimum order amounts
     const areaMinimum = {
@@ -396,4 +397,4 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 });
-
+console.log("cart.js loaded completely");
