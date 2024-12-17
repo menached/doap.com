@@ -217,24 +217,24 @@
         </div>
 
 
-<!-- Tab content for Accessories -->
-<div class="tab-content" id="accessories">
-    <div class="item-list">
-        <!-- LoKey Multi-Voltage KeyFob Vape Battery -->
-        <label class="item">
-            <input type="checkbox" name="item" value="LoKey Multi-Voltage KeyFob Vape Battery|40">
-            <img src="https://alamo.doap.com/wp-content/uploads/2023/08/single-vape-carts.jpg" alt="LoKey Multi-Voltage KeyFob Vape Battery">
-            <div class="item-details">
-                <p class="item-title">LoKey Multi-Voltage KeyFob Vape Battery w/ Built-in USB Charger</p>
-                <div class="item-quantity">
-                    <label for="quantity-lokey-vape-battery">Qty:</label>
-                    <input type="number" id="quantity-lokey-vape-battery" class="quantity" min="1" max="99" value="1">
-                </div>
-                <p class="item-price">$40.00</p>
+        <!-- Tab content for Accessories -->
+        <div class="tab-content" id="accessories">
+            <div class="item-list">
+                <!-- LoKey Multi-Voltage KeyFob Vape Battery -->
+                <label class="item">
+                    <input type="checkbox" name="item" value="LoKey Multi-Voltage KeyFob Vape Battery|40">
+                    <img src="https://alamo.doap.com/wp-content/uploads/2023/08/single-vape-carts.jpg" alt="LoKey Multi-Voltage KeyFob Vape Battery">
+                    <div class="item-details">
+                        <p class="item-title">LoKey Multi-Voltage KeyFob Vape Battery w/ Built-in USB Charger</p>
+                        <div class="item-quantity">
+                            <label for="quantity-lokey-vape-battery">Qty:</label>
+                            <input type="number" id="quantity-lokey-vape-battery" class="quantity" min="1" max="99" value="1">
+                        </div>
+                        <p class="item-price">$40.00</p>
+                    </div>
+                </label>
             </div>
-        </label>
-    </div>
-</div>
+        </div>
 
 
 
