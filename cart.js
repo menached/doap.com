@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const hostname = window.location.hostname;
     const domainName = hostname.split('.')[0]; // Raw subdomain
     // Define the minimum order amount at the beginning
-    const MINIMUM_ORDER_AMOUNT = 50;
+    const MINIMUM_ORDER_AMOUNT = 100;
 
     // Default cityName for single-word subdomains
     let cityName = domainName.charAt(0).toUpperCase() + domainName.slice(1).toLowerCase();
