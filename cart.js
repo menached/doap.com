@@ -88,7 +88,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // Optionally set a message for these pages
         const mainContainer = document.body;
         const message = document.createElement("div");
-        message.textContent = "Welcome to Norcal Doap!";
+        //message.textContent = "Welcome to Norcal Doap!";
         message.style.cssText = "text-align: center; font-size: 2rem; margin-top: 20px; font-weight: bold; font-family: Marvel;";
         mainContainer.appendChild(message);
 
