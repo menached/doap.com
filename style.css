@@ -3,7 +3,7 @@
     #zipFormContainer > form {
         transform: scale(0.8); /* Scale down the form */
         transform-origin: center; /* Center the scaling */
-        max-width: 90%; /* Prevent overflow */
+        max-width: 100%; /* Prevent overflow */
         margin: 0 auto; /* Center the form */
     }
 
