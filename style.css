@@ -4,6 +4,15 @@
     color:#000;
 }
 
+/* Add dark green glow to active tab text */
+.tab.active {
+    background: #fff; /* Keep existing background */
+    font-weight: bold; /* Existing bold text */
+    color: darkgreen; /* Set text color to dark green */
+    text-shadow: 0 0 8px rgba(0, 100, 0, 0.8); /* Dark green glow effect */
+}
+
+
 h3 i.fa-phone-alt {
     color: #000; /* Icon color */
     margin-right: 8px; /* Space between icon and text */
