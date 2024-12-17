@@ -83,7 +83,7 @@ h3 i.fa-phone-alt {
     #cartForm > div.tab-container::after {
         content: "";
         position: absolute;
-        bottom: -10px; /* Moves the border 10px up */
+        bottom: -20px; /* Moves the border 20px up */
         left: 0;
         width: 100%;
         border-bottom: 1px solid #ccc; /* The border line */
