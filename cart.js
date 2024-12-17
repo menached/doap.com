@@ -312,5 +312,66 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }
+
+
+
+        const getMinimumOrderAmount = () => {
+        const hostname = window.location.hostname;
+        const subdomain = hostname.split('.')[0]; // Extract subdomain
+        let minimumOrder = 75; // Default minimum order
+
+        const minimumOrderMap = {
+            alamo: 50,
+            sanramon: 50,
+            danville: 50,
+            dublin: 50,
+            walnutcreek: 60,
+            concord: 60,
+            pleasanthill: 60,
+            castrovalley: 60,
+            burlingame: 120,
+            campbell: 120,
+            livermore: 60,
+        };
+
+        if (minimumOrderMap[subdomain]) {
+            minimumOrder = minimumOrderMap[subdomain];
+        }
+
+        return minimumOrder;
+    };
+
+    const checkMinimumOrder = () => {
+        const totalElement = document.getElementById("total");
+        const checkoutButton = document.getElementById("checkoutButton");
+        const total = parseFloat(totalElement.textContent.replace("$", "")) || 0;
+        const minimumOrder = getMinimumOrderAmount();
+
+        if (total < minimumOrder) {
+            alert(
+                `You must have an order with a minimum of $${minimumOrder.toFixed(
+                    2
+                )} to place your order. Your current total is $${total.toFixed(2)}.`
+            );
+            if (checkoutButton) {
+                checkoutButton.disabled = true; // Disable the checkout button
+            }
+        } else {
+            if (checkoutButton) {
+                checkoutButton.disabled = false; // Enable the checkout button
+            }
+        }
+    };
+
+    // Update cart logic to re-check the minimum order
+    const cartForm = document.getElementById("cartForm");
+    if (cartForm) {
+        cartForm.addEventListener("change", checkMinimumOrder);
+        cartForm.addEventListener("input", checkMinimumOrder);
+    }
+
+    // Run check on page load
+    checkMinimumOrder();
+
 });
 
