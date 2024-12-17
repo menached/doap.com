@@ -1,4 +1,13 @@
 /* General Reset */
+
+/* Smaller text for crypto wallet addresses */
+.small-text {
+    font-size: 0.85rem; /* Reduce font size */
+    line-height: 1.2;   /* Adjust line spacing */
+    color: #444;        /* Slightly darker color for better readability */
+}
+
+
 @media (max-width: 400px) {
     #zipFormContainer > form {
         transform: scale(0.8); /* Scale down the form */
