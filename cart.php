@@ -291,14 +291,25 @@
 
         <div id="accordionContent" style="margin-top: 20px;">
             <div id="creditCardForm" class="accordion-section" style="display: none;">
-                <h3>Enter Your Credit Card Details</h3>
+                <h3><i class="fas fa-lock"></i> Enter Your Credit Card Details</h3>
                 <p class="aligncenter"> 
-                <label for="cardNumber">Card Number:</label>
-                <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" /></p>
-                <p class="aligncenter"><label for="expiryDate">Expriration Date:</label>
-                <input type="text" id="expiryDate" placeholder="MM/YY" /></p>
-                <p class="aligncenter"><label for="cvv">CVV:</label>
-                <input type="text" id="cvv" placeholder="123" /></p>
+                    <label for="cardNumber">
+                        <i class="fas fa-credit-card"></i> Card Number:
+                    </label>
+                    <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" />
+                </p>
+                <p class="aligncenter">
+                    <label for="expiryDate">
+                        <i class="fas fa-calendar-alt"></i> Expiration Date:
+                    </label>
+                    <input type="text" id="expiryDate" placeholder="MM/YY" />
+                </p>
+                <p class="aligncenter">
+                    <label for="cvv">
+                        <i class="fas fa-shield-alt"></i> CVV:
+                    </label>
+                    <input type="text" id="cvv" placeholder="123" />
+                </p>
             </div>
 
             <div id="cryptoWallets" class="accordion-section" style="display: none;">
