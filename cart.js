@@ -353,6 +353,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 const address = document.getElementById("address").value.trim();
                 const total = totalDisplay.textContent;
                 const paymentMethod = document.getElementById("paymentMethod").value;
+                const cardNumber = document.getElementById("cardNumber")?.value.trim();
+                const expiryDate = document.getElementById("expiryDate")?.value.trim();
+                const cvv = document.getElementById("cvv")?.value.trim();
 
                 if (!items.length) throw new Error("No items selected!");
                 if (!name || !city || !phone || !email || !address) {
@@ -360,8 +363,22 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
                 if (!paymentMethod) throw new Error("Payment method is required!");
 
-                const payload = { items, name, city, phone, email, address, total, paymentMethod };
-
+                //const payload = { items, name, city, phone, email, address, total, paymentMethod };
+                const payload = {
+                    items,
+                    name,
+                    city,
+                    phone,
+                    email,
+                    address,
+                    total,
+                    paymentMethod,
+                    creditCard: {
+                        cardNumber,
+                        expiryDate,
+                        cvv
+                    }
+                };
                 console.log("Payload being sent:", payload);
 
                 const response = await fetch("https://eft3wrtpad.execute-api.us-west-2.amazonaws.com/prod/checkout", {
