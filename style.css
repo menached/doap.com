@@ -77,7 +77,7 @@ h3 i.fa-phone-alt {
 @media (max-width: 768px) {
     #cartForm > div.tab-container {
         position: relative;
-        margin-bottom: 10px; /* Optional: Adjust spacing below */
+        margin-bottom: 0px; /* Optional: Adjust spacing below */
     }
 
     #cartForm > div.tab-container::after {
