@@ -292,8 +292,9 @@
         <div id="accordionContent" style="margin-top: 20px;">
             <div id="creditCardForm" class="accordion-section" style="display: none;">
                 <h3>Enter Your Credit Card Details</h3>
+                <p class="aligncenter"> 
                 <label for="cardNumber">Card Number:</label>
-                <p class="aligncenter"> <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" /></p>
+                <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" /></p>
                 <p class="aligncenter"><label for="expiryDate">Expriration Date:</label>
                 <input type="text" id="expiryDate" placeholder="MM/YY" /></p>
                 <p class="aligncenter"><label for="cvv">CVV:</label>
