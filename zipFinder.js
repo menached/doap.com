@@ -1,3 +1,4 @@
+console.log("zipFinder.js started loading");
 document.addEventListener("DOMContentLoaded", function () {
     const hostname = window.location.hostname;
     console.log("Current hostname:", hostname);
@@ -92,4 +93,4 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log("ZIP form will NOT be displayed on this page.");
     }
 });
-
+console.log("zipFinder.js loaded completely");
