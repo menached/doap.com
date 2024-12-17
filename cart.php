@@ -27,46 +27,6 @@
                     <a class="nodec" href="/cart.php" target="_SELF">
                         <h1 id="cityName">Doap</h1>
 
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-    // Extract hostname and subdomain
-    const hostname = window.location.hostname; // e.g., 'alamo.doap.com'
-    const subdomain = hostname.split('.')[0]; // Gets 'alamo' from 'alamo.doap.com'
-
-    // Default name
-    let displayName = "Doap";
-
-    // Mapping of subdomains to city names
-    const cityMap = {
-        pleasanthill: "Pleasant Hill",
-        walnutcreek: "Walnut Creek",
-        castrovalley: "Castro Valley",
-        sanramon: "San Ramon",
-        discoverybay: "Discovery Bay",
-        alamo: "Alamo",
-        antioch: "Antioch",
-        dublin: "Dublin",
-        lafayette: "Lafayette",
-        pleasanton: "Pleasanton",
-        danville: "Danville",
-        concord: "Concord",
-        livermore: "Livermore",
-        orinda: "Orinda",
-        www: "Doap"
-    };
-
-    // Update display name if subdomain exists in cityMap
-    if (cityMap[subdomain]) {
-        displayName = cityMap[subdomain];
-    }
-
-    // Update the cityName element with the correct name
-    const cityNameElement = document.getElementById("cityName");
-    if (cityNameElement) {
-        cityNameElement.textContent = `${displayName} Doap`;
-    }
-});
-</script>
 
 
 
