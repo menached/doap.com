@@ -1,16 +1,9 @@
 /* General Reset */
 
 
-/* Style the cart-section list */
-#selectedItemsList {
-    list-style: none; /* Remove default bullets */
-    padding: 0; /* Remove padding */
-    margin: 0; /* Remove margin */
-}
-
 /* Alternate background colors for list items */
 #selectedItemsList li:nth-child(odd) {
-    background-color: #f9f9f9; /* Light gray for odd rows */
+    background-color: #ffe6e6; /* Pale pink for odd rows */
 }
 
 #selectedItemsList li:nth-child(even) {
@@ -25,19 +18,6 @@
     justify-content: space-between; /* Distribute space between content */
     align-items: center; /* Align items vertically */
 }
-
-/* Highlight remove-item button */
-.remove-item {
-    color: red; /* Red color for remove "x" */
-    font-weight: bold;
-    cursor: pointer; /* Show pointer on hover */
-}
-
-.remove-item:hover {
-    color: darkred; /* Darker red on hover */
-    text-decoration: underline; /* Underline for better UX */
-}
-
 
 
 
