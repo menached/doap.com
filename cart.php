@@ -368,7 +368,7 @@
                 </ul>
 
                     <!-- Temporary Copy Confirmation Message -->
-                    <div id="copyMessage" style="display: none; color: green; font-weight: bold; margin-top: 10px;"></div>
+                    <div id="copyMessage" class="small-text" style="display: none; color: green; font-weight: bold; margin-top: 10px;"></div>
 
            </div>
 
