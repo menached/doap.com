@@ -277,7 +277,7 @@
         
         <!-- Payment Method -->
         <div class="payment-section">
-            <label for="paymentMethod" class="Marvelfont">Payment Method:</label>
+            <label for="paymentMethod" class="Marvelfont"><i class="fas fa-cash-register"></i>  Payment Method: </label>
             <select id="paymentMethod" name="paymentMethod" required>
                 <option value="" selected>Select Payment Method</option>
                 <option value="credit-card">Credit Card</option>
