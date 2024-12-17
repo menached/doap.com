@@ -510,7 +510,7 @@ form {
 .tab-container {
     display: flex;
     justify-content: center;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 0px solid #ccc;
     margin-bottom: 20px;
 }
 .tab {
