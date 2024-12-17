@@ -72,7 +72,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Update logo link
     const logoLink = document.querySelector(".header a");
     if (logoLink) {
-        logoLink.href = `https://${domainName}.doap.com/cart.html`;
+        logoLink.href = `https://${domainName}.doap.com/cart.php`;
         logoLink.title = `Call ${cityName} Doap!`;
     }
 
