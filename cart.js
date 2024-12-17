@@ -87,7 +87,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const mainContainer = document.body;
         const message = document.createElement("div");
         message.textContent = "Welcome to Norcal Doap!";
-        message.style.cssText = "text-align: center; font-size: 2rem; margin-top: 20px; font-weight: bold;";
+        message.style.cssText = "text-align: center; font-size: 2rem; margin-top: 20px; font-weight: bold; font-family: Marvel;";
         mainContainer.appendChild(message);
 
         console.log("Tabs, cart, and payment methods are hidden for www and doap.com.");
