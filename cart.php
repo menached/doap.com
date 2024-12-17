@@ -21,7 +21,7 @@
     <!-- Header Section -->
         <div class="header">
             <div class="logo-title-container">
-                <a href="/cart.html" target="_SELF">
+                <a href="." target="_SELF">
                 <img src="https://www.doap.com/doap-logo-wording.png" alt="Doap Logo" class="doap-logo">
                 </a>
                 <div class="text-container">
@@ -225,16 +225,15 @@
 
         <!-- Cart Section -->
         <div class="cart-section">
-            <h3>Cart:</h3>
             <div style="display: flex; justify-content: space-between; align-items: center;">
-                <ul id="selectedItemsList">
-                    <li>No items selected yet.</li>
-                </ul>
-                <!-- Minimum Order Message -->
-                <div id="minOrderMessage" style="font-size: 0.9rem; font-weight: bold; color: black;">
+                <h3>Cart:</h3>
+                <span id="minOrderMessage" style="font-size: 0.9rem; font-weight: bold; color: black;">
                     Minimum order is $50.
-                </div>
+                </span>
             </div>
+            <ul id="selectedItemsList">
+                <li>No items selected yet.</li>
+            </ul>
             <div id="totalPriceRow">
                 <span>Total Price:</span>
                 <span id="total">$0</span>
