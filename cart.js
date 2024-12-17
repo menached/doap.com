@@ -70,6 +70,27 @@ document.addEventListener("DOMContentLoaded", () => {
         cityName = cityMap[domainName];
     } else if (hostname === "www.doap.com" || hostname === "doap.com") {
         cityName = "Norcal Doap";
+        // Hide all tabs and their contents
+        const tabs = document.querySelectorAll(".tab, .tab-content");
+        tabs.forEach(tab => tab.style.display = "none");
+
+        // Hide cart and payment method sections
+        const cartSection = document.querySelector(".cart-section");
+        const paymentSection = document.querySelector(".payment-section");
+        const customerInfo = document.querySelector(".customer-info");
+
+        if (cartSection) cartSection.style.display = "none";
+        if (paymentSection) paymentSection.style.display = "none";
+        if (customerInfo) customerInfo.style.display = "none";
+
+        // Optionally set a message for these pages
+        const mainContainer = document.body;
+        const message = document.createElement("div");
+        message.textContent = "Welcome to Norcal Doap!";
+        message.style.cssText = "text-align: center; font-size: 2rem; margin-top: 20px; font-weight: bold;";
+        mainContainer.appendChild(message);
+
+        console.log("Tabs, cart, and payment methods are hidden for www and doap.com.");
     }
 
     // Get the phone number based on the subdomain, default to the general number
