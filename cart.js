@@ -76,7 +76,7 @@ document.addEventListener("DOMContentLoaded", () => {
         logoLink.title = `Call ${cityName} Doap!`;
     }
     // Update header text
-    const headerLink = document.querySelector("#cityName a");
+    const headerLink = document.querySelector("h1 a");
     if (headerLink) {
         headerLink.href = `https://${domainName}.doap.com/cart.php`;
         headerLink.title = `Call ${cityName} Doap!`;
