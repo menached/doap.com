@@ -46,7 +46,9 @@ document.addEventListener("DOMContentLoaded", () => {
         danville: "Danville",
         concord: "Concord",
         livermore: "Livermore",
-        orinda: "Orinda"
+        orinda: "Orinda",
+        www: "",
+        doap.com: ""
     };
 
     // Map of subdomains to phone numbers
