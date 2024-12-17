@@ -104,6 +104,17 @@ document.addEventListener("DOMContentLoaded", () => {
     // Update the page title
     document.title = `${cityName} Doap`;
 
+    const cityNameElement = document.getElementById("cityName");
+    if (cityNameElement) {
+        cityNameElement.textContent = `${cityName} Doap`;
+    }
+
+    // Match H1 to Page Title
+    const mainH1 = document.querySelector("h1");
+    if (mainH1) {
+        mainH1.textContent = document.title;
+    }
+    
     //// Update the header text dynamically
     //const cityNameElement = document.getElementById("cityName");
     //if (cityNameElement) {
