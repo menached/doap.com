@@ -291,12 +291,12 @@
 
         <div id="accordionContent" style="margin-top: 20px;">
             <div id="creditCardForm" class="accordion-section" style="display: none;">
-                <h3><i class="fas fa-lock"></i> Enter Your Credit Card Details</h3>
+                <h3><i class="fas fa-credit-card"></i> Enter Your Credit Card Details</h3>
                 <p class="aligncenter"> 
                     <label for="cardNumber">
-                        <i class="fas fa-credit-card"></i> Card Number:
+                        Card Number:
                     </label>
-                    <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" />
+                    <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" /> <i class="fas fa-lock"></i> 
                 </p>
                 <p class="aligncenter">
                     <label for="expiryDate">
