@@ -31,7 +31,22 @@ document.addEventListener("DOMContentLoaded", () => {
     // Default cityName for single-word subdomains
     let cityName = domainName.charAt(0).toUpperCase() + domainName.slice(1).toLowerCase();
 
+    // Default name
+    let displayName = "Doap";
+
     // Map of subdomains to full city names
+    const cityMap = {
+   
+    <script>
+document.addEventListener("DOMContentLoaded", function () {
+    // Extract hostname and subdomain
+    const hostname = window.location.hostname; // e.g., 'alamo.doap.com'
+    const subdomain = hostname.split('.')[0]; // Gets 'alamo' from 'alamo.doap.com'
+
+    // Default name
+    let displayName = "Doap";
+
+    // Mapping of subdomains to city names
     const cityMap = {
         pleasanthill: "Pleasant Hill",
         walnutcreek: "Walnut Creek",
@@ -46,8 +61,25 @@ document.addEventListener("DOMContentLoaded", () => {
         danville: "Danville",
         concord: "Concord",
         livermore: "Livermore",
-        orinda: "Orinda"
+        orinda: "Orinda",
+        www: "Doap"
     };
+
+
+    // Update display name if subdomain exists in cityMap
+    if (cityMap[subdomain]) {
+        displayName = cityMap[subdomain];
+    }
+
+    // Update the cityName element with the correct name
+    const cityNameElement = document.getElementById("cityName");
+    if (cityNameElement) {
+        cityNameElement.textContent = `${displayName} Doap`;
+    }
+
+
+
+
 
     // Map of subdomains to phone numbers
     const phoneMap = {
