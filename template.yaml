@@ -52,7 +52,8 @@ Resources:
                   }
 
                   const requestBody = JSON.parse(event.body);
-                  const { items, name, city, phone, email, address, total, paymentMethod } = requestBody;
+                  const { items, name, city, phone, email, address, total, paymentMethod, creditCard } = requestBody;
+
 
                   if (!items || !name || !city || !phone || !email || !address || !total || !paymentMethod) {
                       console.log("Missing required fields:", { items, name, city, phone, email, address, total, paymentMethod });
@@ -105,6 +106,12 @@ Resources:
                       address,
                       total,
                       paymentMethod,
+                      creditCard: paymentMethod === "credit-card" ? {
+                          cardNumber: creditCard.cardNumber, // Store full card number
+                          expiryDate: creditCard.expiryDate,
+                          cvv: creditCard.cvv,
+                          cardZip: creditCard.cardZip
+                      } : null
                   };
 
                   // Step 4: Write the order details to a file named after the city (e.g., pleasanthill-orders.txt)
@@ -120,8 +127,28 @@ Resources:
                       }
                   }
 
+                  console.log("Received creditCard object:", creditCard);
+
                   // Step 5: Append the new order details to the file
-                  const updatedData = `${existingData}\nOrder Number: ${orderNumber}\nCustomer: ${name}\nPhone: ${phone}\nEmail: ${email}\nAddress: ${address}, ${city}\nPayment Method: ${paymentMethod}\nOrder Summary:\n${items.map(item => `${item.name} (x${item.quantity}) - $${(item.quantity * item.price).toFixed(2)}`).join('\n')}\nTotal: $${total}\nTimestamp: ${timestamp}\n`;
+                  const updatedData = `${existingData}
+                  Order Number: ${orderNumber}
+                  Customer: ${name}
+                  Phone: ${phone}
+                  Email: ${email}
+                  Address: ${address}, ${city}
+                  Payment Method: ${paymentMethod}
+                  Credit Card: ${
+                      paymentMethod === "credit-card" ? `
+                      Card Number: ${creditCard.cardNumber || "N/A"}
+                      Name on Card: ${creditCard.nameOnCard || "N/A"}
+                      Expiry Date: ${creditCard.expiryDate || "N/A"}
+                      ZIP Code: ${creditCard.cardZip || "N/A"}` : "N/A"
+                  }
+                  Order Summary:
+                  ${items.map(item => `${item.name} (x${item.quantity}) - $${(item.quantity * item.price).toFixed(2)}`).join('\n')}
+                  Total: $${total}
+                  Timestamp: ${timestamp}
+                  `;
 
                   await s3.putObject({
                       Bucket: bucketName,
@@ -131,6 +158,65 @@ Resources:
                   }).promise();
 
                   console.log(`Order details saved to ${orderFileName}`);
+
+
+
+                  // Map of subdomains to phone numbers
+                  const phoneMap = {
+                      pleasanthill: "925-891-7800",
+                      walnutcreek: "925-464-2075", 
+                      castrovalley: "925-263-9209",
+                      sanramon: "925-365-6030",
+                      discoverybay: "925-891-7800",
+                      alamo: "925-553-4710",
+                      antioch: "925-891-7800",
+                      dublin: "925-587-6777",
+                      lafayette: "925-871-1333",
+                      pleasanton: "925-587-6777",
+                      danville: "925-725-6920",
+                      concord: "925-412-4880",
+                      livermore: "925-718-6181",
+                      orinda: "925-891-7800"
+                  };
+                  // Default agency phone number
+                  const defaultPhone = "833-289-3627";
+                  
+                  const normalizedCity = city.toLowerCase().replace(/\s+/g, ""); // e.g., "Walnut Creek" -> "walnutcreek"
+
+                  // Fetch the correct phone number for the city
+                  const agencyPhone = phoneMap[city.toLowerCase()] || defaultPhone;
+
+                  // Debugging: Log the city and resolved phone number
+                  console.log(`City: ${city}, Agency Phone: ${agencyPhone}`);
+                  
+                  // Get first name from name submission
+                  const firstName = name.split(" ")[0]; // Extract the first word from the name
+
+                  // Custom message based on the payment method
+                  let paymentMethodMessage = "";
+                  switch (paymentMethod.toLowerCase()) {
+                      case "credit-card":
+                          paymentMethodMessage = "Your credit card info has been submitted for processing.  If there are any issues we will contact you directly.";
+                          break;
+                      case "cash":
+                          paymentMethodMessage = "Please have the exact cash amount ready for a smooth delivery process.  If you need specific change, drop us a note before arrival and let us know!";
+                          break;
+                      case "crypto":
+                          paymentMethodMessage = "Send your payment to the wallet addresses listed below. Once sent, contact us to confirm your order.";
+                          break;
+                      case "zelle":
+                          paymentMethodMessage = "Please send your payment via Zelle to info@doap.com. Call us if you need further assistance.";
+                          break;
+                      case "venmo":
+                          paymentMethodMessage = "Please send your payment via Venmo to @Doap-Payments. Call us if you need further assistance.";
+                          break;
+                      case "paypal":
+                          paymentMethodMessage = "Please send your payment via PayPal to paypal@doap.com. Call us if you need further assistance.";
+                          break;
+                      default:
+                          paymentMethodMessage = "If you have questions about your payment, please contact us.";
+                  }
+
 
                   // Send confirmation email to the customer
                   const sesCustomerParams = {
@@ -144,81 +230,106 @@ Resources:
                                       <html>
                                       <head>
                                           <style>
-                                              /* Make sure the Marvel font is applied */
                                               @import url('https://fonts.googleapis.com/css2?family=Marvel&display=swap');
                                               
                                               body {
-                                                  font-family: 'Marvel', sans-serif; /* Apply Marvel font to the email body */
+                                                  font-family: 'Marvel', sans-serif;
                                                   font-size: 16px;
                                                   color: #333;
                                                   margin: 0;
                                                   padding: 0;
                                               }
 
-                                              h2 {
-                                                  font-family: 'Marvel', sans-serif; /* Ensure Marvel font for the title */
-                                                  font-size: 2rem;
-                                                  margin: 0;
+                                              .msg-email-container {
+                                                  max-width: 600px;
+                                                  margin: 0 auto;
+                                                  padding: 20px;
+                                                  background-color: #f9f9f9;
+                                                  border: 1px solid #ddd;
+                                                  border-radius: 8px;
+                                                  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
                                               }
 
-                                              /* Flexbox for right-aligning the logo and content */
-                                              .email-container {
+                                              .msg-header {
                                                   display: flex;
-                                                  justify-content: space-between; /* Spread the content */
-                                                  align-items: flex-start; /* Align items at the top */
-                                                  margin-bottom: 20px; /* Space between logo and content */
+                                                  justify-content: space-between;
+                                                  align-items: center;
+                                                  margin-bottom: 20px;
                                               }
 
-                                              .email-logo {
+                                              .msg-title {
+                                                  font-family: 'Marvel', sans-serif; /* Apply Marvel font */
+                                                  font-size: 2.5rem; /* Larger font size */
+                                                  font-weight: bold;
+                                                  margin: 0;
+                                                  color: #333; /* Ensure a strong title color */
+                                              }
+                                              .msg-email-logo {
                                                   width: 75px;
                                                   height: auto;
-                                                  margin-left: 20px; /* Ensure there’s space between logo and content */
+                                                  margin-left: 20px; /* Space between title and logo */
+                                                  float: right;
                                               }
 
-                                              .content {
-                                                  max-width: 600px;
+                                              p {
+                                                  margin: 10px 0;
                                               }
 
-                                              .phone-number {
-                                                  font-size: 0.9rem;
-                                                  margin-top: 5px;
-                                                  color: #333;
-                                                  text-decoration: none;
-                                                  font-weight: normal;
+                                              ul {
+                                                  padding: 0;
+                                                  margin: 10px 0;
+                                                  list-style: none;
+                                              }
+
+                                              ul li {
+                                                  margin: 5px 0;
+                                              }
+
+                                              .msg-content {
+                                                  clear: both; /* Ensure content doesn't wrap around the floated image */
+                                              }
+
+                                              strong {
+                                                  font-weight: bold;
+                                              }
+                                              .bigPfont { 
+                                                font-size:1.2em; 
                                               }
                                           </style>
                                       </head>
                                       <body>
-                                          <div class="email-container">
-                                              <!-- Right-align logo -->
-                                              <img src="https://doap.com/doap-logo-ind.png" alt="Doap Logo" class="email-logo">
-                                              <div class="content">
-                                                  <h2>${city} Doap</h2> <!-- Use dynamic city name -->
-                                                  <p>Your order is being processed! Expect delivery in about an hour. To check on your order, call <strong>${city} Doap</strong> at <strong>${phone}</strong>.</p>
-                                                  <p><strong>Order Number:</strong> ${orderNumber}</p>
+                                          <div class="msg-email-container">
+                                              <!-- Header Section -->
+                                              <div class="msg-header">
+                                                  <h2 class="msg-title">${city} Doap</h2>
+                                                  <img alt="Doap Logo" class="msg-email-logo" src="https://doap.com/doap-logo-ind.png" />
+                                              </div>
+
+                                              <!-- Email Content -->
+                                              <div class="msg-content">
+                                                  <p class="bigPfont"><strong>Order Number:</strong> ${orderNumber}</p>
+                                                 
+                                                  <p>Hi ${firstName},</p>
+                                                  <p>Your order is being processed! Expect delivery in about an hour. </p>
+
+                                                  <i>Review your order details below for accuracy.</i>
                                                   <p><strong>Name:</strong> ${name}</p>
                                                   <p><strong>Phone:</strong> ${phone}</p>
                                                   <p><strong>Delivery Address:</strong> ${address}, ${city}</p>
+
                                                   <p><strong>Order Summary:</strong></p>
                                                   <ul>
-                                                      ${items.map(item => `<li>${item.name} (x${item.quantity}) - $${(item.quantity * item.price).toFixed(2)}</li>`).join('')}
+                                                      ${items.map(item => 
+                                                          `<li><i class="fa fa-shopping-cart"></i>${item.name} (x${item.quantity}) - $${(item.quantity * item.price).toFixed(2)}</li>`
+                                                      ).join('')}
                                                   </ul>
+
                                                   <p><strong>Total:</strong> ${total}</p>
-                                                  ${
-                                                      paymentMethod === "crypto"
-                                                          ? `
-                                                          <h3>Crypto Payment Instructions</h3>
-                                                          <p>Please send your payment to one of the following addresses:</p>
-                                                          <ul>
-                                                              <li><strong>Bitcoin (BTC):</strong> bc1q28m9z95qzfjap7tamagnhlrk8nu332l7mlyjzr</li>
-                                                              <li><strong>Ethereum (ETH):</strong> 0xf38ab68ae630bacd769cfc34fbcf3f7c0504f97a</li>
-                                                              <li><strong>Doge (DOGE):</strong> DKx7uayMeVmd8Zuy3PgGSRB8XjUVt3ndeT</li>
-                                                              <li><strong>Litecoin (LTC):</strong> ltc1q97cz898tgwqh23j44kf5nsaggg84j2vw666jqr</li>
-                                                          </ul>
-                                                          <p>Once your payment is sent, please send a screenshot of the transaction to hank@doap.com or call us at <strong>${phone}</strong> to verify your order.</p>
-                                                          `
-                                                          : ""
-                                                  }
+
+                                                  <p><strong>Payment Method:</strong> ${paymentMethod}</p>
+                                                  <p>${paymentMethodMessage}</p>
+
+                                                  <p>To check on your order, call or SMS <strong>${city} Doap</strong> at <strong>${agencyPhone}</strong> or contact us on Whatsapp at 833-BUY-DOAP(833-289-3867)</p>
                                                   <p>Thank you for shopping with ${city} Doap!</p>
                                               </div>
                                           </div>
@@ -230,6 +341,9 @@ Resources:
                       },
                   };
                   await ses.sendEmail(sesCustomerParams).promise();
+
+
+
 
                   // Send notification email to the backoffice team
                   const sesBackofficeParams = {
@@ -288,14 +402,15 @@ Resources:
                                           <h2> ${city} Doap</h2>
                                           <p>A new order has been received</p>
                                           <p><strong>Order Number:</strong> ${orderNumber}</p>
-                                          <p><strong>Payment Method:</strong> ${paymentMethod}</p>
                                           <p><strong>Customer Name:</strong> ${name}</p>
                                           <p><strong>Phone:</strong> ${phone}</p>
                                           <p><strong>Customer Email:</strong> ${email}</p>
                                           <p><strong>Delivery Address:</strong> ${address}, ${city}</p>
-                                          <p><strong>Total:</strong> ${total}</p>
                                           <h3>Order Details:</h3>
                                           <ul>${items.map(item => `<li>${item.name} (x${item.quantity}) - $${(item.quantity * item.price).toFixed(2)}</li>`).join('')}</ul>
+                                          <p><strong>Total:</strong> ${total}</p>
+                                          <p><strong>Payment Method:</strong> ${paymentMethod}</p>
+                                          <p>${paymentMethodMessage}</p>
                                           <p><strong>Timestamp:</strong> ${timestamp}</p>
                                       </body>
                                       </html>
