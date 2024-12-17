@@ -77,7 +77,7 @@ h3 i.fa-phone-alt {
 @media (max-width: 768px) {
     .tab-container {
         margin-bottom: 0px; /* Reduce space below the tabs */
-        transform: translateY(-10px); /* Move the whole container up */
+        transform: translateY(-20px); /* Move the whole container up */
     }
 }
 
