@@ -73,6 +73,23 @@ h3 i.fa-phone-alt {
 }
 
 
+/* Move horizontal line up by 10px on screens <= 768px */
+@media (max-width: 768px) {
+    .tab-container {
+        margin-bottom: 10px; /* Adjust margin to move the line up */
+    }
+
+    .tab-container::after {
+        content: "";
+        display: block;
+        width: 100%;
+        border-bottom: 1px solid #ccc; /* The horizontal line */
+        position: relative;
+        top: -10px; /* Move the line up by 10px */
+    }
+}
+
+
 /* Mobile portrait view */
 @media (max-width: 767px) {
     #cityName {
