@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Welcome Message (prevent duplicates)
         const welcomeMessage = document.createElement("h2");
-        welcomeMessage.textContent = "Welcome to Norcal Doap!";
+        //welcomeMessage.textContent = "Welcome to Norcal Doap!";
         welcomeMessage.style.cssText = "text-align: center; font-size: 2rem; font-family: Marvel; margin-bottom: 10px;";
 
         // ZIP Form
