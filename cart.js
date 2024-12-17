@@ -243,7 +243,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const handleOrderMessage = (total) => {
             if (total === 0) {
                 minOrderMessage.textContent = `Minimum order is $${MINIMUM_ORDER_AMOUNT}.`;
-                minOrderMessage.style.color = "black";
+                minOrderMessage.style.color = "#ccc";
             } else if (total > 0 && total < MINIMUM_ORDER_AMOUNT) {
                 minOrderMessage.textContent = `Minimum order is $${MINIMUM_ORDER_AMOUNT}.`;
                 minOrderMessage.style.color = "red";
