@@ -48,6 +48,7 @@
             <div class="tab" data-tab="accessories">Accessories</div>
         </div>
 
+
 <!-- "Doap Menu" -->
 <!-- Tab content for Flower -->
 <div class="tab-content active" id="flower">
@@ -65,36 +66,45 @@
                 <p class="item-price">$15.00</p>
             </div>
         </label>
-        <!-- 2 pk Top Shelf Prerolled Cone Joints -->
+        <!-- New House Preroll GP Products -->
         <label class="item">
-            <input type="checkbox" name="item" value="2 pk Top Shelf Prerolled Cone Joints|20">
-            <img src="https://alamo.doap.com/wp-content/uploads/2021/10/4-pack-of-top-shelf-cone-joints.jpg" alt="2 pk Top Shelf Prerolled Cone Joints">
+            <input type="checkbox" name="item" value="House Preroll GP - 20|20">
+            <img src="https://alamo.doap.com/wp-content/uploads/4-pack-of-top-shelf-cone-joints.jpg" alt="House Preroll GP - 20">
             <div class="item-details">
-                <p class="item-title">2 pk Top Shelf Prerolled Cone Joints</p>
+                <p class="item-title">House Preroll GP - 20</p>
                 <div class="item-quantity">
-                    <label for="quantity-top-shelf-joints">Qty:</label>
-                    <input type="number" id="quantity-top-shelf-joints" class="quantity" min="1" max="99" value="1">
+                    <label for="quantity-house-gp-20">Qty:</label>
+                    <input type="number" id="quantity-house-gp-20" class="quantity" min="1" max="99" value="1">
                 </div>
                 <p class="item-price">$20.00</p>
             </div>
         </label>
-        <!-- 5 Top Shelf Cannabis Pre-rolled Joints -->
         <label class="item">
-            <input type="checkbox" name="item" value="5 Top Shelf Cannabis Pre-rolled Joints|40">
-            <img src="https://alamo.doap.com/wp-content/uploads/2021/10/4-pack-of-top-shelf-cone-joints.jpg" alt="5 Top Shelf Cannabis Pre-rolled Joints">
+            <input type="checkbox" name="item" value="House Preroll GP - 40|40">
+            <img src="https://alamo.doap.com/wp-content/uploads/4-pack-of-top-shelf-cone-joints.jpg" alt="House Preroll GP - 40">
             <div class="item-details">
-                <p class="item-title">5 Top Shelf Cannabis Pre-rolled Joints</p>
+                <p class="item-title">House Preroll GP - 40</p>
                 <div class="item-quantity">
-                    <label for="quantity-pre-rolled-joints">Qty:</label>
-                    <input type="number" id="quantity-pre-rolled-joints" class="quantity" min="1" max="99" value="1">
+                    <label for="quantity-house-gp-40">Qty:</label>
+                    <input type="number" id="quantity-house-gp-40" class="quantity" min="1" max="99" value="1">
                 </div>
                 <p class="item-price">$40.00</p>
             </div>
         </label>
+        <label class="item">
+            <input type="checkbox" name="item" value="House Preroll GP - 100|100">
+            <img src="https://alamo.doap.com/wp-content/uploads/4-pack-of-top-shelf-cone-joints.jpg" alt="House Preroll GP - 100">
+            <div class="item-details">
+                <p class="item-title">House Preroll GP - 100</p>
+                <div class="item-quantity">
+                    <label for="quantity-house-gp-100">Qty:</label>
+                    <input type="number" id="quantity-house-gp-100" class="quantity" min="1" max="99" value="1">
+                </div>
+                <p class="item-price">$100.00</p>
+            </div>
+        </label>
     </div>
 </div>
-
-
 
 <!-- Tab content for Edibles -->
 <div class="tab-content" id="edibles">
@@ -112,66 +122,8 @@
                 <p class="item-price">$15.00</p>
             </div>
         </label>
-
-        <!-- THC Gummy Bears - Medium Bag -->
-        <label class="item">
-            <input type="checkbox" name="item" value="THC Gummy Bears - Medium Bag|25">
-            <img src="https://alamo.doap.com/wp-content/uploads/2023/11/29568cf4151e0959e1f853d6791c8906.png" alt="THC Gummy Bears - Medium Bag">
-            <div class="item-details">
-                <p class="item-title">THC Gummy Bears - Medium Bag</p>
-                <div class="item-quantity">
-                    <label for="quantity-thc-bears-medium">Qty:</label>
-                    <input type="number" id="quantity-thc-bears-medium" class="quantity" min="1" max="99" value="1">
-                </div>
-                <p class="item-price">$25.00</p>
-            </div>
-        </label>
-
-        <!-- THC Gummy Bears - Large Bag -->
-        <label class="item">
-            <input type="checkbox" name="item" value="THC Gummy Bears - Large Bag|60">
-            <img src="https://alamo.doap.com/wp-content/uploads/2023/11/29568cf4151e0959e1f853d6791c8906.png" alt="THC Gummy Bears - Large Bag">
-            <div class="item-details">
-                <p class="item-title">THC Gummy Bears - Large Bag</p>
-                <div class="item-quantity">
-                    <label for="quantity-thc-bears-large">Qty:</label>
-                    <input type="number" id="quantity-thc-bears-large" class="quantity" min="1" max="99" value="1">
-                </div>
-                <p class="item-price">$60.00</p>
-            </div>
-        </label>
-
-        <!-- THC Gummy Bears - Extra-Large Bag -->
-        <label class="item">
-            <input type="checkbox" name="item" value="THC Gummy Bears - Extra-Large Bag|100">
-            <img src="https://alamo.doap.com/wp-content/uploads/2023/11/29568cf4151e0959e1f853d6791c8906.png" alt="THC Gummy Bears - Extra-Large Bag">
-            <div class="item-details">
-                <p class="item-title">THC Gummy Bears - Extra-Large Bag</p>
-                <div class="item-quantity">
-                    <label for="quantity-thc-bears-xl">Qty:</label>
-                    <input type="number" id="quantity-thc-bears-xl" class="quantity" min="1" max="99" value="1">
-                </div>
-                <p class="item-price">$100.00</p>
-            </div>
-        </label>
-        
-        <!-- Space Tubaroos Cannabis Infused Strawberry Gummies -->
-        <label class="item">
-            <input type="checkbox" name="item" value="Space Tubaroos Cannabis Infused Strawberry Gummies|30">
-            <img src="https://danville.doap.com/wp-content/uploads/2023/09/tuberoos.webp" alt="Space Tubaroos Cannabis Infused Strawberry Gummies">
-            <div class="item-details">
-                <p class="item-title">Space Tubaroos Cannabis Infused Strawberry Gummies</p>
-                <div class="item-quantity">
-                    <label for="quantity-space-tubaroos">Qty:</label>
-                    <input type="number" id="quantity-space-tubaroos" class="quantity" min="1" max="99" value="1">
-                </div>
-                <p class="item-price">$30.00</p>
-            </div>
-        </label>
     </div>
 </div>
-
-
 
 <!-- Tab content for Concentrates -->
 <div class="tab-content" id="concentrates">
@@ -189,38 +141,23 @@
                 <p class="item-price">$50.00</p>
             </div>
         </label>
-
-        <!-- Doap Vape Pen - Rechargeable -->
-        <label class="item">
-            <input type="checkbox" name="item" value="Doap Vape Pen - Rechargeable|25">
-            <img src="https://alamo.doap.com/wp-content/uploads/2021/10/The-DOAP-Vape-Pen-Battery-510thread-wCharger-1yrWarranty-2-1.jpeg" alt="Doap Vape Pen - Rechargeable">
-            <div class="item-details">
-                <p class="item-title">Doap Vape Pen - Rechargeable</p>
-                <div class="item-quantity">
-                    <label for="quantity-doap-vape-pen">Qty:</label>
-                    <input type="number" id="quantity-doap-vape-pen" class="quantity" min="1" max="99" value="1">
-                </div>
-                <p class="item-price">$25.00</p>
-            </div>
-        </label>
     </div>
 </div>
-
 
 <!-- Tab content for Accessories -->
 <div class="tab-content" id="accessories">
     <div class="item-list">
-        <!-- LoKey Multi-Voltage KeyFob Vape Battery -->
+        <!-- Zig Zag Rolling Papers -->
         <label class="item">
-            <input type="checkbox" name="item" value="LoKey Multi-Voltage KeyFob Vape Battery|40">
-            <img src="https://alamo.doap.com/wp-content/uploads/2023/08/single-vape-carts.jpg" alt="LoKey Multi-Voltage KeyFob Vape Battery">
+            <input type="checkbox" name="item" value="Zig Zag 1-1/4 Rolling Papers|5">
+            <img src="https://alamo.doap.com/wp-content/uploads/zigzag.jpg" alt="Zig Zag Rolling Papers">
             <div class="item-details">
-                <p class="item-title">LoKey Multi-Voltage KeyFob Vape Battery w/ Built-in USB Charger</p>
+                <p class="item-title">Zig Zag 1-1/4 Rolling Papers</p>
                 <div class="item-quantity">
-                    <label for="quantity-lokey-vape-battery">Qty:</label>
-                    <input type="number" id="quantity-lokey-vape-battery" class="quantity" min="1" max="99" value="1">
+                    <label for="quantity-zigzag-papers">Qty:</label>
+                    <input type="number" id="quantity-zigzag-papers" class="quantity" min="1" max="99" value="1">
                 </div>
-                <p class="item-price">$40.00</p>
+                <p class="item-price">$5.00</p>
             </div>
         </label>
     </div>
