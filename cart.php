@@ -293,21 +293,31 @@
             <div id="creditCardForm" class="accordion-section" style="display: none;">
                 <h3><i class="fas fa-credit-card alignright"></i> Enter Your Credit Card Details</h3>
                 <p class="aligncenter"> 
+                    <label for="nameOnCard">
+                        Name on card:
+                    </label>
+                    <input type="text" id="nameOnCard" placeholder="Joe Q. Public" /> <i class="cardElement"></i> 
+                </p>
+                <p class="aligncenter"> 
                     <label for="cardNumber">
                         Card Number:
                     </label>
-                    <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" /> <i class="fas fa-lock golden-lock"></i> 
+                    <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" class="cardElement"/> <i class="fas fa-lock golden-lock"></i> 
                 </p>
                 <p class="cardbits">
                     <label for="expiryDate">
                         Expiration Date:
                     </label>
-                    <input type="text" id="expiryDate" placeholder="MM/YY" />
+                    <input type="text" id="expiryDate" placeholder="MM/YY" class="cardElement" />
                 
                     <label for="cvv">
                         CVV:
                     </label>
-                    <input type="text" id="cvv" placeholder="123" />
+                    <input type="text" id="cvv" placeholder="123"  class="cardElement"/>
+                    <label for="zip">
+                        Zip:
+                    </label>
+                    <input type="text" id="cardZip" placeholder="MM/YY"  class="cardElement"/>
                 </p>
             </div>
 
