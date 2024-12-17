@@ -14,9 +14,9 @@ document.addEventListener("DOMContentLoaded", function () {
     // Adjust input width dynamically for screens > 400px
     function adjustInputWidth() {
         if (window.innerWidth > 400) {
-            input.style.width = "97%";
+            input.style.width = "96%";
         } else {
-            input.style.width = "94%";
+            input.style.width = "93%";
         }
     }
     adjustInputWidth(); // Initial width check
