@@ -125,6 +125,17 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     // Append form to the document body
-    document.body.appendChild(form);
+    //document.body.appendChild(form);
+    // Target the white page container where the form will be inserted
+    const pageContent = document.getElementById("pageContent");
+
+    // Check if the container exists and append the form
+    if (pageContent) {
+        pageContent.appendChild(form);
+    } else {
+        console.error("Target container not found! Appending form to document body as fallback.");
+        document.body.appendChild(form); // Fallback if container is missing
+    }
+
 });
 
