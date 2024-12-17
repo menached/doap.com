@@ -10,6 +10,13 @@
     background-color: #ffffff; /* White for even rows */
 }
 
+/* Default background for "No items selected yet" */
+#selectedItemsList li:only-child {
+    background-color: transparent; /* Default background */
+    text-align: center; /* Center-align the message for better UX */
+    color: #555; /* Slightly lighter text color */
+}
+
 /* Add padding and styling for better visual appearance */
 #selectedItemsList li {
     padding: 10px; /* Add spacing inside each list item */
@@ -18,6 +25,15 @@
     justify-content: space-between; /* Distribute space between content */
     align-items: center; /* Align items vertically */
 }
+
+/* Optional: Add a border to distinguish list visually */
+#selectedItemsList {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow: hidden; /* Clean edges */
+    padding: 0;
+}
+
 
 
 
