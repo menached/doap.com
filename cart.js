@@ -108,7 +108,17 @@ document.addEventListener("DOMContentLoaded", () => {
     //if (cityNameElement) {
         //cityNameElement.textContent = cityName;
     //}
-
+    if (cityNameElement) {
+        if (hostname === "www.doap.com") {
+            // Set the site heading explicitly to "Doap"
+            cityNameElement.textContent = "Doap";
+            console.log("Updated site heading to 'Doap' for www.doap.com.");
+        } else {
+            console.log("Preserved city name:", cityNameElement.textContent);
+        }
+    } else {
+        console.warn("Element with id 'cityName' not found.");
+    }
         // Update the phone number dynamically in the header
     const phoneNumberElement = document.querySelector(".phone-number");
     if (phoneNumberElement) {
