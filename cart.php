@@ -298,13 +298,12 @@
                     </label>
                     <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" /> <i class="fas fa-lock"></i> 
                 </p>
-                <p class="aligncenter">
+                <p class="cardbits">
                     <label for="expiryDate">
                         Expiration Date:
                     </label>
                     <input type="text" id="expiryDate" placeholder="MM/YY" />
-                </p>
-                <p class="aligncenter">
+                
                     <label for="cvv">
                         CVV:
                     </label>
