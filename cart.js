@@ -74,7 +74,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Get the phone number based on the subdomain, default to the general number
     const defaultPhoneNumber = "833-289-3627";
+    const defaultCityName = "Doap";
     const phoneNumber = phoneMap[domainName] || defaultPhoneNumber;
+    const cityName = cityMap[domainName] || defaultCityName;
 
     const defaultDescription = `${cityName} DOAP Delivers Organic Awesome Pot to ${cityName} and surrounding cities 9-9 daily.`;
 
