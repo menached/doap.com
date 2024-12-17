@@ -1,5 +1,5 @@
 /* General Reset */
-.nodec {
+.nodec, .nodec:hover {
     text-decoration: none;
     color:#000;
 }
