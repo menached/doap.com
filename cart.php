@@ -373,35 +373,35 @@
     <div id="popupMessage" class="popup hidden">
         <p id="popupText">Order Processed Successfully!</p>
     </div>
-<!-- Footer Section -->
-<footer style="
-    background-color: #f8f9fa;
-    color: #333;
-    padding: 20px 10px;
-    text-align: center;
-    font-family: Arial, sans-serif;
-    font-size: 0.9rem;
-    border-top: 1px solid #ddd;
-    margin-top: 30px;
-">
-    <div style="margin-bottom: 10px;">
-        <strong>DevOps & Platforms</strong> - <a href="https://devopsandplatforms.com" target="_blank" style="color: #007BFF; text-decoration: none;">devopsandplatforms.com</a>
-    </div>
-    <div>
-        Explore the project on GitHub: 
-        <a href="https://github.com/menached/doap.com" target="_blank" style="color: #007BFF; text-decoration: none; font-weight: bold;">
-            github.com/menached/doap.com
-        </a>
-    </div>
-    <div style="margin-top: 10px; font-size: 0.8rem; color: #666;">
-        &copy; <span id="year"></span> DevOps & Platforms. All rights reserved.
-    </div>
-</footer>
+    <!-- Footer Section -->
+    <footer style="
+        background-color: #f8f9fa;
+        color: #333;
+        padding: 20px 10px;
+        text-align: center;
+        font-family: Arial, sans-serif;
+        font-size: 0.9rem;
+        border-top: 1px solid #ddd;
+        margin-top: 30px;
+    ">
+        <div style="margin-bottom: 10px;">
+            <strong>DevOps & Platforms</strong> - <a href="https://devopsandplatforms.com" target="_blank" style="color: #007BFF; text-decoration: none;">devopsandplatforms.com</a>
+        </div>
+        <div>
+            Explore the project on GitHub: 
+            <a href="https://github.com/menached/doap.com" target="_blank" style="color: #007BFF; text-decoration: none; font-weight: bold;">
+                github.com/menached/doap.com
+            </a>
+        </div>
+        <div style="margin-top: 10px; font-size: 0.8rem; color: #666;">
+            &copy; <span id="year"></span> DevOps & Platforms. All rights reserved.
+        </div>
+    </footer>
 
-<!-- Optional: Add this script to update the year dynamically -->
-<script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-</script>
+    <!-- Optional: Add this script to update the year dynamically -->
+    <script>
+        document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
 
 </body>
 </html>
