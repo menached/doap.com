@@ -323,25 +323,41 @@
 
             <div id="cryptoWallets" class="accordion-section" style="display: none;">
                 <h3>Crypto Wallet Addresses</h3>
-                <ul style="list-style: none; padding: 0; margin: 0;">
-                    <li>
-                        <i class="fab fa-bitcoin"></i>
-                        <strong>Bitcoin (BTC):</strong> bc1q28m9z95qzfjap7tamagnhlrk8nu332l7mlyjzr
-                    </li>
-                    <li>
-                        <i class="fab fa-ethereum"></i>
-                        <strong>Ethereum (ETH):</strong> 0xf38ab68ae630bacd769cfc34fbcf3f7c0504f97a
-                    </li>
-                    <li>
-                        <i class="fa fa-dog"></i>
-                        <strong>Doge (DOGE):</strong> DKx7uayMeVmd8Zuy3PgGSRB8XjUVt3ndeT
-                    </li>
-                    <li>
-                        <i class="fa fa-wallet"></i>
-                        <strong>Litecoin (LTC):</strong> ltc1q97cz898tgwqh23j44kf5nsaggg84j2vw666jqr
-                    </li>
-                </ul>
-            </div>
+                     <ul style="list-style: none; padding: 0; margin: 0;">
+                        <li>
+                            <i class="fab fa-bitcoin"></i>
+                            <strong>Bitcoin (BTC):</strong> 
+                            <span class="copy-address" data-address="bc1q28m9z95qzfjap7tamagnhlrk8nu332l7mlyjzr" style="cursor: pointer; color: blue;">
+                                bc1q28m9z95qzfjap7tamagnhlrk8nu332l7mlyjzr
+                            </span>
+                        </li>
+                        <li>
+                            <i class="fab fa-ethereum"></i>
+                            <strong>Ethereum (ETH):</strong> 
+                            <span class="copy-address" data-address="0xf38ab68ae630bacd769cfc34fbcf3f7c0504f97a" style="cursor: pointer; color: blue;">
+                                0xf38ab68ae630bacd769cfc34fbcf3f7c0504f97a
+                            </span>
+                        </li>
+                        <li>
+                            <i class="fa fa-dog"></i>
+                            <strong>Doge (DOGE):</strong> 
+                            <span class="copy-address" data-address="DKx7uayMeVmd8Zuy3PgGSRB8XjUVt3ndeT" style="cursor: pointer; color: blue;">
+                                DKx7uayMeVmd8Zuy3PgGSRB8XjUVt3ndeT
+                            </span>
+                        </li>
+                        <li>
+                            <i class="fa fa-wallet"></i>
+                            <strong>Litecoin (LTC):</strong> 
+                            <span class="copy-address" data-address="ltc1q97cz898tgwqh23j44kf5nsaggg84j2vw666jqr" style="cursor: pointer; color: blue;">
+                                ltc1q97cz898tgwqh23j44kf5nsaggg84j2vw666jqr
+                            </span>
+                        </li>
+                    </ul>
+
+                    <!-- Temporary Copy Confirmation Message -->
+                    <div id="copyMessage" style="display: none; color: green; font-weight: bold; margin-top: 10px;"></div>
+
+           </div>
 
             <div id="generalHelp" class="accordion-section" style="display: none;">
                 <h3><i class="fas fa-phone-alt"></i> Need Assistance?</h3>
