@@ -243,7 +243,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const handleOrderMessage = (total) => {
             if (total === 0) {
                 minOrderMessage.textContent = `Minimum order is $${MINIMUM_ORDER_AMOUNT}.`;
-                minOrderMessage.style.color = "#ccc";
+                minOrderMessage.style.color = "black";
             } else if (total > 0 && total < MINIMUM_ORDER_AMOUNT) {
                 minOrderMessage.textContent = `Minimum order is $${MINIMUM_ORDER_AMOUNT}.`;
                 minOrderMessage.style.color = "red";
@@ -349,5 +349,29 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }
+
+        // Add click event listener to all addresses
+        document.querySelectorAll(".copy-address").forEach(element => {
+            element.addEventListener("click", () => {
+                const address = element.getAttribute("data-address");
+
+                // Copy the address to the clipboard
+                navigator.clipboard.writeText(address).then(() => {
+                    // Show confirmation message
+                    const copyMessage = document.getElementById("copyMessage");
+                    copyMessage.textContent = `Copied: ${address}`;
+                    copyMessage.style.display = "block";
+
+                    // Hide the message after 2 seconds
+                    setTimeout(() => {
+                        copyMessage.style.display = "none";
+                    }, 2000);
+                }).catch(err => {
+                    console.error("Failed to copy address:", err);
+                });
+            });
+        });
+
+
 });
 
