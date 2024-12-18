@@ -1,22 +1,29 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // Fetch data from the JSON file
+  // Fetch the JSON data
   fetch('products.json')
     .then(response => response.json())
-    .then(data => renderCategories(data.categories));
+    .then(data => renderProducts(data.categories));
 
-  function renderCategories(categories) {
+  // Function to render the product categories and items
+  function renderProducts(categories) {
     const container = document.getElementById("product-container");
 
     categories.forEach(category => {
-      // Create tab content for the category
+      // Create a wrapper for the category
       const categoryDiv = document.createElement("div");
       categoryDiv.className = "tab-content";
       categoryDiv.id = category.id;
 
-      // Add items to the category
+      // Add a category title
+      const categoryTitle = document.createElement("h2");
+      categoryTitle.textContent = category.name;
+      categoryDiv.appendChild(categoryTitle);
+
+      // Create an item list for the category
       const itemList = document.createElement("div");
       itemList.className = "item-list";
 
+      // Add items to the category
       category.items.forEach(item => {
         const itemLabel = document.createElement("label");
         itemLabel.className = "item";
@@ -36,7 +43,10 @@ document.addEventListener("DOMContentLoaded", () => {
         itemList.appendChild(itemLabel);
       });
 
+      // Append the item list to the category
       categoryDiv.appendChild(itemList);
+
+      // Append the category to the main container
       container.appendChild(categoryDiv);
     });
   }
