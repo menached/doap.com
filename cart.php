@@ -61,10 +61,31 @@
 
 
     <?php //include('products.html'); ?>
-    <?php include('flower.html'); ?>
-    <?php include('flower.html'); ?>
-    <?php include('flower.html'); ?>
-    <?php include('flower.html'); ?>
+
+    <div class="tab-content active" id="flower">
+        <div class="item-list">
+        <?php include('flower.html'); ?>
+        </div>
+    </div> <!-- End Flower -->
+        
+    <div class="tab-content active" id="concentrates">
+        <div class="item-list">
+        <?php include('concentrates.html'); ?>
+        </div>
+    </div> <!-- End Concentrates -->
+    
+    <div class="tab-content active" id="edibles">
+        <div class="item-list">
+        <?php include('edibles.html'); ?>
+        </div>
+    </div> <!-- End Edibles -->
+    
+    <div class="tab-content active" id="edibles">
+        <div class="item-list">
+        <?php include('accessories.html'); ?>
+        </div>
+    </div> <!-- End Accessories -->
+
 
 
         <!-- Cart Section -->
