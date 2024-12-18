@@ -59,7 +59,8 @@
         </div>
 
 
-    <?php include('products.html'); ?>
+    <?php //include('products.html'); ?>
+<div id="product-container"></div>
 
 
         <!-- Cart Section -->
