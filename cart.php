@@ -60,7 +60,11 @@
         </div>
 
 
-    <?php include('products.html'); ?>
+    <?php //include('products.html'); ?>
+    <?php include('flower.html'); ?>
+    <?php include('flower.html'); ?>
+    <?php include('flower.html'); ?>
+    <?php include('flower.html'); ?>
 
 
         <!-- Cart Section -->
