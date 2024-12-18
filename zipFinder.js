@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const button = document.createElement("button");
     button.type = "submit";
-    button.textContent = "Find a nearby Agency";
+    button.textContent = "Find Location";
     button.style.cssText = "padding: 10px 15px; background-color: #007BFF; color: white; border: none; border-radius: 5px; cursor: pointer;";
 
     // Message element for error or info display
