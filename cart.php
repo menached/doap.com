@@ -239,7 +239,7 @@
         </div>
         <div>
             <a href="https://github.com/menached/doap.com" target="_blank" style="color: #007BFF; text-decoration: none; font-weight: bold;">
-            Explore the project on GitHub: 
+            Explore the project on GitHub 
             </a>
         </div>
         <div style="margin-top: 10px; font-size: 0.8rem; color: #666;">
