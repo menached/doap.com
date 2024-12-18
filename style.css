@@ -1,4 +1,14 @@
 /* General Reset */
+.original-price {
+    text-decoration: line-through;
+    color: #999; /* Optional: Light gray for a more subdued effect */
+    margin-right: 10px; /* Optional: Adds spacing between prices */
+}
+
+.current-price {
+    font-weight: bold;
+    color: #000; /* Optional: Highlight current price */
+}
 
 
 /* Tab styles */
