@@ -11,6 +11,10 @@
 }
 
 
+.item-description {
+font-size: 1rem;
+}
+
 /* Tab styles */
 .tab-container {
   display: flex;
