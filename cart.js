@@ -465,4 +465,12 @@ if (targetElement) {
     console.warn("Element body > div:nth-child(3) not found.");
 }
 
+
+ // Locate the minimum order message container
+    const minOrderMessageElement = document.getElementById("minOrderMessage");
+    if (minOrderMessageElement) {
+        // Replace static text with dynamic variable
+        minOrderMessageElement.textContent = `Minimum order is $${MINIMUM_ORDER_AMOUNT}.`;
+    }
+
 console.log("cart.js loaded completely");
