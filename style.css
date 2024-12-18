@@ -1,6 +1,42 @@
 /* General Reset */
 
 
+/* Tab styles */
+.tab-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.tab {
+  padding: 10px 20px;
+  cursor: pointer;
+  background: #f9f9f9;
+  border: 1px solid #ccc;
+  border-bottom: none;
+  margin: 0 5px;
+  font-size: 1.1rem;
+}
+
+.tab.active {
+  background: #fff;
+  font-weight: bold;
+  border-bottom: 2px solid #007bff;
+}
+
+/* Tab content */
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+
+
+
+
 /* Alternate background colors for list items */
 #selectedItemsList li:nth-child(odd) {
     background-color: #ffe6e6; /* Pale pink for odd rows */
