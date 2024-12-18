@@ -1,5 +1,7 @@
 console.log("cart.js started loading");
 document.addEventListener("DOMContentLoaded", () => {
+
+
     // Map subdomains to minimum order amounts
     const areaMinimum = {
         alamo: 40,
@@ -27,6 +29,53 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Log the minimum order for debugging
     console.log(`Subdomain: ${domainName}, Minimum Order: $${MINIMUM_ORDER_AMOUNT}`);
+
+
+        const defaultMinOrder = 50; // Fallback if no match
+    const minOrderValue = areaMinimum[domainName] || defaultMinOrder;
+
+    // Update minimum order message dynamically
+    const minOrderMessageElement = document.getElementById("minOrderMessage");
+    const totalDisplay = document.getElementById("total");
+    const checkoutButton = document.getElementById("checkoutButton");
+
+    if (minOrderMessageElement) {
+        minOrderMessageElement.textContent = `Minimum order is $${minOrderValue}.`;
+    }
+
+    // Set initial cart total based on the minimum order value
+    if (totalDisplay) {
+        totalDisplay.textContent = `$${minOrderValue.toFixed(2)}`;
+    }
+
+    // Checkout button initially disabled
+    if (checkoutButton) {
+        checkoutButton.disabled = true;
+        checkoutButton.title = `Minimum order is $${minOrderValue}.`;
+    }
+
+    // Function to validate cart total
+    const validateMinimumOrder = () => {
+        const total = parseFloat(totalDisplay.textContent.replace('$', '')) || 0;
+        if (total < minOrderValue) {
+            checkoutButton.disabled = true;
+            checkoutButton.title = `Minimum order is $${minOrderValue}.`;
+        } else {
+            checkoutButton.disabled = false;
+            checkoutButton.title = "";
+        }
+    };
+
+    // Attach event listeners to dynamically update the cart
+    const cartForm = document.getElementById("cartForm");
+    if (cartForm) {
+        cartForm.addEventListener("change", validateMinimumOrder);
+        cartForm.addEventListener("input", validateMinimumOrder);
+    }
+
+    console.log(`Minimum order for ${domainName}: $${minOrderValue}`);
+
+
 
     // Default cityName for single-word subdomains
     let cityName = domainName.charAt(0).toUpperCase() + domainName.slice(1).toLowerCase();
