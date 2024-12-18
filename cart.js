@@ -25,44 +25,6 @@ document.addEventListener("DOMContentLoaded", () => {
     // Determine the minimum order amount based on the subdomain, default to 60
     const MINIMUM_ORDER_AMOUNT = areaMinimum[domainName] || 60;
 
-
-    const defaultMinOrder = 60; // Fallback for subdomains not in the map
-    const minOrderValue = areaMinimum[domainName] || defaultMinOrder;
-
-    // Update the minimum order message dynamically
-    const minOrderMessageElement = document.getElementById("minOrderMessage");
-    if (minOrderMessageElement) {
-        minOrderMessageElement.textContent = `Minimum order is $${minOrderValue}.`;
-    }
-
-    // Cart total validation logic
-    const totalDisplay = document.getElementById("total");
-    const checkoutButton = document.getElementById("checkoutButton");
-
-    const validateMinimumOrder = () => {
-        const total = parseFloat(totalDisplay.textContent.replace('$', '')) || 0;
-        if (total < minOrderValue) {
-            checkoutButton.disabled = true;
-            checkoutButton.title = `Minimum order is $${minOrderValue}.`;
-        } else {
-            checkoutButton.disabled = false;
-            checkoutButton.title = "";
-        }
-    };
-
-    // Attach event listeners to update validation dynamically
-    const cartForm = document.getElementById("cartForm");
-    if (cartForm) {
-        cartForm.addEventListener("change", validateMinimumOrder);
-        cartForm.addEventListener("input", validateMinimumOrder);
-    }
-
-    console.log(`Minimum order for ${domainName}: $${minOrderValue}`);
-});
-
-
-
-
     // Log the minimum order for debugging
     console.log(`Subdomain: ${domainName}, Minimum Order: $${MINIMUM_ORDER_AMOUNT}`);
 
