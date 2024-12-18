@@ -80,7 +80,7 @@
         </div>
     </div> <!-- End Edibles -->
     
-    <div class="tab-content active" id="edibles">
+    <div class="tab-content active" id="accessories">
         <div class="item-list">
         <?php include('accessories.html'); ?>
         </div>
