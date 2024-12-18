@@ -60,8 +60,7 @@
         </div>
 
 
-    <?php //include('products.html'); ?>
-<div id="product-container"></div>
+    <?php include('products.html'); ?>
 
 
         <!-- Cart Section -->
