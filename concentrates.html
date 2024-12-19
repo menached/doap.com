@@ -7,9 +7,8 @@
         <!-- Premium Oil 1 Gram Vape Cartridges - Single -->
         <label class="item">
             <input type="checkbox" name="item" value="Premium Oil 1 Gram Vape Cartridge - Single|80">
-            <div class="thumbnail-container">
+            <div class="thumbnail-container" onmouseover="showLargeImage('/wp-content/uploads/2023/09/three-vape-carts.webp')" onmouseout="hideLargeImage()">
                 <img class="thumbnail" src="/wp-content/uploads/2023/09/three-vape-carts.webp" alt="Premium Oil 1 Gram Vape Cartridge - Single">
-                <img class="enlarged-image" src="/wp-content/uploads/2023/09/three-vape-carts.webp" alt="Premium Oil 1 Gram Vape Cartridge - Single">
             </div>
             <div class="item-details">
                 <p class="item-title">Premium Oil 1 Gram Vape Cartridge - Single</p>
@@ -90,5 +89,10 @@
         </label>
 
     </div>
+</div>
+
+<!-- Large Image Modal -->
+<div id="largeImageModal" class="large-image-modal">
+    <img id="largeImage" src="" alt="Large Preview">
 </div>
 
