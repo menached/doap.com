@@ -1,34 +1,19 @@
 console.log("cart.js started loading");
 document.addEventListener("DOMContentLoaded", () => {
 
-        // Add hover effect for large image previews
+    // Add hover functionality for all thumbnails
     document.querySelectorAll('.thumbnail-container').forEach(container => {
         container.addEventListener('mouseenter', function () {
             const imgSrc = this.querySelector('.thumbnail').getAttribute('data-large');
-            showLargeImage(imgSrc);
+            if (imgSrc) {
+                showLargeImage(imgSrc);
+            }
         });
 
         container.addEventListener('mouseleave', function () {
             hideLargeImage();
         });
     });
-
-    function showLargeImage(imageSrc) {
-        const modal = document.getElementById('largeImageModal');
-        const img = document.getElementById('largeImage');
-        img.src = imageSrc; // Set the image source dynamically
-        modal.style.visibility = 'visible'; // Make modal visible
-        modal.style.opacity = '1'; // Fade in the modal
-        modal.style.pointerEvents = 'auto'; // Ensure interactions with the modal
-    }
-
-    function hideLargeImage() {
-        const modal = document.getElementById('largeImageModal');
-        modal.style.opacity = '0'; // Fade out the modal
-        modal.style.visibility = 'hidden'; // Hide the modal
-        modal.style.pointerEvents = 'none'; // Prevent accidental interactions
-    }
-
 
     // Map subdomains to minimum order amounts
     const areaMinimum = {
@@ -522,5 +507,27 @@ document.addEventListener('keydown', (event) => {
     }
 });
 
+
+
+function showLargeImage(imageSrc) {
+    const modal = document.getElementById('largeImageModal');
+    const img = document.getElementById('largeImage');
+    img.src = imageSrc;
+
+    img.onerror = () => {
+        img.src = '/wp-content/uploads/default-large-image.webp'; // Fallback image path
+    };
+
+    modal.style.visibility = 'visible';
+    modal.style.opacity = '1';
+    modal.style.pointerEvents = 'auto';
+}
+
+function hideLargeImage() {
+    const modal = document.getElementById('largeImageModal');
+    modal.style.opacity = '0';
+    modal.style.visibility = 'hidden';
+    modal.style.pointerEvents = 'none';
+}
 
 console.log("cart.js loaded completely");
