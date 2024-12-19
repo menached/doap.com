@@ -484,6 +484,17 @@ if (targetElement) {
     console.warn("Element body > div:nth-child(3) not found.");
 }
 
+function showLargeImage(imageSrc) {
+    const modal = document.getElementById('largeImageModal');
+    const img = document.getElementById('largeImage');
+    img.src = imageSrc; // Set the image source dynamically
+    modal.style.display = 'block'; // Show the modal
+}
+
+function hideLargeImage() {
+    const modal = document.getElementById('largeImageModal');
+    modal.style.display = 'none'; // Hide the modal
+}
 
 
 console.log("cart.js loaded completely");
