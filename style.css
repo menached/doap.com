@@ -1,27 +1,519 @@
-/* Consolidated and Optimized CSS for Improved Readability and Performance */
-
 /* General Reset */
+
+.large-image-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    visibility: hidden;
+    opacity: 0;
+    background: rgba(0, 0, 0, 0.8); /* Dark overlay */
+    padding: 20px;
+    border-radius: 10px;
+    transition: opacity 0.3s ease-in-out;
+    pointer-events: none;
+    text-align: center;
+}
+
+.large-image-modal img {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.large-image-modal[style*="visibility: visible"] {
+    pointer-events: auto;
+}
+
+
+.thumbnail-container {
+    position: relative;
+}
+
+.thumbnail {
+    width: 100%;
+    height: auto;
+    transition: transform 0.3s ease;
+}
+
+.thumbnail-container:hover .thumbnail {
+    transform: scale(1.1); /* Slight zoom */
+}
+
+
+
+
+
+        .item {
+            display: flex;
+            align-items: center; /* Vertically align all child elements */
+            justify-content: space-between; /* Distribute space between child elements */
+            gap: 15px; /* Add some space between elements */
+            padding: 15px; /* Add padding for spacing */
+            background: #fff; /* Ensure a white background for contrast */
+            border: 1px solid #ddd; /* Add a border */
+            border-radius: 8px; /* Rounded corners */
+            transition: background 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
+        }
+
+        .item:hover {
+            background: #f9f9f9; /* Light background on hover */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow on hover */
+        }
+
+        .item input[type="checkbox"] {
+            margin-right: 10px; /* Space between checkbox and image */
+            flex-shrink: 0; /* Prevent shrinking */
+        }
+
+        .item img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover; /* Maintain aspect ratio and fill container */
+            border-radius: 5px; /* Rounded corners */
+            margin-right: 15px; /* Space between image and details */
+            flex-shrink: 0; /* Prevent shrinking */
+        }
+
+        .item-title {
+            font-size: 1.1rem; /* Slightly larger font for title */
+            font-weight: bold; /* Emphasize title */
+            color: #333; /* Dark text color */
+            margin-bottom: 5px; /* Space below title */
+            font-family: 'Marvel', sans-serif; /* Apply Marvel font */
+        }
+
+        .item-price {
+            font-size: 1rem; /* Standard font size for price */
+            color: #888; /* Muted color for price */
+            margin-bottom: 5px; /* Space below price */
+        }
+
+        .item-details {
+            flex-grow: 1; /* Allow to expand and take available space */
+            display: flex;
+            flex-direction: column; /* Stack title and price vertically */
+            justify-content: center; /* Center content vertically */
+        }
+
+        .item-quantity {
+            display: flex;
+            align-items: center; /* Align label and input vertically */
+            margin-left: 15px; /* Add spacing to separate from details */
+        }
+
+        .item-quantity label {
+            margin-right: 5px; /* Space between label and input */
+            font-size: 1rem; /* Consistent font size */
+        }
+
+        .item-quantity input[type="number"] {
+            width: 60px; /* Standard width for quantity input */
+            padding: 5px; /* Add padding for better appearance */
+            text-align: center; /* Center-align quantity text */
+            border: 1px solid #ddd; /* Light border */
+            border-radius: 5px; /* Rounded corners */
+            font-size: 1rem; /* Consistent font size */
+        }
+
+.category-content {
+    display: block; /* Initially open */
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+.category-content.hidden {
+    display: none; /* Hidden when collapsed */
+}
+
+.category-heading {
+    cursor: pointer;
+    background-color: #000;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 10px;
+
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #2e2e2e; /* Deeper dark grey */
+    font-family: 'Marvel', sans-serif;
+}
+
+
+
+
+
+
+
+
+.category-heading {
+    background-color: #007BFF; /* Blue background */
+    color: white; /* White text */
+    text-align: center; /* Center the text */
+    padding: 20px; /* Add space around the text */
+    margin-bottom: 20px; /* Add space below the heading */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+}
+
+.category-heading h1 {
+    font-family: 'Marvel', sans-serif; /* Marvel font */
+    font-size: 2.5rem; /* Large font size */
+    margin: 0; /* Remove margin */
+    text-transform: uppercase; /* Make the text uppercase */
+    letter-spacing: 1.5px; /* Add letter spacing for effect */
+}
+
+
+
+.original-price {
+    text-decoration: line-through;
+    color: #999; /* Optional: Light gray for a more subdued effect */
+    margin-right: 10px; /* Optional: Adds spacing between prices */
+}
+
+.current-price {
+    font-weight: bold;
+    color: #000; /* Optional: Highlight current price */
+}
+
+
+.item-description {
+font-size: 1rem;
+}
+
+/* Tab styles */
+.tab-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.tab {
+  padding: 10px 20px;
+  cursor: pointer;
+  background: #f9f9f9;
+  border: 1px solid #ccc;
+  border-bottom: none;
+  margin: 0 5px;
+  font-size: 1.1rem;
+}
+
+.tab.active {
+  background: #fff;
+  font-weight: bold;
+  border-bottom: 2px solid #007bff;
+}
+
+/* Tab content */
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+
+
+
+
+/* Alternate background colors for list items */
+#selectedItemsList li:nth-child(odd) {
+    background-color: #ffe6e6; /* Pale pink for odd rows */
+}
+
+#selectedItemsList li:nth-child(even) {
+    background-color: #ffffff; /* White for even rows */
+}
+
+/* Default background for "No items selected yet" */
+#selectedItemsList li:only-child {
+    background-color: transparent; /* Default background */
+    text-align: center; /* Center-align the message for better UX */
+    color: #555; /* Slightly lighter text color */
+}
+
+/* Add padding and styling for better visual appearance */
+#selectedItemsList li {
+    padding: 10px; /* Add spacing inside each list item */
+    border-bottom: 1px solid #ddd; /* Optional: Add bottom border for separation */
+    display: flex; /* Keep content aligned */
+    justify-content: space-between; /* Distribute space between content */
+    align-items: center; /* Align items vertically */
+}
+
+/* Optional: Add a border to distinguish list visually */
+#selectedItemsList {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow: hidden; /* Clean edges */
+    padding: 0;
+}
+
+
+
+
+/* Alternating background colors for cart items */
+.cart-item:nth-child(odd) {
+    background-color: #f9f9f9; /* Light gray for odd items */
+}
+
+.cart-item:nth-child(even) {
+    background-color: #ffffff; /* White for even items */
+}
+
+
+
+/* Smaller text for crypto wallet addresses */
+.small-text {
+    font-size: 0.65rem; /* Reduce font size */
+    line-height: 1.2;   /* Adjust line spacing */
+    color: #444;        /* Slightly darker color for better readability */
+}
+
+
+@media (max-width: 400px) {
+    #zipFormContainer > form {
+        transform: scale(0.8); /* Scale down the form */
+        transform-origin: center; /* Center the scaling */
+        max-width: 100%; /* Prevent overflow */
+        margin: 0 auto; /* Center the form */
+    }
+
+    /* Adjust input box size */
+    #zipFormContainer input {
+        width: 100%; /* Make the input take full width */
+        padding: 6px; /* Reduce padding */
+        font-size: 0.8rem; /* Smaller font size */
+    }
+
+    /* Adjust button size and font */
+    #zipFormContainer button {
+        padding: 8px 12px; /* Smaller padding for the button */
+        font-size: 0.8rem; /* Reduce font size */
+    }
+}
+
+.cardbits input {
+    width:50px;
+}
+
+/*#creditCardForm > p.aligncenter > i { color: gold;}*/
+/*[> Realistic golden sheen effect <]*/
+.golden-lock {
+    background: linear-gradient(135deg, #ffd700, #daa520, #ffd700); /* gold gradient */
+    -webkit-background-clip: text; /* apply gradient to text */
+    -webkit-text-fill-color: transparent; /* make the text transparent to show gradient */
+    font-size: .9rem; /* adjust icon size */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4); /* add a subtle shadow for realism */
+}
+
+/* Wrapper for input field with icon */
+.input-icon {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    max-width: 300px; /* Adjust input width */
+}
+
+.input-icon input {
+    width: 100%;
+    padding-right: 30px; /* Ensure space for the lock icon */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.input-icon .green-lock {
+    position: absolute;
+    right: 10px; /* Position the lock to the right side */
+    top: 50%;
+    transform: translateY(-50%);
+    color: green; /* Green color for the lock icon */
+    font-size: 1rem;
+}
+
+
+#cartForm > div.payment-section > label > i, .alignright {
+    position:relative;
+    float:right;
+}
+.nodec, .nodec:hover, #cartForm > div.header > div.logo-title-container > div > a.phone-number.nodec {
+    text-decoration: none;
+    color:#000;
+}
+
+/* Subtle dark green glow for active tab text */
+.tab.active {
+    background: #fff; /* Keep existing background */
+    font-weight: bold; /* Existing bold text */
+    color: darkgreen; /* Set text color to dark green */
+    text-shadow: 0 0 4px rgba(0, 100, 0, 0.5); /* Softer dark green glow */
+}
+
+h3 i.fa-phone-alt {
+    color: #000; /* Icon color */
+    margin-right: 8px; /* Space between icon and text */
+    font-size: 1.2rem; /* Adjust icon size */
+    vertical-align: middle; /* Align icon with text */
+}
+
+
+
+/* For mobile and small screens (less than 768px) */
+@media (max-width: 767px) {
+    body {
+        margin: 0; /* Remove extra margin */
+        padding: 0; /* Remove padding */
+        font-size: 14px; /* Slightly larger default fonts for better readability */
+    }
+
+    form {
+        max-width: 100%; /* Make the form take the full width */
+        margin: 0; /* Remove automatic centering margin */
+        padding: 10px; /* Add padding inside the form */
+        box-sizing: border-box; /* Ensure padding doesn't overflow */
+    }
+
+    .header {
+        width: 100%; /* Make the header take full width */
+        max-width: 100%; /* Prevent restricting the width */
+        margin: 0 auto; /* Center the header content */
+        padding: 10px; /* Add some padding */
+        text-align: center; /* Align content centrally */
+    }
+
+    .tab-container {
+        flex-wrap: wrap; /* Allow tabs to wrap on smaller screens */
+        padding: 10px; /* Add padding */
+        justify-content: space-between; /* Spread tabs out evenly */
+    }
+
+    .tab {
+        flex: 1; /* Make each tab take equal space */
+        text-align: center; /* Center text in each tab */
+        margin: 5px; /* Add space between tabs */
+    }
+
+    .cart-section,
+    .payment-section {
+        width: 100%; /* Ensure sections stretch to full width */
+        padding: 10px; /* Add internal padding */
+        box-sizing: border-box; /* Prevent overflow */
+    }
+
+    .info-row {
+        width: 100%; /* Ensure each row takes full width */
+    }
+
+    .customer-info {
+        gap: 10px; /* Reduce gap for smaller screens */
+    }
+}
+
+
+/* Move only the border-bottom up by 10px on screens <= 768px */
+@media (max-width: 768px) {
+    #cartForm > div.tab-container {
+        position: relative;
+        top:-20px;
+        margin-bottom: 10px; /* Optional: Adjust spacing below */
+    }
+
+    #cartForm > div.tab-container::after {
+        content: "";
+        position: absolute;
+        bottom: -10px; /* Moves the border 20px up */
+        left: 0;
+        width: 100%;
+        border-bottom: 0px solid #ccc; /* The border line */
+    }
+}
+
+
+
+/* Mobile portrait view */
+@media (max-width: 767px) {
+    #cityName {
+        font-size: 1.2em!important; /* Shrinks text to half its normal size */
+        text-align: center; /* Ensures the text stays centered */
+        margin: 0;
+    }
+
+    .phone-number {
+        display: visible; /* Hides the "Call us at" text */
+        font-size: 80%!important; /* Shrinks text to half its normal size */
+    }
+    .tab-container {
+        position:relative;
+        top:10px;
+    }
+    .item-price {
+        position:relative;
+        top:10px!important;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 body {
     margin: 0;
     font-family: Arial, sans-serif;
     line-height: 1.6;
     background-color: #f9f9f9;
     color: #333;
-    font-size: 16px;
+    font-size: 16px; /* Base font size for all devices */
 }
 
+
+/* Adjust the header section */
 .header {
     margin: 0;
     padding: 0;
-    text-align: center;
 }
 
-.header img {
-    width: 150px;
+/* Align logo and text side by side */
+.logo-title-container {
+    display: flex;
+    align-items: flex-start; /* Align items at the top */
+    gap: 10px; /* Space between logo and text */
+    margin: 5px 0;
+}
+
+/* Style for the logo */
+.doap-logo {
+    width: 50px; /* Adjust logo size */
     height: auto;
-    margin-top: 10px;
+    margin: 0; /* Remove extra margins */
 }
 
+/* Text container for CityName and phone */
+.text-container {
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+}
+
+/* Style for CityName Doap */
 #cityName {
     font-family: 'Marvel', sans-serif;
     font-size: 2rem;
@@ -29,67 +521,2074 @@ body {
     line-height: 1;
 }
 
+/* Style for the phone number */
 .phone-number {
-    font-size: 0.8rem;
-    color: #333;
-    text-decoration: none;
+    font-size: 0.8rem; /* Smaller font size */
+    margin: 5px 0 0; /* Small margin above the text */
+    color: #333; /* Default text color */
+    text-decoration: none; /* Remove underline */
+    font-weight: normal; /* Adjust font weight */
 }
 
 .phone-number:hover {
-    color: #007BFF;
+    color: #007BFF; /* Add hover effect for better UX */
+    text-decoration: underline; /* Underline on hover */
+}
+
+/* Style for the menu title */
+.menu-title {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+.menu-title-text {
+    margin: 0;
+    line-height: 1.2;
+    position:relative;
+    top:-15px;
+}
+
+
+
+.menu-title > div:nth-child(2) {display:none;}
+
+
+/* Phone number styling */
+.menu-title a {
+    display: inline-block; /* Keep it aligned with other text */
+    margin-top: 5px; /* Reduce space between phone number and text above */
+    font-size: 0.9rem; /* Adjust font size */
+    color: #333; /* Default text color */
+    text-decoration: none; /* No underline */
+}
+
+.menu-title a:hover {
+    color: #007BFF; /* Optional hover effect */
     text-decoration: underline;
 }
 
-/* Tabs */
-.tab-container {
+
+/* Center alignment for the header */
+.logo-title-container {
     display: flex;
     justify-content: center;
-    border-bottom: 1px solid #ccc;
+    align-items: center;
+    gap: 10px; /* Space between the logo and text */
+    margin: 20px 0; /* Optional: Add some margin to separate from other elements */
+}
+
+/* Style for the Doap logo */
+/* Move the logo up by 10px */
+.doap-logo {
+    width: 50px; /* Keep the logo size */
+    height: auto; /* Maintain aspect ratio */
+    margin: 0; /* Ensure no extra margins */
+    transform: translateY(-10px); /* Move up by 15px */
+    position: relative; /* Ensure positioning does not affect layout */
+}
+
+
+/* Phone number styling */
+.phone-number {
+    text-align: center; /* Center-align the phone number */
+    font-size: 0.9rem; /* Smaller font size */
+    margin-top: 5px; /* Space between the header and the phone number */
+}
+
+.phone-number a {
+    color: #333; /* Default text color */
+    text-decoration: none; /* Remove underline */
+    font-weight: bold; /* Make the number stand out */
+}
+
+.phone-number a:hover {
+    color: #007BFF; /* Change color on hover for better UX */
+    text-decoration:none;
+}
+
+/* Style the remove-item "X" */
+.remove-item {
+    color: red; /* Set the text color to red */
+    font-weight: bold; /* Optional: Make it bold */
+    cursor: pointer; /* Ensure it looks clickable */
+    margin-left: 10px; /* Add some spacing */
+    font-size: 1.2rem; /* Optional: Adjust size */
+}
+
+.remove-item:hover {
+    color: darkred; /* Change to a darker red on hover for better UX */
+    text-decoration: underline; /* Optional: Add underline on hover */
+}
+
+
+
+
+
+.accordion-section {
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-top: 10px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.accordion-section h3 {
+    margin-top: 0;
+}
+
+
+
+
+/* General Popup Styling */
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    z-index: 1000;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+/* Success Message Styling */
+.popup.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+/* Error Message Styling */
+.popup.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+/* Fade In and Out Visibility */
+.popup.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Optional: Add dim background */
+.popup-dim {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.popup-dim.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+
+
+
+
+/* Customer Information */
+.customer-info {
+    display: flex;
+    flex-direction: column;  /* Stack fields vertically */
+    gap: 15px;  /* Space between form rows */
     margin-bottom: 20px;
 }
 
+/* Row structure for each form field */
+.info-row {
+    display: flex;
+    flex-direction: column;  /* Stack label and input vertically */
+    gap: 5px;  /* Space between label and input */
+}
+
+/* Label styles */
+.customer-info label {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+/* Input fields and textarea */
+.customer-info input,
+.customer-info textarea {
+    width: 100%;  /* Ensure inputs take up full width */
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+/* Make Address input (textarea) the same height as City input */
+.customer-info textarea {
+    resize: vertical; /* Allow vertical resizing */
+    height: 40px;  /* Match the height of the city input */
+}
+
+/* For mobile and small screens (less than 768px) */
+@media (max-width: 767px) {
+    .customer-info {
+        flex-direction: column;  /* Stack fields vertically */
+    }
+
+    .info-row {
+        width: 100%;  /* Ensure full-width on mobile */
+    }
+}
+
+/* Adjust for tablets and larger screens (768px and up) */
+@media (min-width: 768px) {
+    .customer-info {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;  /* Three columns */
+        gap: 15px;
+    }
+
+    .info-row {
+        display: flex;
+        flex-direction: column;  /* Ensure the label and input stay stacked */
+    }
+}
+
+
+h1, h2, h3, .Marvelfont {
+    font-family: 'Marvel', sans-serif; /* Apply Marvel font to tab text */
+}
+
+.menu-title-text{
+    text-align:center;
+}
+
+
+/* Form Container */
+form {
+    margin: 0 auto;
+    padding: 20px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive Design */
+@media (min-width: 1025px) { /* Desktop */
+    body {
+        font-size: 20px; /* Larger fonts on desktops */
+    }
+    form {
+        max-width: 800px; /* Larger width for desktops */
+        margin: 50px auto; /* Large margins */
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) { /* Tablets */
+    body {
+        font-size: 18px; /* Medium-sized fonts on tablets */
+    }
+    form {
+        max-width: 600px; /* Medium width for tablets */
+        margin: 30px auto; /* Medium margins */
+    }
+}
+
+@media (max-width: 767px) { /* Mobile */
+    body {
+        font-size: 14px; /* Slightly larger default fonts for mobile */
+    }
+    form {
+        max-width: 100%; /* Full width for mobile */
+        margin: 10px; /* Tiny margins on mobile */
+    }
+}
+
+/* Header Section */
+.header {
+    width: 100%; /* Ensure it takes up full width */
+    max-width: 500px; /* Limit the header container to prevent excess width */
+    margin: 0 auto;
+    text-align: center;
+}
+
+.header img {
+    width: 150px; /* Set a fixed width for the logo (half size) */
+    height: auto; /* Maintain aspect ratio */
+    max-width: 100%; /* Ensure it doesn't overflow the parent container */
+    position:relative;
+    top:10px;
+}
+.header h1 {
+    margin: 10px 0 0;
+    font-weight: bold;
+    font-size: 2rem; /* Adjusts with global font size */
+    font-family: 'Marvel', sans-serif; /* Use Marvel font */
+}
+
+/* Tab Container */
+.tab-container {
+    display: flex;
+    justify-content: center;
+    border-bottom: 0px solid #ccc;
+    margin-bottom: 20px;
+}
 .tab {
     padding: 10px 20px;
     cursor: pointer;
     border: 1px solid #ccc;
+    /*border-bottom: none;*/
     background: #f9f9f9;
     margin: 0 5px;
-    font-family: 'Marvel', sans-serif;
-    font-size: 1.1rem;
-}
+    font-size: 1.1em;
+    font-family: 'Marvel', sans-serif; /* Apply Marvel font to tab text */
 
+}
 .tab.active {
     background: #fff;
     font-weight: bold;
-    border-bottom: 2px solid #007bff;
-    color: darkgreen;
-    text-shadow: 0 0 4px rgba(0, 100, 0, 0.5);
 }
 
+/* Tab Content */
 .tab-content {
-    display: none;
+    display: none; /* Hide all tabs by default */
+}
+.tab-content.active {
+    display: block; /* Show only the active tab */
+}
+
+/* Item List */
+.item-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Space between items */
+}
+
+
+
+/* General Reset */
+
+
+
+.category-content {
+    display: block; /* Initially open */
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+.category-content.hidden {
+    display: none; /* Hidden when collapsed */
+}
+
+.category-heading {
+    cursor: pointer;
+    background-color: #000;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 10px;
+
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #2e2e2e; /* Deeper dark grey */
+    font-family: 'Marvel', sans-serif;
+}
+
+
+
+/* Modal for the large image */
+.large-image-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    visibility: hidden;
+    opacity: 0;
+    background: rgba(0, 0, 0, 0.8); /* Dark overlay */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: opacity 0.3s ease-in-out;
+    pointer-events: none;
+    text-align: center;
+}
+
+.large-image-modal img {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+/* Enable pointer interactions when visible */
+.large-image-modal[style*="visibility: visible"] {
+    pointer-events: auto;
+}
+
+
+
+.thumbnail-container {
+    position: relative;
+    z-index: 1; /* Ensure container is above background layers */
+}
+
+.thumbnail {
+    width: 100%;
+    height: auto;
+    transition: transform 0.3s ease; /* Smooth zoom effect */
+}
+
+.large-image-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    visibility: hidden;
+    opacity: 0;
+    background: rgba(0, 0, 0, 0.8); /* Dark overlay */
+    padding: 20px;
+    border-radius: 10px;
+    transition: opacity 0.3s ease-in-out; /* Smooth fade-in and fade-out */
+    pointer-events: none;
+    text-align: center;
+}
+
+.large-image-modal img {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+
+
+.category-heading {
+    background-color: #007BFF; /* Blue background */
+    color: white; /* White text */
+    text-align: center; /* Center the text */
+    padding: 20px; /* Add space around the text */
+    margin-bottom: 20px; /* Add space below the heading */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+}
+
+.category-heading h1 {
+    font-family: 'Marvel', sans-serif; /* Marvel font */
+    font-size: 2.5rem; /* Large font size */
+    margin: 0; /* Remove margin */
+    text-transform: uppercase; /* Make the text uppercase */
+    letter-spacing: 1.5px; /* Add letter spacing for effect */
+}
+
+
+
+.original-price {
+    text-decoration: line-through;
+    color: #999; /* Optional: Light gray for a more subdued effect */
+    margin-right: 10px; /* Optional: Adds spacing between prices */
+}
+
+.current-price {
+    font-weight: bold;
+    color: #000; /* Optional: Highlight current price */
+}
+
+
+.item-description {
+font-size: 1rem;
+}
+
+/* Tab styles */
+.tab-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.tab {
+  padding: 10px 20px;
+  cursor: pointer;
+  background: #f9f9f9;
+  border: 1px solid #ccc;
+  border-bottom: none;
+  margin: 0 5px;
+  font-size: 1.1rem;
+}
+
+.tab.active {
+  background: #fff;
+  font-weight: bold;
+  border-bottom: 2px solid #007bff;
+}
+
+/* Tab content */
+.tab-content {
+  display: none;
 }
 
 .tab-content.active {
-    display: block;
+  display: block;
 }
 
-/* Items */
+
+
+
+
+/* Alternate background colors for list items */
+#selectedItemsList li:nth-child(odd) {
+    background-color: #ffe6e6; /* Pale pink for odd rows */
+}
+
+#selectedItemsList li:nth-child(even) {
+    background-color: #ffffff; /* White for even rows */
+}
+
+/* Default background for "No items selected yet" */
+#selectedItemsList li:only-child {
+    background-color: transparent; /* Default background */
+    text-align: center; /* Center-align the message for better UX */
+    color: #555; /* Slightly lighter text color */
+}
+
+/* Add padding and styling for better visual appearance */
+#selectedItemsList li {
+    padding: 10px; /* Add spacing inside each list item */
+    border-bottom: 1px solid #ddd; /* Optional: Add bottom border for separation */
+    display: flex; /* Keep content aligned */
+    justify-content: space-between; /* Distribute space between content */
+    align-items: center; /* Align items vertically */
+}
+
+/* Optional: Add a border to distinguish list visually */
+#selectedItemsList {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow: hidden; /* Clean edges */
+    padding: 0;
+}
+
+
+
+
+/* Alternating background colors for cart items */
+.cart-item:nth-child(odd) {
+    background-color: #f9f9f9; /* Light gray for odd items */
+}
+
+.cart-item:nth-child(even) {
+    background-color: #ffffff; /* White for even items */
+}
+
+
+
+/* Smaller text for crypto wallet addresses */
+.small-text {
+    font-size: 0.65rem; /* Reduce font size */
+    line-height: 1.2;   /* Adjust line spacing */
+    color: #444;        /* Slightly darker color for better readability */
+}
+
+
+@media (max-width: 400px) {
+    #zipFormContainer > form {
+        transform: scale(0.8); /* Scale down the form */
+        transform-origin: center; /* Center the scaling */
+        max-width: 100%; /* Prevent overflow */
+        margin: 0 auto; /* Center the form */
+    }
+
+    /* Adjust input box size */
+    #zipFormContainer input {
+        width: 100%; /* Make the input take full width */
+        padding: 6px; /* Reduce padding */
+        font-size: 0.8rem; /* Smaller font size */
+    }
+
+    /* Adjust button size and font */
+    #zipFormContainer button {
+        padding: 8px 12px; /* Smaller padding for the button */
+        font-size: 0.8rem; /* Reduce font size */
+    }
+}
+
+.cardbits input {
+    width:50px;
+}
+
+/*#creditCardForm > p.aligncenter > i { color: gold;}*/
+/*[> Realistic golden sheen effect <]*/
+.golden-lock {
+    background: linear-gradient(135deg, #ffd700, #daa520, #ffd700); /* gold gradient */
+    -webkit-background-clip: text; /* apply gradient to text */
+    -webkit-text-fill-color: transparent; /* make the text transparent to show gradient */
+    font-size: .9rem; /* adjust icon size */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4); /* add a subtle shadow for realism */
+}
+
+/* Wrapper for input field with icon */
+.input-icon {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    max-width: 300px; /* Adjust input width */
+}
+
+.input-icon input {
+    width: 100%;
+    padding-right: 30px; /* Ensure space for the lock icon */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.input-icon .green-lock {
+    position: absolute;
+    right: 10px; /* Position the lock to the right side */
+    top: 50%;
+    transform: translateY(-50%);
+    color: green; /* Green color for the lock icon */
+    font-size: 1rem;
+}
+
+
+#cartForm > div.payment-section > label > i, .alignright {
+    position:relative;
+    float:right;
+}
+.nodec, .nodec:hover, #cartForm > div.header > div.logo-title-container > div > a.phone-number.nodec {
+    text-decoration: none;
+    color:#000;
+}
+
+/* Subtle dark green glow for active tab text */
+.tab.active {
+    background: #fff; /* Keep existing background */
+    font-weight: bold; /* Existing bold text */
+    color: darkgreen; /* Set text color to dark green */
+    text-shadow: 0 0 4px rgba(0, 100, 0, 0.5); /* Softer dark green glow */
+}
+
+h3 i.fa-phone-alt {
+    color: #000; /* Icon color */
+    margin-right: 8px; /* Space between icon and text */
+    font-size: 1.2rem; /* Adjust icon size */
+    vertical-align: middle; /* Align icon with text */
+}
+
+
+
+/* For mobile and small screens (less than 768px) */
+@media (max-width: 767px) {
+    body {
+        margin: 0; /* Remove extra margin */
+        padding: 0; /* Remove padding */
+        font-size: 14px; /* Slightly larger default fonts for better readability */
+    }
+
+    form {
+        max-width: 100%; /* Make the form take the full width */
+        margin: 0; /* Remove automatic centering margin */
+        padding: 10px; /* Add padding inside the form */
+        box-sizing: border-box; /* Ensure padding doesn't overflow */
+    }
+
+    .header {
+        width: 100%; /* Make the header take full width */
+        max-width: 100%; /* Prevent restricting the width */
+        margin: 0 auto; /* Center the header content */
+        padding: 10px; /* Add some padding */
+        text-align: center; /* Align content centrally */
+    }
+
+    .tab-container {
+        flex-wrap: wrap; /* Allow tabs to wrap on smaller screens */
+        padding: 10px; /* Add padding */
+        justify-content: space-between; /* Spread tabs out evenly */
+    }
+
+    .tab {
+        flex: 1; /* Make each tab take equal space */
+        text-align: center; /* Center text in each tab */
+        margin: 5px; /* Add space between tabs */
+    }
+
+    .cart-section,
+    .payment-section {
+        width: 100%; /* Ensure sections stretch to full width */
+        padding: 10px; /* Add internal padding */
+        box-sizing: border-box; /* Prevent overflow */
+    }
+
+    .info-row {
+        width: 100%; /* Ensure each row takes full width */
+    }
+
+    .customer-info {
+        gap: 10px; /* Reduce gap for smaller screens */
+    }
+}
+
+
+/* Move only the border-bottom up by 10px on screens <= 768px */
+@media (max-width: 768px) {
+    #cartForm > div.tab-container {
+        position: relative;
+        top:-20px;
+        margin-bottom: 10px; /* Optional: Adjust spacing below */
+    }
+
+    #cartForm > div.tab-container::after {
+        content: "";
+        position: absolute;
+        bottom: -10px; /* Moves the border 20px up */
+        left: 0;
+        width: 100%;
+        border-bottom: 0px solid #ccc; /* The border line */
+    }
+}
+
+
+
+/* Mobile portrait view */
+@media (max-width: 767px) {
+    #cityName {
+        font-size: 1.2em!important; /* Shrinks text to half its normal size */
+        text-align: center; /* Ensures the text stays centered */
+        margin: 0;
+    }
+
+    .phone-number {
+        display: visible; /* Hides the "Call us at" text */
+        font-size: 80%!important; /* Shrinks text to half its normal size */
+    }
+    .tab-container {
+        position:relative;
+        top:10px;
+    }
+    .item-price {
+        position:relative;
+        top:10px!important;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f9f9f9;
+    color: #333;
+    font-size: 16px; /* Base font size for all devices */
+}
+
+
+/* Adjust the header section */
+.header {
+    margin: 0;
+    padding: 0;
+}
+
+/* Align logo and text side by side */
+.logo-title-container {
+    display: flex;
+    align-items: flex-start; /* Align items at the top */
+    gap: 10px; /* Space between logo and text */
+    margin: 5px 0;
+}
+
+/* Style for the logo */
+.doap-logo {
+    width: 50px; /* Adjust logo size */
+    height: auto;
+    margin: 0; /* Remove extra margins */
+}
+
+/* Text container for CityName and phone */
+.text-container {
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+}
+
+/* Style for CityName Doap */
+#cityName {
+    font-family: 'Marvel', sans-serif;
+    font-size: 2rem;
+    margin: 0;
+    line-height: 1;
+}
+
+/* Style for the phone number */
+.phone-number {
+    font-size: 0.8rem; /* Smaller font size */
+    margin: 5px 0 0; /* Small margin above the text */
+    color: #333; /* Default text color */
+    text-decoration: none; /* Remove underline */
+    font-weight: normal; /* Adjust font weight */
+}
+
+.phone-number:hover {
+    color: #007BFF; /* Add hover effect for better UX */
+    text-decoration: underline; /* Underline on hover */
+}
+
+/* Style for the menu title */
+.menu-title {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+.menu-title-text {
+    margin: 0;
+    line-height: 1.2;
+    position:relative;
+    top:-15px;
+}
+
+
+
+.menu-title > div:nth-child(2) {display:none;}
+
+
+/* Phone number styling */
+.menu-title a {
+    display: inline-block; /* Keep it aligned with other text */
+    margin-top: 5px; /* Reduce space between phone number and text above */
+    font-size: 0.9rem; /* Adjust font size */
+    color: #333; /* Default text color */
+    text-decoration: none; /* No underline */
+}
+
+.menu-title a:hover {
+    color: #007BFF; /* Optional hover effect */
+    text-decoration: underline;
+}
+
+
+/* Center alignment for the header */
+.logo-title-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px; /* Space between the logo and text */
+    margin: 20px 0; /* Optional: Add some margin to separate from other elements */
+}
+
+/* Style for the Doap logo */
+/* Move the logo up by 10px */
+.doap-logo {
+    width: 50px; /* Keep the logo size */
+    height: auto; /* Maintain aspect ratio */
+    margin: 0; /* Ensure no extra margins */
+    transform: translateY(-10px); /* Move up by 15px */
+    position: relative; /* Ensure positioning does not affect layout */
+}
+
+
+/* Phone number styling */
+.phone-number {
+    text-align: center; /* Center-align the phone number */
+    font-size: 0.9rem; /* Smaller font size */
+    margin-top: 5px; /* Space between the header and the phone number */
+}
+
+.phone-number a {
+    color: #333; /* Default text color */
+    text-decoration: none; /* Remove underline */
+    font-weight: bold; /* Make the number stand out */
+}
+
+.phone-number a:hover {
+    color: #007BFF; /* Change color on hover for better UX */
+    text-decoration:none;
+}
+
+/* Style the remove-item "X" */
+.remove-item {
+    color: red; /* Set the text color to red */
+    font-weight: bold; /* Optional: Make it bold */
+    cursor: pointer; /* Ensure it looks clickable */
+    margin-left: 10px; /* Add some spacing */
+    font-size: 1.2rem; /* Optional: Adjust size */
+}
+
+.remove-item:hover {
+    color: darkred; /* Change to a darker red on hover for better UX */
+    text-decoration: underline; /* Optional: Add underline on hover */
+}
+
+
+
+
+
+.accordion-section {
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-top: 10px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.accordion-section h3 {
+    margin-top: 0;
+}
+
+
+
+
+/* General Popup Styling */
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    z-index: 1000;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+/* Success Message Styling */
+.popup.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+/* Error Message Styling */
+.popup.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+/* Fade In and Out Visibility */
+.popup.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Optional: Add dim background */
+.popup-dim {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.popup-dim.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+
+
+
+
+/* Customer Information */
+.customer-info {
+    display: flex;
+    flex-direction: column;  /* Stack fields vertically */
+    gap: 15px;  /* Space between form rows */
+    margin-bottom: 20px;
+}
+
+/* Row structure for each form field */
+.info-row {
+    display: flex;
+    flex-direction: column;  /* Stack label and input vertically */
+    gap: 5px;  /* Space between label and input */
+}
+
+/* Label styles */
+.customer-info label {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+/* Input fields and textarea */
+.customer-info input,
+.customer-info textarea {
+    width: 100%;  /* Ensure inputs take up full width */
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+/* Make Address input (textarea) the same height as City input */
+.customer-info textarea {
+    resize: vertical; /* Allow vertical resizing */
+    height: 40px;  /* Match the height of the city input */
+}
+
+/* For mobile and small screens (less than 768px) */
+@media (max-width: 767px) {
+    .customer-info {
+        flex-direction: column;  /* Stack fields vertically */
+    }
+
+    .info-row {
+        width: 100%;  /* Ensure full-width on mobile */
+    }
+}
+
+/* Adjust for tablets and larger screens (768px and up) */
+@media (min-width: 768px) {
+    .customer-info {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;  /* Three columns */
+        gap: 15px;
+    }
+
+    .info-row {
+        display: flex;
+        flex-direction: column;  /* Ensure the label and input stay stacked */
+    }
+}
+
+
+h1, h2, h3, .Marvelfont {
+    font-family: 'Marvel', sans-serif; /* Apply Marvel font to tab text */
+}
+
+.menu-title-text{
+    text-align:center;
+}
+
+
+/* Form Container */
+form {
+    margin: 0 auto;
+    padding: 20px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive Design */
+@media (min-width: 1025px) { /* Desktop */
+    body {
+        font-size: 20px; /* Larger fonts on desktops */
+    }
+    form {
+        max-width: 800px; /* Larger width for desktops */
+        margin: 50px auto; /* Large margins */
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) { /* Tablets */
+    body {
+        font-size: 18px; /* Medium-sized fonts on tablets */
+    }
+    form {
+        max-width: 600px; /* Medium width for tablets */
+        margin: 30px auto; /* Medium margins */
+    }
+}
+
+@media (max-width: 767px) { /* Mobile */
+    body {
+        font-size: 14px; /* Slightly larger default fonts for mobile */
+    }
+    form {
+        max-width: 100%; /* Full width for mobile */
+        margin: 10px; /* Tiny margins on mobile */
+    }
+}
+
+/* Header Section */
+.header {
+    width: 100%; /* Ensure it takes up full width */
+    max-width: 500px; /* Limit the header container to prevent excess width */
+    margin: 0 auto;
+    text-align: center;
+}
+
+.header img {
+    width: 150px; /* Set a fixed width for the logo (half size) */
+    height: auto; /* Maintain aspect ratio */
+    max-width: 100%; /* Ensure it doesn't overflow the parent container */
+    position:relative;
+    top:10px;
+}
+.header h1 {
+    margin: 10px 0 0;
+    font-weight: bold;
+    font-size: 2rem; /* Adjusts with global font size */
+    font-family: 'Marvel', sans-serif; /* Use Marvel font */
+}
+
+/* Tab Container */
+.tab-container {
+    display: flex;
+    justify-content: center;
+    border-bottom: 0px solid #ccc;
+    margin-bottom: 20px;
+}
+.tab {
+    padding: 10px 20px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    /*border-bottom: none;*/
+    background: #f9f9f9;
+    margin: 0 5px;
+    font-size: 1.1em;
+    font-family: 'Marvel', sans-serif; /* Apply Marvel font to tab text */
+
+}
+.tab.active {
+    background: #fff;
+    font-weight: bold;
+}
+
+/* Tab Content */
+.tab-content {
+    display: none; /* Hide all tabs by default */
+}
+.tab-content.active {
+    display: block; /* Show only the active tab */
+}
+
+/* Item List */
+.item-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Space between items */
+}
+
+
+
+/* General Reset */
+
+
+
+.category-content {
+    display: block; /* Initially open */
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+.category-content.hidden {
+    display: none; /* Hidden when collapsed */
+}
+
+.category-heading {
+    cursor: pointer;
+    background-color: #000;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 10px;
+
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #2e2e2e; /* Deeper dark grey */
+    font-family: 'Marvel', sans-serif;
+}
+
+
+
+/* Modal for the large image */
+.large-image-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    visibility: hidden;
+    opacity: 0;
+    background: rgba(0, 0, 0, 0.8); /* Dark overlay */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: opacity 0.3s ease-in-out;
+    pointer-events: none;
+    text-align: center;
+}
+
+.large-image-modal img {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+/* Enable pointer interactions when visible */
+.large-image-modal[style*="visibility: visible"] {
+    pointer-events: auto;
+}
+
+
+
+.thumbnail-container {
+    position: relative;
+    z-index: 1; /* Ensure container is above background layers */
+}
+
+.thumbnail {
+    width: 100%;
+    height: auto;
+    transition: transform 0.3s ease; /* Smooth zoom effect */
+}
+
+.large-image-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    visibility: hidden;
+    opacity: 0;
+    background: rgba(0, 0, 0, 0.8); /* Dark overlay */
+    padding: 20px;
+    border-radius: 10px;
+    transition: opacity 0.3s ease-in-out; /* Smooth fade-in and fade-out */
+    pointer-events: none;
+    text-align: center;
+}
+
+.large-image-modal img {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+
+
+.category-heading {
+    background-color: #007BFF; /* Blue background */
+    color: white; /* White text */
+    text-align: center; /* Center the text */
+    padding: 20px; /* Add space around the text */
+    margin-bottom: 20px; /* Add space below the heading */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+}
+
+.category-heading h1 {
+    font-family: 'Marvel', sans-serif; /* Marvel font */
+    font-size: 2.5rem; /* Large font size */
+    margin: 0; /* Remove margin */
+    text-transform: uppercase; /* Make the text uppercase */
+    letter-spacing: 1.5px; /* Add letter spacing for effect */
+}
+
+
+
+.original-price {
+    text-decoration: line-through;
+    color: #999; /* Optional: Light gray for a more subdued effect */
+    margin-right: 10px; /* Optional: Adds spacing between prices */
+}
+
+.current-price {
+    font-weight: bold;
+    color: #000; /* Optional: Highlight current price */
+}
+
+
+.item-description {
+font-size: 1rem;
+}
+
+/* Tab styles */
+.tab-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.tab {
+  padding: 10px 20px;
+  cursor: pointer;
+  background: #f9f9f9;
+  border: 1px solid #ccc;
+  border-bottom: none;
+  margin: 0 5px;
+  font-size: 1.1rem;
+}
+
+.tab.active {
+  background: #fff;
+  font-weight: bold;
+  border-bottom: 2px solid #007bff;
+}
+
+/* Tab content */
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+
+
+
+
+/* Alternate background colors for list items */
+#selectedItemsList li:nth-child(odd) {
+    background-color: #ffe6e6; /* Pale pink for odd rows */
+}
+
+#selectedItemsList li:nth-child(even) {
+    background-color: #ffffff; /* White for even rows */
+}
+
+/* Default background for "No items selected yet" */
+#selectedItemsList li:only-child {
+    background-color: transparent; /* Default background */
+    text-align: center; /* Center-align the message for better UX */
+    color: #555; /* Slightly lighter text color */
+}
+
+/* Add padding and styling for better visual appearance */
+#selectedItemsList li {
+    padding: 10px; /* Add spacing inside each list item */
+    border-bottom: 1px solid #ddd; /* Optional: Add bottom border for separation */
+    display: flex; /* Keep content aligned */
+    justify-content: space-between; /* Distribute space between content */
+    align-items: center; /* Align items vertically */
+}
+
+/* Optional: Add a border to distinguish list visually */
+#selectedItemsList {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow: hidden; /* Clean edges */
+    padding: 0;
+}
+
+
+
+
+/* Alternating background colors for cart items */
+.cart-item:nth-child(odd) {
+    background-color: #f9f9f9; /* Light gray for odd items */
+}
+
+.cart-item:nth-child(even) {
+    background-color: #ffffff; /* White for even items */
+}
+
+
+
+/* Smaller text for crypto wallet addresses */
+.small-text {
+    font-size: 0.65rem; /* Reduce font size */
+    line-height: 1.2;   /* Adjust line spacing */
+    color: #444;        /* Slightly darker color for better readability */
+}
+
+
+@media (max-width: 400px) {
+    #zipFormContainer > form {
+        transform: scale(0.8); /* Scale down the form */
+        transform-origin: center; /* Center the scaling */
+        max-width: 100%; /* Prevent overflow */
+        margin: 0 auto; /* Center the form */
+    }
+
+    /* Adjust input box size */
+    #zipFormContainer input {
+        width: 100%; /* Make the input take full width */
+        padding: 6px; /* Reduce padding */
+        font-size: 0.8rem; /* Smaller font size */
+    }
+
+    /* Adjust button size and font */
+    #zipFormContainer button {
+        padding: 8px 12px; /* Smaller padding for the button */
+        font-size: 0.8rem; /* Reduce font size */
+    }
+}
+
+.cardbits input {
+    width:50px;
+}
+
+/*#creditCardForm > p.aligncenter > i { color: gold;}*/
+/*[> Realistic golden sheen effect <]*/
+.golden-lock {
+    background: linear-gradient(135deg, #ffd700, #daa520, #ffd700); /* gold gradient */
+    -webkit-background-clip: text; /* apply gradient to text */
+    -webkit-text-fill-color: transparent; /* make the text transparent to show gradient */
+    font-size: .9rem; /* adjust icon size */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4); /* add a subtle shadow for realism */
+}
+
+/* Wrapper for input field with icon */
+.input-icon {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    max-width: 300px; /* Adjust input width */
+}
+
+.input-icon input {
+    width: 100%;
+    padding-right: 30px; /* Ensure space for the lock icon */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.input-icon .green-lock {
+    position: absolute;
+    right: 10px; /* Position the lock to the right side */
+    top: 50%;
+    transform: translateY(-50%);
+    color: green; /* Green color for the lock icon */
+    font-size: 1rem;
+}
+
+
+#cartForm > div.payment-section > label > i, .alignright {
+    position:relative;
+    float:right;
+}
+.nodec, .nodec:hover, #cartForm > div.header > div.logo-title-container > div > a.phone-number.nodec {
+    text-decoration: none;
+    color:#000;
+}
+
+/* Subtle dark green glow for active tab text */
+.tab.active {
+    background: #fff; /* Keep existing background */
+    font-weight: bold; /* Existing bold text */
+    color: darkgreen; /* Set text color to dark green */
+    text-shadow: 0 0 4px rgba(0, 100, 0, 0.5); /* Softer dark green glow */
+}
+
+h3 i.fa-phone-alt {
+    color: #000; /* Icon color */
+    margin-right: 8px; /* Space between icon and text */
+    font-size: 1.2rem; /* Adjust icon size */
+    vertical-align: middle; /* Align icon with text */
+}
+
+
+
+/* For mobile and small screens (less than 768px) */
+@media (max-width: 767px) {
+    body {
+        margin: 0; /* Remove extra margin */
+        padding: 0; /* Remove padding */
+        font-size: 14px; /* Slightly larger default fonts for better readability */
+    }
+
+    form {
+        max-width: 100%; /* Make the form take the full width */
+        margin: 0; /* Remove automatic centering margin */
+        padding: 10px; /* Add padding inside the form */
+        box-sizing: border-box; /* Ensure padding doesn't overflow */
+    }
+
+    .header {
+        width: 100%; /* Make the header take full width */
+        max-width: 100%; /* Prevent restricting the width */
+        margin: 0 auto; /* Center the header content */
+        padding: 10px; /* Add some padding */
+        text-align: center; /* Align content centrally */
+    }
+
+    .tab-container {
+        flex-wrap: wrap; /* Allow tabs to wrap on smaller screens */
+        padding: 10px; /* Add padding */
+        justify-content: space-between; /* Spread tabs out evenly */
+    }
+
+    .tab {
+        flex: 1; /* Make each tab take equal space */
+        text-align: center; /* Center text in each tab */
+        margin: 5px; /* Add space between tabs */
+    }
+
+    .cart-section,
+    .payment-section {
+        width: 100%; /* Ensure sections stretch to full width */
+        padding: 10px; /* Add internal padding */
+        box-sizing: border-box; /* Prevent overflow */
+    }
+
+    .info-row {
+        width: 100%; /* Ensure each row takes full width */
+    }
+
+    .customer-info {
+        gap: 10px; /* Reduce gap for smaller screens */
+    }
+}
+
+
+/* Move only the border-bottom up by 10px on screens <= 768px */
+@media (max-width: 768px) {
+    #cartForm > div.tab-container {
+        position: relative;
+        top:-20px;
+        margin-bottom: 10px; /* Optional: Adjust spacing below */
+    }
+
+    #cartForm > div.tab-container::after {
+        content: "";
+        position: absolute;
+        bottom: -10px; /* Moves the border 20px up */
+        left: 0;
+        width: 100%;
+        border-bottom: 0px solid #ccc; /* The border line */
+    }
+}
+
+
+
+/* Mobile portrait view */
+@media (max-width: 767px) {
+    #cityName {
+        font-size: 1.2em!important; /* Shrinks text to half its normal size */
+        text-align: center; /* Ensures the text stays centered */
+        margin: 0;
+    }
+
+    .phone-number {
+        display: visible; /* Hides the "Call us at" text */
+        font-size: 80%!important; /* Shrinks text to half its normal size */
+    }
+    .tab-container {
+        position:relative;
+        top:10px;
+    }
+    .item-price {
+        position:relative;
+        top:10px!important;
+    }
+}
+
+
+
+
+
+
+/* Style for individual product items */
 .item {
     display: flex;
     align-items: center;
     gap: 15px;
+    padding: 15px; /* Add some internal padding */
+    background: #fff; /* Ensure a white background for contrast */
+    border: 1px dashed #ccc; /* Thin, light, dashed border */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    transition: box-shadow 0.3s ease; /* Smooth shadow transition on hover */
+}
+
+/* Add hover effect for better interactivity */
+.item:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Slightly deeper shadow on hover */
+    border-color: #bbb; /* Darken the border slightly on hover */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f9f9f9;
+    color: #333;
+    font-size: 16px; /* Base font size for all devices */
+}
+
+
+/* Adjust the header section */
+.header {
+    margin: 0;
+    padding: 0;
+}
+
+/* Align logo and text side by side */
+.logo-title-container {
+    display: flex;
+    align-items: flex-start; /* Align items at the top */
+    gap: 10px; /* Space between logo and text */
+    margin: 5px 0;
+}
+
+/* Style for the logo */
+.doap-logo {
+    width: 50px; /* Adjust logo size */
+    height: auto;
+    margin: 0; /* Remove extra margins */
+}
+
+/* Text container for CityName and phone */
+.text-container {
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+}
+
+/* Style for CityName Doap */
+#cityName {
+    font-family: 'Marvel', sans-serif;
+    font-size: 2rem;
+    margin: 0;
+    line-height: 1;
+}
+
+/* Style for the phone number */
+.phone-number {
+    font-size: 0.8rem; /* Smaller font size */
+    margin: 5px 0 0; /* Small margin above the text */
+    color: #333; /* Default text color */
+    text-decoration: none; /* Remove underline */
+    font-weight: normal; /* Adjust font weight */
+}
+
+.phone-number:hover {
+    color: #007BFF; /* Add hover effect for better UX */
+    text-decoration: underline; /* Underline on hover */
+}
+
+/* Style for the menu title */
+.menu-title {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+.menu-title-text {
+    margin: 0;
+    line-height: 1.2;
+    position:relative;
+    top:-15px;
+}
+
+
+
+.menu-title > div:nth-child(2) {display:none;}
+
+
+/* Phone number styling */
+.menu-title a {
+    display: inline-block; /* Keep it aligned with other text */
+    margin-top: 5px; /* Reduce space between phone number and text above */
+    font-size: 0.9rem; /* Adjust font size */
+    color: #333; /* Default text color */
+    text-decoration: none; /* No underline */
+}
+
+.menu-title a:hover {
+    color: #007BFF; /* Optional hover effect */
+    text-decoration: underline;
+}
+
+
+/* Center alignment for the header */
+.logo-title-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px; /* Space between the logo and text */
+    margin: 20px 0; /* Optional: Add some margin to separate from other elements */
+}
+
+/* Style for the Doap logo */
+/* Move the logo up by 10px */
+.doap-logo {
+    width: 50px; /* Keep the logo size */
+    height: auto; /* Maintain aspect ratio */
+    margin: 0; /* Ensure no extra margins */
+    transform: translateY(-10px); /* Move up by 15px */
+    position: relative; /* Ensure positioning does not affect layout */
+}
+
+
+/* Phone number styling */
+.phone-number {
+    text-align: center; /* Center-align the phone number */
+    font-size: 0.9rem; /* Smaller font size */
+    margin-top: 5px; /* Space between the header and the phone number */
+}
+
+.phone-number a {
+    color: #333; /* Default text color */
+    text-decoration: none; /* Remove underline */
+    font-weight: bold; /* Make the number stand out */
+}
+
+.phone-number a:hover {
+    color: #007BFF; /* Change color on hover for better UX */
+    text-decoration:none;
+}
+
+/* Style the remove-item "X" */
+.remove-item {
+    color: red; /* Set the text color to red */
+    font-weight: bold; /* Optional: Make it bold */
+    cursor: pointer; /* Ensure it looks clickable */
+    margin-left: 10px; /* Add some spacing */
+    font-size: 1.2rem; /* Optional: Adjust size */
+}
+
+.remove-item:hover {
+    color: darkred; /* Change to a darker red on hover for better UX */
+    text-decoration: underline; /* Optional: Add underline on hover */
+}
+
+
+
+
+
+.accordion-section {
+    border: 1px solid #ddd;
     padding: 15px;
-    background: #fff;
-    border: 1px dashed #ccc;
-    border-radius: 10px;
+    margin-top: 10px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: box-shadow 0.3s ease;
+}
+
+.accordion-section h3 {
+    margin-top: 0;
+}
+
+
+
+
+/* General Popup Styling */
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    z-index: 1000;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+/* Success Message Styling */
+.popup.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+/* Error Message Styling */
+.popup.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+/* Fade In and Out Visibility */
+.popup.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Optional: Add dim background */
+.popup-dim {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.popup-dim.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+
+
+
+
+/* Customer Information */
+.customer-info {
+    display: flex;
+    flex-direction: column;  /* Stack fields vertically */
+    gap: 15px;  /* Space between form rows */
+    margin-bottom: 20px;
+}
+
+/* Row structure for each form field */
+.info-row {
+    display: flex;
+    flex-direction: column;  /* Stack label and input vertically */
+    gap: 5px;  /* Space between label and input */
+}
+
+/* Label styles */
+.customer-info label {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+/* Input fields and textarea */
+.customer-info input,
+.customer-info textarea {
+    width: 100%;  /* Ensure inputs take up full width */
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+/* Make Address input (textarea) the same height as City input */
+.customer-info textarea {
+    resize: vertical; /* Allow vertical resizing */
+    height: 40px;  /* Match the height of the city input */
+}
+
+/* For mobile and small screens (less than 768px) */
+@media (max-width: 767px) {
+    .customer-info {
+        flex-direction: column;  /* Stack fields vertically */
+    }
+
+    .info-row {
+        width: 100%;  /* Ensure full-width on mobile */
+    }
+}
+
+/* Adjust for tablets and larger screens (768px and up) */
+@media (min-width: 768px) {
+    .customer-info {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;  /* Three columns */
+        gap: 15px;
+    }
+
+    .info-row {
+        display: flex;
+        flex-direction: column;  /* Ensure the label and input stay stacked */
+    }
+}
+
+
+h1, h2, h3, .Marvelfont {
+    font-family: 'Marvel', sans-serif; /* Apply Marvel font to tab text */
+}
+
+.menu-title-text{
+    text-align:center;
+}
+
+
+/* Form Container */
+form {
+    margin: 0 auto;
+    padding: 20px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive Design */
+@media (min-width: 1025px) { /* Desktop */
+    body {
+        font-size: 20px; /* Larger fonts on desktops */
+    }
+    form {
+        max-width: 800px; /* Larger width for desktops */
+        margin: 50px auto; /* Large margins */
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) { /* Tablets */
+    body {
+        font-size: 18px; /* Medium-sized fonts on tablets */
+    }
+    form {
+        max-width: 600px; /* Medium width for tablets */
+        margin: 30px auto; /* Medium margins */
+    }
+}
+
+@media (max-width: 767px) { /* Mobile */
+    body {
+        font-size: 14px; /* Slightly larger default fonts for mobile */
+    }
+    form {
+        max-width: 100%; /* Full width for mobile */
+        margin: 10px; /* Tiny margins on mobile */
+    }
+}
+
+/* Header Section */
+.header {
+    width: 100%; /* Ensure it takes up full width */
+    max-width: 500px; /* Limit the header container to prevent excess width */
+    margin: 0 auto;
+    text-align: center;
+}
+
+.header img {
+    width: 150px; /* Set a fixed width for the logo (half size) */
+    height: auto; /* Maintain aspect ratio */
+    max-width: 100%; /* Ensure it doesn't overflow the parent container */
+    position:relative;
+    top:10px;
+}
+.header h1 {
+    margin: 10px 0 0;
+    font-weight: bold;
+    font-size: 2rem; /* Adjusts with global font size */
+    font-family: 'Marvel', sans-serif; /* Use Marvel font */
+}
+
+/* Tab Container */
+.tab-container {
+    display: flex;
+    justify-content: center;
+    border-bottom: 0px solid #ccc;
+    margin-bottom: 20px;
+}
+.tab {
+    padding: 10px 20px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    /*border-bottom: none;*/
+    background: #f9f9f9;
+    margin: 0 5px;
+    font-size: 1.1em;
+    font-family: 'Marvel', sans-serif; /* Apply Marvel font to tab text */
+
+}
+.tab.active {
+    background: #fff;
+    font-weight: bold;
+}
+
+/* Tab Content */
+.tab-content {
+    display: none; /* Hide all tabs by default */
+}
+.tab-content.active {
+    display: block; /* Show only the active tab */
+}
+
+/* Item List */
+.item-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Space between items */
+}
+
+/*.item {*/
+    /*display: flex;*/
+    /*align-items: center;*/
+    /*padding: 10px;*/
+    /*background: #f4f4f4;*/
+    /*border: 1px solid #ddd;*/
+    /*border-radius: 5px;*/
+    /*box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);*/
+    /*transition: background 0.3s ease;*/
+/*}*/
+
+.item {
+    display: flex;
+    align-items: center; /* Vertically align all child elements */
+    justify-content: space-between; /* Distribute space between child elements */
+    gap: 15px; /* Add some space between elements */
 }
 
 .item:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    border-color: #bbb;
+    background: #e8e8e8;
+}
+
+.item input[type="checkbox"] {
+    margin-right: 10px;
+    flex-shrink: 0;
 }
 
 .item img {
@@ -97,20 +2596,64 @@ body {
     height: 80px;
     object-fit: cover;
     border-radius: 5px;
+    margin-right: 15px;
+    flex-shrink: 0;
 }
+
 
 .item-title {
     font-size: 1.1rem;
     font-weight: bold;
-    font-family: 'Marvel', sans-serif;
+    color: #333;
+    margin-bottom: 5px;
+    font-family: 'Marvel', sans-serif; /* Apply Marvel font to tab text */
 }
 
 .item-price {
     font-size: 1rem;
     color: #888;
+    margin-bottom: 5px;
+    position:relative;
+    top:-30px;
 }
 
-/* Cart */
+
+/* Ensure the .item container is a horizontal flexbox */
+.item {
+    display: flex;
+    align-items: center; /* Vertically align all child elements */
+    gap: 15px; /* Add space between elements */
+}
+
+/* Ensure the .item-details and .item-quantity are inline */
+.item-details {
+    flex-grow: 1; /* Allow it to expand and take up available space */
+    display: flex;
+    flex-direction: column; /* Stack title and price vertically */
+    justify-content: center; /* Center content vertically */
+}
+
+.item-quantity {
+    display: flex;
+    align-items: center; /* Center vertically */
+    margin-left: auto; /* Push it to the far right */
+}
+
+/* Optional: Add spacing for the label and input */
+.item-quantity label {
+    margin-right: 5px;
+}
+
+.item-quantity input[type="number"] {
+    width: 60px;
+    padding: 5px;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+
+/* Cart Section */
 .cart-section {
     margin: 20px 0;
     padding: 10px;
@@ -125,26 +2668,21 @@ body {
 .cart-section ul {
     list-style: none;
     padding: 0;
+    margin: 0;
 }
 
 .cart-section li {
+    margin: 5px 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
-}
-
-#totalPriceRow {
-    background-color: black;
-    color: white;
-    font-weight: bold;
-    padding: 10px;
-    text-align: center;
-    border-radius: 5px;
 }
 
 /* Payment Section */
+.payment-section {
+    margin: 20px 0;
+}
+
 .payment-section label {
     font-size: 1.2em;
     font-weight: bold;
@@ -156,32 +2694,1251 @@ body {
     margin-top: 5px;
     border: 1px solid #ddd;
     border-radius: 5px;
+    background-color: #fff;
 }
 
-/* Responsive Design */
+/* Buttons */
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #ff6600;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #e65a00;
+}
+
+
+
+
+
+/* Style for the Total Price row */
+#totalPriceRow {
+    background-color: black; /* Black background */
+    color: white; /* White text */
+    font-weight: bold; /* Bold text */
+    padding: 10px; /* Add some padding for better spacing */
+    border-radius: 5px; /* Optional: rounded corners */
+    text-align: center; /* Center-align the text */
+}
+
+
+
+
+.item {
+    display: flex;
+    align-items: center; /* Vertically align all child elements */
+    justify-content: space-between; /* Distribute space between child elements */
+    gap: 15px; /* Add some space between elements */
+}
+
+.item:hover {
+    background: #e8e8e8;
+}
+
+.item input[type="checkbox"] {
+    margin-right: 10px;
+    flex-shrink: 0;
+}
+
+.item img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-right: 15px;
+    flex-shrink: 0;
+}
+
+
+.item-title {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 5px;
+    font-family: 'Marvel', sans-serif; /* Apply Marvel font to tab text */
+}
+
+.item-price {
+    font-size: 1rem;
+    color: #888;
+    margin-bottom: 5px;
+    position:relative;
+    top:-30px;
+}
+
+
+
+/* Cart Section */
+.cart-section {
+    margin: 20px 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    background: #f9f9f9;
+}
+
+.cart-section h3 {
+    margin: 0 0 10px;
+}
+
+.cart-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.cart-section li {
+    margin: 5px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Payment Section */
+.payment-section {
+    margin: 20px 0;
+}
+
+.payment-section label {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.payment-section select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+/* Buttons */
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #ff6600;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #e65a00;
+}
+
+
+
+
+
+/* Style for the Total Price row */
+#totalPriceRow {
+    background-color: black; /* Black background */
+    color: white; /* White text */
+    font-weight: bold; /* Bold text */
+    padding: 10px; /* Add some padding for better spacing */
+    border-radius: 5px; /* Optional: rounded corners */
+    text-align: center; /* Center-align the text */
+}
+
+
+
+/* General Reset */
+
+
+
+.category-content {
+    display: block; /* Initially open */
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+.category-content.hidden {
+    display: none; /* Hidden when collapsed */
+}
+
+.category-heading {
+    cursor: pointer;
+    background-color: #000;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 10px;
+
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #2e2e2e; /* Deeper dark grey */
+    font-family: 'Marvel', sans-serif;
+}
+
+
+
+/* Modal for the large image */
+.large-image-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    visibility: hidden;
+    opacity: 0;
+    background: rgba(0, 0, 0, 0.8); /* Dark overlay */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: opacity 0.3s ease-in-out;
+    pointer-events: none;
+    text-align: center;
+}
+
+.large-image-modal img {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+/* Enable pointer interactions when visible */
+.large-image-modal[style*="visibility: visible"] {
+    pointer-events: auto;
+}
+
+
+
+.thumbnail-container {
+    position: relative;
+    z-index: 1; /* Ensure container is above background layers */
+}
+
+.thumbnail {
+    width: 100%;
+    height: auto;
+    transition: transform 0.3s ease; /* Smooth zoom effect */
+}
+
+.large-image-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    visibility: hidden;
+    opacity: 0;
+    background: rgba(0, 0, 0, 0.8); /* Dark overlay */
+    padding: 20px;
+    border-radius: 10px;
+    transition: opacity 0.3s ease-in-out; /* Smooth fade-in and fade-out */
+    pointer-events: none;
+    text-align: center;
+}
+
+.large-image-modal img {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+
+
+.category-heading {
+    background-color: #007BFF; /* Blue background */
+    color: white; /* White text */
+    text-align: center; /* Center the text */
+    padding: 20px; /* Add space around the text */
+    margin-bottom: 20px; /* Add space below the heading */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+}
+
+.category-heading h1 {
+    font-family: 'Marvel', sans-serif; /* Marvel font */
+    font-size: 2.5rem; /* Large font size */
+    margin: 0; /* Remove margin */
+    text-transform: uppercase; /* Make the text uppercase */
+    letter-spacing: 1.5px; /* Add letter spacing for effect */
+}
+
+
+
+.original-price {
+    text-decoration: line-through;
+    color: #999; /* Optional: Light gray for a more subdued effect */
+    margin-right: 10px; /* Optional: Adds spacing between prices */
+}
+
+.current-price {
+    font-weight: bold;
+    color: #000; /* Optional: Highlight current price */
+}
+
+
+.item-description {
+font-size: 1rem;
+}
+
+/* Tab styles */
+.tab-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.tab {
+  padding: 10px 20px;
+  cursor: pointer;
+  background: #f9f9f9;
+  border: 1px solid #ccc;
+  border-bottom: none;
+  margin: 0 5px;
+  font-size: 1.1rem;
+}
+
+.tab.active {
+  background: #fff;
+  font-weight: bold;
+  border-bottom: 2px solid #007bff;
+}
+
+/* Tab content */
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+
+
+
+
+/* Alternate background colors for list items */
+#selectedItemsList li:nth-child(odd) {
+    background-color: #ffe6e6; /* Pale pink for odd rows */
+}
+
+#selectedItemsList li:nth-child(even) {
+    background-color: #ffffff; /* White for even rows */
+}
+
+/* Default background for "No items selected yet" */
+#selectedItemsList li:only-child {
+    background-color: transparent; /* Default background */
+    text-align: center; /* Center-align the message for better UX */
+    color: #555; /* Slightly lighter text color */
+}
+
+/* Add padding and styling for better visual appearance */
+#selectedItemsList li {
+    padding: 10px; /* Add spacing inside each list item */
+    border-bottom: 1px solid #ddd; /* Optional: Add bottom border for separation */
+    display: flex; /* Keep content aligned */
+    justify-content: space-between; /* Distribute space between content */
+    align-items: center; /* Align items vertically */
+}
+
+/* Optional: Add a border to distinguish list visually */
+#selectedItemsList {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow: hidden; /* Clean edges */
+    padding: 0;
+}
+
+
+
+
+/* Alternating background colors for cart items */
+.cart-item:nth-child(odd) {
+    background-color: #f9f9f9; /* Light gray for odd items */
+}
+
+.cart-item:nth-child(even) {
+    background-color: #ffffff; /* White for even items */
+}
+
+
+
+/* Smaller text for crypto wallet addresses */
+.small-text {
+    font-size: 0.65rem; /* Reduce font size */
+    line-height: 1.2;   /* Adjust line spacing */
+    color: #444;        /* Slightly darker color for better readability */
+}
+
+
+@media (max-width: 400px) {
+    #zipFormContainer > form {
+        transform: scale(0.8); /* Scale down the form */
+        transform-origin: center; /* Center the scaling */
+        max-width: 100%; /* Prevent overflow */
+        margin: 0 auto; /* Center the form */
+    }
+
+    /* Adjust input box size */
+    #zipFormContainer input {
+        width: 100%; /* Make the input take full width */
+        padding: 6px; /* Reduce padding */
+        font-size: 0.8rem; /* Smaller font size */
+    }
+
+    /* Adjust button size and font */
+    #zipFormContainer button {
+        padding: 8px 12px; /* Smaller padding for the button */
+        font-size: 0.8rem; /* Reduce font size */
+    }
+}
+
+.cardbits input {
+    width:50px;
+}
+
+/*#creditCardForm > p.aligncenter > i { color: gold;}*/
+/*[> Realistic golden sheen effect <]*/
+.golden-lock {
+    background: linear-gradient(135deg, #ffd700, #daa520, #ffd700); /* gold gradient */
+    -webkit-background-clip: text; /* apply gradient to text */
+    -webkit-text-fill-color: transparent; /* make the text transparent to show gradient */
+    font-size: .9rem; /* adjust icon size */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4); /* add a subtle shadow for realism */
+}
+
+/* Wrapper for input field with icon */
+.input-icon {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    max-width: 300px; /* Adjust input width */
+}
+
+.input-icon input {
+    width: 100%;
+    padding-right: 30px; /* Ensure space for the lock icon */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.input-icon .green-lock {
+    position: absolute;
+    right: 10px; /* Position the lock to the right side */
+    top: 50%;
+    transform: translateY(-50%);
+    color: green; /* Green color for the lock icon */
+    font-size: 1rem;
+}
+
+
+#cartForm > div.payment-section > label > i, .alignright {
+    position:relative;
+    float:right;
+}
+.nodec, .nodec:hover, #cartForm > div.header > div.logo-title-container > div > a.phone-number.nodec {
+    text-decoration: none;
+    color:#000;
+}
+
+/* Subtle dark green glow for active tab text */
+.tab.active {
+    background: #fff; /* Keep existing background */
+    font-weight: bold; /* Existing bold text */
+    color: darkgreen; /* Set text color to dark green */
+    text-shadow: 0 0 4px rgba(0, 100, 0, 0.5); /* Softer dark green glow */
+}
+
+h3 i.fa-phone-alt {
+    color: #000; /* Icon color */
+    margin-right: 8px; /* Space between icon and text */
+    font-size: 1.2rem; /* Adjust icon size */
+    vertical-align: middle; /* Align icon with text */
+}
+
+
+
+/* For mobile and small screens (less than 768px) */
 @media (max-width: 767px) {
     body {
-        font-size: 14px;
+        margin: 0; /* Remove extra margin */
+        padding: 0; /* Remove padding */
+        font-size: 14px; /* Slightly larger default fonts for better readability */
+    }
+
+    form {
+        max-width: 100%; /* Make the form take the full width */
+        margin: 0; /* Remove automatic centering margin */
+        padding: 10px; /* Add padding inside the form */
+        box-sizing: border-box; /* Ensure padding doesn't overflow */
+    }
+
+    .header {
+        width: 100%; /* Make the header take full width */
+        max-width: 100%; /* Prevent restricting the width */
+        margin: 0 auto; /* Center the header content */
+        padding: 10px; /* Add some padding */
+        text-align: center; /* Align content centrally */
+    }
+
+    .tab-container {
+        flex-wrap: wrap; /* Allow tabs to wrap on smaller screens */
+        padding: 10px; /* Add padding */
+        justify-content: space-between; /* Spread tabs out evenly */
     }
 
     .tab {
-        flex: 1;
-        text-align: center;
-        margin: 5px;
+        flex: 1; /* Make each tab take equal space */
+        text-align: center; /* Center text in each tab */
+        margin: 5px; /* Add space between tabs */
     }
 
     .cart-section,
     .payment-section {
-        width: 100%;
-        padding: 10px;
+        width: 100%; /* Ensure sections stretch to full width */
+        padding: 10px; /* Add internal padding */
+        box-sizing: border-box; /* Prevent overflow */
     }
 
+    .info-row {
+        width: 100%; /* Ensure each row takes full width */
+    }
+
+    .customer-info {
+        gap: 10px; /* Reduce gap for smaller screens */
+    }
+}
+
+
+/* Move only the border-bottom up by 10px on screens <= 768px */
+@media (max-width: 768px) {
+    #cartForm > div.tab-container {
+        position: relative;
+        top:-20px;
+        margin-bottom: 10px; /* Optional: Adjust spacing below */
+    }
+
+    #cartForm > div.tab-container::after {
+        content: "";
+        position: absolute;
+        bottom: -10px; /* Moves the border 20px up */
+        left: 0;
+        width: 100%;
+        border-bottom: 0px solid #ccc; /* The border line */
+    }
+}
+
+
+
+/* Mobile portrait view */
+@media (max-width: 767px) {
     #cityName {
-        font-size: 1.2rem;
+        font-size: 1.2em!important; /* Shrinks text to half its normal size */
+        text-align: center; /* Ensures the text stays centered */
+        margin: 0;
     }
 
     .phone-number {
-        font-size: 0.8rem;
+        display: visible; /* Hides the "Call us at" text */
+        font-size: 80%!important; /* Shrinks text to half its normal size */
+    }
+    .tab-container {
+        position:relative;
+        top:10px;
+    }
+    .item-price {
+        position:relative;
+        top:10px!important;
     }
 }
+
+
+
+
+
+
+/* Style for individual product items */
+.item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px; /* Add some internal padding */
+    background: #fff; /* Ensure a white background for contrast */
+    border: 1px dashed #ccc; /* Thin, light, dashed border */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    transition: box-shadow 0.3s ease; /* Smooth shadow transition on hover */
+}
+
+/* Add hover effect for better interactivity */
+.item:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Slightly deeper shadow on hover */
+    border-color: #bbb; /* Darken the border slightly on hover */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f9f9f9;
+    color: #333;
+    font-size: 16px; /* Base font size for all devices */
+}
+
+
+/* Adjust the header section */
+.header {
+    margin: 0;
+    padding: 0;
+}
+
+/* Align logo and text side by side */
+.logo-title-container {
+    display: flex;
+    align-items: flex-start; /* Align items at the top */
+    gap: 10px; /* Space between logo and text */
+    margin: 5px 0;
+}
+
+/* Style for the logo */
+.doap-logo {
+    width: 50px; /* Adjust logo size */
+    height: auto;
+    margin: 0; /* Remove extra margins */
+}
+
+/* Text container for CityName and phone */
+.text-container {
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+}
+
+/* Style for CityName Doap */
+#cityName {
+    font-family: 'Marvel', sans-serif;
+    font-size: 2rem;
+    margin: 0;
+    line-height: 1;
+}
+
+/* Style for the phone number */
+.phone-number {
+    font-size: 0.8rem; /* Smaller font size */
+    margin: 5px 0 0; /* Small margin above the text */
+    color: #333; /* Default text color */
+    text-decoration: none; /* Remove underline */
+    font-weight: normal; /* Adjust font weight */
+}
+
+.phone-number:hover {
+    color: #007BFF; /* Add hover effect for better UX */
+    text-decoration: underline; /* Underline on hover */
+}
+
+/* Style for the menu title */
+.menu-title {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+.menu-title-text {
+    margin: 0;
+    line-height: 1.2;
+    position:relative;
+    top:-15px;
+}
+
+
+
+.menu-title > div:nth-child(2) {display:none;}
+
+
+/* Phone number styling */
+.menu-title a {
+    display: inline-block; /* Keep it aligned with other text */
+    margin-top: 5px; /* Reduce space between phone number and text above */
+    font-size: 0.9rem; /* Adjust font size */
+    color: #333; /* Default text color */
+    text-decoration: none; /* No underline */
+}
+
+.menu-title a:hover {
+    color: #007BFF; /* Optional hover effect */
+    text-decoration: underline;
+}
+
+
+/* Center alignment for the header */
+.logo-title-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px; /* Space between the logo and text */
+    margin: 20px 0; /* Optional: Add some margin to separate from other elements */
+}
+
+/* Style for the Doap logo */
+/* Move the logo up by 10px */
+.doap-logo {
+    width: 50px; /* Keep the logo size */
+    height: auto; /* Maintain aspect ratio */
+    margin: 0; /* Ensure no extra margins */
+    transform: translateY(-10px); /* Move up by 15px */
+    position: relative; /* Ensure positioning does not affect layout */
+}
+
+
+/* Phone number styling */
+.phone-number {
+    text-align: center; /* Center-align the phone number */
+    font-size: 0.9rem; /* Smaller font size */
+    margin-top: 5px; /* Space between the header and the phone number */
+}
+
+.phone-number a {
+    color: #333; /* Default text color */
+    text-decoration: none; /* Remove underline */
+    font-weight: bold; /* Make the number stand out */
+}
+
+.phone-number a:hover {
+    color: #007BFF; /* Change color on hover for better UX */
+    text-decoration:none;
+}
+
+/* Style the remove-item "X" */
+.remove-item {
+    color: red; /* Set the text color to red */
+    font-weight: bold; /* Optional: Make it bold */
+    cursor: pointer; /* Ensure it looks clickable */
+    margin-left: 10px; /* Add some spacing */
+    font-size: 1.2rem; /* Optional: Adjust size */
+}
+
+.remove-item:hover {
+    color: darkred; /* Change to a darker red on hover for better UX */
+    text-decoration: underline; /* Optional: Add underline on hover */
+}
+
+
+
+
+
+.accordion-section {
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-top: 10px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.accordion-section h3 {
+    margin-top: 0;
+}
+
+
+
+
+/* General Popup Styling */
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    z-index: 1000;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+/* Success Message Styling */
+.popup.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+/* Error Message Styling */
+.popup.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+/* Fade In and Out Visibility */
+.popup.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Optional: Add dim background */
+.popup-dim {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.popup-dim.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+
+
+
+
+/* Customer Information */
+.customer-info {
+    display: flex;
+    flex-direction: column;  /* Stack fields vertically */
+    gap: 15px;  /* Space between form rows */
+    margin-bottom: 20px;
+}
+
+/* Row structure for each form field */
+.info-row {
+    display: flex;
+    flex-direction: column;  /* Stack label and input vertically */
+    gap: 5px;  /* Space between label and input */
+}
+
+/* Label styles */
+.customer-info label {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+/* Input fields and textarea */
+.customer-info input,
+.customer-info textarea {
+    width: 100%;  /* Ensure inputs take up full width */
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+/* Make Address input (textarea) the same height as City input */
+.customer-info textarea {
+    resize: vertical; /* Allow vertical resizing */
+    height: 40px;  /* Match the height of the city input */
+}
+
+/* For mobile and small screens (less than 768px) */
+@media (max-width: 767px) {
+    .customer-info {
+        flex-direction: column;  /* Stack fields vertically */
+    }
+
+    .info-row {
+        width: 100%;  /* Ensure full-width on mobile */
+    }
+}
+
+/* Adjust for tablets and larger screens (768px and up) */
+@media (min-width: 768px) {
+    .customer-info {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;  /* Three columns */
+        gap: 15px;
+    }
+
+    .info-row {
+        display: flex;
+        flex-direction: column;  /* Ensure the label and input stay stacked */
+    }
+}
+
+
+h1, h2, h3, .Marvelfont {
+    font-family: 'Marvel', sans-serif; /* Apply Marvel font to tab text */
+}
+
+.menu-title-text{
+    text-align:center;
+}
+
+
+/* Form Container */
+form {
+    margin: 0 auto;
+    padding: 20px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive Design */
+@media (min-width: 1025px) { /* Desktop */
+    body {
+        font-size: 20px; /* Larger fonts on desktops */
+    }
+    form {
+        max-width: 800px; /* Larger width for desktops */
+        margin: 50px auto; /* Large margins */
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) { /* Tablets */
+    body {
+        font-size: 18px; /* Medium-sized fonts on tablets */
+    }
+    form {
+        max-width: 600px; /* Medium width for tablets */
+        margin: 30px auto; /* Medium margins */
+    }
+}
+
+@media (max-width: 767px) { /* Mobile */
+    body {
+        font-size: 14px; /* Slightly larger default fonts for mobile */
+    }
+    form {
+        max-width: 100%; /* Full width for mobile */
+        margin: 10px; /* Tiny margins on mobile */
+    }
+}
+
+/* Header Section */
+.header {
+    width: 100%; /* Ensure it takes up full width */
+    max-width: 500px; /* Limit the header container to prevent excess width */
+    margin: 0 auto;
+    text-align: center;
+}
+
+.header img {
+    width: 150px; /* Set a fixed width for the logo (half size) */
+    height: auto; /* Maintain aspect ratio */
+    max-width: 100%; /* Ensure it doesn't overflow the parent container */
+    position:relative;
+    top:10px;
+}
+.header h1 {
+    margin: 10px 0 0;
+    font-weight: bold;
+    font-size: 2rem; /* Adjusts with global font size */
+    font-family: 'Marvel', sans-serif; /* Use Marvel font */
+}
+
+/* Tab Container */
+.tab-container {
+    display: flex;
+    justify-content: center;
+    border-bottom: 0px solid #ccc;
+    margin-bottom: 20px;
+}
+.tab {
+    padding: 10px 20px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    /*border-bottom: none;*/
+    background: #f9f9f9;
+    margin: 0 5px;
+    font-size: 1.1em;
+    font-family: 'Marvel', sans-serif; /* Apply Marvel font to tab text */
+
+}
+.tab.active {
+    background: #fff;
+    font-weight: bold;
+}
+
+/* Tab Content */
+.tab-content {
+    display: none; /* Hide all tabs by default */
+}
+.tab-content.active {
+    display: block; /* Show only the active tab */
+}
+
+/* Item List */
+.item-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Space between items */
+}
+
+/*.item {*/
+    /*display: flex;*/
+    /*align-items: center;*/
+    /*padding: 10px;*/
+    /*background: #f4f4f4;*/
+    /*border: 1px solid #ddd;*/
+    /*border-radius: 5px;*/
+    /*box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);*/
+    /*transition: background 0.3s ease;*/
+/*}*/
+
+.item {
+    display: flex;
+    align-items: center; /* Vertically align all child elements */
+    justify-content: space-between; /* Distribute space between child elements */
+    gap: 15px; /* Add some space between elements */
+}
+
+.item:hover {
+    background: #e8e8e8;
+}
+
+.item input[type="checkbox"] {
+    margin-right: 10px;
+    flex-shrink: 0;
+}
+
+.item img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-right: 15px;
+    flex-shrink: 0;
+}
+
+
+.item-title {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 5px;
+    font-family: 'Marvel', sans-serif; /* Apply Marvel font to tab text */
+}
+
+.item-price {
+    font-size: 1rem;
+    color: #888;
+    margin-bottom: 5px;
+    position:relative;
+    top:-30px;
+}
+
+
+/* Ensure the .item container is a horizontal flexbox */
+.item {
+    display: flex;
+    align-items: center; /* Vertically align all child elements */
+    gap: 15px; /* Add space between elements */
+}
+
+/* Ensure the .item-details and .item-quantity are inline */
+.item-details {
+    flex-grow: 1; /* Allow it to expand and take up available space */
+    display: flex;
+    flex-direction: column; /* Stack title and price vertically */
+    justify-content: center; /* Center content vertically */
+}
+
+.item-quantity {
+    display: flex;
+    align-items: center; /* Center vertically */
+    margin-left: auto; /* Push it to the far right */
+}
+
+/* Optional: Add spacing for the label and input */
+.item-quantity label {
+    margin-right: 5px;
+}
+
+.item-quantity input[type="number"] {
+    width: 60px;
+    padding: 5px;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+
+/* Cart Section */
+.cart-section {
+    margin: 20px 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    background: #f9f9f9;
+}
+
+.cart-section h3 {
+    margin: 0 0 10px;
+}
+
+.cart-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.cart-section li {
+    margin: 5px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Payment Section */
+.payment-section {
+    margin: 20px 0;
+}
+
+.payment-section label {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.payment-section select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+/* Buttons */
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #ff6600;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #e65a00;
+}
+
+
+
+
+
+/* Style for the Total Price row */
+#totalPriceRow {
+    background-color: black; /* Black background */
+    color: white; /* White text */
+    font-weight: bold; /* Bold text */
+    padding: 10px; /* Add some padding for better spacing */
+    border-radius: 5px; /* Optional: rounded corners */
+    text-align: center; /* Center-align the text */
+}
+
+
+
+
+
+/* Cart Section */
+.cart-section {
+    margin: 20px 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    background: #f9f9f9;
+}
+
+.cart-section h3 {
+    margin: 0 0 10px;
+}
+
+.cart-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.cart-section li {
+    margin: 5px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Payment Section */
+.payment-section {
+    margin: 20px 0;
+}
+
+.payment-section label {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.payment-section select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+/* Buttons */
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #ff6600;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #e65a00;
+}
+
+
+
+
+
+/* Style for the Total Price row */
+#totalPriceRow {
+    background-color: black; /* Black background */
+    color: white; /* White text */
+    font-weight: bold; /* Bold text */
+    padding: 10px; /* Add some padding for better spacing */
+    border-radius: 5px; /* Optional: rounded corners */
+    text-align: center; /* Center-align the text */
+}
+
+
 
