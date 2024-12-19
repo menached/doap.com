@@ -64,6 +64,10 @@
 
 
 /* Ensure thumbnail behavior remains unchanged */
+.thumbnail-container {
+    position: relative;
+}
+
 .thumbnail {
     width: 100px; /* Fixed size for the thumbnail */
     height: auto;
@@ -77,13 +81,15 @@
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 1000;
-    display: none; /* Hidden by default */
+    visibility: hidden; /* Hidden by default */
+    opacity: 0; /* Ensure smooth transition */
     background: rgba(0, 0, 0, 0.8); /* Optional: dark background for contrast */
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     text-align: center;
-    pointer-events: none; /* Prevent interaction with the large image */
+    transition: opacity 0.2s ease-in-out; /* Smooth fade-in and fade-out */
+    pointer-events: none; /* Prevent interaction with the modal */
 }
 
 .large-image-modal img {
@@ -92,7 +98,6 @@
     object-fit: contain;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-    pointer-events: none; /* Prevent hover or click on the large image */
 }
 
 
