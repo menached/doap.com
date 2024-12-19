@@ -21,7 +21,6 @@
     <link rel="stylesheet" href="style.css">
     <script src="cart.js" defer></script>
     <script src="zipFinder.js" defer></script>
-    <script src="products.js" defer></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?php include('og_meta.php'); ?>
 </head>
