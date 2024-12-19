@@ -54,6 +54,8 @@
 
     <?php //include('products.html'); ?>
 
+<div class="category">
+    <div class="category-heading" data-toggle="accordion" title="Click to show/hide...">
     <div class="tab-content active" id="flower">
         <div class="item-list">
         <?php include('flower.html'); ?>
@@ -77,7 +79,7 @@
         <?php include('accessories.html'); ?>
         </div>
     </div> <!-- End Accessories -->
-
+</div>
 
 
         <!-- Cart Section -->
