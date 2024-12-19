@@ -454,14 +454,27 @@ document.addEventListener("DOMContentLoaded", () => {
                 });
             });
         });
- // Locate the minimum order message container
-    const minOrderMessageElement = document.getElementById("minOrderMessage");
-    if (minOrderMessageElement) {
-        // Replace static text with dynamic variable
-        minOrderMessageElement.textContent = `Minimum order is $${MINIMUM_ORDER_AMOUNT}.`;
-    }
+        // Locate the minimum order message container
+        const minOrderMessageElement = document.getElementById("minOrderMessage");
+        if (minOrderMessageElement) {
+            // Replace static text with dynamic variable
+            minOrderMessageElement.textContent = `Minimum order is $${MINIMUM_ORDER_AMOUNT}.`;
+        }
 
+        const categoryHeadings = document.querySelectorAll('[data-toggle="accordion"]');
 
+        categoryHeadings.forEach(heading => {
+            heading.addEventListener("click", () => {
+                const content = heading.nextElementSibling;
+                if (content.classList.contains("hidden")) {
+                    content.classList.remove("hidden");
+                    content.style.maxHeight = `${content.scrollHeight}px`;
+                } else {
+                    content.classList.add("hidden");
+                    content.style.maxHeight = "0";
+                }
+            });
+        });
 });
 const targetElement = document.querySelector('body > div:nth-child(3)');
 if (targetElement) {
