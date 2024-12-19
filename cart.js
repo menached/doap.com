@@ -530,4 +530,7 @@ function hideLargeImage() {
     modal.style.pointerEvents = 'none';
 }
 
+console.log("Hovered:", this.querySelector('.thumbnail').getAttribute('alt'));
+console.log("Image src:", imgSrc);
+
 console.log("cart.js loaded completely");
