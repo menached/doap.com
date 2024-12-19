@@ -4,6 +4,7 @@
 # Allow specific files and directories
 !.gitignore
 !index.html
+!simple.html
 !readme.html
 !header.html
 !footer.html
