@@ -29,6 +29,23 @@
 }
 
 
+.thumbnail-container {
+    position: relative;
+}
+
+.thumbnail {
+    width: 100%;
+    height: auto;
+    transition: transform 0.3s ease;
+}
+
+.thumbnail-container:hover .thumbnail {
+    transform: scale(1.1); /* Slight zoom */
+}
+
+
+
+
 
         .item {
             display: flex;
@@ -131,22 +148,6 @@
 
 
 
-
-.thumbnail-container {
-    position: relative;
-    z-index: 1; /* Ensure container is above background layers */
-}
-
-.thumbnail {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-}
-
-.thumbnail-container:hover .thumbnail {
-    transform: scale(1.1); /* Slight zoom */
-    transition: transform 0.3s ease-in-out; /* Smooth effect */
-}
 
 
 .category-heading {
