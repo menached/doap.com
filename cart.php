@@ -200,8 +200,6 @@
                 <h3><i class="fas fa-phone-alt"></i> Need Assistance?</h3>
                 <p>After placing your order, please check your email for further instructions on how to complete your payment.  Feel free to call us at (833)289-3627 for assistance. We're standing by to help!</p>
             </div>
-        <!-- Footer Section -->
-        <?php include('footer.php'); ?>
         </div>
 
 
@@ -215,6 +213,9 @@
     <div id="popupMessage" class="popup hidden">
         <p id="popupText">Order Processed Successfully!</p>
     </div>
+        
+<!-- Footer Section -->
+<?php include('footer.php'); ?>
 
 </body>
 </html>
