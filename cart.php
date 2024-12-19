@@ -236,7 +236,7 @@
     <div id="popupMessage" class="popup hidden">
         <p id="popupText">Order Processed Successfully!</p>
     </div>
-<div class="form2"> </div>
+
 </body>
 </html>
 
