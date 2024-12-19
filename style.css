@@ -83,6 +83,7 @@
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     text-align: center;
+    pointer-events: none; /* Prevent interaction with the large image */
 }
 
 .large-image-modal img {
@@ -91,22 +92,10 @@
     object-fit: contain;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    pointer-events: none; /* Prevent hover or click on the large image */
 }
 
 
-.enlarged-image {
-    position: absolute;
-    top: -10px; /* Adjust to position above or to the side */
-    left: 120%; /* Offset from thumbnail */
-    width: 300px; /* Larger image size */
-    z-index: 100; /* Ensure it appears above other content */
-    display: none; /* Hidden by default */
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Optional: Add shadow for effect */
-}
-
-.thumbnail-container:hover .enlarged-image {
-    display: block; /* Show on hover */
-}
 
 
 
