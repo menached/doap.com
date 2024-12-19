@@ -218,29 +218,31 @@
                 <p>After placing your order, please check your email for further instructions on how to complete your payment.  Feel free to call us at (833)289-3627 for assistance. We're standing by to help!</p>
             </div>
         </div>
-    <!-- Footer Section -->
-    <footer style="
-        background-color: #f8f9fa;
-        color: #333;
-        padding: 20px 10px;
-        text-align: center;
-        font-family: Arial, sans-serif;
-        font-size: 0.9rem;
-        border-top: 1px solid #ddd;
-        margin-top: 30px;
-    ">
-        <div style="margin-bottom: 10px;">
-            <strong>DevOps & Platforms</strong> - <a href="https://devopsandplatforms.com" target="_blank" style="color: #007BFF; text-decoration: none;">devopsandplatforms.com</a>
-        </div>
-        <div>
-            <a href="https://github.com/menached/doap.com" target="_blank" style="color: #007BFF; text-decoration: none; font-weight: bold;">
-            Explore the project on GitHub 
-            </a>
-        </div>
-        <div style="margin-top: 10px; font-size: 0.8rem; color: #666;">
-            &copy; <span id="year"></span> DevOps & Platforms. All rights reserved.
-        </div>
-    </footer>
+
+        <!-- Footer Section -->
+        <footer style="
+            background-color: #f8f9fa;
+            color: #333;
+            padding: 20px 10px;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            font-size: 0.9rem;
+            border-top: 1px solid #ddd;
+            margin-top: 30px;
+        ">
+            <div style="margin-bottom: 10px;">
+                <strong>DevOps & Platforms</strong> - <a href="https://devopsandplatforms.com" target="_blank" style="color: #007BFF; text-decoration: none;">devopsandplatforms.com</a>
+            </div>
+            <div>
+                <a href="https://github.com/menached/doap.com" target="_blank" style="color: #007BFF; text-decoration: none; font-weight: bold;">
+                Explore the project on GitHub 
+                </a>
+            </div>
+            <div style="margin-top: 10px; font-size: 0.8rem; color: #666;">
+                &copy; <span id="year"></span> DevOps & Platforms. All rights reserved.
+            </div>
+        </footer>
+
 
     <!-- Optional: Add this script to update the year dynamically -->
     <script>
