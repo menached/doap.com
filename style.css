@@ -110,36 +110,28 @@
 .thumbnail {
     width: 100%;
     height: auto;
-    transition: transform 0.3s ease; /* Smooth zoom effect */
+    object-fit: cover;
 }
+
+.thumbnail-container:hover .thumbnail {
+    transform: scale(1.1); /* Slight zoom */
+    transition: transform 0.3s ease-in-out; /* Smooth effect */
+}
+
+
+
 
 .large-image-modal {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 1000;
     visibility: hidden;
     opacity: 0;
-    background: rgba(0, 0, 0, 0.8); /* Dark overlay */
-    padding: 20px;
-    border-radius: 10px;
-    transition: opacity 0.3s ease-in-out; /* Smooth fade-in and fade-out */
-    pointer-events: none;
-    text-align: center;
+    position: fixed;
+    z-index: 1000;
+    background: rgba(0, 0, 0, 0.8);
+    transition: opacity 0.3s ease-in-out;
 }
-
-.large-image-modal img {
-    max-width: 90%;
-    max-height: 90%;
-    object-fit: contain;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-}
-
-/* Enable pointer interactions when visible */
-.large-image-modal[style*="visibility: visible"] {
-    pointer-events: auto;
+.large-image-modal.show {
+    visibility: visible;
+    opacity: 1;
 }
 
 
