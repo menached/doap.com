@@ -63,17 +63,6 @@
 }
 
 
-/* Ensure thumbnail behavior remains unchanged */
-.thumbnail-container {
-    position: relative;
-}
-
-.thumbnail {
-    width: 100px; /* Fixed size for the thumbnail */
-    height: auto;
-    object-fit: contain;
-}
-
 /* Modal for the large image */
 .large-image-modal {
     position: fixed;
@@ -81,15 +70,15 @@
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 1000;
-    visibility: hidden; /* Hidden by default */
-    opacity: 0; /* Ensure smooth transition */
-    background: rgba(0, 0, 0, 0.8); /* Optional: dark background for contrast */
+    visibility: hidden;
+    opacity: 0;
+    background: rgba(0, 0, 0, 0.8); /* Dark overlay */
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: opacity 0.3s ease-in-out;
+    pointer-events: none;
     text-align: center;
-    transition: opacity 0.2s ease-in-out; /* Smooth fade-in and fade-out */
-    pointer-events: none; /* Prevent interaction with the modal */
 }
 
 .large-image-modal img {
@@ -98,6 +87,11 @@
     object-fit: contain;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+/* Enable pointer interactions when visible */
+.large-image-modal[style*="visibility: visible"] {
+    pointer-events: auto;
 }
 
 
