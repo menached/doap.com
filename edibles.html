@@ -1,8 +1,87 @@
-<div class="category">
-    <div class="category-heading" data-toggle="accordion" title="Click to show/hide...">
-        <h1>Edibles</h1>
-    </div>
-    <div class="category-content">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edibles</title>
+    <style>
+        .item {
+            display: flex;
+            align-items: center; /* Vertically align all child elements */
+            justify-content: space-between; /* Distribute space between child elements */
+            gap: 15px; /* Add some space between elements */
+            padding: 15px; /* Add padding for spacing */
+            background: #fff; /* Ensure a white background for contrast */
+            border: 1px solid #ddd; /* Add a border */
+            border-radius: 8px; /* Rounded corners */
+            transition: background 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
+        }
+
+        .item:hover {
+            background: #f9f9f9; /* Light background on hover */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow on hover */
+        }
+
+        .item input[type="checkbox"] {
+            margin-right: 10px; /* Space between checkbox and image */
+            flex-shrink: 0; /* Prevent shrinking */
+        }
+
+        .item img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover; /* Maintain aspect ratio and fill container */
+            border-radius: 5px; /* Rounded corners */
+            margin-right: 15px; /* Space between image and details */
+            flex-shrink: 0; /* Prevent shrinking */
+        }
+
+        .item-title {
+            font-size: 1.1rem; /* Slightly larger font for title */
+            font-weight: bold; /* Emphasize title */
+            color: #333; /* Dark text color */
+            margin-bottom: 5px; /* Space below title */
+            font-family: 'Marvel', sans-serif; /* Apply Marvel font */
+        }
+
+        .item-price {
+            font-size: 1rem; /* Standard font size for price */
+            color: #888; /* Muted color for price */
+            margin-bottom: 5px; /* Space below price */
+        }
+
+        .item-details {
+            flex-grow: 1; /* Allow to expand and take available space */
+            display: flex;
+            flex-direction: column; /* Stack title and price vertically */
+            justify-content: center; /* Center content vertically */
+        }
+
+        .item-quantity {
+            display: flex;
+            align-items: center; /* Align label and input vertically */
+            margin-left: 15px; /* Add spacing to separate from details */
+        }
+
+        .item-quantity label {
+            margin-right: 5px; /* Space between label and input */
+            font-size: 1rem; /* Consistent font size */
+        }
+
+        .item-quantity input[type="number"] {
+            width: 60px; /* Standard width for quantity input */
+            padding: 5px; /* Add padding for better appearance */
+            text-align: center; /* Center-align quantity text */
+            border: 1px solid #ddd; /* Light border */
+            border-radius: 5px; /* Rounded corners */
+            font-size: 1rem; /* Consistent font size */
+        }
+    </style>
+</head>
+<body>
+    <div class="category">
+        <div class="category-heading" data-toggle="accordion">Edibles</div>
+        <div class="category-content">
 
             <!-- THC Gummy Bears - Small Bag -->
             <label class="item">
@@ -88,10 +167,9 @@
                     </div>
                 </div>
             </label>
-    </div>
-</div>
 
-<!-- Large Image Modal -->
-<div id="largeImageModal" class="large-image-modal" onclick="hideLargeImage()">
-    <img id="largeImage" src="" alt="Large Preview">
-</div>
+        </div>
+    </div>
+</body>
+</html>
+
