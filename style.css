@@ -62,17 +62,12 @@
     background-color: transparent; /* No background color */
 }
 
-.thumbnail-container {
-    position: relative; /* Establish positioning context for the enlarged image */
-}
 
+/* Ensure thumbnail behavior remains unchanged */
 .thumbnail {
-    width: 100px; /* Thumbnail size */
-    transition: transform 0.2s ease; /* Optional: Zoom effect for thumbnails */
-}
-
-.thumbnail:hover {
-    transform: scale(1.1); /* Optional: Slight zoom for better interactivity */
+    width: 100px; /* Fixed size for the thumbnail */
+    height: auto;
+    object-fit: contain;
 }
 
 /* Modal for the large image */
