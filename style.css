@@ -14,11 +14,16 @@
 
 .category-heading {
     cursor: pointer;
-    background-color: #f5f5f5;
+    background-color: #000;
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 5px;
     margin-bottom: 10px;
+
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #2e2e2e; /* Deeper dark grey */
+    font-family: 'Marvel', sans-serif;
 }
 
 .item img {
