@@ -75,6 +75,30 @@
     transform: scale(1.1); /* Optional: Slight zoom for better interactivity */
 }
 
+/* Modal for the large image */
+.large-image-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    display: none; /* Hidden by default */
+    background: rgba(0, 0, 0, 0.8); /* Optional: dark background for contrast */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.large-image-modal img {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+
 .enlarged-image {
     position: absolute;
     top: -10px; /* Adjust to position above or to the side */
