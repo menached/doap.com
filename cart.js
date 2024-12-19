@@ -485,23 +485,23 @@ if (targetElement) {
     console.warn("Element body > div:nth-child(3) not found.");
 }
 
-// Show large image in the modal
 function showLargeImage(imageSrc) {
     const modal = document.getElementById('largeImageModal');
     const img = document.getElementById('largeImage');
-    img.src = imageSrc;
-    modal.style.visibility = 'visible';
-    modal.style.opacity = '1';
+    img.src = imageSrc; // Set the image source dynamically
+    modal.style.visibility = 'visible'; // Make modal visible
+    modal.style.opacity = '1'; // Fade in the modal
     modal.style.pointerEvents = 'auto'; // Ensure interactions with the modal
 }
 
-// Hide the modal
 function hideLargeImage() {
     const modal = document.getElementById('largeImageModal');
-    modal.style.opacity = '0';
-    modal.style.visibility = 'hidden';
+    modal.style.opacity = '0'; // Fade out the modal
+    modal.style.visibility = 'hidden'; // Hide the modal
     modal.style.pointerEvents = 'none'; // Prevent accidental interactions
 }
+
+
 
 // Close modal on Escape key press
 document.addEventListener('keydown', (event) => {
