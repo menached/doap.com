@@ -1,19 +1,6 @@
 console.log("cart.js started loading");
 document.addEventListener("DOMContentLoaded", () => {
 
-    // Add hover functionality for all thumbnails
-    document.querySelectorAll('.thumbnail-container').forEach(container => {
-        container.addEventListener('mouseenter', function () {
-            const imgSrc = this.querySelector('.thumbnail').getAttribute('data-large');
-            if (imgSrc) {
-                showLargeImage(imgSrc);
-            }
-        });
-
-        container.addEventListener('mouseleave', function () {
-            hideLargeImage();
-        });
-    });
 
     // Map subdomains to minimum order amounts
     const areaMinimum = {
