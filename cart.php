@@ -51,15 +51,15 @@
         </div>
 
 
-    <?php //include('products.html'); ?>
+    <?php include('products.html'); ?>
 
-        <?php include('flower.html'); ?>
+        <?php //include('flower.html'); ?>
         
-        <?php include('concentrates.html'); ?>
+        <?php //include('concentrates.html'); ?>
     
-        <?php include('edibles.html'); ?>
+        <?php //include('edibles.html'); ?>
     
-        <?php include('accessories.html'); ?>
+        <?php //include('accessories.html'); ?>
 
 
 
