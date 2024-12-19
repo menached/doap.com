@@ -26,12 +26,36 @@
     font-family: 'Marvel', sans-serif;
 }
 
-.item img {
-    transition: transform 0.3s ease-in-out;
+.item {
+    position: relative; /* To position the image popup */
+    overflow: hidden; /* Ensures content doesn’t spill outside the item container */
 }
 
-.item img:hover {
-    transform: scale(1.2); /* Zoom effect */
+.item img {
+    transition: transform 0.3s ease, z-index 0.3s ease, box-shadow 0.3s ease;
+    width: 100%; /* Keep the image within the item container initially */
+    height: auto;
+    border-radius: 5px; /* Optional: rounded corners */
+}
+
+.item:hover img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(2); /* Center and scale the image */
+    z-index: 10; /* Bring the image to the front */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5); /* Add a shadow effect */
+    border-radius: 10px; /* Optional: enhance border radius when zoomed */
+}
+
+.item:hover {
+    z-index: 10; /* Ensure the hovered item is above others */
+}
+
+.item-details {
+    position: relative;
+    z-index: 1; /* Ensure the text stays above the default image */
+    background-color: white; /* Optional: add a background to item details */
 }
 
 
