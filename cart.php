@@ -54,21 +54,9 @@
 
     <?php //include('products.html'); ?>
 
-<div class="category">
-    <div class="category-heading" data-toggle="accordion" title="Click to show/hide...">
-    <div class="tab-content active" id="flower">
-        <div class="item-list">
         <?php include('flower.html'); ?>
-        </div>
-    </div> <!-- End Flower -->
-</div>
-</div>
         
-    <div class="tab-content active" id="concentrates">
-        <div class="item-list">
         <?php include('concentrates.html'); ?>
-        </div>
-    </div> <!-- End Concentrates -->
     
     <div class="tab-content active" id="edibles">
         <div class="item-list">
@@ -81,6 +69,7 @@
         <?php include('accessories.html'); ?>
         </div>
     </div> <!-- End Accessories -->
+
 
 
         <!-- Cart Section -->
