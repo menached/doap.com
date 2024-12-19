@@ -62,6 +62,33 @@
     background-color: transparent; /* No background color */
 }
 
+.thumbnail-container {
+    position: relative; /* Establish positioning context for the enlarged image */
+}
+
+.thumbnail {
+    width: 100px; /* Thumbnail size */
+    transition: transform 0.2s ease; /* Optional: Zoom effect for thumbnails */
+}
+
+.thumbnail:hover {
+    transform: scale(1.1); /* Optional: Slight zoom for better interactivity */
+}
+
+.enlarged-image {
+    position: absolute;
+    top: -10px; /* Adjust to position above or to the side */
+    left: 120%; /* Offset from thumbnail */
+    width: 300px; /* Larger image size */
+    z-index: 100; /* Ensure it appears above other content */
+    display: none; /* Hidden by default */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Optional: Add shadow for effect */
+}
+
+.thumbnail-container:hover .enlarged-image {
+    display: block; /* Show on hover */
+}
+
 
 
 
