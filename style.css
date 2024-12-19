@@ -61,6 +61,40 @@
 
 
 
+.thumbnail-container {
+    position: relative;
+    z-index: 1; /* Ensure container is above background layers */
+}
+
+.thumbnail {
+    width: 100%;
+    height: auto;
+    transition: transform 0.3s ease; /* Smooth zoom effect */
+}
+
+.large-image-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    visibility: hidden;
+    opacity: 0;
+    background: rgba(0, 0, 0, 0.8); /* Dark overlay */
+    padding: 20px;
+    border-radius: 10px;
+    transition: opacity 0.3s ease-in-out; /* Smooth fade-in and fade-out */
+    pointer-events: none;
+    text-align: center;
+}
+
+.large-image-modal img {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
 
 
 
