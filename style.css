@@ -29,10 +29,6 @@
 
 
 
-/* Enable pointer interactions when visible */
-.large-image-modal[style*="visibility: visible"] {
-    pointer-events: auto;
-}
 
 
 
@@ -71,6 +67,10 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
 }
 
+/* Enable pointer interactions when visible */
+.large-image-modal[style*="visibility: visible"] {
+    pointer-events: auto;
+}
 
 
 .category-heading {
