@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", function () {
     // ZIP Form
-    const form = document.createElement("form");
-    form.className = "zip-form";
-    form.style.cssText = "display: flex; flex-direction: column; gap: 10px;";
+    const form = document.createElement("form2");
+    form2.className = "zip-form";
+    form2.style.cssText = "display: flex; flex-direction: column; gap: 10px;";
 
     const input = document.createElement("input");
     input.type = "text";
@@ -33,12 +33,12 @@ document.addEventListener("DOMContentLoaded", function () {
     message.style.cssText = "color: red; font-size: 1rem; margin: 10px 0 0;";
 
     // Append elements to form
-    form.appendChild(input);
-    form.appendChild(button);
-    form.appendChild(message);
+    form2.appendChild(input);
+    form2.appendChild(button);
+    form2.appendChild(message);
 
     // Form submit logic
-    form.addEventListener("submit", function (event) {
+    form2.addEventListener("submit", function (event) {
         event.preventDefault(); // Prevent default form submission
 
         const userInput = input.value.trim().toLowerCase();
@@ -131,10 +131,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Check if the container exists and append the form
     if (pageContent) {
-        pageContent.appendChild(form);
+        pageContent.appendChild(form2);
     } else {
         console.error("Target container not found! Appending form to document body as fallback.");
-        document.body.appendChild(form); // Fallback if container is missing
+        document.body.appendChild(form2); // Fallback if container is missing
     }
 
 });
