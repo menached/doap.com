@@ -62,6 +62,7 @@
         </div>
     </div> <!-- End Flower -->
 </div>
+</div>
         
     <div class="tab-content active" id="concentrates">
         <div class="item-list">
