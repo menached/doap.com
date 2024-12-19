@@ -61,6 +61,7 @@
         <?php include('flower.html'); ?>
         </div>
     </div> <!-- End Flower -->
+</div>
         
     <div class="tab-content active" id="concentrates">
         <div class="item-list">
@@ -79,7 +80,6 @@
         <?php include('accessories.html'); ?>
         </div>
     </div> <!-- End Accessories -->
-</div>
 
 
         <!-- Cart Section -->
