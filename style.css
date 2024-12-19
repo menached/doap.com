@@ -1,5 +1,36 @@
 /* General Reset */
 
+
+
+.category-content {
+    display: block; /* Initially open */
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+.category-content.hidden {
+    display: none; /* Hidden when collapsed */
+}
+
+.category-heading {
+    cursor: pointer;
+    background-color: #f5f5f5;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.item img {
+    transition: transform 0.3s ease-in-out;
+}
+
+.item img:hover {
+    transform: scale(1.2); /* Zoom effect */
+}
+
+
+
 .category-heading {
     background-color: #007BFF; /* Blue background */
     color: white; /* White text */
