@@ -215,7 +215,8 @@
     </div>
         
 <!-- Footer Section -->
-<?php include('footer.php'); ?>
+<?php //include('footer.php'); ?>
+<?php echo "test"; ?>
 
 </body>
 </html>
