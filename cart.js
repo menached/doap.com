@@ -488,13 +488,14 @@ function showLargeImage(imageSrc) {
     const modal = document.getElementById('largeImageModal');
     const img = document.getElementById('largeImage');
     img.src = imageSrc; // Set the image source dynamically
-    modal.style.display = 'block'; // Show the modal
+    modal.style.visibility = 'visible'; // Make modal visible
+    modal.style.opacity = '1'; // Fade in the modal
 }
 
 function hideLargeImage() {
     const modal = document.getElementById('largeImageModal');
-    modal.style.display = 'none'; // Hide the modal
+    modal.style.opacity = '0'; // Fade out the modal
+    modal.style.visibility = 'hidden'; // Hide the modal after fading
 }
-
 
 console.log("cart.js loaded completely");
