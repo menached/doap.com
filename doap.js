@@ -101,5 +101,62 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
+
+
+
+import { subdomainData } from './subdomainData.js';
+
+console.log("doap.js started loading");
+
+document.addEventListener("DOMContentLoaded", () => {
+    const cart = [];
+    const cartDisplay = document.getElementById("cartItems");
+    const totalDisplay = document.getElementById("cartTotal");
+
+    // Function to render the cart
+    const renderCart = () => {
+        if (cartDisplay && totalDisplay) {
+            cartDisplay.innerHTML = cart
+                .map(
+                    (item, index) => `
+                        <div class="cart-item">
+                            <span>${item.name} - $${item.price}</span>
+                            <button class="remove-btn" data-index="${index}">Remove</button>
+                        </div>
+                    `
+                )
+                .join("");
+
+            const total = cart.reduce((acc, item) => acc + item.price, 0);
+            totalDisplay.textContent = `Total: $${total.toFixed(2)}`;
+        }
+    };
+
+    // Add to Cart functionality
+    document.addEventListener("click", (e) => {
+        if (e.target.classList.contains("add-to-cart")) {
+            const productElement = e.target.closest(".product-item");
+            const name = productElement.querySelector(".product-name").textContent;
+            const price = parseFloat(productElement.querySelector(".product-price").dataset.price);
+
+            cart.push({ name, price });
+            renderCart();
+            console.log("Cart updated:", cart);
+        }
+    });
+
+    // Remove from Cart functionality
+    document.addEventListener("click", (e) => {
+        if (e.target.classList.contains("remove-btn")) {
+            const index = parseInt(e.target.dataset.index, 10);
+            cart.splice(index, 1);
+            renderCart();
+            console.log("Cart updated:", cart);
+        }
+    });
+
+
+
+
 console.log("doap.js loaded successfully!");
 
