@@ -50,16 +50,19 @@ body {
     align-items: center;
 }
 
+.text-container a {
+    text-decoration: none; /* Remove underline for link */
+}
+
 .text-container h1 {
     margin: 10px 0 0;
     font-weight: bold;
     font-size: 2rem; /* Adjusts with global font size */
     font-family: 'Marvel', sans-serif; /* Use Marvel font */
     color: #007BFF; /* Blue title color */
-    text-decoration: none;
 }
 
-.text-container h1:hover {
+.text-container a:hover h1 {
     text-decoration: underline; /* Optional hover effect */
 }
 
