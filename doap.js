@@ -103,11 +103,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-
-import { subdomainData } from './subdomainData.js';
-
-console.log("doap.js started loading");
-
 document.addEventListener("DOMContentLoaded", () => {
     const cart = [];
     const cartDisplay = document.getElementById("cartItems");
