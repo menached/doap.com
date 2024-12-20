@@ -27,6 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // Default values if no subdomain match
         const cityName = currentSubdomainData ? currentSubdomainData.city : "Norcal Doap";
         const phoneNumber = currentSubdomainData ? currentSubdomainData.phone : "833-289-3627";
+        const minimumOrder = currentSubdomainData ? currentSubdomainData.minimumOrder : 60;
 
         // Update page title and header
         document.title = `${cityName} Doap`;
@@ -42,6 +43,12 @@ document.addEventListener("DOMContentLoaded", () => {
         if (phoneNumberElement) {
             phoneNumberElement.textContent = phoneNumber;
             phoneNumberElement.href = `tel:${phoneNumber.replace(/-/g, '')}`;
+        }
+
+        // Display the minimum order amount
+        const minOrderElement = document.getElementById("minimumOrder");
+        if (minOrderElement) {
+            minOrderElement.textContent = `Minimum Order: $${minimumOrder}`;
         }
     }
 
