@@ -17,7 +17,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Marvel&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <script src="doap.js" defer></script>
-    <script src="zipFinder.js" defer></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?php include('og_meta.php'); ?>
 
