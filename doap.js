@@ -556,33 +556,26 @@ document.addEventListener("DOMContentLoaded", () => {
     zipForm.addEventListener("submit", (event) => {
         event.preventDefault();
 
-        const userInput = input.value.trim().toLowerCase();
-        if (!userInput) {
-            message.textContent = "Please enter a valid ZIP Code or city.";
-            return;
-        }
+    const userInput = input.value.trim().toLowerCase();
+    if (!userInput) {
+        message.textContent = "Please enter a valid ZIP Code or city.";
+        return;
+    }
 
-        const zipData = [
-            { zip: [94507], city: ["Alamo", "Blackhawk", "Tassajara"], url: "https://alamo.doap.com/cart.php" },
-            { zip: [94568], city: ["Dublin"], url: "https://dublin.doap.com/cart.php" },
-            // Add your remaining data here
-        ];
-
-        let matchedURL = null;
-        for (const data of zipData) {
-            if (data.zip.includes(parseInt(userInput)) || data.city.some(city => city.toLowerCase() === userInput)) {
+    let matchedURL = null;
+    for (const data of zipData) {
+        // Check if the input is a number (ZIP Code) or a string (City)
+        if (!isNaN(userInput)) {
+            if (data.zip.includes(parseInt(userInput))) {
                 matchedURL = data.url;
                 break;
             }
+        } else if (data.city.some(city => city.toLowerCase() === userInput)) {
+            matchedURL = data.url;
+            break;
         }
+    }
 
-        if (matchedURL) {
-            window.location.href = matchedURL;
-        } else {
-            message.textContent = "No matching location found. Please try again.";
-        }
-    });
-    message.textContent = "ZIP form initialized.";
 
 });
 
