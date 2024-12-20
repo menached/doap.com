@@ -22,6 +22,73 @@ body {
 
 
 
+/* Customer Information */
+.customer-info {
+    display: flex;
+    flex-direction: column;  /* Stack fields vertically */
+    gap: 15px;  /* Space between form rows */
+    margin-bottom: 20px;
+}
+
+/* Row structure for each form field */
+.info-row {
+    display: flex;
+    flex-direction: column;  /* Stack label and input vertically */
+    gap: 5px;  /* Space between label and input */
+}
+
+/* Label styles */
+.customer-info label {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+/* Input fields and textarea */
+.customer-info input,
+.customer-info textarea {
+    width: 100%;  /* Ensure inputs take up full width */
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+/* Make Address input (textarea) the same height as City input */
+.customer-info textarea {
+    resize: vertical; /* Allow vertical resizing */
+    height: 40px;  /* Match the height of the city input */
+}
+
+/* For mobile and small screens (less than 768px) */
+@media (max-width: 767px) {
+    .customer-info {
+        flex-direction: column;  /* Stack fields vertically */
+    }
+
+    .info-row {
+        width: 100%;  /* Ensure full-width on mobile */
+    }
+}
+
+/* Adjust for tablets and larger screens (768px and up) */
+@media (min-width: 768px) {
+    .customer-info {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;  /* Three columns */
+        gap: 15px;
+    }
+
+    .info-row {
+        display: flex;
+        flex-direction: column;  /* Ensure the label and input stay stacked */
+    }
+}
+
+
+
+
+
     .cart-section,
     .payment-section {
         width: 100%; /* Ensure sections stretch to full width */
