@@ -205,8 +205,6 @@
         </div>
 
 
-
-    <!-- Optional: Add this script to update the year dynamically -->
     <script>
         document.getElementById("year").textContent = new Date().getFullYear();
     </script>
