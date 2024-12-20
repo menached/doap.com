@@ -22,6 +22,16 @@ body {
 
 
 
+    .cart-section,
+    .payment-section {
+        width: 100%; /* Ensure sections stretch to full width */
+        padding: 10px; /* Add internal padding */
+        box-sizing: border-box; /* Prevent overflow */
+    }
+
+
+
+
 /* Alternating background colors for cart items */
 .cart-item:nth-child(odd) {
     background-color: #f9f9f9; /* Light gray for odd items */
