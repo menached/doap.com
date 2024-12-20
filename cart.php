@@ -25,7 +25,6 @@
     <?php include('og_meta.php'); ?>
 </head>
 <body>
-<form id="cartForm">
     <!-- Header Section -->
         <div class="header">
             <div class="logo-title-container">
@@ -50,6 +49,7 @@
             <div class="tab" data-tab="accessories">Accessories</div>
         </div>
 
+    <form id="cartForm">
 
     <?php include('products.html'); ?>
 
