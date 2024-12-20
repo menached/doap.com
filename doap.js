@@ -151,6 +151,29 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 
+document.addEventListener("DOMContentLoaded", () => {
+    const paymentMethods = document.querySelectorAll("input[name='paymentMethod']");
+    const paymentMessage = document.getElementById("paymentMessage");
+
+    // Payment method messages
+    const paymentDetails = {
+        "credit-card": "Enter your credit card details at checkout.",
+        "cash": "Please have the exact cash amount ready for delivery.",
+        "crypto": "Send your payment to the wallet address provided during checkout.",
+        "zelle": "Send your payment via Zelle to info@doap.com.",
+        "venmo": "Send your payment via Venmo to @Doap-Payments.",
+        "paypal": "Send your payment via PayPal to paypal@doap.com.",
+    };
+
+    // Add event listeners to all payment method radio buttons
+    paymentMethods.forEach((method) => {
+        method.addEventListener("change", (event) => {
+            const selectedMethod = event.target.value;
+            const message = paymentDetails[selectedMethod] || "Please select a valid payment method.";
+            paymentMessage.textContent = message;
+        });
+    });
+});
 
 
 console.log("doap.js loaded successfully!");
