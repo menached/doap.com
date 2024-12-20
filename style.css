@@ -1070,15 +1070,6 @@ font-size: 1rem;
 
 
 
-/* Alternate background colors for list items */
-#selectedItemsList li:nth-child(odd) {
-    background-color: #ffe6e6; /* Pale pink for odd rows */
-}
-
-#selectedItemsList li:nth-child(even) {
-    background-color: #ffffff; /* White for even rows */
-}
-
 /* Default background for "No items selected yet" */
 #selectedItemsList li:only-child {
     background-color: transparent; /* Default background */
