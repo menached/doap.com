@@ -30,44 +30,67 @@ body {
 }
 
 /* Header Section */
-.header {
-    width: 100%; /* Ensure it takes up full width */
-    max-width: 500px; /* Limit the header container to prevent excess width */
-    margin: 0 auto;
+.logo-title-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin: 20px 0;
     text-align: center;
 }
 
-.header img {
+.logo-title-container img {
     width: 150px; /* Set a fixed width for the logo */
     height: auto; /* Maintain aspect ratio */
-    max-width: 100%; /* Ensure it doesn't overflow the parent container */
 }
 
-.header h1 {
+.text-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.text-container h1 {
     margin: 10px 0 0;
     font-weight: bold;
     font-size: 2rem; /* Adjusts with global font size */
     font-family: 'Marvel', sans-serif; /* Use Marvel font */
     color: #007BFF; /* Blue title color */
-    text-decoration: none; /* Remove underline */
+    text-decoration: none;
 }
 
-.header h1:hover {
+.text-container h1:hover {
     text-decoration: underline; /* Optional hover effect */
 }
 
 .phone-number {
-    text-align: center; /* Center-align the phone number */
-    font-size: 0.9rem; /* Smaller font size */
-    margin-top: 5px; /* Space between the header and the phone number */
-    color: #333; /* Default text color */
-    text-decoration: none; /* Remove underline */
-    font-weight: bold; /* Make the number stand out */
+    font-size: 1rem;
+    margin-top: 5px;
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
 }
 
 .phone-number:hover {
-    color: #007BFF; /* Add hover effect */
+    color: #007BFF;
     text-decoration: underline;
+}
+
+/* Menu Title */
+.menu-title {
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+.menu-title h2 {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    font-size: 18px;
+    text-decoration: none;
+    color: #000;
+    margin: 0;
+    padding: 0;
 }
 
 /* Welcome Section */
@@ -89,11 +112,11 @@ p {
         font-size: 14px; /* Slightly larger default fonts for mobile */
     }
 
-    .header img {
+    .logo-title-container img {
         width: 100px; /* Adjust logo size for smaller screens */
     }
 
-    .header h1 {
+    .text-container h1 {
         font-size: 1.5rem; /* Adjust title size */
     }
 
