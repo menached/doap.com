@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const cart = [];
     const cartDisplay = document.getElementById("cartItems");
     const totalDisplay = document.getElementById("cartTotal");
-    const paymentMethods = document.querySelectorAll("input[name='paymentMethod']");
+    const paymentMethodSelect = document.getElementById("paymentMethod");
     const paymentMessage = document.getElementById("paymentMessage");
 
     // 1. Update Title, Phone, and Minimum Order
@@ -93,22 +93,34 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // 6. Payment Method Handling
-    if (paymentMethods && paymentMessage) {
-        const paymentDetails = {
-            "credit-card": "Enter your credit card details at checkout.",
-            "cash": "Please have the exact cash amount ready for delivery.",
-            "crypto": "Send your payment to the wallet address provided during checkout.",
-            "zelle": "Send your payment via Zelle to info@doap.com.",
-            "venmo": "Send your payment via Venmo to @Doap-Payments.",
-            "paypal": "Send your payment via PayPal to paypal@doap.com.",
-        };
+    if (paymentMethodSelect && paymentMessage) {
+        paymentMethodSelect.addEventListener("change", (event) => {
+            const selectedMethod = event.target.value;
+            const paymentDetails = {
+                "credit-card": "Enter your credit card details below.",
+                "crypto": "Send your payment to the wallet addresses provided.",
+                "cash": "Please have the exact cash amount ready for delivery.",
+                "zelle": "Send your payment via Zelle to info@doap.com.",
+                "venmo": "Send your payment via Venmo to @Doap-Payments.",
+                "paypal": "Send your payment via PayPal to paypal@doap.com.",
+                "cashapp": "Send your payment via CashApp to $DoapPayments.",
+            };
 
-        paymentMethods.forEach((method) => {
-            method.addEventListener("change", (event) => {
-                const selectedMethod = event.target.value;
-                const message = paymentDetails[selectedMethod] || "Please select a valid payment method.";
-                paymentMessage.textContent = message;
+            const message = paymentDetails[selectedMethod] || "Please select a valid payment method.";
+            paymentMessage.textContent = message;
+
+            // Show/hide relevant sections
+            document.querySelectorAll(".accordion-section").forEach(section => {
+                section.style.display = "none";
             });
+
+            if (selectedMethod === "credit-card") {
+                document.getElementById("creditCardForm").style.display = "block";
+            } else if (selectedMethod === "crypto") {
+                document.getElementById("cryptoWallets").style.display = "block";
+            } else {
+                document.getElementById("generalHelp").style.display = "block";
+            }
         });
     }
 
