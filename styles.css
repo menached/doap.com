@@ -154,8 +154,7 @@ p {
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
     }
 
-    
-        /* Ensure proper alignment of the input and button for small screens */
+    /* Default form styles */
     .zip-form {
         display: flex;
         align-items: center;
@@ -163,7 +162,16 @@ p {
         flex-wrap: nowrap; /* Prevents wrapping of elements */
     }
 
-    /* Adjust the button size for smaller screens */
+    /* Input and button styles */
+    .zip-form input {
+        flex-grow: 1;
+        padding: 10px;
+        font-size: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        width: 60%; /* Base width for all screen sizes */
+    }
+
     .zip-form button {
         padding: 5px 10px;
         font-size: 0.9rem;
@@ -173,34 +181,32 @@ p {
         border-radius: 5px;
         cursor: pointer;
         flex-shrink: 0; /* Prevents the button from resizing too much */
+        white-space: nowrap; /* Prevents text wrapping */
     }
 
     .zip-form button:hover {
         background-color: #0056b3;
     }
 
-    /* Input styles for consistency */
-    .zip-form input {
-        flex-grow: 1;
-        padding: 10px;
-        font-size: 1rem;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-    }
-
-    /* Responsive adjustments for very small screens */
+    /* Responsive design for smaller screens */
     @media (max-width: 767px) {
         .zip-form {
             flex-wrap: nowrap; /* Ensure input and button remain on the same line */
         }
 
         .zip-form input {
-            width: 70%; /* Adjust input width */
+            width: 70%; /* Adjust input width for small screens */
         }
 
         .zip-form button {
             width: auto; /* Keep button compact */
-            white-space: nowrap; /* Prevent text wrapping inside the button */
+        }
+    }
+
+    /* Adjust input width for larger screens */
+    @media (min-width: 768px) {
+        .zip-form input {
+            width: 66%; /* Increase input width by 10% (60% + 10% of 60%) */
         }
     }
 
