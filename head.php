@@ -17,7 +17,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Marvel&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <script src="doap.js" type="module" defer></script>
-    <script src="subdomainData.js" defer></script>
+    <script src="subdomainData.js" type="module" defer></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?php include('og_meta.php'); ?>
 
