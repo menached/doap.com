@@ -109,7 +109,7 @@ document.addEventListener("DOMContentLoaded", () => {
             console.log("Submitting payload:", payload);
 
             try {
-                const response = await fetch("https://your-api-endpoint.amazonaws.com/prod/checkout", {
+                const response = await fetch("https://eft3wrtpad.execute-api.us-west-2.amazonaws.com/prod/checkout", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(payload),
