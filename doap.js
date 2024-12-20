@@ -7,9 +7,19 @@ document.addEventListener("DOMContentLoaded", () => {
     const hostname = window.location.hostname;
     let domainName = hostname.split('.')[0].toLowerCase();
 
-    // Handle www as a special case
+    // Handle root domain and www subdomain
+    if (hostname === "www.doap.com" || hostname === "doap.com") {
+        document.title = "Doap - Organic Awesome Pot";
+        const mainH1 = document.querySelector("h1");
+        if (mainH1) {
+            mainH1.style.display = "none"; // Hide the h1 for these domains
+        }
+        return; // Exit early to prevent further processing for root domain or www
+    }
+
+    // Handle other subdomains
     if (domainName === "www") {
-        domainName = "default"; // Replace 'default' with the subdomain to map 'www'
+        domainName = "default"; // Replace 'default' with the appropriate subdomain handling
     }
 
     // Find the current subdomain data
@@ -25,8 +35,10 @@ document.addEventListener("DOMContentLoaded", () => {
     // Update page title and header
     document.title = `${cityName} Doap`;
     const mainH1 = document.querySelector("h1");
-    if (mainH1) {
+    if (mainH1 && currentSubdomainData) {
         mainH1.textContent = document.title;
+    } else if (mainH1) {
+        mainH1.style.display = "none"; // Hide the h1 if no valid subdomain data
     }
 
     // Update phone number
