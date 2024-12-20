@@ -42,6 +42,7 @@ body {
 .logo-title-container img {
     width: 150px; /* Set a fixed width for the logo */
     height: auto; /* Maintain aspect ratio */
+    transform: translateY(10px); /* Move logo down by 10px */
 }
 
 .text-container {
@@ -89,7 +90,7 @@ body {
 }
 
 .menu-title h2 {
-    font-family: Arial, sans-serif;
+    font-family: 'Marvel', sans-serif; /* Updated to Marvel font */
     line-height: 1.6;
     font-size: 18px;
     text-decoration: none;
@@ -119,6 +120,7 @@ p {
 
     .logo-title-container img {
         width: 100px; /* Adjust logo size for smaller screens */
+        transform: translateY(10px); /* Move logo down by 10px */
     }
 
     .text-container h1 {
