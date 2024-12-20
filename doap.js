@@ -537,65 +537,51 @@ function hideLargeImage() {
 
 
 document.addEventListener("DOMContentLoaded", function () {
-    // Function to create and return the form
-    function createZipForm() {
-        const form = document.createElement("form");
-        form.className = "zip-form";
-        form.style.cssText = "display: flex; flex-direction: column; gap: 10px;";
+document.addEventListener("DOMContentLoaded", () => {
+    console.log("cart.js started loading");
 
-        const input = document.createElement("input");
-        input.type = "text";
-        input.placeholder = "Enter ZIP Code or City/Town";
-        input.className = "userInput";
-        input.required = true;
-        input.style.cssText = "padding: 10px; font-size: 1rem; border: 1px solid #ccc; border-radius: 5px;";
-
-        const button = document.createElement("button");
-        button.type = "submit";
-        button.textContent = "Find a nearby Agency";
-        button.style.cssText = "padding: 10px 15px; background-color: #007BFF; color: white; border: none; border-radius: 5px; cursor: pointer;";
-
-        const message = document.createElement("p");
-        message.className = "message";
-        message.style.cssText = "color: red; font-size: 1rem; margin: 10px 0 0;";
-
-        form.append(input, button, message);
-
-        return { form, input, message };
+    // Select the existing ZIP form in the footer
+    const zipForm = document.querySelector(".zip-form");
+    if (!zipForm) {
+        console.error("ZIP form not found in the footer!");
+        return;
     }
 
-    // Function to handle form submission
-    function handleFormSubmission(form, input, message) {
-        form.addEventListener("submit", function (event) {
-            event.preventDefault();
+    const message = zipForm.querySelector(".message");
+    const input = zipForm.querySelector("input");
 
-            const userInput = input.value.trim().toLowerCase();
-            if (!userInput) {
-                message.textContent = "Please enter a valid ZIP Code or city.";
-                return;
+    // Handle form submission
+    zipForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const userInput = input.value.trim().toLowerCase();
+        if (!userInput) {
+            message.textContent = "Please enter a valid ZIP Code or city.";
+            return;
+        }
+
+        const zipData = [
+            { zip: [94507], city: ["Alamo", "Blackhawk", "Tassajara"], url: "https://alamo.doap.com/cart.php" },
+            { zip: [94568], city: ["Dublin"], url: "https://dublin.doap.com/cart.php" },
+            // Add your remaining data here
+        ];
+
+        let matchedURL = null;
+        for (const data of zipData) {
+            if (data.zip.includes(parseInt(userInput)) || data.city.some(city => city.toLowerCase() === userInput)) {
+                matchedURL = data.url;
+                break;
             }
+        }
 
-            const zipData = [
-                { zip: [94507], city: ["Alamo", "Blackhawk", "Tassajara"], url: "https://alamo.doap.com/cart.php" },
-                { zip: [94568], city: ["Dublin"], url: "https://dublin.doap.com/cart.php" },
-                // Add your remaining data here
-            ];
+        if (matchedURL) {
+            window.location.href = matchedURL;
+        } else {
+            message.textContent = "No matching location found. Please try again.";
+        }
+    });
 
-            let matchedURL = null;
-            for (const data of zipData) {
-                if (data.zip.includes(parseInt(userInput)) || data.city.some(city => city.toLowerCase() === userInput)) {
-                    matchedURL = data.url;
-                    break;
-                }
-            }
-
-            if (matchedURL) {
-                window.location.href = matchedURL;
-            } else {
-                message.textContent = "No matching location found. Please try again.";
-            }
-        });
-    }
+    console.log("Form handling applied successfully!");
 
 });
 
