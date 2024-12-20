@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const currentSubdomainData = subdomainData.find(data => data.subdomain === domainName);
 
     // Default values if no subdomain match
-    const cityName = currentSubdomainData ? currentSubdomainData.city : "Norcal Doap";
+    const cityName = currentSubdomainData ? currentSubdomainData.city : "Directory OF Agencies & Providers";
     const phoneNumber = currentSubdomainData ? currentSubdomainData.phone : "833-289-3627";
     const minimumOrder = currentSubdomainData ? currentSubdomainData.minimumOrder : 60;
     const servingCities = currentSubdomainData ? currentSubdomainData.servingCities.join(", ") : "All Northern California cities";
