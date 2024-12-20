@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Handle root domain and www subdomain
     if (hostname === "www.doap.com" || hostname === "doap.com") {
-        document.title = "Doap - Organic Awesome Pot";
+        document.title = "Directory Of Agencies & Providers";
         const mainH1 = document.querySelector("h1");
         if (mainH1) {
             mainH1.style.display = "none"; // Hide the h1 for these domains
