@@ -52,6 +52,7 @@ body {
 
 .text-container a {
     text-decoration: none; /* Remove underline for link */
+    color: inherit; /* Inherit color from h1 */
 }
 
 .text-container h1 {
@@ -59,7 +60,7 @@ body {
     font-weight: bold;
     font-size: 2rem; /* Adjusts with global font size */
     font-family: 'Marvel', sans-serif; /* Use Marvel font */
-    color: #007BFF; /* Blue title color */
+    color: #333; /* Neutral title color */
 }
 
 .text-container a:hover h1 {
@@ -68,7 +69,7 @@ body {
 
 .phone-number {
     font-size: 1rem;
-    margin-top: 5px;
+    margin-top: 2px; /* Adjusted for better alignment */
     color: #333;
     text-decoration: none;
     font-weight: bold;
@@ -125,6 +126,7 @@ p {
 
     .phone-number {
         font-size: 0.8rem; /* Adjust phone number size */
+        margin-top: 2px; /* Adjust alignment for smaller screens */
     }
 
     p {
