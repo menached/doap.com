@@ -14,11 +14,13 @@ document.addEventListener("DOMContentLoaded", () => {
         if (mainH1) {
             mainH1.style.display = "none"; // Hide the h1 for these domains
         }
+
         // Ensure the minimum order is displayed for root domains
         const minOrderElement = document.getElementById("minimumOrder");
         if (minOrderElement) {
             minOrderElement.textContent = "Minimum Order: $60"; // Default minimum for root
         }
+
         return; // Stop further processing for root domains
     }
 
@@ -99,23 +101,20 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
         console.error("ZIP form not found on the page.");
     }
-});
 
-
-
-document.addEventListener("DOMContentLoaded", () => {
+    // Cart functionality
     const cart = [];
     const cartDisplay = document.getElementById("cartItems");
     const totalDisplay = document.getElementById("cartTotal");
 
-    // Function to render the cart
+    // Render the cart
     const renderCart = () => {
         if (cartDisplay && totalDisplay) {
             cartDisplay.innerHTML = cart
                 .map(
                     (item, index) => `
                         <div class="cart-item">
-                            <span>${item.name} - $${item.price}</span>
+                            <span>${item.name} - $${item.price.toFixed(2)}</span>
                             <button class="remove-btn" data-index="${index}">Remove</button>
                         </div>
                     `
@@ -127,7 +126,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     };
 
-    // Add to Cart functionality
+    // Add to Cart
     document.addEventListener("click", (e) => {
         if (e.target.classList.contains("add-to-cart")) {
             const productElement = e.target.closest(".product-item");
@@ -140,7 +139,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // Remove from Cart functionality
+    // Remove from Cart
     document.addEventListener("click", (e) => {
         if (e.target.classList.contains("remove-btn")) {
             const index = parseInt(e.target.dataset.index, 10);
@@ -150,8 +149,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-
-document.addEventListener("DOMContentLoaded", () => {
+    // Payment method selection
     const paymentMethods = document.querySelectorAll("input[name='paymentMethod']");
     const paymentMessage = document.getElementById("paymentMessage");
 
@@ -174,7 +172,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 });
-
 
 console.log("doap.js loaded successfully!");
 
