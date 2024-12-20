@@ -540,18 +540,20 @@ document.addEventListener("DOMContentLoaded", function () {
 document.addEventListener("DOMContentLoaded", () => {
     console.log("cart.js started loading");
 
-    // Select the existing ZIP form in the footer
-    const zipForm = document.querySelector(".zip-form");
+document.addEventListener("DOMContentLoaded", () => {
+    console.log("Initializing ZIP form...");
+
+    // Select the form from footer.html
+    const zipForm = document.querySelector("#zipForm");
     if (!zipForm) {
-        console.error("ZIP form not found in the footer!");
+        console.error("ZIP form not found!");
         return;
     }
 
-    const message = zipForm.querySelector(".message");
     const input = zipForm.querySelector("input");
+    const message = zipForm.querySelector(".message");
 
-    // Handle form submission
-    zipForm.addEventListener("submit", function (event) {
+    zipForm.addEventListener("submit", (event) => {
         event.preventDefault();
 
         const userInput = input.value.trim().toLowerCase();
@@ -580,8 +582,7 @@ document.addEventListener("DOMContentLoaded", () => {
             message.textContent = "No matching location found. Please try again.";
         }
     });
-
-    console.log("Form handling applied successfully!");
+    message.textContent = "ZIP form initialized.";
 
 });
 
