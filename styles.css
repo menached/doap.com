@@ -3,18 +3,18 @@ body {
     margin: 0;
     font-family: Arial, sans-serif;
     line-height: 1.6;
-    background-color: #f9f9f9; /* Slight grey background */
+    background-color: #f9f9f9; /* Slight grey background for sides */
     color: #333;
     font-size: 16px; /* Base font size for all devices */
 }
 
 /* Page Wrapper with Borders */
 .page-wrapper {
-    max-width: 1200px; /* Define the maximum width of the page content */
+    max-width: 1024px; /* Define the optimal width for SEO */
     margin: 0 auto; /* Center the page content */
     padding: 0 20px; /* Add padding inside the borders */
     background-color: #fff; /* Keep the content area white */
-    box-shadow: -5px 0 0 #ddd, 5px 0 0 #ddd; /* Create left and right borders */
+    box-shadow: 0 0 0 #ddd; /* No visible shadow */
 }
 
 /* Footer Section */
@@ -147,7 +147,6 @@ p {
 
     .page-wrapper {
         padding: 0 10px; /* Reduce padding inside the borders on smaller screens */
-        box-shadow: none; /* Remove borders on very small screens */
     }
 }
 
