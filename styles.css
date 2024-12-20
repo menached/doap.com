@@ -48,6 +48,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 5px; /* Added gap for better spacing */
 }
 
 .text-container a {
@@ -69,7 +70,7 @@ body {
 
 .phone-number {
     font-size: 1rem;
-    margin-top: 2px; /* Adjusted for better alignment */
+    margin-top: -10px; /* Adjusted for better alignment */
     color: #333;
     text-decoration: none;
     font-weight: bold;
@@ -126,7 +127,7 @@ p {
 
     .phone-number {
         font-size: 0.8rem; /* Adjust phone number size */
-        margin-top: 2px; /* Adjust alignment for smaller screens */
+        margin-top: -10px; /* Adjust alignment for smaller screens */
     }
 
     p {
