@@ -2,6 +2,30 @@ import { subdomainData } from './subdomainData.js';
 
 console.log("doap.js started loading");
 
+// Function to process subdomainData in chunks asynchronously
+const processSubdomainData = (data, chunkSize, processCallback, completeCallback) => {
+    let index = 0;
+
+    function processChunk() {
+        const end = Math.min(index + chunkSize, data.length);
+
+        for (let i = index; i < end; i++) {
+            const item = data[i];
+            processCallback(item);
+        }
+
+        index = end;
+
+        if (index < data.length) {
+            setTimeout(processChunk, 0); // Schedule the next chunk
+        } else if (completeCallback) {
+            completeCallback();
+        }
+    }
+
+    processChunk();
+};
+
 document.addEventListener("DOMContentLoaded", () => {
     // Extract hostname and subdomain
     const hostname = window.location.hostname;
@@ -54,6 +78,26 @@ document.addEventListener("DOMContentLoaded", () => {
     if (serviceZipsElement) {
         serviceZipsElement.textContent = `Serving ZIPs: ${serviceZips}`;
     }
+
+    // Process subdomainData asynchronously for additional operations (example: rendering to DOM)
+    processSubdomainData(
+        subdomainData,
+        5, // Process 5 items per chunk
+        (item) => {
+            console.log(`Processing subdomain: ${item.subdomain}, City: ${item.city}`);
+            
+            // Example: Dynamically render data to DOM
+            const container = document.getElementById("dataContainer");
+            if (container) {
+                const element = document.createElement("div");
+                element.textContent = `Subdomain: ${item.subdomain}, City: ${item.city}`;
+                container.appendChild(element);
+            }
+        },
+        () => {
+            console.log("Finished processing subdomain data.");
+        }
+    );
 
     // ZIP Form logic
     const zipForm = document.querySelector("#zipForm");
