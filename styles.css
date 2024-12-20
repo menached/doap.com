@@ -4,247 +4,19 @@ body {
     font-family: Arial, sans-serif;
     line-height: 1.6;
     color: #333;
-    font-size: 16px; /* Base font size for all devices */
-    background-color: #f5f5f5; /* Light grey background for contrast */
+    font-size: 16px;
+    background-color: #f5f5f5;
 }
 
-/* Page Wrapper with Enhanced Visual Appeal */
+/* Page Wrapper */
 .page-wrapper {
-    max-width: 1024px; /* Define the optimal width for SEO */
-    margin: 20px auto; /* Center the page content with vertical spacing */
-    padding: 20px; /* Add padding inside the borders */
-    background-color: #fff; /* Keep the content area white */
-    border-radius: 10px; /* Rounded corners for a modern look */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-    border: 1px solid #ddd; /* Light border for definition */
-}
-
-
-
-
-/* Customer Information */
-.customer-info {
-    display: flex;
-    flex-direction: column;  /* Stack fields vertically */
-    gap: 15px;  /* Space between form rows */
-    margin-bottom: 20px;
-}
-
-/* Row structure for each form field */
-.info-row {
-    display: flex;
-    flex-direction: column;  /* Stack label and input vertically */
-    gap: 5px;  /* Space between label and input */
-}
-
-/* Label styles */
-.customer-info label {
-    font-size: 1rem;
-    font-weight: bold;
-}
-
-/* Input fields and textarea */
-.customer-info input,
-.customer-info textarea {
-    width: 100%;  /* Ensure inputs take up full width */
-    padding: 10px;
-    margin-top: 5px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    box-sizing: border-box;
-}
-
-/* Make Address input (textarea) the same height as City input */
-.customer-info textarea {
-    resize: vertical; /* Allow vertical resizing */
-    height: 40px;  /* Match the height of the city input */
-}
-
-/* For mobile and small screens (less than 768px) */
-@media (max-width: 767px) {
-    .customer-info {
-        flex-direction: column;  /* Stack fields vertically */
-    }
-
-    .info-row {
-        width: 100%;  /* Ensure full-width on mobile */
-    }
-}
-
-/* Adjust for tablets and larger screens (768px and up) */
-@media (min-width: 768px) {
-    .customer-info {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;  /* Three columns */
-        gap: 15px;
-    }
-
-    .info-row {
-        display: flex;
-        flex-direction: column;  /* Ensure the label and input stay stacked */
-    }
-}
-
-
-
-
-
-    .cart-section,
-    .payment-section {
-        width: 100%; /* Ensure sections stretch to full width */
-        padding: 10px; /* Add internal padding */
-        box-sizing: border-box; /* Prevent overflow */
-    }
-
-
-
-
-/* Tab styles */
-.tab-container {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 20px;
-}
-
-.tab {
-  padding: 10px 20px;
-  cursor: pointer;
-  background: #f9f9f9;
-  border: 1px solid #ccc;
-  border-bottom: none;
-  margin: 0 5px;
-  font-size: 1.1rem;
-}
-
-.tab.active {
-  background: #fff;
-  font-weight: bold;
-  border-bottom: 2px solid #007bff;
-}
-
-/* Tab content */
-.tab-content {
-  display: none;
-}
-
-.tab-content.active {
-  display: block;
-}
-
-
-
-
-
-/* Alternate background colors for list items */
-#selectedItemsList li:nth-child(odd) {
-    background-color: #ffe6e6; /* Pale pink for odd rows */
-}
-
-#selectedItemsList li:nth-child(even) {
-    background-color: #ffffff; /* White for even rows */
-}
-
-/* Default background for "No items selected yet" */
-#selectedItemsList li:only-child {
-    background-color: transparent; /* Default background */
-    text-align: center; /* Center-align the message for better UX */
-    color: #555; /* Slightly lighter text color */
-}
-
-/* Add padding and styling for better visual appearance */
-#selectedItemsList li {
-    padding: 10px; /* Add spacing inside each list item */
-    border-bottom: 1px solid #ddd; /* Optional: Add bottom border for separation */
-    display: flex; /* Keep content aligned */
-    justify-content: space-between; /* Distribute space between content */
-    align-items: center; /* Align items vertically */
-}
-
-/* Optional: Add a border to distinguish list visually */
-#selectedItemsList {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    overflow: hidden; /* Clean edges */
-    padding: 0;
-}
-
-
-
-
-/* Alternating background colors for cart items */
-.cart-item:nth-child(odd) {
-    background-color: #f9f9f9; /* Light gray for odd items */
-}
-
-.cart-item:nth-child(even) {
-    background-color: #ffffff; /* White for even items */
-}
-
-
-
-/* Smaller text for crypto wallet addresses */
-.small-text {
-    font-size: 0.65rem; /* Reduce font size */
-    line-height: 1.2;   /* Adjust line spacing */
-    color: #444;        /* Slightly darker color for better readability */
-}
-
-
-
-
-
-/* Tab styles */
-.tab-container {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 20px;
-}
-
-.tab {
-  padding: 10px 20px;
-  cursor: pointer;
-  background: #f9f9f9;
-  border: 1px solid #ccc;
-  border-bottom: none;
-  margin: 0 5px;
-  font-size: 1.1rem;
-}
-
-.tab.active {
-  background: #fff;
-  font-weight: bold;
-  border-bottom: 2px solid #007bff;
-}
-
-/* Tab content */
-.tab-content {
-  display: none;
-}
-
-.tab-content.active {
-  display: block;
-}
-
-
-/* Footer Section */
-.doapfooter {
+    max-width: 1024px;
+    margin: 20px auto;
+    padding: 20px;
     background-color: #fff;
-    color: #333;
-    padding: 20px 10px;
-    text-align: center;
-    font-family: Marvel, Arial, sans-serif;
-    font-size: 0.9rem;
-    border-top: 1px solid #ddd; /* Subtle border for separation */
-    margin-top: 30px;
-}
-
-.doapfooter a {
-    color: #007BFF;
-    text-decoration: none;
-}
-
-.doapfooter a:hover {
-    text-decoration: underline;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ddd;
 }
 
 /* Header Section */
@@ -258,38 +30,38 @@ body {
 }
 
 .logo-title-container img {
-    width: 150px; /* Set a fixed width for the logo */
-    height: auto; /* Maintain aspect ratio */
-    transform: translateY(10px); /* Move logo down by 10px */
+    width: 150px;
+    height: auto;
+    transform: translateY(10px);
 }
 
 .text-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 5px; /* Added gap for better spacing */
+    gap: 5px;
 }
 
 .text-container a {
-    text-decoration: none; /* Remove underline for link */
-    color: inherit; /* Inherit color from h1 */
+    text-decoration: none;
+    color: inherit;
 }
 
 .text-container h1 {
     margin: 10px 0 0;
     font-weight: bold;
-    font-size: 2rem; /* Adjusts with global font size */
-    font-family: 'Marvel', sans-serif; /* Use Marvel font */
-    color: #333; /* Neutral title color */
+    font-size: 2rem;
+    font-family: 'Marvel', sans-serif;
+    color: #333;
 }
 
 .text-container a:hover h1 {
-    text-decoration: underline; /* Optional hover effect */
+    text-decoration: underline;
 }
 
 .phone-number {
     font-size: 1rem;
-    margin-top: -10px; /* Adjusted for better alignment */
+    margin-top: -10px;
     color: #333;
     text-decoration: none;
     font-weight: bold;
@@ -300,128 +72,39 @@ body {
     text-decoration: underline;
 }
 
-/* Menu Title */
-.menu-title {
-    text-align: center;
-    margin: -10px 0 0; /* Move closer to the header */
-    padding: 0;
+/* Tab Styles */
+.tab-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
 }
 
-.menu-title h2 {
-    font-family: 'Marvel', sans-serif; /* Updated to Marvel font */
-    line-height: 1.6;
-    font-size: 18px;
-    text-decoration: none;
-    color: #000;
-    margin: 0;
-    padding: 0;
+.tab {
+    padding: 10px 20px;
+    cursor: pointer;
+    background: #f9f9f9;
+    border: 1px solid #ccc;
+    border-bottom: none;
+    margin: 0 5px;
+    font-size: 1.1rem;
 }
 
-/* Welcome Section */
-h1 {
-    font-family: 'Marvel', sans-serif;
-    font-size: 2rem;
-    text-align: center;
+.tab.active {
+    background: #fff;
+    font-weight: bold;
+    border-bottom: 2px solid #007bff;
 }
 
-p {
-    font-size: 1rem;
-    text-align: center;
-    margin: 20px 0;
+/* Tab Content */
+.tab-content {
+    display: none;
 }
 
-
-/* Responsive Design */
-@media (max-width: 767px) {
-    body {
-        font-size: 14px; /* Slightly larger default fonts for mobile */
-    }
-
-    .logo-title-container img {
-        width: 100px; /* Adjust logo size for smaller screens */
-        transform: translateY(10px); /* Move logo down by 10px */
-    }
-
-    .text-container h1 {
-        font-size: 1.5rem; /* Adjust title size */
-    }
-
-    .phone-number {
-        font-size: 0.8rem; /* Adjust phone number size */
-        margin-top: -10px; /* Adjust alignment for smaller screens */
-    }
-
-    p {
-        padding: 0 15px; /* Add padding for smaller screens */
-    }
-
-    .page-wrapper {
-        padding: 15px; /* Reduce padding inside the borders on smaller screens */
-        border-radius: 8px; /* Slightly less rounded corners for smaller screens */
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-    }
-
-    /* Default form styles */
-    .zip-form {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        flex-wrap: nowrap; /* Prevents wrapping of elements */
-    }
-
-    /* Input and button styles */
-    .zip-form input {
-        flex-grow: 1;
-        padding: 10px;
-        font-size: 1rem;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        width: 60%; /* Base width for all screen sizes */
-    }
-
-    .zip-form button {
-        padding: 5px 10px;
-        font-size: 0.9rem;
-        background-color: #007BFF;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        flex-shrink: 0; /* Prevents the button from resizing too much */
-        white-space: nowrap; /* Prevents text wrapping */
-    }
-
-    .zip-form button:hover {
-        background-color: #0056b3;
-    }
-
-    /* Responsive design for smaller screens */
-    @media (max-width: 767px) {
-        .zip-form {
-            flex-wrap: nowrap; /* Ensure input and button remain on the same line */
-        }
-
-        .zip-form input {
-            width: 70%; /* Adjust input width for small screens */
-        }
-
-        .zip-form button {
-            width: auto; /* Keep button compact */
-        }
-    }
-
-    /* Adjust input width for larger screens */
-    @media (min-width: 768px) {
-        .zip-form input {
-            width: 66%; /* Increase input width by 10% (60% + 10% of 60%) */
-        }
-    }
+.tab-content.active {
+    display: block;
 }
 
-
-
-
-/* Product container */
+/* Product Section */
 #productsContainer {
     display: flex;
     flex-wrap: wrap;
@@ -431,7 +114,6 @@ p {
     max-width: 1200px;
 }
 
-/* Individual product item */
 .product-item {
     background-color: #fff;
     border: 1px solid #ddd;
@@ -482,7 +164,7 @@ p {
     background-color: #0056b3;
 }
 
-/* Cart container */
+/* Cart Section */
 #cart {
     margin: 30px auto;
     padding: 20px;
@@ -503,6 +185,14 @@ p {
     align-items: center;
     padding: 10px 0;
     border-bottom: 1px solid #ddd;
+}
+
+.cart-item:nth-child(odd) {
+    background-color: #f9f9f9;
+}
+
+.cart-item:nth-child(even) {
+    background-color: #ffffff;
 }
 
 .remove-btn {
@@ -526,11 +216,7 @@ p {
     text-align: right;
 }
 
-
-
-
-
-
+/* Payment Section */
 #paymentMethods {
     margin: 20px 0;
     padding: 10px;
@@ -550,21 +236,45 @@ p {
     margin-right: 10px;
 }
 
-#paymentDetails {
-    margin-top: 20px;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    background-color: #fefefe;
-}
-
-#paymentDetails h4 {
-    font-size: 1.2rem;
-    margin-bottom: 10px;
-}
-
 #paymentMessage {
     font-size: 1rem;
     color: #333;
+}
+
+/* Responsive Design */
+@media (max-width: 767px) {
+    body {
+        font-size: 14px;
+    }
+
+    .logo-title-container img {
+        width: 100px;
+    }
+
+    .text-container h1 {
+        font-size: 1.5rem;
+    }
+
+    .phone-number {
+        font-size: 0.8rem;
+    }
+
+    p {
+        padding: 0 15px;
+    }
+
+    .page-wrapper {
+        padding: 15px;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+}
+
+@media (min-width: 768px) {
+    .customer-info {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 15px;
+    }
 }
 
