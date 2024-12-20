@@ -20,6 +20,31 @@ body {
 }
 
 
+
+
+/* Alternating background colors for cart items */
+.cart-item:nth-child(odd) {
+    background-color: #f9f9f9; /* Light gray for odd items */
+}
+
+.cart-item:nth-child(even) {
+    background-color: #ffffff; /* White for even items */
+}
+
+
+
+/* Smaller text for crypto wallet addresses */
+.small-text {
+    font-size: 0.65rem; /* Reduce font size */
+    line-height: 1.2;   /* Adjust line spacing */
+    color: #444;        /* Slightly darker color for better readability */
+}
+
+
+
+
+
+
 /* Tab styles */
 .tab-container {
   display: flex;
