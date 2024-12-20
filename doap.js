@@ -82,8 +82,11 @@ document.addEventListener("DOMContentLoaded", () => {
             event.preventDefault();
 
             const userInput = input.value.trim().toLowerCase();
+            console.log(`ZIP form submitted with input: ${userInput}`);
+
             if (!userInput) {
                 message.textContent = "Please enter a valid ZIP Code or city.";
+                message.style.display = "block";
                 return;
             }
 
@@ -100,11 +103,15 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             if (matchedURL) {
+                console.log(`Matched URL: ${matchedURL}`);
                 window.location.href = matchedURL;
             } else {
                 message.textContent = "No matching location found. Please try again.";
+                message.style.display = "block";
             }
         });
+    } else {
+        console.error("ZIP form not found on the page.");
     }
 });
 
