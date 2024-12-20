@@ -1,4 +1,10 @@
 /* General Reset */
+.githublink {
+    color: #007BFF; 
+    text-decoration: none; 
+    font-weight: bold;
+}
+
 .doapfooter {
     background-color: #fff;
     color: #333;
