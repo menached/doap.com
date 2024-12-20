@@ -123,6 +123,49 @@ p {
     margin: 20px 0;
 }
 
+/* Zip Form Styling */
+.zip-form-container {
+    margin: 20px auto;
+    max-width: 400px;
+    text-align: center;
+}
+
+.zip-form-container h3 {
+    font-family: 'Marvel', sans-serif;
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.zip-form {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.zip-form input {
+    flex-grow: 1;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.zip-form button {
+    padding: 5px 10px;
+    font-size: 0.9rem;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.zip-form button:hover {
+    background-color: #0056b3;
+}
+
 /* Responsive Design */
 @media (max-width: 767px) {
     body {
@@ -151,6 +194,15 @@ p {
         padding: 15px; /* Reduce padding inside the borders on smaller screens */
         border-radius: 8px; /* Slightly less rounded corners for smaller screens */
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    }
+
+    .zip-form {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .zip-form button {
+        width: 100%; /* Make the button full width on smaller screens */
     }
 }
 
