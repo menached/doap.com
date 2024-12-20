@@ -48,6 +48,12 @@ body {
     font-weight: bold;
     font-size: 2rem; /* Adjusts with global font size */
     font-family: 'Marvel', sans-serif; /* Use Marvel font */
+    color: #007BFF; /* Blue title color */
+    text-decoration: none; /* Remove underline */
+}
+
+.header h1:hover {
+    text-decoration: underline; /* Optional hover effect */
 }
 
 .phone-number {
@@ -56,6 +62,7 @@ body {
     margin-top: 5px; /* Space between the header and the phone number */
     color: #333; /* Default text color */
     text-decoration: none; /* Remove underline */
+    font-weight: bold; /* Make the number stand out */
 }
 
 .phone-number:hover {
