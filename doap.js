@@ -36,6 +36,38 @@ document.addEventListener("DOMContentLoaded", () => {
         headerLink.href = currentSubdomainData.url;
         headerLink.title = `Call ${cityName} Doap!`;
     }
+
+
+
+    const zipForm = document.querySelector("#zipForm"); // Update to match your form ID
+    if (!zipForm) {
+        console.error("Form element not found!");
+        return;
+    }
+
+    const input = zipForm.querySelector("input");
+    const message = zipForm.querySelector(".message");
+
+    zipForm.addEventListener("submit", (event) => {
+        event.preventDefault(); // Prevent default form submission
+
+        const userInput = input.value.trim().toLowerCase();
+        if (!userInput) {
+            message.textContent = "Please enter a valid ZIP Code or city.";
+            return;
+        }
+
+        const matchedData = subdomainData.find((data) =>
+            data.city.toLowerCase() === userInput || data.subdomain.toLowerCase() === userInput
+        );
+
+        if (matchedData && matchedData.url) {
+            window.location.href = matchedData.url; // Redirect to matched URL
+        } else {
+            message.textContent = "No matching location found. Please try again.";
+        }
+    });
+
 });
 
 console.log("doap.js loaded successfully!");
