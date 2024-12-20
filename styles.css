@@ -19,6 +19,64 @@ body {
     border: 1px solid #ddd; /* Light border for definition */
 }
 
+
+/* Container for the tabs */
+.tab-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 800px;
+    margin: 20px auto;
+    font-family: Arial, sans-serif;
+}
+
+/* Tabs navigation bar */
+.tab-header {
+    display: flex;
+    border-bottom: 2px solid #ddd;
+    background-color: #f9f9f9;
+}
+
+.tab-header .tab {
+    flex-grow: 1;
+    text-align: center;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    border: 1px solid #ddd;
+    border-bottom: none; /* Remove bottom border for active look */
+    background-color: #f1f1f1;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.tab-header .tab:hover {
+    background-color: #eaeaea;
+    color: #007BFF;
+}
+
+/* Active tab style */
+.tab-header .tab.active {
+    background-color: white;
+    color: #333;
+    border-top: 3px solid #007BFF;
+}
+
+/* Tab content area */
+.tab-content {
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-top: none; /* Align with tabs */
+    background-color: white;
+    display: none; /* Hide all tab contents by default */
+}
+
+/* Active tab content */
+.tab-content.active {
+    display: block;
+}
+
+
 /* Footer Section */
 .doapfooter {
     background-color: #fff;
