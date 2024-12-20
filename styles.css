@@ -150,3 +150,14 @@ p {
     }
 }
 
+.zip-form {
+    max-width: 400px;
+    margin: 20px auto;
+    text-align: center;
+}
+
+.zip-form input,
+.zip-form button {
+    width: 100%;
+}
+
