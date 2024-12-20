@@ -1,160 +1,129 @@
-import { subdomainData } from './subdomainData.js';
-
-console.log("doap.js started loading");
-
 document.addEventListener("DOMContentLoaded", () => {
-    const cart = [];
-    const cartDisplay = document.getElementById("cartItems");
-    const totalDisplay = document.getElementById("cartTotal");
-    const paymentMethodSelect = document.getElementById("paymentMethod");
-    const paymentMessage = document.getElementById("paymentMessage");
+    console.log("cart.js started loading");
 
-    // 1. Update Title, Phone, and Minimum Order
+    // Subdomain and city-based configurations
     const hostname = window.location.hostname;
-    let domainName = hostname.split('.')[0].toLowerCase();
+    const domainName = hostname.split('.')[0].toLowerCase();
 
-    if (hostname === "www.doap.com" || hostname === "doap.com") {
-        document.title = "Directory Of Agencies & Providers";
-        const mainH1 = document.querySelector("h1");
-        if (mainH1) mainH1.style.display = "none";
+    const areaMinimum = {
+        alamo: 40, walnutcreek: 50, concord: 50, sanramon: 40, dublin: 40, 
+        lafayette: 50, livermore: 50, orinda: 60, pleasanthill: 60
+    };
+    const MINIMUM_ORDER_AMOUNT = areaMinimum[domainName] || 60;
 
-        const minOrderElement = document.getElementById("minimumOrder");
-        if (minOrderElement) minOrderElement.textContent = "Minimum Order: $60";
-    } else {
-        const currentSubdomainData = subdomainData.find(data => data.subdomain === domainName);
-        const cityName = currentSubdomainData ? currentSubdomainData.city : "Norcal Doap";
-        const phoneNumber = currentSubdomainData ? currentSubdomainData.phone : "833-289-3627";
-        const minimumOrder = currentSubdomainData ? currentSubdomainData.minimumOrder : 60;
+    const phoneMap = {
+        alamo: "925-553-4710", walnutcreek: "925-464-2075", 
+        concord: "925-412-4880", sanramon: "925-365-6030"
+    };
+    const phoneNumber = phoneMap[domainName] || "833-289-3627";
 
-        document.title = `${cityName} Doap`;
-        const phoneNumberElement = document.querySelector(".phone-number");
-        if (phoneNumberElement) {
-            phoneNumberElement.textContent = phoneNumber;
-            phoneNumberElement.href = `tel:${phoneNumber.replace(/-/g, '')}`;
-        }
+    const cityName = domainName.charAt(0).toUpperCase() + domainName.slice(1);
+    document.title = `${cityName} Doap`;
 
-        const minOrderElement = document.getElementById("minimumOrder");
-        if (minOrderElement) minOrderElement.textContent = `Minimum Order: $${minimumOrder}`;
+    // Update phone number in the header
+    const phoneElement = document.querySelector(".phone-number");
+    if (phoneElement) {
+        phoneElement.textContent = phoneNumber;
+        phoneElement.href = `tel:${phoneNumber.replace(/-/g, '')}`;
     }
 
-    // 2. Tabs Functionality
-    const tabs = document.querySelectorAll(".tab");
-    const tabContents = document.querySelectorAll(".tab-content");
+    // Payment Method Handling
+    const paymentMethodDropdown = document.getElementById("paymentMethod");
+    const creditCardForm = document.getElementById("creditCardForm");
+    const cryptoWallets = document.getElementById("cryptoWallets");
+    const generalHelp = document.getElementById("generalHelp");
 
-    tabs.forEach(tab => {
-        tab.addEventListener("click", () => {
-            tabs.forEach(t => t.classList.remove("active"));
-            tabContents.forEach(tc => tc.classList.remove("active"));
+    const handlePaymentMethodChange = (selectedMethod) => {
+        creditCardForm.style.display = "none";
+        cryptoWallets.style.display = "none";
+        generalHelp.style.display = "none";
 
-            tab.classList.add("active");
-            document.getElementById(tab.dataset.tab).classList.add("active");
-        });
-    });
-
-    // 3. Render the Cart
-    const renderCart = () => {
-        if (cartDisplay && totalDisplay) {
-            cartDisplay.innerHTML = cart
-                .map(
-                    (item, index) => `
-                    <div class="cart-item">
-                        <span>${item.name} (x${item.quantity}) - $${(item.price * item.quantity).toFixed(2)}</span>
-                        <button class="remove-btn" data-index="${index}">Remove</button>
-                    </div>
-                `
-                )
-                .join("");
-
-            const total = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
-            totalDisplay.textContent = `Total: $${total.toFixed(2)}`;
+        if (selectedMethod === "credit-card") creditCardForm.style.display = "block";
+        if (selectedMethod === "crypto") cryptoWallets.style.display = "block";
+        if (["cash", "zelle", "venmo", "paypal", "cashapp"].includes(selectedMethod)) {
+            generalHelp.style.display = "block";
         }
     };
 
-    // 4. Add to Cart
-    document.addEventListener("click", (e) => {
-        if (e.target.classList.contains("add-to-cart")) {
-            const productElement = e.target.closest(".product-item");
-            const name = productElement.querySelector(".product-name").textContent;
-            const price = parseFloat(productElement.querySelector(".product-price").dataset.price);
-            const quantity = parseInt(productElement.querySelector(".product-quantity").value, 10);
-
-            cart.push({ name, price, quantity });
-            renderCart();
-        }
-    });
-
-    // 5. Remove from Cart
-    document.addEventListener("click", (e) => {
-        if (e.target.classList.contains("remove-btn")) {
-            const index = parseInt(e.target.dataset.index, 10);
-            cart.splice(index, 1);
-            renderCart();
-        }
-    });
-
-    // 6. Payment Method Handling
-    if (paymentMethodSelect && paymentMessage) {
-        paymentMethodSelect.addEventListener("change", (event) => {
-            const selectedMethod = event.target.value;
-            const paymentDetails = {
-                "credit-card": "Enter your credit card details below.",
-                "crypto": "Send your payment to the wallet addresses provided.",
-                "cash": "Please have the exact cash amount ready for delivery.",
-                "zelle": "Send your payment via Zelle to info@doap.com.",
-                "venmo": "Send your payment via Venmo to @Doap-Payments.",
-                "paypal": "Send your payment via PayPal to paypal@doap.com.",
-                "cashapp": "Send your payment via CashApp to $DoapPayments.",
-            };
-
-            const message = paymentDetails[selectedMethod] || "Please select a valid payment method.";
-            paymentMessage.textContent = message;
-
-            // Show/hide relevant sections
-            document.querySelectorAll(".accordion-section").forEach(section => {
-                section.style.display = "none";
-            });
-
-            if (selectedMethod === "credit-card") {
-                document.getElementById("creditCardForm").style.display = "block";
-            } else if (selectedMethod === "crypto") {
-                document.getElementById("cryptoWallets").style.display = "block";
-            } else {
-                document.getElementById("generalHelp").style.display = "block";
-            }
+    if (paymentMethodDropdown) {
+        paymentMethodDropdown.addEventListener("change", (event) => {
+            handlePaymentMethodChange(event.target.value);
         });
     }
 
-    // 7. ZIP Form Logic
-    const zipForm = document.querySelector("#zipForm");
-    if (zipForm) {
-        const input = zipForm.querySelector("input");
-        const message = zipForm.querySelector(".message");
+    // Cart Logic
+    const cartForm = document.getElementById("cartForm");
+    const totalDisplay = document.getElementById("total");
+    const selectedItemsList = document.getElementById("selectedItemsList");
 
-        zipForm.addEventListener("submit", (event) => {
+    const updateCart = () => {
+        const itemElements = cartForm.querySelectorAll('input[name="item"]:checked');
+        let total = 0;
+
+        const cartItems = Array.from(itemElements).map(item => {
+            const quantityInput = item.closest(".item").querySelector(".quantity");
+            const quantity = parseInt(quantityInput.value, 10) || 1;
+            const [itemName, itemCost] = item.value.split('|');
+            const cost = parseFloat(itemCost) * quantity;
+
+            total += cost;
+            return `<li>${itemName} (x${quantity}) - $${cost.toFixed(2)}</li>`;
+        });
+
+        selectedItemsList.innerHTML = cartItems.length 
+            ? cartItems.join("")
+            : '<li>No items selected yet.</li>';
+        totalDisplay.textContent = `$${total.toFixed(2)}`;
+    };
+
+    if (cartForm) {
+        cartForm.addEventListener("change", updateCart);
+        cartForm.addEventListener("input", updateCart);
+    }
+
+    // Order Submission
+    const checkoutButton = document.getElementById("checkoutButton");
+    if (checkoutButton) {
+        checkoutButton.addEventListener("click", async (event) => {
             event.preventDefault();
 
-            const userInput = input.value.trim().toLowerCase();
-            if (!userInput) {
-                message.textContent = "Please enter a valid ZIP Code or city.";
-                message.style.display = "block";
-                return;
-            }
+            const items = Array.from(cartForm.querySelectorAll('input[name="item"]:checked')).map(item => {
+                const quantityInput = item.closest(".item").querySelector(".quantity");
+                const quantity = parseInt(quantityInput.value, 10) || 1;
+                const [itemName, itemCost] = item.value.split('|');
+                return { name: itemName, quantity, price: parseFloat(itemCost) };
+            });
 
-            const match = subdomainData.find(data =>
-                data.servingCities.some(city => city.toLowerCase() === userInput) ||
-                data.serviceZips.includes(parseInt(userInput, 10))
-            );
+            const name = document.getElementById("name").value.trim();
+            const city = document.getElementById("city").value.trim();
+            const phone = document.getElementById("phone").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const address = document.getElementById("address").value.trim();
+            const paymentMethod = document.getElementById("paymentMethod").value;
+            const total = parseFloat(totalDisplay.textContent.replace('$', ''));
 
-            if (match) {
-                window.location.href = match.url;
-            } else {
-                message.textContent = "No matching location found. Please try again.";
+            if (!items.length) return alert("No items selected!");
+            if (total < MINIMUM_ORDER_AMOUNT) return alert(`Minimum order is $${MINIMUM_ORDER_AMOUNT}.`);
+
+            const payload = { items, name, city, phone, email, address, total, paymentMethod };
+            console.log("Submitting payload:", payload);
+
+            try {
+                const response = await fetch("https://your-api-endpoint.amazonaws.com/prod/checkout", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(payload),
+                });
+
+                if (!response.ok) throw new Error(`Error: ${response.statusText}`);
+                alert("Order submitted successfully!");
+            } catch (error) {
+                console.error("Error submitting order:", error);
+                alert("Failed to submit the order. Please try again.");
             }
         });
-    } else {
-        console.error("ZIP form not found on the page.");
     }
-});
 
-console.log("doap.js loaded successfully!");
+    console.log("cart.js loaded completely");
+});
 
