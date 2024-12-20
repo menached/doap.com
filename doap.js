@@ -14,42 +14,48 @@ document.addEventListener("DOMContentLoaded", () => {
         if (mainH1) {
             mainH1.style.display = "none"; // Hide the h1 for these domains
         }
-        // Allow form functionality to proceed
-    } else {
-        // Handle other subdomains
-        if (domainName === "www") {
-            domainName = "default"; // Replace 'default' with the appropriate subdomain handling
-        }
-
-        // Find the current subdomain data
-        const currentSubdomainData = subdomainData.find(data => data.subdomain === domainName);
-
-        // Default values if no subdomain match
-        const cityName = currentSubdomainData ? currentSubdomainData.city : "Norcal Doap";
-        const phoneNumber = currentSubdomainData ? currentSubdomainData.phone : "833-289-3627";
-        const minimumOrder = currentSubdomainData ? currentSubdomainData.minimumOrder : 60;
-
-        // Update page title and header
-        document.title = `${cityName} Doap`;
-        const mainH1 = document.querySelector("h1");
-        if (mainH1 && currentSubdomainData) {
-            mainH1.textContent = document.title;
-        } else if (mainH1) {
-            mainH1.style.display = "none"; // Hide the h1 if no valid subdomain data
-        }
-
-        // Update phone number
-        const phoneNumberElement = document.querySelector(".phone-number");
-        if (phoneNumberElement) {
-            phoneNumberElement.textContent = phoneNumber;
-            phoneNumberElement.href = `tel:${phoneNumber.replace(/-/g, '')}`;
-        }
-
-        // Display the minimum order amount
+        // Ensure the minimum order is displayed for root domains
         const minOrderElement = document.getElementById("minimumOrder");
         if (minOrderElement) {
-            minOrderElement.textContent = `Minimum Order: $${minimumOrder}`;
+            minOrderElement.textContent = "Minimum Order: $60"; // Default minimum for root
         }
+        return; // Stop further processing for root domains
+    }
+
+    // Handle other subdomains
+    if (domainName === "www") {
+        domainName = "default"; // Replace 'default' with the appropriate subdomain handling
+    }
+
+    // Find the current subdomain data
+    const currentSubdomainData = subdomainData.find(data => data.subdomain === domainName);
+
+    // Default values if no subdomain match
+    const cityName = currentSubdomainData ? currentSubdomainData.city : "Norcal Doap";
+    const phoneNumber = currentSubdomainData ? currentSubdomainData.phone : "833-289-3627";
+    const minimumOrder = currentSubdomainData ? currentSubdomainData.minimumOrder : 60;
+
+    // Update page title and header
+    document.title = `${cityName} Doap`;
+    const mainH1 = document.querySelector("h1");
+    if (mainH1 && currentSubdomainData) {
+        mainH1.textContent = document.title;
+    } else if (mainH1) {
+        mainH1.style.display = "none"; // Hide the h1 if no valid subdomain data
+    }
+
+    // Update phone number
+    const phoneNumberElement = document.querySelector(".phone-number");
+    if (phoneNumberElement) {
+        phoneNumberElement.textContent = phoneNumber;
+        phoneNumberElement.href = `tel:${phoneNumber.replace(/-/g, '')}`;
+    }
+
+    // Display the minimum order amount
+    const minOrderElement = document.getElementById("minimumOrder");
+    if (minOrderElement) {
+        minOrderElement.textContent = `Minimum Order: $${minimumOrder}`;
+        console.log(`Updated minimum order to: $${minimumOrder}`);
     }
 
     // ZIP Form logic
