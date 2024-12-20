@@ -3,7 +3,7 @@ body {
     margin: 0;
     font-family: Arial, sans-serif;
     line-height: 1.6;
-    background-color: #fff;
+    background-color: #f9f9f9; /* Slight grey background */
     color: #333;
     font-size: 16px; /* Base font size for all devices */
 }
@@ -13,6 +13,7 @@ body {
     max-width: 1200px; /* Define the maximum width of the page content */
     margin: 0 auto; /* Center the page content */
     padding: 0 20px; /* Add padding inside the borders */
+    background-color: #fff; /* Keep the content area white */
     box-shadow: -5px 0 0 #ddd, 5px 0 0 #ddd; /* Create left and right borders */
 }
 
