@@ -526,3 +526,45 @@ p {
     text-align: right;
 }
 
+
+
+
+
+
+#paymentMethods {
+    margin: 20px 0;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+#paymentMethods label {
+    display: block;
+    font-size: 1rem;
+    margin: 10px 0;
+    cursor: pointer;
+}
+
+#paymentMethods input[type="radio"] {
+    margin-right: 10px;
+}
+
+#paymentDetails {
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fefefe;
+}
+
+#paymentDetails h4 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+#paymentMessage {
+    font-size: 1rem;
+    color: #333;
+}
+
