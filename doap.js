@@ -603,21 +603,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // Render the form in the target container
-    function renderZipForm() {
-        const formContainer = document.querySelector(".form2");
-
-        if (formContainer) {
-            const { form, input, message } = createZipForm();
-            formContainer.appendChild(form);
-            handleFormSubmission(form, input, message);
-        } else {
-            console.error("Target container '.form2' not found! Form was not appended.");
-        }
-    }
-
-    // Call render function
-    renderZipForm();
 });
 
 
