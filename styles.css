@@ -32,6 +32,78 @@ body {
 
 
 
+/* Tab styles */
+.tab-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.tab {
+  padding: 10px 20px;
+  cursor: pointer;
+  background: #f9f9f9;
+  border: 1px solid #ccc;
+  border-bottom: none;
+  margin: 0 5px;
+  font-size: 1.1rem;
+}
+
+.tab.active {
+  background: #fff;
+  font-weight: bold;
+  border-bottom: 2px solid #007bff;
+}
+
+/* Tab content */
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+
+
+
+
+/* Alternate background colors for list items */
+#selectedItemsList li:nth-child(odd) {
+    background-color: #ffe6e6; /* Pale pink for odd rows */
+}
+
+#selectedItemsList li:nth-child(even) {
+    background-color: #ffffff; /* White for even rows */
+}
+
+/* Default background for "No items selected yet" */
+#selectedItemsList li:only-child {
+    background-color: transparent; /* Default background */
+    text-align: center; /* Center-align the message for better UX */
+    color: #555; /* Slightly lighter text color */
+}
+
+/* Add padding and styling for better visual appearance */
+#selectedItemsList li {
+    padding: 10px; /* Add spacing inside each list item */
+    border-bottom: 1px solid #ddd; /* Optional: Add bottom border for separation */
+    display: flex; /* Keep content aligned */
+    justify-content: space-between; /* Distribute space between content */
+    align-items: center; /* Align items vertically */
+}
+
+/* Optional: Add a border to distinguish list visually */
+#selectedItemsList {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow: hidden; /* Clean edges */
+    padding: 0;
+}
+
+
+
+
 /* Alternating background colors for cart items */
 .cart-item:nth-child(odd) {
     background-color: #f9f9f9; /* Light gray for odd items */
@@ -49,7 +121,6 @@ body {
     line-height: 1.2;   /* Adjust line spacing */
     color: #444;        /* Slightly darker color for better readability */
 }
-
 
 
 
