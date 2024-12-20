@@ -1,10 +1,4 @@
 /* General Reset */
-.githublink {
-    color: #007BFF; 
-    text-decoration: none; 
-    font-weight: bold;
-}
-
 body {
     margin: 0;
     font-family: Arial, sans-serif;
@@ -22,7 +16,7 @@ body {
     text-align: center;
     font-family: Marvel, Arial, sans-serif;
     font-size: 0.9rem;
-    border-top: 0px solid #ddd;
+    border-top: 0px solid #ddd; /* Removed visible border */
     margin-top: 30px;
 }
 
@@ -91,7 +85,7 @@ body {
 /* Menu Title */
 .menu-title {
     text-align: center;
-    margin: 0;
+    margin: -10px 0 0; /* Move closer to the header */
     padding: 0;
 }
 
