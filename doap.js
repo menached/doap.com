@@ -543,6 +543,12 @@ document.addEventListener("DOMContentLoaded", () => {
 document.addEventListener("DOMContentLoaded", () => {
     console.log("Initializing ZIP form...");
 
+    const zipData = [
+        { zip: [94507], city: ["Alamo", "Blackhawk", "Tassajara"], url: "https://alamo.doap.com/cart.php" },
+        { zip: [94568], city: ["Dublin"], url: "https://dublin.doap.com/cart.php" },
+        // Add more entries as needed
+    ];
+
     // Select the form from footer.html
     const zipForm = document.querySelector("#zipForm");
     if (!zipForm) {
