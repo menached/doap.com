@@ -61,6 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
         sanramon: "San Ramon",
         discoverybay: "Discovery Bay",
         alamo: "Alamo",
+        burlingame: "Burlingame",
         antioch: "Antioch",
         dublin: "Dublin",
         lafayette: "Lafayette",
@@ -79,6 +80,7 @@ document.addEventListener("DOMContentLoaded", () => {
         sanramon: "925-365-6030",
         discoverybay: "925-891-7800",
         alamo: "925-553-4710",
+        burlingame: "650-293-0880",
         antioch: "925-891-7800",
         dublin: "925-587-6777",
         lafayette: "925-871-1333",
@@ -132,11 +134,6 @@ document.addEventListener("DOMContentLoaded", () => {
         mainH1.textContent = document.title;
     }
     
-    //// Update the header text dynamically
-    //const cityNameElement = document.getElementById("cityName");
-    //if (cityNameElement) {
-        //cityNameElement.textContent = cityName;
-    //}
     if (cityNameElement) {
         if (hostname === "www.doap.com" || hostname === "doap.com") {
             // Set the site heading explicitly to "Doap"
@@ -539,9 +536,6 @@ function hideLargeImage() {
 
 
 
-
-
-
 document.addEventListener("DOMContentLoaded", function () {
     // Function to create and return the form
     function createZipForm() {
@@ -605,10 +599,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 
-
-
-
 console.log("Hovered:", this.querySelector('.thumbnail').getAttribute('alt'));
 console.log("Image src:", imgSrc);
-
 console.log("cart.js loaded completely");
