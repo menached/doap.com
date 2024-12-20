@@ -8,6 +8,14 @@ body {
     font-size: 16px; /* Base font size for all devices */
 }
 
+/* Page Wrapper with Borders */
+.page-wrapper {
+    max-width: 1200px; /* Define the maximum width of the page content */
+    margin: 0 auto; /* Center the page content */
+    padding: 0 20px; /* Add padding inside the borders */
+    box-shadow: -5px 0 0 #ddd, 5px 0 0 #ddd; /* Create left and right borders */
+}
+
 /* Footer Section */
 .doapfooter {
     background-color: #fff;
@@ -134,6 +142,11 @@ p {
 
     p {
         padding: 0 15px; /* Add padding for smaller screens */
+    }
+
+    .page-wrapper {
+        padding: 0 10px; /* Reduce padding inside the borders on smaller screens */
+        box-shadow: none; /* Remove borders on very small screens */
     }
 }
 
