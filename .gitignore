@@ -18,9 +18,13 @@
 !cart.html
 !cart.php
 !cart.js
+!shop.php
+!shop.js
 !doap.js
 !zipFinder.js
+!shopzipFinder.js
 !products.html
+!shopproducts.html
 !flower.html
 !concentrates.html
 !edibles.html
@@ -30,6 +34,7 @@
 !template.yaml
 !style.css
 !styles.css
+!shopstyles.css
 !LICENSE
 !*.png
 !*.jpg
