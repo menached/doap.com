@@ -65,6 +65,9 @@
             <label for="city">City:</label>
             <input type="text" id="city" name="city" value="<?php include('city.php'); ?>" required>
         </div>
+
+        <textarea id="specialInstructions" placeholder="Special instructions"></textarea>
+
         <!-- Submit Button -->
         <button id="checkoutButton">Checkout</button>
     </div>
