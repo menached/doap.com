@@ -544,15 +544,15 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 document.addEventListener("DOMContentLoaded", function () {
-    // Check if the current hostname matches www.doap.com
-    if (window.location.hostname === "www.doap.com") {
+    // Check if the current hostname and pathname match
+    if (window.location.hostname === "www.doap.com" && window.location.pathname === "/simple.php") {
         // Select the element with the ID cartForm
         const cartForm = document.getElementById("cartForm");
 
         // Hide the element if it exists
         if (cartForm) {
             cartForm.style.display = "none";
-            console.log("Hid #cartForm because we are on www.doap.com");
+            console.log("Hid #cartForm because we are on www.doap.com/simple.php");
         } else {
             console.warn("#cartForm element not found!");
         }
