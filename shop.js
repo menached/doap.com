@@ -530,32 +530,25 @@ function showNotification(message) {
     setTimeout(() => popup.remove(), 3000);
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-    console.log("Remove checkout script is running");
-
-    const urlParams = new URLSearchParams(window.location.search);
-    if (!urlParams.has('v')) {
-        const cartForm = document.getElementById('cartForm');
-        if (cartForm) {
-            cartForm.style.display = 'none'; // Hide the form
-        }
-    }
-    console.log("Remove checkout script completed");
-});
-
 document.addEventListener("DOMContentLoaded", function () {
     // Check if the current hostname and pathname match
     if (window.location.hostname === "www.doap.com" && window.location.pathname === "/simple.php") {
-        // Select the element with the ID cartForm
-        const cartForm = document.getElementById("cartForm");
+        const hideCartForm = () => {
+            const cartForm = document.getElementById("cartForm");
+            if (cartForm) {
+                cartForm.style.display = "none";
+                console.log("Hid #cartForm because we are on www.doap.com/simple.php");
+            } else {
+                console.warn("#cartForm not found, will retry...");
+            }
+        };
 
-        // Hide the element if it exists
-        if (cartForm) {
-            cartForm.style.display = "none";
-            console.log("Hid #cartForm because we are on www.doap.com/simple.php");
-        } else {
-            console.warn("#cartForm element not found!");
-        }
+        // Initial check
+        hideCartForm();
+
+        // Use MutationObserver to handle dynamically added elements
+        const observer = new MutationObserver(() => hideCartForm());
+        observer.observe(document.body, { childList: true, subtree: true });
     }
 });
 
