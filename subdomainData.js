@@ -136,6 +136,15 @@ export const subdomainData = [
         serviceZips: [
             94598, 94595, 94596, 94575, 94556, 94806, 94803, 94805, 94564, 94572, 94801, 94804
         ]
+    },
+    {
+        subdomain: "www",
+        city: "Norcal",
+        phone: "883-289-3627",
+        minimumOrder: 50,
+        url: "https://www.doap.com/simple.php",
+        servingCities: ["Norcal", "Bay Area"],
+        serviceZips: [ ]
     }
 ];
 
