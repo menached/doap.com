@@ -78,14 +78,14 @@ body {
 }
 
 .zip-form button:hover {
-    background-color: #0056b3;
+    background-color: #3d550c;
 }
 
 /* Footer Styling */
 .doapfooter {
     background-color: #f9f9f9;
     color: #333;
-    padding: 0px 0px;
+    padding: 20px 10px;
     text-align: center;
     font-family: Marvel, Arial, sans-serif;
     font-size: 0.9rem;
