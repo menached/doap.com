@@ -158,13 +158,13 @@ document.addEventListener("DOMContentLoaded", () => {
     // Update logo link
     const logoLink = document.querySelector(".header a");
     if (logoLink) {
-        logoLink.href = `https://${domainName}.doap.com/cart.php`;
+        logoLink.href = `https://${domainName}.doap.com/simple.php`;
         logoLink.title = `Call ${cityName} Doap!`;
     }
     // Update header text
     const headerLink = document.querySelector("h1 a");
     if (headerLink) {
-        headerLink.href = `https://${domainName}.doap.com/cart.php`;
+        headerLink.href = `https://${domainName}.doap.com/simple.php`;
         headerLink.title = `Call ${cityName} Doap!`;
     }
 
