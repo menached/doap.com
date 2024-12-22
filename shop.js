@@ -1,4 +1,4 @@
-console.log("cart.js started loading");
+console.log("shop.js started loading");
 document.addEventListener("DOMContentLoaded", () => {
 
 
@@ -172,7 +172,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const ogMetaTags = [
         { property: "og:title", content: `${cityName} Doap - Call us today!` },
         { property: "og:type", content: "website" },
-        { property: "og:url", content: `https://${hostname}/cart.html` },
+        { property: "og:url", content: `https://${hostname}/simple.php` },
         { property: "og:description", content: defaultDescription },
         { property: "og:image", content: `https://${subdomain}.doap.com/${subdomain}doapbanner.webp` },
         { name: "twitter:card", content: "summary_large_image" },
@@ -415,22 +415,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     creditCard
                 };
 
-                //const payload = { items, name, city, phone, email, address, total, paymentMethod };
-                //const payload = {
-                    //items,
-                    //name,
-                    //city,
-                    //phone,
-                    //email,
-                    //address,
-                    //total,
-                    //paymentMethod,
-                    //creditCard: {
-                        //cardNumber,
-                        //expiryDate,
-                        //cvv
-                    //}
-                //};
                 console.log("Payload being sent:", payload);
 
                 const response = await fetch("https://eft3wrtpad.execute-api.us-west-2.amazonaws.com/prod/checkout", {
@@ -506,14 +490,12 @@ if (targetElement) {
 }
 
 
-
 // Close modal on Escape key press
 document.addEventListener('keydown', (event) => {
     if (event.key === 'Escape') {
         hideLargeImage();
     }
 });
-
 
 
 function showLargeImage(imageSrc) {
@@ -540,4 +522,4 @@ function hideLargeImage() {
 console.log("Hovered:", this.querySelector('.thumbnail').getAttribute('alt'));
 console.log("Image src:", imgSrc);
 
-console.log("cart.js loaded completely");
+console.log("shop.js loaded completely");
