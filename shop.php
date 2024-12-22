@@ -68,8 +68,6 @@
 
         <textarea id="specialInstructions" placeholder="Special instructions"></textarea>
 
-        <!-- Submit Button -->
-        <button id="checkoutButton">Checkout</button>
     </div>
         
     <!-- Payment Method -->
@@ -154,6 +152,9 @@
             </ul>
             <!-- Temporary Copy Confirmation Message -->
             <div id="copyMessage" class="small-text" style="display: none; color: green; font-weight: bold; margin-top: 10px;"></div>
+        
+            <!-- Submit Button -->
+            <button id="checkoutButton">Checkout</button>
 
        </div>
 
