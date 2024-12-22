@@ -522,4 +522,14 @@ function hideLargeImage() {
 console.log("Hovered:", this.querySelector('.thumbnail').getAttribute('alt'));
 console.log("Image src:", imgSrc);
 
+function showNotification(message) {
+    const popup = document.createElement('div');
+    popup.className = 'popup success visible';
+    popup.textContent = message;
+    document.body.appendChild(popup);
+    setTimeout(() => popup.remove(), 3000);
+}
+
+
+
 console.log("shop.js loaded completely");
