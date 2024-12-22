@@ -268,9 +268,8 @@ font-size: 1rem;
 }
 
 .tab.active {
-  background: #fff;
-  font-weight: bold;
-  border-bottom: 2px solid #007bff;
+    color: darkgreen; /* Change text color to green */
+    text-shadow: 0 0 4px rgba(0, 100, 0, 0.5); /* Softer dark green glow */
 }
 
 /* Tab content */
@@ -286,14 +285,15 @@ font-size: 1rem;
 
 
 
-/* Alternate background colors for list items */
-#selectedItemsList li:nth-child(odd) {
-    background-color: #f8f4e3; /* Pale pink for odd rows */
-}
+/*[> Alternate background colors for list items <]*/
+/*#selectedItemsList li:nth-child(odd) {*/
+    /*background-color: #f8f4e3; [> Pale pink for odd rows <]*/
+/*}*/
 
-#selectedItemsList li:nth-child(even) {
-    background-color: #eae4d5; /* White for even rows */
-}
+/*#selectedItemsList li:nth-child(even) {*/
+    /*background-color: #eae4d5; [> White for even rows <]*/
+/*}*/
+
 
 /* Default background for "No items selected yet" */
 #selectedItemsList li:only-child {
@@ -320,16 +320,14 @@ font-size: 1rem;
 }
 
 
+/*[> Alternating background colors for cart items <]*/
+/*.cart-item:nth-child(odd) {*/
+    /*background-color: #f9f9f9; [> Light gray for odd items <]*/
+/*}*/
 
-
-/* Alternating background colors for cart items */
-.cart-item:nth-child(odd) {
-    background-color: #f9f9f9; /* Light gray for odd items */
-}
-
-.cart-item:nth-child(even) {
-    background-color: #ffffff; /* White for even items */
-}
+/*.cart-item:nth-child(even) {*/
+    /*background-color: #ffffff; [> White for even items <]*/
+/*}*/
 
 
 
