@@ -887,11 +887,15 @@ body {
     box-sizing: border-box;
 }
 
-/* Make Address input (textarea) the same height as City input */
-.customer-info textarea {
+#specialInstructions { 
     resize: vertical; /* Allow vertical resizing */
-    height: 40px;  /* Match the height of the city input */
+    min-height: 70px;
 }
+
+/* Make Address input (textarea) the same height as City input */
+/*.customer-info textarea {*/
+    /*height: 40px;  [> Match the height of the city input <]*/
+/*}*/
 
 /* For mobile and small screens (less than 768px) */
 @media (max-width: 767px) {
