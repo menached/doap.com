@@ -6,26 +6,26 @@
         <div class="tab" data-tab="accessories">Accessories</div>
     </div>
 
-    <form id="cartForm">
 
     <?php //include('shopproducts.html'); ?>
     <?php
     if ($_SERVER['HTTP_HOST'] === 'www.doap.com') {
-        // Do not include shopproducts.html if the hostname is www.doap.com
+        // Do not include shopproducts.html and cartsection.html if the hostname is www.doap.com
         echo "<!-- shopproducts.html not included -->";
+        echo "<!-- cartsection.html not included -->";
     } else {
         // Include shopproducts.html for other hostnames
+        echo "<form id=\"cartForm\">";
         include('shopproducts.html');
         include('cartsection.html');
+        //include('flower.html'); 
+        //include('concentrates.html'); 
+        //include('edibles.html'); 
+        //include('accessories.html'); 
+        echo "</form>";
     }
     ?>
 
-    <?php //include('flower.html'); ?>
-    <?php //include('concentrates.html'); ?>
-    <?php //include('edibles.html'); ?>
-    <?php //include('accessories.html'); ?>
-
-    </form>
 
     <script>
         document.getElementById("year").textContent = new Date().getFullYear();
