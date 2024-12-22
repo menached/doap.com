@@ -22,7 +22,7 @@
         //include('concentrates.html'); 
         //include('edibles.html'); 
         //include('accessories.html'); 
-        echo "</form>";
+        //echo "</form>";
     }
     ?>
 
