@@ -152,7 +152,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (cityNameElement) {
         if (hostname === "www.doap.com" || hostname === "doap.com") {
             // Set the site heading explicitly to "Doap"
-            cityNameElement.textContent = "Doap";
+            cityNameElement.textContent = "California";
             console.log("Updated site heading to 'Doap' for www.doap.com.");
         } else {
             console.log("Preserved city name:", cityNameElement.textContent);
