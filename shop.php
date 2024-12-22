@@ -1,4 +1,3 @@
-<body>
     <!-- Tabs -->
     <div class="tab-container">
         <div class="tab active" data-tab="flower">Flower</div>
@@ -181,6 +180,4 @@
     </div>
 
 
-</body>
-</html>
 
