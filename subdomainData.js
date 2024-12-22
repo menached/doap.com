@@ -4,7 +4,7 @@ export const subdomainData = [
         city: "Alamo",
         phone: "925-553-4710",
         minimumOrder: 40,
-        url: "https://alamo.doap.com/cart.php",
+        url: "https://alamo.doap.com/simple.php",
         servingCities: ["Alamo", "Blackhawk", "Tassajara"],
         serviceZips: [94507]
     },
@@ -13,7 +13,7 @@ export const subdomainData = [
         city: "Burlingame",
         phone: "650-293-0880",
         minimumOrder: 120,
-        url: "https://burlingame.doap.com/cart.php",
+        url: "https://burlingame.doap.com/simple.php",
         servingCities: ["Burlingame", "El Granada", "Moss Beach", "Montara", "San Mateo"],
         serviceZips: [
             94002, 94005, 94010, 94011, 94014, 94015, 94019, 94022, 94025, 94027,
@@ -26,7 +26,7 @@ export const subdomainData = [
         city: "Campbell",
         phone: "N/A",
         minimumOrder: 120,
-        url: "https://campbell.doap.com/cart.php",
+        url: "https://campbell.doap.com/simple.php",
         servingCities: ["Campbell", "Monte Sereno", "Saratoga", "San Jose", "Los Gatos"],
         serviceZips: [
             94022, 94023, 94024, 94040, 94041, 94042, 94043, 94085, 94086, 94087,
@@ -47,7 +47,7 @@ export const subdomainData = [
         city: "Concord",
         phone: "925-412-4880",
         minimumOrder: 50,
-        url: "https://concord.doap.com/cart.php",
+        url: "https://concord.doap.com/simple.php",
         servingCities: ["Concord", "Clayton", "Pacheco"],
         serviceZips: [94528, 94547, 94552, 94556, 94619, 94605, 94516, 94575]
     },
@@ -56,7 +56,7 @@ export const subdomainData = [
         city: "Danville",
         phone: "925-725-6920",
         minimumOrder: 40,
-        url: "https://danville.doap.com/cart.php",
+        url: "https://danville.doap.com/simple.php",
         servingCities: ["Danville", "Diablo"],
         serviceZips: [94506, 94526]
     },
@@ -65,7 +65,7 @@ export const subdomainData = [
         city: "Dublin",
         phone: "925-587-6777",
         minimumOrder: 40,
-        url: "https://dublin.doap.com/cart.php",
+        url: "https://dublin.doap.com/simple.php",
         servingCities: ["Dublin", "Sunol"],
         serviceZips: [94568, 94552, 94586]
     },
@@ -74,7 +74,7 @@ export const subdomainData = [
         city: "Lafayette",
         phone: "925-871-1333",
         minimumOrder: 50,
-        url: "https://lafayette.doap.com/cart.php",
+        url: "https://lafayette.doap.com/simple.php",
         servingCities: ["Lafayette", "Moraga"],
         serviceZips: [94549, 94583, 94553, 94598, 94575, 94556, 94708, 94707, 94709, 94618]
     },
@@ -83,7 +83,7 @@ export const subdomainData = [
         city: "Livermore",
         phone: "925-718-6181",
         minimumOrder: 50,
-        url: "https://livermore.doap.com/cart.php",
+        url: "https://livermore.doap.com/simple.php",
         servingCities: ["Livermore", "Altamont"],
         serviceZips: [94550, 94551]
     },
@@ -92,7 +92,7 @@ export const subdomainData = [
         city: "Orinda",
         phone: "925-891-7800",
         minimumOrder: 60,
-        url: "https://orinda.doap.com/cart.php",
+        url: "https://orinda.doap.com/simple.php",
         servingCities: ["Orinda", "El Sobrante", "Pinole"],
         serviceZips: [
             94618, 94705, 94708, 94563, 94611, 94803, 94704, 94530, 94707, 94556, 94804, 94564,
@@ -104,7 +104,7 @@ export const subdomainData = [
         city: "Pittsburg",
         phone: "N/A",
         minimumOrder: 75,
-        url: "https://pittsburg.doap.com/cart.php",
+        url: "https://pittsburg.doap.com/simple.php",
         servingCities: ["Pittsburg", "Bay Point"],
         serviceZips: [94512, 94513, 94565, 94509, 94514, 94531, 94548, 94561, 94571, 94511]
     },
@@ -113,7 +113,7 @@ export const subdomainData = [
         city: "Pleasant Hill",
         phone: "925-891-7800",
         minimumOrder: 60,
-        url: "https://pleasanthill.doap.com/cart.php",
+        url: "https://pleasanthill.doap.com/simple.php",
         servingCities: ["Pleasant Hill", "Martinez", "Crockett"],
         serviceZips: [94597, 94523, 94553, 94528, 94575, 94806, 94531, 94564, 94803, 94805]
     },
@@ -122,7 +122,7 @@ export const subdomainData = [
         city: "San Ramon",
         phone: "925-365-6030",
         minimumOrder: 40,
-        url: "https://sanramon.doap.com/cart.php",
+        url: "https://sanramon.doap.com/simple.php",
         servingCities: ["San Ramon", "Dougherty"],
         serviceZips: [94528, 94583, 94582, 94517, 94552, 94556, 94536, 94537]
     },
@@ -131,7 +131,7 @@ export const subdomainData = [
         city: "Walnut Creek",
         phone: "925-464-2075",
         minimumOrder: 50,
-        url: "https://walnutcreek.doap.com/cart.php",
+        url: "https://walnutcreek.doap.com/simple.php",
         servingCities: ["Walnut Creek", "Rossmoor"],
         serviceZips: [
             94598, 94595, 94596, 94575, 94556, 94806, 94803, 94805, 94564, 94572, 94801, 94804
