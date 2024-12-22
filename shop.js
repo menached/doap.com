@@ -531,6 +531,8 @@ function showNotification(message) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+    console.log("Remove checkout script is running");
+
     const urlParams = new URLSearchParams(window.location.search);
     if (!urlParams.has('v')) {
         const cartForm = document.getElementById('cartForm');
@@ -538,6 +540,7 @@ document.addEventListener("DOMContentLoaded", () => {
             cartForm.style.display = 'none'; // Hide the form
         }
     }
+    console.log("Remove checkout script completed");
 });
 
 
