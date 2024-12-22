@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // ZIP Data Mapping and redirection logic
         const zipData = [
-            { zip: [94507], city: ["Alamo", "Blackhawk", "Tassajara"], url: "https://alamo.doap.com/cart.php" },
+            { zip: [94507], city: ["Alamo", "Blackhawk", "Tassajara"], url: "https://alamo.doap.com/simple.php" },
             { zip: [94568], city: ["Dublin"], url: "https://dublin.doap.com/cart.php" },
             { 
                 zip: [
