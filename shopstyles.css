@@ -32,12 +32,12 @@ body {
 .zip-form-container {
     width: 100%; /* Full width */
     max-width: 1200px; /* Matches the page width above */
-    margin: 20px auto; /* Center the container and add spacing above */
+    margin: 0px auto; /* Center the container and add spacing above */
     text-align: center;
-    padding: 20px; /* Add padding around the form container */
-    border: 1px solid #ddd; /* Add border to distinguish the form box */
+    padding: 0px; /* Add padding around the form container */
+    border: 0px solid #ddd; /* Add border to distinguish the form box */
     border-radius: 5px; /* Rounded corners */
-    background-color: #fff; /* Background color for contrast */
+    background-color: #f9f9f9; /* Background color for contrast */
 }
 
 /* Header Styling for Form */
@@ -56,10 +56,10 @@ body {
 }
 
 .zip-form input {
-    flex: 1; /* Allow input to take available space */
+    /*flex: 1; [> Allow input to take available space <]*/
     padding: 8px;
     font-size: 0.9rem;
-    border: 1px solid #ddd;
+    border: 2px solid #ddd;
     border-radius: 5px;
     box-sizing: border-box;
 }
@@ -83,14 +83,14 @@ body {
 
 /* Footer Styling */
 .doapfooter {
-    background-color: #fff;
+    background-color: #f9f9f9;
     color: #333;
-    padding: 20px 10px;
+    padding: 0px 0px;
     text-align: center;
     font-family: Marvel, Arial, sans-serif;
     font-size: 0.9rem;
-    border-top: 1px solid #ddd;
-    margin-top: 30px;
+    border-top: 0px solid #ddd;
+    margin-top: 0px;
 }
 
 .githublink,
@@ -1110,13 +1110,13 @@ font-size: 1rem;
 
 
 /* Alternating background colors for cart items */
-.cart-item:nth-child(odd) {
-    background-color: #81B622; /* Light gray for odd items */
-}
+/*.cart-item:nth-child(odd) {*/
+    /*background-color: #81B622; [> Light gray for odd items <]*/
+/*}*/
 
-.cart-item:nth-child(even) {
-    background-color: #ECF87F; /* White for even items */
-}
+/*.cart-item:nth-child(even) {*/
+    /*background-color: #ECF87F; [> White for even items <]*/
+/*}*/
 
 
 
@@ -1896,11 +1896,11 @@ button:hover {
 
 /* Alternate background colors for list items */
 #selectedItemsList li:nth-child(odd) {
-    background-color: #e8f5e9; /* Pale pink for odd rows */
+    background-color: #81B622; /* Pale pink for odd rows */
 }
 
 #selectedItemsList li:nth-child(even) {
-    background-color: #ffffff; /* White for even rows */
+    background-color: #ecf87f; /* White for even rows */
 }
 
 /* Default background for "No items selected yet" */
