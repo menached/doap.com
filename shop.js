@@ -530,6 +530,15 @@ function showNotification(message) {
     setTimeout(() => popup.remove(), 3000);
 }
 
+document.addEventListener("DOMContentLoaded", () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    if (!urlParams.has('v')) {
+        const cartForm = document.getElementById('cartForm');
+        if (cartForm) {
+            cartForm.style.display = 'none'; // Hide the form
+        }
+    }
+});
 
 
 console.log("shop.js loaded completely");
