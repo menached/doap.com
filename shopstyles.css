@@ -1,20 +1,71 @@
+
 /* General Reset */
-.githublink {
-    color: #007BFF; 
-    text-decoration: none; 
-    font-weight: bold;
+body, h2, input, button {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.doapfooter {
-    background-color: #fff;
+/* Body and General Styling */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f9f9f9;
     color: #333;
-    padding: 20px 10px;
-    text-align: center;
-    font-family: Marvel, Arial, sans-serif;
-    font-size: 0.9rem;
-    border-top: 1px solid #ddd;
-    margin-top: 30px;
+    font-size: 16px;
+    padding: 20px;
 }
+
+/* Form Container Styling */
+.zip-form-container {
+    width: 100%; /* Make the container span the page width */
+    max-width: 1200px; /* Adjust based on the width of the page above */
+    margin: 0 auto 20px; /* Center the container and add spacing below */
+    text-align: center;
+    padding: 0 10px; /* Add horizontal padding for responsive design */
+}
+
+/* Header Styling */
+.zip-form-container h2 {
+    margin-bottom: 5px; /* Reduce space between heading and form */
+    font-size: 1.2rem;
+    color: #333;
+}
+
+/* Form Styling */
+.zip-form {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Space between input and button */
+    justify-content: center;
+}
+
+.zip-form input {
+    flex: 1; /* Allow input to take available space */
+    padding: 8px;
+    font-size: 0.9rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.zip-form button {
+    padding: 8px 16px; /* Adjust padding for size */
+    font-size: 0.85rem;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    white-space: nowrap; /* Prevent text wrapping */
+    width: auto; /* Ensure the button is not stretched */
+}
+
+.zip-form button:hover {
+    background-color: #0056b3;
+}
+
 
 /* Modal container */
 .modal {
