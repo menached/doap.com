@@ -139,7 +139,7 @@ export const subdomainData = [
     },
     {
         subdomain: "www",
-        city: "Norcal",
+        city: "",
         phone: "883-289-3627",
         minimumOrder: 50,
         url: "https://www.doap.com/simple.php",
