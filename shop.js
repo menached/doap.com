@@ -124,7 +124,18 @@ document.addEventListener("DOMContentLoaded", () => {
     const defaultDescription = `${cityName} DOAP Delivers Organic Awesome Pot to ${cityName} and surrounding cities 9-9 daily.`;
 
     // Update the page title
-    document.title = `${cityName} Doap`;
+    //document.title = `${cityName} Doap`;
+
+
+    // Check if the hostname is not 'www.doap.com'
+    if (window.location.hostname !== "www.doap.com") {
+        // Update the page title
+        document.title = `${cityName} Doap`;
+    } else {
+        console.log("Skipped updating the page title because the hostname is www.doap.com");
+    }
+
+
 
     // Match H1 to Page Title
     const mainH1 = document.querySelector("h1");
