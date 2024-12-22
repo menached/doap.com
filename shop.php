@@ -21,14 +21,9 @@
     ?>
 
     <?php //include('flower.html'); ?>
-    
     <?php //include('concentrates.html'); ?>
-
     <?php //include('edibles.html'); ?>
-
     <?php //include('accessories.html'); ?>
-
-
 
     </form>
 
@@ -45,6 +40,3 @@
         <img class="modal-content" id="modalImage">
         <div id="caption"></div>
     </div>
-
-
-
