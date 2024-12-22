@@ -543,5 +543,21 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log("Remove checkout script completed");
 });
 
+document.addEventListener("DOMContentLoaded", function () {
+    // Check if the current hostname matches www.doap.com
+    if (window.location.hostname === "www.doap.com") {
+        // Select the element with the ID cartForm
+        const cartForm = document.getElementById("cartForm");
+
+        // Hide the element if it exists
+        if (cartForm) {
+            cartForm.style.display = "none";
+            console.log("Hid #cartForm because we are on www.doap.com");
+        } else {
+            console.warn("#cartForm element not found!");
+        }
+    }
+});
+
 
 console.log("shop.js loaded completely");
