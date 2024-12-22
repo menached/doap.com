@@ -123,8 +123,8 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // Append form to the div with class "form2"
-    const formContainer = document.querySelector(".form2");
+    // Append form to the div with class "zip-form-container"
+    const formContainer = document.querySelector(".zip-form-container");
 
     if (formContainer) {
         formContainer.appendChild(form);
