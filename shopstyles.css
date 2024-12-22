@@ -1,3 +1,16 @@
+/*Olive Green*/
+/*#3d550c*/
+
+/*Lime Green*/
+/*#81b622*/
+
+/*Yellow Green*/
+/*#ecf87f*/
+
+/*Green*/
+/*#59981a*/
+
+
 /* General Reset */
 body, h2, input, button, footer {
     margin: 0;
@@ -369,18 +382,6 @@ font-size: 1rem;
 
 
 
-
-
-/*[> Alternate background colors for list items <]*/
-/*#selectedItemsList li:nth-child(odd) {*/
-    /*background-color: #f8f4e3; [> Pale pink for odd rows <]*/
-/*}*/
-
-/*#selectedItemsList li:nth-child(even) {*/
-    /*background-color: #eae4d5; [> White for even rows <]*/
-/*}*/
-
-
 /* Default background for "No items selected yet" */
 #selectedItemsList li:only-child {
     background-color: transparent; /* Default background */
@@ -405,15 +406,6 @@ font-size: 1rem;
     padding: 0;
 }
 
-
-/*[> Alternating background colors for cart items <]*/
-/*.cart-item:nth-child(odd) {*/
-    /*background-color: #f9f9f9; [> Light gray for odd items <]*/
-/*}*/
-
-/*.cart-item:nth-child(even) {*/
-    /*background-color: #ffffff; [> White for even items <]*/
-/*}*/
 
 
 
@@ -1119,11 +1111,11 @@ font-size: 1rem;
 
 /* Alternating background colors for cart items */
 .cart-item:nth-child(odd) {
-    background-color: #f9f9f9; /* Light gray for odd items */
+    background-color: #81B622; /* Light gray for odd items */
 }
 
 .cart-item:nth-child(even) {
-    background-color: #ffffff; /* White for even items */
+    background-color: #ECF87F; /* White for even items */
 }
 
 
