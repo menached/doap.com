@@ -153,8 +153,6 @@
             <!-- Temporary Copy Confirmation Message -->
             <div id="copyMessage" class="small-text" style="display: none; color: green; font-weight: bold; margin-top: 10px;"></div>
         
-            <!-- Submit Button -->
-            <button id="checkoutButton">Checkout</button>
 
        </div>
 
@@ -162,6 +160,9 @@
             <h3><i class="fas fa-phone-alt"></i> Need Assistance?</h3>
             <p>After placing your order, please check your email for further instructions on how to complete your payment.  Feel free to call us at (833)289-3627 for assistance. We're standing by to help!</p>
         </div>
+            
+        <!-- Submit Button -->
+        <button id="checkoutButton">Checkout</button>
 
     </form>
 
