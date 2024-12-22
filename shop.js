@@ -531,24 +531,14 @@ function showNotification(message) {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-    // Check if the current hostname and pathname match
     if (window.location.hostname === "www.doap.com" && window.location.pathname === "/simple.php") {
-        const hideCartForm = () => {
-            const cartForm = document.getElementById("cartForm");
-            if (cartForm) {
-                cartForm.style.display = "none";
-                console.log("Hid #cartForm because we are on www.doap.com/simple.php");
-            } else {
-                console.warn("#cartForm not found, will retry...");
-            }
-        };
-
-        // Initial check
-        hideCartForm();
-
-        // Use MutationObserver to handle dynamically added elements
-        const observer = new MutationObserver(() => hideCartForm());
-        observer.observe(document.body, { childList: true, subtree: true });
+        const cartForm = document.getElementById("cartForm");
+        if (cartForm) {
+            cartForm.style.display = "none";
+            console.log("#cartForm hidden successfully.");
+        } else {
+            console.warn("#cartForm not found on this page.");
+        }
     }
 });
 
