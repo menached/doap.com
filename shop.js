@@ -134,6 +134,7 @@ document.addEventListener("DOMContentLoaded", () => {
         document.title = `${cityName} Doap`;
     } else {
         console.log("Skipped updating the page title because the hostname is www.doap.com");
+        document.title = `Norcal DOAP`;
     }
 
 
