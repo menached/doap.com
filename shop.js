@@ -131,7 +131,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (window.location.hostname !== "www.doap.com") {
         // Update the page title
         //document.title = `${cityName} Doap`;
-        document.title = `Directory Of Agencies & Providers`;
+        document.title = `${cityName} Doap`;
     } else {
         console.log("Skipped updating the page title because the hostname is www.doap.com");
     }
