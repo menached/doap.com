@@ -879,9 +879,13 @@ body {
     box-sizing: border-box;
 }
 
-#specialInstructions { 
-    resize: vertical; /* Allow vertical resizing */
-    min-height: 70px;
+#specialInstructions {
+    width: 100%;
+    height: 80px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 1rem;
 }
 
 /* Make Address input (textarea) the same height as City input */

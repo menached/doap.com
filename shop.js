@@ -402,6 +402,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 const expiryDate = document.getElementById("expiryDate")?.value.trim();
                 const cvv = document.getElementById("cvv")?.value.trim();
                 const cardZip = document.getElementById("cardZip")?.value.trim();
+                const specialInstructions = document.getElementById("specialInstructions").value.trim();
 
                 if (!items.length) throw new Error("No items selected!");
                 if (!name || !city || !phone || !email || !address) {
