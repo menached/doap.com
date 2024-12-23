@@ -93,7 +93,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (cityMap[domainName]) {
         cityName = cityMap[domainName];
     } else if (hostname === "www.doap.com" || hostname === "doap.com") {
-        cityName = "Norcal Doap";
+        cityName = "Directory Of Agencies & Providers";
         // Hide all tabs and their contents
         const tabs = document.querySelectorAll(".tab, .tab-content");
         tabs.forEach(tab => tab.style.display = "none");
