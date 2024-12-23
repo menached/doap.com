@@ -1,4 +1,4 @@
-export const subdomainData = [
+[
     {
         subdomain: "alamo",
         city: "Alamo",
