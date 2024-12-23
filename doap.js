@@ -16,6 +16,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const cryptoWallets = document.getElementById("cryptoWallets");
     const generalHelp = document.getElementById("generalHelp");
 
+    const checkoutButton = document.getElementById("checkoutButton");
+
     // Tab Switching
     const initializeTabs = () => {
         tabs.forEach(tab => {
@@ -93,10 +95,77 @@ document.addEventListener("DOMContentLoaded", () => {
         console.log("Payment methods initialized successfully!");
     };
 
+    // Checkout Logic
+    const initializeCheckout = () => {
+        if (checkoutButton) {
+            checkoutButton.addEventListener("click", async event => {
+                event.preventDefault();
+
+                try {
+                    const selectedItems = cartForm.querySelectorAll('button.add-to-cart');
+                    const items = Array.from(selectedItems).map(item => {
+                        const productItem = item.closest(".product-item");
+                        const name = productItem.querySelector(".product-name").textContent;
+                        const price = parseFloat(productItem.querySelector(".product-price").dataset.price);
+                        const quantity = parseInt(productItem.querySelector(".product-quantity").value, 10) || 1;
+
+                        return { name, price, quantity };
+                    });
+
+                    const name = document.getElementById("name").value.trim();
+                    const city = document.getElementById("city").value.trim();
+                    const phone = document.getElementById("phone").value.trim();
+                    const email = document.getElementById("email").value.trim();
+                    const address = document.getElementById("address").value.trim();
+                    const total = cartTotal.textContent.replace("Total: $", "").trim();
+                    const paymentMethod = paymentMethodDropdown.value;
+                    const specialInstructions = document.getElementById("specialInstructions").value.trim();
+
+                    if (!name || !city || !phone || !email || !address || items.length === 0) {
+                        throw new Error("All fields must be filled and at least one item must be selected!");
+                    }
+
+                    const payload = {
+                        items,
+                        name,
+                        city,
+                        phone,
+                        email,
+                        address,
+                        total: parseFloat(total),
+                        paymentMethod,
+                        specialInstructions // Include special instructions
+                    };
+
+                    console.log("Payload:", payload);
+
+                    const response = await fetch("https://your-api-gateway-url/checkout", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (!response.ok) {
+                        const errorText = await response.text();
+                        throw new Error(`Failed to submit order: ${errorText}`);
+                    }
+
+                    alert("Order submitted successfully!");
+                } catch (error) {
+                    console.error("Error during checkout:", error);
+                    alert(error.message);
+                }
+            });
+        }
+
+        console.log("Checkout initialized successfully!");
+    };
+
     // Initialize Features
     initializeTabs();
     initializeCart();
     initializePaymentMethods();
+    initializeCheckout();
 
     console.log("doap.js loaded completely");
 });
