@@ -426,7 +426,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     address,
                     total,
                     paymentMethod,
-                    creditCard
+                    creditCard,
+                    specialInstructions
                 };
 
                 console.log("Payload being sent:", payload);
