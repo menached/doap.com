@@ -1911,7 +1911,8 @@ button:hover {
 #selectedItemsList li:only-child {
     background-color: transparent; /* Default background */
     text-align: center; /* Center-align the message for better UX */
-    color: #555; /* Slightly lighter text color */
+    /*color: #555; [> Slightly lighter text color <]*/
+    color: #ecf87f; /* Slightly lighter text color */
 }
 
 /* Add padding and styling for better visual appearance */
