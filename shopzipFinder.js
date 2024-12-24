@@ -75,7 +75,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 city: ["Burlingame", "El Granada", "Moss Beach", "Montara", "San Mateo"],
                 url: "https://burlingame.doap.com/simple.php"
             },
-            { zip: [94536, 94538, 94539, 94555], city: ["Castro Valley", "Newark", "Union City", "Fremont"], url: "https://castrovalley.doap.com/simple.php" },
+            { zip: [94536, 94538, 94539, 94555, 94577, 94578, 94579], city: ["Castro Valley", "Newark", "Union City", "Fremont", "San Leandro"], url: "https://castrovalley.doap.com/simple.php" },
             { 
                 zip: [94022, 94023, 94024, 94040, 94041, 94042, 94043, 94085, 94086, 94087, 
                       94088, 94089, 94301, 94302, 94303, 94304, 94305, 94306, 94309, 94401, 
