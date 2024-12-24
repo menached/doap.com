@@ -30,6 +30,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const agencyId = getAgencyIdFromDomain();
     console.log("AgencyID:", agencyId);
 
+    // Display the AgencyID in the div
+    document.addEventListener("DOMContentLoaded", () => {
+        const agencyId = getAgencyIdFromDomain();
+        const displayDiv = document.getElementById("agencyIdDisplay");
+        displayDiv.textContent = agencyId ? `Agency ID: ${agencyId}` : "Agency ID not found.";
+    });
 
 
 
