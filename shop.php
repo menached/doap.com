@@ -36,7 +36,3 @@
         <img class="modal-content" id="modalImage">
         <div id="caption"></div>
     </div>
-
-
-    <div id="agencyIdDisplay">Agency ID will appear here...</div>
-
