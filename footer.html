@@ -15,37 +15,3 @@
     </div>    
         <div id="agencyIdDisplay">Agency ID will appear here...</div>
 </footer>
-
-
-    <script>
-        // JavaScript function to determine the AgencyID
-        function getAgencyIdFromDomain() {
-            const host = window.location.hostname; // Get the current domain
-            let agencyId = "";
-
-            if (host.endsWith(".doobiefinder.com")) {
-                agencyId = host.replace(".doobiefinder.com", "");
-            } else if (host.endsWith(".doap.com")) {
-                agencyId = host.replace(".doap.com", "");
-                if (agencyId === "www") {
-                    agencyId = "california";
-                }
-            } else if (host.endsWith(".dooberz.com")) {
-                agencyId = host.replace(".dooberz.com", "");
-                if (agencyId === "doap.com") {
-                    agencyId = "california";
-                }
-            } else {
-                console.warn("Domain not recognized for AgencyID extraction.");
-            }
-
-            return agencyId;
-        }
-
-        // Display the AgencyID in the div
-        document.addEventListener("DOMContentLoaded", () => {
-            const agencyId = getAgencyIdFromDomain();
-            const displayDiv = document.getElementById("agencyIdDisplay");
-            displayDiv.textContent = agencyId ? `Agency ID: ${agencyId}` : "Agency ID not found.";
-        });
-    </script>
