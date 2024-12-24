@@ -27,10 +27,6 @@
     ?>
 
 
-    <script>
-        document.getElementById("year").textContent = new Date().getFullYear();
-    </script>
-
     <div id="popupMessage" class="popup hidden">
         <p id="popupText">Order Processed Successfully!</p>
     </div>
