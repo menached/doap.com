@@ -1,44 +1,6 @@
 console.log("shop.js started loading");
 document.addEventListener("DOMContentLoaded", () => {
 
-
-    // JavaScript function to determine the AgencyID
-    function getAgencyIdFromDomain() {
-        const host = window.location.hostname; // Get the current domain
-        let agencyId = "";
-
-        if (host.endsWith(".doobiefinder.com")) {
-            agencyId = host.replace(".doobiefinder.com", "");
-        } else if (host.endsWith(".doap.com")) {
-            agencyId = host.replace(".doap.com", "");
-            if (agencyId === "www") {
-                agencyId = "california";
-            }
-        } else if (host.endsWith(".dooberz.com")) {
-            agencyId = host.replace(".dooberz.com", "");
-            if (agencyId === "doap.com") {
-                agencyId = "california";
-            }
-        } else {
-            console.warn("Domain not recognized for AgencyID extraction.");
-        }
-
-        return agencyId;
-    }
-
-    // Example usage
-    const agencyId = getAgencyIdFromDomain();
-    console.log("AgencyID:", agencyId);
-
-    // Display the AgencyID in the div
-    document.addEventListener("DOMContentLoaded", () => {
-        const agencyId = getAgencyIdFromDomain();
-        const displayDiv = document.getElementById("agencyIdDisplay");
-        displayDiv.textContent = agencyId ? `Agency ID: ${agencyId}` : "Agency ID not found.";
-    });
-
-
-
     // Get the modal
     const modal = document.getElementById("imageModal");
     const modalImage = document.getElementById("modalImage");
