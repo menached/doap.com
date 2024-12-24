@@ -1,6 +1,7 @@
 console.log("shop.js started loading");
 document.addEventListener("DOMContentLoaded", () => {
 
+
     // Get the modal
     const modal = document.getElementById("imageModal");
     const modalImage = document.getElementById("modalImage");
@@ -51,7 +52,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Default cityName for single-word subdomains
     let cityName = domainName.charAt(0).toUpperCase() + domainName.slice(1).toLowerCase();
-    let agencyId = domainName.charAt(0).toUpperCase() + domainName.slice(1).toLowerCase();
 
     // Map of subdomains to full city names
     const cityMap = {
