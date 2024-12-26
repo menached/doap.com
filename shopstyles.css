@@ -1120,16 +1120,6 @@ form {
     display: block; /* Show only the active tab */
 }
 
-/* Item List */
-.item-list {
-    display: flex;
-    flex-direction: column;
-    gap: 15px; /* Space between items */
-}
-
-
-
-
 
 
 /* Tab styles */
