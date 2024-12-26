@@ -11,6 +11,125 @@
 /*#59981a*/
 
 
+
+
+/* Prices */
+.original-price {
+    text-decoration: line-through;
+    color: #999; /* Light gray for subdued effect */
+    margin-right: 10px; /* Space between original and current prices */
+}
+
+.current-price {
+    font-weight: bold;
+    color: #000; /* Highlight current price */
+}
+
+/* Descriptions */
+.item-description {
+    font-size: 1rem;
+}
+
+/* Remove Item "X" */
+.remove-item {
+    color: red; /* Set text color */
+    font-weight: bold; /* Bold for emphasis */
+    cursor: pointer; /* Indicate clickable */
+    margin-left: 10px; /* Space from other elements */
+    font-size: 1.2rem; /* Adjust size */
+}
+
+.remove-item:hover {
+    color: darkred; /* Darker red on hover */
+    text-decoration: underline; /* Underline for hover effect */
+}
+
+/* Item List */
+.item-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Space between items */
+    margin: 0;
+    padding: 0;
+}
+
+/* Item Container */
+.item {
+    display: flex;
+    align-items: center; /* Align child elements vertically */
+    justify-content: space-between; /* Space out child elements */
+    gap: 15px; /* Add space between elements */
+    padding: 15px; /* Add spacing inside */
+    background: #fff; /* White background for contrast */
+    border: 1px solid #ddd; /* Light border */
+    border-radius: 8px; /* Rounded corners */
+    transition: background 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
+}
+
+.item:hover {
+    background: #f9f9f9; /* Light background on hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+}
+
+/* Item Image */
+.item img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover; /* Maintain aspect ratio */
+    border-radius: 5px; /* Slightly round the corners */
+    margin-right: 15px; /* Space from details */
+    flex-shrink: 0; /* Prevent shrinking */
+}
+
+/* Item Title and Price */
+.item-title {
+    font-size: 1.1rem; /* Slightly larger font */
+    font-weight: bold; /* Emphasize title */
+    color: #333; /* Dark text */
+    margin-bottom: 5px; /* Space below title */
+    font-family: 'Marvel', sans-serif; /* Marvel font */
+}
+
+.item-price {
+    font-size: 1rem; /* Standard size */
+    color: #888; /* Muted color */
+    margin-bottom: 5px; /* Space below price */
+}
+
+/* Item Details */
+.item-details {
+    flex-grow: 1; /* Allow to expand */
+    display: flex;
+    flex-direction: column; /* Stack vertically */
+    justify-content: center; /* Center content */
+}
+
+/* Item Quantity */
+.item-quantity {
+    display: flex;
+    align-items: center; /* Align label and input */
+    margin-left: 15px; /* Space from details */
+}
+
+.item-quantity label {
+    margin-right: 5px; /* Space between label and input */
+    font-size: 1rem; /* Consistent size */
+}
+
+.item-quantity input[type="number"] {
+    width: 60px; /* Standard width */
+    padding: 5px; /* Add padding */
+    text-align: center; /* Center-align input */
+    border: 1px solid #ddd; /* Light border */
+    border-radius: 5px; /* Rounded corners */
+    font-size: 1rem; /* Consistent size */
+}
+
+
+
+
+
+
 /* General Reset */
 body, h2, input, button, footer {
     margin: 0;
@@ -210,77 +329,6 @@ body {
 }
 
 
-        .item {
-            display: flex;
-            align-items: center; /* Vertically align all child elements */
-            justify-content: space-between; /* Distribute space between child elements */
-            gap: 15px; /* Add some space between elements */
-            padding: 15px; /* Add padding for spacing */
-            background: #fff; /* Ensure a white background for contrast */
-            border: 1px solid #ddd; /* Add a border */
-            border-radius: 8px; /* Rounded corners */
-            transition: background 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
-        }
-
-        .item:hover {
-            background: #f9f9f9; /* Light background on hover */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow on hover */
-        }
-
-        .item input[type="checkbox"] {
-            margin-right: 10px; /* Space between checkbox and image */
-            flex-shrink: 0; /* Prevent shrinking */
-        }
-
-        .item img {
-            width: 80px;
-            height: 80px;
-            object-fit: cover; /* Maintain aspect ratio and fill container */
-            border-radius: 5px; /* Rounded corners */
-            margin-right: 15px; /* Space between image and details */
-            flex-shrink: 0; /* Prevent shrinking */
-        }
-
-        .item-title {
-            font-size: 1.1rem; /* Slightly larger font for title */
-            font-weight: bold; /* Emphasize title */
-            color: #333; /* Dark text color */
-            margin-bottom: 5px; /* Space below title */
-            font-family: 'Marvel', sans-serif; /* Apply Marvel font */
-        }
-
-        .item-price {
-            font-size: 1rem; /* Standard font size for price */
-            color: #888; /* Muted color for price */
-            margin-bottom: 5px; /* Space below price */
-        }
-
-        .item-details {
-            flex-grow: 1; /* Allow to expand and take available space */
-            display: flex;
-            flex-direction: column; /* Stack title and price vertically */
-            justify-content: center; /* Center content vertically */
-        }
-
-        .item-quantity {
-            display: flex;
-            align-items: center; /* Align label and input vertically */
-            margin-left: 15px; /* Add spacing to separate from details */
-        }
-
-        .item-quantity label {
-            margin-right: 5px; /* Space between label and input */
-            font-size: 1rem; /* Consistent font size */
-        }
-
-        .item-quantity input[type="number"] {
-            width: 60px; /* Standard width for quantity input */
-            padding: 5px; /* Add padding for better appearance */
-            text-align: center; /* Center-align quantity text */
-            border: 1px solid #ddd; /* Light border */
-            border-radius: 5px; /* Rounded corners */
-            font-size: 1rem; /* Consistent font size */
-        }
 
 .category-content {
     display: block; /* Initially open */
@@ -333,21 +381,6 @@ body {
 
 
 
-.original-price {
-    text-decoration: line-through;
-    color: #999; /* Optional: Light gray for a more subdued effect */
-    margin-right: 10px; /* Optional: Adds spacing between prices */
-}
-
-.current-price {
-    font-weight: bold;
-    color: #000; /* Optional: Highlight current price */
-}
-
-
-.item-description {
-font-size: 1rem;
-}
 
 /* Tab styles */
 .tab-container {
@@ -747,21 +780,6 @@ body {
     text-decoration:none;
 }
 
-/* Style the remove-item "X" */
-.remove-item {
-    color: red; /* Set the text color to red */
-    font-weight: bold; /* Optional: Make it bold */
-    cursor: pointer; /* Ensure it looks clickable */
-    margin-left: 10px; /* Add some spacing */
-    font-size: 1.2rem; /* Optional: Adjust size */
-}
-
-.remove-item:hover {
-    color: darkred; /* Change to a darker red on hover for better UX */
-    text-decoration: underline; /* Optional: Add underline on hover */
-}
-
-
 
 
 
@@ -1033,22 +1051,6 @@ form {
 
 
 
-
-.original-price {
-    text-decoration: line-through;
-    color: #999; /* Optional: Light gray for a more subdued effect */
-    margin-right: 10px; /* Optional: Adds spacing between prices */
-}
-
-.current-price {
-    font-weight: bold;
-    color: #000; /* Optional: Highlight current price */
-}
-
-
-.item-description {
-font-size: 1rem;
-}
 
 /* Tab styles */
 .tab-container {
@@ -1464,21 +1466,6 @@ body {
     text-decoration:none;
 }
 
-/* Style the remove-item "X" */
-.remove-item {
-    color: red; /* Set the text color to red */
-    font-weight: bold; /* Optional: Make it bold */
-    cursor: pointer; /* Ensure it looks clickable */
-    margin-left: 10px; /* Add some spacing */
-    font-size: 1.2rem; /* Optional: Adjust size */
-}
-
-.remove-item:hover {
-    color: darkred; /* Change to a darker red on hover for better UX */
-    text-decoration: underline; /* Optional: Add underline on hover */
-}
-
-
 
 
 
@@ -1729,101 +1716,6 @@ form {
 }
 .tab-content.active {
     display: block; /* Show only the active tab */
-}
-
-/* Item List */
-.item-list {
-    display: flex;
-    flex-direction: column;
-    gap: 15px; /* Space between items */
-}
-
-/*.item {*/
-    /*display: flex;*/
-    /*align-items: center;*/
-    /*padding: 10px;*/
-    /*background: #f4f4f4;*/
-    /*border: 1px solid #ddd;*/
-    /*border-radius: 5px;*/
-    /*box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);*/
-    /*transition: background 0.3s ease;*/
-/*}*/
-
-.item {
-    display: flex;
-    align-items: center; /* Vertically align all child elements */
-    justify-content: space-between; /* Distribute space between child elements */
-    gap: 15px; /* Add some space between elements */
-}
-
-.item:hover {
-    background: #e8e8e8;
-}
-
-.item input[type="checkbox"] {
-    margin-right: 10px;
-    flex-shrink: 0;
-}
-
-.item img {
-    width: 80px;
-    height: 80px;
-    object-fit: cover;
-    border-radius: 5px;
-    margin-right: 15px;
-    flex-shrink: 0;
-}
-
-
-.item-title {
-    font-size: 1.1rem;
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 5px;
-    font-family: 'Marvel', sans-serif; /* Apply Marvel font to tab text */
-}
-
-.item-price {
-    font-size: 1rem;
-    color: #888;
-    margin-bottom: 5px;
-    position:relative;
-    top:-30px;
-}
-
-
-/* Ensure the .item container is a horizontal flexbox */
-.item {
-    display: flex;
-    align-items: center; /* Vertically align all child elements */
-    gap: 15px; /* Add space between elements */
-}
-
-/* Ensure the .item-details and .item-quantity are inline */
-.item-details {
-    flex-grow: 1; /* Allow it to expand and take up available space */
-    display: flex;
-    flex-direction: column; /* Stack title and price vertically */
-    justify-content: center; /* Center content vertically */
-}
-
-.item-quantity {
-    display: flex;
-    align-items: center; /* Center vertically */
-    margin-left: auto; /* Push it to the far right */
-}
-
-/* Optional: Add spacing for the label and input */
-.item-quantity label {
-    margin-right: 5px;
-}
-
-.item-quantity input[type="number"] {
-    width: 60px;
-    padding: 5px;
-    text-align: center;
-    border: 1px solid #ddd;
-    border-radius: 5px;
 }
 
 
