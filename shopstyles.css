@@ -10,205 +10,11 @@
 /*Green*/
 /*#59981a*/
 
-/* Item Box Styling */
-.item {
-    display: flex;
-    flex-direction: column;  /* Stack content vertically */
-    align-items: center; /* Center align content */
-    justify-content: space-between; /* Space out child elements */
-    padding: 20px; /* Add internal padding for space */
-    background-color: #fff; /* White background */
-    border: 2px solid #ddd; /* Slightly thicker border for box look */
-    border-radius: 8px; /* Rounded corners */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow to lift box */
-    transition: box-shadow 0.3s ease, transform 0.3s ease; /* Smooth transition */
-    text-align: center; /* Center content inside the box */
-    margin: 15px; /* Space between items in grid */
-}
-
-/* Hover Effect for Item Box */
-.item:hover {
-    transform: translateY(-5px); /* Lift the box slightly */
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Deeper shadow */
-}
-
-/* Image inside the item box */
-.item img {
-    width: 100%; /* Make image responsive */
-    max-width: 160px; /* Set a maximum width for the image */
-    height: auto; /* Keep aspect ratio */
-    margin-bottom: 10px; /* Space below image */
-    border-radius: 5px; /* Rounded corners for image */
-}
-
-/* Title inside the box */
-.item-title {
-    font-size: 1.2rem; /* Slightly larger font size */
-    font-weight: bold; /* Make title bold */
-    color: #333; /* Dark color for the title */
-    margin-bottom: 10px; /* Space below title */
-}
-
-/* Price inside the box */
-.item-price {
-    font-size: 1rem; /* Standard font size for price */
-    color: #555; /* Muted color for price */
-    margin-bottom: 15px; /* Space below price */
-}
-
-/* Details and Quantity section inside the box */
-.item-details {
-    display: flex;
-    flex-direction: column; /* Stack title, price, and quantity vertically */
-    justify-content: center;
-    align-items: center; /* Center align content */
-}
-
-/* Quantity section inside the item box */
-.item-quantity {
-    display: flex;
-    align-items: center; /* Align label and input vertically */
-    gap: 10px; /* Space between label and input */
-    margin-top: 10px; /* Space above quantity input */
-}
-
-/* Input for quantity */
-.item-quantity input[type="number"] {
-    width: 50px; /* Fixed width for quantity input */
-    padding: 5px;
-    text-align: center; /* Center the number inside the box */
-    border: 1px solid #ddd; /* Light border */
-    border-radius: 5px; /* Rounded corners */
-    font-size: 1rem; /* Standard font size */
-}
-
-
-
-/* Ensure grid layout for product items */
-.item-list {
-    display: grid; /* Use grid layout */
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Responsive, at least 250px width per item */
-    gap: 20px; /* Space between product boxes */
-    padding: 20px; /* Padding inside the grid container */
-    margin-top: 20px; /* Space above the list */
-    width: 100%; /* Ensure the grid container takes full width */
-    box-sizing: border-box; /* Ensure padding doesn’t cause overflow */
-}
-
-/* Two columns for medium screens */
-@media (min-width: 768px) {
-    .item-list {
-        grid-template-columns: repeat(2, 1fr); /* 2 items per row on medium screens and up */
-        padding: 30px 20px; /* Add extra padding for spacing */
-    }
-
-    .item {
-        max-width: 100%; /* Let the items take full width of their grid cell */
-        margin: 0; /* Ensure no margin between items */
-    }
-}
-
-/* For large screens, 2 items per row */
-@media (min-width: 1024px) {
-    .item-list {
-        grid-template-columns: repeat(2, 1fr); /* Still 2 items per row for large screens */
-        padding: 40px 20px; /* Adjust padding for larger screens */
-    }
-
-    .item {
-        max-width: 100%; /* Let each item take the full width of its grid cell */
-        margin: 0; /* Ensure no margin */
-    }
-}
-
-/* Extra-large screens */
-@media (min-width: 1200px) {
-    .item-list {
-        grid-template-columns: repeat(2, 1fr); /* Keep 2 items per row */
-        padding: 50px 20px; /* More padding for very large screens */
-    }
-
-    .item {
-        max-width: 100%; /* Ensure no width restriction */
-        margin: 0; /* No margin */
-    }
-}
-
-/* General Item Styling */
-.item {
-    display: flex;
-    flex-direction: column; /* Stack content vertically inside the box */
-    align-items: center; /* Center align content */
-    padding: 20px; /* Internal padding for the product box */
-    background-color: #fff; /* White background for each product box */
-    border: 2px solid #ddd; /* Light border for separation */
-    border-radius: 8px; /* Rounded corners */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow to lift the box */
-    transition: box-shadow 0.3s ease, transform 0.3s ease; /* Smooth transition */
-    text-align: center; /* Center the content */
-    margin: 0; /* Remove extra margin */
-}
-
-/* Hover effect on product boxes */
-.item:hover {
-    transform: translateY(-5px); /* Lift the box slightly on hover */
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Darker shadow on hover */
-}
-
-/* Image Styling inside product box */
-.item img {
-    width: 100%; /* Ensure responsive image */
-    max-width: 160px; /* Max width for the image */
-    height: auto; /* Keep the aspect ratio */
-    margin-bottom: 10px; /* Space below the image */
-    border-radius: 5px; /* Round corners of the image */
-}
-
-/* Title and price of product */
-.item-title {
-    font-size: 1.2rem; /* Larger font for title */
-    font-weight: bold; /* Bold title */
-    color: #333; /* Dark color */
-    margin-bottom: 10px; /* Space below title */
-}
-
-/* Price styling */
-.item-price {
-    font-size: 1rem; /* Standard price font size */
-    color: #555; /* Muted price color */
-    margin-bottom: 15px; /* Space below price */
-}
-
-/* Item Details Section */
-.item-details {
-    display: flex;
-    flex-direction: column; /* Stack details vertically */
-    justify-content: center; /* Center vertically */
-    align-items: center; /* Align horizontally */
-}
-
-/* Quantity Input Styling */
-.item-quantity {
-    display: flex;
-    align-items: center; /* Align label and input vertically */
-    gap: 10px; /* Space between label and input */
-    margin-top: 10px; /* Space above the quantity input */
-}
-
-/* Quantity input field */
-.item-quantity input[type="number"] {
-    width: 50px; /* Fixed width for quantity input */
-    padding: 5px; /* Add padding */
-    text-align: center; /* Center the number */
-    border: 1px solid #ddd; /* Light border */
-    border-radius: 5px; /* Rounded corners */
-    font-size: 1rem; /* Standard font size */
-}
-
-
-
-
-
+/* Color Palette */
+/* Olive Green: #3d550c */
+/* Lime Green: #81b622 */
+/* Yellow Green: #ecf87f */
+/* Green: #59981a */
 
 /* General Reset */
 body, h2, input, button, footer {
@@ -217,7 +23,7 @@ body, h2, input, button, footer {
     box-sizing: border-box;
 }
 
-/* Body and General Styling */
+/* Body Styling */
 body {
     font-family: Arial, sans-serif;
     line-height: 1.6;
@@ -226,6 +32,202 @@ body {
     font-size: 16px;
     padding: 20px;
 }
+
+/* Item Box Styling */
+.item {
+    display: flex;
+    flex-direction: column; /* Stack content vertically */
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: #fff;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    text-align: center;
+    margin: 15px;
+}
+
+.item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.item img {
+    width: 100%;
+    max-width: 160px;
+    height: auto;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.item-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.item-price {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 15px;
+}
+
+.item-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.item-quantity {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.item-quantity input[type="number"] {
+    width: 50px;
+    padding: 5px;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+/* Grid Layout for Items */
+.item-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    margin-top: 20px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+@media (min-width: 768px) {
+    .item-list {
+        grid-template-columns: repeat(2, 1fr);
+        padding: 30px 20px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .item-list {
+        padding: 40px 20px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .item-list {
+        padding: 50px 20px;
+    }
+}
+
+/* Form Styling */
+.zip-form-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 0;
+    background-color: #f9f9f9;
+}
+
+.zip-form {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+}
+
+.zip-form input {
+    padding: 8px;
+    font-size: 0.9rem;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.zip-form button {
+    padding: 8px 16px;
+    font-size: 0.85rem;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    white-space: nowrap;
+}
+
+.zip-form button:hover {
+    background-color: #3d550c;
+}
+
+/* Footer Styling */
+.doapfooter {
+    background-color: #f9f9f9;
+    color: #333;
+    padding: 20px 10px;
+    text-align: center;
+    font-family: 'Marvel', Arial, sans-serif;
+    font-size: 0.9rem;
+    margin-top: 20px;
+}
+
+.githublink,
+.footer-link {
+    color: #3d550c;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.githublink:hover,
+.footer-link:hover {
+    text-decoration: underline;
+}
+
+/* Tabs */
+.tab-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.tab {
+    padding: 10px 20px;
+    border: 1px solid #ccc;
+    background: #f9f9f9;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-family: 'Marvel', sans-serif;
+}
+
+.tab.active {
+    background: #fff;
+    font-weight: bold;
+    border-bottom: 2px solid #007BFF;
+    color: darkgreen;
+    text-shadow: 0 0 4px rgba(0, 100, 0, 0.5);
+}
+
+/* Responsive Design */
+@media (max-width: 767px) {
+    body {
+        font-size: 14px;
+    }
+
+    .item {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
 
 /* Form Container Styling */
 .zip-form-container {
@@ -728,15 +730,6 @@ h3 i.fa-phone-alt {
 
 
 
-
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-    background-color: #f9f9f9;
-    color: #333;
-    font-size: 16px; /* Base font size for all devices */
-}
 
 
 /* Adjust the header section */
@@ -1405,14 +1398,6 @@ h3 i.fa-phone-alt {
 
 
 
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-    background-color: #f9f9f9;
-    color: #333;
-    font-size: 16px; /* Base font size for all devices */
-}
 
 
 /* Adjust the header section */
