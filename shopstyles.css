@@ -87,34 +87,35 @@
 /* Item List Layout */
 .item-list {
     display: grid; /* Grid layout for the product list */
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Adjust columns based on screen size */
-    gap: 20px; /* Add space between product boxes */
-    padding: 20px; /* Add padding around the grid */
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Ensure a minimum box size of 250px */
+    gap: 20px; /* Space between product boxes */
+    padding: 20px; /* Padding around the grid */
     margin-top: 20px; /* Space above the list */
 }
 
-/* Ensuring responsiveness on wider screens */
+/* Ensuring compact layout on wider screens */
 @media (min-width: 1024px) {
     .item-list {
-        grid-template-columns: repeat(4, 1fr); /* 4 items per row on large screens */
-        padding: 30px 20px; /* Adjust padding */
+        grid-template-columns: repeat(4, 1fr); /* 4 items per row on medium and larger screens */
+        padding: 30px 20px; /* Adjust padding for larger screens */
     }
     
     .item {
-        max-width: 100%; /* Allow each item to take full available space */
-        margin: 0; /* No extra margin between items */
+        width: 100%; /* Ensure item takes the full width within the grid */
+        max-width: 300px; /* Limit the width of each product box */
+        margin: 0; /* Remove extra margins between items */
     }
 }
 
-/* Additional enhancements for very large screens */
+/* Additional adjustments for very large screens */
 @media (min-width: 1200px) {
     .item-list {
-        grid-template-columns: repeat(5, 1fr); /* 5 items per row for extra-large screens */
-        padding: 40px 20px; /* Adjust padding */
+        grid-template-columns: repeat(5, 1fr); /* 5 items per row on extra-large screens */
+        padding: 40px 20px; /* Adjust padding for very large screens */
     }
 
     .item {
-        max-width: 100%; /* Ensure no width limit */
+        max-width: 300px; /* Ensure each box stays compact */
         margin: 0; /* Remove margin */
     }
 }
