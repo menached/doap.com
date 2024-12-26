@@ -10,119 +10,101 @@
 /*Green*/
 /*#59981a*/
 
-
-
-
-/* Prices */
-.original-price {
-    text-decoration: line-through;
-    color: #999; /* Light gray for subdued effect */
-    margin-right: 10px; /* Space between original and current prices */
-}
-
-.current-price {
-    font-weight: bold;
-    color: #000; /* Highlight current price */
-}
-
-/* Descriptions */
-.item-description {
-    font-size: 1rem;
-}
-
-/* Remove Item "X" */
-.remove-item {
-    color: red; /* Set text color */
-    font-weight: bold; /* Bold for emphasis */
-    cursor: pointer; /* Indicate clickable */
-    margin-left: 10px; /* Space from other elements */
-    font-size: 1.2rem; /* Adjust size */
-}
-
-.remove-item:hover {
-    color: darkred; /* Darker red on hover */
-    text-decoration: underline; /* Underline for hover effect */
-}
-
-/* Item List */
-.item-list {
-    display: flex;
-    flex-direction: column;
-    gap: 15px; /* Space between items */
-    margin: 0;
-    padding: 0;
-}
-
-/* Item Container */
+/* Item Box Styling */
 .item {
     display: flex;
-    align-items: center; /* Align child elements vertically */
+    flex-direction: column;  /* Stack content vertically */
+    align-items: center; /* Center align content */
     justify-content: space-between; /* Space out child elements */
-    gap: 15px; /* Add space between elements */
-    padding: 15px; /* Add spacing inside */
-    background: #fff; /* White background for contrast */
-    border: 1px solid #ddd; /* Light border */
+    padding: 20px; /* Add internal padding for space */
+    background-color: #fff; /* White background */
+    border: 2px solid #ddd; /* Slightly thicker border for box look */
     border-radius: 8px; /* Rounded corners */
-    transition: background 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow to lift box */
+    transition: box-shadow 0.3s ease, transform 0.3s ease; /* Smooth transition */
+    text-align: center; /* Center content inside the box */
+    margin: 15px; /* Space between items in grid */
 }
 
+/* Hover Effect for Item Box */
 .item:hover {
-    background: #f9f9f9; /* Light background on hover */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+    transform: translateY(-5px); /* Lift the box slightly */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Deeper shadow */
 }
 
-/* Item Image */
+/* Image inside the item box */
 .item img {
-    width: 80px;
-    height: 80px;
-    object-fit: cover; /* Maintain aspect ratio */
-    border-radius: 5px; /* Slightly round the corners */
-    margin-right: 15px; /* Space from details */
-    flex-shrink: 0; /* Prevent shrinking */
+    width: 100%; /* Make image responsive */
+    max-width: 160px; /* Set a maximum width for the image */
+    height: auto; /* Keep aspect ratio */
+    margin-bottom: 10px; /* Space below image */
+    border-radius: 5px; /* Rounded corners for image */
 }
 
-/* Item Title and Price */
+/* Title inside the box */
 .item-title {
-    font-size: 1.1rem; /* Slightly larger font */
-    font-weight: bold; /* Emphasize title */
-    color: #333; /* Dark text */
-    margin-bottom: 5px; /* Space below title */
-    font-family: 'Marvel', sans-serif; /* Marvel font */
+    font-size: 1.2rem; /* Slightly larger font size */
+    font-weight: bold; /* Make title bold */
+    color: #333; /* Dark color for the title */
+    margin-bottom: 10px; /* Space below title */
 }
 
+/* Price inside the box */
 .item-price {
-    font-size: 1rem; /* Standard size */
-    color: #888; /* Muted color */
-    margin-bottom: 5px; /* Space below price */
+    font-size: 1rem; /* Standard font size for price */
+    color: #555; /* Muted color for price */
+    margin-bottom: 15px; /* Space below price */
 }
 
-/* Item Details */
+/* Details and Quantity section inside the box */
 .item-details {
-    flex-grow: 1; /* Allow to expand */
     display: flex;
-    flex-direction: column; /* Stack vertically */
-    justify-content: center; /* Center content */
+    flex-direction: column; /* Stack title, price, and quantity vertically */
+    justify-content: center;
+    align-items: center; /* Center align content */
 }
 
-/* Item Quantity */
+/* Quantity section inside the item box */
 .item-quantity {
     display: flex;
-    align-items: center; /* Align label and input */
-    margin-left: 15px; /* Space from details */
+    align-items: center; /* Align label and input vertically */
+    gap: 10px; /* Space between label and input */
+    margin-top: 10px; /* Space above quantity input */
 }
 
-.item-quantity label {
-    margin-right: 5px; /* Space between label and input */
-    font-size: 1rem; /* Consistent size */
-}
-
+/* Input for quantity */
 .item-quantity input[type="number"] {
-    width: 60px; /* Standard width */
-    padding: 5px; /* Add padding */
-    text-align: center; /* Center-align input */
+    width: 50px; /* Fixed width for quantity input */
+    padding: 5px;
+    text-align: center; /* Center the number inside the box */
     border: 1px solid #ddd; /* Light border */
     border-radius: 5px; /* Rounded corners */
-    font-size: 1rem; /* Consistent size */
+    font-size: 1rem; /* Standard font size */
+}
+
+/* Item List Layout */
+.item-list {
+    display: grid; /* Grid layout for the product list */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Adjust columns based on screen size */
+    gap: 20px; /* Add space between product boxes */
+    padding: 20px; /* Add padding around the grid */
+    margin-top: 20px; /* Space above the list */
+}
+
+/* Ensuring responsiveness on wider screens */
+@media (min-width: 1024px) {
+    .item {
+        max-width: 300px; /* Set a maximum width for each item box */
+        margin: 20px auto; /* Center the items on large screens */
+    }
+}
+
+/* Additional enhancements for wide screens */
+@media (min-width: 1200px) {
+    .item {
+        max-width: 350px; /* Increase max width for even larger screens */
+        margin: 25px auto; /* Add more margin for a spacious feel */
+    }
 }
 
 
