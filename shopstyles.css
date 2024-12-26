@@ -997,6 +997,12 @@ body {
         flex-direction: column;  /* Stack fields vertically */
     }
 
+    .info-row {
+        width: 100%;  /* Ensure full-width on mobile */
+    }
+}
+
+
 /* General Styles */
 body {
     margin: 0;
