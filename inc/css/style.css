@@ -12,32 +12,6 @@
 
 
 
-/* Cart Summary */
-.cart-summary {
-    position: fixed;
-    top: 50%;
-    right: 10px;
-    transform: translateY(-50%);
-    width: 300px;
-    padding: 10px;
-    background-color: white;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-}
-.cart-summary ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-.cart-summary ul li {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 5px;
-}
-
-
 
 
 /* Item Box Styling */
