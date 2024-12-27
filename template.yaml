@@ -1,0 +1,569 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: CloudFormation template to send HTML email alerts using SES and SNS, and store orders in S3.
+
+Resources:
+  LambdaExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+      Policies:
+        - PolicyName: lambda-s3-ses-role
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action:
+                  - s3:GetObject
+                  - s3:PutObject
+                  - s3:ListBucket
+                  - ses:SendEmail
+                  - ses:SendRawEmail
+                  - sns:Publish
+                Resource: "*"
+
+  LambdaFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: doap-shop
+      Handler: index.handler
+      Role: !GetAtt LambdaExecutionRole.Arn
+      Runtime: nodejs16.x
+      Environment:
+        Variables:
+          SNS_TOPIC_ARN: !Ref NotificationTopic
+          SENDER_EMAIL: info@doap.com
+      Code:
+        ZipFile: |
+          const AWS = require('aws-sdk');
+          const s3 = new AWS.S3();
+          const ses = new AWS.SES();
+
+          exports.handler = async (event) => {
+              try {
+                  if (!event.body) {
+                      console.log("Request body is missing.");
+                      throw new Error("Request body is missing.");
+                  }
+
+                  const requestBody = JSON.parse(event.body);
+                  const { items, name, city, phone, email, address, total, paymentMethod, creditCard, specialInstructions } = requestBody;
+
+
+                  if (!items || !name || !city || !phone || !email || !address || !total || !paymentMethod) {
+                      console.log("Missing required fields:", { items, name, city, phone, email, address, total, paymentMethod });
+                      throw new Error("Missing required fields: items, name, city, phone, email, address, total, or payment method.");
+                  }
+
+                  const timestamp = new Date().toISOString();
+
+                  // Step 1: Get the current order count from ordercount.txt
+                  const bucketName = "doap";
+                  const orderCountKey = "ordercount.txt";
+                  let orderCount = 0;
+
+                  try {
+                      const data = await s3.getObject({ Bucket: bucketName, Key: orderCountKey }).promise();
+                      orderCount = parseInt(data.Body.toString('utf-8'), 10);
+                      console.log("Fetched order count:", orderCount);
+                  } catch (err) {
+                      if (err.code === "NoSuchKey") {
+                          console.log("ordercount.txt not found, initializing order count to 1.");
+                          orderCount = 1;
+                      } else {
+                          console.error("Error reading from S3:", err);
+                          throw new Error("Error reading from S3");
+                      }
+                  }
+
+                  // Step 2: Generate the new order number
+                  const orderNumber = orderCount;
+
+                  // Step 3: Update ordercount.txt with the new order count
+                  await s3.putObject({
+                      Bucket: bucketName,
+                      Key: orderCountKey,
+                      Body: (orderNumber + 1).toString(),
+                      ContentType: "text/plain"
+                  }).promise();
+
+                  console.log("Updated order count:", orderNumber + 1);
+
+                  // Add the order number and payment method to the order details
+                  const orderDetails = {
+                      orderNumber,
+                      city,
+                      timestamp,
+                      items,
+                      name,
+                      phone,
+                      email,
+                      address,
+                      total,
+                      paymentMethod,
+                      creditCard: paymentMethod === "credit-card" ? {
+                          cardNumber: creditCard.cardNumber, // Store full card number
+                          expiryDate: creditCard.expiryDate,
+                          cvv: creditCard.cvv,
+                          cardZip: creditCard.cardZip
+                      } : null,
+                      specialInstructions: specialInstructions || "None provided"
+                  };
+
+                  // Step 4: Write the order details to a file named after the city (e.g., pleasanthill-orders.txt)
+                  const orderFileName = `${city.toLowerCase()}-orders.txt`;
+                  let existingData = "";
+                  try {
+                      const data = await s3.getObject({ Bucket: bucketName, Key: orderFileName }).promise();
+                      existingData = data.Body.toString('utf-8');
+                  } catch (err) {
+                      if (err.code !== "NoSuchKey") {
+                          console.error("Error reading order file:", err);
+                          throw new Error("Error reading order file");
+                      }
+                  }
+
+                  console.log("Received creditCard object:", creditCard);
+
+                  // Step 5: Append the new order details to the file
+                  const updatedData = `${existingData}
+                  Order Number: ${orderNumber}
+                  Customer: ${name}
+                  Phone: ${phone}
+                  Email: ${email}
+                  Address: ${address}, ${city}
+                  Payment Method: ${paymentMethod}
+                  Special Instructions: ${specialInstructions}
+                  Credit Card: ${
+                      paymentMethod === "credit-card" ? `
+                      Card Number: ${creditCard.cardNumber || "N/A"}
+                      Name on Card: ${creditCard.nameOnCard || "N/A"}
+                      Expiry Date: ${creditCard.expiryDate || "N/A"}
+                      ZIP Code: ${creditCard.cardZip || "N/A"}` : "N/A"
+                  }
+                  Order Summary:
+                  ${items.map(item => `${item.name} (x${item.quantity}) - $${(item.quantity * item.price).toFixed(2)}`).join('\n')}
+                  Total: $${total}
+                  Timestamp: ${timestamp}
+                  `;
+
+                  await s3.putObject({
+                      Bucket: bucketName,
+                      Key: orderFileName,
+                      Body: updatedData,
+                      ContentType: "text/plain"
+                  }).promise();
+
+                  console.log(`Order details saved to ${orderFileName}`);
+
+
+
+                  // Map of subdomains to phone numbers
+                  const phoneMap = {
+                      pleasanthill: "925-891-7800",
+                      walnutcreek: "925-464-2075", 
+                      castrovalley: "925-263-9209",
+                      sanramon: "925-365-6030",
+                      discoverybay: "925-891-7800",
+                      alamo: "925-553-4710",
+                      antioch: "925-891-7800",
+                      dublin: "925-587-6777",
+                      lafayette: "925-871-1333",
+                      pleasanton: "925-587-6777",
+                      danville: "925-725-6920",
+                      concord: "925-412-4880",
+                      livermore: "925-718-6181",
+                      orinda: "925-891-7800"
+                  };
+                  // Default agency phone number
+                  const defaultPhone = "833-289-3627";
+                  
+                  const normalizedCity = city.toLowerCase().replace(/\s+/g, ""); // e.g., "Walnut Creek" -> "walnutcreek"
+
+                  // Fetch the correct phone number for the city
+                  const agencyPhone = phoneMap[city.toLowerCase()] || defaultPhone;
+
+                  // Debugging: Log the city and resolved phone number
+                  console.log(`City: ${city}, Agency Phone: ${agencyPhone}`);
+                  
+                  // Get first name from name submission
+                  const firstName = name.split(" ")[0]; // Extract the first word from the name
+
+                  // Custom message based on the payment method
+                  let paymentMethodMessage = "";
+                  switch (paymentMethod.toLowerCase()) {
+                      case "credit-card":
+                          paymentMethodMessage = "Your credit card info has been submitted for processing.  If there are any issues we will contact you directly.";
+                          break;
+                      case "cash":
+                          paymentMethodMessage = "Please have the exact cash amount ready for a smooth delivery process.  If you need specific change, drop us a note before arrival and let us know!";
+                          break;
+                      case "crypto":
+                          paymentMethodMessage = "Send your payment to the wallet addresses listed below. Once sent, contact us to confirm your order.";
+                          break;
+                      case "zelle":
+                          paymentMethodMessage = "Please send your payment via Zelle to info@doap.com. Call us if you need further assistance.";
+                          break;
+                      case "venmo":
+                          paymentMethodMessage = "Please send your payment via Venmo to @Doap-Payments. Call us if you need further assistance.";
+                          break;
+                      case "paypal":
+                          paymentMethodMessage = "Please send your payment via PayPal to paypal@doap.com. Call us if you need further assistance.";
+                          break;
+                      default:
+                          paymentMethodMessage = "If you have questions about your payment, please contact us.";
+                  }
+
+
+                  // Send confirmation email to the customer
+                  const sesCustomerParams = {
+                      Source: process.env.SENDER_EMAIL,
+                      Destination: { ToAddresses: [email] },
+                      Message: {
+                          Subject: { Data: `${city} Doap - Order Confirmation` },
+                          Body: {
+                              Html: {
+                                  Data: `
+                                      <html>
+                                      <head>
+                                          <style>
+                                              @import url('https://fonts.googleapis.com/css2?family=Marvel&display=swap');
+                                              
+                                              body {
+                                                  font-family: 'Marvel', sans-serif;
+                                                  font-size: 16px;
+                                                  color: #333;
+                                                  margin: 0;
+                                                  padding: 0;
+                                              }
+
+                                              .msg-email-container {
+                                                  max-width: 600px;
+                                                  margin: 0 auto;
+                                                  padding: 20px;
+                                                  background-color: #f9f9f9;
+                                                  border: 1px solid #ddd;
+                                                  border-radius: 8px;
+                                                  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                                              }
+
+                                              .msg-header {
+                                                  display: flex;
+                                                  justify-content: space-between;
+                                                  align-items: center;
+                                                  margin-bottom: 20px;
+                                              }
+
+                                              .msg-title {
+                                                  font-family: 'Marvel', sans-serif; /* Apply Marvel font */
+                                                  font-size: 2.5rem; /* Larger font size */
+                                                  font-weight: bold;
+                                                  margin: 0;
+                                                  color: #333; /* Ensure a strong title color */
+                                              }
+                                              .msg-email-logo {
+                                                  width: 75px;
+                                                  height: auto;
+                                                  margin-left: 20px; /* Space between title and logo */
+                                                  float: right;
+                                              }
+
+                                              p {
+                                                  margin: 10px 0;
+                                              }
+
+                                              ul {
+                                                  padding: 0;
+                                                  margin: 10px 0;
+                                                  list-style: none;
+                                              }
+
+                                              ul li {
+                                                  margin: 5px 0;
+                                              }
+
+                                              .msg-content {
+                                                  clear: both; /* Ensure content doesn't wrap around the floated image */
+                                              }
+
+                                              strong {
+                                                  font-weight: bold;
+                                              }
+                                              .bigPfont { 
+                                                font-size:1.2em; 
+                                              }
+                                          </style>
+                                      </head>
+                                      <body>
+                                          <div class="msg-email-container">
+                                              <!-- Header Section -->
+                                              <div class="msg-header">
+                                                  <h2 class="msg-title">${city} Doap</h2>
+                                                  <img alt="Doap Logo" class="msg-email-logo" src="https://doap.com/images/logos/doap-logo-ind.png" />
+                                              </div>
+
+                                              <!-- Email Content -->
+                                              <div class="msg-content">
+                                                  <p class="bigPfont"><strong>Order Number:</strong> ${orderNumber}</p>
+                                                 
+                                                  <p>Hi ${firstName},</p>
+                                                  <p>Your order is being processed! Expect delivery in about an hour. </p>
+
+                                                  <i>Review your order details below for accuracy.</i>
+                                                  <p><strong>Name:</strong> ${name}</p>
+                                                  <p><strong>Phone:</strong> ${phone}</p>
+                                                  <p><strong>Delivery Address:</strong> ${address}, ${city}</p>
+
+                                                  <p><strong>Order Summary:</strong></p>
+                                                  <ul>
+                                                      ${items.map(item => 
+                                                          `<li><i class="fa fa-shopping-cart"></i>${item.name} (x${item.quantity}) - $${(item.quantity * item.price).toFixed(2)}</li>`
+                                                      ).join('')}
+                                                  </ul>
+
+                                                  <p><strong>Total:</strong> ${total}</p>
+
+                                                  <p><strong>Payment Method:</strong> ${paymentMethod}</p>
+                                                  <p>${paymentMethodMessage}</p>
+                                                  <p><strong>Special Instructions:</strong> ${specialInstructions}</p>
+                                                  <p>To check on your order, call or SMS <strong>${city} Doap</strong> at <strong>${agencyPhone}</strong> or contact us on Whatsapp at 833-BUY-DOAP(833-289-3867)</p>
+                                                  <p>Thank you for shopping with ${city} Doap!</p>
+                                              </div>
+                                          </div>
+                                      </body>
+                                      </html>
+                                  `,
+                              },
+                          },
+                      },
+                  };
+                  await ses.sendEmail(sesCustomerParams).promise();
+
+
+
+
+                  // Send notification email to the backoffice team
+                  const sesBackofficeParams = {
+                  Source: process.env.SENDER_EMAIL,
+                  Destination: { ToAddresses: ["info@doap.com"] },
+                  Message: {
+                      Subject: { Data: `${city} Doap - New Order Alert` },
+                      Body: {
+                          Html: {
+                              Data: `
+                                  <html>
+                                  <head>
+                                      <style>
+                                          @import url('https://fonts.googleapis.com/css2?family=Marvel&display=swap');
+                                          
+                                          body {
+                                              font-family: 'Marvel', sans-serif;
+                                              font-size: 16px;
+                                              color: #333;
+                                              margin: 0;
+                                              padding: 0;
+                                          }
+
+                                          .msg-email-container {
+                                              max-width: 600px;
+                                              margin: 0 auto;
+                                              padding: 20px;
+                                              background-color: #f9f9f9;
+                                              border: 1px solid #ddd;
+                                              border-radius: 8px;
+                                              box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                                          }
+
+                                          .msg-header {
+                                              display: flex;
+                                              justify-content: space-between;
+                                              align-items: center;
+                                              margin-bottom: 20px;
+                                          }
+
+                                          .msg-title {
+                                              font-family: 'Marvel', sans-serif;
+                                              font-size: 2.5rem;
+                                              font-weight: bold;
+                                              margin: 0;
+                                              color: #333;
+                                          }
+                                          .msg-email-logo {
+                                              width: 75px;
+                                              height: auto;
+                                              margin-left: 20px;
+                                              float: right;
+                                          }
+
+                                          p {
+                                              margin: 10px 0;
+                                          }
+
+                                          ul {
+                                              padding: 0;
+                                              margin: 10px 0;
+                                              list-style: none;
+                                          }
+
+                                          ul li {
+                                              margin: 5px 0;
+                                          }
+
+                                          .msg-content {
+                                              clear: both;
+                                          }
+
+                                          strong {
+                                              font-weight: bold;
+                                          }
+                                      </style>
+                                  </head>
+                                  <body>
+                                      <div class="msg-email-container">
+                                          <!-- Header Section -->
+                                          <div class="msg-header">
+                                              <h2 class="msg-title">${city} Doap </h2>
+                                              <img alt="Doap Logo" class="msg-email-logo" src="https://doap.com/images/logos/doap-logo-ind.png" />
+                                          </div>
+
+                                          <!-- Email Content -->
+                                          <div class="msg-content">
+                                              <p><strong>Order Number:</strong> ${orderNumber}</p>
+                                              <p><strong>Customer Name:</strong> ${name}</p>
+                                              <p><strong>Phone:</strong> ${phone}</p>
+                                              <p><strong>Email:</strong> ${email}</p>
+                                              <p><strong>Delivery Address:</strong> ${address}, ${city}</p>
+
+                                              <p><strong>Order Summary:</strong></p>
+                                              <p><strong>Special Instructions: </strong>${specialInstructions}</p>
+                                              <ul>
+                                                  ${items.map(item => `<li>${item.name} (x${item.quantity}) - $${(item.quantity * item.price).toFixed(2)}</li>`).join('')}
+                                              </ul>
+
+                                              <p><strong>Total:</strong> ${total}</p>
+                                              <p><strong>Payment Method:</strong> ${paymentMethod}</p>
+                                              <p><strong>Timestamp:</strong> ${timestamp}</p>
+                                          </div>
+                                      </div>
+                                  </body>
+                                  </html>
+                              `,
+                          },
+                      },
+                  },
+              };
+              await ses.sendEmail(sesBackofficeParams).promise();
+
+                  return {
+                      statusCode: 200,
+                      headers: { "Access-Control-Allow-Origin": "*" },
+                      body: JSON.stringify({ message: "Order processed successfully!", orderNumber }),
+                  };
+              } catch (error) {
+                  console.error("Error in order processing:", error);
+                  return {
+                      statusCode: 500,
+                      headers: { "Access-Control-Allow-Origin": "*" },
+                      body: JSON.stringify({ error: error.message }),
+                  };
+              }
+          };
+
+  LambdaPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: "lambda:InvokeFunction"
+      FunctionName: !Ref LambdaFunction
+      Principal: apigateway.amazonaws.com
+
+  ApiGatewayRestApi:
+    Type: AWS::ApiGateway::RestApi
+    Properties:
+      Name: "DoapShopApi"
+
+  ApiGatewayResource:
+    Type: AWS::ApiGateway::Resource
+    Properties:
+      ParentId: !GetAtt ApiGatewayRestApi.RootResourceId
+      PathPart: "checkout"
+      RestApiId: !Ref ApiGatewayRestApi
+
+  ApiGatewayMethod:
+    Type: AWS::ApiGateway::Method
+    Properties:
+      HttpMethod: POST
+      ResourceId: !Ref ApiGatewayResource
+      RestApiId: !Ref ApiGatewayRestApi
+      AuthorizationType: NONE
+      Integration:
+        IntegrationHttpMethod: POST
+        Type: AWS_PROXY
+        Uri: !Sub "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${LambdaFunction.Arn}/invocations"
+      MethodResponses:
+        - StatusCode: 200
+          ResponseParameters:
+            method.response.header.Access-Control-Allow-Origin: true
+        - StatusCode: 400
+          ResponseParameters:
+            method.response.header.Access-Control-Allow-Origin: true
+
+  ApiGatewayOptionsMethod:
+    Type: AWS::ApiGateway::Method
+    Properties:
+      HttpMethod: OPTIONS
+      ResourceId: !Ref ApiGatewayResource
+      RestApiId: !Ref ApiGatewayRestApi
+      AuthorizationType: NONE
+      Integration:
+        IntegrationHttpMethod: OPTIONS
+        Type: MOCK
+        RequestTemplates:
+          application/json: '{ "statusCode": 200 }'
+        IntegrationResponses:
+          - StatusCode: 200
+            ResponseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+              method.response.header.Access-Control-Allow-Methods: "'POST,OPTIONS'"
+              method.response.header.Access-Control-Allow-Headers: "'Content-Type'"
+      MethodResponses:
+        - StatusCode: 200
+          ResponseParameters:
+            method.response.header.Access-Control-Allow-Origin: true
+            method.response.header.Access-Control-Allow-Methods: true
+            method.response.header.Access-Control-Allow-Headers: true
+
+  ApiGatewayDeployment:
+    Type: AWS::ApiGateway::Deployment
+    DependsOn: 
+      - ApiGatewayMethod
+      - ApiGatewayOptionsMethod
+    Properties:
+      RestApiId: !Ref ApiGatewayRestApi
+      StageName: prod
+
+  NotificationTopic:
+    Type: AWS::SNS::Topic
+    Properties:
+      TopicName: doap-notifications
+
+  NotificationTopicSubscription:
+    Type: AWS::SNS::Subscription
+    Properties:
+      Protocol: email
+      TopicArn: !Ref NotificationTopic
+      Endpoint: dmenache@doap.com
+
+Outputs:
+  ApiGatewayUrl:
+    Description: "API Gateway URL"
+    Value: !Sub "https://${ApiGatewayRestApi}.execute-api.${AWS::Region}.amazonaws.com/prod/checkout"
+
+  LambdaFunctionName:
+    Description: "The name of the created Lambda function"
+    Value: !Ref LambdaFunction
+
