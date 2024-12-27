@@ -581,4 +581,32 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log("Product selection logic applied successfully");
 });
 
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    console.log("Product selection logic initialized");
+
+    // Select all product items
+    const productItems = document.querySelectorAll('.item');
+
+    // Add click event listener to each product item
+    productItems.forEach(item => {
+        item.addEventListener('click', function () {
+            const checkbox = this.querySelector('input[type="checkbox"]');
+
+            // Toggle the selected state
+            const isSelected = checkbox.checked;
+            checkbox.checked = !isSelected;
+
+            // Apply or remove the 'selected' class based on the checkbox state
+            this.classList.toggle('selected', !isSelected);
+
+            // Optionally, update the cart or any other UI here
+            console.log(`${this.querySelector('.item-title').textContent} is now ${!isSelected ? "added to" : "removed from"} the cart.`);
+        });
+    });
+
+    console.log("Product selection logic applied successfully");
+});
+
 console.log("shop.js loaded completely");
