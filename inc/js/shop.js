@@ -585,54 +585,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-document.addEventListener('DOMContentLoaded', () => {
-    const cartItems = [];
-    const cartSummary = document.getElementById('cartSummary');
-    const cartItemsList = document.getElementById('cartItems');
-    const cartTotal = document.getElementById('cartTotal');
-
-    function updateCart(itemName, itemPrice, quantity) {
-        const existingItem = cartItems.find(item => item.name === itemName);
-        if (existingItem) {
-            existingItem.quantity += quantity;
-        } else {
-            cartItems.push({ name: itemName, price: itemPrice, quantity });
-        }
-        renderCart();
-    }
-
-    function renderCart() {
-        cartItemsList.innerHTML = '';
-        let total = 0;
-        cartItems.forEach(item => {
-            total += item.price * item.quantity;
-            const li = document.createElement('li');
-            li.textContent = `${item.name} (x${item.quantity}) - $${(item.price * item.quantity).toFixed(2)}`;
-            cartItemsList.appendChild(li);
-        });
-        cartTotal.textContent = total.toFixed(2);
-    }
-
-    document.querySelectorAll('.item input[type="checkbox"]').forEach(checkbox => {
-        checkbox.addEventListener('change', function () {
-            const itemDetails = this.closest('.item');
-            const itemName = itemDetails.querySelector('.item-title').textContent;
-            const itemPrice = parseFloat(itemDetails.querySelector('.item-price').textContent.replace('$', ''));
-            const quantityInput = itemDetails.querySelector('.quantity');
-            const quantity = parseInt(quantityInput.value, 10) || 1;
-
-            if (this.checked) {
-                updateCart(itemName, itemPrice, quantity);
-            } else {
-                const index = cartItems.findIndex(item => item.name === itemName);
-                if (index > -1) {
-                    cartItems.splice(index, 1);
-                }
-                renderCart();
-            }
-        });
-    });
-});
 
 
 
