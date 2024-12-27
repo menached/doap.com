@@ -12,7 +12,6 @@
 
 /* Item Box Styling */
 
-/* General styling for product items */
 
 /* Default product box styles */
 .item {
@@ -26,6 +25,7 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     cursor: pointer;
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    position: relative; /* To position the "Added to Cart" text */
 }
 
 /* Hidden checkboxes */
@@ -35,10 +35,59 @@
 
 /* Highlight selected product boxes */
 .item.selected {
-    background-color: #d4edda; /* Light green */
-    border-color: #28a745; /* Green border */
-    box-shadow: 0 0 10px rgba(40, 167, 69, 0.5); /* Green glow */
+    background-color: #ffeeba; /* Brighter yellow color */
+    border-color: #ffc107; /* Yellow border */
+    box-shadow: 0 0 10px rgba(255, 193, 7, 0.5); /* Yellow glow */
 }
+
+/* "Added to Cart" text */
+.item .added-to-cart {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 5px;
+    display: none; /* Hidden by default */
+}
+
+/* Show the "Added to Cart" text when selected */
+.item.selected .added-to-cart {
+    display: block;
+}
+
+
+/* General styling for product items */
+
+/* Default product box styles */
+/*.item {*/
+    /*display: flex;*/
+    /*align-items: center;*/
+    /*justify-content: space-between;*/
+    /*padding: 10px;*/
+    /*background: #fff;*/
+    /*border: 1px solid #ddd;*/
+    /*border-radius: 8px;*/
+    /*box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);*/
+    /*cursor: pointer;*/
+    /*transition: background-color 0.3s ease, box-shadow 0.3s ease;*/
+/*}*/
+
+/*[> Hidden checkboxes <]*/
+/*.item input[type="checkbox"] {*/
+    /*display: none;*/
+/*}*/
+
+/*[> Highlight selected product boxes <]*/
+/*.item.selected {*/
+    /*background-color: #d4edda; [> Light green <]*/
+    /*border-color: #28a745; [> Green border <]*/
+    /*box-shadow: 0 0 10px rgba(40, 167, 69, 0.5); [> Green glow <]*/
+/*}*/
 
 
 
