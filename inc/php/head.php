@@ -1,14 +1,14 @@
 <title>Doap</title>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VP7XRHB9TQ"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-VP7XRHB9TQ', { 'cookie_flags': 'SameSite=None;Secure' });
-    </script>
 
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-VP7XRHB9TQ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'G-VP7XRHB9TQ');
+</script>
     <script>
         const hostname = window.location.hostname;
         const subdomain = hostname.split('.')[0];
