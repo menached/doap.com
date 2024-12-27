@@ -182,35 +182,6 @@ document.addEventListener("DOMContentLoaded", () => {
         headerLink.title = `Call ${cityName} Doap!`;
     }
 
-    //// Set up Open Graph and Twitter meta tags
-    //const ogMetaTags = [
-        //{ property: "og:title", content: `${cityName} Doap - Call us today!` },
-        //{ property: "og:type", content: "website" },
-        //{ property: "og:url", content: `https://${hostname}/simple.php` },
-        //{ property: "og:description", content: defaultDescription },
-        //{ property: "og:image", content: `https://${subdomain}.doap.com/${subdomain}doapbanner.webp` },
-        //{ name: "twitter:card", content: "summary_large_image" },
-        //{ name: "twitter:image", content: `https://${subdomain}.doap.com/${subdomain}doapbanner.webp` },
-        //{ name: "twitter:title", content: `${cityName} Doap - Call us today!` },
-        //{ name: "twitter:description", content: defaultDescription },
-        //{ name: "twitter:site", content: "@danvilledoap" }
-    //];
-
-    //// Remove existing meta tags
-    //document.querySelectorAll('meta[property^="og:"], meta[name^="twitter:"]').forEach(tag => tag.remove());
-
-    //// Append new meta tags
-    //ogMetaTags.forEach(tagData => {
-        //const tag = document.createElement("meta");
-        //Object.keys(tagData).forEach(key => {
-            //tag.setAttribute(key, tagData[key]);
-        //});
-        //document.head.appendChild(tag);
-        //console.log("Added meta tag:", tagData.property || tagData.name);
-    //});
-
-    //console.log("Open Graph and Twitter meta tags added successfully!");
-
     // Payment method handling
     const paymentMethodDropdown = document.getElementById("paymentMethod");
     
