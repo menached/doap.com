@@ -22,8 +22,8 @@
             //include('cartsection.html'); 
             //echo "</div>";
  
-        include('inc/html/products.html');
         include('cartsection.html'); 
+        include('inc/html/products.html');
         //include('flower.html'); 
         //include('concentrates.html'); 
         //include('edibles.html'); 
