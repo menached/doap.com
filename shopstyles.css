@@ -11,20 +11,94 @@
 /*#59981a*/
 
 /* Item Box Styling */
+
+/* General styling for product items */
+
+/* Default product box styles */
 .item {
     display: flex;
-    flex-direction: column;  /* Stack content vertically */
-    align-items: center; /* Center align content */
-    justify-content: space-between; /* Space out child elements */
-    padding: 20px; /* Add internal padding for space */
-    background-color: #fff; /* White background */
-    border: 2px solid #ddd; /* Slightly thicker border for box look */
-    border-radius: 8px; /* Rounded corners */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow to lift box */
-    transition: box-shadow 0.3s ease, transform 0.3s ease; /* Smooth transition */
-    text-align: center; /* Center content inside the box */
-    margin: 15px; /* Space between items in grid */
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
+
+/* Hidden checkboxes */
+.item input[type="checkbox"] {
+    display: none;
+}
+
+/* Highlight selected product boxes */
+.item.selected {
+    background-color: #d4edda; /* Light green */
+    border-color: #28a745; /* Green border */
+    box-shadow: 0 0 10px rgba(40, 167, 69, 0.5); /* Green glow */
+}
+
+
+
+
+/*.item {*/
+    /*display: flex;*/
+    /*align-items: center;*/
+    /*justify-content: space-between;*/
+    /*padding: 10px;*/
+    /*background: #fff;*/
+    /*border: 1px solid #ddd;*/
+    /*border-radius: 8px;*/
+    /*box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);*/
+    /*transition: background-color 0.3s ease, box-shadow 0.3s ease;*/
+    /*cursor: pointer;*/
+/*}*/
+
+/*[> Hide the checkboxes <]*/
+/*.item input[type="checkbox"] {*/
+    /*display: none;*/
+/*}*/
+
+/*[> Style for selected product items <]*/
+/*.item.selected {*/
+    /*background-color: #d4edda; [> Light green <]*/
+    /*border-color: #28a745; [> Green border <]*/
+    /*box-shadow: 0 0 10px rgba(40, 167, 69, 0.5); [> Green glow <]*/
+/*}*/
+
+/*.item {*/
+    /*display: flex;*/
+    /*align-items: center;*/
+    /*justify-content: space-between;*/
+    /*padding: 10px;*/
+    /*background: #fff;*/
+    /*border: 1px solid #ddd;*/
+    /*border-radius: 8px;*/
+    /*box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);*/
+    /*transition: box-shadow 0.3s ease, border-color 0.3s ease;*/
+/*}*/
+
+/* Glow effect for selected items */
+/*.item.selected {*/
+    /*border-color: green;*/
+    /*box-shadow: 0 0 8px rgba(0, 255, 0, 0.5);*/
+/*}*/
+/*.item {*/
+    /*display: flex;*/
+    /*flex-direction: column;  [> Stack content vertically <]*/
+    /*align-items: center; [> Center align content <]*/
+    /*justify-content: space-between; [> Space out child elements <]*/
+    /*padding: 20px; [> Add internal padding for space <]*/
+    /*background-color: #fff; [> White background <]*/
+    /*border: 2px solid #ddd; [> Slightly thicker border for box look <]*/
+    /*border-radius: 8px; [> Rounded corners <]*/
+    /*box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); [> Subtle shadow to lift box <]*/
+    /*transition: box-shadow 0.3s ease, transform 0.3s ease; [> Smooth transition <]*/
+    /*text-align: center; [> Center content inside the box <]*/
+    /*margin: 15px; [> Space between items in grid <]*/
+/*}*/
 
 /* Hover Effect for Item Box */
 .item:hover {
@@ -33,13 +107,20 @@
 }
 
 /* Image inside the item box */
+/* Smaller size for images in items */
 .item img {
-    width: 100%; /* Make image responsive */
-    max-width: 160px; /* Set a maximum width for the image */
-    height: auto; /* Keep aspect ratio */
-    margin-bottom: 10px; /* Space below image */
-    border-radius: 5px; /* Rounded corners for image */
+    width: 70px;
+    height: 70px;
+    border-radius: 4px;
 }
+
+/*.item img {*/
+    /*width: 100%; [> Make image responsive <]*/
+    /*max-width: 160px; [> Set a maximum width for the image <]*/
+    /*height: auto; [> Keep aspect ratio <]*/
+    /*margin-bottom: 10px; [> Space below image <]*/
+    /*border-radius: 5px; [> Rounded corners for image <]*/
+/*}*/
 
 /* Title inside the box */
 .item-title {
