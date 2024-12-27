@@ -586,6 +586,49 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
+document.addEventListener('DOMContentLoaded', () => {
+    const cartContainer = document.getElementById('cartContainer');
+    const selectedItemsList = document.getElementById('selectedItemsList');
+
+    // Function to check if the cart has any items
+    function toggleCartVisibility() {
+        const hasItems = selectedItemsList.querySelectorAll('li').length > 0 &&
+                         selectedItemsList.querySelector('li').textContent !== 'No items selected yet.';
+        cartContainer.style.display = hasItems ? 'block' : 'none';
+    }
+
+    // Listen for changes to the cart
+    document.querySelectorAll('.item input[type="checkbox"]').forEach(checkbox => {
+        checkbox.addEventListener('change', () => {
+            const itemDetails = checkbox.closest('.item');
+            const itemName = itemDetails.querySelector('.item-title').textContent;
+            const itemPrice = parseFloat(itemDetails.querySelector('.item-price').textContent.replace('$', ''));
+            const quantityInput = itemDetails.querySelector('.quantity');
+            const quantity = parseInt(quantityInput.value, 10) || 1;
+
+            if (checkbox.checked) {
+                // Add item to the cart
+                const li = document.createElement('li');
+                li.textContent = `${itemName} (x${quantity}) - $${(itemPrice * quantity).toFixed(2)}`;
+                selectedItemsList.appendChild(li);
+            } else {
+                // Remove item from the cart
+                const items = Array.from(selectedItemsList.querySelectorAll('li'));
+                const itemToRemove = items.find(li => li.textContent.includes(itemName));
+                if (itemToRemove) {
+                    selectedItemsList.removeChild(itemToRemove);
+                }
+            }
+
+            toggleCartVisibility();
+        });
+    });
+
+    // Initially check if the cart has any items
+    toggleCartVisibility();
+});
+
+
 
 
 console.log("shop.js loaded completely");
