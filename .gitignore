@@ -54,3 +54,6 @@
 !slot-machine/index.html
 !slot-machine/*.png
 
+!inc/
+!inc/*
+
