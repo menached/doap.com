@@ -5,6 +5,7 @@
 !.gitignore
 !index.html
 !simple.html
+!simple.php
 !readme.html
 !header.html
 !head.php
@@ -56,4 +57,5 @@
 
 !inc/
 !inc/*
+!images/*
 
