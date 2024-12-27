@@ -2,8 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Create the form container dynamically
     const form = document.createElement("form");
     form.className = "zip-form";
-    form.style.cssText = "display: flex; align-items: center; gap: 10px; justify-content: center;";
-
+    form.style.cssText = "padding: 10px; font-size: 1rem; border: 1px solid #ccc; border-radius: 5px; flex-grow: 1; max-width: 300px;";
     // Create the input field
     const input = document.createElement("input");
     input.type = "text";
