@@ -20,8 +20,8 @@ jobs:
       # Step 2: Copy Files to Apache vhost
       - name: Copy Files to Apache vhost
         run: |
-          echo "Copying files to /var/www/doap.com/"
+          echo "Copying file index.html to /var/www/doap.com/"
           #sudo rsync -avn --delete ./ /var/www/doap.com/
           #sudo scp index.html deb1.doap.com:/var/www/doap.com/
-          scp -o StrictHostKeyChecking=no index.html deb1.doap.com:/var/www/doap.com/
+          sudo scp -o StrictHostKeyChecking=no index.html deb1.doap.com:/var/www/doap.com/
 
