@@ -22,4 +22,6 @@ jobs:
         run: |
           echo "Copying files to /var/www/doap.com/"
           #sudo rsync -avn --delete ./ /var/www/doap.com/
-          sudo scp index.html deb1.doap.com:/var/www/doap.com/
+          #sudo scp index.html deb1.doap.com:/var/www/doap.com/
+          scp -o StrictHostKeyChecking=no index.html deb1.doap.com:/var/www/doap.com/
+
