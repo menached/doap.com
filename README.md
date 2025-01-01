@@ -9,7 +9,7 @@ This project streamlines online orders by integrating:
 - Dynamic storage of order details in Amazon S3.
 - Real-time email notifications using AWS Simple Email Service (SES) and Simple Notification Service (SNS).
 
-The project dynamically adapts based on subdomains to provide localized services for cities across **Northern California**.
+This project dynamically adapts based on subdomains to provide localized services for cities across **Northern California**.
 
 ## Features
 - **Subdomain Detection**: Updates phone numbers, branding, and OpenGraph metadata based on the subdomain.
