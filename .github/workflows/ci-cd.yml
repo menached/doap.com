@@ -28,4 +28,6 @@ jobs:
         run: |
           echo "Copying file index.html to /var/www/doap.com/"
           scp -o StrictHostKeyChecking=no index.html dmenache@deb1.doap.com:/var/www/doap.com/
+          echo "Copying file simple.php to /var/www/doap.com/"
+          scp -o StrictHostKeyChecking=no simple.php dmenache@deb1.doap.com:/var/www/doap.com/
 
