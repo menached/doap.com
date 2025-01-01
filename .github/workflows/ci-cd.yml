@@ -61,6 +61,11 @@ jobs:
           echo "Copying changed files to server and syncing with S3 and CloudFront..."
           while read -r file; do
             echo "Processing $file"
+
+            # Ensure the destination directory exists on the server
+            DEST_DIR=$(dirname "/var/www/doap.com/$file")
+            ssh -o StrictHostKeyChecking=no dmenache@deb1.doap.com "mkdir -p $DEST_DIR"
+
             # Copy to server
             scp -o StrictHostKeyChecking=no "$file" dmenache@deb1.doap.com:/var/www/doap.com/"$file"
 
