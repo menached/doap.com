@@ -37,6 +37,7 @@ jobs:
           echo "Copying file simple.php to /var/www/doap.com/"
           scp -o StrictHostKeyChecking=no simple.php dmenache@deb1.doap.com:/var/www/doap.com/
           #scp -r -o StrictHostKeyChecking=no images/* dmenache@deb1.doap.com:/var/www/doap.com/images/          
+          
           scp -r -o StrictHostKeyChecking=no inc/* dmenache@deb1.doap.com:/var/www/doap.com/inc/          
           echo "Sending Email Notification"
           echo '<html>
