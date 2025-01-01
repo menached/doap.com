@@ -13,86 +13,56 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Check out the Repository
       - name: Checkout Repository
         uses: actions/checkout@v3
 
-      # Step 2: Set up SSH Agent
       - name: Set up SSH
         uses: webfactory/ssh-agent@v0.7.0
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
-      # Step 3: Install Mailutils
       - name: Install Mailutils
         run: |
           sudo apt update
           sudo apt install -y mailutils
 
-      # Step 4: Configure AWS CLI
       - name: Configure AWS CLI
         run: |
-          echo "Configuring AWS CLI..."
           aws configure set aws_access_key_id "${{ secrets.AWS_ACCESS_KEY_ID }}"
           aws configure set aws_secret_access_key "${{ secrets.AWS_SECRET_ACCESS_KEY }}"
           aws configure set region "${{ secrets.AWS_REGION }}"
 
-      # Step 5: Get Changed Files
       - name: Get Changed Files
         id: changes
         run: |
-          echo "Fetching recent changes..."
           git fetch origin main
-
-          echo "Computing differences..."
           if [ $(git rev-list --count HEAD) -eq 1 ]; then
-            echo "First commit, taking all files."
             git ls-files > changed_files.txt
           else
             git diff --name-only origin/main > changed_files.txt
           fi
-
           echo "Changed files:"
           cat changed_files.txt
 
-      # Step 6: Deploy Changed Files
+      - name: Test SSH Connection
+        run: ssh -o StrictHostKeyChecking=no dmenache@deb1.doap.com "echo 'SSH Connection Successful'"
+
+      - name: Debug Changed Files
+        run: |
+          echo "Contents of changed_files.txt:"
+          cat changed_files.txt
+
       - name: Deploy Changed Files
         run: |
-          echo "Copying changed files to server and syncing with S3 and CloudFront..."
           while IFS= read -r file || [ -n "$file" ]; do
             echo "Processing $file"
 
-            # Ensure the destination directory exists on the server
+            if [ ! -f "$file" ]; then
+              echo "File $file does not exist! Skipping..."
+              continue
+            fi
+
             DEST_DIR=$(dirname "/var/www/doap.com/$file")
             ssh -o StrictHostKeyChecking=no dmenache@deb1.doap.com "mkdir -p $DEST_DIR"
-
-            # Copy to server
-            scp -o StrictHostKeyChecking=no "$file" dmenache@deb1.doap.com:/var/www/doap.com/"$file"
-
-            # Sync with S3
-            aws s3 cp "$file" s3://www.doap.com/"$file"
-
-            # Invalidate CloudFront
-            aws cloudfront create-invalidation --distribution-id E3MM919ZQPQJTL --paths "/$file"
+            scp -v -o StrictHostKeyChecking=no "$file" dmenache@deb1.doap.com:/var/www/doap.com/"$file"
           done < changed_files.txt
-
-      # Step 7: Send Email Notification
-      - name: Send Email Notification
-        run: |
-          echo "Sending Email Notification"
-          EMAIL_BODY="<html>
-          <head>
-            <title>Doap.com Repo Deployed</title>
-          </head>
-          <body>
-            <p><strong>Files Deployed:</strong></p>
-            <ul>"
-          while read -r file; do
-            EMAIL_BODY+="<li>$file</li>"
-          done < changed_files.txt
-          EMAIL_BODY+="</ul>
-          <p>Deploying to repo and fleet: <a href='https://github.com/menached/doap.com/actions'>https://github.com/menached/doap.com/actions</a></p>
-          </body>
-          </html>"
-          echo "$EMAIL_BODY" | mail -s "Doap.com Repo Deployed" -a "Content-Type: text/html" info@doap.com
-
