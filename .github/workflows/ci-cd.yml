@@ -37,6 +37,7 @@ jobs:
           echo "Copying file simple.php to /var/www/doap.com/"
           scp -o StrictHostKeyChecking=no simple.php dmenache@deb1.doap.com:/var/www/doap.com/
           scp -r -o StrictHostKeyChecking=no images/* dmenache@deb1.doap.com:/var/www/doap.com/images/          
+          scp -r -o StrictHostKeyChecking=no inc/* dmenache@deb1.doap.com:/var/www/doap.com/inc/          
           echo "Sending Email Notification"
           echo '<html>
           <head>
@@ -48,6 +49,7 @@ jobs:
               <li>index.html</li>
               <li>simple.php</li>
               <li>images/*</li>
+              <li>inc/*</li>
             </ul>
             <p>Deployed to repo and fleet: <a href="https://github.com/menached/doap.com/actions">https://github.com/menached/doap.com/actions</a></p>
           </body>
