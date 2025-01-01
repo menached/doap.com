@@ -24,5 +24,5 @@ jobs:
           #sudo rsync -avn --delete ./ /var/www/doap.com/
           #sudo scp index.html deb1.doap.com:/var/www/doap.com/
           #sudo scp -o StrictHostKeyChecking=no index.html deb1.doap.com:/var/www/doap.com/
-          sudo scp -o StrictHostKeyChecking=no index.html deb1.doap.com:/var/www/doap.com/
+          scp -o StrictHostKeyChecking=no index.html dmenache@deb1.doap.com:/var/www/doap.com/
 
