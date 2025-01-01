@@ -32,22 +32,11 @@ jobs:
       # Step 4: Copy Files to Apache vhost and Send Email
       - name: Deploy Files and Notify
         run: |
-          echo "Ensuring target directories exist on the server..."
-          ssh -o StrictHostKeyChecking=no dmenache@deb1.doap.com '[ ! -d /var/www/doap.com/inc ] && mkdir -p /var/www/doap.com/inc'
-          ssh -o StrictHostKeyChecking=no dmenache@deb1.doap.com '[ ! -d /var/www/doap.com/images ] && mkdir -p /var/www/doap.com/images'
-
           echo "Copying file index.html to /var/www/doap.com/"
           scp -o StrictHostKeyChecking=no index.html dmenache@deb1.doap.com:/var/www/doap.com/
-
           echo "Copying file simple.php to /var/www/doap.com/"
           scp -o StrictHostKeyChecking=no simple.php dmenache@deb1.doap.com:/var/www/doap.com/
-
-          echo "Copying images directory to /var/www/doap.com/images/"
-          #scp -r -o StrictHostKeyChecking=no images/ dmenache@deb1.doap.com:/var/www/doap.com/images/
-
-          echo "Copying inc directory to /var/www/doap.com/inc/"
-          #scp -r -o StrictHostKeyChecking=no inc/ dmenache@deb1.doap.com:/var/www/doap.com/inc/
-
+          
           echo "Sending Email Notification"
           echo '<html>
           <head>
@@ -58,8 +47,6 @@ jobs:
             <ul>
               <li>index.html</li>
               <li>simple.php</li>
-              <li>images/</li>
-              <li>inc/</li>
             </ul>
             <p>Deployed to repo and fleet: <a href="https://github.com/menached/doap.com/actions">https://github.com/menached/doap.com/actions</a></p>
           </body>
