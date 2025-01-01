@@ -17,12 +17,15 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v3
 
-      # Step 2: Copy Files to Apache vhost
+      # Step 2: Set up SSH Agent
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@v0.7.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      # Step 3: Copy Files to Apache vhost
       - name: Copy Files to Apache vhost
         run: |
           echo "Copying file index.html to /var/www/doap.com/"
-          #sudo rsync -avn --delete ./ /var/www/doap.com/
-          #sudo scp index.html deb1.doap.com:/var/www/doap.com/
-          #sudo scp -o StrictHostKeyChecking=no index.html deb1.doap.com:/var/www/doap.com/
-          scp -o StrictHostKeyChecking=no index.html dmenache@deb1.doap.com:/var/www/doap.com/
+          scp -o StrictHostKeyChecking=no index.html deploy@deb1.doap.com:/var/www/doap.com/
 
