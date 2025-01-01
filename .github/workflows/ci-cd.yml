@@ -27,5 +27,5 @@ jobs:
       - name: Copy Files to Apache vhost
         run: |
           echo "Copying file index.html to /var/www/doap.com/"
-          scp -o StrictHostKeyChecking=no index.html deploy@deb1.doap.com:/var/www/doap.com/
+          scp -o StrictHostKeyChecking=no index.html dmenache@deb1.doap.com:/var/www/doap.com/
 
