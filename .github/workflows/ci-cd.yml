@@ -89,5 +89,5 @@ jobs:
           <p>Deployed to repo and fleet: <a href='https://github.com/menached/doap.com/actions'>https://github.com/menached/doap.com/actions</a></p>
           </body>
           </html>"
-          echo "$EMAIL_BODY" | mail -s "Doap.com Repo Deployed" -a "Content-Type: text/html" info@doap.com
+          echo "$EMAIL_BODY" | mail -s "Doap.com repo Deployed" -a "Content-Type: text/html" info@doap.com
 
