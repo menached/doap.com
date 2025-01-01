@@ -3,7 +3,7 @@
 **DOAP Shop** is a scalable, serverless order management and delivery system that uses AWS Cloud services like Lambda, API Gateway, S3, SES, and SNS to process orders, store data, and send email notifications dynamically.
 
 ## Project Overview
-This project streamlines online orders by integrating:
+The project streamlines online orders by integrating:
 - A **web frontend** for customers to place orders.
 - A **backend API** built with AWS Lambda to process orders.
 - Dynamic storage of order details in Amazon S3.
