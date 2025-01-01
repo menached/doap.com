@@ -43,10 +43,10 @@ jobs:
           scp -o StrictHostKeyChecking=no simple.php dmenache@deb1.doap.com:/var/www/doap.com/
 
           echo "Copying images directory to /var/www/doap.com/images/"
-          scp -r -o StrictHostKeyChecking=no images/ dmenache@deb1.doap.com:/var/www/doap.com/images/
+          #scp -r -o StrictHostKeyChecking=no images/ dmenache@deb1.doap.com:/var/www/doap.com/images/
 
           echo "Copying inc directory to /var/www/doap.com/inc/"
-          scp -r -o StrictHostKeyChecking=no inc/ dmenache@deb1.doap.com:/var/www/doap.com/inc/
+          #scp -r -o StrictHostKeyChecking=no inc/ dmenache@deb1.doap.com:/var/www/doap.com/inc/
 
           echo "Sending Email Notification"
           echo '<html>
