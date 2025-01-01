@@ -29,7 +29,19 @@ jobs:
           sudo apt update
           sudo apt install -y mailutils
 
-      # Step 4: Get Changed Files
+      # Step 4: Export AWS Credentials
+      - name: Configure AWS CLI
+        run: |
+          echo "Setting up AWS credentials..."
+          export AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }}
+          export AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          export AWS_REGION=${{ secrets.AWS_REGION }}
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: ${{ secrets.AWS_REGION }}
+
+      # Step 5: Get Changed Files
       - name: Get Changed Files
         id: changes
         run: |
@@ -43,7 +55,7 @@ jobs:
           echo "Changed files:"
           cat changed_files.txt
 
-      # Step 5: Deploy Changed Files
+      # Step 6: Deploy Changed Files
       - name: Deploy Changed Files
         run: |
           echo "Copying changed files to server and syncing with S3 and CloudFront..."
@@ -59,7 +71,7 @@ jobs:
             aws cloudfront create-invalidation --distribution-id E3MM919ZQPQJTL --paths "/$file"
           done < changed_files.txt
 
-      # Step 6: Send Email Notification
+      # Step 7: Send Email Notification
       - name: Send Email Notification
         run: |
           echo "Sending Email Notification"
@@ -77,5 +89,5 @@ jobs:
           <p>Deployed to repo and fleet: <a href='https://github.com/menached/doap.com/actions'>https://github.com/menached/doap.com/actions</a></p>
           </body>
           </html>"
-          echo "$EMAIL_BODY" | mail -s "Doap.com repo Deployed" -a "Content-Type: text/html" info@doap.com
+          echo "$EMAIL_BODY" | mail -s "Doap.com Repo Deployed" -a "Content-Type: text/html" info@doap.com
 
