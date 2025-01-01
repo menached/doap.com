@@ -59,7 +59,7 @@ jobs:
       - name: Deploy Changed Files
         run: |
           echo "Copying changed files to server and syncing with S3 and CloudFront..."
-          while read -r file; do
+          while IFS= read -r file || [ -n "$file" ]; do
             echo "Processing $file"
 
             # Ensure the destination directory exists on the server
