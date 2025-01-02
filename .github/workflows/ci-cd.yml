@@ -51,46 +51,34 @@ jobs:
           echo "Changed files:"
           cat changed_files.txt
 
-      # Step 6: Debug Changed Files
-      - name: Debug Changed Files
+      # Step 6: Deploy with Rsync
+      - name: Deploy Changed Files with Rsync
         run: |
-          echo "Debugging contents of changed_files.txt:"
-          cat changed_files.txt
-
-      # Step 7: Deploy Changed Files
-      - name: Deploy Changed Files
-        run: |
-          echo "Copying changed files to server and syncing with S3 and CloudFront..."
+          echo "Syncing all changed files to server and syncing with S3 and CloudFront..."
           while IFS= read -r file || [ -n "$file" ]; do
             echo "Processing file: $file"
 
-            # Normalize the file path
-            NORMALIZED_PATH="${file#./}"
-            echo "Normalized Path: $NORMALIZED_PATH"
-
-            # Check if the file exists locally
+            # Ensure the file exists locally
             if [ ! -f "$file" ]; then
               echo "File $file does not exist locally. Skipping..."
               continue
             fi
-
-            # Ensure the destination directory exists on the server
-            DEST_DIR=$(dirname "/var/www/doap.com/$NORMALIZED_PATH")
-            echo "Creating directory on server: $DEST_DIR"
-            ssh -o StrictHostKeyChecking=no dmenache@deb1.doap.com "mkdir -p $DEST_DIR"
-
-            # Copy the file to the server
-            echo "Copying file to server: $file"
-            scp -v -o StrictHostKeyChecking=no "$file" dmenache@deb1.doap.com:/var/www/doap.com/"$NORMALIZED_PATH"
-
-            # Sync the file with S3
-            echo "Syncing file with S3: $file"
-            aws s3 cp "$file" s3://www.doap.com/"$NORMALIZED_PATH"
-
-            # Invalidate CloudFront cache for the file
-            echo "Invalidating CloudFront cache for: $file"
-            aws cloudfront create-invalidation --distribution-id E3MM919ZQPQJTL --paths "/$NORMALIZED_PATH"
           done < changed_files.txt
+
+          echo "Deploying using rsync..."
+          rsync -avz --exclude '.git/' ./ dmenache@deb1.doap.com:/var/www/doap.com/
+
+          echo "Syncing all files to S3..."
+          aws s3 sync . s3://www.doap.com/ --exclude ".git/*"
+
+          echo "Invalidating CloudFront cache..."
+          aws cloudfront create-invalidation --distribution-id E3MM919ZQPQJTL --paths "/*"
+
+      # Step 7: Debug Deployment
+      - name: Debug Deployment
+        run: |
+          echo "Verifying deployment to server and S3..."
+          ssh -o StrictHostKeyChecking=no dmenache@deb1.doap.com "ls -la /var/www/doap.com/"
 
       # Step 8: Send Email Notification
       - name: Send Email Notification
