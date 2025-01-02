@@ -6,6 +6,9 @@
 /*#ecf87f*/
 /*Green*/
 /*#59981a*/
+.remove-item {
+    font-color:red;
+}
 
 #flying-text-container {
     position: fixed;
