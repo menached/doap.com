@@ -6,9 +6,20 @@
 /*#ecf87f*/
 /*Green*/
 /*#59981a*/
-.remove-item {
-    font-color:red;
+
+
+
+
+#selectedItemsList > li > span {
+    color: red; /* Makes the X red */
+    cursor: pointer; /* Adds a pointer cursor for better UX */
+    font-weight: bold; /* Optional: Makes it bold */
+    font-size: 1.2em; /* Optional: Slightly increase size */
+    margin-left: 10px; /* Optional: Adds spacing from the text */
 }
+
+
+
 
 #flying-text-container {
     position: fixed;
