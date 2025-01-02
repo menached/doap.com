@@ -1,5 +1,19 @@
 console.log("shop.js started loading");
 
+document.addEventListener('DOMContentLoaded', () => {
+    const items = document.querySelectorAll('.item');
+
+    items.forEach(item => {
+        const checkbox = item.querySelector('input[type="checkbox"]');
+        checkbox.addEventListener('change', () => {
+            if (checkbox.checked) {
+                item.classList.add('selected');
+            } else {
+                item.classList.remove('selected');
+            }
+        });
+    });
+});
 
 
 
