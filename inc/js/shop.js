@@ -1,5 +1,25 @@
 console.log("shop.js started loading");
 
+// Update the city dynamically
+document.addEventListener('DOMContentLoaded', () => {
+    // Get the subdomain from the current hostname
+    const hostname = window.location.hostname;
+    const subdomain = hostname.split('.')[0];
+
+    // Find the matching subdomain data
+    const data = subdomainData.find(entry => entry.subdomain === subdomain);
+
+    // Use the city name if found, otherwise use a default
+    const cityName = data && data.city ? data.city : "your area";
+
+    // Update the footer text
+    const footerText = document.querySelector('.fromElsewhere');
+    if (footerText) {
+        footerText.innerHTML = footerText.innerHTML.replace('CITY', cityName);
+    }
+});
+
+
 $(document).ready(function () {
     // Function to show flying text
     function showFlyingText(message, isRemoved = false) {
