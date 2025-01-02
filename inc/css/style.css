@@ -359,7 +359,6 @@ body {
     justify-content: center;
     align-items: center;
     gap: 15px; /* Increase spacing between input and button */
-    max-width: 600px; /* Make the form wider */
     margin: 0 auto; /* Center the form horizontally */
     padding: 10px; /* Add padding for better spacing */
     box-sizing: border-box; /* Ensure padding doesn’t affect width */
@@ -384,11 +383,21 @@ body {
     border-radius: 5px;
     cursor: pointer;
     white-space: nowrap; /* Prevent text wrapping */
-    min-width: 120px; /* Ensure a minimum width for the button */
+    min-width: 140px; /* Ensure a minimum width for the button */
 }
 
 .zip-form button:hover {
     background-color: #0056b3;
+}
+.zip-form-container form{
+    width: 100%; 
+}
+.zip-form input {
+    width: 100%; /* Full width for mobile */
+}
+.zip-form {
+    width: 100%; /* Full width for mobile */
+    padding:0px;
 }
 
 /* For smaller screens */
@@ -396,6 +405,8 @@ body {
     .zip-form-container {
         flex-direction: column; /* Stack elements vertically */
         align-items: stretch; /* Allow full width for child elements */
+        justify-content: center;
+        align-items: center;
     }
     .zip-form input {
         width: 100%; /* Full width for mobile */
@@ -407,58 +418,6 @@ body {
 
 
 
-
-.zip-form-container {
-    width: 100%; /* Full width */
-    max-width: 1200px; /* Matches the page width above */
-    margin: 0px auto; /* Center the container and add spacing above */
-    text-align: center;
-    padding: 0px; /* Add padding around the form container */
-    border: 0px solid #ddd; /* Add border to distinguish the form box */
-    border-radius: 5px; /* Rounded corners */
-    background-color: #f9f9f9; /* Background color for contrast */
-}
-
-/* Header Styling for Form */
-.zip-form-container h2 {
-    margin-bottom: 8px; /* Smaller space below the heading */
-    font-size: 1.2rem;
-    color: #333;
-}
-
-/* Form Styling */
-.zip-form {
-    display: flex;
-    align-items: center;
-    gap: 10px; /* Space between input and button */
-    justify-content: center;
-}
-
-.zip-form input {
-    /*flex: 1; [> Allow input to take available space <]*/
-    padding: 8px;
-    font-size: 0.9rem;
-    border: 2px solid #ddd;
-    border-radius: 5px;
-    box-sizing: border-box;
-}
-
-.zip-form button {
-    padding: 8px 16px; /* Adjust padding for size */
-    font-size: 0.85rem;
-    background-color: #007BFF;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    white-space: nowrap; /* Prevent text wrapping */
-    width: auto; /* Ensure the button is not stretched */
-}
-
-.zip-form button:hover {
-    background-color: #3d550c;
-}
 
 /* Footer Styling */
 .doapfooter {
