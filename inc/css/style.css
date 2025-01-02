@@ -293,7 +293,7 @@
 /* Image Styling inside product box */
 .item img {
     width: 100%; /* Ensure responsive image */
-    max-width: 50%; /* Max width for the image */
+    max-width: 100%; /* Max width for the image */
     height: auto; /* Keep the aspect ratio */
     margin-bottom: 10px; /* Space below the image */
     border-radius: 5px; /* Round corners of the image */
@@ -321,6 +321,11 @@
     flex-direction: column; /* Stack details vertically */
     justify-content: center; /* Center vertically */
     align-items: center; /* Align horizontally */
+
+    width: 100%; /* Full width of the container */
+    max-width: 300px; /* Set a maximum width */
+    box-sizing: border-box; /* Includes padding and border in the width */
+    margin: 0 auto; /* Centers the details */
 }
 
 /* Quantity Input Styling */
