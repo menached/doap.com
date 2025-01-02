@@ -354,6 +354,12 @@ body {
 }
 
 /* Form Container Styling */
+
+#cartForm > footer > div:nth-child(1) > div > form > input::placeholder {
+    text-align: center;
+}
+
+
 .zip-form-container {
     display: flex;
     justify-content: center;
