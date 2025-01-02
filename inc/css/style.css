@@ -222,7 +222,7 @@
 /* Ensure grid layout for product items */
 .item-list {
     display: grid; /* Use grid layout */
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Responsive, at least 250px width per item */
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Responsive, at least 250px width per item */
     gap: 20px; /* Space between product boxes */
     padding: 20px; /* Padding inside the grid container */
     margin-top: 20px; /* Space above the list */
