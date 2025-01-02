@@ -1,19 +1,5 @@
 console.log("shop.js started loading");
 
-document.addEventListener('DOMContentLoaded', () => {
-    const items = document.querySelectorAll('.item');
-
-    items.forEach(item => {
-        const checkbox = item.querySelector('input[type="checkbox"]');
-        checkbox.addEventListener('change', () => {
-            if (checkbox.checked) {
-                item.classList.add('selected');
-            } else {
-                item.classList.remove('selected');
-            }
-        });
-    });
-});
 
 
 
@@ -524,7 +510,7 @@ function hideLargeImage() {
     modal.style.pointerEvents = 'none';
 }
 
-#console.log("Hovered:", this.querySelector('.thumbnail').getAttribute('alt'));
+console.log("Hovered:", this.querySelector('.thumbnail').getAttribute('alt'));
 console.log("Image src:", imgSrc);
 
 function showNotification(message) {
@@ -547,39 +533,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 
-
-
-
-document.addEventListener('DOMContentLoaded', () => {
-    // Select all items with the class "item"
-    const productItems = document.querySelectorAll('.item');
-
-    // Add click event listener to each item
-    productItems.forEach(item => {
-        item.addEventListener('click', function () {
-            const checkbox = this.querySelector('input[type="checkbox"]');
-            
-            if (checkbox) {
-                // Toggle the checkbox state
-                checkbox.checked = !checkbox.checked;
-
-                // Add or remove the "selected" class based on the checkbox state
-                if (checkbox.checked) {
-                    this.classList.add('selected');
-                } else {
-                    this.classList.remove('selected');
-                }
-
-                // Debugging output
-                console.log(`${this.querySelector('.item-title').textContent} is ${checkbox.checked ? 'selected' : 'deselected'}.`);
-            } else {
-                console.warn('Checkbox not found inside:', this);
-            }
-        });
-    });
-
-    console.log("Selection logic applied successfully.");
-});
 
 
 
