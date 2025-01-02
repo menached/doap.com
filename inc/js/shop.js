@@ -510,7 +510,7 @@ function hideLargeImage() {
     modal.style.pointerEvents = 'none';
 }
 
-#console.log("Hovered:", this.querySelector('.thumbnail').getAttribute('alt'));
+console.log("Hovered:", this.querySelector('.thumbnail').getAttribute('alt'));
 console.log("Image src:", imgSrc);
 
 function showNotification(message) {
