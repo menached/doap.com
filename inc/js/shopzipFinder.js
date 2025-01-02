@@ -16,6 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
         border-radius: 5px;
         flex-grow: 1;
         max-width: 300px;
+        text-align: center;
     `;
 
     // Create the submit button
