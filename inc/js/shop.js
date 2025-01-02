@@ -533,28 +533,38 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 
+
+
+
 document.addEventListener('DOMContentLoaded', () => {
-    // Select all product items
+    // Select all items with the class "item"
     const productItems = document.querySelectorAll('.item');
 
-    // Add click event listener to each product item
+    // Add click event listener to each item
     productItems.forEach(item => {
         item.addEventListener('click', function () {
             const checkbox = this.querySelector('input[type="checkbox"]');
+            
+            if (checkbox) {
+                // Toggle the checkbox state
+                checkbox.checked = !checkbox.checked;
 
-            // Toggle the selected state
-            const isSelected = checkbox.checked;
-            checkbox.checked = !isSelected;
+                // Add or remove the "selected" class based on the checkbox state
+                if (checkbox.checked) {
+                    this.classList.add('selected');
+                } else {
+                    this.classList.remove('selected');
+                }
 
-            // Apply or remove the 'selected' class based on the checkbox state
-            this.classList.toggle('selected', !isSelected);
-
-            // Log action for debugging
-            console.log(`${this.querySelector('.item-title').textContent} is now ${!isSelected ? "added to" : "removed from"} the cart.`);
+                // Debugging output
+                console.log(`${this.querySelector('.item-title').textContent} is ${checkbox.checked ? 'selected' : 'deselected'}.`);
+            } else {
+                console.warn('Checkbox not found inside:', this);
+            }
         });
     });
 
-    console.log("Product selection logic applied successfully");
+    console.log("Selection logic applied successfully.");
 });
 
 
