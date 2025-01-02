@@ -1,7 +1,5 @@
 console.log("shop.js started loading");
 
-
-
 $(document).ready(function () {
     // Function to show flying text
     function showFlyingText(message, isRemoved = false) {
@@ -9,8 +7,10 @@ $(document).ready(function () {
         const flyingText = $('<div class="flying-text"></div>')
             .text(message)
             .css({
-                left: `${Math.random() * 80 + 10}%`, // Random horizontal position
-                top: `${Math.random() * 80 + 10}%`   // Random vertical position
+                left: '50%', // Center horizontally
+                top: '50%',  // Center vertically
+                transform: 'translate(-50%, -50%)', // Adjust for true centering
+                zIndex: 9999, // Ensure it appears above other elements
             });
 
         // Add removed class if it's a removal message
@@ -24,7 +24,7 @@ $(document).ready(function () {
         // Remove the flying text after the animation
         setTimeout(() => {
             flyingText.remove();
-        }, 2000);
+        }, 3000); // Match animation duration
     }
 
     // Example usage: Add click events to your items
