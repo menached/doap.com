@@ -23,13 +23,20 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
-      # Step 3: Install Mailutils
+      # Step 3: Add Host to Known Hosts
+      - name: Add Host to Known Hosts
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -H deb1.doap.com >> ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+
+      # Step 4: Install Mailutils
       - name: Install Mailutils
         run: |
           sudo apt update
           sudo apt install -y mailutils
 
-      # Step 4: Configure AWS CLI
+      # Step 5: Configure AWS CLI
       - name: Configure AWS CLI
         run: |
           echo "Configuring AWS CLI..."
@@ -37,7 +44,7 @@ jobs:
           aws configure set aws_secret_access_key "${{ secrets.AWS_SECRET_ACCESS_KEY }}"
           aws configure set region "${{ secrets.AWS_REGION }}"
 
-      # Step 5: Get Changed Files
+      # Step 6: Get Changed Files
       - name: Get Changed Files
         id: changes
         run: |
@@ -51,7 +58,7 @@ jobs:
           echo "Changed files:"
           cat changed_files.txt
 
-      # Step 6: Deploy with Rsync
+      # Step 7: Deploy with Rsync
       - name: Deploy Changed Files with Rsync
         run: |
           echo "Syncing all changed files to server and syncing with S3 and CloudFront..."
@@ -66,9 +73,7 @@ jobs:
           done < changed_files.txt
 
           echo "Deploying using rsync..."
-          rsync -avz --no-times --exclude '.git/' ./ dmenache@deb1.doap.com:/var/www/doap.com/
-          # rsync -avz -e "ssh -o StrictHostKeyChecking=no" --exclude '.git/' ./ dmenache@deb1.doap.com:/var/www/doap.com/
-          # rsync -avz --exclude '.git/' ./ dmenache@deb1.doap.com:/var/www/doap.com/
+          rsync -avz --rsync-path="sudo rsync" --no-perms --no-group --exclude '.git/' ./ dmenache@deb1.doap.com:/var/www/doap.com/
 
           echo "Syncing all files to S3..."
           aws s3 sync . s3://www.doap.com/ --exclude ".git/*"
@@ -76,13 +81,13 @@ jobs:
           echo "Invalidating CloudFront cache..."
           aws cloudfront create-invalidation --distribution-id E3MM919ZQPQJTL --paths "/*"
 
-      # Step 7: Debug Deployment
+      # Step 8: Debug Deployment
       - name: Debug Deployment
         run: |
           echo "Verifying deployment to server and S3..."
           ssh -o StrictHostKeyChecking=no dmenache@deb1.doap.com "ls -la /var/www/doap.com/"
 
-      # Step 8: Send Email Notification
+      # Step 9: Send Email Notification
       - name: Send Email Notification
         run: |
           echo "Sending Email Notification"
