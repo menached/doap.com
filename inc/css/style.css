@@ -293,7 +293,7 @@
 /* Image Styling inside product box */
 .item img {
     width: 100%; /* Ensure responsive image */
-    max-width: 160px; /* Max width for the image */
+    max-width: 50%; /* Max width for the image */
     height: auto; /* Keep the aspect ratio */
     margin-bottom: 10px; /* Space below the image */
     border-radius: 5px; /* Round corners of the image */
