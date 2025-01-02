@@ -44,9 +44,9 @@
 }
 
 /* Hidden checkboxes */
-/*.item input[type="checkbox"] {*/
-    /*display: none;*/
-/*}*/
+.item input[type="checkbox"] {
+    display: none;
+}
 
 /* Highlight selected product boxes */
 .item.selected {
