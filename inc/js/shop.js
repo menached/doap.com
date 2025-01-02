@@ -534,8 +534,6 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-    console.log("Product selection logic initialized");
-
     // Select all product items
     const productItems = document.querySelectorAll('.item');
 
@@ -550,6 +548,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Apply or remove the 'selected' class based on the checkbox state
             this.classList.toggle('selected', !isSelected);
+
+            // Log action for debugging
+            console.log(`${this.querySelector('.item-title').textContent} is now ${!isSelected ? "added to" : "removed from"} the cart.`);
         });
     });
 
