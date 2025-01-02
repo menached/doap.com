@@ -183,14 +183,6 @@
     /*border-radius: 5px; [> Rounded corners for image <]*/
 /*}*/
 
-/* Title inside the box */
-.item-title {
-    font-family: Marvel;/* Make title bold */
-    font-size: 1.2rem; /* Slightly larger font size */
-    font-weight: bold; /* Make title bold */
-    color: #333; /* Dark color for the title */
-    margin-bottom: 10px; /* Space below title */
-}
 
 /* Price inside the box */
 .item-price {
@@ -309,9 +301,10 @@
 
 /* Title and price of product */
 .item-title {
-    font-size: 1.2rem; /* Larger font for title */
-    font-weight: bold; /* Bold title */
-    color: #333; /* Dark color */
+    font-family: Marvel;/* Make title bold */
+    font-size: 1.2rem; /* Slightly larger font size */
+    font-weight: bold; /* Make title bold */
+    color: #333; /* Dark color for the title */
     margin-bottom: 10px; /* Space below title */
 }
 
