@@ -2,6 +2,47 @@ console.log("shop.js started loading");
 
 
 
+$(document).ready(function () {
+    // Function to show flying text
+    function showFlyingText(message, isRemoved = false) {
+        // Create a new flying text element
+        const flyingText = $('<div class="flying-text"></div>')
+            .text(message)
+            .css({
+                left: `${Math.random() * 80 + 10}%`, // Random horizontal position
+                top: `${Math.random() * 80 + 10}%`   // Random vertical position
+            });
+
+        // Add removed class if it's a removal message
+        if (isRemoved) {
+            flyingText.addClass('removed');
+        }
+
+        // Append to the container
+        $('#flying-text-container').append(flyingText);
+
+        // Remove the flying text after the animation
+        setTimeout(() => {
+            flyingText.remove();
+        }, 2000);
+    }
+
+    // Example usage: Add click events to your items
+    $('.item').on('click', function () {
+        const checkbox = $(this).find('input[type="checkbox"]');
+        const isChecked = checkbox.prop('checked');
+        checkbox.prop('checked', !isChecked);
+
+        // Show flying text
+        if (!isChecked) {
+            showFlyingText('Added to Cart');
+        } else {
+            showFlyingText('Removed from Cart', true);
+        }
+    });
+});
+
+
 
 
 

@@ -7,6 +7,50 @@
 /*Green*/
 /*#59981a*/
 
+
+
+#flying-text-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    pointer-events: none; /* Prevent interaction */
+}
+
+.flying-text {
+    position: absolute;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #28a745; /* Green for "Added to Cart" */
+    animation: fly-across 2s ease-out, fade-out 2s ease-out;
+}
+
+.flying-text.removed {
+    color: #dc3545; /* Red for "Removed from Cart" */
+}
+
+@keyframes fly-across {
+    0% {
+        transform: translateX(-50%) translateY(0);
+    }
+    100% {
+        transform: translateX(300%) translateY(-100px);
+    }
+}
+
+@keyframes fade-out {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+
+
+
+
 /* Item Box Styling */
 
 
