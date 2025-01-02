@@ -241,6 +241,9 @@
         max-width: 100%; /* Let the items take full width of their grid cell */
         margin: 0; /* Ensure no margin between items */
     }
+    .item-details { 
+        max-width: 100%;
+    }
 }
 
 /* For large screens, 2 items per row */
