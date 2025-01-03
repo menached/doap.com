@@ -7,6 +7,23 @@
 /*Green*/
 /*#59981a*/
 
+/* General Reset */
+body, h2, input, button, footer {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body and General Styling */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f9f9f9;
+    color: #333;
+    font-size: 16px;
+    padding: 20px;
+}
+
 .fromElsewhere {
     position:relative;top:40px;
     font-size:1.2em;
@@ -20,48 +37,6 @@
     font-weight: bold; /* Optional: Makes it bold */
     font-size: 1.2em; /* Optional: Slightly increase size */
     margin-left: 10px; /* Optional: Adds spacing from the text */
-}
-
-
-
-
-#flying-text-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%; /* Cover the entire viewport */
-    pointer-events: none; /* Prevent interaction */
-}
-
-.flying-text {
-    position: absolute;
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #28a745; /* Green for "Added to Cart" */
-    animation: fly-across 3s ease-out, fade-out 3s ease-out; /* Slower animation */
-}
-
-.flying-text.removed {
-    color: #dc3545; /* Red for "Removed from Cart" */
-}
-
-@keyframes fly-across {
-    0% {
-        transform: translate(-50%, 0); /* Start at the original position */
-    }
-    100% {
-        transform: translate(-50%, -150px); /* Move upwards slightly */
-    }
-}
-
-@keyframes fade-out {
-    0% {
-        opacity: 1;
-    }
-    100% {
-        opacity: 0;
-    }
 }
 
 
@@ -189,72 +164,124 @@
     display: block;
 }
 
-/* Two columns for medium screens */
-@media (min-width: 768px) {
-    .item-list {
-        grid-template-columns: repeat(2, 1fr); /* 2 items per row on medium screens and up */
-        padding: 30px 20px; /* Add extra padding for spacing */
-    }
 
-    .item {
-        max-width: 100%; /* Let the items take full width of their grid cell */
-        margin: 0; /* Ensure no margin between items */
-    }
-    .item-details { 
-        max-width: 100%;
-    }
+
+
+/* Header Section */
+.header {
+    width: 100%; /* Ensure it takes up full width */
+    max-width: 500px; /* Limit the header container to prevent excess width */
+    margin: 0 auto;
+    text-align: center;
 }
 
-/* For large screens, 2 items per row */
-@media (min-width: 1024px) {
-    .item-list {
-        grid-template-columns: repeat(2, 1fr); /* Still 2 items per row for large screens */
-        padding: 40px 20px; /* Adjust padding for larger screens */
-    }
-
-    .item {
-        max-width: 100%; /* Let each item take the full width of its grid cell */
-        margin: 0; /* Ensure no margin */
-    }
+.header img {
+    width: 150px; /* Set a fixed width for the logo (half size) */
+    height: auto; /* Maintain aspect ratio */
+    max-width: 100%; /* Ensure it doesn't overflow the parent container */
+    position:relative;
+    top:10px;
+}
+.header h1 {
+    margin: 10px 0 0;
+    font-weight: bold;
+    font-size: 2rem; /* Adjusts with global font size */
+    font-family: 'Marvel', sans-serif; /* Use Marvel font */
 }
 
-/* Extra-large screens */
-@media (min-width: 1200px) {
-    .item-list {
-        grid-template-columns: repeat(2, 1fr); /* Keep 2 items per row */
-        padding: 50px 20px; /* More padding for very large screens */
-    }
+/* Tab Container */
+.tab-container {
+    display: flex;
+    justify-content: center;
+    border-bottom: 0px solid #ccc;
+    margin-bottom: 20px;
+}
+.tab {
+    padding: 10px 20px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    /*border-bottom: none;*/
+    background: #f9f9f9;
+    margin: 0 5px;
+    font-size: 1.1em;
+    font-family: 'Marvel', sans-serif; /* Apply Marvel font to tab text */
 
-    .item {
-        max-width: 100%; /* Ensure no width restriction */
-        margin: 0; /* No margin */
-    }
+}
+.tab.active {
+    background: #fff;
+    font-weight: bold;
+}
+
+/* Tab Content */
+.tab-content {
+    display: none; /* Hide all tabs by default */
+}
+.tab-content.active {
+    display: block; /* Show only the active tab */
+}
+
+
+
+/* Tab styles */
+.tab-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.tab {
+  padding: 10px 20px;
+  cursor: pointer;
+  background: #f9f9f9;
+  border: 1px solid #ccc;
+  border-bottom: none;
+  margin: 0 5px;
+  font-size: 1.1rem;
+}
+
+.tab.active {
+  background: #fff;
+  font-weight: bold;
+  border-bottom: 2px solid #007bff;
+}
+
+/* Tab content */
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
 }
 
 
 
 
 
+/* Default background for "No items selected yet" */
+#selectedItemsList li:only-child {
+    background-color: transparent; /* Default background */
+    text-align: center; /* Center-align the message for better UX */
+    color: #555; /* Slightly lighter text color */
+}
 
+/* Add padding and styling for better visual appearance */
+#selectedItemsList li {
+    padding: 10px; /* Add spacing inside each list item */
+    border-bottom: 1px solid #ddd; /* Optional: Add bottom border for separation */
+    display: flex; /* Keep content aligned */
+    justify-content: space-between; /* Distribute space between content */
+    align-items: center; /* Align items vertically */
+}
 
-
-
-/* General Reset */
-body, h2, input, button, footer {
-    margin: 0;
+/* Optional: Add a border to distinguish list visually */
+#selectedItemsList {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow: hidden; /* Clean edges */
     padding: 0;
-    box-sizing: border-box;
 }
 
-/* Body and General Styling */
-body {
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-    background-color: #f9f9f9;
-    color: #333;
-    font-size: 16px;
-    padding: 20px;
-}
 
 /* Form Container Styling */
 
@@ -307,6 +334,62 @@ body {
     width: 100%; /* Full width for mobile */
     padding:0px;
 }
+
+
+
+
+
+
+/* Two columns for medium screens */
+@media (min-width: 768px) {
+    .item-list {
+        grid-template-columns: repeat(2, 1fr); /* 2 items per row on medium screens and up */
+        padding: 30px 20px; /* Add extra padding for spacing */
+    }
+
+    .item {
+        max-width: 100%; /* Let the items take full width of their grid cell */
+        margin: 0; /* Ensure no margin between items */
+    }
+    .item-details { 
+        max-width: 100%;
+    }
+}
+
+/* For large screens, 2 items per row */
+@media (min-width: 1024px) {
+    .item-list {
+        grid-template-columns: repeat(2, 1fr); /* Still 2 items per row for large screens */
+        padding: 40px 20px; /* Adjust padding for larger screens */
+    }
+
+    .item {
+        max-width: 100%; /* Let each item take the full width of its grid cell */
+        margin: 0; /* Ensure no margin */
+    }
+}
+
+/* Extra-large screens */
+@media (min-width: 1200px) {
+    .item-list {
+        grid-template-columns: repeat(2, 1fr); /* Keep 2 items per row */
+        padding: 50px 20px; /* More padding for very large screens */
+    }
+
+    .item {
+        max-width: 100%; /* Ensure no width restriction */
+        margin: 0; /* No margin */
+    }
+}
+
+
+
+
+
+
+
+
+
 
 /* For smaller screens */
 @media (max-width: 768px) {
@@ -1009,7 +1092,6 @@ form {
 
 
 
-
 /* Customer Information */
 .customer-info {
     display: flex;
@@ -1042,6 +1124,13 @@ form {
     box-sizing: border-box;
 }
 
+/* Make Address input (textarea) the same height as City input */
+.customer-info textarea {
+    resize: vertical; /* Allow vertical resizing */
+    height: 40px;  /* Match the height of the city input */
+}
+
+
 #specialInstructions {
     width: 100%;
     height: 80px;
@@ -1050,11 +1139,6 @@ form {
     padding: 10px;
     font-size: 1rem;
 }
-
-/* Make Address input (textarea) the same height as City input */
-/*.customer-info textarea {*/
-    /*height: 40px;  [> Match the height of the city input <]*/
-/*}*/
 
 /* For mobile and small screens (less than 768px) */
 @media (max-width: 767px) {
@@ -1114,121 +1198,6 @@ form {
     }
 }
 
-/* Header Section */
-.header {
-    width: 100%; /* Ensure it takes up full width */
-    max-width: 500px; /* Limit the header container to prevent excess width */
-    margin: 0 auto;
-    text-align: center;
-}
-
-.header img {
-    width: 150px; /* Set a fixed width for the logo (half size) */
-    height: auto; /* Maintain aspect ratio */
-    max-width: 100%; /* Ensure it doesn't overflow the parent container */
-    position:relative;
-    top:10px;
-}
-.header h1 {
-    margin: 10px 0 0;
-    font-weight: bold;
-    font-size: 2rem; /* Adjusts with global font size */
-    font-family: 'Marvel', sans-serif; /* Use Marvel font */
-}
-
-/* Tab Container */
-.tab-container {
-    display: flex;
-    justify-content: center;
-    border-bottom: 0px solid #ccc;
-    margin-bottom: 20px;
-}
-.tab {
-    padding: 10px 20px;
-    cursor: pointer;
-    border: 1px solid #ccc;
-    /*border-bottom: none;*/
-    background: #f9f9f9;
-    margin: 0 5px;
-    font-size: 1.1em;
-    font-family: 'Marvel', sans-serif; /* Apply Marvel font to tab text */
-
-}
-.tab.active {
-    background: #fff;
-    font-weight: bold;
-}
-
-/* Tab Content */
-.tab-content {
-    display: none; /* Hide all tabs by default */
-}
-.tab-content.active {
-    display: block; /* Show only the active tab */
-}
-
-
-
-/* Tab styles */
-.tab-container {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 20px;
-}
-
-.tab {
-  padding: 10px 20px;
-  cursor: pointer;
-  background: #f9f9f9;
-  border: 1px solid #ccc;
-  border-bottom: none;
-  margin: 0 5px;
-  font-size: 1.1rem;
-}
-
-.tab.active {
-  background: #fff;
-  font-weight: bold;
-  border-bottom: 2px solid #007bff;
-}
-
-/* Tab content */
-.tab-content {
-  display: none;
-}
-
-.tab-content.active {
-  display: block;
-}
-
-
-
-
-
-/* Default background for "No items selected yet" */
-#selectedItemsList li:only-child {
-    background-color: transparent; /* Default background */
-    text-align: center; /* Center-align the message for better UX */
-    color: #555; /* Slightly lighter text color */
-}
-
-/* Add padding and styling for better visual appearance */
-#selectedItemsList li {
-    padding: 10px; /* Add spacing inside each list item */
-    border-bottom: 1px solid #ddd; /* Optional: Add bottom border for separation */
-    display: flex; /* Keep content aligned */
-    justify-content: space-between; /* Distribute space between content */
-    align-items: center; /* Align items vertically */
-}
-
-/* Optional: Add a border to distinguish list visually */
-#selectedItemsList {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    overflow: hidden; /* Clean edges */
-    padding: 0;
-}
-
 
 
 
@@ -1271,45 +1240,6 @@ form {
         padding: 8px 12px; /* Smaller padding for the button */
         font-size: 0.8rem; /* Reduce font size */
     }
-}
-
-.cardbits input {
-    width:50px;
-}
-
-/*#creditCardForm > p.aligncenter > i { color: gold;}*/
-/*[> Realistic golden sheen effect <]*/
-.golden-lock {
-    background: linear-gradient(135deg, #ffd700, #daa520, #ffd700); /* gold gradient */
-    -webkit-background-clip: text; /* apply gradient to text */
-    -webkit-text-fill-color: transparent; /* make the text transparent to show gradient */
-    font-size: .9rem; /* adjust icon size */
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4); /* add a subtle shadow for realism */
-}
-
-/* Wrapper for input field with icon */
-.input-icon {
-    position: relative;
-    display: inline-block;
-    width: 100%;
-    max-width: 300px; /* Adjust input width */
-}
-
-.input-icon input {
-    width: 100%;
-    padding-right: 30px; /* Ensure space for the lock icon */
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box;
-}
-
-.input-icon .green-lock {
-    position: absolute;
-    right: 10px; /* Position the lock to the right side */
-    top: 50%;
-    transform: translateY(-50%);
-    color: green; /* Green color for the lock icon */
-    font-size: 1rem;
 }
 
 
@@ -1668,43 +1598,6 @@ body {
 
 
 
-/* Customer Information */
-.customer-info {
-    display: flex;
-    flex-direction: column;  /* Stack fields vertically */
-    gap: 15px;  /* Space between form rows */
-    margin-bottom: 20px;
-}
-
-/* Row structure for each form field */
-.info-row {
-    display: flex;
-    flex-direction: column;  /* Stack label and input vertically */
-    gap: 5px;  /* Space between label and input */
-}
-
-/* Label styles */
-.customer-info label {
-    font-size: 1rem;
-    font-weight: bold;
-}
-
-/* Input fields and textarea */
-.customer-info input,
-.customer-info textarea {
-    width: 100%;  /* Ensure inputs take up full width */
-    padding: 10px;
-    margin-top: 5px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    box-sizing: border-box;
-}
-
-/* Make Address input (textarea) the same height as City input */
-.customer-info textarea {
-    resize: vertical; /* Allow vertical resizing */
-    height: 40px;  /* Match the height of the city input */
-}
 
 /* For mobile and small screens (less than 768px) */
 @media (max-width: 767px) {
@@ -1834,6 +1727,64 @@ form {
 .tab-content.active {
     display: block; /* Show only the active tab */
 }
+
+
+
+
+/* Wrapper for input field with icon */
+.input-icon {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    max-width: 300px; /* Adjust input width */
+}
+
+.input-icon input {
+    width: 100%;
+    padding-right: 30px; /* Ensure space for the lock icon */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.input-icon .green-lock {
+    position: absolute;
+    right: 10px; /* Position the lock to the right side */
+    top: 50%;
+    transform: translateY(-50%);
+    color: green; /* Green color for the lock icon */
+    font-size: 1rem;
+}
+
+
+#cartForm > div.payment-section > label > i, .alignright {
+    position:relative;
+    float:right;
+}
+.nodec, .nodec:hover, #cartForm > div.header > div.logo-title-container > div > a.phone-number.nodec {
+    text-decoration: none;
+    color:#000;
+}
+
+/* Subtle dark green glow for active tab text */
+.tab.active {
+    background: #fff; /* Keep existing background */
+    font-weight: bold; /* Existing bold text */
+    color: darkgreen; /* Set text color to dark green */
+    text-shadow: 0 0 4px rgba(0, 100, 0, 0.5); /* Softer dark green glow */
+}
+
+h3 i.fa-phone-alt {
+    color: #000; /* Icon color */
+    margin-right: 8px; /* Space between icon and text */
+    font-size: 1.2rem; /* Adjust icon size */
+    vertical-align: middle; /* Align icon with text */
+}
+
+
+
+
+
 
 
 /* Cart Section */
@@ -1972,69 +1923,9 @@ button:hover {
     }
 }
 
-.cardbits input {
-    width:50px;
-}
-
-/*#creditCardForm > p.aligncenter > i { color: gold;}*/
-/*[> Realistic golden sheen effect <]*/
-.golden-lock {
-    background: linear-gradient(135deg, #ffd700, #daa520, #ffd700); /* gold gradient */
-    -webkit-background-clip: text; /* apply gradient to text */
-    -webkit-text-fill-color: transparent; /* make the text transparent to show gradient */
-    font-size: .9rem; /* adjust icon size */
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4); /* add a subtle shadow for realism */
-}
-
-/* Wrapper for input field with icon */
-.input-icon {
-    position: relative;
-    display: inline-block;
-    width: 100%;
-    max-width: 300px; /* Adjust input width */
-}
-
-.input-icon input {
-    width: 100%;
-    padding-right: 30px; /* Ensure space for the lock icon */
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box;
-}
-
-.input-icon .green-lock {
-    position: absolute;
-    right: 10px; /* Position the lock to the right side */
-    top: 50%;
-    transform: translateY(-50%);
-    color: green; /* Green color for the lock icon */
-    font-size: 1rem;
-}
 
 
-#cartForm > div.payment-section > label > i, .alignright {
-    position:relative;
-    float:right;
-}
-.nodec, .nodec:hover, #cartForm > div.header > div.logo-title-container > div > a.phone-number.nodec {
-    text-decoration: none;
-    color:#000;
-}
 
-/* Subtle dark green glow for active tab text */
-.tab.active {
-    background: #fff; /* Keep existing background */
-    font-weight: bold; /* Existing bold text */
-    color: darkgreen; /* Set text color to dark green */
-    text-shadow: 0 0 4px rgba(0, 100, 0, 0.5); /* Softer dark green glow */
-}
-
-h3 i.fa-phone-alt {
-    color: #000; /* Icon color */
-    margin-right: 8px; /* Space between icon and text */
-    font-size: 1.2rem; /* Adjust icon size */
-    vertical-align: middle; /* Align icon with text */
-}
 
 
 
@@ -2090,6 +1981,9 @@ h3 i.fa-phone-alt {
 }
 
 
+
+
+
 /* Move only the border-bottom up by 10px on screens <= 768px */
 @media (max-width: 768px) {
     #cartForm > div.tab-container {
@@ -2107,6 +2001,10 @@ h3 i.fa-phone-alt {
         border-bottom: 0px solid #ccc; /* The border line */
     }
 }
+
+
+
+
 
 
 
@@ -2148,4 +2046,43 @@ h3 i.fa-phone-alt {
 
 
 
+
+#flying-text-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; /* Cover the entire viewport */
+    pointer-events: none; /* Prevent interaction */
+}
+
+.flying-text {
+    position: absolute;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #28a745; /* Green for "Added to Cart" */
+    animation: fly-across 3s ease-out, fade-out 3s ease-out; /* Slower animation */
+}
+
+.flying-text.removed {
+    color: #dc3545; /* Red for "Removed from Cart" */
+}
+
+@keyframes fly-across {
+    0% {
+        transform: translate(-50%, 0); /* Start at the original position */
+    }
+    100% {
+        transform: translate(-50%, -150px); /* Move upwards slightly */
+    }
+}
+
+@keyframes fade-out {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
 
