@@ -639,50 +639,61 @@ form {
     line-height: 1;
 }
 
+
+
 /* Style for the phone number */
 .phone-number {
-    font-size: 0.8rem; /* Smaller font size */
+    text-align: center; /* Center-align the phone number */
+    font-size: 0.8rem; /* Consistent smaller font size */
     margin: 5px 0 0; /* Small margin above the text */
     color: #333; /* Default text color */
     text-decoration: none; /* Remove underline */
-    font-weight: normal; /* Adjust font weight */
+    font-weight: normal; /* Standard font weight */
 }
 
-.phone-number:hover {
-    color: #007BFF; /* Add hover effect for better UX */
-    text-decoration: underline; /* Underline on hover */
+.phone-number a {
+    color: #333; /* Default text color for links */
+    text-decoration: none; /* Remove underline */
+    font-weight: bold; /* Make the number stand out */
 }
+
+.phone-number a:hover,
+.phone-number:hover {
+    color: #007BFF; /* Change color to blue for better UX */
+    text-decoration: underline; /* Add underline on hover */
+}
+
+
+
 
 /* Style for the menu title */
 .menu-title {
     margin: 0;
     padding: 0;
-    text-align: center;
+    text-align: center; /* Center-align the menu title */
 }
 
 .menu-title-text {
-    text-align:center;
-    margin: 0;
-    line-height: 1.2;
-    position:relative;
-    top:-15px;
+    text-align: center; /* Center-align the text */
+    margin: 0; /* Remove default margin */
+    line-height: 1.2; /* Adjust line height for compact spacing */
+    position: relative; /* Relative positioning for fine-tuning */
+    top: -15px; /* Adjust vertical alignment */
 }
-
 
 /* Phone number styling */
 .menu-title a {
-    display: inline-block; /* Keep it aligned with other text */
-    margin-top: 5px; /* Reduce space between phone number and text above */
-    font-size: 0.9rem; /* Adjust font size */
+    display: inline-block; /* Align with other text elements */
+    margin-top: 5px; /* Space between phone number and the text above */
+    font-size: 0.9rem; /* Font size for the phone number */
     color: #333; /* Default text color */
-    text-decoration: none; /* No underline */
+    text-decoration: none; /* Remove underline */
 }
 
 .menu-title a:hover {
-    color: #007BFF; /* Optional hover effect */
-    text-decoration: underline;
+    color: #007BFF; /* Change color to blue on hover */
+    text-decoration: underline; /* Add underline on hover */
 }
-
 
 
 /* Tab Container and Tabs */
@@ -905,55 +916,11 @@ h3 i.fa-phone-alt {
     line-height: 1;
 }
 
-/* Style for the phone number */
-.phone-number {
-    font-size: 0.8rem; /* Smaller font size */
-    margin: 5px 0 0; /* Small margin above the text */
-    color: #333; /* Default text color */
-    text-decoration: none; /* Remove underline */
-    font-weight: normal; /* Adjust font weight */
-}
-
-.phone-number:hover {
-    color: #007BFF; /* Add hover effect for better UX */
-    text-decoration: underline; /* Underline on hover */
-}
-
-/* Style for the menu title */
-.menu-title {
-    margin: 0;
-    padding: 0;
-    text-align: center;
-}
-
-.menu-title-text {
-    margin: 0;
-    line-height: 1.2;
-    position:relative;
-    top:-15px;
-}
 
 
 
 
 
-/* Phone number styling */
-.phone-number {
-    text-align: center; /* Center-align the phone number */
-    font-size: 0.9rem; /* Smaller font size */
-    margin-top: 5px; /* Space between the header and the phone number */
-}
-
-.phone-number a {
-    color: #333; /* Default text color */
-    text-decoration: none; /* Remove underline */
-    font-weight: bold; /* Make the number stand out */
-}
-
-.phone-number a:hover {
-    color: #007BFF; /* Change color on hover for better UX */
-    text-decoration:none;
-}
 
 
 
