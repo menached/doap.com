@@ -785,6 +785,24 @@ body {
     font-size: 16px; /* Base font size for all devices */
 }
 
+h1, h2, h3, .Marvelfont {
+    font-family: 'Marvel', sans-serif; /* Apply Marvel font to tab text */
+}
+
+.menu-title-text{
+    text-align:center;
+}
+
+
+/* Form Container */
+form {
+    margin: 0 auto;
+    padding: 20px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
 
 /* Adjust the header section */
 .header {
@@ -851,7 +869,7 @@ body {
 
 
 
-.menu-title > div:nth-child(2) {display:none;}
+/*.menu-title > div:nth-child(2) {display:none;}*/
 
 
 /* Phone number styling */
@@ -946,7 +964,7 @@ body {
     justify-content: center;
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
 }
 
 /* Success Message Styling */
@@ -980,7 +998,7 @@ body {
     z-index: 999;
     visibility: hidden;
     opacity: 0;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
 }
 
 .popup-dim.visible {
@@ -1064,24 +1082,6 @@ body {
 }
 
 
-h1, h2, h3, .Marvelfont {
-    font-family: 'Marvel', sans-serif; /* Apply Marvel font to tab text */
-}
-
-.menu-title-text{
-    text-align:center;
-}
-
-
-/* Form Container */
-form {
-    margin: 0 auto;
-    padding: 20px;
-    background: #fff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
 
 /* Responsive Design */
 @media (min-width: 1025px) { /* Desktop */
