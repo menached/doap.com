@@ -7,7 +7,9 @@
 /*Green*/
 /*#59981a*/
 
-
+.fromElsewhere {
+    position:relative;top:40px;
+}
 
 
 #selectedItemsList > li > span {
