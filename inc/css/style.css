@@ -214,10 +214,11 @@ body {
 
 /* Tab Content */
 .tab-content {
-    display: none; /* Hide all tabs by default */
+  display: none;
 }
+
 .tab-content.active {
-    display: block; /* Show only the active tab */
+  display: block;
 }
 
 
@@ -245,17 +246,30 @@ body {
   border-bottom: 2px solid #007bff;
 }
 
-/* Tab content */
-.tab-content {
-  display: none;
+/* Wrapper for input field with icon */
+.input-icon {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    max-width: 300px; /* Adjust input width */
 }
 
-.tab-content.active {
-  display: block;
+.input-icon input {
+    width: 100%;
+    padding-right: 30px; /* Ensure space for the lock icon */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
 }
 
-
-
+.input-icon .green-lock {
+    position: absolute;
+    right: 10px; /* Position the lock to the right side */
+    top: 50%;
+    transform: translateY(-50%);
+    color: green; /* Green color for the lock icon */
+    font-size: 1rem;
+}
 
 
 /* Default background for "No items selected yet" */
@@ -284,7 +298,6 @@ body {
 
 
 /* Form Container Styling */
-
 #cartForm > footer > div:nth-child(1) > div > form > input::placeholder {
     text-align: center;
 }
@@ -337,79 +350,6 @@ body {
 
 
 
-
-
-
-/* Two columns for medium screens */
-@media (min-width: 768px) {
-    .item-list {
-        grid-template-columns: repeat(2, 1fr); /* 2 items per row on medium screens and up */
-        padding: 30px 20px; /* Add extra padding for spacing */
-    }
-
-    .item {
-        max-width: 100%; /* Let the items take full width of their grid cell */
-        margin: 0; /* Ensure no margin between items */
-    }
-    .item-details { 
-        max-width: 100%;
-    }
-}
-
-/* For large screens, 2 items per row */
-@media (min-width: 1024px) {
-    .item-list {
-        grid-template-columns: repeat(2, 1fr); /* Still 2 items per row for large screens */
-        padding: 40px 20px; /* Adjust padding for larger screens */
-    }
-
-    .item {
-        max-width: 100%; /* Let each item take the full width of its grid cell */
-        margin: 0; /* Ensure no margin */
-    }
-}
-
-/* Extra-large screens */
-@media (min-width: 1200px) {
-    .item-list {
-        grid-template-columns: repeat(2, 1fr); /* Keep 2 items per row */
-        padding: 50px 20px; /* More padding for very large screens */
-    }
-
-    .item {
-        max-width: 100%; /* Ensure no width restriction */
-        margin: 0; /* No margin */
-    }
-}
-
-
-
-
-
-
-
-
-
-
-/* For smaller screens */
-@media (max-width: 768px) {
-    .zip-form-container {
-        flex-direction: column; /* Stack elements vertically */
-        align-items: stretch; /* Allow full width for child elements */
-        justify-content: center;
-        align-items: center;
-    }
-    .zip-form input {
-        width: 100%; /* Full width for mobile */
-    }
-    .zip-form button {
-        width: 100%; /* Full width for mobile */
-    }
-}
-
-
-
-
 /* Footer Styling */
 .doapfooter {
     background-color: #f9f9f9;
@@ -439,10 +379,6 @@ body {
     font-size: 0.8rem;
     color: #666;
 }
-
-
-
-
 
 /* Modal container */
 .modal {
@@ -493,8 +429,6 @@ body {
     cursor: pointer;
 }
 
-
-
 .large-image-modal {
     position: fixed;
     top: 50%;
@@ -538,8 +472,6 @@ body {
     transform: scale(1.1); /* Slight zoom */
 }
 
-
-
 .category-content {
     display: block; /* Initially open */
     overflow: hidden;
@@ -564,13 +496,6 @@ body {
     font-family: 'Marvel', sans-serif;
 }
 
-
-
-
-
-
-
-
 .category-heading {
     background-color: #007BFF; /* Blue background */
     color: white; /* White text */
@@ -589,24 +514,21 @@ body {
     letter-spacing: 1.5px; /* Add letter spacing for effect */
 }
 
-
-
-
 /* Tab styles */
 .tab-container {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
 }
 
 .tab {
-  padding: 10px 20px;
-  cursor: pointer;
-  background: #f9f9f9;
-  border: 1px solid #ccc;
-  border-bottom: none;
-  margin: 0 5px;
-  font-size: 1.1rem;
+    padding: 10px 20px;
+    cursor: pointer;
+    background: #f9f9f9;
+    border: 1px solid #ccc;
+    border-bottom: none;
+    margin: 0 5px;
+    font-size: 1.1rem;
 }
 
 .tab.active {
@@ -616,14 +538,12 @@ body {
 
 /* Tab content */
 .tab-content {
-  display: none;
+    display: none;
 }
 
 .tab-content.active {
-  display: block;
+    display: block;
 }
-
-
 
 /* Default background for "No items selected yet" */
 #selectedItemsList li:only-child {
@@ -649,9 +569,6 @@ body {
     padding: 0;
 }
 
-
-
-
 /* Smaller text for crypto wallet addresses */
 .small-text {
     font-size: 0.65rem; /* Reduce font size */
@@ -660,34 +577,18 @@ body {
 }
 
 
-@media (max-width: 400px) {
-    #zipFormContainer > form {
-        transform: scale(0.8); /* Scale down the form */
-        transform-origin: center; /* Center the scaling */
-        max-width: 100%; /* Prevent overflow */
-        margin: 0 auto; /* Center the form */
-    }
 
-    /* Adjust input box size */
-    #zipFormContainer input {
-        width: 100%; /* Make the input take full width */
-        padding: 6px; /* Reduce padding */
-        font-size: 0.8rem; /* Smaller font size */
-    }
 
-    /* Adjust button size and font */
-    #zipFormContainer button {
-        padding: 8px 12px; /* Smaller padding for the button */
-        font-size: 0.8rem; /* Reduce font size */
-    }
-}
+
+
+
+
+
 
 .cardbits input {
     width:50px;
 }
 
-/*#creditCardForm > p.aligncenter > i { color: gold;}*/
-/*[> Realistic golden sheen effect <]*/
 .golden-lock {
     background: linear-gradient(135deg, #ffd700, #daa520, #ffd700); /* gold gradient */
     -webkit-background-clip: text; /* apply gradient to text */
@@ -726,6 +627,7 @@ body {
     position:relative;
     float:right;
 }
+
 .nodec, .nodec:hover, #cartForm > div.header > div.logo-title-container > div > a.phone-number.nodec {
     text-decoration: none;
     color:#000;
@@ -746,101 +648,6 @@ h3 i.fa-phone-alt {
     vertical-align: middle; /* Align icon with text */
 }
 
-
-
-/* For mobile and small screens (less than 768px) */
-@media (max-width: 767px) {
-    body {
-        margin: 0; /* Remove extra margin */
-        padding: 0; /* Remove padding */
-        font-size: 14px; /* Slightly larger default fonts for better readability */
-    }
-
-    form {
-        max-width: 100%; /* Make the form take the full width */
-        margin: 0; /* Remove automatic centering margin */
-        padding: 10px; /* Add padding inside the form */
-        box-sizing: border-box; /* Ensure padding doesn't overflow */
-    }
-
-    .header {
-        width: 100%; /* Make the header take full width */
-        max-width: 100%; /* Prevent restricting the width */
-        margin: 0 auto; /* Center the header content */
-        padding: 10px; /* Add some padding */
-        text-align: center; /* Align content centrally */
-    }
-
-    .tab-container {
-        flex-wrap: wrap; /* Allow tabs to wrap on smaller screens */
-        padding: 10px; /* Add padding */
-        justify-content: space-between; /* Spread tabs out evenly */
-    }
-
-    .tab {
-        flex: 1; /* Make each tab take equal space */
-        text-align: center; /* Center text in each tab */
-        margin: 5px; /* Add space between tabs */
-    }
-
-    .cart-section,
-    .payment-section {
-        width: 100%; /* Ensure sections stretch to full width */
-        padding: 10px; /* Add internal padding */
-        box-sizing: border-box; /* Prevent overflow */
-    }
-
-    .info-row {
-        width: 100%; /* Ensure each row takes full width */
-    }
-
-    .customer-info {
-        gap: 10px; /* Reduce gap for smaller screens */
-    }
-}
-
-
-/* Move only the border-bottom up by 10px on screens <= 768px */
-@media (max-width: 768px) {
-    #cartForm > div.tab-container {
-        position: relative;
-        top:-20px;
-        margin-bottom: 10px; /* Optional: Adjust spacing below */
-    }
-
-    #cartForm > div.tab-container::after {
-        content: "";
-        position: absolute;
-        bottom: -10px; /* Moves the border 20px up */
-        left: 0;
-        width: 100%;
-        border-bottom: 0px solid #ccc; /* The border line */
-    }
-}
-
-
-
-/* Mobile portrait view */
-@media (max-width: 767px) {
-    #cityName {
-        font-size: 1.2em!important; /* Shrinks text to half its normal size */
-        text-align: center; /* Ensures the text stays centered */
-        margin: 0;
-    }
-
-    .phone-number {
-        display: visible; /* Hides the "Call us at" text */
-        font-size: 80%!important; /* Shrinks text to half its normal size */
-    }
-    .tab-container {
-        position:relative;
-        top:10px;
-    }
-    .item-price {
-        position:relative;
-        top:10px!important;
-    }
-}
 
 
 
@@ -1140,109 +947,6 @@ form {
     font-size: 1rem;
 }
 
-/* For mobile and small screens (less than 768px) */
-@media (max-width: 767px) {
-    .customer-info {
-        flex-direction: column;  /* Stack fields vertically */
-    }
-
-    .info-row {
-        width: 100%;  /* Ensure full-width on mobile */
-    }
-}
-
-/* Adjust for tablets and larger screens (768px and up) */
-@media (min-width: 768px) {
-    .customer-info {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;  /* Three columns */
-        gap: 15px;
-    }
-
-    .info-row {
-        display: flex;
-        flex-direction: column;  /* Ensure the label and input stay stacked */
-    }
-}
-
-
-
-/* Responsive Design */
-@media (min-width: 1025px) { /* Desktop */
-    body {
-        font-size: 20px; /* Larger fonts on desktops */
-    }
-    form {
-        max-width: 800px; /* Larger width for desktops */
-        margin: 50px auto; /* Large margins */
-    }
-}
-
-@media (min-width: 768px) and (max-width: 1024px) { /* Tablets */
-    body {
-        font-size: 18px; /* Medium-sized fonts on tablets */
-    }
-    form {
-        max-width: 600px; /* Medium width for tablets */
-        margin: 30px auto; /* Medium margins */
-    }
-}
-
-@media (max-width: 767px) { /* Mobile */
-    body {
-        font-size: 14px; /* Slightly larger default fonts for mobile */
-    }
-    form {
-        max-width: 100%; /* Full width for mobile */
-        margin: 10px; /* Tiny margins on mobile */
-    }
-}
-
-
-
-
-/* Alternating background colors for cart items */
-/*.cart-item:nth-child(odd) {*/
-    /*background-color: #81B622; [> Light gray for odd items <]*/
-/*}*/
-
-/*.cart-item:nth-child(even) {*/
-    /*background-color: #ECF87F; [> White for even items <]*/
-/*}*/
-
-
-
-/* Smaller text for crypto wallet addresses */
-.small-text {
-    font-size: 0.65rem; /* Reduce font size */
-    line-height: 1.2;   /* Adjust line spacing */
-    color: #444;        /* Slightly darker color for better readability */
-}
-
-
-@media (max-width: 400px) {
-    #zipFormContainer > form {
-        transform: scale(0.8); /* Scale down the form */
-        transform-origin: center; /* Center the scaling */
-        max-width: 100%; /* Prevent overflow */
-        margin: 0 auto; /* Center the form */
-    }
-
-    /* Adjust input box size */
-    #zipFormContainer input {
-        width: 100%; /* Make the input take full width */
-        padding: 6px; /* Reduce padding */
-        font-size: 0.8rem; /* Smaller font size */
-    }
-
-    /* Adjust button size and font */
-    #zipFormContainer button {
-        padding: 8px 12px; /* Smaller padding for the button */
-        font-size: 0.8rem; /* Reduce font size */
-    }
-}
-
-
 #cartForm > div.payment-section > label > i, .alignright {
     position:relative;
     float:right;
@@ -1269,99 +973,7 @@ h3 i.fa-phone-alt {
 
 
 
-/* For mobile and small screens (less than 768px) */
-@media (max-width: 767px) {
-    body {
-        margin: 0; /* Remove extra margin */
-        padding: 0; /* Remove padding */
-        font-size: 14px; /* Slightly larger default fonts for better readability */
-    }
 
-    form {
-        max-width: 100%; /* Make the form take the full width */
-        margin: 0; /* Remove automatic centering margin */
-        padding: 10px; /* Add padding inside the form */
-        box-sizing: border-box; /* Ensure padding doesn't overflow */
-    }
-
-    .header {
-        width: 100%; /* Make the header take full width */
-        max-width: 100%; /* Prevent restricting the width */
-        margin: 0 auto; /* Center the header content */
-        padding: 10px; /* Add some padding */
-        text-align: center; /* Align content centrally */
-    }
-
-    .tab-container {
-        flex-wrap: wrap; /* Allow tabs to wrap on smaller screens */
-        padding: 10px; /* Add padding */
-        justify-content: space-between; /* Spread tabs out evenly */
-    }
-
-    .tab {
-        flex: 1; /* Make each tab take equal space */
-        text-align: center; /* Center text in each tab */
-        margin: 5px; /* Add space between tabs */
-    }
-
-    .cart-section,
-    .payment-section {
-        width: 100%; /* Ensure sections stretch to full width */
-        padding: 10px; /* Add internal padding */
-        box-sizing: border-box; /* Prevent overflow */
-    }
-
-    .info-row {
-        width: 100%; /* Ensure each row takes full width */
-    }
-
-    .customer-info {
-        gap: 10px; /* Reduce gap for smaller screens */
-    }
-}
-
-
-/* Move only the border-bottom up by 10px on screens <= 768px */
-@media (max-width: 768px) {
-    #cartForm > div.tab-container {
-        position: relative;
-        top:-20px;
-        margin-bottom: 10px; /* Optional: Adjust spacing below */
-    }
-
-    #cartForm > div.tab-container::after {
-        content: "";
-        position: absolute;
-        bottom: -10px; /* Moves the border 20px up */
-        left: 0;
-        width: 100%;
-        border-bottom: 0px solid #ccc; /* The border line */
-    }
-}
-
-
-
-/* Mobile portrait view */
-@media (max-width: 767px) {
-    #cityName {
-        font-size: 1.2em!important; /* Shrinks text to half its normal size */
-        text-align: center; /* Ensures the text stays centered */
-        margin: 0;
-    }
-
-    .phone-number {
-        display: visible; /* Hides the "Call us at" text */
-        font-size: 80%!important; /* Shrinks text to half its normal size */
-    }
-    .tab-container {
-        position:relative;
-        top:10px;
-    }
-    .item-price {
-        position:relative;
-        top:10px!important;
-    }
-}
 
 
 
@@ -1598,33 +1210,6 @@ body {
 
 
 
-
-/* For mobile and small screens (less than 768px) */
-@media (max-width: 767px) {
-    .customer-info {
-        flex-direction: column;  /* Stack fields vertically */
-    }
-
-    .info-row {
-        width: 100%;  /* Ensure full-width on mobile */
-    }
-}
-
-/* Adjust for tablets and larger screens (768px and up) */
-@media (min-width: 768px) {
-    .customer-info {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;  /* Three columns */
-        gap: 15px;
-    }
-
-    .info-row {
-        display: flex;
-        flex-direction: column;  /* Ensure the label and input stay stacked */
-    }
-}
-
-
 h1, h2, h3, .Marvelfont {
     font-family: 'Marvel', sans-serif; /* Apply Marvel font to tab text */
 }
@@ -1643,145 +1228,6 @@ form {
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
-
-/* Responsive Design */
-@media (min-width: 1025px) { /* Desktop */
-    body {
-        font-size: 20px; /* Larger fonts on desktops */
-    }
-    form {
-        max-width: 800px; /* Larger width for desktops */
-        margin: 50px auto; /* Large margins */
-    }
-}
-
-@media (min-width: 768px) and (max-width: 1024px) { /* Tablets */
-    body {
-        font-size: 18px; /* Medium-sized fonts on tablets */
-    }
-    form {
-        max-width: 600px; /* Medium width for tablets */
-        margin: 30px auto; /* Medium margins */
-    }
-}
-
-@media (max-width: 767px) { /* Mobile */
-    body {
-        font-size: 14px; /* Slightly larger default fonts for mobile */
-    }
-    form {
-        max-width: 100%; /* Full width for mobile */
-        margin: 10px; /* Tiny margins on mobile */
-    }
-}
-
-/* Header Section */
-.header {
-    width: 100%; /* Ensure it takes up full width */
-    max-width: 500px; /* Limit the header container to prevent excess width */
-    margin: 0 auto;
-    text-align: center;
-}
-
-.header img {
-    width: 150px; /* Set a fixed width for the logo (half size) */
-    height: auto; /* Maintain aspect ratio */
-    max-width: 100%; /* Ensure it doesn't overflow the parent container */
-    position:relative;
-    top:10px;
-}
-.header h1 {
-    margin: 10px 0 0;
-    font-weight: bold;
-    font-size: 2rem; /* Adjusts with global font size */
-    font-family: 'Marvel', sans-serif; /* Use Marvel font */
-}
-
-/* Tab Container */
-.tab-container {
-    display: flex;
-    justify-content: center;
-    border-bottom: 0px solid #ccc;
-    margin-bottom: 20px;
-}
-.tab {
-    padding: 10px 20px;
-    cursor: pointer;
-    border: 1px solid #ccc;
-    /*border-bottom: none;*/
-    background: #f9f9f9;
-    margin: 0 5px;
-    font-size: 1.1em;
-    font-family: 'Marvel', sans-serif; /* Apply Marvel font to tab text */
-
-}
-.tab.active {
-    background: #fff;
-    font-weight: bold;
-}
-
-/* Tab Content */
-.tab-content {
-    display: none; /* Hide all tabs by default */
-}
-.tab-content.active {
-    display: block; /* Show only the active tab */
-}
-
-
-
-
-/* Wrapper for input field with icon */
-.input-icon {
-    position: relative;
-    display: inline-block;
-    width: 100%;
-    max-width: 300px; /* Adjust input width */
-}
-
-.input-icon input {
-    width: 100%;
-    padding-right: 30px; /* Ensure space for the lock icon */
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box;
-}
-
-.input-icon .green-lock {
-    position: absolute;
-    right: 10px; /* Position the lock to the right side */
-    top: 50%;
-    transform: translateY(-50%);
-    color: green; /* Green color for the lock icon */
-    font-size: 1rem;
-}
-
-
-#cartForm > div.payment-section > label > i, .alignright {
-    position:relative;
-    float:right;
-}
-.nodec, .nodec:hover, #cartForm > div.header > div.logo-title-container > div > a.phone-number.nodec {
-    text-decoration: none;
-    color:#000;
-}
-
-/* Subtle dark green glow for active tab text */
-.tab.active {
-    background: #fff; /* Keep existing background */
-    font-weight: bold; /* Existing bold text */
-    color: darkgreen; /* Set text color to dark green */
-    text-shadow: 0 0 4px rgba(0, 100, 0, 0.5); /* Softer dark green glow */
-}
-
-h3 i.fa-phone-alt {
-    color: #000; /* Icon color */
-    margin-right: 8px; /* Space between icon and text */
-    font-size: 1.2rem; /* Adjust icon size */
-    vertical-align: middle; /* Align icon with text */
-}
-
-
 
 
 
@@ -1893,13 +1339,465 @@ button:hover {
 
 
 
-/* Smaller text for crypto wallet addresses */
-.small-text {
-    font-size: 0.65rem; /* Reduce font size */
-    line-height: 1.2;   /* Adjust line spacing */
-    color: #444;        /* Slightly darker color for better readability */
+
+
+/* special effects section */
+#flying-text-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; /* Cover the entire viewport */
+    pointer-events: none; /* Prevent interaction */
 }
 
+.flying-text {
+    position: absolute;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #28a745; /* Green for "Added to Cart" */
+    animation: fly-across 3s ease-out, fade-out 3s ease-out; /* Slower animation */
+}
+
+.flying-text.removed {
+    color: #dc3545; /* Red for "Removed from Cart" */
+}
+
+@keyframes fly-across {
+    0% {
+        transform: translate(-50%, 0); /* Start at the original position */
+    }
+    100% {
+        transform: translate(-50%, -150px); /* Move upwards slightly */
+    }
+}
+
+@keyframes fade-out {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+/* end special effects section */
+
+
+
+
+/* responsive rules here */
+
+/* For smaller screens */
+@media (max-width: 768px) {
+    .zip-form-container {
+        flex-direction: column; /* Stack elements vertically */
+        align-items: stretch; /* Allow full width for child elements */
+        justify-content: center;
+        align-items: center;
+    }
+    .zip-form input {
+        width: 100%; /* Full width for mobile */
+    }
+    .zip-form button {
+        width: 100%; /* Full width for mobile */
+    }
+}
+
+
+
+/* Two columns for medium screens */
+@media (min-width: 768px) {
+    .item-list {
+        grid-template-columns: repeat(2, 1fr); /* 2 items per row on medium screens and up */
+        padding: 30px 20px; /* Add extra padding for spacing */
+    }
+
+    .item {
+        max-width: 100%; /* Let the items take full width of their grid cell */
+        margin: 0; /* Ensure no margin between items */
+    }
+    .item-details { 
+        max-width: 100%;
+    }
+}
+
+/* For large screens, 2 items per row */
+@media (min-width: 1024px) {
+    .item-list {
+        grid-template-columns: repeat(2, 1fr); /* Still 2 items per row for large screens */
+        padding: 40px 20px; /* Adjust padding for larger screens */
+    }
+
+    .item {
+        max-width: 100%; /* Let each item take the full width of its grid cell */
+        margin: 0; /* Ensure no margin */
+    }
+}
+
+/* Extra-large screens */
+@media (min-width: 1200px) {
+    .item-list {
+        grid-template-columns: repeat(2, 1fr); /* Keep 2 items per row */
+        padding: 50px 20px; /* More padding for very large screens */
+    }
+
+    .item {
+        max-width: 100%; /* Ensure no width restriction */
+        margin: 0; /* No margin */
+    }
+}
+
+@media (max-width: 400px) {
+    #zipFormContainer > form {
+        transform: scale(0.8); /* Scale down the form */
+        transform-origin: center; /* Center the scaling */
+        max-width: 100%; /* Prevent overflow */
+        margin: 0 auto; /* Center the form */
+    }
+
+    /* Adjust input box size */
+    #zipFormContainer input {
+        width: 100%; /* Make the input take full width */
+        padding: 6px; /* Reduce padding */
+        font-size: 0.8rem; /* Smaller font size */
+    }
+
+    /* Adjust button size and font */
+    #zipFormContainer button {
+        padding: 8px 12px; /* Smaller padding for the button */
+        font-size: 0.8rem; /* Reduce font size */
+    }
+}
+/* For mobile and small screens (less than 768px) */
+@media (max-width: 767px) {
+    body {
+        margin: 0; /* Remove extra margin */
+        padding: 0; /* Remove padding */
+        font-size: 14px; /* Slightly larger default fonts for better readability */
+    }
+
+    form {
+        max-width: 100%; /* Make the form take the full width */
+        margin: 0; /* Remove automatic centering margin */
+        padding: 10px; /* Add padding inside the form */
+        box-sizing: border-box; /* Ensure padding doesn't overflow */
+    }
+
+    .header {
+        width: 100%; /* Make the header take full width */
+        max-width: 100%; /* Prevent restricting the width */
+        margin: 0 auto; /* Center the header content */
+        padding: 10px; /* Add some padding */
+        text-align: center; /* Align content centrally */
+    }
+
+    .tab-container {
+        flex-wrap: wrap; /* Allow tabs to wrap on smaller screens */
+        padding: 10px; /* Add padding */
+        justify-content: space-between; /* Spread tabs out evenly */
+    }
+
+    .tab {
+        flex: 1; /* Make each tab take equal space */
+        text-align: center; /* Center text in each tab */
+        margin: 5px; /* Add space between tabs */
+    }
+
+    .cart-section,
+    .payment-section {
+        width: 100%; /* Ensure sections stretch to full width */
+        padding: 10px; /* Add internal padding */
+        box-sizing: border-box; /* Prevent overflow */
+    }
+
+    .info-row {
+        width: 100%; /* Ensure each row takes full width */
+    }
+
+    .customer-info {
+        gap: 10px; /* Reduce gap for smaller screens */
+    }
+}
+
+
+/* Move only the border-bottom up by 10px on screens <= 768px */
+@media (max-width: 768px) {
+    #cartForm > div.tab-container {
+        position: relative;
+        top:-20px;
+        margin-bottom: 10px; /* Optional: Adjust spacing below */
+    }
+
+    #cartForm > div.tab-container::after {
+        content: "";
+        position: absolute;
+        bottom: -10px; /* Moves the border 20px up */
+        left: 0;
+        width: 100%;
+        border-bottom: 0px solid #ccc; /* The border line */
+    }
+}
+
+
+
+/* Mobile portrait view */
+@media (max-width: 767px) {
+    #cityName {
+        font-size: 1.2em!important; /* Shrinks text to half its normal size */
+        text-align: center; /* Ensures the text stays centered */
+        margin: 0;
+    }
+
+    .phone-number {
+        display: visible; /* Hides the "Call us at" text */
+        font-size: 80%!important; /* Shrinks text to half its normal size */
+    }
+    .tab-container {
+        position:relative;
+        top:10px;
+    }
+    .item-price {
+        position:relative;
+        top:10px!important;
+    }
+}
+
+
+
+/* For mobile and small screens (less than 768px) */
+@media (max-width: 767px) {
+    .customer-info {
+        flex-direction: column;  /* Stack fields vertically */
+    }
+
+    .info-row {
+        width: 100%;  /* Ensure full-width on mobile */
+    }
+}
+
+/* Adjust for tablets and larger screens (768px and up) */
+@media (min-width: 768px) {
+    .customer-info {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;  /* Three columns */
+        gap: 15px;
+    }
+
+    .info-row {
+        display: flex;
+        flex-direction: column;  /* Ensure the label and input stay stacked */
+    }
+}
+
+
+
+/* Responsive Design */
+@media (min-width: 1025px) { /* Desktop */
+    body {
+        font-size: 20px; /* Larger fonts on desktops */
+    }
+    form {
+        max-width: 800px; /* Larger width for desktops */
+        margin: 50px auto; /* Large margins */
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) { /* Tablets */
+    body {
+        font-size: 18px; /* Medium-sized fonts on tablets */
+    }
+    form {
+        max-width: 600px; /* Medium width for tablets */
+        margin: 30px auto; /* Medium margins */
+    }
+}
+
+@media (max-width: 767px) { /* Mobile */
+    body {
+        font-size: 14px; /* Slightly larger default fonts for mobile */
+    }
+    form {
+        max-width: 100%; /* Full width for mobile */
+        margin: 10px; /* Tiny margins on mobile */
+    }
+}
+
+@media (max-width: 400px) {
+    #zipFormContainer > form {
+        transform: scale(0.8); /* Scale down the form */
+        transform-origin: center; /* Center the scaling */
+        max-width: 100%; /* Prevent overflow */
+        margin: 0 auto; /* Center the form */
+    }
+
+    /* Adjust input box size */
+    #zipFormContainer input {
+        width: 100%; /* Make the input take full width */
+        padding: 6px; /* Reduce padding */
+        font-size: 0.8rem; /* Smaller font size */
+    }
+
+    /* Adjust button size and font */
+    #zipFormContainer button {
+        padding: 8px 12px; /* Smaller padding for the button */
+        font-size: 0.8rem; /* Reduce font size */
+    }
+}
+
+
+
+/* For mobile and small screens (less than 768px) */
+@media (max-width: 767px) {
+    body {
+        margin: 0; /* Remove extra margin */
+        padding: 0; /* Remove padding */
+        font-size: 14px; /* Slightly larger default fonts for better readability */
+    }
+
+    form {
+        max-width: 100%; /* Make the form take the full width */
+        margin: 0; /* Remove automatic centering margin */
+        padding: 10px; /* Add padding inside the form */
+        box-sizing: border-box; /* Ensure padding doesn't overflow */
+    }
+
+    .header {
+        width: 100%; /* Make the header take full width */
+        max-width: 100%; /* Prevent restricting the width */
+        margin: 0 auto; /* Center the header content */
+        padding: 10px; /* Add some padding */
+        text-align: center; /* Align content centrally */
+    }
+
+    .tab-container {
+        flex-wrap: wrap; /* Allow tabs to wrap on smaller screens */
+        padding: 10px; /* Add padding */
+        justify-content: space-between; /* Spread tabs out evenly */
+    }
+
+    .tab {
+        flex: 1; /* Make each tab take equal space */
+        text-align: center; /* Center text in each tab */
+        margin: 5px; /* Add space between tabs */
+    }
+
+    .cart-section,
+    .payment-section {
+        width: 100%; /* Ensure sections stretch to full width */
+        padding: 10px; /* Add internal padding */
+        box-sizing: border-box; /* Prevent overflow */
+    }
+
+    .info-row {
+        width: 100%; /* Ensure each row takes full width */
+    }
+
+    .customer-info {
+        gap: 10px; /* Reduce gap for smaller screens */
+    }
+}
+
+
+/* Move only the border-bottom up by 10px on screens <= 768px */
+@media (max-width: 768px) {
+    #cartForm > div.tab-container {
+        position: relative;
+        top:-20px;
+        margin-bottom: 10px; /* Optional: Adjust spacing below */
+    }
+
+    #cartForm > div.tab-container::after {
+        content: "";
+        position: absolute;
+        bottom: -10px; /* Moves the border 20px up */
+        left: 0;
+        width: 100%;
+        border-bottom: 0px solid #ccc; /* The border line */
+    }
+}
+
+
+
+/* Mobile portrait view */
+@media (max-width: 767px) {
+    #cityName {
+        font-size: 1.2em!important; /* Shrinks text to half its normal size */
+        text-align: center; /* Ensures the text stays centered */
+        margin: 0;
+    }
+
+    .phone-number {
+        display: visible; /* Hides the "Call us at" text */
+        font-size: 80%!important; /* Shrinks text to half its normal size */
+    }
+    .tab-container {
+        position:relative;
+        top:10px;
+    }
+    .item-price {
+        position:relative;
+        top:10px!important;
+    }
+}
+
+
+
+/* For mobile and small screens (less than 768px) */
+@media (max-width: 767px) {
+    .customer-info {
+        flex-direction: column;  /* Stack fields vertically */
+    }
+
+    .info-row {
+        width: 100%;  /* Ensure full-width on mobile */
+    }
+}
+
+/* Adjust for tablets and larger screens (768px and up) */
+@media (min-width: 768px) {
+    .customer-info {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;  /* Three columns */
+        gap: 15px;
+    }
+
+    .info-row {
+        display: flex;
+        flex-direction: column;  /* Ensure the label and input stay stacked */
+    }
+}
+
+
+/* Responsive Design */
+@media (min-width: 1025px) { /* Desktop */
+    body {
+        font-size: 20px; /* Larger fonts on desktops */
+    }
+    form {
+        max-width: 800px; /* Larger width for desktops */
+        margin: 50px auto; /* Large margins */
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) { /* Tablets */
+    body {
+        font-size: 18px; /* Medium-sized fonts on tablets */
+    }
+    form {
+        max-width: 600px; /* Medium width for tablets */
+        margin: 30px auto; /* Medium margins */
+    }
+}
+
+@media (max-width: 767px) { /* Mobile */
+    body {
+        font-size: 14px; /* Slightly larger default fonts for mobile */
+    }
+    form {
+        max-width: 100%; /* Full width for mobile */
+        margin: 10px; /* Tiny margins on mobile */
+    }
+}
 
 @media (max-width: 400px) {
     #zipFormContainer > form {
@@ -2030,6 +1928,7 @@ button:hover {
     }
 }
 
+/* end responsive rules here */
 
 
 
@@ -2039,50 +1938,4 @@ button:hover {
 
 
 
-
-
-
-
-
-
-
-
-#flying-text-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%; /* Cover the entire viewport */
-    pointer-events: none; /* Prevent interaction */
-}
-
-.flying-text {
-    position: absolute;
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #28a745; /* Green for "Added to Cart" */
-    animation: fly-across 3s ease-out, fade-out 3s ease-out; /* Slower animation */
-}
-
-.flying-text.removed {
-    color: #dc3545; /* Red for "Removed from Cart" */
-}
-
-@keyframes fly-across {
-    0% {
-        transform: translate(-50%, 0); /* Start at the original position */
-    }
-    100% {
-        transform: translate(-50%, -150px); /* Move upwards slightly */
-    }
-}
-
-@keyframes fade-out {
-    0% {
-        opacity: 1;
-    }
-    100% {
-        opacity: 0;
-    }
-}
 
