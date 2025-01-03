@@ -163,7 +163,10 @@ body {
 
 
 /* Header Section */
+
 .header {
+    margin: 0;
+    padding: 0;
     width: 100%; /* Ensure it takes up full width */
     max-width: 500px; /* Limit the header container to prevent excess width */
     margin: 0 auto;
@@ -610,12 +613,6 @@ form {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Adjust the header section */
-.header {
-    margin: 0;
-    padding: 0;
-}
-
 /* Center alignment for the header */
 .logo-title-container {
     align-items: center;
@@ -625,12 +622,8 @@ form {
     margin: 20px 0; /* Optional: Add some margin to separate from other elements */
 }
 
-/* Style for the logo */
-.doap-logo {
-    width: 50px; /* Adjust logo size */
-    height: auto;
-    margin: 0; /* Remove extra margins */
-}
+
+
 
 /* Text container for CityName and phone */
 .text-container {
@@ -691,15 +684,44 @@ form {
 }
 
 
-/* Style for the Doap logo */
-/* Move the logo up by 10px */
-.doap-logo {
-    width: 50px; /* Keep the logo size */
-    height: auto; /* Maintain aspect ratio */
-    margin: 0; /* Ensure no extra margins */
-    transform: translateY(-10px); /* Move up by 15px */
-    position: relative; /* Ensure positioning does not affect layout */
+
+/* Tab Container and Tabs */
+.tab-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px; /* Space below the tab container */
 }
+
+.tab {
+    padding: 10px 20px;
+    margin: 0 5px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-family: 'Marvel', sans-serif; /* Apply Marvel font to tab text */
+    background: #f9f9f9; /* Light background for tabs */
+    border: 1px solid #ccc;
+    border-bottom: none; /* Remove bottom border for seamless design */
+}
+
+/* Active Tab Styles */
+.tab.active {
+    background: #fff; /* White background for active tab */
+    font-weight: bold; /* Bold text for active tab */
+    color: darkgreen; /* Dark green text for active tab */
+    text-shadow: 0 0 4px rgba(0, 100, 0, 0.5); /* Soft green glow effect */
+    border-bottom: 2px solid #007bff; /* Optional: Add a blue bottom border for active tab */
+}
+
+/* Tab Content */
+.tab-content {
+    display: none; /* Hide tab content by default */
+}
+
+.tab-content.active {
+    display: block; /* Show active tab content */
+}
+
+
 
 
 /* Phone number styling */
@@ -869,44 +891,6 @@ h3 i.fa-phone-alt {
     vertical-align: middle; /* Align icon with text */
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* Adjust the header section */
-.header {
-    margin: 0;
-    padding: 0;
-}
-
-/* Style for the logo */
-.doap-logo {
-    width: 50px; /* Adjust logo size */
-    height: auto;
-    margin: 0; /* Remove extra margins */
-}
-
 /* Text container for CityName and phone */
 .text-container {
     display: flex;
@@ -951,15 +935,6 @@ h3 i.fa-phone-alt {
 
 
 
-/* Style for the Doap logo */
-/* Move the logo up by 10px */
-.doap-logo {
-    width: 50px; /* Keep the logo size */
-    height: auto; /* Maintain aspect ratio */
-    margin: 0; /* Ensure no extra margins */
-    transform: translateY(-10px); /* Move up by 15px */
-    position: relative; /* Ensure positioning does not affect layout */
-}
 
 
 /* Phone number styling */
