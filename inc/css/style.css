@@ -14,8 +14,13 @@ body, h2, input, button, footer {
     box-sizing: border-box;
 }
 
+h1, h2, h3, .Marvelfont {
+    font-family: 'Marvel', sans-serif; /* Apply Marvel font to tab text */
+}
+
 /* Body and General Styling */
 body {
+    margin: 0;
     font-family: Arial, sans-serif;
     line-height: 1.6;
     background-color: #f9f9f9;
@@ -29,16 +34,6 @@ body {
     font-size:1.2em;
     font-family: Marvel;
 }
-
-
-#selectedItemsList > li > span {
-    color: red; /* Makes the X red */
-    cursor: pointer; /* Adds a pointer cursor for better UX */
-    font-weight: bold; /* Optional: Makes it bold */
-    font-size: 1.2em; /* Optional: Slightly increase size */
-    margin-left: 10px; /* Optional: Adds spacing from the text */
-}
-
 
 .item-list {
     display: grid; /* Use grid layout */
@@ -189,62 +184,6 @@ body {
     font-family: 'Marvel', sans-serif; /* Use Marvel font */
 }
 
-/* Tab Container */
-.tab-container {
-    display: flex;
-    justify-content: center;
-    border-bottom: 0px solid #ccc;
-    margin-bottom: 20px;
-}
-.tab {
-    padding: 10px 20px;
-    cursor: pointer;
-    border: 1px solid #ccc;
-    /*border-bottom: none;*/
-    background: #f9f9f9;
-    margin: 0 5px;
-    font-size: 1.1em;
-    font-family: 'Marvel', sans-serif; /* Apply Marvel font to tab text */
-
-}
-.tab.active {
-    background: #fff;
-    font-weight: bold;
-}
-
-/* Tab Content */
-.tab-content {
-  display: none;
-}
-
-.tab-content.active {
-  display: block;
-}
-
-
-
-/* Tab styles */
-.tab-container {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 20px;
-}
-
-.tab {
-  padding: 10px 20px;
-  cursor: pointer;
-  background: #f9f9f9;
-  border: 1px solid #ccc;
-  border-bottom: none;
-  margin: 0 5px;
-  font-size: 1.1rem;
-}
-
-.tab.active {
-  background: #fff;
-  font-weight: bold;
-  border-bottom: 2px solid #007bff;
-}
 
 /* Wrapper for input field with icon */
 .input-icon {
@@ -272,30 +211,47 @@ body {
 }
 
 
-/* Default background for "No items selected yet" */
-#selectedItemsList li:only-child {
-    background-color: transparent; /* Default background */
-    text-align: center; /* Center-align the message for better UX */
-    color: #555; /* Slightly lighter text color */
-}
-
-/* Add padding and styling for better visual appearance */
-#selectedItemsList li {
-    padding: 10px; /* Add spacing inside each list item */
-    border-bottom: 1px solid #ddd; /* Optional: Add bottom border for separation */
-    display: flex; /* Keep content aligned */
-    justify-content: space-between; /* Distribute space between content */
-    align-items: center; /* Align items vertically */
-}
-
-/* Optional: Add a border to distinguish list visually */
+/* Style for the selected items list container */
 #selectedItemsList {
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    border: 1px solid #ccc; /* Border around the list */
+    border-radius: 5px; /* Rounded corners */
     overflow: hidden; /* Clean edges */
-    padding: 0;
+    padding: 0; /* Remove default padding */
 }
 
+/* Style for individual list items */
+#selectedItemsList li {
+    padding: 10px; /* Internal padding for each item */
+    border-bottom: 1px solid #ddd; /* Separator between list items */
+    display: flex; /* Flex layout for alignment */
+    justify-content: space-between; /* Distribute content across the row */
+    align-items: center; /* Vertically center-align content */
+}
+
+/* Alternate background colors for list items */
+#selectedItemsList li:nth-child(odd) {
+    background-color: #81B622; /* Green for odd rows */
+}
+
+#selectedItemsList li:nth-child(even) {
+    background-color: #ecf87f; /* Yellow-green for even rows */
+}
+
+/* Style for the placeholder message when no items are selected */
+#selectedItemsList li:only-child {
+    background-color: transparent; /* Transparent background */
+    text-align: center; /* Center-align the text */
+    color: #555; /* Muted text color */
+}
+
+/* Style for the "X" (remove button) */
+#selectedItemsList > li > span {
+    color: red; /* Red color for the "X" */
+    cursor: pointer; /* Pointer cursor for interactivity */
+    font-weight: bold; /* Bold for emphasis */
+    font-size: 1.2em; /* Slightly larger size */
+    margin-left: 10px; /* Space between the "X" and the text */
+}
 
 /* Form Container Styling */
 #cartForm > footer > div:nth-child(1) > div > form > input::placeholder {
@@ -514,60 +470,49 @@ body {
     letter-spacing: 1.5px; /* Add letter spacing for effect */
 }
 
-/* Tab styles */
+
+
+
+
+/* Tab Container */
 .tab-container {
     display: flex;
     justify-content: center;
-    margin-bottom: 20px;
+    margin-bottom: 20px; /* Space below the tab container */
 }
 
+/* Tab Button Styles */
 .tab {
     padding: 10px 20px;
     cursor: pointer;
-    background: #f9f9f9;
+    background: #f9f9f9; /* Light background for tabs */
     border: 1px solid #ccc;
-    border-bottom: none;
+    border-bottom: none; /* Remove bottom border for seamless design */
     margin: 0 5px;
     font-size: 1.1rem;
+    font-family: 'Marvel', sans-serif; /* Apply Marvel font to tab text */
 }
 
+/* Active Tab Styles */
 .tab.active {
-    color: darkgreen; /* Change text color to green */
-    text-shadow: 0 0 4px rgba(0, 100, 0, 0.5); /* Softer dark green glow */
+    background: #fff; /* White background for active tab */
+    font-weight: bold; /* Bold text for active tab */
+    color: darkgreen; /* Dark green text for active tab */
+    text-shadow: 0 0 4px rgba(0, 100, 0, 0.5); /* Soft green glow effect */
+    border-bottom: 2px solid #007bff; /* Optional: Add a blue bottom border for active tab */
 }
 
-/* Tab content */
+/* Tab Content */
 .tab-content {
-    display: none;
+    display: none; /* Hide tab content by default */
 }
 
 .tab-content.active {
-    display: block;
+    display: block; /* Show active tab content */
 }
 
-/* Default background for "No items selected yet" */
-#selectedItemsList li:only-child {
-    background-color: transparent; /* Default background */
-    text-align: center; /* Center-align the message for better UX */
-    color: #555; /* Slightly lighter text color */
-}
 
-/* Add padding and styling for better visual appearance */
-#selectedItemsList li {
-    padding: 10px; /* Add spacing inside each list item */
-    border-bottom: 1px solid #ddd; /* Optional: Add bottom border for separation */
-    display: flex; /* Keep content aligned */
-    justify-content: space-between; /* Distribute space between content */
-    align-items: center; /* Align items vertically */
-}
 
-/* Optional: Add a border to distinguish list visually */
-#selectedItemsList {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    overflow: hidden; /* Clean edges */
-    padding: 0;
-}
 
 /* Smaller text for crypto wallet addresses */
 .small-text {
@@ -628,18 +573,7 @@ body {
     float:right;
 }
 
-.nodec, .nodec:hover, #cartForm > div.header > div.logo-title-container > div > a.phone-number.nodec {
-    text-decoration: none;
-    color:#000;
-}
 
-/* Subtle dark green glow for active tab text */
-.tab.active {
-    background: #fff; /* Keep existing background */
-    font-weight: bold; /* Existing bold text */
-    color: darkgreen; /* Set text color to dark green */
-    text-shadow: 0 0 4px rgba(0, 100, 0, 0.5); /* Softer dark green glow */
-}
 
 h3 i.fa-phone-alt {
     color: #000; /* Icon color */
@@ -666,24 +600,6 @@ h3 i.fa-phone-alt {
 
 
 
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-    background-color: #f9f9f9;
-    color: #333;
-    font-size: 16px; /* Base font size for all devices */
-}
-
-h1, h2, h3, .Marvelfont {
-    font-family: 'Marvel', sans-serif; /* Apply Marvel font to tab text */
-}
-
-.menu-title-text{
-    text-align:center;
-}
-
-
 /* Form Container */
 form {
     margin: 0 auto;
@@ -700,12 +616,13 @@ form {
     padding: 0;
 }
 
-/* Align logo and text side by side */
+/* Center alignment for the header */
 .logo-title-container {
+    align-items: center;
     display: flex;
-    align-items: flex-start; /* Align items at the top */
-    gap: 10px; /* Space between logo and text */
-    margin: 5px 0;
+    justify-content: center;
+    gap: 10px; /* Space between the logo and text */
+    margin: 20px 0; /* Optional: Add some margin to separate from other elements */
 }
 
 /* Style for the logo */
@@ -751,15 +668,12 @@ form {
 }
 
 .menu-title-text {
+    text-align:center;
     margin: 0;
     line-height: 1.2;
     position:relative;
     top:-15px;
 }
-
-
-
-/*.menu-title > div:nth-child(2) {display:none;}*/
 
 
 /* Phone number styling */
@@ -776,15 +690,6 @@ form {
     text-decoration: underline;
 }
 
-
-/* Center alignment for the header */
-.logo-title-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px; /* Space between the logo and text */
-    margin: 20px 0; /* Optional: Add some margin to separate from other elements */
-}
 
 /* Style for the Doap logo */
 /* Move the logo up by 10px */
@@ -956,13 +861,6 @@ form {
     color:#000;
 }
 
-/* Subtle dark green glow for active tab text */
-.tab.active {
-    background: #fff; /* Keep existing background */
-    font-weight: bold; /* Existing bold text */
-    color: darkgreen; /* Set text color to dark green */
-    text-shadow: 0 0 4px rgba(0, 100, 0, 0.5); /* Softer dark green glow */
-}
 
 h3 i.fa-phone-alt {
     color: #000; /* Icon color */
@@ -994,28 +892,12 @@ h3 i.fa-phone-alt {
 
 
 
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-    background-color: #f9f9f9;
-    color: #333;
-    font-size: 16px; /* Base font size for all devices */
-}
 
 
 /* Adjust the header section */
 .header {
     margin: 0;
     padding: 0;
-}
-
-/* Align logo and text side by side */
-.logo-title-container {
-    display: flex;
-    align-items: flex-start; /* Align items at the top */
-    gap: 10px; /* Space between logo and text */
-    margin: 5px 0;
 }
 
 /* Style for the logo */
@@ -1068,33 +950,6 @@ body {
 }
 
 
-
-.menu-title > div:nth-child(2) {display:none;}
-
-
-/* Phone number styling */
-.menu-title a {
-    display: inline-block; /* Keep it aligned with other text */
-    margin-top: 5px; /* Reduce space between phone number and text above */
-    font-size: 0.9rem; /* Adjust font size */
-    color: #333; /* Default text color */
-    text-decoration: none; /* No underline */
-}
-
-.menu-title a:hover {
-    color: #007BFF; /* Optional hover effect */
-    text-decoration: underline;
-}
-
-
-/* Center alignment for the header */
-.logo-title-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px; /* Space between the logo and text */
-    margin: 20px 0; /* Optional: Add some margin to separate from other elements */
-}
 
 /* Style for the Doap logo */
 /* Move the logo up by 10px */
@@ -1210,14 +1065,6 @@ body {
 
 
 
-h1, h2, h3, .Marvelfont {
-    font-family: 'Marvel', sans-serif; /* Apply Marvel font to tab text */
-}
-
-.menu-title-text{
-    text-align:center;
-}
-
 
 /* Form Container */
 form {
@@ -1304,37 +1151,9 @@ button:hover {
 }
 
 
-/* Alternate background colors for list items */
-#selectedItemsList li:nth-child(odd) {
-    background-color: #81B622; /* Pale pink for odd rows */
-}
 
-#selectedItemsList li:nth-child(even) {
-    background-color: #ecf87f; /* White for even rows */
-}
 
-/* Default background for "No items selected yet" */
-#selectedItemsList li:only-child {
-    background-color: #ecf87f; /* Default background */
-    text-align: center; /* Center-align the message for better UX */
-}
 
-/* Add padding and styling for better visual appearance */
-#selectedItemsList li {
-    padding: 10px; /* Add spacing inside each list item */
-    border-bottom: 1px solid #ddd; /* Optional: Add bottom border for separation */
-    display: flex; /* Keep content aligned */
-    justify-content: space-between; /* Distribute space between content */
-    align-items: center; /* Align items vertically */
-}
-
-/* Optional: Add a border to distinguish list visually */
-#selectedItemsList {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    overflow: hidden; /* Clean edges */
-    padding: 0;
-}
 
 
 
@@ -1386,7 +1205,6 @@ button:hover {
 
 
 /* responsive rules here */
-
 /* For smaller screens */
 @media (max-width: 768px) {
     .zip-form-container {
