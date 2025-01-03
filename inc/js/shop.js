@@ -581,7 +581,7 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log("Product selection logic initialized");
 
     // Select all product items
-    const productItems = document.querySelectorAll('.item');
+    const productItems = document.querySelectorAll('.product');
 
     // Add click event listener to each product item
     productItems.forEach(item => {

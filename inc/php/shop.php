@@ -17,18 +17,8 @@
         // Include shopproducts.html for other hostnames
         echo "<form id=\"cartForm\">";
 
-            //echo "<div id=\"cartContainer\" style=\"display: none;\">";
-            //echo "<div id=\"cartContainer\">";
-            //include('cartsection.html'); 
-            //echo "</div>";
- 
         include('inc/html/products.html');
-        include('cartsection.html'); 
-        //include('flower.html'); 
-        //include('concentrates.html'); 
-        //include('edibles.html'); 
-        //include('accessories.html'); 
-        //echo "</form>";
+        include('inc/html/cartsection.html'); 
     }
     ?>
 
