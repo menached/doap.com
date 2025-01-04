@@ -1,5 +1,5 @@
 console.log("shop.js started loading");
-const productTitle = '';
+const productTitle = 'NULL';
 $(document).ready(function () {
     function showFlyingText(message, isRemoved = false) {
         console.log("Flying text message:", message);

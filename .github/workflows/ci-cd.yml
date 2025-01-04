@@ -1,109 +1,38 @@
-name: CI/CD Pipeline
+# Step 6: Get Changed Files with Diff
+- name: Get Changed Files with Diff
+  id: changes
+  run: |
+    git fetch origin main
+    if [ $(git rev-list --count HEAD) -eq 1 ]; then
+      echo "First commit, taking all files."
+      git ls-files > changed_files.txt
+      git diff HEAD --color=never > changes.diff
+    else
+      git diff origin/main HEAD --color=never > changes.diff
+      git diff --name-only origin/main HEAD > changed_files.txt
+    fi
+    echo "Changed files:"
+    cat changed_files.txt
 
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
-
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
-
-    steps:
-      # Step 1: Check out the Repository
-      - name: Checkout Repository
-        uses: actions/checkout@v3
-
-      # Step 2: Set up SSH Agent
-      - name: Set up SSH
-        uses: webfactory/ssh-agent@v0.7.0
-        with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-
-      # Step 3: Add Host to Known Hosts
-      - name: Add Host to Known Hosts
-        run: |
-          mkdir -p ~/.ssh
-          ssh-keyscan -H deb1.doap.com >> ~/.ssh/known_hosts
-          chmod 600 ~/.ssh/known_hosts
-
-      # Step 4: Install Mailutils
-      - name: Install Mailutils
-        run: |
-          sudo apt update
-          sudo apt install -y mailutils
-
-      # Step 5: Configure AWS CLI
-      - name: Configure AWS CLI
-        run: |
-          echo "Configuring AWS CLI..."
-          aws configure set aws_access_key_id "${{ secrets.AWS_ACCESS_KEY_ID }}"
-          aws configure set aws_secret_access_key "${{ secrets.AWS_SECRET_ACCESS_KEY }}"
-          aws configure set region "${{ secrets.AWS_REGION }}"
-
-      # Step 6: Get Changed Files
-      - name: Get Changed Files
-        id: changes
-        run: |
-          git fetch origin main
-          if [ $(git rev-list --count HEAD) -eq 1 ]; then
-            echo "First commit, taking all files."
-            git ls-files > changed_files.txt
-          else
-            git diff --name-only origin/main > changed_files.txt
-          fi
-          echo "Changed files:"
-          cat changed_files.txt
-
-      # Step 7: Deploy with Rsync
-      - name: Deploy Changed Files with Rsync
-        run: |
-          echo "Syncing all changed files to server and syncing with S3 and CloudFront..."
-          while IFS= read -r file || [ -n "$file" ]; do
-            echo "Processing file: $file"
-
-            # Ensure the file exists locally
-            if [ ! -f "$file" ]; then
-              echo "File $file does not exist locally. Skipping..."
-              continue
-            fi
-          done < changed_files.txt
-
-          echo "Deploying using rsync..."
-          rsync -avz --rsync-path="sudo rsync" --no-perms --no-group --exclude '.git/' ./ dmenache@deb1.doap.com:/var/www/doap.com/
-
-          echo "Syncing all files to S3..."
-          aws s3 sync . s3://www.doap.com/ --exclude ".git/*"
-
-          echo "Invalidating CloudFront cache..."
-          aws cloudfront create-invalidation --distribution-id E3MM919ZQPQJTL --paths "/*"
-
-      # Step 8: Debug Deployment
-      - name: Debug Deployment
-        run: |
-          echo "Verifying deployment to server and S3..."
-          ssh -o StrictHostKeyChecking=no dmenache@deb1.doap.com "ls -la /var/www/doap.com/"
-
-      # Step 9: Send Email Notification
-      - name: Send Email Notification
-        run: |
-          echo "Sending Email Notification"
-          EMAIL_BODY="<html>
-          <head>
-            <title>Doap.com Repo Deployed</title>
-          </head>
-          <body>
-            <p><strong>Files Deployed:</strong></p>
-            <ul>"
-          while read -r file; do
-            EMAIL_BODY+="<li>$file</li>"
-          done < changed_files.txt
-          EMAIL_BODY+="</ul>
-          <p>Deployed to repo and fleet: <a href='https://github.com/menached/doap.com/actions'>https://github.com/menached/doap.com/actions</a></p>
-          </body>
-          </html>"
-          echo "$EMAIL_BODY" | mail -s "Doap.com Repo Deployed" -a "Content-Type: text/html" info@doap.com
+# Step 9: Send Email Notification with Diff
+- name: Send Email Notification
+  run: |
+    echo "Sending Email Notification"
+    EMAIL_BODY="<html>
+    <head>
+      <title>Doap.com Repo Deployed</title>
+    </head>
+    <body>
+      <p><strong>Files Changed:</strong></p>
+      <ul>"
+    while read -r file; do
+      EMAIL_BODY+="<li>$file</li>"
+    done < changed_files.txt
+    EMAIL_BODY+="</ul><p><strong>Git Diff Details:</strong></p><pre>"
+    EMAIL_BODY+="$(cat changes.diff | sed 's/&/&amp;/g; s/</&lt;/g; s/>/&gt;/g')" # Escape HTML
+    EMAIL_BODY+="</pre>
+    <p>Deployed to repo and fleet: <a href='https://github.com/menached/doap.com/actions'>https://github.com/menached/doap.com/actions</a></p>
+    </body>
+    </html>"
+    echo "$EMAIL_BODY" | mail -s "Doap.com Repo Deployed" -a "Content-Type: text/html" info@doap.com
 
