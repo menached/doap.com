@@ -15,9 +15,7 @@ $(document).ready(function () {
                 zIndex: 9999,
                 fontSize: '2rem',
                 fontWeight: 'bold',
-                backgroundColor: 'transparent',  // Transparent background
-                border: 'none',
-                borderRadius: '0',  // Remove rounded corners
+                borderRadius: '10px',  // Remove rounded corners
                 textShadow: '2px 2px 5px rgba(0, 0, 0, 0.2)',
             });
 
@@ -37,18 +35,20 @@ $(document).ready(function () {
     });
 
 
-    // Example usage: Add click events to your items
     $('.item').on('click', function () {
         const checkbox = $(this).find('input[type="checkbox"]');
         const isChecked = checkbox.prop('checked');
+        const productTitle = $(this).find('.item-title').text().trim();  // Get product title and trim extra spaces
+
         checkbox.prop('checked', !isChecked);  // Toggle the checkbox
 
         if (!isChecked) {
-            showFlyingText('Added to Cart', false);  // Not removed
+            showFlyingText(`Added ${productTitle} to cart.`, false);  // Added
         } else {
-            showFlyingText('Removed from Cart', true);  // Removed
+            showFlyingText(`Removed ${productTitle} from cart.`, true);  // Removed
         }
     });
+
 
     $(document).on('click', '.item', function () {
         const checkbox = $(this).find('input[type="checkbox"]');
@@ -56,9 +56,9 @@ $(document).ready(function () {
         checkbox.prop('checked', !isChecked);
 
         if (!isChecked) {
-            showNotification('Added to Cart');
+            showFlyingText(`Added ${productTitle} to cart.`, false);  // Added
         } else {
-            showNotification('Removed from Cart');
+            showFlyingText(`Removed ${productTitle} from cart.`, true);  // Removed
         }
     });
 
