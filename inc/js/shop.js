@@ -1,5 +1,5 @@
 console.log("shop.js started loading");
-
+const productTitle = '';
 $(document).ready(function () {
     function showFlyingText(message, isRemoved = false) {
         console.log("Flying text message:", message);
@@ -38,7 +38,17 @@ $(document).ready(function () {
     $('.item').on('click', function () {
         const checkbox = $(this).find('input[type="checkbox"]');
         const isChecked = checkbox.prop('checked');
-        const productTitle = $(this).find('.item-title').text().trim();  // Get product title and trim extra spaces
+
+        // Find the product title within the closest .product div
+        const productElement = $(this).closest('.product');  // Move to the parent .product
+        const productTitleElement = productElement.find('.item-title');  // Find .item-title inside .product
+
+        if (productTitleElement.length === 0) {
+            console.error('Error: Product title not found for:', productElement);
+            return;  // Stop execution if no product title is found
+        }
+
+        const productTitle = productTitleElement.text().trim() || "Unknown Product";  // Get the product title or default to "Unknown Product"
 
         checkbox.prop('checked', !isChecked);  // Toggle the checkbox
 
