@@ -6,48 +6,47 @@ $(document).ready(function () {
 
         const flyingText = $('<div class="flying-text"></div>')
             .text(message)
+            .addClass(isRemoved ? 'removed' : 'added')  // Add a specific class for styling
             .css({
                 position: 'fixed',  // Stay relative to the viewport
                 left: '50%',
-                top: '50%',  // Vertically centered in the viewport
-                transform: 'translate(-50%, -50%)',  // Center based on its size
-                zIndex: 9999,  // Ensure it appears above all other elements
-                padding: '20px 40px',
-                borderRadius: '10px',
-                fontSize: '1.5rem',
+                top: '50%',  // Vertically centered
+                transform: 'translate(-50%, -50%)',  // Center horizontally
+                zIndex: 9999,
+                fontSize: '2rem',
                 fontWeight: 'bold',
-                color: 'white',
-                backgroundColor: isRemoved ? '#dc3545' : '#28a745',  // Red for remove, green for add
-                border: '2px solid black',  // Add a debug border to make it obvious
+                backgroundColor: 'transparent',  // Transparent background
+                border: 'none',
+                borderRadius: '0',  // Remove rounded corners
+                textShadow: '2px 2px 5px rgba(0, 0, 0, 0.2)',
             });
 
         $('body').append(flyingText);
 
         setTimeout(() => {
             flyingText.fadeOut(500, () => flyingText.remove());
-        }, 3000);  // Remove after 3 seconds
+        }, 3000);  // Fade out after 3 seconds
     }
 
     window.addEventListener('scroll', () => {
         const flyingTextElement = document.querySelector('.flying-text');
         if (flyingTextElement) {
             const windowHeight = window.innerHeight;
-            flyingTextElement.style.top = `${windowHeight / 2}px`;  // Recenter based on viewport height
+            flyingTextElement.style.top = `${windowHeight / 2}px`;  // Adjust based on viewport height
         }
     });
 
 
     // Example usage: Add click events to your items
-    $('.item').off('click').on('click', function () {
+    $('.item').on('click', function () {
         const checkbox = $(this).find('input[type="checkbox"]');
         const isChecked = checkbox.prop('checked');
-        checkbox.prop('checked', !isChecked); // Toggle the checkbox
+        checkbox.prop('checked', !isChecked);  // Toggle the checkbox
 
-        // Show flying text
         if (!isChecked) {
-            showNotification('Added to Cart');
+            showFlyingText('Added to Cart', false);  // Not removed
         } else {
-            showNotification('Removed from Cart');
+            showFlyingText('Removed from Cart', true);  // Removed
         }
     });
 
