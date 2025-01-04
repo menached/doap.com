@@ -125,19 +125,14 @@ body {
     font-size: 1rem; /* Standard font size */
 }
 
-/* Change background color when checkbox is checked */
-.item input[type="checkbox"]:checked ~ .item-details {
+/* Change background color of .product when checkbox inside it is checked */
+.product:has(input[type="checkbox"]:checked) {
     background-color: #ffeeba; /* Highlight color */
     border-radius: 5px;
     padding: 10px;
 }
 
-/* Highlight selected product boxes */
-.item.selected {
-    background-color: #ffeeba; /* Brighter yellow color */
-    border-color: #ffc107; /* Yellow border */
-    box-shadow: 0 0 10px rgba(255, 193, 7, 0.5); /* Yellow glow */
-}
+
 
 /* "Added to Cart" text */
 .item .added-to-cart {
@@ -666,34 +661,6 @@ form {
 
 
 
-/* Style for the menu title */
-.menu-title {
-    margin: 0;
-    padding: 0;
-    text-align: center; /* Center-align the menu title */
-}
-
-.menu-title-text {
-    text-align: center; /* Center-align the text */
-    margin: 0; /* Remove default margin */
-    line-height: 1.2; /* Adjust line height for compact spacing */
-    position: relative; /* Relative positioning for fine-tuning */
-    top: -15px; /* Adjust vertical alignment */
-}
-
-/* Phone number styling */
-.menu-title a {
-    display: inline-block; /* Align with other text elements */
-    margin-top: 5px; /* Space between phone number and the text above */
-    font-size: 0.9rem; /* Font size for the phone number */
-    color: #333; /* Default text color */
-    text-decoration: none; /* Remove underline */
-}
-
-.menu-title a:hover {
-    color: #007BFF; /* Change color to blue on hover */
-    text-decoration: underline; /* Add underline on hover */
-}
 
 
 /* Tab Container and Tabs */

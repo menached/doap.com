@@ -310,138 +310,136 @@ console.log("Tab logic applied successfully!");
 
 
 
-// Configuration: Maps for subdomains
-const areaMinimum = {
-    alamo: 40, burlingame: 120, campbell: 120, concord: 50, danville: 40, dublin: 40,
-    lafayette: 50, livermore: 50, orinda: 60, pittsburg: 75, pleasanthill: 60,
-    sanramon: 40, walnutcreek: 50
-};
+document.addEventListener("DOMContentLoaded", () => {
 
-const cityMap = {
-    pleasanthill: "Pleasant Hill", walnutcreek: "Walnut Creek", castrovalley: "Castro Valley",
-    sanramon: "San Ramon", discoverybay: "Discovery Bay", alamo: "Alamo", antioch: "Antioch",
-    dublin: "Dublin", lafayette: "Lafayette", pleasanton: "Pleasanton", danville: "Danville",
-    concord: "Concord", livermore: "Livermore", orinda: "Orinda"
-};
-
-const phoneMap = {
-    pleasanthill: "925-891-7800", walnutcreek: "925-464-2075", castrovalley: "925-263-9209",
-    sanramon: "925-365-6030", discoverybay: "925-891-7800", alamo: "925-553-4710",
-    antioch: "925-891-7800", dublin: "925-587-6777", lafayette: "925-871-1333",
-    pleasanton: "925-587-6777", danville: "925-725-6920", concord: "925-412-4880",
-    livermore: "925-718-6181", orinda: "925-891-7800"
-};
-
-const defaultPhoneNumber = "833-289-3627";
-
-// Extract subdomain and determine city info
-function getSubdomain() {
-    const hostname = window.location.hostname;
-    return hostname.split('.')[0].toLowerCase();
-}
-
-function getCityName(domainName) {
-    return cityMap[domainName] || domainName.charAt(0).toUpperCase() + domainName.slice(1);
-}
-
-function getMinimumOrderAmount(domainName) {
-    return areaMinimum[domainName] || 60;
-}
-
-function getPhoneNumber(domainName) {
-    return phoneMap[domainName] || defaultPhoneNumber;
-}
-
-// Update document elements
-function updatePageTitle(cityName, hostname) {
-    if (hostname === "www.doap.com" || hostname === "doap.com") {
-        document.title = "Norcal DOAP";
-    } else {
-        document.title = `${cityName} Doap`;
-    }
-    console.log(`Page title set to: ${document.title}`);
-}
-
-function updateCityNameElement(cityName) {
-    const cityNameElement = document.getElementById("cityName");
-    if (cityNameElement) {
-        cityNameElement.textContent = cityName;
-    } else {
-        console.warn("Element with id 'cityName' not found.");
-    }
-}
-
-function updatePhoneNumberElement(phoneNumber) {
-    const phoneNumberElement = document.querySelector(".phone-number");
-    if (phoneNumberElement) {
-        phoneNumberElement.textContent = phoneNumber;
-        phoneNumberElement.href = `tel:${phoneNumber.replace(/-/g, '')}`;
-    }
-}
-
-function updateLogoAndHeaderLinks(domainName, cityName) {
-    const logoLink = document.querySelector(".header a");
-    const headerLink = document.querySelector("h1 a");
-    const linkUrl = `https://${domainName}.doap.com/simple.php`;
-    const linkTitle = `Call ${cityName} Doap!`;
-
-    if (logoLink) {
-        logoLink.href = linkUrl;
-        logoLink.title = linkTitle;
+    // Remove "Call us at" from the phone number
+    const phone = document.querySelector(".phone-number");
+    if (phone) {
+        phone.textContent = phone.textContent.replace(/Call us at\s*/, '');
     }
 
-    if (headerLink) {
-        headerLink.href = linkUrl;
-        headerLink.title = linkTitle;
+    // Checkout button logic
+    const checkoutButton = document.getElementById("checkoutButton");
+    if (checkoutButton && cartForm) {
+        checkoutButton.addEventListener("click", async (event) => {
+            event.preventDefault();
+
+            try {
+                const checkedItems = cartForm.querySelectorAll('input[name="item"]:checked');
+                const items = Array.from(checkedItems).map(item => {
+                    const quantityInput = item.closest(".item").querySelector(".quantity");
+                    const quantity = parseInt(quantityInput.value, 10) || 1;
+                    const [itemName, itemCost] = item.value.split('|');
+                    return { name: itemName, quantity, price: parseFloat(itemCost) };
+                });
+
+                const name = document.getElementById("name").value.trim();
+                const city = document.getElementById("city").value.trim();
+                const phone = document.getElementById("phone").value.trim();
+                const email = document.getElementById("email").value.trim();
+                const address = document.getElementById("address").value.trim();
+                const total = totalDisplay.textContent;
+                const paymentMethod = document.getElementById("paymentMethod").value;
+                const nameOnCard = document.getElementById("nameOnCard")?.value.trim();
+                const cardNumber = document.getElementById("cardNumber")?.value.trim();
+                const expiryDate = document.getElementById("expiryDate")?.value.trim();
+                const cvv = document.getElementById("cvv")?.value.trim();
+                const cardZip = document.getElementById("cardZip")?.value.trim();
+                const specialInstructions = document.getElementById("specialInstructions").value.trim();
+
+                if (!items.length) throw new Error("No items selected!");
+                if (!name || !city || !phone || !email || !address) {
+                    throw new Error("All fields must be filled out!");
+                }
+                if (!paymentMethod) throw new Error("Payment method is required!");
+
+                const creditCard = {
+                    cardNumber,
+                    nameOnCard,
+                    expiryDate,
+                    cvv,
+                    cardZip
+                };
+
+                const payload = {
+                    items,
+                    name,
+                    city,
+                    phone,
+                    email,
+                    address,
+                    total,
+                    paymentMethod,
+                    creditCard,
+                    specialInstructions
+                };
+
+                console.log("Payload being sent:", payload);
+
+                const response = await fetch("https://eft3wrtpad.execute-api.us-west-2.amazonaws.com/prod/checkout", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(payload),
+                });
+
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    console.error("Error from API:", errorText);
+                    throw new Error("Failed to submit order.");
+                }
+
+                alert("Order submitted successfully!");
+            } catch (error) {
+                console.error("Error during checkout:", error);
+                alert(error.message);
+            }
+        });
     }
-}
 
-function syncMainH1WithTitle() {
-    const mainH1 = document.querySelector("h1");
-    if (mainH1) {
-        mainH1.textContent = document.title;
-    }
-}
+        // Add click event listener to all addresses
+        document.querySelectorAll(".copy-address").forEach(element => {
+            element.addEventListener("click", () => {
+                const address = element.getAttribute("data-address");
 
-function hideElementsForMainDomain() {
-    const sectionsToHide = [".tab", ".tab-content", ".cart-section", ".payment-section", ".customer-info"];
-    sectionsToHide.forEach(selector => {
-        document.querySelectorAll(selector).forEach(element => element.style.display = "none");
-    });
-    console.log("Tabs, cart, and payment methods are hidden for www and doap.com.");
-}
+                // Copy the address to the clipboard
+                navigator.clipboard.writeText(address).then(() => {
+                    // Show confirmation message
+                    const copyMessage = document.getElementById("copyMessage");
+                    copyMessage.textContent = `Copied: ${address}`;
+                    copyMessage.style.display = "block";
 
-// Main function to initialize the page based on subdomain
-function initializePage() {
-    const hostname = window.location.hostname;
-    const domainName = getSubdomain();
-    const cityName = (hostname === "www.doap.com" || hostname === "doap.com") ? "California" : getCityName(domainName);
+                    // Hide the message after 2 seconds
+                    setTimeout(() => {
+                        copyMessage.style.display = "none";
+                    }, 2000);
+                }).catch(err => {
+                    console.error("Failed to copy address:", err);
+                });
+            });
+        });
+        // Locate the minimum order message container
+        const minOrderMessageElement = document.getElementById("minOrderMessage");
+        if (minOrderMessageElement) {
+            // Replace static text with dynamic variable
+            minOrderMessageElement.textContent = `Minimum order is $${MINIMUM_ORDER_AMOUNT}.`;
+        }
 
-    const minimumOrderAmount = getMinimumOrderAmount(domainName);
-    console.log(`Subdomain: ${domainName}, Minimum Order: $${minimumOrderAmount}`);
+        const categoryHeadings = document.querySelectorAll('[data-toggle="accordion"]');
 
-    if (hostname === "www.doap.com" || hostname === "doap.com") {
-        hideElementsForMainDomain();
-    }
+        categoryHeadings.forEach(heading => {
+            heading.addEventListener("click", () => {
+                const content = heading.nextElementSibling;
+                if (content.classList.contains("hidden")) {
+                    content.classList.remove("hidden");
+                    content.style.maxHeight = `${content.scrollHeight}px`;
+                } else {
+                    content.classList.add("hidden");
+                    content.style.maxHeight = "0";
+                }
+            });
+        });
+});
 
-    updatePageTitle(cityName, hostname);
-    updateCityNameElement(cityName);
-    updatePhoneNumberElement(getPhoneNumber(domainName));
-    updateLogoAndHeaderLinks(domainName, cityName);
-    syncMainH1WithTitle();
-}
-
-// Run the initialization
-initializePage();
-
-
-const targetElement = document.querySelector('body > div:nth-child(3)');
-if (targetElement) {
-    targetElement.remove();
-    console.log("Removed body > div:nth-child(3)");
-} else {
-    console.warn("Element body > div:nth-child(3) not found.");
-}
 
 
 // Close modal on Escape key press
