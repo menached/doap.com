@@ -44,17 +44,17 @@ jobs:
           aws configure set aws_secret_access_key "${{ secrets.AWS_SECRET_ACCESS_KEY }}"
           aws configure set region "${{ secrets.AWS_REGION }}"
 
-      # Step 6: Get Changed Files with Diff
+      # Step 6: Get Changed Files with Detailed Diff
       - name: Get Changed Files with Diff
         id: changes
         run: |
-          git fetch origin main
+          git fetch --depth=2 origin main
           if [ $(git rev-list --count HEAD) -eq 1 ]; then
-            echo "First commit, taking all files."
+            echo "First commit detected."
             git ls-files > changed_files.txt
-            git diff HEAD > changes.diff
+            git diff HEAD --stat > changes.diff
           else
-            git diff origin/main HEAD > changes.diff
+            git diff --stat origin/main HEAD > changes.diff
             git diff --name-only origin/main HEAD > changed_files.txt
           fi
           echo "Changed files:"
@@ -88,13 +88,13 @@ jobs:
           echo "Verifying deployment to server and S3..."
           ssh -o StrictHostKeyChecking=no dmenache@deb1.doap.com "ls -la /var/www/doap.com/"
 
-      # Step 9: Send Email Notification with Diff
+      # Step 9: Send Email Notification
       - name: Send Email Notification
         run: |
           echo "Sending Email Notification"
-          DIFF_OUTPUT=$(cat changes.diff | sed 's/&/&amp;/g; s/</&lt;/g; s/>/&gt;/g')  # Escape HTML
+          DIFF_OUTPUT=$(cat changes.diff | sed 's/&/&amp;/g; s/</&lt;/g; s/>/&gt;/g')
           if [ -z "$DIFF_OUTPUT" ]; then
-            DIFF_OUTPUT="No differences found."
+            DIFF_OUTPUT="No content differences found. The files might be new, renamed, or have formatting-only changes."
           fi
           EMAIL_BODY="<html>
           <head>
