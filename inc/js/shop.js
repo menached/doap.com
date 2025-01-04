@@ -1,31 +1,41 @@
 console.log("shop.js started loading");
 
 $(document).ready(function () {
-    // Function to show flying text
     function showFlyingText(message, isRemoved = false) {
-        // Create a new flying text element
+        console.log("Flying text message:", message);
+
         const flyingText = $('<div class="flying-text"></div>')
             .text(message)
             .css({
-                left: '50%', // Center horizontally
-                top: '50%',  // Center vertically
-                transform: 'translate(-50%, -50%)', // Adjust for true centering
-                zIndex: 9999, // Ensure it appears above other elements
+                position: 'fixed',  // Stay relative to the viewport
+                left: '50%',
+                top: '50%',  // Vertically centered in the viewport
+                transform: 'translate(-50%, -50%)',  // Center based on its size
+                zIndex: 9999,  // Ensure it appears above all other elements
+                padding: '20px 40px',
+                borderRadius: '10px',
+                fontSize: '1.5rem',
+                fontWeight: 'bold',
+                color: 'white',
+                backgroundColor: isRemoved ? '#dc3545' : '#28a745',  // Red for remove, green for add
+                border: '2px solid black',  // Add a debug border to make it obvious
             });
 
-        // Add removed class if it's a removal message
-        if (isRemoved) {
-            flyingText.addClass('removed');
-        }
+        $('body').append(flyingText);
 
-        // Append to the container
-        $('#flying-text-container').append(flyingText);
-
-        // Remove the flying text after the animation
         setTimeout(() => {
-            flyingText.remove();
-        }, 3000); // Match animation duration
+            flyingText.fadeOut(500, () => flyingText.remove());
+        }, 3000);  // Remove after 3 seconds
     }
+
+    window.addEventListener('scroll', () => {
+        const flyingTextElement = document.querySelector('.flying-text');
+        if (flyingTextElement) {
+            const windowHeight = window.innerHeight;
+            flyingTextElement.style.top = `${windowHeight / 2}px`;  // Recenter based on viewport height
+        }
+    });
+
 
     // Example usage: Add click events to your items
     $('.item').off('click').on('click', function () {
@@ -507,14 +517,21 @@ document.addEventListener('mouseover', function (event) {
 
 //console.log("Image src:", imgSrc);
 
-
 function showNotification(message) {
     const popup = document.createElement('div');
-    popup.className = 'popup success visible';
+    popup.className = 'popup success visible flying-text'; // Add flying-text class for consistency
     popup.textContent = message;
     document.body.appendChild(popup);
     setTimeout(() => popup.remove(), 3000);
 }
+
+//function showNotification(message) {
+    //const popup = document.createElement('div');
+    //popup.className = 'popup success visible';
+    //popup.textContent = message;
+    //document.body.appendChild(popup);
+    //setTimeout(() => popup.remove(), 3000);
+//}
 
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -561,11 +578,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const cartContainer = document.getElementById('cartContainer');
     const selectedItemsList = document.getElementById('selectedItemsList');
 
-    // Function to check if the cart has any items
+    //// Function to check if the cart has any items
+    //function toggleCartVisibility() {
+        //const hasItems = selectedItemsList.querySelectorAll('li').length > 0 &&
+                         //selectedItemsList.querySelector('li').textContent !== 'No items selected yet.';
+        //cartContainer.style.display = hasItems ? 'block' : 'none';
+    //}
     function toggleCartVisibility() {
-        const hasItems = selectedItemsList.querySelectorAll('li').length > 0 &&
-                         selectedItemsList.querySelector('li').textContent !== 'No items selected yet.';
-        cartContainer.style.display = hasItems ? 'block' : 'none';
+        const hasRealItems = Array.from(selectedItemsList.querySelectorAll('li')).some(li =>
+            !li.textContent.includes('No items selected yet.')
+        );
+        cartContainer.style.display = hasRealItems ? 'block' : 'none';
     }
 
     document.querySelectorAll('.product input[type="checkbox"]').forEach(checkbox => {
