@@ -1,21 +1,24 @@
 console.log("shop.js started loading");
-const productTitle = 'NULL';
+const productTitle = '';
 $(document).ready(function () {
     function showFlyingText(message, isRemoved = false) {
         console.log("Flying text message:", message);
 
+        // Remove any existing flying text before adding a new one
+        $('.flying-text').remove();
+
         const flyingText = $('<div class="flying-text"></div>')
             .text(message)
-            .addClass(isRemoved ? 'removed' : 'added')  // Add a specific class for styling
+            .addClass(isRemoved ? 'removed' : 'added')
             .css({
-                position: 'fixed',  // Stay relative to the viewport
+                position: 'fixed',
                 left: '50%',
-                top: '50%',  // Vertically centered
-                transform: 'translate(-50%, -50%)',  // Center horizontally
+                top: '50%',
+                transform: 'translate(-50%, -50%)',
                 zIndex: 9999,
                 fontSize: '2rem',
                 fontWeight: 'bold',
-                borderRadius: '10px',  // Remove rounded corners
+                borderRadius: '10px',
                 textShadow: '2px 2px 5px rgba(0, 0, 0, 0.2)',
             });
 
@@ -35,20 +38,22 @@ $(document).ready(function () {
     });
 
 
-    $('.item').on('click', function () {
+
+    // Delegated event listener for .item elements (covers dynamically added elements)
+    $(document).on('click', '.item', function () {
         const checkbox = $(this).find('input[type="checkbox"]');
         const isChecked = checkbox.prop('checked');
 
         // Find the product title within the closest .product div
-        const productElement = $(this).closest('.product');  // Move to the parent .product
-        const productTitleElement = productElement.find('.item-title');  // Find .item-title inside .product
+        const productElement = $(this).closest('.product');
+        const productTitleElement = productElement.find('.item-title');
 
         if (productTitleElement.length === 0) {
             console.error('Error: Product title not found for:', productElement);
-            return;  // Stop execution if no product title is found
+            return;
         }
 
-        const productTitle = productTitleElement.text().trim() || "Unknown Product";  // Get the product title or default to "Unknown Product"
+        const productTitle = productTitleElement.text().trim() || "Unknown Product";  // Get the product title
 
         checkbox.prop('checked', !isChecked);  // Toggle the checkbox
 
@@ -59,17 +64,12 @@ $(document).ready(function () {
         }
     });
 
-
-    $(document).on('click', '.item', function () {
-        const checkbox = $(this).find('input[type="checkbox"]');
-        const isChecked = checkbox.prop('checked');
-        checkbox.prop('checked', !isChecked);
-
-        if (!isChecked) {
-            showFlyingText(`Added ${productTitle} to cart.`, false);  // Added
-        } else {
-            showFlyingText(`Removed ${productTitle} from cart.`, true);  // Removed
-        }
+    // Log the image source when a product image is clicked
+    document.querySelectorAll('.item img').forEach(img => {
+        img.addEventListener('click', function () {
+            const imgSrc = this.src;  // Get the image source
+            console.log("Image src:", imgSrc);
+        });
     });
 
     document.querySelectorAll('.item img').forEach(img => {
@@ -534,12 +534,12 @@ function showNotification(message) {
     setTimeout(() => popup.remove(), 3000);
 }
 
-//function showNotification(message) {
-    //const popup = document.createElement('div');
-    //popup.className = 'popup success visible';
-    //popup.textContent = message;
-    //document.body.appendChild(popup);
-    //setTimeout(() => popup.remove(), 3000);
+//function shownotification(message) {
+    //const popup = document.createelement('div');
+    //popup.classname = 'popup success visible';
+    //popup.textcontent = message;
+    //document.body.appendchild(popup);
+    //settimeout(() => popup.remove(), 3000);
 //}
 
 

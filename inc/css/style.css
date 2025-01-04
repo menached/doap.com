@@ -149,10 +149,10 @@ body {
     display: none; /* Hidden by default */
 }
 
-/* Show the "Added to Cart" text when selected */
-.item.selected .added-to-cart {
-    display: block;
-}
+/*[> Show the "Added to Cart" text when selected <]*/
+/*.item.selected .added-to-cart {*/
+    /*display: block;*/
+/*}*/
 
 
 
@@ -1097,11 +1097,15 @@ button:hover {
     animation: flyUp 2s ease-out forwards;
 }
 .flying-text {
-    background-color: transparent !important;  /* No background */
-    border: none !important;  /* Remove borders */
-    border-radius: 0 !important;  /* Remove rounded corners */
-    padding: 0;  /* Remove padding */
-    font-size: 2rem;  /* Consistent font size */
+    font-family: Marvel;
+    background-color: #eee!important; /* Green for added */
+    #border: none !important;  /* Remove borders */
+    border: 1px solid #000;  /* Remove borders */
+    #border-radius: 0 !important;  /* Remove rounded corners */
+    border-radius: 15px;  /* Remove rounded corners */
+    padding: 5;  /* Remove padding */
+    #font-size: 2rem;  /* Consistent font size */
+    font-size: 1.2rem;  /* Consistent font size */
     color: inherit;  /* Inherit color set via JavaScript */
 }
 
