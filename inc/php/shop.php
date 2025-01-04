@@ -18,9 +18,11 @@
         echo "<form id=\"cartForm\">";
 
         include('inc/html/products.html');
-        include('inc/html/cartsection.html'); 
-    }
-    ?>
+?>
+    <div id="cartContainer">
+        <?php include('inc/html/cartsection.html');  ?>
+    </div>
+<?php } ?>
 
 
     <div id="popupMessage" class="popup hidden">

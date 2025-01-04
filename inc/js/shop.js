@@ -28,18 +28,39 @@ $(document).ready(function () {
     }
 
     // Example usage: Add click events to your items
-    $('.item').on('click', function () {
+    $('.item').off('click').on('click', function () {
+        const checkbox = $(this).find('input[type="checkbox"]');
+        const isChecked = checkbox.prop('checked');
+        checkbox.prop('checked', !isChecked); // Toggle the checkbox
+
+        // Show flying text
+        if (!isChecked) {
+            showNotification('Added to Cart');
+        } else {
+            showNotification('Removed from Cart');
+        }
+    });
+
+    $(document).on('click', '.item', function () {
         const checkbox = $(this).find('input[type="checkbox"]');
         const isChecked = checkbox.prop('checked');
         checkbox.prop('checked', !isChecked);
 
-        // Show flying text
         if (!isChecked) {
-            showFlyingText('Added to Cart');
+            showNotification('Added to Cart');
         } else {
-            showFlyingText('Removed from Cart', true);
+            showNotification('Removed from Cart');
         }
     });
+
+    document.querySelectorAll('.item img').forEach(img => {
+        img.addEventListener('click', function () {
+            const imgSrc = this.src; // Get the image source
+            console.log("Image src:", imgSrc); // Log the source of the clicked image
+        });
+    });
+
+
 });
 
 
@@ -472,8 +493,19 @@ function hideLargeImage() {
     modal.style.pointerEvents = 'none';
 }
 
-console.log("Hovered:", this.querySelector('.thumbnail').getAttribute('alt'));
-console.log("Image src:", imgSrc);
+
+//console.log("Hovered:", this.querySelector('.thumbnail').getAttribute('alt'));
+
+document.addEventListener('mouseover', function (event) {
+    const thumbnail = event.target.closest('.thumbnail');
+    if (thumbnail) {
+        console.log("Hovered:", thumbnail.getAttribute('alt'));
+    }
+});
+
+
+
+//console.log("Image src:", imgSrc);
 
 
 function showNotification(message) {
@@ -536,14 +568,26 @@ document.addEventListener('DOMContentLoaded', () => {
         cartContainer.style.display = hasItems ? 'block' : 'none';
     }
 
-    // Listen for changes to the cart
-    document.querySelectorAll('.item input[type="checkbox"]').forEach(checkbox => {
+    document.querySelectorAll('.product input[type="checkbox"]').forEach(checkbox => {
         checkbox.addEventListener('change', () => {
-            const itemDetails = checkbox.closest('.item');
-            const itemName = itemDetails.querySelector('.item-title').textContent;
-            const itemPrice = parseFloat(itemDetails.querySelector('.item-price').textContent.replace('$', ''));
+            // Find the parent product element
+            const productElement = checkbox.closest('.product');
+            if (!productElement) {
+                console.error('Error: .product element not found.');
+                return;
+            }
+
+            // Find the item-details within the product
+            const itemDetails = productElement.querySelector('.item-details');
+            if (!itemDetails) {
+                console.error('Error: .item-details element not found.');
+                return;
+            }
+
+            const itemName = itemDetails.querySelector('.item-title')?.textContent || 'Unknown Item';
+            const itemPrice = parseFloat(itemDetails.querySelector('.item-price')?.textContent.replace('$', '') || 0);
             const quantityInput = itemDetails.querySelector('.quantity');
-            const quantity = parseInt(quantityInput.value, 10) || 1;
+            const quantity = parseInt(quantityInput?.value, 10) || 1;
 
             if (checkbox.checked) {
                 // Add item to the cart
@@ -562,6 +606,7 @@ document.addEventListener('DOMContentLoaded', () => {
             toggleCartVisibility();
         });
     });
+
 
     // Initially check if the cart has any items
     toggleCartVisibility();
