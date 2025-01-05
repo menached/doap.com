@@ -26,8 +26,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Marvel&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="inc/css/style.css">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script src="inc/js/shop.js" type="module" defer></script>
     <script src="inc/js/payments.js" type="module" defer></script>
+    <script src="inc/js/shop.js" type="module" defer></script>
     <script src="inc/js/subdomainData.js" type="module" defer></script>
     <script src="inc/js/shopzipFinder.js" defer></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
