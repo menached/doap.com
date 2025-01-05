@@ -638,47 +638,38 @@ document.addEventListener('DOMContentLoaded', () => {
     const cartContainer = document.getElementById('cartContainer');
     const selectedItemsList = document.getElementById('selectedItemsList');
 
-    //// Function to check if the cart has any items
-    //function toggleCartVisibility() {
-        //const hasItems = selectedItemsList.querySelectorAll('li').length > 0 &&
-                         //selectedItemsList.querySelector('li').textContent !== 'No items selected yet.';
-        //cartContainer.style.display = hasItems ? 'block' : 'none';
-    //}
     function toggleCartVisibility() {
         const hasRealItems = Array.from(selectedItemsList.querySelectorAll('li')).some(li =>
             !li.textContent.includes('No items selected yet.')
         );
         cartContainer.style.display = hasRealItems ? 'block' : 'none';
+
+        // Apply green background to the first item if only one item exists
+        const cartItems = selectedItemsList.querySelectorAll('li');
+        cartItems.forEach((item, index) => {
+            if (cartItems.length === 1) {
+                item.style.backgroundColor = 'green';  // Only one item
+            } else {
+                // Alternate background color for multiple items
+                item.style.backgroundColor = index % 2 === 0 ? 'green' : 'greenyellow';
+            }
+        });
     }
 
     document.querySelectorAll('.product input[type="checkbox"]').forEach(checkbox => {
         checkbox.addEventListener('change', () => {
-            // Find the parent product element
             const productElement = checkbox.closest('.product');
-            if (!productElement) {
-                console.error('Error: .product element not found.');
-                return;
-            }
-
-            // Find the item-details within the product
             const itemDetails = productElement.querySelector('.item-details');
-            if (!itemDetails) {
-                console.error('Error: .item-details element not found.');
-                return;
-            }
-
             const itemName = itemDetails.querySelector('.item-title')?.textContent || 'Unknown Item';
             const itemPrice = parseFloat(itemDetails.querySelector('.item-price')?.textContent.replace('$', '') || 0);
             const quantityInput = itemDetails.querySelector('.quantity');
             const quantity = parseInt(quantityInput?.value, 10) || 1;
 
             if (checkbox.checked) {
-                // Add item to the cart
                 const li = document.createElement('li');
                 li.textContent = `${itemName} (x${quantity}) - $${(itemPrice * quantity).toFixed(2)}`;
                 selectedItemsList.appendChild(li);
             } else {
-                // Remove item from the cart
                 const items = Array.from(selectedItemsList.querySelectorAll('li'));
                 const itemToRemove = items.find(li => li.textContent.includes(itemName));
                 if (itemToRemove) {
@@ -686,13 +677,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
 
-            toggleCartVisibility();
+            toggleCartVisibility();  // Update cart visibility and item background
         });
     });
 
-
-    // Initially check if the cart has any items
-    toggleCartVisibility();
+    toggleCartVisibility();  // Initial check
 });
 
 console.log("shop.js loaded completely");
