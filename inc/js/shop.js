@@ -1,68 +1,6 @@
 console.log("shop.js started loading");
 const productTitle = '';
 $(document).ready(function () {
-    function showFlyingText(message, isRemoved = false) {
-        console.log("Flying text message:", message);
-
-        // Remove any existing flying text before adding a new one
-        $('.flying-text').remove();
-
-        const flyingText = $('<div class="flying-text"></div>')
-            .text(message)
-            .addClass(isRemoved ? 'removed' : 'added')
-            .css({
-                position: 'fixed',
-                left: '50%',
-                top: '50%',
-                transform: 'translate(-50%, -50%)',
-                zIndex: 9999,
-                fontSize: '2rem',
-                fontWeight: 'bold',
-                borderRadius: '10px',
-                textShadow: '2px 2px 5px rgba(0, 0, 0, 0.2)',
-            });
-
-        $('body').append(flyingText);
-
-        setTimeout(() => {
-            flyingText.fadeOut(500, () => flyingText.remove());
-        }, 3000);  // Fade out after 3 seconds
-    }
-
-    window.addEventListener('scroll', () => {
-        const flyingTextElement = document.querySelector('.flying-text');
-        if (flyingTextElement) {
-            const windowHeight = window.innerHeight;
-            flyingTextElement.style.top = `${windowHeight / 2}px`;  // Adjust based on viewport height
-        }
-    });
-
-
-
-    // Delegated event listener for .item elements (covers dynamically added elements)
-    $(document).on('click', '.item', function () {
-        const checkbox = $(this).find('input[type="checkbox"]');
-        const isChecked = checkbox.prop('checked');
-
-        // Find the product title within the closest .product div
-        const productElement = $(this).closest('.product');
-        const productTitleElement = productElement.find('.item-title');
-
-        if (productTitleElement.length === 0) {
-            console.error('Error: Product title not found for:', productElement);
-            return;
-        }
-
-        const productTitle = productTitleElement.text().trim() || "Unknown Product";  // Get the product title
-
-        checkbox.prop('checked', !isChecked);  // Toggle the checkbox
-
-        if (!isChecked) {
-            showFlyingText(`Added ${productTitle} to cart.`, false);  // Added
-        } else {
-            showFlyingText(`Removed ${productTitle} from cart.`, true);  // Removed
-        }
-    });
 
     // Log the image source when a product image is clicked
     document.querySelectorAll('.item img').forEach(img => {
@@ -72,19 +10,8 @@ $(document).ready(function () {
         });
     });
 
-    document.querySelectorAll('.item img').forEach(img => {
-        img.addEventListener('click', function () {
-            const imgSrc = this.src; // Get the image source
-            console.log("Image src:", imgSrc); // Log the source of the clicked image
-        });
-    });
-
-
 });
 
-
-// Cart update logic
-const cartForm = document.getElementById("cartForm");
 const totalDisplay = document.getElementById("total");
 const selectedItemsList = document.getElementById("selectedItemsList");
 
@@ -106,101 +33,26 @@ const updateCart = () => {
                 <span class="remove-item" data-value="${item.value}">x</span></li>`;
         });
 
-    // Update the selected items and total display
-    selectedItemsList.innerHTML = cartItems.length
-        ? cartItems.join("")
-        : '<li>No items selected yet.</li>';
-    totalDisplay.textContent = `$${total.toFixed(2)}`;
+        // Update the selected items and total display
+        selectedItemsList.innerHTML = cartItems.length
+            ? cartItems.join("")
+            : '<li>No items selected yet.</li>';
+        totalDisplay.textContent = `$${total.toFixed(2)}`;
 
-    const handleOrderMessage = (total) => {
-        if (total === 0) {
-            minOrderMessage.textContent = `Minimum order is $${MINIMUM_ORDER_AMOUNT}.`;
-            minOrderMessage.style.color = "black";
-        } else if (total > 0 && total < MINIMUM_ORDER_AMOUNT) {
-            minOrderMessage.textContent = `Minimum order is $${MINIMUM_ORDER_AMOUNT}.`;
-            minOrderMessage.style.color = "red";
-        } else {
-            minOrderMessage.textContent = "Free 1hr delivery!";
-            minOrderMessage.style.color = "green";
-        }
-    };
-
-
-    // Example cart update logic (placeholder for your actual cart logic)
-    const updateCart = () => {
-        let total = parseFloat(totalDisplay.textContent.replace('$', '')) || 0;
-        handleOrderMessage(total);
-    };
-
-    // Call the function when the cart updates
-    updateCart();
-
-    document.getElementById("cartForm").addEventListener("change", updateCart);
-
-
-        // Add remove-item functionality
-        document.querySelectorAll(".remove-item").forEach(button => {
-            button.addEventListener("click", () => {
-                const valueToRemove = button.getAttribute("data-value");
-                const itemToUncheck = cartForm.querySelector(`input[name="item"][value="${valueToRemove}"]`);
-                if (itemToUncheck) {
-                    itemToUncheck.checked = false;
-                    cartForm.dispatchEvent(new Event("change"));
-                }
-            });
-        });
-    };
-
-
-    document.addEventListener("DOMContentLoaded", function () {
-        document.addEventListener("click", function (e) {
-            if (e.target.matches(".add-to-cart-button")) {  // Matches the add-to-cart button
-                setTimeout(() => {  // Ensure the DOM updates before applying styles
-                    const cartItems = document.querySelectorAll('.cart-container li'); // Adjust your cart list selector
-
-                    if (cartItems.length === 1) {
-                        cartItems[0].style.backgroundColor = 'green'; // First cart item background
-                    } else {
-                        cartItems.forEach((item) => {
-                            item.style.backgroundColor = ''; // Reset for other counts
-                        });
-                    }
-                }, 100);  // Delay to ensure the DOM reflects new additions
+        const handleOrderMessage = (total) => {
+            if (total === 0) {
+                minOrderMessage.textContent = `Minimum order is $${MINIMUM_ORDER_AMOUNT}.`;
+                minOrderMessage.style.color = "black";
+            } else if (total > 0 && total < MINIMUM_ORDER_AMOUNT) {
+                minOrderMessage.textContent = `Minimum order is $${MINIMUM_ORDER_AMOUNT}.`;
+                minOrderMessage.style.color = "red";
+            } else {
+                minOrderMessage.textContent = "Free 1hr delivery!";
+                minOrderMessage.style.color = "green";
             }
-        });
-    });
+        };
 
-
-    // Select all product items
-    const productItems = document.querySelectorAll('.product');
-
-    // Add click event listener to each product item
-    productItems.forEach(item => {
-        item.addEventListener('click', function () {
-            const checkbox = this.querySelector('input[type="checkbox"]');
-
-            // Toggle the selected state
-            const isSelected = checkbox.checked;
-            checkbox.checked = !isSelected;
-
-            // Apply or remove the 'selected' class based on the checkbox state
-            this.classList.toggle('selected', !isSelected);
-
-            // Find the add-to-cart button and change its text
-            const button = this.querySelector('.add-to-cart-button');
-            if (button) {
-                button.textContent = !isSelected ? "Added to Cart" : "Add to Cart";
-                button.classList.toggle('added', !isSelected);  // Optional: Add a CSS class for styling
-            }
-
-            // Optionally, update the cart or any other UI here
-            console.log(`${this.querySelector('.item-title').textContent} is now ${!isSelected ? "added to" : "removed from"} the cart.`);
-        });
-    });
-
-    console.log("Product selection logic applied successfully");
-
-
+    };
 
 // Event listeners for cart updates
 if (cartForm) {
@@ -211,61 +63,7 @@ if (cartForm) {
         }
     });
 }
-
 console.log("Cart logic applied successfully!");
-
-
-// Payment method handling
-const paymentMethodDropdown = document.getElementById("paymentMethod");
-const creditCardForm = document.getElementById("creditCardForm");
-const cryptoWallets = document.getElementById("cryptoWallets");
-const generalHelp = document.getElementById("generalHelp");
-
-const handlePaymentMethodChange = (selectedMethod) => {
-    // Hide all sections initially
-    creditCardForm.style.display = "none";
-    cryptoWallets.style.display = "none";
-    generalHelp.style.display = "none";
-
-    // Show the appropriate section based on the selected payment method
-    if (selectedMethod === "credit-card") {
-        creditCardForm.style.display = "block";
-    } else if (selectedMethod === "crypto") {
-        cryptoWallets.style.display = "block";
-    } else if (["cash"].includes(selectedMethod)) {
-        generalHelp.style.display = "block";
-        // Update the message for "Cash" payment method
-        generalHelp.innerHTML = `
-            <h3 style="display: flex; justify-content: space-between; align-items: center;">
-                <span><i class="fas fa-phone-alt"></i> Cash on Delivery</span>
-                <i class="fas fa-question-circle" style="color: green; cursor: pointer;" title="Need more help? Click here!"></i>
-            </h3>
-            <p>COD is the easiest payment method.  No sign-up required.  Show proof of age upon delivery.  Check your email after placing your order to verify your order details. 
-            If you need to make changes, call us at <strong>(833) 289-3627</strong> for assistance. We're standing by to help!</p>
-        `;
-    } else if (["zelle", "venmo", "paypal", "cashapp"].includes(selectedMethod)) {
-        generalHelp.style.display = "block";
-        generalHelp.innerHTML = `
-            <h3 style="display: flex; justify-content: space-between; align-items: center;">
-                <span><i class="fas fa-phone-alt"></i> Need Assistance?</span>
-                <i class="fas fa-question-circle" style="color: green; cursor: pointer;" title="Need more help? Click here!"></i>
-            </h3>
-            <p>After placing your order, please check your email for further instructions on how to complete your payment. 
-            For zelle send payment to zelle@doap.com, for venmo, venmo@doap.com, for paypal, paypal@doap.com, and cashapp is cashapp@doap.com.  Feel free to call us at <strong>(833) 289-3627</strong> for assistance. We're standing by to help!</p>
-        `;
-    }
-};
-
-if (paymentMethodDropdown) {
-    paymentMethodDropdown.addEventListener("change", (event) => {
-        handlePaymentMethodChange(event.target.value);
-    });
-
-    // Trigger default behavior on page load
-    handlePaymentMethodChange(paymentMethodDropdown.value);
-}
-console.log("Payment method logic applied!");
-
 
 // Get the modal
 const modal = document.getElementById("imageModal");
@@ -281,13 +79,10 @@ document.querySelectorAll(".item img").forEach(img => {
     });
 });
 
-
 // Close the modal
 window.closeModal = function () {
     modal.style.display = "none";
 };
-
-
 
 // Configuration: Map subdomains to minimum order amounts, city names, and phone numbers
 const areaMinimum = {
@@ -365,16 +160,6 @@ if (headerLink) {
     headerLink.title = `Call ${cityName} Doap!`;
 }
 
-// Sync the H1 tag content with the page title
-const mainH1 = document.querySelector("h1");
-if (mainH1) {
-    mainH1.textContent = document.title;
-}
-
-// Debug output
-console.log(`Page title set to: ${document.title}`);
-
-
 // Tab switching logic
 const applyTabListeners = () => {
     const tabs = document.querySelectorAll(".tab");
@@ -399,16 +184,7 @@ const applyTabListeners = () => {
 applyTabListeners();
 console.log("Tab logic applied successfully!");
 
-
-
 document.addEventListener("DOMContentLoaded", () => {
-
-    // Remove "Call us at" from the phone number
-    const phone = document.querySelector(".phone-number");
-    if (phone) {
-        phone.textContent = phone.textContent.replace(/Call us at\s*/, '');
-    }
-
     // Checkout button logic
     const checkoutButton = document.getElementById("checkoutButton");
     if (checkoutButton && cartForm) {
@@ -530,108 +306,3 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
 });
-
-
-
-// Close modal on Escape key press
-document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape') {
-        hideLargeImage();
-    }
-});
-
-
-function showLargeImage(imageSrc) {
-    const modal = document.getElementById('largeImageModal');
-    const img = document.getElementById('largeImage');
-    img.src = imageSrc;
-
-    img.onerror = () => {
-        img.src = '/wp-content/uploads/default-large-image.webp'; // Fallback image path
-    };
-
-    modal.style.visibility = 'visible';
-    modal.style.opacity = '1';
-    modal.style.pointerEvents = 'auto';
-}
-
-
-function hideLargeImage() {
-    const modal = document.getElementById('largeImageModal');
-    modal.style.opacity = '0';
-    modal.style.visibility = 'hidden';
-    modal.style.pointerEvents = 'none';
-}
-
-
-//console.log("Hovered:", this.querySelector('.thumbnail').getAttribute('alt'));
-
-document.addEventListener('mouseover', function (event) {
-    const thumbnail = event.target.closest('.thumbnail');
-    if (thumbnail) {
-        console.log("Hovered:", thumbnail.getAttribute('alt'));
-    }
-});
-
-
-
-//console.log("Image src:", imgSrc);
-
-function showNotification(message) {
-    const popup = document.createElement('div');
-    popup.className = 'popup success visible flying-text'; // Add flying-text class for consistency
-    popup.textContent = message;
-    document.body.appendChild(popup);
-    setTimeout(() => popup.remove(), 3000);
-}
-
-//function shownotification(message) {
-    //const popup = document.createelement('div');
-    //popup.classname = 'popup success visible';
-    //popup.textcontent = message;
-    //document.body.appendchild(popup);
-    //settimeout(() => popup.remove(), 3000);
-//}
-
-
-document.addEventListener("DOMContentLoaded", function () {
-    if (window.location.hostname === "www.doap.com" && window.location.pathname === "/simple.php") {
-        const cartForm = document.getElementById("cartForm");
-        if (cartForm) {
-            cartForm.style.display = "none";
-            console.log("#cartForm hidden successfully.");
-        } else {
-            console.warn("#cartForm not found on this page.");
-        }
-    }
-});
-
-
-document.addEventListener('DOMContentLoaded', () => {
-    console.log("Product selection logic initialized");
-
-    // Select all product items
-    const productItems = document.querySelectorAll('.product');
-
-    // Add click event listener to each product item
-    productItems.forEach(item => {
-        item.addEventListener('click', function () {
-            const checkbox = this.querySelector('input[type="checkbox"]');
-
-            // Toggle the selected state
-            const isSelected = checkbox.checked;
-            checkbox.checked = !isSelected;
-
-            // Apply or remove the 'selected' class based on the checkbox state
-            this.classList.toggle('selected', !isSelected);
-
-            // Optionally, update the cart or any other UI here
-            console.log(`${this.querySelector('.item-title').textContent} is now ${!isSelected ? "added to" : "removed from"} the cart.`);
-        });
-    });
-
-    console.log("Product selection logic applied successfully");
-});
-
-
-console.log("shop.js loaded completely");
