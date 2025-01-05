@@ -20,6 +20,7 @@
 !inc/js/
 !inc/js/shop.js
 !inc/js/payments.js
+!inc/js/modal.js
 !inc/js/shopzipFinder.js
 !inc/js/subdomainData.js
 !inc/php/

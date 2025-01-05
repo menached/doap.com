@@ -1,4 +1,14 @@
 // Payment method handling
+// Configuration: Map subdomains to minimum order amounts, city names, and phone numbers
+const areaMinimum = {
+    alamo: 40, burlingame: 120, campbell: 120, concord: 50, danville: 40, dublin: 40,
+    lafayette: 50, livermore: 50, orinda: 60, pittsburg: 75, pleasanthill: 60,
+    sanramon: 40, walnutcreek: 50
+};
+const MINIMUM_ORDER_AMOUNT = areaMinimum[domainName] || 60;
+console.log(`Subdomain: ${domainName}, Minimum Order: $${MINIMUM_ORDER_AMOUNT}`);
+
+
 const paymentMethodDropdown = document.getElementById("paymentMethod");
 const creditCardForm = document.getElementById("creditCardForm");
 const cryptoWallets = document.getElementById("cryptoWallets");

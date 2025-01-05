@@ -65,32 +65,6 @@ if (cartForm) {
 }
 console.log("Cart logic applied successfully!");
 
-// Get the modal
-const modal = document.getElementById("imageModal");
-const modalImage = document.getElementById("modalImage");
-const captionText = document.getElementById("caption");
-
-// Add event listener to all product images
-document.querySelectorAll(".item img").forEach(img => {
-    img.addEventListener("click", function () {
-        modal.style.display = "block";
-        modalImage.src = this.src;
-        captionText.innerHTML = this.alt;
-    });
-});
-
-// Close the modal
-window.closeModal = function () {
-    modal.style.display = "none";
-};
-
-// Configuration: Map subdomains to minimum order amounts, city names, and phone numbers
-const areaMinimum = {
-    alamo: 40, burlingame: 120, campbell: 120, concord: 50, danville: 40, dublin: 40,
-    lafayette: 50, livermore: 50, orinda: 60, pittsburg: 75, pleasanthill: 60,
-    sanramon: 40, walnutcreek: 50
-};
-
 const cityMap = {
     pleasanthill: "Pleasant Hill", walnutcreek: "Walnut Creek", castrovalley: "Castro Valley",
     sanramon: "San Ramon", discoverybay: "Discovery Bay", alamo: "Alamo", antioch: "Antioch",
@@ -112,9 +86,7 @@ const defaultPhoneNumber = "833-289-3627";
 const hostname = window.location.hostname;
 const domainName = hostname.split('.')[0].toLowerCase();
 let cityName = cityMap[domainName] || domainName.charAt(0).toUpperCase() + domainName.slice(1);
-const MINIMUM_ORDER_AMOUNT = areaMinimum[domainName] || 60;
 
-console.log(`Subdomain: ${domainName}, Minimum Order: $${MINIMUM_ORDER_AMOUNT}`);
 
 // Handle special case for the main domain (www.doap.com or doap.com)
 if (hostname === "www.doap.com" || hostname === "doap.com") {
