@@ -29,11 +29,6 @@ body {
     padding: 20px;
 }
 
-.fromElsewhere {
-    position:relative;top:40px;
-    font-size:1.2em;
-    font-family: Marvel;
-}
 
 .item-list {
     display: grid; /* Use grid layout */
@@ -1144,6 +1139,11 @@ button:hover {
     .zip-form button {
         width: 100%; /* Full width for mobile */
     }
+    .fromElsewhere {
+        position:relative;top:10px;
+        font-size:1.2em;
+        font-family: Marvel;
+    }
 }
 
 
@@ -1162,6 +1162,11 @@ button:hover {
     .item-details { 
         max-width: 100%;
     }
+    .fromElsewhere {
+        position:relative;top:30px;
+        font-size:1.2em;
+        font-family: Marvel;
+    }
 }
 
 /* For large screens, 2 items per row */
@@ -1174,6 +1179,11 @@ button:hover {
     .item {
         max-width: 100%; /* Let each item take the full width of its grid cell */
         margin: 0; /* Ensure no margin */
+    }
+    .fromElsewhere {
+        position:relative;top:40px;
+        font-size:1.2em;
+        font-family: Marvel;
     }
 }
 
@@ -1209,6 +1219,11 @@ button:hover {
     #zipFormContainer button {
         padding: 8px 12px; /* Smaller padding for the button */
         font-size: 0.8rem; /* Reduce font size */
+    }
+    .fromElsewhere {
+        position:relative;top:0px;
+        font-size:1em;
+        font-family: Marvel;
     }
 }
 /* For mobile and small screens (less than 768px) */

@@ -151,6 +151,57 @@ const updateCart = () => {
         });
     };
 
+
+    document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("click", function (e) {
+            if (e.target.matches(".add-to-cart-button")) {  // Matches the add-to-cart button
+                setTimeout(() => {  // Ensure the DOM updates before applying styles
+                    const cartItems = document.querySelectorAll('.cart-container li'); // Adjust your cart list selector
+
+                    if (cartItems.length === 1) {
+                        cartItems[0].style.backgroundColor = 'green'; // First cart item background
+                    } else {
+                        cartItems.forEach((item) => {
+                            item.style.backgroundColor = ''; // Reset for other counts
+                        });
+                    }
+                }, 100);  // Delay to ensure the DOM reflects new additions
+            }
+        });
+    });
+
+
+    // Select all product items
+    const productItems = document.querySelectorAll('.product');
+
+    // Add click event listener to each product item
+    productItems.forEach(item => {
+        item.addEventListener('click', function () {
+            const checkbox = this.querySelector('input[type="checkbox"]');
+
+            // Toggle the selected state
+            const isSelected = checkbox.checked;
+            checkbox.checked = !isSelected;
+
+            // Apply or remove the 'selected' class based on the checkbox state
+            this.classList.toggle('selected', !isSelected);
+
+            // Find the add-to-cart button and change its text
+            const button = this.querySelector('.add-to-cart-button');
+            if (button) {
+                button.textContent = !isSelected ? "Added to Cart" : "Add to Cart";
+                button.classList.toggle('added', !isSelected);  // Optional: Add a CSS class for styling
+            }
+
+            // Optionally, update the cart or any other UI here
+            console.log(`${this.querySelector('.item-title').textContent} is now ${!isSelected ? "added to" : "removed from"} the cart.`);
+        });
+    });
+
+    console.log("Product selection logic applied successfully");
+
+
+
 // Event listeners for cart updates
 if (cartForm) {
     cartForm.addEventListener("change", updateCart);
