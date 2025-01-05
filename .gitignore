@@ -19,6 +19,7 @@
 !inc/html/products.html
 !inc/js/
 !inc/js/shop.js
+!inc/js/payments.js
 !inc/js/shopzipFinder.js
 !inc/js/subdomainData.js
 !inc/php/
