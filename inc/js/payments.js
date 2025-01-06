@@ -1,4 +1,15 @@
 // Payment method handling
+
+// Extract subdomain from the current hostname
+let domainName = window.location.hostname.split('.')[0];
+
+// Check if it's a known subdomain; if not, set a default or handle it gracefully
+if (!areaMinimum.hasOwnProperty(domainName)) {
+    console.warn(`Unknown subdomain: ${domainName}. Setting default.`);
+    domainName = 'default';
+}
+
+
 // Configuration: Map subdomains to minimum order amounts, city names, and phone numbers
 const areaMinimum = {
     alamo: 40, burlingame: 120, campbell: 120, concord: 50, danville: 40, dublin: 40,
