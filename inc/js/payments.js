@@ -12,8 +12,8 @@ let domainName = window.location.hostname.split('.')[0];
 
 // Check if it's a known subdomain; if not, set a default or handle it gracefully
 if (!areaMinimum.hasOwnProperty(domainName)) {
-    console.warn(`Unknown subdomain: ${domainName}. Setting default.`);
-    domainName = 'default';
+    console.log(`Unknown: ${domainName}, Using www as default domain name.`);
+    domainName = 'www';
 }
 
 const MINIMUM_ORDER_AMOUNT = areaMinimum[domainName] || 60;
