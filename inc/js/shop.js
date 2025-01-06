@@ -3,7 +3,6 @@ let cartForm;
 console.log("shop.js started loading");
 const productTitle = '';
 $(document).ready(function () {
-
     // Log the image source when a product image is clicked
     document.querySelectorAll('.item img').forEach(img => {
         img.addEventListener('click', function () {
@@ -11,13 +10,20 @@ $(document).ready(function () {
             console.log("Image src:", imgSrc);
         });
     });
-
 });
 
 const totalDisplay = document.getElementById("total");
 const selectedItemsList = document.getElementById("selectedItemsList");
 
-const updateCart = () => {
+const debounce = (func, delay = 100) => {
+    let timer;
+    return function (...args) {
+        clearTimeout(timer);
+        timer = setTimeout(() => func.apply(this, args), delay);
+    };
+};
+
+const updateCart = debounce(() => {
     if (!cartForm) {
         console.log("cartForm is not defined.");
         return;
@@ -65,7 +71,7 @@ const updateCart = () => {
             minOrderMessage.style.color = "green";
         }
     }
-};
+}, 100);
 
 // Event listeners for cart updates
 if (cartForm) {
@@ -152,16 +158,41 @@ const applyTabListeners = () => {
 applyTabListeners();
 console.log("Tab logic applied successfully!");
 
-// Ensure document.createElement is not overridden anywhere
-if (typeof document.createElement === 'function' && document.createElement.toString().includes('native code')) {
-    console.log("document.createElement is using native implementation.");
-} else {
-    console.warn("document.createElement may have been overridden. Resetting to native function.");
-    const nativeCreateElement = HTMLElement.prototype.constructor.call(document, 'div').constructor;
-    document.createElement = function(tagName) {
-        return new nativeCreateElement(tagName);
+// Avoid recursive creation and warn about third-party cookie limits
+(function() {
+    const nativeCreateElement = document.createElement;
+    document.createElement = function(tagName, options) {
+        if (typeof tagName !== 'string') {
+            throw new Error("Invalid tagName passed to createElement.");
+        }
+        if (tagName === "script" && options?.isRecursive) {
+            console.warn("Prevented recursive script element creation.");
+            return null;
+        }
+        const element = nativeCreateElement.call(document, tagName, options);
+        if (tagName === "script") {
+            element.addEventListener("load", () => {
+                console.log(`Script loaded: ${element.src}`);
+            });
+            element.addEventListener("error", () => {
+                console.error(`Failed to load script: ${element.src}`);
+            });
+        }
+        return element;
     };
-}
 
-console.log("document.createElement verified and adjusted as needed.");
+    console.log("Document element modifications applied.");
+
+    // Inform the user when third-party cookies are detected
+    console.log("Note: Chrome's cookie update may limit tracking scripts.");
+
+    if (navigator.cookieEnabled) {
+        console.log("Cookies are enabled. Google Analytics may collect data.");
+    } else {
+        console.warn("Cookies are disabled. Tracking scripts may not function as expected.");
+    }
+
+})();
+
+console.log("document.createElement checked for recursion and adjusted.");
 
