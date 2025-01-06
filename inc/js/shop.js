@@ -88,29 +88,29 @@ const domainName = hostname.split('.')[0].toLowerCase();
 let cityName = cityMap[domainName] || domainName.charAt(0).toUpperCase() + domainName.slice(1);
 
 
-// Handle special case for the main domain (www.doap.com or doap.com)
-if (hostname === "www.doap.com" || hostname === "doap.com") {
-    cityName = "Directory Of Agencies & Providers";
-    document.title = "Norcal DOAP";
+//// Handle special case for the main domain (www.doap.com or doap.com)
+//if (hostname === "www.doap.com" || hostname === "doap.com") {
+    //cityName = "Directory Of Agencies & Providers";
+    //document.title = "Norcal DOAP";
 
-    // Hide all interactive sections for directory view
-    const sectionsToHide = [".tab", ".tab-content", ".cart-section", ".payment-section", ".customer-info"];
-    sectionsToHide.forEach(selector => {
-        document.querySelectorAll(selector).forEach(element => element.style.display = "none");
-    });
+    //// Hide all interactive sections for directory view
+    //const sectionsToHide = [".tab", ".tab-content", ".cart-section", ".payment-section", ".customer-info"];
+    //sectionsToHide.forEach(selector => {
+        //document.querySelectorAll(selector).forEach(element => element.style.display = "none");
+    //});
 
-    console.log("Tabs, cart, and payment methods are hidden for www and doap.com.");
-} else {
-    document.title = `${cityName} Doap`;
-}
+    //console.log("Tabs, cart, and payment methods are hidden for www and doap.com.");
+//} else {
+    //document.title = `${cityName} Doap`;
+//}
 
-// Update page elements with city-specific information
-const cityNameElement = document.getElementById("cityName");
-if (cityNameElement) {
-    cityNameElement.textContent = (hostname === "www.doap.com" || hostname === "doap.com") ? "California" : cityName;
-} else {
-    console.warn("Element with id 'cityName' not found.");
-}
+//// Update page elements with city-specific information
+//const cityNameElement = document.getElementById("cityName");
+//if (cityNameElement) {
+    //cityNameElement.textContent = (hostname === "www.doap.com" || hostname === "doap.com") ? "California" : cityName;
+//} else {
+    //console.warn("Element with id 'cityName' not found.");
+//}
 
 // Update phone number dynamically
 const phoneNumber = phoneMap[domainName] || defaultPhoneNumber;
