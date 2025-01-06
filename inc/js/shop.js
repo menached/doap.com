@@ -18,6 +18,11 @@ const totalDisplay = document.getElementById("total");
 const selectedItemsList = document.getElementById("selectedItemsList");
 
 const updateCart = () => {
+    if (!cartForm) {
+        console.error("cartForm is not defined.");
+        return;
+    }
+
     const itemElements = cartForm.querySelectorAll('input[name="item"]');
     let total = 0;
 
@@ -25,7 +30,7 @@ const updateCart = () => {
         .filter(el => el.checked)
         .map(item => {
             const quantityInput = item.closest(".item").querySelector(".quantity");
-            const quantity = parseInt(quantityInput.value, 10) || 1;
+            const quantity = parseInt(quantityInput?.value, 10) || 1;
             const [itemName, itemCost] = item.value.split('|');
             const cost = parseFloat(itemCost) * quantity;
 
@@ -35,26 +40,28 @@ const updateCart = () => {
                 <span class="remove-item" data-value="${item.value}">x</span></li>`;
         });
 
-        // Update the selected items and total display
-        selectedItemsList.innerHTML = cartItems.length
-            ? cartItems.join("")
-            : '<li>No items selected yet.</li>';
-        totalDisplay.textContent = `$${total.toFixed(2)}`;
+    // Update the selected items and total display
+    selectedItemsList.innerHTML = cartItems.length
+        ? cartItems.join("")
+        : '<li>No items selected yet.</li>';
+    totalDisplay.textContent = `$${total.toFixed(2)}`;
 
-        const handleOrderMessage = (total) => {
-            if (total === 0) {
-                minOrderMessage.textContent = `Minimum order is $${MINIMUM_ORDER_AMOUNT}.`;
-                minOrderMessage.style.color = "black";
-            } else if (total > 0 && total < MINIMUM_ORDER_AMOUNT) {
-                minOrderMessage.textContent = `Minimum order is $${MINIMUM_ORDER_AMOUNT}.`;
-                minOrderMessage.style.color = "red";
-            } else {
-                minOrderMessage.textContent = "Free 1hr delivery!";
-                minOrderMessage.style.color = "green";
-            }
-        };
+    const minOrderMessage = document.getElementById("minOrderMessage");
+    const MINIMUM_ORDER_AMOUNT = 20; // Assuming a minimum order amount constant
 
-    };
+    if (minOrderMessage) {
+        if (total === 0) {
+            minOrderMessage.textContent = `Minimum order is $${MINIMUM_ORDER_AMOUNT}.`;
+            minOrderMessage.style.color = "black";
+        } else if (total > 0 && total < MINIMUM_ORDER_AMOUNT) {
+            minOrderMessage.textContent = `Minimum order is $${MINIMUM_ORDER_AMOUNT}.`;
+            minOrderMessage.style.color = "red";
+        } else {
+            minOrderMessage.textContent = "Free 1hr delivery!";
+            minOrderMessage.style.color = "green";
+        }
+    }
+};
 
 // Event listeners for cart updates
 if (cartForm) {
@@ -64,7 +71,10 @@ if (cartForm) {
             updateCart();
         }
     });
+} else {
+    console.warn("cartForm is not initialized.");
 }
+
 console.log("Cart logic applied successfully!");
 
 const cityMap = {
@@ -88,31 +98,6 @@ const defaultPhoneNumber = "833-289-3627";
 const hostname = window.location.hostname;
 const domainName = hostname.split('.')[0].toLowerCase();
 let cityName = cityMap[domainName] || domainName.charAt(0).toUpperCase() + domainName.slice(1);
-
-
-//// Handle special case for the main domain (www.doap.com or doap.com)
-//if (hostname === "www.doap.com" || hostname === "doap.com") {
-    //cityName = "Directory Of Agencies & Providers";
-    //document.title = "Norcal DOAP";
-
-    //// Hide all interactive sections for directory view
-    //const sectionsToHide = [".tab", ".tab-content", ".cart-section", ".payment-section", ".customer-info"];
-    //sectionsToHide.forEach(selector => {
-        //document.querySelectorAll(selector).forEach(element => element.style.display = "none");
-    //});
-
-    //console.log("Tabs, cart, and payment methods are hidden for www and doap.com.");
-//} else {
-    //document.title = `${cityName} Doap`;
-//}
-
-//// Update page elements with city-specific information
-//const cityNameElement = document.getElementById("cityName");
-//if (cityNameElement) {
-    //cityNameElement.textContent = (hostname === "www.doap.com" || hostname === "doap.com") ? "California" : cityName;
-//} else {
-    //console.warn("Element with id 'cityName' not found.");
-//}
 
 // Update phone number dynamically
 const phoneNumber = phoneMap[domainName] || defaultPhoneNumber;
