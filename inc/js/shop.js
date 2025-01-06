@@ -1,3 +1,5 @@
+let cartForm;
+
 console.log("shop.js started loading");
 const productTitle = '';
 $(document).ready(function () {
