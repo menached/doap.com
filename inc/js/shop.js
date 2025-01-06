@@ -76,7 +76,7 @@ if (cartForm) {
         }
     });
 } else {
-    console.log("cartForm is not initialized.");
+    console.warn("cartForm is not initialized.");
 }
 
 console.log("Cart logic applied successfully!");
@@ -152,15 +152,8 @@ const applyTabListeners = () => {
 applyTabListeners();
 console.log("Tab logic applied successfully!");
 
-// Override createElement to avoid recursion issues
-const originalCreateElement = document.createElement;
-document.createElement = function (tagName, ...args) {
-    if (this._isCreating) {
-        return originalCreateElement.call(document, tagName, ...args);
-    }
-    this._isCreating = true;
-    const element = originalCreateElement.call(document, tagName, ...args);
-    this._isCreating = false;
-    return element;
-};
+// Remove the createElement override to avoid recursion issues
+// If there is still a need to track dynamic element creation, use a safer approach like mutation observers.
+
+console.log("Removed createElement override to avoid stack overflow issues.");
 
