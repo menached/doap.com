@@ -1,3 +1,5 @@
+let cityName;
+
 // Extract subdomain from the current hostname
 let domainName = window.location.hostname.split('.')[0];
     console.log(`Hostname: ${hostname}, DomainName: ${domainName}`);
