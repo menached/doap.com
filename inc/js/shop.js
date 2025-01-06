@@ -76,7 +76,7 @@ if (cartForm) {
         }
     });
 } else {
-    console.warn("cartForm is not initialized.");
+    console.log("cartForm is not initialized.");
 }
 
 console.log("Cart logic applied successfully!");
