@@ -29,8 +29,12 @@ const updateCart = () => {
     const cartItems = Array.from(itemElements)
         .filter(el => el.checked)
         .map(item => {
-            const quantityInput = item.closest(".item").querySelector(".quantity");
-            const quantity = parseInt(quantityInput?.value, 10) || 1;
+            const quantityInput = item.closest(".item")?.querySelector(".quantity");
+            if (!quantityInput) {
+                console.warn("Quantity input not found for item.");
+                return;
+            }
+            const quantity = parseInt(quantityInput.value, 10) || 1;
             const [itemName, itemCost] = item.value.split('|');
             const cost = parseFloat(itemCost) * quantity;
 
@@ -38,7 +42,7 @@ const updateCart = () => {
 
             return `<li>${itemName} (x${quantity}) - $${cost.toFixed(2)} 
                 <span class="remove-item" data-value="${item.value}">x</span></li>`;
-        });
+        }).filter(Boolean);
 
     // Update the selected items and total display
     selectedItemsList.innerHTML = cartItems.length
@@ -72,7 +76,7 @@ if (cartForm) {
         }
     });
 } else {
-    console.warn("cartForm is not initialized.");
+    console.log("cartForm is not initialized.");
 }
 
 console.log("Cart logic applied successfully!");
@@ -124,22 +128,39 @@ const applyTabListeners = () => {
     const tabs = document.querySelectorAll(".tab");
     const tabContents = document.querySelectorAll(".tab-content");
 
-    tabs.forEach(tab => {
-        tab.addEventListener("click", () => {
-            // Remove active class from all tabs and tab contents
-            tabs.forEach(t => t.classList.remove("active"));
-            tabContents.forEach(content => content.classList.remove("active"));
+    if (tabs.length === 0) {
+        console.warn("No tabs found.");
+        return;
+    }
 
-            // Add active class to clicked tab and corresponding tab content
-            tab.classList.add("active");
-            const targetTab = document.getElementById(tab.dataset.tab);
-            if (targetTab) {
-                targetTab.classList.add("active");
-            }
-        });
+    tabs.forEach(tab => {
+        tab.removeEventListener("click", handleTabClick);
+        tab.addEventListener("click", handleTabClick);
     });
+
+    function handleTabClick() {
+        tabs.forEach(t => t.classList.remove("active"));
+        tabContents.forEach(content => content.classList.remove("active"));
+        this.classList.add("active");
+        const targetTab = document.getElementById(this.dataset.tab);
+        if (targetTab) {
+            targetTab.classList.add("active");
+        }
+    }
 };
 
 applyTabListeners();
 console.log("Tab logic applied successfully!");
+
+// Override createElement to avoid recursion issues
+const originalCreateElement = document.createElement;
+document.createElement = function (tagName, ...args) {
+    if (this._isCreating) {
+        return originalCreateElement.call(document, tagName, ...args);
+    }
+    this._isCreating = true;
+    const element = originalCreateElement.call(document, tagName, ...args);
+    this._isCreating = false;
+    return element;
+};
 
