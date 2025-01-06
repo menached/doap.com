@@ -19,7 +19,7 @@ const selectedItemsList = document.getElementById("selectedItemsList");
 
 const updateCart = () => {
     if (!cartForm) {
-        console.error("cartForm is not defined.");
+        console.log("cartForm is not defined.");
         return;
     }
 
@@ -76,7 +76,7 @@ if (cartForm) {
         }
     });
 } else {
-    console.warn("cartForm is not initialized.");
+    console.log("cartForm is not initialized.");
 }
 
 console.log("Cart logic applied successfully!");
