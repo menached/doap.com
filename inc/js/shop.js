@@ -19,7 +19,7 @@ const selectedItemsList = document.getElementById("selectedItemsList");
 
 const updateCart = () => {
     if (!cartForm) {
-        console.error("cartForm is not defined.");
+        console.log("cartForm is not defined.");
         return;
     }
 
