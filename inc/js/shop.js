@@ -19,7 +19,7 @@ const selectedItemsList = document.getElementById("selectedItemsList");
 
 const updateCart = () => {
     if (!cartForm) {
-        console.log("cartForm is not defined.");
+        console.error("cartForm is not defined.");
         return;
     }
 
@@ -152,8 +152,11 @@ const applyTabListeners = () => {
 applyTabListeners();
 console.log("Tab logic applied successfully!");
 
-// Remove the createElement override to avoid recursion issues
-// If there is still a need to track dynamic element creation, use a safer approach like mutation observers.
+// Remove MutationObserver if present to prevent infinite recursion
+if (typeof observer !== "undefined" && observer instanceof MutationObserver) {
+    observer.disconnect();
+    console.log("MutationObserver disconnected to prevent recursion.");
+}
 
-console.log("Removed createElement override to avoid stack overflow issues.");
+console.log("Ensured MutationObserver is not causing recursion errors.");
 
