@@ -165,34 +165,29 @@ console.log("Tab logic applied successfully!");
         if (typeof tagName !== 'string') {
             throw new Error("Invalid tagName passed to createElement.");
         }
-        if (tagName === "script" && options?.isRecursive) {
-            console.warn("Prevented recursive script element creation.");
-            return null;
-        }
-        const element = nativeCreateElement.call(document, tagName, options);
+
+        // Ensure changes only affect specific script sources
         if (tagName === "script") {
-            element.addEventListener("load", () => {
-                console.log(`Script loaded: ${element.src}`);
+            const tempElement = nativeCreateElement.call(document, tagName, options);
+            const url = tempElement.src || "";
+
+            // Only log or modify known tracking and ad sources
+            if (url.includes("googlesyndication.com") || url.includes("google-analytics.com")) {
+                console.warn(`Third-party script from ${url} loaded.`);
+            }
+
+            tempElement.addEventListener("error", () => {
+                console.error(`Failed to load script: ${tempElement.src}`);
             });
-            element.addEventListener("error", () => {
-                console.error(`Failed to load script: ${element.src}`);
-            });
+
+            return tempElement;
         }
-        return element;
+
+        return nativeCreateElement.call(document, tagName, options);
     };
 
-    console.log("Document element modifications applied.");
-
-    // Inform the user when third-party cookies are detected
-    console.log("Note: Chrome's cookie update may limit tracking scripts.");
-
-    if (navigator.cookieEnabled) {
-        console.log("Cookies are enabled. Google Analytics may collect data.");
-    } else {
-        console.warn("Cookies are disabled. Tracking scripts may not function as expected.");
-    }
-
+    console.log("Script creation interceptor applied selectively.");
 })();
 
-console.log("document.createElement checked for recursion and adjusted.");
+console.log("document.createElement adjusted for specific third-party cases.");
 
