@@ -1,3 +1,7 @@
+// Extract subdomain from the current hostname
+let domainName = window.location.hostname.split('.')[0];
+    console.log(`Hostname: ${hostname}, DomainName: ${domainName}`);
+
 // Handle special case for the main domain (www.doap.com or doap.com)
 if (hostname === "www.doap.com" || hostname === "doap.com") {
     cityName = "Directory Of Agencies & Providers";
