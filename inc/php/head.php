@@ -1,7 +1,4 @@
 <title>Doap</title>
-    <!-- Start cookieyes banner -->
-	<script id="cookieyes" type="text/javascript" src="https://cdn-cookieyes.com/client_data/14d93e81e1d5d1ccad7ad1e5/script.js"></script>
-    <!-- End cookieyes banner -->
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
