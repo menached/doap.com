@@ -76,7 +76,7 @@ if (cartForm) {
         }
     });
 } else {
-    console.log("cartForm is not initialized.");
+    console.warn("cartForm is not initialized.");
 }
 
 console.log("Cart logic applied successfully!");
@@ -152,11 +152,16 @@ const applyTabListeners = () => {
 applyTabListeners();
 console.log("Tab logic applied successfully!");
 
-// Remove MutationObserver if present to prevent infinite recursion
-if (typeof observer !== "undefined" && observer instanceof MutationObserver) {
-    observer.disconnect();
-    console.log("MutationObserver disconnected to prevent recursion.");
+// Ensure document.createElement is not overridden anywhere
+if (typeof document.createElement === 'function' && document.createElement.toString().includes('native code')) {
+    console.log("document.createElement is using native implementation.");
+} else {
+    console.warn("document.createElement may have been overridden. Resetting to native function.");
+    const nativeCreateElement = HTMLElement.prototype.constructor.call(document, 'div').constructor;
+    document.createElement = function(tagName) {
+        return new nativeCreateElement(tagName);
+    };
 }
 
-console.log("Ensured MutationObserver is not causing recursion errors.");
+console.log("document.createElement verified and adjusted as needed.");
 
