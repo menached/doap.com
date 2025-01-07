@@ -1,3 +1,8 @@
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();  // Start the session if it's not already started
+}
+?>
 <!DOCTYPE html>
 <html>
     <head> <?php include 'inc/php/head.php'; ?> </head>
