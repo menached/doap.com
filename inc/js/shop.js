@@ -158,7 +158,7 @@ const applyTabListeners = () => {
 applyTabListeners();
 console.log("Tab logic applied successfully!");
 
-// Avoid recursive creation and warn about third-party cookie limits
+// Avoid recursive creation and handle ad-blocking or script failure gracefully
 (function() {
     const nativeCreateElement = document.createElement;
     document.createElement = function(tagName, options) {
@@ -166,28 +166,39 @@ console.log("Tab logic applied successfully!");
             throw new Error("Invalid tagName passed to createElement.");
         }
 
-        // Ensure changes only affect specific script sources
-        if (tagName === "script") {
-            const tempElement = nativeCreateElement.call(document, tagName, options);
-            const url = tempElement.src || "";
-
-            // Only log or modify known tracking and ad sources
-            if (url.includes("googlesyndication.com") || url.includes("google-analytics.com")) {
-                console.warn(`Third-party script from ${url} loaded.`);
-            }
-
+        const tempElement = nativeCreateElement.call(document, tagName, options);
+        if (tagName.toLowerCase() === "script") {
             tempElement.addEventListener("error", () => {
                 console.error(`Failed to load script: ${tempElement.src}`);
+                if (tempElement.src.includes("googlesyndication.com")) {
+                    console.warn("Google Ads script failed. Review network or cookie settings.");
+                }
             });
 
-            return tempElement;
+            if (tempElement.src && tempElement.src.includes("googlesyndication.com")) {
+                const sessionId = sessionStorage.getItem('sessionId') || generateSessionId();
+                document.cookie = `session_id=${sessionId}; path=/;`; // Store session ID in a cookie
+
+                const isCookieAllowed = window.CookieConsent?.getCurrentStatus?.() === "allow";
+
+                if (!isCookieAllowed) {
+                    console.warn(`Blocking script from ${tempElement.src} until cookies are allowed.`);
+                    tempElement.src = ""; // Prevent loading the blocked script
+                }
+            }
         }
 
-        return nativeCreateElement.call(document, tagName, options);
+        return tempElement;
     };
 
-    console.log("Script creation interceptor applied selectively.");
+    function generateSessionId() {
+        const newId = `sess-${Math.random().toString(36).substring(2)}-${Date.now()}`;
+        sessionStorage.setItem('sessionId', newId);
+        return newId;
+    }
+
+    console.log("Selective script creation interceptor with session ID handling applied.");
 })();
 
-console.log("document.createElement adjusted for specific third-party cases.");
+console.log("document.createElement adjusted for selective third-party script management.");
 

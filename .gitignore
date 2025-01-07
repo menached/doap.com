@@ -6,6 +6,8 @@
 !README.md
 !template.yaml
 !index.html
+!privacy-policy
+!privacy-policy.html
 !simple.php
 
 # Allow specific files in the "inc" directory

@@ -42,3 +42,42 @@
     <script src="/inc/js/shopzipFinder.js" defer></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?php include('/inc/php/og_meta.php'); ?>
+
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.1/cookieconsent.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.1/cookieconsent.min.js"></script>
+<script>
+  window.addEventListener("load", function() {
+    window.cookieconsent.initialise({
+      palette: {
+        popup: { background: "#000" },
+        button: { background: "#f1d600" }
+      },
+      type: "opt-in", // Require opt-in for analytics and ads.
+      content: {
+        message: "We use cookies to enhance your experience.",
+        dismiss: "Got it!",
+        allow: "Allow Cookies",
+        deny: "Decline",
+        link: "Learn more",
+        href: "/privacy-policy"
+      },
+      onInitialise: function(status) {
+        if (status === 'allow') {
+          enableAnalyticsAndAds();
+        }
+      }
+    });
+  });
+
+  function enableAnalyticsAndAds() {
+    console.log("Cookies allowed. Loading third-party scripts...");
+    // Re-load Google Ads or Analytics scripts only if allowed.
+    const script = document.createElement("script");
+    script.src = "https://pagead2.googlesyndication.com/pagead/conversion.js";
+    document.head.appendChild(script);
+  }
+</script>
+
