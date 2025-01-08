@@ -1,4 +1,13 @@
 <!-- "Doap Menu" -->
+<!-- Form for ZIP Code or City/Town Input -->
+<form class="zip-form">
+    <div class="zip-form-container">
+        <label for="userInput">Enter ZIP Code or City/Town:</label>
+        <input type="text" id="userInput" name="location-input" placeholder="Enter ZIP Code or City/Town" class="userInput" required style="padding: 10px; font-size: 1rem; border: 1px solid rgb(204, 204, 204); border-radius: 5px; flex-grow: 1; max-width: 300px; text-align: center;">
+        <button type="submit" class="find-agency-button">Find Agency</button>
+    </div>
+</form>
+
 <!-- Tab content for Flower -->
 <div class="tab-content active" id="flower">
     <div class="item-list">
@@ -12,7 +21,7 @@
                 <p class="item-title">Premium Quality 5 pack Hybrid Prerolls</p>
                 <div class="item-quantity">
                     <label for="quantity-premium-prerolls-1">Qty:</label>
-                    <input type="number" id="quantity-premium-prerolls-1" class="quantity" min="1" max="99" value="1">
+                    <input type="number" id="quantity-premium-prerolls-1" class="quantity" min="1" max="99" value="1" name="quantity-premium-prerolls">
                 </div>
                 <p class="item-price">$115.00</p>
                 <button class="add-to-cart-button" data-product-name="Premium Quality Hybrid 5pack Prerolls" data-price="115">Add to Cart</button>
@@ -30,7 +39,7 @@
                 <p class="item-title">Premium Quality Hybrid Prerolls</p>
                 <div class="item-quantity">
                     <label for="quantity-premium-prerolls-2">Qty:</label>
-                    <input type="number" id="quantity-premium-prerolls-2" class="quantity" min="1" max="99" value="1">
+                    <input type="number" id="quantity-premium-prerolls-2" class="quantity" min="1" max="99" value="1" name="quantity-premium-prerolls-2">
                 </div>
                 <p class="item-price">$15.00</p>
                 <button class="add-to-cart-button" data-product-name="Premium Quality Hybrid Prerolls" data-price="15">Add to Cart</button>
@@ -48,7 +57,7 @@
                 <p class="item-title">2 pk Top Shelf Prerolled Cone Joints</p>
                 <div class="item-quantity">
                     <label for="quantity-top-shelf-joints-1">Qty:</label>
-                    <input type="number" id="quantity-top-shelf-joints-1" class="quantity" min="1" max="99" value="1">
+                    <input type="number" id="quantity-top-shelf-joints-1" class="quantity" min="1" max="99" value="1" name="quantity-top-shelf-joints">
                 </div>
                 <p class="item-price">$20.00</p>
                 <button class="add-to-cart-button" data-product-name="2 pk Top Shelf Prerolled Cone Joints" data-price="20">Add to Cart</button>
@@ -66,7 +75,7 @@
                 <p class="item-title">5 Top Shelf Cannabis Pre-rolled Joints</p>
                 <div class="item-quantity">
                     <label for="quantity-pre-rolled-joints-1">Qty:</label>
-                    <input type="number" id="quantity-pre-rolled-joints-1" class="quantity" min="1" max="99" value="1">
+                    <input type="number" id="quantity-pre-rolled-joints-1" class="quantity" min="1" max="99" value="1" name="quantity-pre-rolled-joints">
                 </div>
                 <p class="item-price">$40.00</p>
                 <button class="add-to-cart-button" data-product-name="5 Top Shelf Cannabis Pre-rolled Joints" data-price="40">Add to Cart</button>
@@ -91,7 +100,7 @@
                 <p class="item-title">THC Gummy Bears - Small Bag</p>
                 <div class="item-quantity">
                     <label for="quantity-thc-bears-small-1">Qty:</label>
-                    <input type="number" id="quantity-thc-bears-small-1" class="quantity" min="1" max="99" value="1">
+                    <input type="number" id="quantity-thc-bears-small-1" class="quantity" min="1" max="99" value="1" name="quantity-thc-bears-small">
                 </div>
                 <p class="item-price">$15.00</p>
                 <button class="add-to-cart-button" data-product-name="THC Gummy Bears - Small Bag" data-price="15">Add to Cart</button>
@@ -109,7 +118,7 @@
                 <p class="item-title">THC Gummy Bears - Medium Bag</p>
                 <div class="item-quantity">
                     <label for="quantity-thc-bears-medium-1">Qty:</label>
-                    <input type="number" id="quantity-thc-bears-medium-1" class="quantity" min="1" max="99" value="1">
+                    <input type="number" id="quantity-thc-bears-medium-1" class="quantity" min="1" max="99" value="1" name="quantity-thc-bears-medium">
                 </div>
                 <p class="item-price">$25.00</p>
                 <button class="add-to-cart-button" data-product-name="THC Gummy Bears - Medium Bag" data-price="25">Add to Cart</button>
@@ -127,7 +136,7 @@
                 <p class="item-title">THC Gummy Bears - Large Bag</p>
                 <div class="item-quantity">
                     <label for="quantity-thc-bears-large-1">Qty:</label>
-                    <input type="number" id="quantity-thc-bears-large-1" class="quantity" min="1" max="99" value="1">
+                    <input type="number" id="quantity-thc-bears-large-1" class="quantity" min="1" max="99" value="1" name="quantity-thc-bears-large">
                 </div>
                 <p class="item-price">$60.00</p>
                 <button class="add-to-cart-button" data-product-name="THC Gummy Bears - Large Bag" data-price="60">Add to Cart</button>
@@ -145,7 +154,7 @@
                 <p class="item-title">THC Gummy Bears - Extra-Large Bag</p>
                 <div class="item-quantity">
                     <label for="quantity-thc-bears-xl-1">Qty:</label>
-                    <input type="number" id="quantity-thc-bears-xl-1" class="quantity" min="1" max="99" value="1">
+                    <input type="number" id="quantity-thc-bears-xl-1" class="quantity" min="1" max="99" value="1" name="quantity-thc-bears-xl">
                 </div>
                 <p class="item-price">$100.00</p>
                 <button class="add-to-cart-button" data-product-name="THC Gummy Bears - Extra-Large Bag" data-price="100">Add to Cart</button>
@@ -170,7 +179,7 @@
                 <p class="item-title">Solventless Extraction .5g Disposable Vape</p>
                 <div class="item-quantity">
                     <label for="quantity-solventless-vape-1">Qty:</label>
-                    <input type="number" id="quantity-solventless-vape-1" class="quantity" min="1" max="99" value="1">
+                    <input type="number" id="quantity-solventless-vape-1" class="quantity" min="1" max="99" value="1" name="quantity-solventless-vape">
                 </div>
                 <p class="item-price">$50.00</p>
                 <button class="add-to-cart-button" data-product-name="Solventless Extraction .5g Disposable Vape" data-price="50">Add to Cart</button>
@@ -188,7 +197,7 @@
                 <p class="item-title">Doap Vape Pen - Rechargeable</p>
                 <div class="item-quantity">
                     <label for="quantity-doap-vape-pen-1">Qty:</label>
-                    <input type="number" id="quantity-doap-vape-pen-1" class="quantity" min="1" max="99" value="1">
+                    <input type="number" id="quantity-doap-vape-pen-1" class="quantity" min="1" max="99" value="1" name="quantity-doap-vape-pen">
                 </div>
                 <p class="item-price">$25.00</p>
                 <button class="add-to-cart-button" data-product-name="Doap Vape Pen - Rechargeable" data-price="25">Add to Cart</button>
@@ -213,7 +222,7 @@
                 <p class="item-title">Vape Battery w/ Built-in USB Charger</p>
                 <div class="item-quantity">
                     <label for="quantity-lokey-vape-battery-1">Qty:</label>
-                    <input type="number" id="quantity-lokey-vape-battery-1" class="quantity" min="1" max="99" value="1">
+                    <input type="number" id="quantity-lokey-vape-battery-1" class="quantity" min="1" max="99" value="1" name="quantity-lokey-vape-battery">
                 </div>
                 <p class="item-price">$40.00</p>
                 <button class="add-to-cart-button" data-product-name="Vape Battery" data-price="40">Add to Cart</button>
