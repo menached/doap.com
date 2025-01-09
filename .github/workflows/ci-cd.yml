@@ -23,18 +23,17 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
-      # Step 3: Add Host to Known Hosts
+      # Step 3: Install Required Packages (Ensures ssh-keyscan is available)
+      - name: Install SSH Client and Mailutils
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y openssh-client mailutils
+
+      # Step 4: Add Host to Known Hosts
       - name: Add Host to Known Hosts
         run: |
-          mkdir -p ~/.ssh
           ssh-keyscan -H deb1.doap.com >> ~/.ssh/known_hosts
           chmod 600 ~/.ssh/known_hosts
-
-      # Step 4: Install Mailutils
-      - name: Install Mailutils
-        run: |
-          sudo apt update
-          sudo apt install -y mailutils
 
       # Step 5: Configure AWS CLI
       - name: Configure AWS CLI
@@ -60,7 +59,7 @@ jobs:
           echo "Changed files:"
           cat changed_files.txt
 
-      # Step 7: Deploy Changed Files with Rsync (S3 sync commented out)
+      # Step 7: Deploy Changed Files with Rsync
       - name: Deploy Changed Files with Rsync
         run: |
           echo "Syncing all changed files to server..."
@@ -73,7 +72,7 @@ jobs:
           done < changed_files.txt
 
           echo "Deploying using rsync..."
-          rsync -avz --rsync-path="sudo rsync" --no-perms --no-group --exclude '.git/' ./ dmenache@deb1.doap.com:/var/www/doap.com/
+          rsync -avz -e "ssh -o StrictHostKeyChecking=no" --rsync-path="sudo rsync" --no-perms --no-group --exclude '.git/' ./ dmenache@deb1.doap.com:/var/www/doap.com/
 
           # Commented out S3 sync
           # echo "Syncing all files to S3..."
@@ -85,7 +84,7 @@ jobs:
       # Step 8: Debug Deployment
       - name: Debug Deployment
         run: |
-          echo "Verifying deployment to server and S3..."
+          echo "Verifying deployment to server..."
           ssh -o StrictHostKeyChecking=no dmenache@deb1.doap.com "ls -la /var/www/doap.com/"
 
       # Step 9: Send Email Notification
