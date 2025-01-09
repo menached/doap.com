@@ -1,5 +1,4 @@
-// Updated cart.js to dynamically update the cityName in the header and handle cart interactions effectively, showing 'Added to Cart' when applicable
-
+// Updated cart.js to dynamically update the cityName in the header
 let cartForm;
 
 console.log("shop.js started loading");
@@ -9,7 +8,7 @@ const productTitle = '';
 document.addEventListener('DOMContentLoaded', function () {
     console.log("DOM fully loaded");
 
-    // Set cityName dynamically using cityMap from inline logic (no import)
+    // Set cityName dynamically using cityMap or fallback
     const cityMap = {
         pleasanthill: "Pleasant Hill", walnutcreek: "Walnut Creek", castrovalley: "Castro Valley",
         sanramon: "San Ramon", discoverybay: "Discovery Bay", alamo: "Alamo", antioch: "Antioch",
@@ -54,16 +53,19 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         tabs.forEach(tab => {
-            tab.addEventListener("click", function () {
-                tabs.forEach(t => t.classList.remove("active"));
-                tabContents.forEach(content => content.classList.remove("active"));
-                this.classList.add("active");
-                const targetTab = document.getElementById(this.dataset.tab);
-                if (targetTab) {
-                    targetTab.classList.add("active");
-                }
-            });
+            tab.removeEventListener("click", handleTabClick);
+            tab.addEventListener("click", handleTabClick);
         });
+
+        function handleTabClick() {
+            tabs.forEach(t => t.classList.remove("active"));
+            tabContents.forEach(content => content.classList.remove("active"));
+            this.classList.add("active");
+            const targetTab = document.getElementById(this.dataset.tab);
+            if (targetTab) {
+                targetTab.classList.add("active");
+            }
+        }
     };
 
     applyTabListeners();
@@ -77,18 +79,15 @@ document.addEventListener('DOMContentLoaded', function () {
             const price = parseFloat(this.value.split('|')[1]) || 0;
             const quantityInput = itemLabel.querySelector('.quantity');
             const quantity = parseInt(quantityInput?.value, 10) || 1;
-            const addToCartButton = itemLabel.querySelector('.add-to-cart-button');
 
             if (this.checked) {
                 console.log(`Added ${productName} to cart.`);
                 addItemToCart(productName, price, quantity);
                 itemLabel.classList.add("selected"); // Add highlighted border
-                if (addToCartButton) addToCartButton.textContent = "Added to Cart";
             } else {
                 console.log(`Removed ${productName} from cart.`);
                 removeItemFromCart(productName);
                 itemLabel.classList.remove("selected");
-                if (addToCartButton) addToCartButton.textContent = "Add to Cart";
             }
         });
     });
@@ -103,7 +102,7 @@ document.addEventListener('DOMContentLoaded', function () {
             cartData.push({ name: productName, price, quantity });
         }
 
-        console.log("Updated cart data:", cartData);
+        console.table(cartData); // Display cart data as a table for easier debugging
         sessionStorage.setItem("cartData", JSON.stringify(cartData));
         updateCartUI(cartData);
     }
@@ -155,21 +154,15 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
 
-        // Update "Add to Cart" buttons to reflect cart state
-        document.querySelectorAll('.add-to-cart-button').forEach(button => {
-            const productName = button.getAttribute('data-product-name');
-            const inCart = cartData.some(item => item.name === productName);
-            button.textContent = inCart ? "Added to Cart" : "Add to Cart";
-        });
-
-        // Use event delegation to handle remove buttons more efficiently
-        selectedItemsList.addEventListener("click", function (event) {
-            if (event.target.classList.contains("remove-item")) {
-                const productName = event.target.getAttribute("data-product-name");
+        // Add event listener for remove buttons dynamically to ensure latest DOM
+        document.querySelectorAll(".remove-item").forEach(removeBtn => {
+            removeBtn.replaceWith(removeBtn.cloneNode(true)); // Remove previous listeners to avoid duplicates
+            removeBtn.addEventListener("click", function () {
+                const productName = this.getAttribute("data-product-name");
                 removeItemFromCart(productName);
                 console.log(`Removed ${productName} from cart.`);
                 updateCartUI(JSON.parse(sessionStorage.getItem("cartData"))); // Ensure UI reflects latest cart data
-            }
+            });
         });
     };
 
@@ -188,6 +181,7 @@ document.addEventListener('DOMContentLoaded', function () {
         console.log("Cart form element:", cartForm);
         console.log(`Number of child nodes: ${cartForm.childNodes.length}`);
         console.log("Number of input elements in cart form:", cartForm.querySelectorAll('input').length);
+        cartForm.addEventListener("change", () => updateCartUI(JSON.parse(sessionStorage.getItem("cartData"))));
         console.log("Cart form event listeners added.");
     } else {
         console.error("cartForm is not found in the DOM.");
