@@ -1,4 +1,4 @@
-// Updated cart.js to dynamically update the cityName in the header
+// Updated cart.js to dynamically update the cityName in the header and display 'Added to Cart' when applicable
 let cartForm;
 
 console.log("shop.js started loading");
@@ -8,10 +8,20 @@ const productTitle = '';
 document.addEventListener('DOMContentLoaded', function () {
     console.log("DOM fully loaded");
 
-    // Set cityName dynamically
+    // Set cityName dynamically with suffix logic
     const cityNameElement = document.getElementById("cityName");
     const cookieCityName = document.cookie.split('; ').find(row => row.startsWith('cityName='));
-    const cityName = cookieCityName ? decodeURIComponent(cookieCityName.split('=')[1]) : "Doap";
+    let cityName = cookieCityName ? decodeURIComponent(cookieCityName.split('=')[1]) : "Doap";
+
+    // Handle localhost and default cases
+    if (cityName.toLowerCase() === 'www' || cityName.toLowerCase() === 'doap.com') {
+        cityName = "Doap";
+    } else if (cityName.toLowerCase() === 'localhost') {
+        cityName = "Localhost Doap";
+    } else {
+        cityName += " Doap"; // Append "Doap" to the city name if not default.
+    }
+
     if (cityNameElement) {
         cityNameElement.textContent = cityName;
     } else {
@@ -63,15 +73,18 @@ document.addEventListener('DOMContentLoaded', function () {
             const price = parseFloat(this.value.split('|')[1]) || 0;
             const quantityInput = itemLabel.querySelector('.quantity');
             const quantity = parseInt(quantityInput?.value, 10) || 1;
+            const addToCartButton = itemLabel.querySelector('.add-to-cart-button');
 
             if (this.checked) {
                 console.log(`Added ${productName} to cart.`);
                 addItemToCart(productName, price, quantity);
                 itemLabel.classList.add("selected"); // Add highlighted border
+                if (addToCartButton) addToCartButton.textContent = "Added to Cart";
             } else {
                 console.log(`Removed ${productName} from cart.`);
                 removeItemFromCart(productName);
                 itemLabel.classList.remove("selected");
+                if (addToCartButton) addToCartButton.textContent = "Add to Cart";
             }
         });
     });
@@ -137,6 +150,13 @@ document.addEventListener('DOMContentLoaded', function () {
                 minOrderMessage.style.color = "green";
             }
         }
+
+        // Update "Add to Cart" buttons to reflect cart state
+        document.querySelectorAll('.add-to-cart-button').forEach(button => {
+            const productName = button.getAttribute('data-product-name');
+            const inCart = cartData.some(item => item.name === productName);
+            button.textContent = inCart ? "Added to Cart" : "Add to Cart";
+        });
 
         // Add event listener for remove buttons dynamically to ensure latest DOM
         document.querySelectorAll(".remove-item").forEach(removeBtn => {
