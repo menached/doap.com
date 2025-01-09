@@ -1,4 +1,4 @@
-// Updated cart.js to dynamically update the cityName in the header and handle cart interactions effectively
+// Updated cart.js to dynamically update the cityName in the header and handle cart interactions effectively, showing 'Added to Cart' when applicable
 
 let cartForm;
 
@@ -77,15 +77,18 @@ document.addEventListener('DOMContentLoaded', function () {
             const price = parseFloat(this.value.split('|')[1]) || 0;
             const quantityInput = itemLabel.querySelector('.quantity');
             const quantity = parseInt(quantityInput?.value, 10) || 1;
+            const addToCartButton = itemLabel.querySelector('.add-to-cart-button');
 
             if (this.checked) {
                 console.log(`Added ${productName} to cart.`);
                 addItemToCart(productName, price, quantity);
                 itemLabel.classList.add("selected"); // Add highlighted border
+                if (addToCartButton) addToCartButton.textContent = "Added to Cart";
             } else {
                 console.log(`Removed ${productName} from cart.`);
                 removeItemFromCart(productName);
                 itemLabel.classList.remove("selected");
+                if (addToCartButton) addToCartButton.textContent = "Add to Cart";
             }
         });
     });
@@ -151,6 +154,13 @@ document.addEventListener('DOMContentLoaded', function () {
                 minOrderMessage.style.color = "green";
             }
         }
+
+        // Update "Add to Cart" buttons to reflect cart state
+        document.querySelectorAll('.add-to-cart-button').forEach(button => {
+            const productName = button.getAttribute('data-product-name');
+            const inCart = cartData.some(item => item.name === productName);
+            button.textContent = inCart ? "Added to Cart" : "Add to Cart";
+        });
 
         // Use event delegation to handle remove buttons more efficiently
         selectedItemsList.addEventListener("click", function (event) {
