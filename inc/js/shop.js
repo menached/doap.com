@@ -43,51 +43,6 @@ const applyTabListeners = () => {
 applyTabListeners();
 console.log("Tab logic applied successfully!");
 
-// Avoid recursive creation and handle ad-blocking or script failure gracefully
-(function() {
-    const nativeCreateElement = document.createElement;
-    document.createElement = function(tagName, options) {
-        if (typeof tagName !== 'string') {
-            throw new Error("Invalid tagName passed to createElement.");
-        }
-
-        const tempElement = nativeCreateElement.call(document, tagName, options);
-        if (tagName.toLowerCase() === "script") {
-            tempElement.addEventListener("error", () => {
-                console.error(`Failed to load script: ${tempElement.src}`);
-                if (tempElement.src.includes("googlesyndication.com")) {
-                    console.warn("Google Ads script failed. Review network or cookie settings.");
-                }
-            });
-
-            if (tempElement.src && tempElement.src.includes("googlesyndication.com")) {
-                const sessionId = sessionStorage.getItem('sessionId') || generateSessionId();
-                document.cookie = `session_id=${sessionId}; path=/;`; // Store session ID in a cookie
-
-                const isCookieAllowed = window.CookieConsent?.getCurrentStatus?.() === "allow";
-
-                if (!isCookieAllowed) {
-                    console.warn(`Blocking script from ${tempElement.src} until cookies are allowed.`);
-                    tempElement.src = ""; // Prevent loading the blocked script
-                }
-            }
-        }
-
-        return tempElement;
-    };
-
-    function generateSessionId() {
-        const newId = `sess-${Math.random().toString(36).substring(2)}-${Date.now()}`;
-        sessionStorage.setItem('sessionId', newId);
-        return newId;
-    }
-
-    console.log("Selective script creation interceptor with session ID handling applied.");
-})();
-
-console.log("document.createElement adjusted for selective third-party script management.");
-
-
 
 document.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll('.add-to-cart-button').forEach(button => {
