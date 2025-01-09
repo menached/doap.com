@@ -105,8 +105,8 @@ window.addEventListener("DOMContentLoaded", () => {
     if (hostname && domainName && cityName) {
         console.log(`Cookie Values - Hostname: ${hostname}, DomainName: ${domainName}, CityName: ${cityName}`);
 
-        // Example: Use in an HTML element
-        document.getElementById("cityNameDisplay").textContent = `City: ${cityName}`;
+        // Example: Use in an HTML element (this didnt work. threw error Uncaught TypeError: Cannot set properties of null)
+        //document.getElementById("cityNameDisplay").textContent = `City: ${cityName}`;
     }
 });
 
