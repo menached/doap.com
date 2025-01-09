@@ -292,11 +292,15 @@ body {
 .zip-form input {
     width: 100%; /* Full width for mobile */
 }
-.zip-form {
-    width: 100%; /* Full width for mobile */
-    padding:0px;
-}
-
+/*.zip-form {*/
+    /*width: 100%; [> Full width for mobile <]*/
+    /*padding: 10px; */
+    /*font-size: 1rem; */
+    /*border: 1px solid #ccc; */
+    /*border-radius: 5px; */
+    /*flex-grow: 1; */
+    /*max-width: 300px;*/
+/*}*/
 
 
 /* Footer Styling */
