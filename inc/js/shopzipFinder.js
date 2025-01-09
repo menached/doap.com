@@ -2,37 +2,22 @@ document.addEventListener("DOMContentLoaded", function () {
     // Create the form container dynamically
     const form = document.createElement("form");
     form.className = "zip-form";
-    form.style.cssText = "padding: 10px; font-size: 1rem; border: 1px solid #ccc; border-radius: 5px; flex-grow: 1; max-width: 300px;";
+    //form.style.cssText = "padding: 10px; font-size: 1rem; border: 1px solid #ccc; border-radius: 5px; flex-grow: 1; max-width: 300px;";
     // Create the input field
     const input = document.createElement("input");
     input.type = "text";
+    input.id = "zipOrCityInput";  // Add id for accessibility and reference
+    input.name = "zipOrCity";  // Add name to ensure it is included in form submissions
     input.placeholder = "Enter ZIP Code or City/Town";
     input.className = "userInput";
     input.required = true;
-    input.style.cssText = `
-        padding: 10px;
-        font-size: 1rem;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        flex-grow: 1;
-        max-width: 300px;
-        text-align: center;
-    `;
+    //input.style.cssText = ` padding: 10px; font-size: 1rem; border: 1px solid #ccc; border-radius: 5px; flex-grow: 1; max-width: 300px; text-align: center; `;
 
     // Create the submit button
     const button = document.createElement("button");
     button.type = "submit";
     button.textContent = "Find a nearby Agency";
-    button.style.cssText = `
-        padding: 10px 15px;
-        font-size: 1rem;
-        background-color: #007BFF;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        white-space: nowrap;
-    `;
+    //button.style.cssText = ` padding: 10px 15px; font-size: 1rem; background-color: #007BFF; color: white; border: none; border-radius: 5px; cursor: pointer; white-space: nowrap; `;
 
     // Style hover effect for the button
     button.addEventListener("mouseover", () => {
