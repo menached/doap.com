@@ -26,6 +26,7 @@
 !inc/js/ifroot.js
 !inc/js/shopzipFinder.js
 !inc/js/subdomainData.js
+!inc/js/cookieconsent.js
 !inc/php/
 !inc/php/head.php
 !inc/php/og_meta.php

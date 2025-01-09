@@ -64,3 +64,49 @@ if (headerLink) {
     headerLink.title = `Call ${cityName} Doap!`;
 }
 
+
+function setCookie(name, value, days) {
+    let expires = "";
+    if (days) {
+        const date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + (value || "") + expires + "; path=/; SameSite=None; Secure";
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+    const hostname = window.location.hostname;
+    const domainName = hostname.split('.')[0];
+    const cityName = domainName.charAt(0).toUpperCase() + domainName.slice(1);
+
+    console.log(`Hostname: ${hostname}, DomainName: ${domainName}, CityName: ${cityName}`);
+
+    // Store in cookies
+    setCookie("hostname", hostname, 7);  // 7 days expiration
+    setCookie("domainName", domainName, 7);
+    setCookie("cityName", cityName, 7);
+});
+
+
+
+function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(";").shift();
+    return null;
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+    const hostname = getCookie("hostname");
+    const domainName = getCookie("domainName");
+    const cityName = getCookie("cityName");
+
+    if (hostname && domainName && cityName) {
+        console.log(`Cookie Values - Hostname: ${hostname}, DomainName: ${domainName}, CityName: ${cityName}`);
+
+        // Example: Use in an HTML element
+        document.getElementById("cityNameDisplay").textContent = `City: ${cityName}`;
+    }
+});
+

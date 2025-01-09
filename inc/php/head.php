@@ -1,3 +1,11 @@
+<?php 
+setcookie("cookie_name", "cookie_value", [
+    "samesite" => "None",
+    "secure" => true,
+    "httponly" => true // optional, increases security
+]);
+?>
+<link rel="stylesheet" href="/inc/js/cookieconsent.js">
 <title>Doap</title>
     <!-- Google Tag Manager -->
     <script async src="https://www.googletagmanager.com/gtm.js?id=GTM-PHZXR9R"></script>
@@ -12,6 +20,7 @@
         const hostname = window.location.hostname;
         const subdomain = hostname.split('.')[0];
     </script>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Marvel&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/inc/css/style.css">
