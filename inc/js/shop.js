@@ -1,4 +1,6 @@
-// Updated cart.js to dynamically update the cityName in the header and display 'Added to Cart' when applicable
+// Updated cart.js to dynamically update the cityName in the header using cityMap and display 'Added to Cart' when applicable
+import { cityMap } from './ifroot.js';
+
 let cartForm;
 
 console.log("shop.js started loading");
@@ -8,15 +10,14 @@ const productTitle = '';
 document.addEventListener('DOMContentLoaded', function () {
     console.log("DOM fully loaded");
 
-    // Set cityName dynamically with suffix logic
+    // Set cityName dynamically using cityMap
     const cityNameElement = document.getElementById("cityName");
-    const cookieCityName = document.cookie.split('; ').find(row => row.startsWith('cityName='));
-    let cityName = cookieCityName ? decodeURIComponent(cookieCityName.split('=')[1]) : "Doap";
+    const hostname = window.location.hostname.split('.')[0].toLowerCase();
+    let cityName = cityMap[hostname] || "Doap";
 
-    // Handle localhost and default cases
-    if (cityName.toLowerCase() === 'www' || cityName.toLowerCase() === 'doap.com') {
+    if (hostname === 'www' || hostname === 'doap.com') {
         cityName = "Doap";
-    } else if (cityName.toLowerCase() === 'localhost') {
+    } else if (hostname === 'localhost') {
         cityName = "Localhost Doap";
     } else {
         cityName += " Doap"; // Append "Doap" to the city name if not default.
