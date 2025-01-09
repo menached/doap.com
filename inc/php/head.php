@@ -1,11 +1,4 @@
-<?php 
-setcookie("cookie_name", "cookie_value", [
-    "samesite" => "None",
-    "secure" => true,
-    "httponly" => true // optional, increases security
-]);
-?>
-<link rel="stylesheet" href="/inc/js/cookieconsent.js">
+<script src="/inc/js/cookieConsent.js"></script>
 <title>Doap</title>
     <!-- Google Tag Manager -->
     <script async src="https://www.googletagmanager.com/gtm.js?id=GTM-PHZXR9R"></script>
