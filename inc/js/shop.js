@@ -1,8 +1,23 @@
+// Updated cart.js to dynamically update the cityName in the header
 let cartForm;
 
 console.log("shop.js started loading");
 const productTitle = '';
-$(document).ready(function () {
+
+// Ensure DOM content is fully loaded before applying listeners
+document.addEventListener('DOMContentLoaded', function () {
+    console.log("DOM fully loaded");
+
+    // Set cityName dynamically
+    const cityNameElement = document.getElementById("cityName");
+    const cookieCityName = document.cookie.split('; ').find(row => row.startsWith('cityName='));
+    const cityName = cookieCityName ? decodeURIComponent(cookieCityName.split('=')[1]) : "Doap";
+    if (cityNameElement) {
+        cityNameElement.textContent = cityName;
+    } else {
+        console.error("cityName element not found.");
+    }
+
     // Log the image source when a product image is clicked
     document.querySelectorAll('.item img').forEach(img => {
         img.addEventListener('click', function () {
@@ -10,108 +25,105 @@ $(document).ready(function () {
             console.log("Image src:", imgSrc);
         });
     });
-});
 
+    // Tab switching logic
+    const applyTabListeners = () => {
+        const tabs = document.querySelectorAll(".tab");
+        const tabContents = document.querySelectorAll(".tab-content");
 
-
-// Tab switching logic
-const applyTabListeners = () => {
-    const tabs = document.querySelectorAll(".tab");
-    const tabContents = document.querySelectorAll(".tab-content");
-
-    if (tabs.length === 0) {
-        console.warn("No tabs found.");
-        return;
-    }
-
-    tabs.forEach(tab => {
-        tab.removeEventListener("click", handleTabClick);
-        tab.addEventListener("click", handleTabClick);
-    });
-
-    function handleTabClick() {
-        tabs.forEach(t => t.classList.remove("active"));
-        tabContents.forEach(content => content.classList.remove("active"));
-        this.classList.add("active");
-        const targetTab = document.getElementById(this.dataset.tab);
-        if (targetTab) {
-            targetTab.classList.add("active");
-        }
-    }
-};
-
-applyTabListeners();
-console.log("Tab logic applied successfully!");
-
-
-document.addEventListener('DOMContentLoaded', function () {
-    document.querySelectorAll('.add-to-cart-button').forEach(button => {
-        button.addEventListener('click', function () {
-            const productName = this.getAttribute('data-product-name');
-            const price = this.getAttribute('data-price');
-            const quantityInput = this.closest('.item-details').querySelector('.quantity');
-            const quantity = parseInt(quantityInput.value, 10);
-
-            fetch('/cart-handler.php', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ productName, price, quantity })
-            }).then(response => response.json())
-              .then(data => {
-                  alert(data.message);  // Show success message
-                  console.log("Cart:", data.cart);  // Log cart for debugging
-              })
-              .catch(error => console.error("Error:", error));
-        });
-    });
-
-
-    const totalDisplay = document.getElementById("total");
-    const selectedItemsList = document.getElementById("selectedItemsList");
-
-    const debounce = (func, delay = 100) => {
-        let timer;
-        return function (...args) {
-            clearTimeout(timer);
-            timer = setTimeout(() => func.apply(this, args), delay);
-        };
-    };
-
-    const updateCart = debounce(() => {
-        if (!cartForm) {
-            console.log("cartForm is not defined.");
+        if (tabs.length === 0) {
+            console.warn("No tabs found.");
             return;
         }
 
-        const itemElements = cartForm.querySelectorAll('input[name="item"]');
+        tabs.forEach(tab => {
+            tab.removeEventListener("click", handleTabClick);
+            tab.addEventListener("click", handleTabClick);
+        });
+
+        function handleTabClick() {
+            tabs.forEach(t => t.classList.remove("active"));
+            tabContents.forEach(content => content.classList.remove("active"));
+            this.classList.add("active");
+            const targetTab = document.getElementById(this.dataset.tab);
+            if (targetTab) {
+                targetTab.classList.add("active");
+            }
+        }
+    };
+
+    applyTabListeners();
+    console.log("Tab logic applied successfully!");
+
+    // Handle checkbox clicks to add items to cart
+    document.querySelectorAll('label.item input[type="checkbox"]').forEach(checkbox => {
+        checkbox.addEventListener('change', function () {
+            const itemLabel = this.closest('.item');
+            const productName = this.value.split('|')[0];
+            const price = parseFloat(this.value.split('|')[1]) || 0;
+            const quantityInput = itemLabel.querySelector('.quantity');
+            const quantity = parseInt(quantityInput?.value, 10) || 1;
+
+            if (this.checked) {
+                console.log(`Added ${productName} to cart.`);
+                addItemToCart(productName, price, quantity);
+                itemLabel.classList.add("selected"); // Add highlighted border
+            } else {
+                console.log(`Removed ${productName} from cart.`);
+                removeItemFromCart(productName);
+                itemLabel.classList.remove("selected");
+            }
+        });
+    });
+
+    // Add item to cart
+    function addItemToCart(productName, price, quantity) {
+        let cartData = JSON.parse(sessionStorage.getItem("cartData")) || [];
+        const existingItem = cartData.find(item => item.name === productName);
+        if (existingItem) {
+            existingItem.quantity += quantity;
+        } else {
+            cartData.push({ name: productName, price, quantity });
+        }
+
+        console.table(cartData); // Display cart data as a table for easier debugging
+        sessionStorage.setItem("cartData", JSON.stringify(cartData));
+        updateCartUI(cartData);
+    }
+
+    // Remove item from cart
+    function removeItemFromCart(productName) {
+        let cartData = JSON.parse(sessionStorage.getItem("cartData")) || [];
+        cartData = cartData.filter(item => item.name !== productName);
+        sessionStorage.setItem("cartData", JSON.stringify(cartData));
+        updateCartUI(cartData);
+    }
+
+    // Function to update cart UI based on sessionStorage or cookies
+    const updateCartUI = (cartData) => {
+        if (!Array.isArray(cartData)) {
+            console.error("cartData is not an array:", cartData);
+            cartData = []; // Fallback to empty array to avoid breaking map function
+        }
+
+        const selectedItemsList = document.getElementById("selectedItemsList");
+        const totalDisplay = document.getElementById("total");
         let total = 0;
 
-        const cartItems = Array.from(itemElements)
-            .filter(el => el.checked)
-            .map(item => {
-                const quantityInput = item.closest(".item")?.querySelector(".quantity");
-                if (!quantityInput) {
-                    console.warn("Quantity input not found for item.");
-                    return;
-                }
-                const quantity = parseInt(quantityInput.value, 10) || 1;
-                const [itemName, itemCost] = item.value.split('|');
-                const cost = parseFloat(itemCost) * quantity;
+        const cartItemsHTML = cartData.map(item => {
+            const cost = item.price * item.quantity;
+            total += cost;
+            return `<li>${item.name} (x${item.quantity}) - $${cost.toFixed(2)}
+                <span class="remove-item" data-product-name="${item.name}">x</span></li>`;
+        }).join("");
 
-                total += cost;
-
-                return `<li>${itemName} (x${quantity}) - $${cost.toFixed(2)} 
-                    <span class="remove-item" data-value="${item.value}">x</span></li>`;
-            }).filter(Boolean);
-
-        // Update the selected items and total display
-        selectedItemsList.innerHTML = cartItems.length
-            ? cartItems.join("")
-            : '<li>No items selected yet.</li>';
+        selectedItemsList.innerHTML = cartItemsHTML || '<li>No items selected yet.</li>';
         totalDisplay.textContent = `$${total.toFixed(2)}`;
 
+        console.log(`Updated Cart UI: Total Value - $${total.toFixed(2)}, Items:`, cartData);
+
         const minOrderMessage = document.getElementById("minOrderMessage");
-        const MINIMUM_ORDER_AMOUNT = 20; // Assuming a minimum order amount constant
+        const MINIMUM_ORDER_AMOUNT = 20;
 
         if (minOrderMessage) {
             if (total === 0) {
@@ -125,23 +137,40 @@ document.addEventListener('DOMContentLoaded', function () {
                 minOrderMessage.style.color = "green";
             }
         }
-    }, 100);
 
-    // Event listeners for cart updates
-    if (cartForm) {
-        cartForm.addEventListener("change", updateCart);
-        cartForm.addEventListener("input", (event) => {
-            if (event.target.classList.contains("quantity")) {
-                updateCart();
-            }
+        // Add event listener for remove buttons dynamically to ensure latest DOM
+        document.querySelectorAll(".remove-item").forEach(removeBtn => {
+            removeBtn.replaceWith(removeBtn.cloneNode(true)); // Remove previous listeners to avoid duplicates
+            removeBtn.addEventListener("click", function () {
+                const productName = this.getAttribute("data-product-name");
+                removeItemFromCart(productName);
+                console.log(`Removed ${productName} from cart.`);
+                updateCartUI(JSON.parse(sessionStorage.getItem("cartData"))); // Ensure UI reflects latest cart data
+            });
         });
+    };
+
+    // Load initial cart data from sessionStorage or cookies on page load
+    let initialCartData = JSON.parse(sessionStorage.getItem("cartData"));
+    if (!Array.isArray(initialCartData)) {
+        const cookieData = document.cookie.split('; ').find(row => row.startsWith('cartData='));
+        initialCartData = cookieData ? JSON.parse(decodeURIComponent(cookieData.split('=')[1])) : [];
+    }
+    sessionStorage.setItem("cartData", JSON.stringify(initialCartData)); // Sync with sessionStorage
+    updateCartUI(initialCartData);
+
+    // Ensure form is present and add form change listeners if necessary
+    cartForm = document.getElementById("cartForm");
+    if (cartForm) {
+        console.log("Cart form element:", cartForm);
+        console.log(`Number of child nodes: ${cartForm.childNodes.length}`);
+        console.log("Number of input elements in cart form:", cartForm.querySelectorAll('input').length);
+        cartForm.addEventListener("change", () => updateCartUI(JSON.parse(sessionStorage.getItem("cartData"))));
+        console.log("Cart form event listeners added.");
     } else {
-        console.log("cartForm is not initialized.");
+        console.error("cartForm is not found in the DOM.");
     }
 
     console.log("Cart logic applied successfully!");
-
-
-
 });
 
