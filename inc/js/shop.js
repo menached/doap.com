@@ -1,6 +1,4 @@
-// Updated cart.js to dynamically update the cityName in the header using cityMap and display 'Added to Cart' when applicable
-import { cityMap } from './ifroot.js';
-
+// Updated cart.js to dynamically update the cityName in the header
 let cartForm;
 
 console.log("shop.js started loading");
@@ -10,7 +8,14 @@ const productTitle = '';
 document.addEventListener('DOMContentLoaded', function () {
     console.log("DOM fully loaded");
 
-    // Set cityName dynamically using cityMap
+    // Set cityName dynamically using cityMap or fallback
+    const cityMap = {
+        pleasanthill: "Pleasant Hill", walnutcreek: "Walnut Creek", castrovalley: "Castro Valley",
+        sanramon: "San Ramon", discoverybay: "Discovery Bay", alamo: "Alamo", antioch: "Antioch",
+        dublin: "Dublin", lafayette: "Lafayette", pleasanton: "Pleasanton", danville: "Danville",
+        concord: "Concord", livermore: "Livermore", orinda: "Orinda"
+    };
+
     const cityNameElement = document.getElementById("cityName");
     const hostname = window.location.hostname.split('.')[0].toLowerCase();
     let cityName = cityMap[hostname] || "Doap";
@@ -74,18 +79,15 @@ document.addEventListener('DOMContentLoaded', function () {
             const price = parseFloat(this.value.split('|')[1]) || 0;
             const quantityInput = itemLabel.querySelector('.quantity');
             const quantity = parseInt(quantityInput?.value, 10) || 1;
-            const addToCartButton = itemLabel.querySelector('.add-to-cart-button');
 
             if (this.checked) {
                 console.log(`Added ${productName} to cart.`);
                 addItemToCart(productName, price, quantity);
                 itemLabel.classList.add("selected"); // Add highlighted border
-                if (addToCartButton) addToCartButton.textContent = "Added to Cart";
             } else {
                 console.log(`Removed ${productName} from cart.`);
                 removeItemFromCart(productName);
                 itemLabel.classList.remove("selected");
-                if (addToCartButton) addToCartButton.textContent = "Add to Cart";
             }
         });
     });
@@ -151,13 +153,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 minOrderMessage.style.color = "green";
             }
         }
-
-        // Update "Add to Cart" buttons to reflect cart state
-        document.querySelectorAll('.add-to-cart-button').forEach(button => {
-            const productName = button.getAttribute('data-product-name');
-            const inCart = cartData.some(item => item.name === productName);
-            button.textContent = inCart ? "Added to Cart" : "Add to Cart";
-        });
 
         // Add event listener for remove buttons dynamically to ensure latest DOM
         document.querySelectorAll(".remove-item").forEach(removeBtn => {
