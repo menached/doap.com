@@ -132,10 +132,11 @@ document.addEventListener('DOMContentLoaded', function () {
         const totalDisplay = document.getElementById("total");
         let total = 0;
 
-        const cartItemsHTML = cartData.map(item => {
+        const cartItemsHTML = cartData.map((item, index) => {
             const cost = item.price * item.quantity;
             total += cost;
-            return `<li>${item.name} (x${item.quantity}) - $${cost.toFixed(2)}
+            const backgroundColor = cartData.length === 1 ? 'background-color: lightgreen;' : (index % 2 === 0 ? 'background-color: #81B622;' : 'background-color: #ecf87f;');
+            return `<li style="${backgroundColor}">${item.name} (x${item.quantity}) - $${cost.toFixed(2)}
                 <span class="remove-item" data-product-name="${item.name}">x</span></li>`;
         }).join("");
 
@@ -168,12 +169,14 @@ document.addEventListener('DOMContentLoaded', function () {
                 removeItemFromCart(productName);
                 updateCartUI(JSON.parse(sessionStorage.getItem("cartData")));
                 
-                // Reset button text when removed from cart
+                // Reset checkbox state and button text when removed from cart
                 document.querySelectorAll('label.item').forEach(item => {
                     const checkbox = item.querySelector('input[type="checkbox"]');
                     const addToCartText = item.querySelector('.add-to-cart-button');
-                    if (checkbox && !checkbox.checked && addToCartText) {
-                        addToCartText.textContent = "Add to Cart";
+                    if (checkbox && checkbox.value.split('|')[0] === productName) {
+                        checkbox.checked = false; // Uncheck the checkbox
+                        item.classList.remove("selected"); // Remove highlight
+                        if (addToCartText) addToCartText.textContent = "Add to Cart"; // Reset button text
                     }
                 });
             }
@@ -203,4 +206,3 @@ document.addEventListener('DOMContentLoaded', function () {
 
     console.log("Cart logic applied successfully!");
 });
-
