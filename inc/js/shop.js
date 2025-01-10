@@ -135,7 +135,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const cartItemsHTML = cartData.map((item, index) => {
             const cost = item.price * item.quantity;
             total += cost;
-            const backgroundColor = cartData.length === 1 ? 'background-color: lightgreen;' : (index % 2 === 0 ? 'background-color: #81B622;' : 'background-color: #ecf87f;');
+            const backgroundColor = cartData.length === 1 ? 'background-color: #81b622;color:#000000;' : (index % 2 === 0 ? 'background-color: #81B622;' : 'background-color: #ecf87f;');
             return `<li style="${backgroundColor}">${item.name} (x${item.quantity}) - $${cost.toFixed(2)}
                 <span class="remove-item" data-product-name="${item.name}">x</span></li>`;
         }).join("");
