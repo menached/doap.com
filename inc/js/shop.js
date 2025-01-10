@@ -106,9 +106,8 @@ document.addEventListener('DOMContentLoaded', function () {
             cartData.push({ name: productName, price, quantity });
         }
 
-        console.table(cartData); // Display cart data as a table for easier debugging
         sessionStorage.setItem("cartData", JSON.stringify(cartData));
-        updateCartUI(cartData);
+        updateCartUI(cartData); // Update UI after adding item
     }
 
     // Remove item from cart
@@ -117,12 +116,13 @@ document.addEventListener('DOMContentLoaded', function () {
         let cartData = JSON.parse(sessionStorage.getItem("cartData")) || [];
         cartData = cartData.filter(item => item.name !== productName);
         sessionStorage.setItem("cartData", JSON.stringify(cartData));
-        updateCartUI(cartData);
+        updateCartUI(cartData); // Update UI after removing item
     }
 
     // Function to update cart UI based on sessionStorage or cookies
     const updateCartUI = (cartData) => {
         console.log(`Cart updated with items:`, cartData);
+
         if (!Array.isArray(cartData)) {
             console.error("cartData is not an array:", cartData);
             cartData = []; // Fallback to empty array to avoid breaking map function
@@ -141,7 +141,13 @@ document.addEventListener('DOMContentLoaded', function () {
         }).join("");
 
         selectedItemsList.innerHTML = cartItemsHTML || '<li>No items selected yet.</li>';
-        totalDisplay.textContent = `$${total.toFixed(2)}`;
+
+        // Check if totalDisplay element exists before updating it
+        if (totalDisplay) {
+            totalDisplay.textContent = `$${total.toFixed(2)}`;
+        } else {
+            console.error("Total display element not found.");
+        }
 
         console.log(`Updated Cart UI: Total Value - $${total.toFixed(2)}, Items:`, cartData);
 
@@ -168,7 +174,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 console.log(`Removing ${productName} from cart`);
                 removeItemFromCart(productName);
                 updateCartUI(JSON.parse(sessionStorage.getItem("cartData")));
-                
+
                 // Reset checkbox state and button text when removed from cart
                 document.querySelectorAll('label.item').forEach(item => {
                     const checkbox = item.querySelector('input[type="checkbox"]');
@@ -206,3 +212,4 @@ document.addEventListener('DOMContentLoaded', function () {
 
     console.log("Cart logic applied successfully!");
 });
+
