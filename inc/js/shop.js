@@ -79,15 +79,18 @@ document.addEventListener('DOMContentLoaded', function () {
             const price = parseFloat(this.value.split('|')[1]) || 0;
             const quantityInput = itemLabel.querySelector('.quantity');
             const quantity = parseInt(quantityInput?.value, 10) || 1;
+            const addToCartText = itemLabel.querySelector('.add-to-cart-button');
 
             if (this.checked) {
                 console.log(`Added ${productName} to cart.`);
                 addItemToCart(productName, price, quantity);
                 itemLabel.classList.add("selected"); // Add highlighted border
+                if (addToCartText) addToCartText.textContent = "Added to Cart";
             } else {
                 console.log(`Removed ${productName} from cart.`);
                 removeItemFromCart(productName);
                 itemLabel.classList.remove("selected");
+                if (addToCartText) addToCartText.textContent = "Add to Cart";
             }
         });
     });
@@ -164,6 +167,15 @@ document.addEventListener('DOMContentLoaded', function () {
                 console.log(`Removing ${productName} from cart`);
                 removeItemFromCart(productName);
                 updateCartUI(JSON.parse(sessionStorage.getItem("cartData")));
+                
+                // Reset button text when removed from cart
+                document.querySelectorAll('label.item').forEach(item => {
+                    const checkbox = item.querySelector('input[type="checkbox"]');
+                    const addToCartText = item.querySelector('.add-to-cart-button');
+                    if (checkbox && !checkbox.checked && addToCartText) {
+                        addToCartText.textContent = "Add to Cart";
+                    }
+                });
             }
         });
     };
