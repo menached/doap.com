@@ -94,6 +94,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Add item to cart
     function addItemToCart(productName, price, quantity) {
+        console.log(`Called addItemToCart for ${productName}`);
         let cartData = JSON.parse(sessionStorage.getItem("cartData")) || [];
         const existingItem = cartData.find(item => item.name === productName);
         if (existingItem) {
@@ -109,6 +110,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Remove item from cart
     function removeItemFromCart(productName) {
+        console.log(`Called removeItemFromCart for ${productName}`);
         let cartData = JSON.parse(sessionStorage.getItem("cartData")) || [];
         cartData = cartData.filter(item => item.name !== productName);
         sessionStorage.setItem("cartData", JSON.stringify(cartData));
@@ -117,6 +119,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Function to update cart UI based on sessionStorage or cookies
     const updateCartUI = (cartData) => {
+        console.log(`Cart updated with items:`, cartData);
         if (!Array.isArray(cartData)) {
             console.error("cartData is not an array:", cartData);
             cartData = []; // Fallback to empty array to avoid breaking map function
@@ -154,15 +157,14 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
 
-        // Add event listener for remove buttons dynamically to ensure latest DOM
-        document.querySelectorAll(".remove-item").forEach(removeBtn => {
-            removeBtn.replaceWith(removeBtn.cloneNode(true)); // Remove previous listeners to avoid duplicates
-            removeBtn.addEventListener("click", function () {
-                const productName = this.getAttribute("data-product-name");
+        // Add single event listener for remove buttons dynamically using event delegation
+        selectedItemsList.addEventListener("click", function (e) {
+            if (e.target.classList.contains("remove-item")) {
+                const productName = e.target.getAttribute("data-product-name");
+                console.log(`Removing ${productName} from cart`);
                 removeItemFromCart(productName);
-                console.log(`Removed ${productName} from cart.`);
-                updateCartUI(JSON.parse(sessionStorage.getItem("cartData"))); // Ensure UI reflects latest cart data
-            });
+                updateCartUI(JSON.parse(sessionStorage.getItem("cartData")));
+            }
         });
     };
 
