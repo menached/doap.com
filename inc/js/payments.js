@@ -72,9 +72,40 @@ console.log("Payment method logic applied!");
 // Page Load Event
 
 document.addEventListener("DOMContentLoaded", () => {
+    // Clear session data if cookies are declined
+    const consentStatus = getCookie("cookieconsent_status");
+    const cartDataKey = "cartData";
+    const selectedItemsList = document.getElementById("selectedItemsList");
+
+    if (consentStatus !== "allow") {
+        console.log("Cookies not allowed. Clearing session data.");
+        sessionStorage.removeItem(cartDataKey);
+        updateCartUI([]);  // Ensure the UI shows "No items selected yet."
+    }
+
+    // Function to update the cart UI
+    function updateCartUI(cartData) {
+        if (!Array.isArray(cartData)) {
+            cartData = [];
+        }
+        const totalDisplay = document.getElementById("total");
+        let total = 0;
+
+        const cartItemsHTML = cartData.map(item => {
+            const cost = item.price * item.quantity;
+            total += cost;
+            return `<li>${item.name} (x${item.quantity}) - $${cost.toFixed(2)}</li>`;
+        }).join("");
+
+        selectedItemsList.innerHTML = cartItemsHTML || '<li>No items selected yet.</li>';
+        if (totalDisplay) {
+            totalDisplay.textContent = `$${total.toFixed(2)}`;
+        }
+    }
+
     // Checkout button logic
     const checkoutButton = document.getElementById("checkoutButton");
-    const totalDisplay = document.getElementById("total");  // Ensure totalDisplay is defined
+    const totalDisplay = document.getElementById("total");
     const cartForm = document.getElementById("cartForm");
 
     if (!totalDisplay || !cartForm) {
@@ -226,4 +257,11 @@ document.addEventListener("DOMContentLoaded", () => {
         console.error("City input field not found.");
     }
 });
+
+function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(";").shift();
+    return null;
+}
 
