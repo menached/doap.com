@@ -75,6 +75,13 @@ console.log("Payment method logic applied!");
 document.addEventListener("DOMContentLoaded", () => {
     // Checkout button logic
     const checkoutButton = document.getElementById("checkoutButton");
+    const totalDisplay = document.getElementById("total"); // Ensure totalDisplay is defined
+
+    if (!totalDisplay) {
+        console.error("Total display element not found. Cannot proceed with checkout.");
+        return;
+    }
+
     if (checkoutButton && cartForm) {
         checkoutButton.addEventListener("click", async (event) => {
             event.preventDefault();
@@ -93,7 +100,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 const phone = document.getElementById("phone").value.trim();
                 const email = document.getElementById("email").value.trim();
                 const address = document.getElementById("address").value.trim();
-                const total = totalDisplay.textContent;
+                const total = totalDisplay.textContent.trim(); // Retrieve total safely
                 const paymentMethod = document.getElementById("paymentMethod").value;
                 const nameOnCard = document.getElementById("nameOnCard")?.value.trim();
                 const cardNumber = document.getElementById("cardNumber")?.value.trim();
@@ -151,47 +158,48 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-        // Add click event listener to all addresses
-        document.querySelectorAll(".copy-address").forEach(element => {
-            element.addEventListener("click", () => {
-                const address = element.getAttribute("data-address");
+    // Add click event listener to all addresses
+    document.querySelectorAll(".copy-address").forEach(element => {
+        element.addEventListener("click", () => {
+            const address = element.getAttribute("data-address");
 
-                // Copy the address to the clipboard
-                navigator.clipboard.writeText(address).then(() => {
-                    // Show confirmation message
-                    const copyMessage = document.getElementById("copyMessage");
-                    copyMessage.textContent = `Copied: ${address}`;
-                    copyMessage.style.display = "block";
+            // Copy the address to the clipboard
+            navigator.clipboard.writeText(address).then(() => {
+                // Show confirmation message
+                const copyMessage = document.getElementById("copyMessage");
+                copyMessage.textContent = `Copied: ${address}`;
+                copyMessage.style.display = "block";
 
-                    // Hide the message after 2 seconds
-                    setTimeout(() => {
-                        copyMessage.style.display = "none";
-                    }, 2000);
-                }).catch(err => {
-                    console.error("Failed to copy address:", err);
-                });
+                // Hide the message after 2 seconds
+                setTimeout(() => {
+                    copyMessage.style.display = "none";
+                }, 2000);
+            }).catch(err => {
+                console.error("Failed to copy address:", err);
             });
         });
-        // Locate the minimum order message container
-        const minOrderMessageElement = document.getElementById("minOrderMessage");
-        if (minOrderMessageElement) {
-            // Replace static text with dynamic variable
-            minOrderMessageElement.textContent = `Minimum order is $${MINIMUM_ORDER_AMOUNT}.`;
-        }
+    });
 
-        const categoryHeadings = document.querySelectorAll('[data-toggle="accordion"]');
+    // Locate the minimum order message container
+    const minOrderMessageElement = document.getElementById("minOrderMessage");
+    if (minOrderMessageElement) {
+        // Replace static text with dynamic variable
+        minOrderMessageElement.textContent = `Minimum order is $${MINIMUM_ORDER_AMOUNT}.`;
+    }
 
-        categoryHeadings.forEach(heading => {
-            heading.addEventListener("click", () => {
-                const content = heading.nextElementSibling;
-                if (content.classList.contains("hidden")) {
-                    content.classList.remove("hidden");
-                    content.style.maxHeight = `${content.scrollHeight}px`;
-                } else {
-                    content.classList.add("hidden");
-                    content.style.maxHeight = "0";
-                }
-            });
+    const categoryHeadings = document.querySelectorAll('[data-toggle="accordion"]');
+
+    categoryHeadings.forEach(heading => {
+        heading.addEventListener("click", () => {
+            const content = heading.nextElementSibling;
+            if (content.classList.contains("hidden")) {
+                content.classList.remove("hidden");
+                content.style.maxHeight = `${content.scrollHeight}px`;
+            } else {
+                content.classList.add("hidden");
+                content.style.maxHeight = "0";
+            }
         });
+    });
 });
 
