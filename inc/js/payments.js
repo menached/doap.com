@@ -1,18 +1,15 @@
 // Payment method handling
 
-// Configuration: Map subdomains to minimum order amounts, city names, and phone numbers
-const areaMinimum = {
-    alamo: 40, burlingame: 120, campbell: 120, concord: 50, danville: 40, dublin: 40,
-    lafayette: 50, livermore: 50, orinda: 60, pittsburg: 75, pleasanthill: 60,
-    sanramon: 40, walnutcreek: 50
-};
+// Import areaMinimum and handlePaymentMethodChange from utility modules
+import { areaMinimum } from './ifroot.js';
+import { handlePaymentMethodChange } from './formUtils.js';
 
 // Extract subdomain from the current hostname
 let domainName = window.location.hostname.split('.')[0].toLowerCase();
 
 // Check if it's a known subdomain; if not, set a default or handle it gracefully
 if (!areaMinimum.hasOwnProperty(domainName)) {
-    console.log(`Unknown: ${domainName}, using www as default domain name.`);
+    console.log(`Unknown: ${domainName}, using default.`);
     domainName = '';
 }
 
@@ -20,49 +17,18 @@ const MINIMUM_ORDER_AMOUNT = areaMinimum[domainName] || 60;
 console.log(`Subdomain: ${domainName}, Minimum Order: $${MINIMUM_ORDER_AMOUNT}`);
 
 const paymentMethodDropdown = document.getElementById("paymentMethod");
-const creditCardForm = document.getElementById("creditCardForm");
-const cryptoWallets = document.getElementById("cryptoWallets");
-const generalHelp = document.getElementById("generalHelp");
-
-const handlePaymentMethodChange = (selectedMethod) => {
-    // Hide all sections initially
-    if (creditCardForm) creditCardForm.style.display = "none";
-    if (cryptoWallets) cryptoWallets.style.display = "none";
-    if (generalHelp) generalHelp.style.display = "none";
-
-    // Show the appropriate section based on the selected payment method
-    if (selectedMethod === "credit-card") {
-        creditCardForm.style.display = "block";
-    } else if (selectedMethod === "crypto") {
-        cryptoWallets.style.display = "block";
-    } else if (["cash"].includes(selectedMethod)) {
-        generalHelp.style.display = "block";
-        // Update the message for "Cash" payment method
-        generalHelp.innerHTML = `
-            <h3 style="display: flex; justify-content: space-between; align-items: center;">
-                <span><i class="fas fa-phone-alt"></i> Cash on Delivery</span>
-                <i class="fas fa-question-circle" style="color: green; cursor: pointer;" title="Need more help? Click here!"></i>
-            </h3>
-            <p>Please have the exact cash amount ready for a smooth delivery process. Check your email after placing your order to verify details.</p>
-        `;
-    } else if (["zelle", "venmo", "paypal", "cashapp"].includes(selectedMethod)) {
-        generalHelp.style.display = "block";
-        generalHelp.innerHTML = `
-            <h3 style="display: flex; justify-content: space-between; align-items: center;">
-                <span><i class="fas fa-phone-alt"></i> Payment Instructions</span>
-                <i class="fas fa-question-circle" style="color: green; cursor: pointer;" title="Need more help? Click here!"></i>
-            </h3>
-            <p>After placing your order, please check your email for further instructions on completing your payment. Feel free to call us at <strong>(833) 289-3627</strong> for assistance.</p>
-        `;
-    }
-};
+const customerFormFields = ["name", "city", "phone", "email", "address", "specialInstructions", "paymentMethod"];
+const sessionDataKey = "sessionData";
 
 if (paymentMethodDropdown) {
     paymentMethodDropdown.addEventListener("change", (event) => {
         handlePaymentMethodChange(event.target.value);
+        if (typeof saveSessionData === 'function') {
+            saveSessionData();
+        } else {
+            console.error('saveSessionData is not defined. Ensure it is declared before use.');
+        }
     });
-
-    // Trigger default behavior on page load to show the correct form if any default value is set
     handlePaymentMethodChange(paymentMethodDropdown.value);
 }
 
