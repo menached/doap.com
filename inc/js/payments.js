@@ -1,10 +1,18 @@
-// Payment method handling
-
 // Import areaMinimum and handlePaymentMethodChange from utility modules
 import { areaMinimum } from './ifroot.js';
 import { cityMap } from './ifroot.js';
 import { handlePaymentMethodChange } from './formUtils.js';
 import { updateCartUI } from './cartUtils.js'; // Use imported function
+
+// Define saveSessionData function before it's used
+function saveSessionData() {
+    const sessionData = {
+        paymentMethod: paymentMethodDropdown.value,  // Store the selected payment method
+        // Add other fields you want to save
+    };
+    sessionStorage.setItem(sessionDataKey, JSON.stringify(sessionData));
+    console.log("Session data saved:", sessionData);
+}
 
 // Extract subdomain from the current hostname
 let domainName = window.location.hostname.split('.')[0].toLowerCase();
@@ -22,14 +30,11 @@ const paymentMethodDropdown = document.getElementById("paymentMethod");
 const customerFormFields = ["name", "city", "phone", "email", "address", "specialInstructions", "paymentMethod"];
 const sessionDataKey = "sessionData";
 
+// Event listener for payment method changes
 if (paymentMethodDropdown) {
     paymentMethodDropdown.addEventListener("change", (event) => {
         handlePaymentMethodChange(event.target.value);
-        if (typeof saveSessionData === 'function') {
-            saveSessionData();
-        } else {
-            console.error('saveSessionData is not defined. Ensure it is declared before use.');
-        }
+        saveSessionData(); // Now save session data here
     });
     handlePaymentMethodChange(paymentMethodDropdown.value);
 }
@@ -41,6 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Clear session data if cookies are declined
     const consentStatus = getCookie("cookieconsent_status");
     const cartDataKey = "cartData";
+    const selectedItemsList = document.getElementById("selectedItemsList");
 
     if (consentStatus !== "allow") {
         console.log("Cookies not allowed. Clearing session data.");
