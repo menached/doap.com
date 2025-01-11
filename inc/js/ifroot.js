@@ -1,24 +1,6 @@
 //let cityName;
 export const defaultPhoneNumber = "833-289-3627";
 
-// Subdomain city logic
-export const cityMap = {
-    pleasanthill: "Pleasant Hill",
-    walnutcreek: "Walnut Creek",
-    castrovalley: "Castro Valley",
-    sanramon: "San Ramon",
-    discoverybay: "Discovery Bay",
-    alamo: "Alamo",
-    antioch: "Antioch",
-    dublin: "Dublin",
-    lafayette: "Lafayette",
-    pleasanton: "Pleasanton",
-    danville: "Danville",
-    concord: "Concord",
-    livermore: "Livermore",
-    orinda: "Orinda"
-};
-
 // Configuration: Map subdomains to minimum order amounts, city names, and phone numbers
 export const areaMinimum = {
     alamo: 40, burlingame: 120, campbell: 120, concord: 50, danville: 40, dublin: 40,
@@ -41,11 +23,7 @@ export const phoneMap = {
     livermore: "925-718-6181", orinda: "925-891-7800"
 };
 
-// Extract subdomain from the current hostname
-//let domainName = window.location.hostname.split('.')[0];
-
 // Extract the subdomain and set defaults
-//const hostname = window.location.hostname;
 const hostname = window.location.hostname.split('.')[0]; 
 const domainName = hostname.split('.')[0].toLowerCase();
 let cityName = cityMap[domainName] || domainName.charAt(0).toUpperCase() + domainName.slice(1);
@@ -90,7 +68,6 @@ if (headerLink) {
     headerLink.title = `Call ${cityName} Doap!`;
 }
 
-
 function setCookie(name, value, days) {
     let expires = "";
     if (days) {
@@ -113,8 +90,6 @@ window.addEventListener("DOMContentLoaded", () => {
     setCookie("domainName", domainName, 7);
     setCookie("cityName", cityName, 7);
 });
-
-
 
 function getCookie(name) {
     const value = `; ${document.cookie}`;
