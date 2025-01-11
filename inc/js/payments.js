@@ -234,7 +234,5 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
         console.error("City input field not found.");
     }
-=======
->>>>>>> 5bce543db0bb4c4612dc9dc0cc807d4299cd8957
 });
 
