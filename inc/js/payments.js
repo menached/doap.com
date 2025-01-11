@@ -81,6 +81,12 @@ document.addEventListener("DOMContentLoaded", () => {
         console.log("Cookies not allowed. Clearing session data.");
         sessionStorage.removeItem(cartDataKey);
         updateCartUI([]);  // Ensure the UI shows "No items selected yet."
+    } else {
+        // Load cart data from cookies if allowed
+        const cookieCartData = getCookie(cartDataKey);
+        if (cookieCartData) {
+            sessionStorage.setItem(cartDataKey, cookieCartData);
+        }
     }
 
     // Function to update the cart UI
@@ -94,6 +100,19 @@ document.addEventListener("DOMContentLoaded", () => {
         const cartItemsHTML = cartData.map(item => {
             const cost = item.price * item.quantity;
             total += cost;
+            
+            // Highlight the corresponding product checkbox and show "Added to Cart"
+            const productCheckbox = document.querySelector(`input[name="item"][value="${item.name}|${item.price}"]`);
+            if (productCheckbox) {
+                productCheckbox.checked = true;
+                const itemLabel = productCheckbox.closest(".item");
+                itemLabel.classList.add("selected");  // Add highlighted border class
+                const addedText = itemLabel.querySelector(".added-to-cart");
+                if (addedText) {
+                    addedText.style.display = "block";  // Show "Added to Cart"
+                }
+            }
+
             return `<li>${item.name} (x${item.quantity}) - $${cost.toFixed(2)}</li>`;
         }).join("");
 
@@ -102,6 +121,10 @@ document.addEventListener("DOMContentLoaded", () => {
             totalDisplay.textContent = `$${total.toFixed(2)}`;
         }
     }
+
+    // Load initial cart data on page load
+    const initialCartData = JSON.parse(sessionStorage.getItem(cartDataKey)) || [];
+    updateCartUI(initialCartData);
 
     // Checkout button logic
     const checkoutButton = document.getElementById("checkoutButton");
