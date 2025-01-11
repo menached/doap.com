@@ -10,7 +10,7 @@ function saveSessionData() {
         paymentMethod: paymentMethodDropdown.value,  // Store the selected payment method
         // Add other fields you want to save
     };
-    sessionStorage.setItem(sessionDataKey, JSON.stringify(sessionData));
+    sessionStorage.setItem(sessionDataKey, encodeURIComponent(JSON.stringify(sessionData)));
     console.log("Session data saved:", sessionData);
 }
 
@@ -61,7 +61,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Load initial cart data on page load
-    const initialCartData = JSON.parse(sessionStorage.getItem(cartDataKey)) || [];
+    let initialCartData = sessionStorage.getItem(cartDataKey);
+    try {
+        initialCartData = initialCartData ? JSON.parse(decodeURIComponent(initialCartData)) : [];
+    } catch (e) {
+        console.error("Failed to parse initial cart data:", e);
+        initialCartData = [];
+    }
     updateCartUI(initialCartData);
 
     // Checkout button logic

@@ -98,7 +98,14 @@ document.addEventListener('DOMContentLoaded', function () {
     // Add item to cart
     function addItemToCart(productName, price, quantity) {
         console.log(`Called addItemToCart for ${productName}`);
-        let cartData = JSON.parse(sessionStorage.getItem("cartData")) || [];
+        let cartData = sessionStorage.getItem("cartData");
+        try {
+            cartData = cartData ? JSON.parse(decodeURIComponent(cartData)) : [];
+        } catch (e) {
+            console.error("Failed to parse cart data:", e);
+            cartData = [];
+        }
+
         const existingItem = cartData.find(item => item.name === productName);
         if (existingItem) {
             existingItem.quantity += quantity;
@@ -106,16 +113,23 @@ document.addEventListener('DOMContentLoaded', function () {
             cartData.push({ name: productName, price, quantity });
         }
 
-        sessionStorage.setItem("cartData", JSON.stringify(cartData));
+        sessionStorage.setItem("cartData", encodeURIComponent(JSON.stringify(cartData)));
         updateCartUI(cartData); // Update UI after adding item
     }
 
     // Remove item from cart
     function removeItemFromCart(productName) {
         console.log(`Called removeItemFromCart for ${productName}`);
-        let cartData = JSON.parse(sessionStorage.getItem("cartData")) || [];
+        let cartData = sessionStorage.getItem("cartData");
+        try {
+            cartData = cartData ? JSON.parse(decodeURIComponent(cartData)) : [];
+        } catch (e) {
+            console.error("Failed to parse cart data:", e);
+            cartData = [];
+        }
+
         cartData = cartData.filter(item => item.name !== productName);
-        sessionStorage.setItem("cartData", JSON.stringify(cartData));
+        sessionStorage.setItem("cartData", encodeURIComponent(JSON.stringify(cartData)));
         updateCartUI(cartData); // Update UI after removing item
     }
 
@@ -173,7 +187,14 @@ document.addEventListener('DOMContentLoaded', function () {
                 const productName = e.target.getAttribute("data-product-name");
                 console.log(`Removing ${productName} from cart`);
                 removeItemFromCart(productName);
-                updateCartUI(JSON.parse(sessionStorage.getItem("cartData")));
+                let updatedCartData = sessionStorage.getItem("cartData");
+                try {
+                    updatedCartData = updatedCartData ? JSON.parse(decodeURIComponent(updatedCartData)) : [];
+                } catch (e) {
+                    console.error("Failed to parse updated cart data:", e);
+                    updatedCartData = [];
+                }
+                updateCartUI(updatedCartData);
 
                 // Reset checkbox state and button text when removed from cart
                 document.querySelectorAll('label.item').forEach(item => {
@@ -190,12 +211,14 @@ document.addEventListener('DOMContentLoaded', function () {
     };
 
     // Load initial cart data from sessionStorage or cookies on page load
-    let initialCartData = JSON.parse(sessionStorage.getItem("cartData"));
-    if (!Array.isArray(initialCartData)) {
-        const cookieData = document.cookie.split('; ').find(row => row.startsWith('cartData='));
-        initialCartData = cookieData ? JSON.parse(decodeURIComponent(cookieData.split('=')[1])) : [];
+    let initialCartData = sessionStorage.getItem("cartData");
+    try {
+        initialCartData = initialCartData ? JSON.parse(decodeURIComponent(initialCartData)) : [];
+    } catch (e) {
+        console.error("Failed to parse initial cart data:", e);
+        initialCartData = [];
     }
-    sessionStorage.setItem("cartData", JSON.stringify(initialCartData)); // Sync with sessionStorage
+    sessionStorage.setItem("cartData", encodeURIComponent(JSON.stringify(initialCartData))); // Sync with sessionStorage
     updateCartUI(initialCartData);
 
     // Ensure form is present and add form change listeners if necessary
@@ -204,7 +227,16 @@ document.addEventListener('DOMContentLoaded', function () {
         console.log("Cart form element:", cartForm);
         console.log(`Number of child nodes: ${cartForm.childNodes.length}`);
         console.log("Number of input elements in cart form:", cartForm.querySelectorAll('input').length);
-        cartForm.addEventListener("change", () => updateCartUI(JSON.parse(sessionStorage.getItem("cartData"))));
+        cartForm.addEventListener("change", () => {
+            let formCartData = sessionStorage.getItem("cartData");
+            try {
+                formCartData = formCartData ? JSON.parse(decodeURIComponent(formCartData)) : [];
+            } catch (e) {
+                console.error("Failed to parse form cart data:", e);
+                formCartData = [];
+            }
+            updateCartUI(formCartData);
+        });
         console.log("Cart form event listeners added.");
     } else {
         console.error("cartForm is not found in the DOM.");
