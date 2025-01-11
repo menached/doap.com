@@ -1,7 +1,5 @@
 // Payment method handling
 
-
-
 // Configuration: Map subdomains to minimum order amounts, city names, and phone numbers
 const areaMinimum = {
     alamo: 40, burlingame: 120, campbell: 120, concord: 50, danville: 40, dublin: 40,
@@ -10,17 +8,16 @@ const areaMinimum = {
 };
 
 // Extract subdomain from the current hostname
-let domainName = window.location.hostname.split('.')[0];
+let domainName = window.location.hostname.split('.')[0].toLowerCase();
 
 // Check if it's a known subdomain; if not, set a default or handle it gracefully
 if (!areaMinimum.hasOwnProperty(domainName)) {
-    console.log(`Unknown: ${domainName}, Using www as default domain name.`);
-    domainName = 'www';
+    console.log(`Unknown: ${domainName}, using www as default domain name.`);
+    domainName = '';
 }
 
 const MINIMUM_ORDER_AMOUNT = areaMinimum[domainName] || 60;
 console.log(`Subdomain: ${domainName}, Minimum Order: $${MINIMUM_ORDER_AMOUNT}`);
-
 
 const paymentMethodDropdown = document.getElementById("paymentMethod");
 const creditCardForm = document.getElementById("creditCardForm");
@@ -29,9 +26,9 @@ const generalHelp = document.getElementById("generalHelp");
 
 const handlePaymentMethodChange = (selectedMethod) => {
     // Hide all sections initially
-    creditCardForm.style.display = "none";
-    cryptoWallets.style.display = "none";
-    generalHelp.style.display = "none";
+    if (creditCardForm) creditCardForm.style.display = "none";
+    if (cryptoWallets) cryptoWallets.style.display = "none";
+    if (generalHelp) generalHelp.style.display = "none";
 
     // Show the appropriate section based on the selected payment method
     if (selectedMethod === "credit-card") {
@@ -46,18 +43,16 @@ const handlePaymentMethodChange = (selectedMethod) => {
                 <span><i class="fas fa-phone-alt"></i> Cash on Delivery</span>
                 <i class="fas fa-question-circle" style="color: green; cursor: pointer;" title="Need more help? Click here!"></i>
             </h3>
-            <p>COD is the easiest payment method.  No sign-up required.  Show proof of age upon delivery.  Check your email after placing your order to verify your order details. 
-            If you need to make changes, call us at <strong>(833) 289-3627</strong> for assistance. We're standing by to help!</p>
+            <p>Please have the exact cash amount ready for a smooth delivery process. Check your email after placing your order to verify details.</p>
         `;
     } else if (["zelle", "venmo", "paypal", "cashapp"].includes(selectedMethod)) {
         generalHelp.style.display = "block";
         generalHelp.innerHTML = `
             <h3 style="display: flex; justify-content: space-between; align-items: center;">
-                <span><i class="fas fa-phone-alt"></i> Need Assistance?</span>
+                <span><i class="fas fa-phone-alt"></i> Payment Instructions</span>
                 <i class="fas fa-question-circle" style="color: green; cursor: pointer;" title="Need more help? Click here!"></i>
             </h3>
-            <p>After placing your order, please check your email for further instructions on how to complete your payment. 
-            For zelle send payment to zelle@doap.com, for venmo, venmo@doap.com, for paypal, paypal@doap.com, and cashapp is cashapp@doap.com.  Feel free to call us at <strong>(833) 289-3627</strong> for assistance. We're standing by to help!</p>
+            <p>After placing your order, please check your email for further instructions on completing your payment. Feel free to call us at <strong>(833) 289-3627</strong> for assistance.</p>
         `;
     }
 };
@@ -67,24 +62,27 @@ if (paymentMethodDropdown) {
         handlePaymentMethodChange(event.target.value);
     });
 
-    // Trigger default behavior on page load
+    // Trigger default behavior on page load to show the correct form if any default value is set
     handlePaymentMethodChange(paymentMethodDropdown.value);
 }
+
 console.log("Payment method logic applied!");
 
 
+// Page Load Event
 
 document.addEventListener("DOMContentLoaded", () => {
     // Checkout button logic
     const checkoutButton = document.getElementById("checkoutButton");
-    const totalDisplay = document.getElementById("total"); // Ensure totalDisplay is defined
+    const totalDisplay = document.getElementById("total");  // Ensure totalDisplay is defined
+    const cartForm = document.getElementById("cartForm");
 
-    if (!totalDisplay) {
-        console.error("Total display element not found. Cannot proceed with checkout.");
+    if (!totalDisplay || !cartForm) {
+        console.error("Total display or cart form element not found. Cannot proceed with checkout.");
         return;
     }
 
-    if (checkoutButton && cartForm) {
+    if (checkoutButton) {
         checkoutButton.addEventListener("click", async (event) => {
             event.preventDefault();
 
@@ -102,8 +100,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 const phone = document.getElementById("phone").value.trim();
                 const email = document.getElementById("email").value.trim();
                 const address = document.getElementById("address").value.trim();
-                const total = totalDisplay.textContent.trim(); // Retrieve total safely
-                const paymentMethod = document.getElementById("paymentMethod").value;
+                const total = totalDisplay.textContent.trim();
+                const paymentMethod = paymentMethodDropdown.value;
                 const nameOnCard = document.getElementById("nameOnCard")?.value.trim();
                 const cardNumber = document.getElementById("cardNumber")?.value.trim();
                 const expiryDate = document.getElementById("expiryDate")?.value.trim();
@@ -165,14 +163,11 @@ document.addEventListener("DOMContentLoaded", () => {
         element.addEventListener("click", () => {
             const address = element.getAttribute("data-address");
 
-            // Copy the address to the clipboard
             navigator.clipboard.writeText(address).then(() => {
-                // Show confirmation message
                 const copyMessage = document.getElementById("copyMessage");
                 copyMessage.textContent = `Copied: ${address}`;
                 copyMessage.style.display = "block";
 
-                // Hide the message after 2 seconds
                 setTimeout(() => {
                     copyMessage.style.display = "none";
                 }, 2000);
@@ -185,12 +180,10 @@ document.addEventListener("DOMContentLoaded", () => {
     // Locate the minimum order message container
     const minOrderMessageElement = document.getElementById("minOrderMessage");
     if (minOrderMessageElement) {
-        // Replace static text with dynamic variable
         minOrderMessageElement.textContent = `Minimum order is $${MINIMUM_ORDER_AMOUNT}.`;
     }
 
     const categoryHeadings = document.querySelectorAll('[data-toggle="accordion"]');
-
     categoryHeadings.forEach(heading => {
         heading.addEventListener("click", () => {
             const content = heading.nextElementSibling;
@@ -203,10 +196,8 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     });
-<<<<<<< HEAD
-});
 
-document.addEventListener("DOMContentLoaded", () => {
+    // Subdomain city logic
     const cityMap = {
         pleasanthill: "Pleasant Hill",
         walnutcreek: "Walnut Creek",
@@ -230,7 +221,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (cityElement) {
         cityElement.value = cityName;  // Set the city name directly (no "Doap" suffix)
-        console.log(`City input value set to: ${cityElement.value}`);  // For debugging
+        console.log(`City input value set to: ${cityElement.value}`);
     } else {
         console.error("City input field not found.");
     }
