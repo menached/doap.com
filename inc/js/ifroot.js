@@ -20,7 +20,8 @@ const phoneMap = {
 //let domainName = window.location.hostname.split('.')[0];
 
 // Extract the subdomain and set defaults
-const hostname = window.location.hostname;
+//const hostname = window.location.hostname;
+const hostname = window.location.hostname.split('.')[0]; 
 const domainName = hostname.split('.')[0].toLowerCase();
 let cityName = cityMap[domainName] || domainName.charAt(0).toUpperCase() + domainName.slice(1);
     
@@ -109,4 +110,6 @@ window.addEventListener("DOMContentLoaded", () => {
         //document.getElementById("cityNameDisplay").textContent = `City: ${cityName}`;
     }
 });
-
+console.log(`Subdomain: ${domainName}, City detected: ${cityName}`);
+document.getElementById("city").value = cityName || "Norcal";
+console.log(`City input value: ${document.getElementById("city").value}`);
