@@ -23,6 +23,7 @@
 !inc/js/shop.js
 !inc/js/payments.js
 !inc/js/formUtils.js
+!inc/js/cartUtils.js
 !inc/js/modal.js
 !inc/js/ifroot.js
 !inc/js/shopzipFinder.js

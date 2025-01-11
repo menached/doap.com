@@ -2,7 +2,9 @@
 
 // Import areaMinimum and handlePaymentMethodChange from utility modules
 import { areaMinimum } from './ifroot.js';
+import { cityMap } from './ifroot.js';
 import { handlePaymentMethodChange } from './formUtils.js';
+import { updateCartUI } from './cartUtils.js';
 
 // Extract subdomain from the current hostname
 let domainName = window.location.hostname.split('.')[0].toLowerCase();
@@ -217,23 +219,23 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // Subdomain city logic
-    const cityMap = {
-        pleasanthill: "Pleasant Hill",
-        walnutcreek: "Walnut Creek",
-        castrovalley: "Castro Valley",
-        sanramon: "San Ramon",
-        discoverybay: "Discovery Bay",
-        alamo: "Alamo",
-        antioch: "Antioch",
-        dublin: "Dublin",
-        lafayette: "Lafayette",
-        pleasanton: "Pleasanton",
-        danville: "Danville",
-        concord: "Concord",
-        livermore: "Livermore",
-        orinda: "Orinda"
-    };
+    //// Subdomain city logic
+    //const cityMap = {
+        //pleasanthill: "Pleasant Hill",
+        //walnutcreek: "Walnut Creek",
+        //castrovalley: "Castro Valley",
+        //sanramon: "San Ramon",
+        //discoverybay: "Discovery Bay",
+        //alamo: "Alamo",
+        //antioch: "Antioch",
+        //dublin: "Dublin",
+        //lafayette: "Lafayette",
+        //pleasanton: "Pleasanton",
+        //danville: "Danville",
+        //concord: "Concord",
+        //livermore: "Livermore",
+        //orinda: "Orinda"
+    //};
 
     const hostname = window.location.hostname.split('.')[0].toLowerCase();  // Get subdomain
     const cityName = cityMap[hostname] || "";  // Leave blank if subdomain is not mapped

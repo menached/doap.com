@@ -1,6 +1,24 @@
 //let cityName;
 export const defaultPhoneNumber = "833-289-3627";
 
+// Subdomain city logic
+export const cityMap = {
+    pleasanthill: "Pleasant Hill",
+    walnutcreek: "Walnut Creek",
+    castrovalley: "Castro Valley",
+    sanramon: "San Ramon",
+    discoverybay: "Discovery Bay",
+    alamo: "Alamo",
+    antioch: "Antioch",
+    dublin: "Dublin",
+    lafayette: "Lafayette",
+    pleasanton: "Pleasanton",
+    danville: "Danville",
+    concord: "Concord",
+    livermore: "Livermore",
+    orinda: "Orinda"
+};
+
 // Configuration: Map subdomains to minimum order amounts, city names, and phone numbers
 export const areaMinimum = {
     alamo: 40, burlingame: 120, campbell: 120, concord: 50, danville: 40, dublin: 40,
