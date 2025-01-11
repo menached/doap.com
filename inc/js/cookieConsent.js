@@ -49,12 +49,18 @@ function enableAnalyticsAndAds() {
     };
 }
 
-// Function to switch cart data from session storage to cookies after consent
 function switchToCookies() {
     const cartData = sessionStorage.getItem("cartData");
     if (cartData) {
-        document.cookie = `cartData=${encodeURIComponent(cartData)}; path=/; SameSite=None; Secure; max-age=604800`; // 7 days
-        console.log("Cart data moved to cookies:", JSON.parse(cartData));
+        try {
+            // Decode the cartData if it's URL-encoded
+            const decodedData = decodeURIComponent(cartData);
+            const parsedData = JSON.parse(decodedData);  // Parse after decoding
+            document.cookie = `cartData=${encodeURIComponent(JSON.stringify(parsedData))}; path=/; SameSite=None; Secure; max-age=604800`; // 7 days
+            console.log("Cart data moved to cookies:", parsedData);
+        } catch (error) {
+            console.error("Failed to parse cart data from sessionStorage:", error);
+        }
     }
 }
 
