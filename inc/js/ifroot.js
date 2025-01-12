@@ -26,7 +26,9 @@ export const phoneMap = {
 // Extract the subdomain and set defaults
 const hostname = window.location.hostname.split('.')[0]; 
 const domainName = hostname.split('.')[0].toLowerCase();
-let cityName = cityMap[domainName] || domainName.charAt(0).toUpperCase() + domainName.slice(1);
+
+//let cityName = cityMap[domainName] || domainName.charAt(0).toUpperCase() + domainName.slice(1);
+let cityName = cityMap[domainName] || "Unknown City";
     
 console.log(`Hostname: ${hostname}, DomainName: ${domainName}, CityName ${cityName}`);
 
