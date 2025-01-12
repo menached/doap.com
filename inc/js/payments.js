@@ -7,11 +7,17 @@ import { updateCartUI } from './cartUtils.js'; // Use imported function
 // Define saveSessionData function before it's used
 function saveSessionData() {
     const sessionData = {
-        paymentMethod: paymentMethodDropdown.value,  // Store the selected payment method
-        // Add other fields you want to save
+        paymentMethod: paymentMethodDropdown.value,
+        name: document.getElementById("name")?.value.trim(),
+        city: document.getElementById("city")?.value.trim(),
+        phone: document.getElementById("phone")?.value.trim(),
+        email: document.getElementById("email")?.value.trim(),
+        address: document.getElementById("address")?.value.trim(),
+        specialInstructions: document.getElementById("specialInstructions")?.value.trim()
     };
     sessionStorage.setItem(sessionDataKey, encodeURIComponent(JSON.stringify(sessionData)));
-    console.log("Session data saved:", sessionData);
+    document.cookie = `sessionData=${encodeURIComponent(JSON.stringify(sessionData))}; path=/; SameSite=None; Secure; max-age=604800`; // 7 days expiration
+    console.log("Session data saved in sessionStorage and cookies:", sessionData);
 }
 
 // Extract subdomain from the current hostname
@@ -30,6 +36,16 @@ const paymentMethodDropdown = document.getElementById("paymentMethod");
 const customerFormFields = ["name", "city", "phone", "email", "address", "specialInstructions", "paymentMethod"];
 const sessionDataKey = "sessionData";
 
+// Add event listeners for all input fields to save session data dynamically
+customerFormFields.forEach(fieldId => {
+    const inputField = document.getElementById(fieldId);
+    if (inputField) {
+        inputField.addEventListener('input', () => {
+            saveSessionData();  // Save session data whenever the user types
+        });
+    }
+});
+
 // Event listener for payment method changes
 if (paymentMethodDropdown) {
     paymentMethodDropdown.addEventListener("change", (event) => {
@@ -43,7 +59,6 @@ console.log("Payment method logic applied!");
 
 // Page Load Event
 document.addEventListener("DOMContentLoaded", () => {
-    // Clear session data if cookies are declined
     const consentStatus = getCookie("cookieconsent_status");
     const cartDataKey = "cartData";
     const selectedItemsList = document.getElementById("selectedItemsList");
@@ -53,14 +68,12 @@ document.addEventListener("DOMContentLoaded", () => {
         sessionStorage.removeItem(cartDataKey);
         updateCartUI([]);  // Ensure the UI shows "No items selected yet."
     } else {
-        // Load cart data from cookies if allowed
         const cookieCartData = getCookie(cartDataKey);
         if (cookieCartData) {
             sessionStorage.setItem(cartDataKey, cookieCartData);
         }
     }
 
-    // Load initial cart data on page load
     let initialCartData = sessionStorage.getItem(cartDataKey);
     try {
         initialCartData = initialCartData ? JSON.parse(decodeURIComponent(initialCartData)) : [];
@@ -70,7 +83,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     updateCartUI(initialCartData);
 
-    // Checkout button logic
     const checkoutButton = document.getElementById("checkoutButton");
     const totalDisplay = document.getElementById("total");
     const cartForm = document.getElementById("cartForm");
@@ -93,20 +105,33 @@ document.addEventListener("DOMContentLoaded", () => {
                     return { name: itemName, quantity, price: parseFloat(itemCost) };
                 });
 
-                const name = document.getElementById("name").value.trim();
-                const city = document.getElementById("city").value.trim();
-                const phone = document.getElementById("phone").value.trim();
-                const email = document.getElementById("email").value.trim();
-                const address = document.getElementById("address").value.trim();
+                const name = document.getElementById("name")?.value.trim() || "";
+                const city = document.getElementById("city")?.value.trim() || "";
+                const phone = document.getElementById("phone")?.value.trim() || "";
+                const email = document.getElementById("email")?.value.trim() || "";
+                const address = document.getElementById("address")?.value.trim() || "";
                 const total = totalDisplay.textContent.trim();
                 const paymentMethod = paymentMethodDropdown.value;
-                const specialInstructions = document.getElementById("specialInstructions").value.trim();
+                const specialInstructions = document.getElementById("specialInstructions")?.value.trim() || "";
+                const cardNumber = document.getElementById("cardNumber")?.value.trim() || "";
+                const nameOnCard = document.getElementById("nameOnCard")?.value.trim() || "";
+                const expiryDate = document.getElementById("expiryDate")?.value.trim() || "";
+                const cvv = document.getElementById("cvv")?.value.trim() || "";
+                const cardZip = document.getElementById("cardZip")?.value.trim() || "";
 
                 if (!items.length) throw new Error("No items selected!");
                 if (!name || !city || !phone || !email || !address) {
                     throw new Error("All fields must be filled out!");
                 }
                 if (!paymentMethod) throw new Error("Payment method is required!");
+
+                const creditCard = {
+                    cardNumber,
+                    nameOnCard,
+                    expiryDate,
+                    cvv,
+                    cardZip
+                };
 
                 const payload = {
                     items,
@@ -117,6 +142,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     address,
                     total,
                     paymentMethod,
+                    creditCard,
                     specialInstructions
                 };
 
@@ -141,7 +167,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Add click event listener to all addresses
     document.querySelectorAll(".copy-address").forEach(element => {
         element.addEventListener("click", () => {
             const address = element.getAttribute("data-address");
@@ -160,7 +185,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // Locate the minimum order message container
     const minOrderMessageElement = document.getElementById("minOrderMessage");
     if (minOrderMessageElement) {
         minOrderMessageElement.textContent = `Minimum order is $${MINIMUM_ORDER_AMOUNT}.`;
@@ -180,12 +204,12 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    const hostname = window.location.hostname.split('.')[0].toLowerCase();  // Get subdomain
-    const cityName = cityMap[hostname] || "";  // Leave blank if subdomain is not mapped
-    const cityElement = document.getElementById("city");  // City input field
+    const hostname = window.location.hostname.split('.')[0].toLowerCase();
+    const cityName = cityMap[hostname] || "";
+    const cityElement = document.getElementById("city");
 
     if (cityElement) {
-        cityElement.value = cityName;  // Set the city name directly (no "Doap" suffix)
+        cityElement.value = cityName;
         console.log(`City input value set to: ${cityElement.value}`);
     } else {
         console.error("City input field not found.");
@@ -198,4 +222,108 @@ function getCookie(name) {
     if (parts.length === 2) return parts.pop().split(";").shift();
     return null;
 }
+
+// Helper function to set a cookie
+function setCookie(name, value, days) {
+    let expires = "";
+    if (days) {
+        const date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + (value || "") + expires + "; path=/; SameSite=None; Secure";
+}
+
+// Function to switch session data to cookies
+function switchToCookies() {
+    const sessionData = sessionStorage.getItem(sessionDataKey);
+    if (sessionData) {
+        try {
+            const decodedData = decodeURIComponent(sessionData);
+            const parsedData = JSON.parse(decodedData);
+            document.cookie = `sessionData=${encodeURIComponent(JSON.stringify(parsedData))}; path=/; SameSite=None; Secure; max-age=604800`; // 7 days
+            console.log("Customer info moved to cookies:", parsedData);
+        } catch (error) {
+            console.error("Failed to parse session data from sessionStorage:", error);
+        }
+    }
+}
+
+function loadCustomerAndCartData() {
+    let customerData;
+    let cartData;
+
+    // Try loading customer data from cookies
+    const sessionDataCookie = document.cookie.split('; ').find(row => row.startsWith('sessionData='));
+    if (sessionDataCookie) {
+        try {
+            customerData = JSON.parse(decodeURIComponent(sessionDataCookie.split('=')[1]));
+            console.log("Customer data loaded from cookies:", customerData);
+        } catch (error) {
+            console.error("Error parsing customer data from cookies:", error);
+        }
+    }
+
+    // Fallback to session storage if no customer data in cookies
+    if (!customerData) {
+        const sessionData = sessionStorage.getItem("sessionData");
+        if (sessionData) {
+            try {
+                customerData = JSON.parse(decodeURIComponent(sessionData));
+                console.log("Customer data loaded from session storage:", customerData);
+            } catch (error) {
+                console.error("Error parsing customer data from session storage:", error);
+            }
+        }
+    }
+
+    // Populate form fields if customer data exists
+    if (customerData) {
+        Object.keys(customerData).forEach(key => {
+            const inputField = document.getElementById(key);
+            if (inputField) {
+                inputField.value = customerData[key];
+            } else {
+                console.warn(`Input field with id '${key}' not found.`);
+            }
+        });
+    } else {
+        console.log("No customer data found.");
+    }
+
+    // Try loading cart data from cookies
+    const cartDataCookie = document.cookie.split('; ').find(row => row.startsWith('cartData='));
+    if (cartDataCookie) {
+        try {
+            cartData = JSON.parse(decodeURIComponent(cartDataCookie.split('=')[1]));
+            console.log("Cart data loaded from cookies:", cartData);
+        } catch (error) {
+            console.error("Error parsing cart data from cookies:", error);
+        }
+    }
+
+    // Fallback to session storage if no cart data in cookies
+    if (!cartData) {
+        const cartDataSession = sessionStorage.getItem("cartData");
+        if (cartDataSession) {
+            try {
+                cartData = JSON.parse(decodeURIComponent(cartDataSession));
+                console.log("Cart data loaded from session storage:", cartData);
+            } catch (error) {
+                console.error("Error parsing cart data from session storage:", error);
+            }
+        }
+    }
+
+    // Update the cart UI if cart data exists
+    if (cartData) {
+        updateCartUI(cartData);
+    } else {
+        console.log("No cart data found.");
+    }
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+    loadCustomerAndCartData(); // Load customer and cart data when the page loads
+});
 

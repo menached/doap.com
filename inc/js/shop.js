@@ -1,3 +1,9 @@
+// Import areaMinimum and handlePaymentMethodChange from utility modules
+import { areaMinimum } from './ifroot.js';
+import { cityMap } from './ifroot.js';
+import { handlePaymentMethodChange } from './formUtils.js';
+import { updateCartUI } from './cartUtils.js'; // Use imported function
+
 // Updated cart.js to dynamically update the cityName in the header
 let cartForm;
 
@@ -8,13 +14,13 @@ const productTitle = '';
 document.addEventListener('DOMContentLoaded', function () {
     console.log("DOM fully loaded");
 
-    // Set cityName dynamically using cityMap or fallback
-    const cityMap = {
-        pleasanthill: "Pleasant Hill", walnutcreek: "Walnut Creek", castrovalley: "Castro Valley",
-        sanramon: "San Ramon", discoverybay: "Discovery Bay", alamo: "Alamo", antioch: "Antioch",
-        dublin: "Dublin", lafayette: "Lafayette", pleasanton: "Pleasanton", danville: "Danville",
-        concord: "Concord", livermore: "Livermore", orinda: "Orinda"
-    };
+    //// Set cityName dynamically using cityMap or fallback
+    //const cityMap = {
+        //pleasanthill: "Pleasant Hill", walnutcreek: "Walnut Creek", castrovalley: "Castro Valley",
+        //sanramon: "San Ramon", discoverybay: "Discovery Bay", alamo: "Alamo", antioch: "Antioch",
+        //dublin: "Dublin", lafayette: "Lafayette", pleasanton: "Pleasanton", danville: "Danville",
+        //concord: "Concord", livermore: "Livermore", orinda: "Orinda"
+    //};
 
     const cityNameElement = document.getElementById("cityName");
     const hostname = window.location.hostname.split('.')[0].toLowerCase();
