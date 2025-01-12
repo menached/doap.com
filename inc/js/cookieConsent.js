@@ -50,16 +50,25 @@ function enableAnalyticsAndAds() {
 }
 
 function switchToCookies() {
-    const cartData = sessionStorage.getItem("cartData");
-    if (cartData) {
+    let existingCartData = [];
+    const cookieCartData = document.cookie.split('; ').find(row => row.startsWith('cartData='));
+    if (cookieCartData) {
         try {
-            // Decode the cartData if it's URL-encoded
-            const decodedData = decodeURIComponent(cartData);
-            const parsedData = JSON.parse(decodedData);  // Parse after decoding
-            document.cookie = `cartData=${encodeURIComponent(JSON.stringify(parsedData))}; path=/; SameSite=None; Secure; max-age=604800`; // 7 days
-            console.log("Cart data moved to cookies:", parsedData);
+            existingCartData = JSON.parse(decodeURIComponent(cookieCartData.split('=')[1])) || [];
         } catch (error) {
-            console.error("Failed to parse cart data from sessionStorage:", error);
+            console.error("Error parsing cart data from cookies:", error);
+        }
+    }
+
+    const sessionCartData = sessionStorage.getItem("cartData");
+    if (sessionCartData) {
+        try {
+            const newCartData = JSON.parse(decodeURIComponent(sessionCartData));
+            const mergedCartData = [...existingCartData, ...newCartData];
+            document.cookie = `cartData=${encodeURIComponent(JSON.stringify(mergedCartData))}; path=/; SameSite=None; Secure; max-age=604800`;
+            console.log("Cart data moved to cookies:", mergedCartData);
+        } catch (error) {
+            console.error("Failed to parse session cart data:", error);
         }
     }
 }

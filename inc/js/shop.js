@@ -1,8 +1,9 @@
 // Import areaMinimum and handlePaymentMethodChange from utility modules
-import { areaMinimum } from './ifroot.js';
 import { cityMap } from './ifroot.js';
+import { addItemToCart } from './cartUtils.js'; // Use imported function
 import { handlePaymentMethodChange } from './formUtils.js';
-import { updateCartUI } from './cartUtils.js'; // Use imported function
+import { updateCartUI} from './cartUtils.js'; // Use imported function
+import { areaMinimum } from './ifroot.js';
 
 // Updated cart.js to dynamically update the cityName in the header
 let cartForm;
@@ -101,27 +102,20 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // Add item to cart
-    function addItemToCart(productName, price, quantity) {
-        console.log(`Called addItemToCart for ${productName}`);
-        let cartData = sessionStorage.getItem("cartData");
-        try {
-            cartData = cartData ? JSON.parse(decodeURIComponent(cartData)) : [];
-        } catch (e) {
-            console.error("Failed to parse cart data:", e);
-            cartData = [];
-        }
-
-        const existingItem = cartData.find(item => item.name === productName);
-        if (existingItem) {
-            existingItem.quantity += quantity;
-        } else {
-            cartData.push({ name: productName, price, quantity });
-        }
-
-        sessionStorage.setItem("cartData", encodeURIComponent(JSON.stringify(cartData)));
-        updateCartUI(cartData); // Update UI after adding item
-    }
+    //// Add item to cart
+    //function addItemToCart(productName, price, quantity) {
+        //console.log(`Adding item: ${productName}`);
+        //let cartData = JSON.parse(sessionStorage.getItem("cartData")) || [];
+        //const existingItem = cartData.find(item => item.name === productName);
+        //if (existingItem) {
+            //existingItem.quantity += quantity;
+        //} else {
+            //cartData.push({ name: productName, price, quantity });
+        //}
+        //sessionStorage.setItem("cartData", JSON.stringify(cartData));
+        //console.log("Updated cartData in sessionStorage:", cartData);
+        //updateCartUI(cartData);  // Ensure UI reflects the updated cart
+    //}
 
     // Remove item from cart
     function removeItemFromCart(productName) {
