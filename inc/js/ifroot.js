@@ -83,7 +83,8 @@ function setCookie(name, value, days) {
 window.addEventListener("DOMContentLoaded", () => {
     const hostname = window.location.hostname;
     const domainName = hostname.split('.')[0];
-    const cityName = domainName.charAt(0).toUpperCase() + domainName.slice(1);
+    //const cityName = domainName.charAt(0).toUpperCase() + domainName.slice(1);
+    const cityName = cityMap[domainName] || "Unknown City";
 
     console.log(`Hostname: ${hostname}, DomainName: ${domainName}, CityName: ${cityName}`);
 
