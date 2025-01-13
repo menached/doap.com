@@ -1,91 +1,101 @@
-// Configuration: Map subdomains to minimum order amounts, city names, and phone numbers
-export const defaultPhoneNumber = "833-289-3627";
-
-export const areaMinimum = {
-    alamo: 40, burlingame: 120, campbell: 120, concord: 50, danville: 40, dublin: 40,
-    lafayette: 50, livermore: 50, orinda: 60, pittsburg: 75, pleasanthill: 60,
-    sanramon: 40, walnutcreek: 50
-};
-
-export const cityMap = {
-    pleasanthill: "Pleasant Hill", walnutcreek: "Walnut Creek", castrovalley: "Castro Valley",
-    sanramon: "San Ramon", discoverybay: "Discovery Bay", alamo: "Alamo", antioch: "Antioch",
-    dublin: "Dublin", lafayette: "Lafayette", pleasanton: "Pleasanton", danville: "Danville",
-    concord: "Concord", livermore: "Livermore", orinda: "Orinda"
-};
-
-export const phoneMap = {
-    pleasanthill: "925-891-7800", walnutcreek: "925-464-2075", castrovalley: "925-263-9209",
-    sanramon: "925-365-6030", discoverybay: "925-891-7800", alamo: "925-553-4710",
-    antioch: "925-891-7800", dublin: "925-587-6777", lafayette: "925-871-1333",
-    pleasanton: "925-587-6777", danville: "925-725-6920", concord: "925-412-4880",
-    livermore: "925-718-6181", orinda: "925-891-7800"
-};
-
-function setCookie(name, value, days) {
-    let expires = "";
-    if (days) {
-        const date = new Date();
-        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-        expires = "; expires=" + date.toUTCString();
-    }
-    document.cookie = `${name}=${value || ""}${expires}; path=/; SameSite=None; Secure`;
-}
-
-function getCookie(name) {
-    const value = `; ${document.cookie}`;
-    const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) return parts.pop().split(";").shift();
-    return null;
-}
+import { setCookie, getCookie } from "./cookieUtils.js";
+import { cityMap } from "./data.js";
+import { setSessionData, getSessionData } from "./sessionUtils.js";
 
 window.addEventListener("DOMContentLoaded", () => {
     const hostname = window.location.hostname.split('.')[0].toLowerCase();
-    const domainName = hostname === "www" || hostname === "doap" ? "default" : hostname;
+    const domainName = hostname === "localhost" || hostname === "www" ? "localhost" : hostname;
     const cityName = cityMap[domainName] || "Norcal";
 
-    console.log(`Subdomain: ${domainName}, City detected: ${cityName}`);
+    const sessionData = {
+        hostname,
+        domainName,
+        cityName,
+        subdomain: domainName === "default" ? "norcal" : domainName
+    };
 
-    const cityInputElement = document.getElementById("city");
-    if (cityInputElement) {
-        cityInputElement.value = cityName;
-        console.log(`City input value set to: ${cityInputElement.value}`);
-    } else {
-        console.error("City input element not found.");
+    const cartData = getSessionData("cartItems") || [];
+    const customerInfo = getSessionData("customerInfo") || {};
+
+    // Save sessionData, customerInfo, and cartData
+    setSessionData("sessionData", sessionData);  // Global session info
+    setSessionData("cartData", cartData);  // Cart data
+    setSessionData("customerInfo", customerInfo);  // Customer-specific info
+
+    setCookie("sessionData", JSON.stringify(sessionData), 7);  // Save sessionData to cookies
+    setCookie("cartData", JSON.stringify(cartData), 7);  // Save cartData to cookies
+    setCookie("customerInfo", JSON.stringify(customerInfo), 7);  // Save customerInfo to cookies
+
+    console.log("Synchronized session and cookies:");
+    console.log("Session Data:", sessionData);
+    console.log("Cart Data:", cartData);
+    console.log("Customer Info:", customerInfo);
+
+    // Populate form fields with existing session data if available
+    Object.keys(customerInfo).forEach(key => {
+        const inputField = document.getElementById(key);
+        if (inputField) {
+            inputField.value = customerInfo[key];
+        }
+    });
+
+    console.log("Populated form with customer info from session storage:", customerInfo);
+
+    // Function to update customerInfo in session and cookies
+    function updateCustomerInfo() {
+        const updatedCustomerInfo = {
+            name: document.getElementById("name")?.value || "",
+            phone: document.getElementById("phone")?.value || "",
+            email: document.getElementById("email")?.value || "",
+            address: document.getElementById("address")?.value || "",
+            city: document.getElementById("city")?.value || "",
+            specialInstructions: document.getElementById("specialInstructions")?.value || "",
+            paymentMethod: document.getElementById("paymentMethod")?.value || ""
+        };
+
+        console.log("Updating customer info:", updatedCustomerInfo);  // Check what data is being saved
+        setSessionData("customerInfo", updatedCustomerInfo);
+
+        const cookieConsent = getCookie("cookieconsent_status");
+        if (cookieConsent === "allow") {
+            setCookie("customerInfo", JSON.stringify(updatedCustomerInfo), 7);
+            console.log("Updated customerInfo cookie:", document.cookie);
+        }
     }
 
-    setCookie("hostname", hostname, 7);
-    setCookie("domainName", domainName, 7);
-    setCookie("cityName", cityName, 7);
+    // Initialize input listeners for customer info
+    const customerInputs = document.querySelectorAll(".customer-info input, .customer-info textarea, #paymentMethod");
+    customerInputs.forEach(input => {
+        input.addEventListener("input", updateCustomerInfo);
+        input.addEventListener("change", updateCustomerInfo);  // For select dropdowns like payment method
+    });
+function syncCookiesToSession() {
+    try {
+        const cartData = getCookie("cartData");
+        const sessionData = getCookie("sessionData");
 
-    // Update phone number dynamically
-    const phoneNumberElement = document.querySelector(".phone-number");
-    const phoneNumber = phoneMap[domainName] || defaultPhoneNumber;
-    if (phoneNumberElement) {
-        phoneNumberElement.textContent = phoneNumber;
-        phoneNumberElement.href = `tel:${phoneNumber.replace(/-/g, '')}`;
-    } else {
-        console.error("Phone number element not found.");
+        if (cartData) {
+            sessionStorage.setItem("cartData", decodeURIComponent(cartData));
+            console.log("Synchronized cart data from cookies to session.");
+        }
+        if (sessionData) {
+            sessionStorage.setItem("sessionData", decodeURIComponent(sessionData));
+            console.log("Synchronized customer data from cookies to session.");
+        }
+    } catch (error) {
+        console.error("Error syncing cookies to session:", error);
+    }
+}
+    console.log("Customer info input listeners initialized.")
+
+    if (!navigator.cookieEnabled) {
+        console.warn("Cookies are disabled or blocked. Please enable cookies for full functionality.");
     }
 
-    // Update header and logo links
-    const logoLink = document.querySelector(".header a");
-    const headerLink = document.querySelector("h1 a");
-    if (logoLink) {
-        logoLink.href = `https://${domainName}.doap.com/simple.php`;
-        logoLink.title = `Call ${cityName} Doap!`;
-    }
-    if (headerLink) {
-        headerLink.href = `https://${domainName}.doap.com/simple.php`;
-        headerLink.title = `Call ${cityName} Doap!`;
-    }
-
-    // Load values from cookies and verify
-    const cookieCityName = getCookie("cityName");
-    if (cookieCityName) {
-        console.log(`City from cookies: ${cookieCityName}`);
-    } else {
-        console.warn("City cookie not found.");
-    }
+    // Log cart contents
+    console.log("Cart Item Count:", cartData.length);
+    cartData.forEach((item, index) => {
+        console.log(`Item ${index + 1}: Name: ${item.name || "N/A"}, Quantity: ${item.qty || "1"}, Price: ${item.price || "0.00"}`);
+    });
 });
 

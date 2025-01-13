@@ -1,5 +1,14 @@
 export const subdomainData = [
     {
+        subdomain: "localhost",
+        city: "Norcal",
+        phone: "925-123-4567",
+        minimumOrder: 40,
+        url: "https://localhost.doap.com/simple.php",
+        servingCities: ["Norcal","Here", "There", "Nowhere"],
+        serviceZips: [94444]
+    },
+    {
         subdomain: "alamo",
         city: "Alamo",
         phone: "925-553-4710",

@@ -24,6 +24,9 @@
 !inc/js/payments.js
 !inc/js/formUtils.js
 !inc/js/cartUtils.js
+!inc/js/cookieUtils.js
+!inc/js/data.js
+!inc/js/sessionUtils.js
 !inc/js/cartHandlers.js
 !inc/js/formHandlers.js
 !inc/js/utils.js
