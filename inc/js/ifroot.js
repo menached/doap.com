@@ -1,7 +1,6 @@
-//let cityName;
+// Configuration: Map subdomains to minimum order amounts, city names, and phone numbers
 export const defaultPhoneNumber = "833-289-3627";
 
-// Configuration: Map subdomains to minimum order amounts, city names, and phone numbers
 export const areaMinimum = {
     alamo: 40, burlingame: 120, campbell: 120, concord: 50, danville: 40, dublin: 40,
     lafayette: 50, livermore: 50, orinda: 60, pittsburg: 75, pleasanthill: 60,
@@ -23,53 +22,6 @@ export const phoneMap = {
     livermore: "925-718-6181", orinda: "925-891-7800"
 };
 
-// Extract the subdomain and set defaults
-const hostname = window.location.hostname.split('.')[0]; 
-const domainName = hostname.split('.')[0].toLowerCase();
-
-//let cityName = cityMap[domainName] || domainName.charAt(0).toUpperCase() + domainName.slice(1);
-let cityName = cityMap[domainName] || "Unknown City";
-    
-console.log(`Hostname: ${hostname}, DomainName: ${domainName}, CityName ${cityName}`);
-
-// Handle special case for the main domain (www.doap.com or doap.com)
-if (hostname === "www.doap.com" || hostname === "doap.com") {
-    cityName = "Directory Of Agencies & Providers";
-    document.title = "Norcal DOAP";
-
-    // Hide all interactive sections for directory view
-    const sectionsToHide = [".tab", ".tab-content", ".cart-section", ".payment-section", ".customer-info"];
-    sectionsToHide.forEach(selector => {
-        document.querySelectorAll(selector).forEach(element => element.style.display = "none");
-    });
-
-    console.log("Tabs, cart, and payment methods are hidden for www and doap.com.");
-} else {
-    document.title = `${cityName} Doap`;
-}
-
-
-console.log(domainName)
-// Update phone number dynamically
-const phoneNumber = phoneMap[domainName] || defaultPhoneNumber;
-const phoneNumberElement = document.querySelector(".phone-number");
-if (phoneNumberElement) {
-    phoneNumberElement.textContent = phoneNumber;
-    phoneNumberElement.href = `tel:${phoneNumber.replace(/-/g, '')}`;
-}
-
-// Update logo and header links with subdomain-specific links
-const logoLink = document.querySelector(".header a");
-const headerLink = document.querySelector("h1 a");
-if (logoLink) {
-    logoLink.href = `https://${domainName}.doap.com/simple.php`;
-    logoLink.title = `Call ${cityName} Doap!`;
-}
-if (headerLink) {
-    headerLink.href = `https://${domainName}.doap.com/simple.php`;
-    headerLink.title = `Call ${cityName} Doap!`;
-}
-
 function setCookie(name, value, days) {
     let expires = "";
     if (days) {
@@ -77,22 +29,8 @@ function setCookie(name, value, days) {
         date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
         expires = "; expires=" + date.toUTCString();
     }
-    document.cookie = name + "=" + (value || "") + expires + "; path=/; SameSite=None; Secure";
+    document.cookie = `${name}=${value || ""}${expires}; path=/; SameSite=None; Secure`;
 }
-
-window.addEventListener("DOMContentLoaded", () => {
-    const hostname = window.location.hostname;
-    const domainName = hostname.split('.')[0];
-    //const cityName = domainName.charAt(0).toUpperCase() + domainName.slice(1);
-    const cityName = cityMap[domainName] || "Unknown City";
-
-    console.log(`Hostname: ${hostname}, DomainName: ${domainName}, CityName: ${cityName}`);
-
-    // Store in cookies
-    setCookie("hostname", hostname, 7);  // 7 days expiration
-    setCookie("domainName", domainName, 7);
-    setCookie("cityName", cityName, 7);
-});
 
 function getCookie(name) {
     const value = `; ${document.cookie}`;
@@ -102,17 +40,52 @@ function getCookie(name) {
 }
 
 window.addEventListener("DOMContentLoaded", () => {
-    const hostname = getCookie("hostname");
-    const domainName = getCookie("domainName");
-    const cityName = getCookie("cityName");
+    const hostname = window.location.hostname.split('.')[0].toLowerCase();
+    const domainName = hostname === "www" || hostname === "doap" ? "default" : hostname;
+    const cityName = cityMap[domainName] || "Norcal";
 
-    if (hostname && domainName && cityName) {
-        console.log(`Cookie Values - Hostname: ${hostname}, DomainName: ${domainName}, CityName: ${cityName}`);
+    console.log(`Subdomain: ${domainName}, City detected: ${cityName}`);
 
-        // Example: Use in an HTML element (this didnt work. threw error Uncaught TypeError: Cannot set properties of null)
-        //document.getElementById("cityNameDisplay").textContent = `City: ${cityName}`;
+    const cityInputElement = document.getElementById("city");
+    if (cityInputElement) {
+        cityInputElement.value = cityName;
+        console.log(`City input value set to: ${cityInputElement.value}`);
+    } else {
+        console.error("City input element not found.");
+    }
+
+    setCookie("hostname", hostname, 7);
+    setCookie("domainName", domainName, 7);
+    setCookie("cityName", cityName, 7);
+
+    // Update phone number dynamically
+    const phoneNumberElement = document.querySelector(".phone-number");
+    const phoneNumber = phoneMap[domainName] || defaultPhoneNumber;
+    if (phoneNumberElement) {
+        phoneNumberElement.textContent = phoneNumber;
+        phoneNumberElement.href = `tel:${phoneNumber.replace(/-/g, '')}`;
+    } else {
+        console.error("Phone number element not found.");
+    }
+
+    // Update header and logo links
+    const logoLink = document.querySelector(".header a");
+    const headerLink = document.querySelector("h1 a");
+    if (logoLink) {
+        logoLink.href = `https://${domainName}.doap.com/simple.php`;
+        logoLink.title = `Call ${cityName} Doap!`;
+    }
+    if (headerLink) {
+        headerLink.href = `https://${domainName}.doap.com/simple.php`;
+        headerLink.title = `Call ${cityName} Doap!`;
+    }
+
+    // Load values from cookies and verify
+    const cookieCityName = getCookie("cityName");
+    if (cookieCityName) {
+        console.log(`City from cookies: ${cookieCityName}`);
+    } else {
+        console.warn("City cookie not found.");
     }
 });
-console.log(`Subdomain: ${domainName}, City detected: ${cityName}`);
-document.getElementById("city").value = cityName || "Norcal";
-console.log(`City input value: ${document.getElementById("city").value}`);
+

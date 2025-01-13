@@ -1,8 +1,8 @@
 // Import areaMinimum and handlePaymentMethodChange from utility modules
 import { cityMap } from './ifroot.js';
 import { addItemToCart } from './cartUtils.js'; // Use imported function
-import { handlePaymentMethodChange } from './formUtils.js';
-import { updateCartUI} from './cartUtils.js'; // Use imported function
+import { handlePaymentMethodChange } from './formHandlers.js';
+import { updateCartUI } from './cartUtils.js'; // Use imported function
 import { areaMinimum } from './ifroot.js';
 
 // Updated cart.js to dynamically update the cityName in the header
@@ -14,14 +14,6 @@ const productTitle = '';
 // Ensure DOM content is fully loaded before applying listeners
 document.addEventListener('DOMContentLoaded', function () {
     console.log("DOM fully loaded");
-
-    //// Set cityName dynamically using cityMap or fallback
-    //const cityMap = {
-        //pleasanthill: "Pleasant Hill", walnutcreek: "Walnut Creek", castrovalley: "Castro Valley",
-        //sanramon: "San Ramon", discoverybay: "Discovery Bay", alamo: "Alamo", antioch: "Antioch",
-        //dublin: "Dublin", lafayette: "Lafayette", pleasanton: "Pleasanton", danville: "Danville",
-        //concord: "Concord", livermore: "Livermore", orinda: "Orinda"
-    //};
 
     const cityNameElement = document.getElementById("cityName");
     const hostname = window.location.hostname.split('.')[0].toLowerCase();
@@ -101,21 +93,6 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     });
-
-    //// Add item to cart
-    //function addItemToCart(productName, price, quantity) {
-        //console.log(`Adding item: ${productName}`);
-        //let cartData = JSON.parse(sessionStorage.getItem("cartData")) || [];
-        //const existingItem = cartData.find(item => item.name === productName);
-        //if (existingItem) {
-            //existingItem.quantity += quantity;
-        //} else {
-            //cartData.push({ name: productName, price, quantity });
-        //}
-        //sessionStorage.setItem("cartData", JSON.stringify(cartData));
-        //console.log("Updated cartData in sessionStorage:", cartData);
-        //updateCartUI(cartData);  // Ensure UI reflects the updated cart
-    //}
 
     // Remove item from cart
     function removeItemFromCart(productName) {

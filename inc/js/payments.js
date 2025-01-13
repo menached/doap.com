@@ -1,7 +1,7 @@
 // Import areaMinimum and handlePaymentMethodChange from utility modules
 import { areaMinimum } from './ifroot.js';
 import { cityMap } from './ifroot.js';
-import { handlePaymentMethodChange } from './formUtils.js';
+import { handlePaymentMethodChange } from './formHandlers.js';
 import { updateCartUI } from './cartUtils.js'; // Use imported function
 import { loadCustomerAndCartData } from './cartUtils.js'; // Use imported function
 
@@ -23,19 +23,19 @@ window.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // Add an additional periodic log to check if sessionStorage is cleared externally
-    setInterval(() => {
-        console.log("Periodic check: Current sessionStorage contents:");
-        Object.keys(sessionStorage).forEach(key => {
-            console.log(`${key}:`, sessionStorage.getItem(key));
-        });
-    }, 10000); // Log session storage every 10 seconds
+    //// Add an additional periodic log to check if sessionStorage is cleared externally
+    //setInterval(() => {
+        //console.log("Periodic check: Current sessionStorage contents:");
+        //Object.keys(sessionStorage).forEach(key => {
+            //console.log(`${key}:`, sessionStorage.getItem(key));
+        //});
+    //}, 10000); // Log session storage every 10 seconds
 });
 
 
 
 // Define saveSessionData function before it's used
-function saveSessionData() {
+export function saveSessionData() {
     const sessionData = {
         paymentMethod: paymentMethodDropdown.value,
         name: document.getElementById("name")?.value.trim(),
@@ -264,208 +264,6 @@ function setCookie(name, value, days) {
     document.cookie = name + "=" + (value || "") + expires + "; path=/; SameSite=None; Secure";
 }
 
-//// Function to switch session data to cookies
-//function switchToCookies() {
-    //const sessionData = sessionStorage.getItem(sessionDataKey);
-    //if (sessionData) {
-        //try {
-            //const decodedData = decodeURIComponent(sessionData);
-            //const parsedData = JSON.parse(decodedData);
-            //document.cookie = `sessionData=${encodeURIComponent(JSON.stringify(parsedData))}; path=/; SameSite=None; Secure; max-age=604800`; // 7 days
-            //console.log("Customer info moved to cookies:", parsedData);
-        //} catch (error) {
-            //console.error("Failed to parse session data from sessionStorage:", error);
-        //}
-    //}
-//}
-
-
-//function loadCustomerAndCartData() {
-    //let customerData;
-    //let cartData;
-
-    //// Try loading customer data from cookies
-    //const sessionDataCookie = document.cookie.split('; ').find(row => row.startsWith('sessionData='));
-    //if (sessionDataCookie) {
-        //try {
-            //customerData = JSON.parse(decodeURIComponent(sessionDataCookie.split('=')[1]));
-            //console.log("Customer data loaded from cookies:", customerData);
-        //} catch (error) {
-            //console.error("Error parsing customer data from cookies:", error);
-        //}
-    //}
-
-    //// Fallback to session storage if no customer data in cookies
-    //if (!customerData) {
-        //const sessionData = sessionStorage.getItem("sessionData");
-        //if (sessionData) {
-            //try {
-                //customerData = JSON.parse(decodeURIComponent(sessionData));
-                //console.log("Customer data loaded from session storage:", customerData);
-            //} catch (error) {
-                //console.error("Error parsing customer data from session storage:", error);
-            //}
-        //}
-    //}
-
-    //// Populate form fields if customer data exists
-    //if (customerData) {
-        //Object.keys(customerData).forEach(key => {
-            //const inputField = document.getElementById(key);
-            //if (inputField) {
-                //inputField.value = customerData[key];
-            //} else {
-                //console.warn(`Input field with id '${key}' not found.`);
-            //}
-        //});
-    //} else {
-        //console.log("No customer data found.");
-    //}
-
-    //// Try loading cart data from cookies
-    //const cartDataCookie = document.cookie.split('; ').find(row => row.startsWith('cartData='));
-    //if (cartDataCookie) {
-        //try {
-            //cartData = JSON.parse(decodeURIComponent(cartDataCookie.split('=')[1]));
-            //console.log("Cart data loaded from cookies:", cartData);
-        //} catch (error) {
-            //console.error("Error parsing cart data from cookies:", error);
-        //}
-    //}
-
-    //// Fallback to session storage if no cart data in cookies
-    //if (!cartData) {
-        //const cartDataSession = sessionStorage.getItem("cartData");
-        //if (cartDataSession) {
-            //try {
-                //cartData = JSON.parse(decodeURIComponent(cartDataSession));
-                //console.log("Cart data loaded from session storage:", cartData);
-            //} catch (error) {
-                //console.error("Error parsing cart data from session storage:", error);
-            //}
-        //}
-    //}
-
-    //// Update the cart UI if cart data exists and save back to session storage if cookies are denied
-    //if (cartData && cartData.length > 0) {
-        //console.log("Updating session storage with current cart data:", cartData);
-        //sessionStorage.setItem("cartData", encodeURIComponent(JSON.stringify(cartData))); // Ensure it is saved
-
-        //updateCartUI(cartData);
-
-        //cartData.forEach(item => {
-            //const productCheckbox = document.querySelector(`input[name="item"][value="${item.name}|${item.price}"]`);
-            //if (productCheckbox) {
-                //const itemLabel = productCheckbox.closest(".item");
-                //itemLabel.classList.add("selected"); // Add highlight class
-
-                //let removeButton = itemLabel.querySelector(".remove-item");
-                //if (!removeButton) {
-                    //removeButton = document.createElement("span");
-                    //removeButton.textContent = "x";
-                    //removeButton.classList.add("remove-item");
-                    //removeButton.dataset.productName = item.name;
-                    //itemLabel.appendChild(removeButton);
-                //}
-                //console.log(`Added remove button for ${item.name}.`);
-            //}
-        //});
-
-        //// Save cart data to sessionData for consistency
-        //customerData = customerData || {};
-        //customerData.cartData = cartData;
-        //sessionStorage.setItem("sessionData", encodeURIComponent(JSON.stringify(customerData)));
-        //console.log("Cart data saved to session storage within sessionData:", customerData);
-    //} else {
-        //console.log("No cart data found. Initializing an empty cart in session storage.");
-        //sessionStorage.setItem("cartData", encodeURIComponent(JSON.stringify([]))); // Ensure cartData is initialized as an empty array
-    //}
-//}
-
-//function addItemToCart(productName, price, quantity) {
-    //console.log(`Adding item to cart: ${productName}, Price: ${price}, Quantity: ${quantity}`);
-    //let cartData = sessionStorage.getItem("cartData");
-    //try {
-        //cartData = cartData ? JSON.parse(decodeURIComponent(cartData)) : [];
-    //} catch (error) {
-        //console.error("Failed to parse cart data from sessionStorage:", error);
-        //cartData = [];
-    //}
-
-    //const existingItem = cartData.find(item => item.name === productName);
-    //if (existingItem) {
-        //existingItem.quantity += quantity;
-        //console.log(`Updated quantity for ${productName}: ${existingItem.quantity}`);
-    //} else {
-        //cartData.push({ name: productName, price, quantity });
-        //console.log(`Added new item to cart: ${productName}`);
-    //}
-
-    //sessionStorage.setItem("cartData", encodeURIComponent(JSON.stringify(cartData)));
-    //console.log("Cart data after adding item:", cartData);
-
-    //// Update sessionData with updated cart info for consistency
-    //let sessionData = sessionStorage.getItem("sessionData");
-    //try {
-        //sessionData = sessionData ? JSON.parse(decodeURIComponent(sessionData)) : {};
-    //} catch (error) {
-        //console.error("Failed to parse sessionData:", error);
-        //sessionData = {};
-    //}
-    //sessionData.cartData = cartData;
-    //sessionStorage.setItem("sessionData", encodeURIComponent(JSON.stringify(sessionData)));
-    //console.log("Updated sessionData with cart info:", sessionData);
-
-    //updateCartUI(cartData);
-
-    //// Debug: Verify session storage persists across reloads
-    //const sessionCartCheck = sessionStorage.getItem("cartData");
-    //if (sessionCartCheck) {
-        //console.log("Session storage cart data after add:", JSON.parse(decodeURIComponent(sessionCartCheck)));
-    //} else {
-        //console.error("Session storage cart data is missing after add!");
-    //}
-//}
-
-//window.addEventListener("DOMContentLoaded", () => {
-    //console.log("DOMContentLoaded event triggered: Initializing customer and cart data loading.");
-    //loadCustomerAndCartData(); // Load customer and cart data when the page loads
-
-    //// Check if sessionStorage is cleared externally by any plugin or script
-    //setInterval(() => {
-        //const currentCartData = sessionStorage.getItem("cartData");
-        //if (!currentCartData) {
-            //console.warn("Session storage cartData is empty during page session. It may have been cleared externally.");
-        //}
-    //}, 5000); // Check every 5 seconds
-
-    //// Track external influences that reset sessionStorage
-    //window.addEventListener("storage", (event) => {
-        //if (event.key === "cartData") {
-            //console.log("Session storage cartData changed externally:", JSON.parse(decodeURIComponent(event.newValue || "[]")));
-        //}
-    //});
-
-    //// Ensure this function is called after adding items
-    //document.querySelectorAll('label.item input[type="checkbox"]').forEach(checkbox => {
-        //checkbox.addEventListener('change', function () {
-            //const itemLabel = this.closest('.item');
-            //const productName = this.value.split('|')[0];
-            //const price = parseFloat(this.value.split('|')[1]) || 0;
-            //const quantityInput = itemLabel.querySelector('.quantity');
-            //const quantity = parseInt(quantityInput?.value, 10) || 1;
-
-            //if (this.checked) {
-                //addItemToCart(productName, price, quantity);
-            //} else {
-                //console.log(`Removing ${productName} from cart.`);
-                //removeItemFromCart(productName);
-            //}
-        //});
-    //});
-//});
-
-
 
 window.addEventListener("DOMContentLoaded", () => {
     console.log("DOMContentLoaded event triggered: Initializing customer and cart data loading.");
@@ -496,18 +294,5 @@ window.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // Add an additional periodic log to check if sessionStorage is cleared externally
-    setInterval(() => {
-        console.log("Periodic check: Current sessionStorage contents:");
-        Object.keys(sessionStorage).forEach(key => {
-            try {
-                const value = sessionStorage.getItem(key);
-                const decodedValue = value ? JSON.parse(decodeURIComponent(value)) : value;
-                console.log(`${key}:`, decodedValue);
-            } catch (e) {
-                console.error(`Error decoding sessionStorage value during periodic check for key ${key}:`, e);
-            }
-        });
-    }, 10000); // Log session storage every 10 seconds
 });
 

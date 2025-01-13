@@ -20,6 +20,7 @@ window.addEventListener("load", function() {
                 switchToCookies(); // Switch session storage to cookies after consent
             } else {
                 console.log("Cookies declined. Keeping cart data in session storage.");
+                //clearCookieBasedData();
             }
         },
         onStatusChange: function(status) {
@@ -27,7 +28,8 @@ window.addEventListener("load", function() {
                 enableAnalyticsAndAds();
                 switchToCookies();
             } else {
-                console.warn("User declined cookies.");
+                console.warn("User declined cookies. Leaving existing cookie-based data intact.");
+                //clearCookieBasedData();
             }
         }
     });
@@ -49,28 +51,62 @@ function enableAnalyticsAndAds() {
     };
 }
 
-function switchToCookies() {
-    let existingCartData = [];
-    const cookieCartData = document.cookie.split('; ').find(row => row.startsWith('cartData='));
-    if (cookieCartData) {
-        try {
-            existingCartData = JSON.parse(decodeURIComponent(cookieCartData.split('=')[1])) || [];
-        } catch (error) {
-            console.error("Error parsing cart data from cookies:", error);
-        }
-    }
 
-    const sessionCartData = sessionStorage.getItem("cartData");
-    if (sessionCartData) {
-        try {
-            const newCartData = JSON.parse(decodeURIComponent(sessionCartData));
-            const mergedCartData = [...existingCartData, ...newCartData];
-            document.cookie = `cartData=${encodeURIComponent(JSON.stringify(mergedCartData))}; path=/; SameSite=None; Secure; max-age=604800`;
-            console.log("Cart data moved to cookies:", mergedCartData);
-        } catch (error) {
-            console.error("Failed to parse session cart data:", error);
+
+function switchToCookies() {
+    try {
+        let existingCartData = [];
+        const cookieCartData = document.cookie.split('; ').find(row => row.startsWith('cartData='));
+
+        // Load existing cart data from cookies if available
+        if (cookieCartData) {
+            existingCartData = JSON.parse(decodeURIComponent(cookieCartData.split('=')[1])) || [];
+            console.log("Existing cart data from cookies:", existingCartData);
         }
+
+        const sessionCartData = sessionStorage.getItem("cartData");
+        let mergedCartData = existingCartData;
+
+        // Merge session cart data if available
+        if (sessionCartData) {
+            const newCartData = JSON.parse(decodeURIComponent(sessionCartData));
+            mergedCartData = [...new Set([...existingCartData, ...newCartData])]; // Avoid duplicate entries
+            console.log("Synchronized cart data between session and cookies:", mergedCartData);
+
+            // Sync the merged cart data to both cookies and sessionStorage
+            const encodedCartData = encodeURIComponent(JSON.stringify(mergedCartData));
+            if (encodedCartData.length <= 4000) { // Prevent large cookie size
+                document.cookie = `cartData=${encodedCartData}; path=/; SameSite=None; Secure; max-age=604800`;
+                sessionStorage.setItem("cartData", encodedCartData);
+            } else {
+                console.warn("Cart data exceeds cookie size limit. Only sessionStorage will be updated.");
+                sessionStorage.setItem("cartData", encodedCartData);
+            }
+        }
+
+        const sessionCustomerData = sessionStorage.getItem("sessionData");
+
+        // Sync customer data if available
+        if (sessionCustomerData) {
+            const customerData = JSON.parse(decodeURIComponent(sessionCustomerData));
+            const encodedCustomerData = encodeURIComponent(JSON.stringify(customerData));
+
+            document.cookie = `sessionData=${encodedCustomerData}; path=/; SameSite=None; Secure; max-age=604800`;
+            sessionStorage.setItem("sessionData", encodedCustomerData); // Ensure it remains in sessionStorage too
+            console.log("Synchronized customer data between session and cookies:", customerData);
+        }
+
+    } catch (error) {
+        console.error("Error during switchToCookies operation:", error);
     }
 }
 
-console.log(`Consent status: ${status}`);
+function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(";").shift();
+    return null;
+}
+
+
+

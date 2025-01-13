@@ -56,7 +56,7 @@ export function updateCartUI(cartData) {
         if (e.target.classList.contains("remove-item")) {
             const productName = e.target.getAttribute("data-product-name");
             console.log(`Removing ${productName} from cart.`);
-            removeItemFromCart(productName);
+            //removeItemFromCart(productName);
 
             const cartData = sessionStorage.getItem("cartData");
             try {
@@ -74,39 +74,39 @@ export function updateCartUI(cartData) {
 }
 
 
-
-
-
 export function loadCustomerAndCartData() {
-    let customerData = loadFromCookiesOrSession("sessionData");
-    let cartData = loadFromCookiesOrSession("cartData");
+    let cartData;
 
-    // Populate form fields with customer data if available
-    if (customerData) {
-        Object.keys(customerData).forEach(key => {
-            const inputField = document.getElementById(key);
-            if (inputField) {
-                inputField.value = customerData[key];
-            } else {
-                console.warn(`Input field with id '${key}' not found.`);
+    // Check cookie consent status
+    const consentStatus = getCookie("cookieconsent_status");
+
+    if (consentStatus === "allow") {
+        const cookieCartData = getCookie("cartData");
+        if (cookieCartData) {
+            try {
+                cartData = JSON.parse(decodeURIComponent(cookieCartData));
+            } catch (error) {
+                console.error("Failed to parse cart data from cookies:", error);
+                cartData = [];
             }
-        });
-    } else {
-        console.log("No customer data found.");
+        }
     }
 
-    // Update cart data
-    if (Array.isArray(cartData) && cartData.length > 0) {
-        console.log("Updating session storage with current cart data:", cartData);
-        sessionStorage.setItem("cartData", encodeURIComponent(JSON.stringify(cartData)));
-        updateCartUI(cartData);  // Update the UI with the current cart data
-    } else {
-        console.log("No cart data found. Initializing an empty cart.");
-        cartData = [];
-        sessionStorage.setItem("cartData", encodeURIComponent(JSON.stringify(cartData)));
-        updateCartUI(cartData);  // Reset UI with no items
+    if (!cartData) {
+        const sessionCartData = sessionStorage.getItem("cartData");
+        try {
+            cartData = sessionCartData ? JSON.parse(decodeURIComponent(sessionCartData)) : [];
+        } catch (error) {
+            console.error("Failed to parse cart data from session storage:", error);
+            cartData = [];
+        }
     }
+
+    // Update cart UI
+    updateCartUI(cartData || []);
 }
+
+
 
 // Helper function to load data from cookies or sessionStorage
 function loadFromCookiesOrSession(key) {
@@ -138,9 +138,6 @@ function loadFromCookiesOrSession(key) {
 
     return data;
 }
-
-
-
 
 export function addItemToCart(productName, price, quantity) {
     console.log(`Adding item to cart: ${productName}, Price: ${price}, Quantity: ${quantity}`);
@@ -187,46 +184,20 @@ export function addItemToCart(productName, price, quantity) {
     }
 }
 
+//function removeItemFromCart(productName) {
+    //console.log(`Removing item from cart: ${productName}`);
+    //let cartData = sessionStorage.getItem("cartData");
+    //try {
+        //cartData = cartData ? JSON.parse(decodeURIComponent(cartData)) : [];
+    //} catch (error) {
+        //console.error("Failed to parse cart data from sessionStorage:", error);
+        //cartData = [];
+    //}
 
+    //cartData = cartData.filter(item => item.name !== productName);
+    //sessionStorage.setItem("cartData", encodeURIComponent(JSON.stringify(cartData)));
 
-
-
-window.addEventListener("DOMContentLoaded", () => {
-    console.log("DOMContentLoaded event triggered: Initializing customer and cart data loading.");
-    loadCustomerAndCartData(); // Load customer and cart data when the page loads
-
-    // Check if sessionStorage is cleared externally by any plugin or script
-    setInterval(() => {
-        const currentCartData = sessionStorage.getItem("cartData");
-        if (!currentCartData) {
-            console.warn("Session storage cartData is empty during page session. It may have been cleared externally.");
-        }
-    }, 5000); // Check every 5 seconds
-
-    // Track external influences that reset sessionStorage
-    window.addEventListener("storage", (event) => {
-        if (event.key === "cartData") {
-            console.log("Session storage cartData changed externally:", JSON.parse(decodeURIComponent(event.newValue || "[]")));
-        }
-    });
-
-    // Ensure this function is called after adding items
-    document.querySelectorAll('label.item input[type="checkbox"]').forEach(checkbox => {
-        checkbox.addEventListener('change', function () {
-            const itemLabel = this.closest('.item');
-            const productName = this.value.split('|')[0];
-            const price = parseFloat(this.value.split('|')[1]) || 0;
-            const quantityInput = itemLabel.querySelector('.quantity');
-            const quantity = parseInt(quantityInput?.value, 10) || 1;
-
-            if (this.checked) {
-                addItemToCart(productName, price, quantity);
-            } else {
-                console.log(`Removing ${productName} from cart.`);
-                removeItemFromCart(productName);
-            }
-        });
-    });
-});
-
+    //// Update the cart UI after removal
+    //updateCartUI(cartData);
+//}
 
