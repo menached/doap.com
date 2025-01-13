@@ -74,12 +74,13 @@ jobs:
           echo "Deploying using rsync..."
           rsync -avz -e "ssh -o StrictHostKeyChecking=no" --rsync-path="sudo rsync" --no-perms --no-group --exclude '.git/' ./ dmenache@deb1.doap.com:/var/www/doap.com/
 
-          # Commented out S3 sync
+          # Commented out S3 sync (unchanged)
           # echo "Syncing all files to S3..."
           # aws s3 sync . s3://www.doap.com/ --exclude ".git/*"
 
-          echo "Invalidating CloudFront cache..."
-          aws cloudfront create-invalidation --distribution-id E3MM919ZQPQJTL --paths "/*"
+          # Commented out CloudFront invalidation
+          # echo "Invalidating CloudFront cache..."
+          # aws cloudfront create-invalidation --distribution-id E3MM919ZQPQJTL --paths "/*"
 
       # Step 8: Debug Deployment
       - name: Debug Deployment
