@@ -1,0 +1,40 @@
+<div class="header" style="background-color:#fff;">
+    <div class="logo-title-container">
+        <a href="/simple.php" target="_SELF" title="Call Norcal Doap Doap!">
+            <img src="/images/logos/doap-logo-wording.png" alt="Doap Logo" class="doap-logo">
+        </a>
+        <div class="text-container">
+            <a class="nodec" href="/simple.php" target="_SELF">
+                <h1 id="cityName">Doap</h1>
+            </a>
+            <a href="tel:8332893627" class="phone-number nodec">833-289-3627</a>
+        </div>
+    </div>
+    <div class="menu-title nodec">
+        <a style="text-decoration:none!important;" class="nodec" href="/simple.php" target="_SELF">
+            <h2 class="menu-title-text nodec">Delivering Organic Awesome Pot</h2>
+        </a>
+    </div>
+</div>
+
+<script type="module">
+    import { subdomainData } from './inc/js/subdomainData.js';
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const cityNameElement = document.getElementById("cityName");
+        const phoneNumberElement = document.querySelector(".phone-number");
+        const hostname = window.location.hostname.split('.')[0].toLowerCase();
+
+        const cityData = subdomainData.find(entry => entry.subdomain === hostname);
+        if (cityData) {
+            cityNameElement.textContent = cityData.city + ' Doap';
+            phoneNumberElement.textContent = cityData.phone;
+            phoneNumberElement.href = `tel:${cityData.phone.replace(/-/g, '')}`;
+        } else {
+            console.warn("Subdomain not found in data.");
+        }
+
+        console.log("Header script initialized successfully.");
+    });
+</script>
+

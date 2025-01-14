@@ -1,0 +1,45 @@
+/* Zip Form Container */
+.zip-form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px; /* Increase spacing between input and button */
+    margin: 0 auto; /* Center the form horizontally */
+    padding: 10px; /* Add padding for better spacing */
+    box-sizing: border-box; /* Ensure padding doesn’t affect width */
+}
+
+.zip-form input {
+    flex: 1; /* Allow the input to take up remaining space */
+    min-width: 200px; /* Wider minimum width */
+    padding: 12px; /* Increase padding for a larger input box */
+    font-size: 1rem; /* Standard font size */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.zip-form button {
+    padding: 10px 12px; /* Adjust padding for smaller button */
+    font-size: 0.9rem; /* Slightly smaller font */
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    white-space: nowrap; /* Prevent text wrapping */
+    min-width: 140px; /* Ensure a minimum width for the button */
+}
+
+.zip-form button:hover {
+    background-color: #0056b3;
+}
+
+.zip-form-container form {
+    width: 100%;
+}
+
+.zip-form input {
+    width: 100%; /* Full width for mobile */
+}
+
