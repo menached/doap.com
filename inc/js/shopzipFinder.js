@@ -8,14 +8,14 @@ document.addEventListener("DOMContentLoaded", function () {
     input.type = "text";
     input.id = "zipOrCityInput";
     input.name = "zipOrCity";
-    input.placeholder = "Enter ZIP Code or City/Town";
+    input.placeholder = "Enter ZIP Code or City";
     input.className = "userInput";
     input.required = true;
 
     // Create the submit button
     const button = document.createElement("button");
     button.type = "submit";
-    button.textContent = "Find a nearby Agency";
+    button.textContent = "Find a closer Agency";
 
     // Style hover effect for the button
     button.addEventListener("mouseover", () => {

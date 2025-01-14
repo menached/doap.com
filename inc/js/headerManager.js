@@ -40,5 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }, {});
     //console.log("Cookies:", cookies);
 
+
+
     console.groupEnd(); // Close the console group
 });

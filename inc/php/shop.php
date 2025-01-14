@@ -34,3 +34,31 @@
         <img class="modal-content" id="modalImage">
         <div id="caption"></div>
     </div>
+
+
+
+<script type="module">
+document.addEventListener("DOMContentLoaded", () => {
+    const tabs = document.querySelectorAll(".tab");
+    const tabContents = document.querySelectorAll(".tab-content");
+
+    // Show all categories on page load
+    tabContents.forEach(content => content.classList.add("active"));
+
+    tabs.forEach((tab) => {
+        tab.addEventListener("click", () => {
+            // Hide all categories
+            tabContents.forEach(content => content.classList.remove("active"));
+
+            // Show only the selected category
+            const contentId = tab.dataset.tab;
+            const targetContent = document.getElementById(contentId);
+            if (targetContent) {
+                targetContent.classList.add("active");
+            }
+        });
+    });
+});
+
+</script>
+

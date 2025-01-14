@@ -1,7 +1,7 @@
 import { getCookie, setCookie } from './cookieManager.js';
 
 document.addEventListener("DOMContentLoaded", () => {
-    const productItems = document.querySelectorAll(".product .item");
+    const addToCartButtons = document.querySelectorAll(".add-to-cart-button");
 
     // Function to update cart display in cartsection.html
     function updateCartDisplay() {
@@ -60,6 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
             ? JSON.parse(decodeURIComponent(sessionStorage.getItem("cartData")))
             : [];
 
+        const productItems = document.querySelectorAll(".product");
         productItems.forEach(item => {
             const productName = item.querySelector(".item-title").textContent.trim();
             const cartItem = cartData.find(cartItem => cartItem.name === productName);
@@ -72,18 +73,15 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Attach click event listeners for products
-    function attachProductListeners() {
-        productItems.forEach(item => {
-            const productName = item.querySelector(".item-title").textContent.trim();
-
-            function productClickHandler(e) {
-                if (e.target.tagName === "INPUT") {
-                    return;  // Ignore clicks on the input field
-                }
-
-                const price = parseFloat(item.querySelector(".item-price").textContent.replace("$", ""));
-                const quantityInput = item.querySelector(".item-quantity input");
+    // Listen only to "Add to Cart" button clicks
+    function attachAddToCartListeners() {
+        addToCartButtons.forEach(button => {
+            button.addEventListener("click", (e) => {
+                e.stopPropagation(); // Prevent event bubbling
+                const product = button.closest(".product"); // Get the closest product container
+                const productName = product.querySelector(".item-title").textContent.trim();
+                const price = parseFloat(button.dataset.price);
+                const quantityInput = product.querySelector(".item-quantity input");
                 const selectedQuantity = quantityInput ? parseInt(quantityInput.value) : 1;
 
                 let cartData = sessionStorage.getItem("cartData")
@@ -112,10 +110,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 updateCartDisplay();
                 highlightCartItems();  // Apply highlights after updating the cart
-            }
-
-            item.removeEventListener("click", productClickHandler);  // Ensure no duplicate listeners
-            item.addEventListener("click", productClickHandler);
+            });
         });
     }
 
@@ -132,6 +127,6 @@ document.addEventListener("DOMContentLoaded", () => {
     // Initial cart display and product highlight
     restoreHighlightsOnLoad();
     updateCartDisplay();
-    attachProductListeners();  // Attach product click event listeners
+    attachAddToCartListeners();  // Attach "Add to Cart" button listeners
 });
 

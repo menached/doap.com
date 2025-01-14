@@ -1,8 +1,8 @@
 export const subdomainData = [
     {
         subdomain: "localhost",
-        city: "BAlamo",
-        phone: "925-553-4710",
+        city: "Developing",
+        phone: "925-725-1330",
         minimumOrder: 40,
         url: "https://localhost.doap.com/simple.php",
         servingCities: ["localhost", "BBlackhawk", "BTassajara"],

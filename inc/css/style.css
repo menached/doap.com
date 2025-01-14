@@ -4,43 +4,87 @@ body, h2, input, button, footer {
     padding: 0;
 }
 
-
-#\\\"cartForm\\\" {
-    border: 0px;
-    border-radius: 0px;
+.cart-section {
+    
+    border:1px dashed #000;
+    padding: 0px 5px 5px 5px; /* Top: 30px, Right: 5px, Bottom: 25px, Left: 5px */
+    margin: 0px 5px 0px 5px; /* Top: 30px, Right: 5px, Bottom: 25px, Left: 5px */
+    border-radius:5px;
 }
 
-/* Ensure .tab-content container is responsive */
-.tab-content {
-    display: grid;
-    gap: 20px;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    padding: 20px;
-    box-sizing: border-box;
-    visibility: hidden; /* Hidden without removing from layout */
-    height: 0; /* Collapse height */
-    overflow: hidden;
-    opacity: 0;
-    transition: opacity 0.3s ease-in-out, height 0.3s ease-in-out;
+
+/* Center alignment for the header */
+.logo-title-container {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    gap: 10px; /* Space between the logo and text */
+    margin: 20px 0; /* Optional: Add some margin to separate from other elements */
 }
 
-.tab-content.active {
-    visibility: visible; /* Visible when active */
-    height: auto; /* Expand to fit content */
-    opacity: 1;
+
+/* Text container for CityName and phone */
+.text-container {
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
 }
 
-/* Ensure product fills the grid without overflow */
+/* Style for CityName Doap */
+#cityName {
+    font-family: 'Marvel', sans-serif;
+    font-size: 2rem;
+    margin: 0;
+    line-height: 1;
+}
+
+.nodec, .nodec:hover, #cartForm > div.header > div.logo-title-container > div > a.phone-number.nodec {
+    text-decoration: none;
+    color:#000;
+}
+
+
+/* Style for the phone number */
+.phone-number {
+    text-align: center; /* Center-align the phone number */
+    font-size: 0.8rem; /* Consistent smaller font size */
+    margin: 5px 0 0; /* Small margin above the text */
+    color: #333; /* Default text color */
+    text-decoration: none; /* Remove underline */
+    font-weight: normal; /* Standard font weight */
+}
+
+.phone-number a {
+    color: #333; /* Default text color for links */
+    text-decoration: none; /* Remove underline */
+    font-weight: bold; /* Make the number stand out */
+}
+
+.phone-number a:hover,
+.phone-number:hover {
+    color: #007BFF; /* Change color to blue for better UX */
+    text-decoration: underline; /* Add underline on hover */
+}
+
+
+/* Product card styling */
 .product {
-    background-color: #fff;
-    padding: 15px;
+    padding: 10px; /* Adjust padding for internal spacing */
+    width: 100%; /* Ensures it takes full column width */
+    box-sizing: border-box; /* Includes border and padding */
     border: 1px solid #ddd;
     border-radius: 10px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    width: 100%;
     box-sizing: border-box;
 }
 
+
+/* Image styling */
+.product img {
+    width: 70% !important; /* Set image width to 70% */
+    height: auto !important; /* Maintain aspect ratio */
+    border-radius: 5px !important; /* Rounded corners */
+    display: block; /* Ensures margin works */
+    margin: 0 auto; /* Centers the image horizontally */
+}
 
 
 h1, h2, h3, .Marvelfont {
@@ -58,18 +102,123 @@ body {
 }
 
 .tab-container {
+    flex-wrap: wrap; /* Allow the tabs to wrap on smaller screens */
+    padding: 10px 0; /* Reduce padding */
+    gap: 10px; /* Less gap between tabs */
+    margin: 0 auto;
+    background: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     display: flex;
     justify-content: center;
-    margin-bottom: 20px; /* Space below the tab container */
+    max-width: 1290px; /* Match the width of `.zip-form-container` */
+    margin-bottom: 10px;
 }
 
-/* Product Card Styling */
-.product {
-    background-color: #fff;
-    padding: 2px;
-    border: 1px solid #ff0000;
-    border-radius: 5px;
+
+/*.tab-container {*/
+    /*border: 1px solid #ddd;*/
+    /*display: flex;*/
+    /*justify-content: center; [> Centers the tabs horizontally <]*/
+    /*gap: 20px; [> Adds space between the tabs <]*/
+    /*margin: 20px auto; [> Adds spacing above/below and centers it horizontally <]*/
+    /*background-color: #f8f9fa; [> Light background for the tab container <]*/
+    /*padding: 10px 15px; [> Add padding to the tab container <]*/
+    /*border-radius: 10px; [> Rounded corners <]*/
+    /*box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); [> Subtle shadow for elevation <]*/
+    /*max-width: 1255px; [> Limits the width <]*/
+    /*width: 100%; [> Ensures it takes full width on smaller screens <]*/
+/*}*/
+
+
+/* Individual Tab */
+.tab {
+    padding: 10px 20px;
+    cursor: pointer;
+    background: #fff; /* White background for tabs */
+    border: 1px solid #ccc; /* Light border */
+    border-radius: 5px; /* Rounded corners */
+    font-size: 1.1rem;
+    font-family: 'Marvel', sans-serif; /* Marvel font */
+    text-align: center;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effects */
 }
+
+/* Active Tab */
+.tab.active {
+    background: #007bff; /* Blue background for active tab */
+    color: white; /* White text for active tab */
+    font-weight: bold; /* Bold text for active tab */
+    border: 1px solid #007bff; /* Matching border for active tab */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for the active tab */
+}
+
+/* Hover Effect for Tabs */
+.tab:hover {
+    background-color: #f1f1f1; /* Light gray on hover */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15); /* Slight shadow on hover */
+}
+
+/* Prevent hover from changing active tab style */
+.tab.active:hover {
+    background-color: #007bff; /* Keep blue background */
+    color: white; /* Keep white text */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Retain shadow for active tab */
+}
+
+
+/* Responsive Adjustments for Mobile */
+@media (max-width: 767px) {
+    .tab-container {
+        flex-wrap: wrap; /* Allow the tabs to wrap on smaller screens */
+        padding: 10px 0; /* Reduce padding */
+        gap: 10px; /* Less gap between tabs */
+    }
+
+    .tab {
+        padding: 8px 12px; /* Reduce padding for mobile */
+        font-size: 0.9rem; /* Slightly smaller font size */
+    }
+}
+
+/* Hide all tab content by default */
+.tab-content {
+    display: none;
+}
+
+/* Show active tab content */
+.tab-content.active {
+    display: block;
+}
+
+#cartForm, .fromElsewhere {
+    max-width: 1250px; /* Limits the width */
+}
+.zip-form, .zip-form-container {
+    max-width: 1310px; /* Limits the width */
+}
+
+
+
+
+@media (min-width: 400px) and (max-width: 1300px) {
+    .tab-container,
+    #cartContainer,
+    .zip-form-container {
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+}
+
+@media (min-width: 200px) and (max-width: 768px) {
+    .item-list, .product, .tab-content active, #cartForm {
+        margin: 0px !important; /* Remove padding */
+        padding: 0px !important; /* Remove padding */
+    }
+}
+
+
 
 
 /* Hidden Checkboxes */
@@ -175,8 +324,8 @@ input[type="checkbox"] {
 form {
     margin: 0 auto;
     padding: 20px;
-    background: #fff;
-    border: 1px solid #ddd;
+    background: #f8f9fa;
+    border: 2px solid #ddd;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -273,64 +422,81 @@ button:hover {
 
 /* Container for product list */
 .item-list {
-    display: grid;
-    gap: 20px; /* Space between products */
-    padding: 20px;
-    width: 100%;
-    max-width: 1200px; /* Prevents the grid from being too wide on large screens */
-    margin: 0 auto; /* Centers the grid container */
-    box-sizing: border-box;
+    display: grid !important;
+    gap: 20px !important; /* Space between products */
+    padding: 20px !important;
+    width: 100% !important;
+    max-width: 1200px !important; /* Prevents the grid from being too wide on large screens */
+    margin: 0 auto !important; /* Centers the grid container */
+    box-sizing: border-box !important;
 }
 
 /* Desktop: 3 products per row */
 @media (min-width: 1025px) {
     .item-list {
-        grid-template-columns: repeat(3, 1fr); /* 3 equal columns */
+        grid-template-columns: repeat(3, 1fr) !important; /* 3 equal columns */
     }
 }
 
-/* Tablet: 2 products per row */
-@media (min-width: 768px) and (max-width: 1024px) {
+/* Tablet and mobile portrait between 400px and 767px: 2 products per row */
+@media (min-width: 400px) and (max-width: 767px) {
     .item-list {
-        grid-template-columns: repeat(2, 1fr); /* 2 equal columns */
+        grid-template-columns: repeat(2, 1fr) !important; /* 2 equal columns */
     }
 }
 
-/* Mobile: 1 product per row */
-@media (max-width: 767px) {
+/* Mobile: 1 product per row below 400px */
+@media (max-width: 399px) {
     .item-list {
-        grid-template-columns: 1fr; /* 1 column on mobile */
+        grid-template-columns: 1fr !important; /* 1 column */
     }
 }
 
 /* Product card styling */
 .product {
-    background-color: #fff;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    width: 100%; /* Make sure the product takes up the full column */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    background-color: #fff !important;
+    padding: 10px !important;
+    border: 1px solid #000; /* Red border for visibility */
+    border-radius: 5px !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+    overflow: hidden !important;
+    width: 100% !important; /* Make sure the product takes up the full column */
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
 }
+
+.flash {
+    animation: flash-effect 1s ease-out;
+}
+
+@keyframes flash-effect {
+    0% {
+        background-color: rgba(255, 255, 0, 0.8); /* Yellow */
+    }
+    50% {
+        background-color: rgba(255, 0, 0, 0.8); /* Red */
+    }
+    100% {
+        background-color: transparent; /* Back to default */
+    }
+}
+
+
+
 
 /* Product image styling */
 .product img {
-    width: 100%;
-    height: auto;
-    max-height: 200px; /* Prevent overly tall images */
-    object-fit: cover; /* Ensures the image fills the box nicely */
-    border-radius: 5px;
+    width: 70% !important;
+    border-radius: 5px !important;
 }
 
 /* Product details styling */
 .item-details {
-    text-align: center; /* Centers text within product card */
-    margin-top: 10px;
+    text-align: center !important; /* Centers text within product card */
+    margin-top: 10px !important;
 }
+
 
 .item-title {
     font-family: 'Marvel', sans-serif;
@@ -361,40 +527,27 @@ button:hover {
     border-radius: 5px;
 }
 
+/* Remove hover effect */
 .add-to-cart-button {
-    margin-top: 10px;
-    background-color: #007BFF;
-    color: #fff;
+    background-color: #007BFF; /* Default background color */
+    color: white;
     padding: 10px 15px;
     border-radius: 5px;
     cursor: pointer;
     text-align: center;
     font-size: 1rem;
+    transition: background-color 0.3s ease; /* Smooth background transition */
 }
 
 .add-to-cart-button:hover {
-    background-color: #0056b3;
+    background-color: #007BFF; /* Keep the same background color on hover */
+    color: white; /* Keep the same text color */
 }
 
-
-
-.item-list {
-    display: grid;
-    gap: 20px; /* Space between products */
-    padding: 10px; /* Internal padding for the container */
-    max-width: 100%; /* Prevent it from exceeding its parent */
-    box-sizing: border-box; /* Includes padding in the width/height */
-}
-
-/* Product card styling */
-.product {
-    background-color: #fff;
-    padding: 10px; /* Adjust padding for internal spacing */
-    border: 0px solid #ddd;
-    border-radius: 0px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    width: 100%; /* Ensures it takes full column width */
-    box-sizing: border-box; /* Includes border and padding */
+/* Click effect (flash when clicked) */
+.add-to-cart-button:active {
+    background-color: #0056b3; /* Darker blue when clicked */
+    transform: scale(0.95); /* Slightly shrink on click */
 }
 
 /* Responsive product grid */
@@ -416,11 +569,107 @@ button:hover {
     }
 }
 
-/* Image styling */
-.product img {
-    width: 100%; /* Ensures image fills the product width */
-    height: auto;
-    object-fit: cover; /* Prevent distortion */
-    border-radius: 8px; /* Consistent rounded corners */
+
+
+
+.zip-form-container {
+    display: flex;
+    justify-content: center;
+    margin: 20px auto;
+}
+
+.zip-form {
+    display: flex; /* Make form elements inline */
+    width: 100%;
+    max-width: 1200px; /* Optional: limit max width */
+    gap: 10px; /* Add some spacing between the input and button */
+}
+
+.zip-form input {
+    flex: 3; /* 3/4 width of the form */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.zip-form button {
+    flex: 1; /* 1/4 width of the form */
+    max-width: 200px; /* Optional: set a maximum width for the button */
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    text-align: center;
+    cursor: pointer;
+}
+
+.zip-form button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+@media (max-width: 600px) {
+    .zip-form {
+        flex-direction: column; /* Stack input and button vertically */
+    }
+
+    .zip-form input,
+    .zip-form button {
+        width: 100%;
+    }
+}
+
+
+
+
+/* Ensure consistent styling for the list */
+#selectedItemsList {
+    list-style: none; /* Remove default bullet points */
+    padding: 0;
+    margin: 0;
+}
+
+#selectedItemsList li {
+    display: flex; /* Use flexbox for consistent alignment */
+    justify-content: space-between; /* Push the "X" to the right */
+    align-items: center; /* Vertically center-align the text and button */
+    padding: 10px 0; /* Add some spacing inside each row */
+    border-bottom: 1px solid #ddd; /* Optional: add a separator for visibility */
+    margin-bottom: 5px;
+}
+
+/* Style for the "X" (remove button) */
+#selectedItemsList li span.remove-item {
+    color: red; /* Red color for the "X" */
+    cursor: pointer; /* Pointer cursor for interactivity */
+    font-weight: bold; /* Bold for emphasis */
+    font-size: 1.2em; /* Slightly larger size */
+    margin: 0; /* Remove any default margins */
+    padding: 0; /* Remove padding to ensure no additional spacing */
+}
+
+
+/* General styles for the selected items list */
+#selectedItemsList {
+    list-style: none; /* Remove bullet points */
+    padding: 0;
+    margin: 0;
+}
+
+/* Alternate background colors */
+#selectedItemsList li:nth-child(odd) {
+    background-color: #d4edda; /* Pale green for odd rows */
+}
+
+#selectedItemsList li:nth-child(even) {
+    background-color: #e9f5ea; /* Slightly lighter green for even rows */
+}
+
+#selectedItemsList li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ddd; /* Optional separator */
 }
 
