@@ -25,11 +25,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Display message and reset total price if cart is empty
         if (cartData.length === 0) {
-            selectedItemsList.innerHTML = `<li class="no-items">No items selected yet.</li>`;
+            selectedItemsList.innerHTML = `<span class="no-items">No items selected yet.</span>`;
             selectedItemsList.classList.add("empty"); // Add "empty" class when cart is empty
             minOrderMessage.textContent = `Minimum order is $${minimumOrderValue.toFixed(2)}.`; // Always show the correct value
             minOrderMessage.style.color = "red"; // Default to red when cart is empty
-            cartSection.style.border = "1px dashed #000"; // Default border when cart is empty
+            cartSection.style.border = "1px dashed #ff0000"; // Default border when cart is empty
             document.getElementById("total").textContent = `$0.00`;
 
             // Ensure CSS styling for `.empty` state in styles
