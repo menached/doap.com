@@ -9,14 +9,14 @@ export const areaMinimum = {
 };
 
 export const cityMap = {
-    localhost: "Localhost", pleasanthill: "Pleasant Hill", walnutcreek: "Walnut Creek", castrovalley: "Castro Valley",
+    localhost: "Localhost", burlingame: "Burlingame", pleasanthill: "Pleasant Hill", walnutcreek: "Walnut Creek", castrovalley: "Castro Valley",
     sanramon: "San Ramon", discoverybay: "Discovery Bay", alamo: "Alamo", antioch: "Antioch",
     dublin: "Dublin", lafayette: "Lafayette", pleasanton: "Pleasanton", danville: "Danville",
     concord: "Concord", livermore: "Livermore", orinda: "Orinda"
 };
 
 export const phoneMap = {
-    localhost: "833-BUY-DOAP", pleasanthill: "925-891-7800", walnutcreek: "925-464-2075", castrovalley: "925-263-9209",
+    localhost: "833-BUY-DOAP", burlingame: "650-293-0880", pleasanthill: "925-891-7800", walnutcreek: "925-464-2075", castrovalley: "925-263-9209",
     sanramon: "925-365-6030", discoverybay: "925-891-7800", alamo: "925-553-4710",
     antioch: "925-891-7800", dublin: "925-587-6777", lafayette: "925-871-1333",
     pleasanton: "925-587-6777", danville: "925-725-6920", concord: "925-412-4880",
