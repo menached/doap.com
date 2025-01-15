@@ -8,57 +8,58 @@ document.addEventListener("DOMContentLoaded", () => {
     function updateCartDisplay() {
         const cartData = sessionStorage.getItem("cartData")
             ? JSON.parse(decodeURIComponent(sessionStorage.getItem("cartData")))
-            : [];
+            : []; // Default to an empty array if no cartData
 
         const siteData = sessionStorage.getItem("siteData")
             ? JSON.parse(decodeURIComponent(sessionStorage.getItem("siteData")))
-            : { minOrder: 0 }; // Default `minOrder` if not available
+            : { minimumOrder: 0 }; // Default siteData with minimumOrder 0 if not available
 
         const selectedItemsList = document.getElementById("selectedItemsList");
         const minOrderMessage = document.getElementById("minOrderMessage");
-        selectedItemsList.innerHTML = ""; // Clear current cart items
 
         let totalPrice = 0;
 
-        // Add `minOrder` to `cartData`
-        cartData.minOrder = siteData.minOrder || 0;
+        // Ensure `minimumOrder` is a valid number
+        const minimumOrderValue = parseFloat(siteData.minimumOrder) || 0;
 
+        // Display message and reset total price if cart is empty
         if (cartData.length === 0) {
             selectedItemsList.innerHTML = `<li>No items selected yet.</li>`;
-            minOrderMessage.style.color = "red"; // Reset to black if cart is empty
-        } else {
-            cartData.forEach((item) => {
-                totalPrice += item.price * item.quantity;
-                const li = document.createElement("li");
-                li.innerHTML = `
-                    ${item.name} - $${item.price.toFixed(2)} x ${item.quantity}
-                    <span class="remove-item" style="color: red; cursor: pointer;" data-product-name="${item.name}">X</span>
-                `;
-                selectedItemsList.appendChild(li);
-            });
-
-            // Check if total price meets the minimum order requirement
-            if (totalPrice < cartData.minOrder) {
-                minOrderMessage.style.color = "red"; // Paint red if total is below min order
-            } else {
-                minOrderMessage.style.color = "black"; // Paint black if total meets or exceeds min order
-            }
+            minOrderMessage.textContent = `Minimum order is $${minimumOrderValue.toFixed(2)}.`; // Always show the correct value
+            minOrderMessage.style.color = "red"; // Default to red when cart is empty
+            document.getElementById("total").textContent = `$0.00`;
+            return; // Exit early since the cart is empty
         }
 
+        // Clear the list and calculate total price from cart items
+        selectedItemsList.innerHTML = "";
+        cartData.forEach((item) => {
+            totalPrice += item.price * item.quantity;
+            const li = document.createElement("li");
+            li.innerHTML = `
+                ${item.name} - $${item.price.toFixed(2)} x ${item.quantity}
+                <span style="color: red; cursor: pointer;" class="remove-item" data-product-name="${item.name}">X</span>
+            `;
+            selectedItemsList.appendChild(li);
+        });
+
+        // Update total price and minimum order message
         document.getElementById("total").textContent = `$${totalPrice.toFixed(2)}`;
+        minOrderMessage.textContent = `Minimum order is $${minimumOrderValue.toFixed(2)}.`;
 
-        // Sync `cartData` to `sessionStorage` and `cookies`
-        sessionStorage.setItem("cartData", encodeURIComponent(JSON.stringify(cartData)));
-        if (getCookie("cookieconsent_status") === "allow") {
-            setCookie("cartData", encodeURIComponent(JSON.stringify(cartData)), 7);
+        // Change color based on whether the total meets the minimum order
+        if (totalPrice >= minimumOrderValue) {
+            minOrderMessage.style.color = "black"; // Black if minimum order met
+        } else {
+            minOrderMessage.style.color = "red"; // Red if below minimum
         }
 
-        // Add remove button listeners
+        // Add event listeners for remove buttons
         document.querySelectorAll(".remove-item").forEach(removeButton => {
             removeButton.addEventListener("click", (e) => {
                 e.stopPropagation();
                 const productName = removeButton.dataset.productName;
-                removeItemFromCart(productName);
+                removeItemFromCart(productName); // Remove item and update cart
             });
         });
     }
