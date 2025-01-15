@@ -1,4 +1,5 @@
 import { getCookie, setCookie } from './cookieManager.js';
+import { subdomainData } from './data.js';
 
 document.addEventListener("DOMContentLoaded", () => {
     const addToCartButtons = document.querySelectorAll(".add-to-cart-button");
@@ -9,27 +10,50 @@ document.addEventListener("DOMContentLoaded", () => {
             ? JSON.parse(decodeURIComponent(sessionStorage.getItem("cartData")))
             : [];
 
+        const siteData = sessionStorage.getItem("siteData")
+            ? JSON.parse(decodeURIComponent(sessionStorage.getItem("siteData")))
+            : { minOrder: 0 }; // Default `minOrder` if not available
+
         const selectedItemsList = document.getElementById("selectedItemsList");
+        const minOrderMessage = document.getElementById("minOrderMessage");
         selectedItemsList.innerHTML = ""; // Clear current cart items
 
         let totalPrice = 0;
 
+        // Add `minOrder` to `cartData`
+        cartData.minOrder = siteData.minOrder || 0;
+
         if (cartData.length === 0) {
             selectedItemsList.innerHTML = `<li>No items selected yet.</li>`;
+            minOrderMessage.style.color = "red"; // Reset to black if cart is empty
         } else {
-            cartData.forEach(item => {
+            cartData.forEach((item) => {
                 totalPrice += item.price * item.quantity;
                 const li = document.createElement("li");
                 li.innerHTML = `
                     ${item.name} - $${item.price.toFixed(2)} x ${item.quantity}
-                    <span style="color: red; cursor: pointer;" class="remove-item" data-product-name="${item.name}">X</span>
+                    <span class="remove-item" style="color: red; cursor: pointer;" data-product-name="${item.name}">X</span>
                 `;
                 selectedItemsList.appendChild(li);
             });
+
+            // Check if total price meets the minimum order requirement
+            if (totalPrice < cartData.minOrder) {
+                minOrderMessage.style.color = "red"; // Paint red if total is below min order
+            } else {
+                minOrderMessage.style.color = "black"; // Paint black if total meets or exceeds min order
+            }
         }
 
         document.getElementById("total").textContent = `$${totalPrice.toFixed(2)}`;
 
+        // Sync `cartData` to `sessionStorage` and `cookies`
+        sessionStorage.setItem("cartData", encodeURIComponent(JSON.stringify(cartData)));
+        if (getCookie("cookieconsent_status") === "allow") {
+            setCookie("cartData", encodeURIComponent(JSON.stringify(cartData)), 7);
+        }
+
+        // Add remove button listeners
         document.querySelectorAll(".remove-item").forEach(removeButton => {
             removeButton.addEventListener("click", (e) => {
                 e.stopPropagation();

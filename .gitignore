@@ -36,6 +36,7 @@
 !inc/php/head.php
 !inc/php/og_meta.php
 !inc/php/shop.php
+!inc/js/productSelectionHandler.js
 
 # Allow specific files in the "images" directory
 !images/
