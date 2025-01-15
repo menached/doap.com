@@ -1,29 +1,30 @@
 // sessionManager.js
-
 export function setSessionData(key, value) {
-    sessionStorage.setItem(key, encodeURIComponent(JSON.stringify(value))); // Encode before storing
+    sessionStorage.setItem(key, encodeURIComponent(JSON.stringify(value)));
 }
 
 export function getSessionData(key) {
     const data = sessionStorage.getItem(key);
-    return data ? JSON.parse(decodeURIComponent(data)) : null;
+    try {
+        return data ? JSON.parse(decodeURIComponent(data)) : null;
+    } catch (error) {
+        console.error(`Error parsing session data for key "${key}":`, error);
+        return null;
+    }
 }
 
 export function syncCookiesToSession(getCookie) {
-    const cartData = getCookie("cartData");
-    const siteData = getCookie("siteData");
-    const customerData = getCookie("customerData");
-
-    if (cartData) sessionStorage.setItem("cartData", decodeURIComponent(cartData));
-    if (siteData) sessionStorage.setItem("siteData", decodeURIComponent(siteData));
-    if (customerData) sessionStorage.setItem("customerData", decodeURIComponent(customerData));
-
-    console.log("Synchronized cookies to session.");
+    const cookieKeys = ["cartData", "siteData", "customerData"];
+    cookieKeys.forEach((key) => {
+        try {
+            const cookieValue = getCookie(key);
+            if (cookieValue) {
+                sessionStorage.setItem(key, decodeURIComponent(cookieValue));
+                console.log(`Synchronized ${key} from cookies to session.`);
+            }
+        } catch (error) {
+            console.error(`Failed to sync ${key} from cookies:`, error);
+        }
+    });
 }
-
-//console.group("Sync Cookies to Session");
-//console.log("Session before sync:", JSON.parse(sessionStorage.getItem("customerData") || "{}"));
-//syncCookiesToSession(getCookie);
-//console.log("Session after sync:", JSON.parse(sessionStorage.getItem("customerData") || "{}"));
-//console.groupEnd();
 

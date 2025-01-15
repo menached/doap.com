@@ -1,8 +1,7 @@
 // cookieManager.js
-
 export function setCookie(name, value, days) {
-    if (JSON.stringify(value) === "{}") {
-        console.warn(`Skipped setting ${name} cookie: value is empty.`);
+    if (!value || JSON.stringify(value) === "{}") {
+        console.warn(`Skipped setting ${name} cookie: value is null or empty.`);
         return;
     }
     let expires = "";
@@ -11,13 +10,27 @@ export function setCookie(name, value, days) {
         date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
         expires = "; expires=" + date.toUTCString();
     }
-    document.cookie = `${name}=${value || ""}${expires}; path=/; SameSite=None; Secure;`;
+    document.cookie = `${name}=${encodeURIComponent(JSON.stringify(value))}${expires}; path=/; SameSite=None; Secure;`;
 }
 
 export function getCookie(name) {
-    const value = `; ${document.cookie}`;
-    const parts = value.split(`; ${name}=`);
-    return parts.length === 2 ? parts.pop().split(";").shift() : null;
+    try {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) {
+            const cookieValue = decodeURIComponent(parts.pop().split(";").shift());
+            // Attempt to parse as JSON; if it fails, return the plain string.
+            try {
+                return JSON.parse(cookieValue);
+            } catch (error) {
+                return cookieValue;  // Return as plain string if not valid JSON.
+            }
+        }
+        return null;
+    } catch (error) {
+        console.error(`Error retrieving cookie ${name}:`, error);
+        return null;
+    }
 }
 
 export function deleteCookie(name) {

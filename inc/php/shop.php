@@ -14,7 +14,7 @@
     } else {
         // Include shopproducts.html for other hostnames
     ?>
-    <div id="cartContainer"> 
+    <div id="productsAndCartWrapper"> 
     <?php
         echo "<form id=\"cartForm\">";
 

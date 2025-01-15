@@ -1,4 +1,4 @@
-/* General Reset */
+/* Geeneral Reset */
 body, h2, input, button, footer {
     margin: 0;
     padding: 0;
@@ -257,6 +257,11 @@ body {
 }
 
 
+#cartContainer {
+    border:1px dashed #ff0000;
+    padding:10px;
+    border-radius:10px;
+}
 
 
 @media (min-width: 400px) and (max-width: 1300px) {
