@@ -2,23 +2,32 @@
 import { getCookie } from './cookieManager.js';
 import { getSessionData } from './sessionManager.js';
 
+let formPopulated = false;  // Prevents double population
+
 export function populateFormFromStorage() {
-    const useCookies = getCookie("cookieconsent_status") === "allow";
-    const customerData = useCookies ? JSON.parse(decodeURIComponent(getCookie("customerData") || "{}")) : getSessionData("customerData") || {};
-    const cartData = useCookies ? JSON.parse(decodeURIComponent(getCookie("cartData") || "[]")) : getSessionData("cartData") || [];
-    const siteData = useCookies ? JSON.parse(decodeURIComponent(getCookie("siteData") || "{}")) : getSessionData("siteData") || {};
+    if (formPopulated) {
+        console.warn("Form is already populated. Skipping...");
+        return;
+    }
+    formPopulated = true;
+
+    const customerDataString = sessionStorage.getItem("customerData");
+    let customerData = {};
+
+    try {
+        customerData = customerDataString ? JSON.parse(decodeURIComponent(customerDataString)) : {};
+    } catch (error) {
+        console.error("Failed to parse customerData:", error, customerDataString);
+        customerData = {};  // Fallback to empty object in case of error
+    }
 
     Object.keys(customerData).forEach((key) => {
         const inputField = document.getElementById(key);
         if (inputField) inputField.value = customerData[key];
+        console.log(`Populated ${key} with value: ${customerData[key]}`);
     });
-
-    console.group("Populated Data:");
-    console.log("Customer Data:", customerData);
-    console.log("Cart Data:", cartData);
-    console.log("Site Data:", siteData);
-    console.groupEnd();
 }
+
 
 document.addEventListener("DOMContentLoaded", () => {
     const tabs = document.querySelectorAll(".tab");
@@ -62,4 +71,11 @@ function initializeTabs() {
 
 // Export for use in main.js
 export { initializeTabs };
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    console.log("populateFormFromStorage() running...");
+    populateFormFromStorage();  // Ensure this runs
+});
 

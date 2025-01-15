@@ -91,3 +91,13 @@
     }
 }
 
+/* Add specific style for the submit button between 400px and 768px */
+@media (min-width: 400px) and (max-width: 768px) {
+    #checkoutButton {
+        margin-bottom: 10px; /* Add 10px bottom margin */
+    }
+    #cartContainer{
+        padding-bottom: 20px; /* Add 10px bottom margin */
+    }
+}
+
