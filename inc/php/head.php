@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Marvel&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/inc/css/style.css">
+    <link rel="stylesheet" href="/inc/css/customerInfo.css">
 <link rel="stylesheet" href="/inc/css/zipFormStyle.css">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="/inc/js/main.js" type="module" defer></script>

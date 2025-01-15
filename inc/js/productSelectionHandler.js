@@ -16,6 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const selectedItemsList = document.getElementById("selectedItemsList");
         const minOrderMessage = document.getElementById("minOrderMessage");
+        const cartSection = document.querySelector(".cart-section"); // Select the cart section for styling
 
         let totalPrice = 0;
 
@@ -24,12 +25,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Display message and reset total price if cart is empty
         if (cartData.length === 0) {
-            selectedItemsList.innerHTML = `<li>No items selected yet.</li>`;
+            selectedItemsList.innerHTML = `<li class="no-items">No items selected yet.</li>`;
+            selectedItemsList.classList.add("empty"); // Add "empty" class when cart is empty
             minOrderMessage.textContent = `Minimum order is $${minimumOrderValue.toFixed(2)}.`; // Always show the correct value
             minOrderMessage.style.color = "red"; // Default to red when cart is empty
+            cartSection.style.border = "1px dashed #000"; // Default border when cart is empty
             document.getElementById("total").textContent = `$0.00`;
+
+            // Ensure CSS styling for `.empty` state in styles
+            selectedItemsList.querySelectorAll("li").forEach(li => {
+                li.style.backgroundColor = "transparent"; // Ensure no background for "No items selected yet"
+                li.style.padding = "10px 0"; // Optional: Adjust padding for consistency
+                li.style.textAlign = "center"; // Center align the message
+            });
+
             return; // Exit early since the cart is empty
         }
+
+        selectedItemsList.classList.remove("empty"); // Remove "empty" class when items exist
 
         // Clear the list and calculate total price from cart items
         selectedItemsList.innerHTML = "";
@@ -45,13 +58,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Update total price and minimum order message
         document.getElementById("total").textContent = `$${totalPrice.toFixed(2)}`;
-        minOrderMessage.textContent = `Minimum order is $${minimumOrderValue.toFixed(2)}.`;
 
-        // Change color based on whether the total meets the minimum order
         if (totalPrice >= minimumOrderValue) {
-            minOrderMessage.style.color = "black"; // Black if minimum order met
+            minOrderMessage.textContent = "🚚 Free 1hr Delivery! 🚀"; // Change message when minimum order is met
+            minOrderMessage.style.color = "#28a745"; // Bright green color for emphasis
+            minOrderMessage.style.fontSize = "1.2rem"; // Slightly larger text
+            minOrderMessage.style.fontWeight = "bold"; // Bold text
+            minOrderMessage.style.textShadow = "2px 2px 4px rgba(0, 0, 0, 0.2)"; // Add subtle shadow for stylized effect
+            cartSection.style.border = "1px dashed #28a745"; // Change border to green when minimum order is met
         } else {
+            minOrderMessage.textContent = `Minimum order is $${minimumOrderValue.toFixed(2)}.`;
             minOrderMessage.style.color = "red"; // Red if below minimum
+            minOrderMessage.style.fontSize = "0.9rem"; // Reset to default size
+            minOrderMessage.style.fontWeight = "bold"; // Reset font weight
+            minOrderMessage.style.textShadow = "none"; // Remove shadow
+            cartSection.style.border = "1px dashed #000"; // Revert border to default if below minimum
         }
 
         // Add event listeners for remove buttons

@@ -4,13 +4,54 @@ body, h2, input, button, footer {
     padding: 0;
 }
 
-.cart-section {
-    border:1px dashed #000;
-    padding: 0px 5px 5px 5px; /* Top: 30px, Right: 5px, Bottom: 25px, Left: 5px */
-    margin: 0px 5px 0px 5px; /* Top: 30px, Right: 5px, Bottom: 25px, Left: 5px */
-    border-radius:5px;
+/* Match parent background color and remove border */
+.customer-info {
+    background-color: inherit;  /* Matches the background color of the parent */
+    border: none;  /* Removes the border */
+    padding: 20px;  /* Keep internal spacing for readability */
+    border-radius: 0;  /* Remove any rounding if present */
+    box-shadow: none;  /* Remove shadow if there is one */
 }
 
+/* Inputs and Textareas */
+.customer-info input,
+.customer-info textarea {
+    background-color: inherit;  /* Matches the input background to parent */
+    border: 1px solid #ccc;  /* Subtle border for separation */
+    padding: 10px;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+/* Placeholder text color */
+.customer-info input::placeholder,
+.customer-info textarea::placeholder {
+    color: #777;  /* Muted placeholder color */
+}
+
+/* Focus state to make it user-friendly */
+.customer-info input:focus,
+.customer-info textarea:focus {
+    border-color: #81b622;  /* Lime green for focus */
+    outline: none;
+}
+
+
+.orderInfo { 
+    background-color:#fff;
+    border-radius:8px;
+    border:1px solid #000;
+    padding:10px; 
+}
+
+.cart-section {
+    border:2px dashed #000;
+    background-color:#fff;
+    padding: 0px 15px 15px 15px; /* Top: 30px, Right: 5px, Bottom: 25px, Left: 5px */
+    margin: 0px 5px 0px 5px; /* Top: 30px, Right: 5px, Bottom: 25px, Left: 5px */
+    border-radius:8px;
+    margin: 0px 0px 20px 0px;
+}
 
 /* Center alignment for the header */
 .logo-title-container {
@@ -89,6 +130,23 @@ body, h2, input, button, footer {
 h1, h2, h3, .Marvelfont {
     font-family: 'Marvel', sans-serif; /* Apply Marvel font to tab text */
 }
+
+h3 {font-size:1.8em;font-weight: bold;}
+
+#selectedItemsList.empty {
+    display: flex;
+    justify-content: center; /* Horizontal centering */
+    align-items: center; /* Vertical centering */
+    height: 100px; /* Set height to create vertical space */
+}
+
+.cart-section > div {
+    padding-top: 5px; /* Reduce padding at the top */
+    padding-bottom: 5px; /* Reduce padding at the bottom */
+    margin-top: 0; /* Remove extra margin if any */
+    margin-bottom: 0; /* Remove extra margin if any */
+}
+
 
 /* Body and General Styling */
 body {

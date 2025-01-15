@@ -1,0 +1,93 @@
+/* Delivery Form Grid Layout */
+.customer-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;  /* Two columns */
+    gap: 20px;  /* Space between the form elements */
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.info-row {
+    display: flex;
+    flex-direction: column;
+}
+
+.info-row.full-width {
+    grid-column: span 2;  /* Make the input span both columns */
+}
+
+.customer-info label {
+    font-weight: bold;
+}
+
+.customer-info input,
+.customer-info textarea {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+#specialInstructions {
+    height: 100px;
+}
+
+/* Mobile View */
+@media (max-width: 768px) {
+    .customer-info {
+        grid-template-columns: 1fr;  /* One column for mobile */
+    }
+}
+
+
+/* Payment Section Styling */
+.payment-section {
+    max-width: 800px;  /* Same width as .customer-info */
+    margin: 0 auto;  /* Center horizontally */
+    padding: 20px;  /* Same padding for consistency */
+    background-color: inherit;  /* Match parent background */
+    border: none;  /* Remove border */
+    border-radius: 0;  /* No rounded corners */
+    box-shadow: none;  /* Remove shadow */
+}
+
+/* Payment Label */
+.payment-section label {
+    font-weight: bold;
+    font-size: 1rem;
+    display: block;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+/* Payment Select */
+.payment-section select {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+    box-sizing: border-box;
+}
+
+/* Focus state for select */
+.payment-section select:focus {
+    border-color: #81b622;  /* Lime green border on focus */
+    outline: none;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .payment-section {
+        padding: 15px;  /* Slightly reduced padding for mobile */
+    }
+
+    .payment-section select {
+        font-size: 0.9rem;  /* Slightly smaller font size for mobile */
+    }
+}
+
