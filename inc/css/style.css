@@ -38,18 +38,18 @@ body, h2, input, button, footer {
 
 
 .orderInfo { 
-    background-color:#fff;
-    border-radius:8px;
-    border:1px solid #000;
     padding:10px; 
+}
+#productsAndCartWrapper{
+    margin: 0px 25px 15px 25px!important; /* Top: 30px, Right: 5px, Bottom: 25px, Left: 5px */
 }
 
 .cart-section {
-    border:2px dashed #ff0000;
-    background-color:#fff;
+    /*border:2px dashed #ff0000;*/
+    /*background-color:#fff;*/
     padding: 0px 15px 15px 15px; /* Top: 30px, Right: 5px, Bottom: 25px, Left: 5px */
     margin: 0px 5px 0px 5px; /* Top: 30px, Right: 5px, Bottom: 25px, Left: 5px */
-    border-radius:8px;
+    /*border-radius:8px;*/
     margin: 0px 0px 20px 0px;
 }
 
@@ -261,15 +261,16 @@ body {
     border:1px dashed #ff0000;
     padding:10px;
     border-radius:10px;
+    background-color:#fff;
 }
 
 
-@media (min-width: 400px) and (max-width: 1300px) {
+@media (min-width: 400px) and (max-width: 1350px) {
     .tab-container,
     #cartContainer,
     .zip-form-container {
-        margin-left: 20px;
-        margin-right: 20px;
+        margin-left: 18px;
+        margin-right: 18px;
     }
 }
 
@@ -281,13 +282,19 @@ body {
 }
 
 @media (min-width: 200px) and (max-width: 768px) {
+    #cartContainer {
+        margin-bottom:20px;
+    }
+}
+
+@media (min-width: 200px) and (max-width: 768px) {
     .item-list {
         /*margin: 10px !important; [> Remove padding <]*/
         padding-left: 25px !important; /* Remove padding */
         padding-right: 25px !important; /* Remove padding */
     }
 }
-@media (min-width: 768px) and (max-width: 1299px) {
+@media (min-width: 768px) and (max-width: 1350px) {
     .item-list {
         /*margin: 10px !important; [> Remove padding <]*/
         padding-left: 25px !important; /* Remove padding */

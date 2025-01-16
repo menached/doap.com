@@ -16,35 +16,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const selectedItemsList = document.getElementById("selectedItemsList");
         const minOrderMessage = document.getElementById("minOrderMessage");
-        const cartSection = document.querySelector(".cart-section"); // Select the cart section for styling
+        const cartSection = document.querySelector(".cart-section");
 
         let totalPrice = 0;
-
-        // Ensure `minimumOrder` is a valid number
         const minimumOrderValue = parseFloat(siteData.minimumOrder) || 0;
 
-        // Display message and reset total price if cart is empty
+        // Handle empty cart
         if (cartData.length === 0) {
             selectedItemsList.innerHTML = `<span class="no-items">No items selected yet.</span>`;
-            selectedItemsList.classList.add("empty"); // Add "empty" class when cart is empty
-            minOrderMessage.textContent = `Minimum order is $${minimumOrderValue.toFixed(2)}.`; // Always show the correct value
-            minOrderMessage.style.color = "red"; // Default to red when cart is empty
-            cartSection.style.border = "1px dashed #ff0000"; // Default border when cart is empty
+            selectedItemsList.classList.add("empty");
+            minOrderMessage.textContent = `Minimum order is $${minimumOrderValue.toFixed(2)}.`;
+            minOrderMessage.style.color = "red";
+            cartSection.style.border = "1px dashed #ff0000";
             document.getElementById("total").textContent = `$0.00`;
-
-            // Ensure CSS styling for `.empty` state in styles
-            selectedItemsList.querySelectorAll("li").forEach(li => {
-                li.style.backgroundColor = "transparent"; // Ensure no background for "No items selected yet"
-                li.style.padding = "10px 0"; // Optional: Adjust padding for consistency
-                li.style.textAlign = "center"; // Center align the message
-            });
-
-            return; // Exit early since the cart is empty
+            return;
         }
 
-        selectedItemsList.classList.remove("empty"); // Remove "empty" class when items exist
-
-        // Clear the list and calculate total price from cart items
+        selectedItemsList.classList.remove("empty");
         selectedItemsList.innerHTML = "";
         cartData.forEach((item) => {
             totalPrice += item.price * item.quantity;
@@ -56,31 +44,29 @@ document.addEventListener("DOMContentLoaded", () => {
             selectedItemsList.appendChild(li);
         });
 
-        // Update total price and minimum order message
         document.getElementById("total").textContent = `$${totalPrice.toFixed(2)}`;
 
         if (totalPrice >= minimumOrderValue) {
-            minOrderMessage.textContent = "🚚 Free 1hr Delivery! 🚀"; // Change message when minimum order is met
-            minOrderMessage.style.color = "#28a745"; // Bright green color for emphasis
-            minOrderMessage.style.fontSize = "1.2rem"; // Slightly larger text
-            minOrderMessage.style.fontWeight = "bold"; // Bold text
-            minOrderMessage.style.textShadow = "2px 2px 4px rgba(0, 0, 0, 0.2)"; // Add subtle shadow for stylized effect
-            cartSection.style.border = "1px dashed #28a745"; // Change border to green when minimum order is met
+            minOrderMessage.textContent = "🚚 Free 1hr Delivery! 🚀";
+            minOrderMessage.style.color = "#28a745";  // Bright green
+            minOrderMessage.style.backgroundColor = "#e9f7ef";  // Light green background
+            minOrderMessage.style.borderRadius = "5px";
+            cartSection.style.border = "1px dashed #28a745";
         } else {
-            minOrderMessage.textContent = `Minimum order is $${minimumOrderValue.toFixed(2)}.`;
-            minOrderMessage.style.color = "red"; // Red if below minimum
-            minOrderMessage.style.fontSize = "0.9rem"; // Reset to default size
-            minOrderMessage.style.fontWeight = "bold"; // Reset font weight
-            minOrderMessage.style.textShadow = "none"; // Remove shadow
-            cartSection.style.border = "1px dashed #000"; // Revert border to default if below minimum
+            const difference = minimumOrderValue - totalPrice;
+            minOrderMessage.textContent = `$${difference.toFixed(2)} shy of free delivery!`;
+            minOrderMessage.style.color = "#ff6f00";  // A more readable amber orange
+            minOrderMessage.style.backgroundColor = "#fff3cd";  // Light amber background
+            minOrderMessage.style.padding = "5px";  // Padding for breathing room
+            minOrderMessage.style.borderRadius = "5px";  // Rounded corners
+            cartSection.style.border = "1px dashed #ff6f00";
         }
 
-        // Add event listeners for remove buttons
-        document.querySelectorAll(".remove-item").forEach(removeButton => {
+        document.querySelectorAll(".remove-item").forEach((removeButton) => {
             removeButton.addEventListener("click", (e) => {
                 e.stopPropagation();
                 const productName = removeButton.dataset.productName;
-                removeItemFromCart(productName); // Remove item and update cart
+                removeItemFromCart(productName);
             });
         });
     }

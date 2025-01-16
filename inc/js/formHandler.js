@@ -55,3 +55,43 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
+
+
+
+window.addEventListener("DOMContentLoaded", () => {
+    // Existing code for updating city name, phone number, etc.
+    
+    const customerInputs = document.querySelectorAll(".customer-info input, .customer-info textarea, #paymentMethod");
+    customerInputs.forEach(input => {
+        input.addEventListener("input", updateCustomerInfo);
+        input.addEventListener("change", updateCustomerInfo);  // For select dropdowns
+    });
+
+    function updateCustomerInfo() {
+        const customerData = {
+            name: document.getElementById("name")?.value.trim() || "",
+            phone: document.getElementById("phone")?.value.trim() || "",
+            email: document.getElementById("email")?.value.trim() || "",
+            address: document.getElementById("address")?.value.trim() || "",
+            city: document.getElementById("city")?.value.trim() || "",
+            specialInstructions: document.getElementById("specialInstructions")?.value.trim() || ""  // Optional
+        };
+
+        // Check if all required fields (except specialInstructions) are filled
+        const allRequiredFilled = customerData.name && customerData.phone && customerData.email && customerData.address && customerData.city;
+
+        const formContainer = document.querySelector(".customer-info");
+        if (allRequiredFilled) {
+            formContainer.style.border = "2px solid #28a745";  // Green border if valid
+        } else {
+            formContainer.style.border = "2px solid #ff0000";  // Red border if invalid
+        }
+
+        setSessionData("customerData", customerData);
+
+        if (getCookie("cookieconsent_status") === "allow") {
+            setCookie("customerData", JSON.stringify(customerData), 7);
+        }
+    }
+});
+
