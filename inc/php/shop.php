@@ -29,14 +29,6 @@
         <p id="popupText">Order Processed Successfully!</p>
     </div>
 
-    <div id="imageModal" class="modal">
-        <span class="close" onclick="closeModal()">&times;</span>
-        <img class="modal-content" id="modalImage">
-        <div id="caption"></div>
-    </div>
-
-
-
 <script type="module">
 document.addEventListener("DOMContentLoaded", () => {
     const tabs = document.querySelectorAll(".tab");

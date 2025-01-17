@@ -21,6 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function isCustomerInfoComplete() {
+        // Gather all fields
         const customerInfo = {
             name: document.getElementById("name")?.value || "",
             phone: document.getElementById("phone")?.value || "",
@@ -30,12 +31,18 @@ document.addEventListener("DOMContentLoaded", () => {
             specialInstructions: document.getElementById("specialInstructions")?.value || "",
         };
 
-        const filledFields = Object.values(customerInfo).filter(value => value.trim() !== "").length;
-        const totalFields = Object.keys(customerInfo).length;
+        // Define which fields are “required”
+        const requiredFields = ["name", "phone", "email", "address", "city"];
+
+        // Count filled required fields
+        const filledRequiredCount = requiredFields
+            .filter(field => customerInfo[field].trim() !== "").length;
+
+        const totalRequired = requiredFields.length;
 
         return {
-            allFilled: filledFields === totalFields,  // All fields filled
-            partiallyFilled: filledFields > 0 && filledFields < totalFields,  // Some fields filled
+            allFilled: filledRequiredCount === totalRequired,
+            partiallyFilled: filledRequiredCount > 0 && filledRequiredCount < totalRequired,
         };
     }
 

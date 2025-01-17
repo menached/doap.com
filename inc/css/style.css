@@ -76,18 +76,18 @@ body, h2, input, button, footer {
     margin: 0;
     line-height: 1;
 }
-
+.nodec {position:relative;top:-3px;}
 .nodec, .nodec:hover, #cartForm > div.header > div.logo-title-container > div > a.phone-number.nodec {
     text-decoration: none;
     color:#000;
 }
 
 
+
 /* Style for the phone number */
 .phone-number {
     text-align: center; /* Center-align the phone number */
-    font-size: 0.8rem; /* Consistent smaller font size */
-    margin: 5px 0 0; /* Small margin above the text */
+    margin: 2px 0 0; /* Small margin above the text */
     color: #333; /* Default text color */
     text-decoration: none; /* Remove underline */
     font-weight: normal; /* Standard font weight */
@@ -102,7 +102,7 @@ body, h2, input, button, footer {
 .phone-number a:hover,
 .phone-number:hover {
     color: #007BFF; /* Change color to blue for better UX */
-    text-decoration: underline; /* Add underline on hover */
+    text-decoration: none; /* Add underline on hover */
 }
 
 

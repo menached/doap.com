@@ -3,7 +3,7 @@
 export const defaultPhoneNumber = "833-289-3627";
 
 export const areaMinimum = {
-    localhost: 0, alamo: 40, burlingame: 120, campbell: 120, concord: 50, danville: 40, dublin: 40,
+    localhost: 40, alamo: 40, burlingame: 120, campbell: 120, concord: 50, danville: 40, dublin: 40,
     lafayette: 50, livermore: 50, orinda: 60, pittsburg: 75, pleasanthill: 60,
     sanramon: 40, walnutcreek: 50
 };
