@@ -1,9 +1,10 @@
 // consentHandler.js
 import { setCookie, getCookie, deleteCookie } from './cookieManager.js';
-import { enableAnalyticsAndAds } from './analytics.js';
 
 export function initCookieConsent() {
     window.addEventListener("load", () => {
+        syncCookiesToSession(); // Sync cookies to sessionStorage before anything else
+
         if (typeof window.cookieconsent === "undefined") {
             console.error("CookieConsent library not loaded.");
             return;
@@ -23,76 +24,97 @@ export function initCookieConsent() {
                 link: "Learn more",
                 href: "/privacy-policy"
             },
-            onInitialise: (status) => {
-                console.log(`Cookie consent ${status.toUpperCase()} on page load (onInitialise).`);
-                initializeCartData();
-                initializeCustomerData(); // Ensure customerData is synced
-            },
-            onStatusChange: (status) => {
-                console.log(`Cookies ${status.toUpperCase()} by user (onStatusChange).`);
-                initializeCartData();
-                initializeCustomerData(); // Re-initialize customerData sync if needed
-            }
+            onInitialise: handleConsentChange,
+            onStatusChange: handleConsentChange,
         });
     });
 }
 
-// Function to initialize cartData
-function initializeCartData() {
-    let cartData = sessionStorage.getItem("cartData") ? JSON.parse(decodeURIComponent(sessionStorage.getItem("cartData"))) : null;
-
-    if (!cartData || !Array.isArray(cartData)) {
-        console.warn("No cartData found. Initializing empty cart.");
-        cartData = []; // Initialize as empty array if missing or invalid
-        sessionStorage.setItem("cartData", encodeURIComponent(JSON.stringify(cartData)));
+// Handle consent changes (on initialise and status change)
+function handleConsentChange(status) {
+    console.log(`Cookies ${status.toUpperCase()} by user.`);
+    if (status === "allow") {
+        syncSessionToCookies();
     } else {
-        console.log("Existing cartData found in sessionStorage:", cartData);
-    }
-
-    // Sync cartData to cookies if allowed
-    if (getCookie("cookieconsent_status") === "allow") {
-        setCookie("cartData", encodeURIComponent(JSON.stringify(cartData)), 7); // 7-day expiry
-        console.log("cartData synchronized to cookie:", cartData);
+        clearCookies();
     }
 }
 
-// Function to initialize customerData
-function initializeCustomerData() {
-    let customerData = null;
-
-    // Check sessionStorage first
-    customerData = sessionStorage.getItem("customerData")
-        ? JSON.parse(decodeURIComponent(sessionStorage.getItem("customerData")))
-        : null;
-
-    if (customerData && typeof customerData === "object" && !Array.isArray(customerData)) {
-        console.log("Existing customerData found in sessionStorage:", customerData);
-    } else {
-        // If sessionStorage is empty, check cookies
-        const customerDataCookie = getCookie("customerData");
-        if (customerDataCookie) {
-            customerData = JSON.parse(decodeURIComponent(customerDataCookie));
-            console.log("Loaded customerData from cookies into sessionStorage:", customerData);
-            sessionStorage.setItem("customerData", encodeURIComponent(JSON.stringify(customerData)));
-        } else {
-            // If neither sessionStorage nor cookie contains data, initialize default values
-            console.warn("No customerData found. Initializing default customerData.");
-            customerData = {
-                name: "",
-                phone: "",
-                email: "",
-                address: "",
-                city: "",
-                specialInstructions: ""
-            };
-            sessionStorage.setItem("customerData", encodeURIComponent(JSON.stringify(customerData)));
+// Sync data from sessionStorage to cookies
+function syncSessionToCookies() {
+    const keysToSync = ["cartData", "customerData"];
+    keysToSync.forEach(key => {
+        const sessionData = sessionStorage.getItem(key);
+        if (sessionData) {
+            setCookie(key, JSON.parse(decodeURIComponent(sessionData)), 7); // Ensure cookies are valid JSON
+            console.log(`${key} synchronized to cookies.`);
         }
-    }
+    });
+}
 
-    // Sync to cookies if consent is "allow"
+// Sync cookies to sessionStorage
+export function syncCookiesToSession() {
     if (getCookie("cookieconsent_status") === "allow") {
-        setCookie("customerData", encodeURIComponent(JSON.stringify(customerData)), 7);
-        console.log("customerData synchronized to cookie:", customerData);
+        const keysToSync = ["cartData", "customerData", "siteData"];
+        keysToSync.forEach((key) => {
+            const cookieValue = getCookie(key);
+            if (cookieValue) {
+              try {
+                // If it's an object, just JSON.stringify it directly.
+                sessionStorage.setItem(
+                  key,
+                  encodeURIComponent(JSON.stringify(cookieValue))
+                );
+                console.log(`${key} synchronized from cookies to sessionStorage:`, cookieValue);
+              } catch (error) {
+                console.error(`Failed to process cookie for key "${key}":`, error);
+              }
+            }
+        });
+    }
+}
+
+
+// Clear cookies if consent is revoked
+function clearCookies() {
+    const keysToClear = ["cartData", "customerData", "siteData"];
+    keysToClear.forEach(deleteCookie);
+    console.log("Cookies cleared due to revoked consent.");
+}
+
+// Initialize default sessionStorage data
+function initializeSessionData() {
+    initializeCartData();
+    initializeCustomerData();
+}
+
+// Initialize cartData in sessionStorage
+function initializeCartData() {
+    const cartData = getSessionData("cartData", []);
+    sessionStorage.setItem("cartData", encodeURIComponent(JSON.stringify(cartData)));
+}
+
+// Initialize customerData in sessionStorage
+function initializeCustomerData() {
+    const customerData = getSessionData("customerData", {
+        name: "",
+        phone: "",
+        email: "",
+        address: "",
+        city: "",
+        specialInstructions: ""
+    });
+    sessionStorage.setItem("customerData", encodeURIComponent(JSON.stringify(customerData)));
+}
+
+// Utility to retrieve and parse session data or return a default value
+function getSessionData(key, defaultValue) {
+    try {
+        const data = sessionStorage.getItem(key);
+        return data ? JSON.parse(decodeURIComponent(data)) : defaultValue;
+    } catch {
+        console.warn(`Failed to parse ${key}. Using default value.`);
+        return defaultValue;
     }
 }
 

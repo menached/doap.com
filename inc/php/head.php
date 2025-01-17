@@ -15,21 +15,20 @@
     
 <!-- Cookie Stuff -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.1/cookieconsent.min.css">
-    <script src="/inc/js/cookieConsent.js"></script> 
-    <script type="module" src="/inc/js/headerManager.js" defer></script>
-<script type="module" src="/inc/js/formHandler.js" defer></script>
-<script type="module" src="/inc/js/tabHandler.js" defer></script>
-<script type="module" src="/inc/js/productSelectionHandler.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.1/cookieconsent.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Marvel&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script type="module" src="/inc/js/headerManager.js" defer></script>
+    <script type="module" src="/inc/js/formHandler.js" defer></script>
+    <script type="module" src="/inc/js/tabHandler.js" defer></script>
+    <script type="module" src="/inc/js/productSelectionHandler.js" defer></script>
+    <script type="module" src="/inc/js/main.js" defer></script>
+    <script type="module" src="/inc/js/subdomainData.js" defer></script>
+    <script type="module" src="/inc/js/formPopulator.js" defer></script>
+    <script src="/inc/js/shopzipFinder.js" defer></script>
     <link rel="stylesheet" href="/inc/css/style.css">
     <link rel="stylesheet" href="/inc/css/customerInfo.css">
-<link rel="stylesheet" href="/inc/css/zipFormStyle.css">
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script src="/inc/js/main.js" type="module" defer></script>
-    <script src="/inc/js/subdomainData.js" type="module" defer></script>
-    <script src="/inc/js/shopzipFinder.js" defer></script>
-<script type="module" src="/inc/js/formPopulator.js" defer></script>
+    <link rel="stylesheet" href="/inc/css/zipFormStyle.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?php include('/inc/php/og_meta.php'); ?>

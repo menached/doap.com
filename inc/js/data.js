@@ -12,7 +12,7 @@ export const cityMap = {
     localhost: "Localhost", burlingame: "Burlingame", pleasanthill: "Pleasant Hill", walnutcreek: "Walnut Creek", castrovalley: "Castro Valley",
     sanramon: "San Ramon", discoverybay: "Discovery Bay", alamo: "Alamo", antioch: "Antioch",
     dublin: "Dublin", lafayette: "Lafayette", pleasanton: "Pleasanton", danville: "Danville",
-    concord: "Concord", livermore: "Livermore", orinda: "Orinda"
+    concord: "Concord", livermore: "Livermore", orinda: "Orinda", pittsburg: "Pittsburg"
 };
 
 export const phoneMap = {
@@ -20,7 +20,7 @@ export const phoneMap = {
     sanramon: "925-365-6030", discoverybay: "925-891-7800", alamo: "925-553-4710",
     antioch: "925-891-7800", dublin: "925-587-6777", lafayette: "925-871-1333",
     pleasanton: "925-587-6777", danville: "925-725-6920", concord: "925-412-4880",
-    livermore: "925-718-6181", orinda: "925-891-7800"
+    livermore: "925-718-6181", orinda: "925-891-7800", pittsburg: "925-825-8555"
 };
 
 // Create the merged array of data objects

@@ -12,19 +12,3 @@ export function getSessionData(key) {
         return null;
     }
 }
-
-export function syncCookiesToSession(getCookie) {
-    const cookieKeys = ["cartData", "siteData", "customerData"];
-    cookieKeys.forEach((key) => {
-        try {
-            const cookieValue = getCookie(key);
-            if (cookieValue) {
-                sessionStorage.setItem(key, decodeURIComponent(cookieValue));
-                console.log(`Synchronized ${key} from cookies to session.`);
-            }
-        } catch (error) {
-            console.error(`Failed to sync ${key} from cookies:`, error);
-        }
-    });
-}
-

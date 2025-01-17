@@ -6,13 +6,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Function to update cart display in cartsection.html
     function updateCartDisplay() {
-        const cartData = sessionStorage.getItem("cartData")
-            ? JSON.parse(decodeURIComponent(sessionStorage.getItem("cartData")))
-            : []; // Default to an empty array if no cartData
+        let cartData = [];
+        try {
+            cartData = sessionStorage.getItem("cartData")
+                ? JSON.parse(decodeURIComponent(sessionStorage.getItem("cartData")))
+                : [];
+        } catch (error) {
+            console.error("Failed to parse cartData from sessionStorage:", error);
+            cartData = [];
+        }
 
         const siteData = sessionStorage.getItem("siteData")
             ? JSON.parse(decodeURIComponent(sessionStorage.getItem("siteData")))
-            : { minimumOrder: 0 }; // Default siteData with minimumOrder 0 if not available
+            : { minimumOrder: 0 };
 
         const selectedItemsList = document.getElementById("selectedItemsList");
         const minOrderMessage = document.getElementById("minOrderMessage");
@@ -73,12 +79,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Function to remove an item from cart
     function removeItemFromCart(productName) {
-        let cartData = JSON.parse(decodeURIComponent(sessionStorage.getItem("cartData") || "[]"));
+        let cartData = [];
+        try {
+            cartData = JSON.parse(decodeURIComponent(sessionStorage.getItem("cartData") || "[]"));
+        } catch (error) {
+            console.error("Failed to parse cartData during removal:", error);
+            cartData = [];
+        }
+
         cartData = cartData.filter(item => item.name !== productName);
         sessionStorage.setItem("cartData", encodeURIComponent(JSON.stringify(cartData)));
 
         if (getCookie("cookieconsent_status") === "allow") {
-            setCookie("cartData", encodeURIComponent(JSON.stringify(cartData)), 7);
+            setCookie("cartData", cartData, 7); // Pass the plain array; setCookie handles encoding
         }
 
         console.log(`Removed ${productName} from cart.`);
@@ -88,9 +101,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Highlight products that are in the cart
     function highlightCartItems() {
-        const cartData = sessionStorage.getItem("cartData")
-            ? JSON.parse(decodeURIComponent(sessionStorage.getItem("cartData")))
-            : [];
+        let cartData = [];
+        try {
+            cartData = sessionStorage.getItem("cartData")
+                ? JSON.parse(decodeURIComponent(sessionStorage.getItem("cartData")))
+                : [];
+        } catch (error) {
+            console.error("Failed to parse cartData during highlight:", error);
+            cartData = [];
+        }
 
         const productItems = document.querySelectorAll(".product");
         productItems.forEach(item => {
@@ -137,7 +156,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 sessionStorage.setItem("cartData", encodeURIComponent(JSON.stringify(cartData)));
 
                 if (getCookie("cookieconsent_status") === "allow") {
-                    setCookie("cartData", encodeURIComponent(JSON.stringify(cartData)), 7);
+                    setCookie("cartData", cartData, 7); // Pass the plain array; setCookie handles encoding
                 }
 
                 updateCartDisplay();
@@ -146,14 +165,22 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+    // Restore cart highlights on load
     function restoreHighlightsOnLoad() {
-        if (sessionStorage.getItem("cartData")) {
-            highlightCartItems();
-        } else if (getCookie("cartData")) {
-            const cartDataFromCookie = JSON.parse(decodeURIComponent(getCookie("cartData")));
-            sessionStorage.setItem("cartData", encodeURIComponent(JSON.stringify(cartDataFromCookie)));
-            highlightCartItems();
+        let cartData = [];
+        try {
+            if (sessionStorage.getItem("cartData")) {
+                cartData = JSON.parse(decodeURIComponent(sessionStorage.getItem("cartData")));
+            } else if (getCookie("cartData")) {
+                cartData = JSON.parse(decodeURIComponent(getCookie("cartData")));
+                sessionStorage.setItem("cartData", encodeURIComponent(JSON.stringify(cartData)));
+            }
+        } catch (error) {
+            console.error("Failed to parse cartData during restore:", error);
+            cartData = [];
         }
+
+        highlightCartItems();
     }
 
     // Initial cart display and product highlight

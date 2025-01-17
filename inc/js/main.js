@@ -83,3 +83,9 @@ document.addEventListener("DOMContentLoaded", () => {
     console.groupEnd();
 });
 
+
+export function getCityDataFromHostname() {
+    const hostname = window.location.hostname.split('.')[0].toLowerCase();
+    return subdomainData.find(entry => entry.subdomain === hostname) || {};
+}
+
