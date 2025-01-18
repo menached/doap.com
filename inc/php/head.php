@@ -7,7 +7,6 @@
     })(window,document,'script','dataLayer','GTM-TSJ7XFHN');</script>
     <!-- End Google Tag Manager -->
 
-
     <script>
         const hostname = window.location.hostname;
         const subdomain = hostname.split('.')[0];

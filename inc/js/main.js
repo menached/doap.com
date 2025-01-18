@@ -51,18 +51,19 @@ document.addEventListener("DOMContentLoaded", () => {
         const minimumOrder = getMinimumOrder();
         const meetsMinimumOrder = cartTotal >= minimumOrder;
         const { allFilled, partiallyFilled } = isCustomerInfoComplete();
+        const paymentMethod = document.getElementById("paymentMethod")?.value;
 
         if (!allFilled && cartTotal === 0) {
-            cartContainer.style.borderColor = "#FF0000";  // Red: No fields and no cart data
+            cartContainer.style.borderColor = "#FF0000"; // Red: No fields and no cart data
         } else if (!allFilled && partiallyFilled) {
-            cartContainer.style.borderColor = "#FFCC00";  // Yellow: Some fields filled but not all
-        } else if (allFilled && meetsMinimumOrder) {
-            cartContainer.style.borderColor = "#00FF00";  // Green: All fields filled and meets minimum
+            cartContainer.style.borderColor = "#FFCC00"; // Yellow: Some fields filled but not all
+        } else if (allFilled && meetsMinimumOrder && paymentMethod) {
+            cartContainer.style.borderColor = "#00FF00"; // Green: All fields filled, meets minimum, and payment selected
         } else {
-            cartContainer.style.borderColor = "#FF0000";  // Red: If the form is blank and cart total is still good
+            cartContainer.style.borderColor = "#FF0000"; // Red: Invalid state (e.g., missing payment method)
         }
 
-        console.log(`Customer Info Complete: ${allFilled}, Partially Filled: ${partiallyFilled}, Cart Total: $${cartTotal}, Minimum: $${minimumOrder}`);
+        console.log(`Customer Info Complete: ${allFilled}, Partially Filled: ${partiallyFilled}, Payment Method: ${paymentMethod}, Cart Total: $${cartTotal}, Minimum: $${minimumOrder}`);
     }
 
     // Listen for changes in customer info inputs
@@ -95,4 +96,33 @@ export function getCityDataFromHostname() {
     const hostname = window.location.hostname.split('.')[0].toLowerCase();
     return subdomainData.find(entry => entry.subdomain === hostname) || {};
 }
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    const checkoutButton = document.getElementById("checkoutButton");
+    const requiredFields = document.querySelectorAll(".customer-info input[required], .customer-info textarea[required]");
+
+    // Function to check if all required fields are filled
+    function validateFields() {
+        let allFilled = true;
+
+        requiredFields.forEach((field) => {
+            if (!field.value.trim()) {
+                allFilled = false;
+            }
+        });
+
+        // Enable or disable the button based on the validation
+        checkoutButton.disabled = !allFilled;
+    }
+
+    // Add event listeners to all required fields
+    requiredFields.forEach((field) => {
+        field.addEventListener("input", validateFields);
+    });
+
+    // Initial validation check
+    validateFields();
+});
 

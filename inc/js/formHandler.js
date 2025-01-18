@@ -14,9 +14,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Add event listeners for customer form fields to update session storage
     const customerInputs = document.querySelectorAll(".customer-info input, .customer-info textarea");
+    const paymentMethodField = document.getElementById("paymentMethod");
+
     customerInputs.forEach(input => {
         input.addEventListener("input", updateCustomerDataInSession);
     });
+
+    paymentMethodField.addEventListener("change", updateCustomerDataInSession);
+
+    // Perform initial validation on page load
+    validateFields();
 });
 
 // Initialize customerData in sessionStorage
@@ -41,7 +48,8 @@ function initializeCustomerData() {
             email: "",
             address: "",
             city: "",
-            specialInstructions: ""
+            specialInstructions: "",
+            paymentMethod: "" // Initialize payment method as empty
         };
         sessionStorage.setItem("customerData", encodeURIComponent(JSON.stringify(defaultCustomerData)));
         console.warn("Default customerData set in sessionStorage.");
@@ -83,7 +91,8 @@ function updateCustomerDataInSession() {
         email: document.getElementById("email")?.value || "",
         address: document.getElementById("address")?.value || "",
         city: document.getElementById("city")?.value || "",
-        specialInstructions: document.getElementById("specialInstructions")?.value || ""
+        specialInstructions: document.getElementById("specialInstructions")?.value || "",
+        paymentMethod: document.getElementById("paymentMethod")?.value || ""
     };
 
     sessionStorage.setItem("customerData", encodeURIComponent(JSON.stringify(customerData)));
@@ -95,37 +104,26 @@ function updateCustomerDataInSession() {
         console.log("Updated customerData in cookies:", customerData);
     }
     console.log("SessionStorage after cookie sync:", JSON.parse(decodeURIComponent(sessionStorage.getItem("customerData"))));
+
+    // Validate fields after update
+    validateFields();
 }
 
-// Update customer info dynamically
-function updateCustomerInfo() {
-    const customerData = {
-        name: document.getElementById("name")?.value.trim() || "",
-        phone: document.getElementById("phone")?.value.trim() || "",
-        email: document.getElementById("email")?.value.trim() || "",
-        address: document.getElementById("address")?.value.trim() || "",
-        city: document.getElementById("city")?.value.trim() || "",
-        specialInstructions: document.getElementById("specialInstructions")?.value.trim() || ""
-    };
-
-    // Check if all required fields (except specialInstructions) are filled
-    const allRequiredFilled = customerData.name && customerData.phone && customerData.email && customerData.address && customerData.city;
+// Validate all fields, including payment method
+function validateFields() {
+    const customerData = JSON.parse(decodeURIComponent(sessionStorage.getItem("customerData") || "{}"));
+    const allRequiredFilled = customerData.name && customerData.phone && customerData.email &&
+        customerData.address && customerData.city && customerData.paymentMethod;
 
     const cartContainer = document.querySelector("#cartContainer");
+    const checkoutButton = document.getElementById("checkoutButton");
+
     if (allRequiredFilled) {
-        cartContainer.style.border = "2px solid #28a745";  // Green border if valid
+        cartContainer.style.border = "2px solid #28a745"; // Green border if valid
+        checkoutButton.disabled = false; // Enable checkout button
     } else {
-        cartContainer.style.border = "2px solid #ff0000";  // Red border if invalid
+        cartContainer.style.border = "1px dashed #ff0000"; // Red border if invalid
+        checkoutButton.disabled = true; // Disable checkout button
     }
-
-    // Update session and cookies
-    sessionStorage.setItem("customerData", encodeURIComponent(JSON.stringify(customerData)));
-
-    if (getCookie("cookieconsent_status") === "allow") {
-        console.log("Cookies before sync:", document.cookie);
-        setCookie("customerData", customerData, 7);
-        console.log("Updated customerData in cookies:", customerData);
-    }
-    console.log("SessionStorage after cookie sync:", JSON.parse(decodeURIComponent(sessionStorage.getItem("customerData"))));
 }
 

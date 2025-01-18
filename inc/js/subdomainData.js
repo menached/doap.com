@@ -1,21 +1,13 @@
 export const subdomainData = [
     {
-        subdomain: "localhost",
-        city: "Developing",
-        phone: "925-725-1330",
-        minimumOrder: 40,
-        url: "https://localhost.doap.com/simple.php",
-        servingCities: ["localhost", "BBlackhawk", "BTassajara"],
-        serviceZips: [94444]
-    },
-    {
         subdomain: "alamo",
         city: "Alamo",
         phone: "925-553-4710",
         minimumOrder: 40,
         url: "https://alamo.doap.com/simple.php",
         servingCities: ["Alamo", "Blackhawk", "Tassajara"],
-        serviceZips: [94507]
+        serviceZips: [94507],
+        description: "Alamo Doap delivers organic awesome pot from 9am to 9pm daily to Alamo and surrounding cities 7 days a week."
     },
     {
         subdomain: "burlingame",
@@ -28,12 +20,13 @@ export const subdomainData = [
             94002, 94005, 94010, 94011, 94014, 94015, 94019, 94022, 94025, 94027,
             94028, 94030, 94038, 94044, 94061, 94062, 94063, 94065, 94066, 94070,
             94080, 94112, 94128, 94134, 94301, 94401, 94402, 94403, 94404
-        ]
+        ],
+        description: "Burlingame Doap offers premium organic pot delivery, 9am to 9pm daily, covering Burlingame and nearby areas."
     },
     {
         subdomain: "campbell",
         city: "Campbell",
-        phone: "N/A",
+        phone: "408-645-6700",
         minimumOrder: 120,
         url: "https://campbell.doap.com/simple.php",
         servingCities: ["Campbell", "Monte Sereno", "Saratoga", "San Jose", "Los Gatos"],
@@ -49,7 +42,8 @@ export const subdomainData = [
             95148, 95150, 95151, 95152, 95153, 95154, 95155, 95156, 95157, 95158,
             95159, 95160, 95161, 95164, 95170, 95172, 95173, 95191, 95192, 95193,
             95194, 95196, 95391
-        ]
+        ],
+        description: "Campbell Doap brings you fresh organic pot daily from 9am to 9pm, serving Campbell and neighboring cities."
     },
     {
         subdomain: "concord",
@@ -58,7 +52,8 @@ export const subdomainData = [
         minimumOrder: 50,
         url: "https://concord.doap.com/simple.php",
         servingCities: ["Concord", "Clayton", "Pacheco"],
-        serviceZips: [94528, 94547, 94552, 94556, 94619, 94605, 94516, 94575]
+        serviceZips: [94528, 94547, 94552, 94556, 94619, 94605, 94516, 94575],
+        description: "Concord Doap delivers organic awesome pot daily, 9am to 9pm, to Concord and surrounding cities."
     },
     {
         subdomain: "danville",
@@ -67,7 +62,8 @@ export const subdomainData = [
         minimumOrder: 40,
         url: "https://danville.doap.com/simple.php",
         servingCities: ["Danville", "Diablo"],
-        serviceZips: [94506, 94526]
+        serviceZips: [94506, 94526],
+        description: "Danville Doap offers reliable pot delivery 7 days a week, 9am to 9pm, serving Danville and nearby cities."
     },
     {
         subdomain: "dublin",
@@ -76,7 +72,8 @@ export const subdomainData = [
         minimumOrder: 40,
         url: "https://dublin.doap.com/simple.php",
         servingCities: ["Dublin", "Sunol"],
-        serviceZips: [94568, 94552, 94586]
+        serviceZips: [94568, 94552, 94586],
+        description: "Dublin Doap delivers organic pot daily from 9am to 9pm to Dublin and surrounding areas."
     },
     {
         subdomain: "lafayette",
@@ -85,7 +82,8 @@ export const subdomainData = [
         minimumOrder: 50,
         url: "https://lafayette.doap.com/simple.php",
         servingCities: ["Lafayette", "Moraga"],
-        serviceZips: [94549, 94583, 94553, 94598, 94575, 94556, 94708, 94707, 94709, 94618]
+        serviceZips: [94549, 94583, 94553, 94598, 94575, 94556, 94708, 94707, 94709, 94618],
+        description: "Lafayette Doap delivers organic pot to Lafayette and surrounding cities daily from 9am to 9pm."
     },
     {
         subdomain: "livermore",
@@ -94,7 +92,8 @@ export const subdomainData = [
         minimumOrder: 50,
         url: "https://livermore.doap.com/simple.php",
         servingCities: ["Livermore", "Altamont"],
-        serviceZips: [94550, 94551]
+        serviceZips: [94550, 94551],
+        description: "Livermore Doap delivers fresh organic pot daily, 9am to 9pm, serving Livermore and nearby areas."
     },
     {
         subdomain: "orinda",
@@ -106,16 +105,18 @@ export const subdomainData = [
         serviceZips: [
             94618, 94705, 94708, 94563, 94611, 94803, 94704, 94530, 94707, 94556, 94804, 94564,
             94619, 94805, 94553, 94709, 94609, 94516, 94610, 94575, 94706, 94710, 94702, 94572
-        ]
+        ],
+        description: "Orinda Doap offers daily organic pot delivery, 9am to 9pm, serving Orinda and its neighboring cities."
     },
     {
         subdomain: "pittsburg",
         city: "Pittsburg",
-        phone: "N/A",
+        phone: "925-825-8555",
         minimumOrder: 75,
         url: "https://pittsburg.doap.com/simple.php",
         servingCities: ["Pittsburg", "Bay Point"],
-        serviceZips: [94512, 94513, 94565, 94509, 94514, 94531, 94548, 94561, 94571, 94511]
+        serviceZips: [94512, 94513, 94565, 94509, 94514, 94531, 94548, 94561, 94571, 94511],
+        description: "Pittsburg Doap provides daily pot delivery, 9am to 9pm, serving Pittsburg and Bay Point."
     },
     {
         subdomain: "pleasanthill",
@@ -124,7 +125,8 @@ export const subdomainData = [
         minimumOrder: 60,
         url: "https://pleasanthill.doap.com/simple.php",
         servingCities: ["Pleasant Hill", "Martinez", "Crockett"],
-        serviceZips: [94597, 94523, 94553, 94528, 94575, 94806, 94531, 94564, 94803, 94805]
+        serviceZips: [94597, 94523, 94553, 94528, 94575, 94806, 94531, 94564, 94803, 94805],
+        description: "Pleasant Hill Doap brings organic pot to your door daily, 9am to 9pm, serving Pleasant Hill and surrounding areas."
     },
     {
         subdomain: "sanramon",
@@ -133,7 +135,8 @@ export const subdomainData = [
         minimumOrder: 40,
         url: "https://sanramon.doap.com/simple.php",
         servingCities: ["San Ramon", "Dougherty"],
-        serviceZips: [94528, 94583, 94582, 94517, 94552, 94556, 94536, 94537]
+        serviceZips: [94528, 94583, 94582, 94517, 94552, 94556, 94536, 94537],
+        description: "San Ramon Doap provides daily pot delivery, 9am to 9pm, serving San Ramon and nearby cities."
     },
     {
         subdomain: "walnutcreek",
@@ -144,16 +147,18 @@ export const subdomainData = [
         servingCities: ["Walnut Creek", "Rossmoor"],
         serviceZips: [
             94598, 94595, 94596, 94575, 94556, 94806, 94803, 94805, 94564, 94572, 94801, 94804
-        ]
+        ],
+        description: "Walnut Creek Doap offers organic pot delivery every day, 9am to 9pm, in Walnut Creek and surrounding areas."
     },
     {
         subdomain: "www",
-        city: "",
-        phone: "883-289-3627",
+        city: "Norcal",
+        phone: "833-289-3627",
         minimumOrder: 50,
         url: "https://www.doap.com/simple.php",
         servingCities: ["Norcal", "Bay Area"],
-        serviceZips: [ ]
+        serviceZips: [],
+        description: "Consult the Directory Of Agencies & Providers for agencies that deliver organic awesome pot from 9am to 9pm daily 7 days a week!"
     }
 ];
 

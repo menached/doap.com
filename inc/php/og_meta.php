@@ -109,7 +109,9 @@ if ($subdomain === "www" && $_SERVER['REQUEST_URI'] === "/simple.php") {
 $cityName = htmlspecialchars($domainDetails['city'], ENT_QUOTES, 'UTF-8');
 $description = htmlspecialchars($domainDetails['description'], ENT_QUOTES, 'UTF-8');
 $phone = htmlspecialchars($domainDetails['phone'], ENT_QUOTES, 'UTF-8');
-$imageUrl = "https://{$subdomain}.doap.com/images/{$subdomain}doapbanner.webp";
+$imageUrl = "https://{$subdomain}.doap.com/images/banners/{$subdomain}doapbanner.webp";
+$imageUrl = file_exists($imagePath) ? $imagePath : 'https://default-image-url.com/fallback-image.webp';
+
 $logoUrl = "https://{$subdomain}.doap.com/images/doap-logo-wording.png";
 
 // Output the meta tags

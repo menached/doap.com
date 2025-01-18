@@ -4,6 +4,15 @@ body, h2, input, button, footer {
     padding: 0;
 }
 
+
+
+button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+
 /* Match parent background color and remove border */
 .customer-info {
     background-color: inherit;  /* Matches the background color of the parent */

@@ -37,6 +37,21 @@
             <input type="email" id="email" name="email" required autocomplete="email" placeholder="Email Address">
         </div>
 
+        <!-- Promo Opt-In Checkboxes -->
+        <div class="info-row full-width"> 
+          <label>Yes! Send me promo messages:</label>
+          <div class="promo-optin">
+            <label for="promo_sms">
+              <input type="checkbox" id="promo_sms" name="promo_sms" checked />
+              SMS
+            </label>
+            <label for="promo_email">
+              <input type="checkbox" id="promo_email" name="promo_email" checked />
+              Email
+            </label>
+          </div>
+        </div>
+
         <div class="info-row">
             <label for="address">Address:</label>
             <textarea id="address" name="address" required autocomplete="street-address" placeholder="Street Address"></textarea>
@@ -135,7 +150,7 @@
         <p>After placing your order, check your email for order status. Feel free to call us at (833)289-3627 for assistance.</p>
     </div>
     <!-- Submit Button -->
-    <button id="checkoutButton">Checkout</button>
+    <button id="checkoutButton" disabled>Checkout</button>
 </div>
 </form>
 </div>

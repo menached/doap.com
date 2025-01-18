@@ -2,12 +2,36 @@
 .customer-info {
     display: grid;
     grid-template-columns: 1fr 1fr;  /* Two columns */
-    gap: 20px;  /* Space between the form elements */
+    gap: 20px;                      /* Space between form elements */
     padding: 20px;
     background-color: #fff;
     border-radius: 8px;
     max-width: 800px;
     margin: 0 auto;
+}
+
+#checkoutButton {
+    height: 90px;           /* Adjust height as needed */
+    margin: 0 25%;          /* 25% margin on left and right */
+    width: 50%;             /* Ensure button width fits the layout */
+    font-size: 1.9em;       /* Slightly larger font size */
+    background-color: darkgreen;
+    color: #fff;
+    font-weight: 700;
+    font-family: Marvel;
+    border: none;           /* Remove border */
+    border-radius: 10px;    /* Rounded corners */
+    cursor: pointer;        /* Pointer cursor for interactivity */
+}
+
+#checkoutButton:hover {
+    background-color: #ccc; /* Slightly darker shade on hover */
+}
+
+#checkoutButton:disabled {
+    background-color: #ccc; /* Greyed-out look for disabled state */
+    cursor: not-allowed;    /* Prevent pointer cursor */
+    opacity: 0.6;           /* Reduced opacity */
 }
 
 .info-row {
@@ -35,23 +59,22 @@
     height: 100px;
 }
 
-/* Mobile View */
+/* Mobile View (up to 768px) */
 @media (max-width: 768px) {
     .customer-info {
         grid-template-columns: 1fr;  /* One column for mobile */
     }
 }
 
-
 /* Payment Section Styling */
 .payment-section {
-    max-width: 800px;  /* Same width as .customer-info */
-    margin: 0 auto;  /* Center horizontally */
-    padding: 20px;  /* Same padding for consistency */
-    background-color: inherit;  /* Match parent background */
-    border: none;  /* Remove border */
-    border-radius: 0;  /* No rounded corners */
-    box-shadow: none;  /* Remove shadow */
+    max-width: 800px;       /* Same width as .customer-info */
+    margin: 0 auto;         /* Center horizontally */
+    padding: 20px;          /* Same padding for consistency */
+    background-color: inherit;  
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
 }
 
 /* Payment Label */
@@ -80,14 +103,13 @@
     outline: none;
 }
 
-/* Mobile responsiveness */
+/* Mobile responsiveness (up to 768px) */
 @media (max-width: 768px) {
     .payment-section {
         padding: 15px;  /* Slightly reduced padding for mobile */
     }
-
     .payment-section select {
-        font-size: 0.9rem;  /* Slightly smaller font size for mobile */
+        font-size: 0.9rem; /* Slightly smaller font size for mobile */
     }
 }
 
@@ -96,8 +118,39 @@
     #checkoutButton {
         margin-bottom: 10px; /* Add 10px bottom margin */
     }
-    #cartContainer{
-        padding-bottom: 20px; /* Add 10px bottom margin */
+    #cartContainer {
+        padding-bottom: 20px; /* Add 20px bottom margin */
     }
+}
+
+/* Additional style for very narrow screens (250px to 360px) */
+@media only screen and (min-width: 250px) and (max-width: 360px) {
+    .customer-info {
+        grid-template-columns: 1fr; /* Force single column on tiny screens */
+        width: 90%;
+        max-width: 350px;
+        margin: 0 auto;
+        padding: 10px;
+        box-sizing: border-box;
+    }
+
+    .customer-info input,
+    .customer-info textarea {
+        width: 100%;
+        box-sizing: border-box;
+    }
+    #minOrderMessage { 
+        font-size: .7em!important;
+        size: .7em!important;
+        position:relative;
+        text-align:right;
+    }
+}
+
+
+.promo-optin {
+  display: flex;
+  gap: 1rem;            /* Space between each label+checkbox */
+  align-items: center;  /* Vertically center checkboxes with labels */
 }
 
