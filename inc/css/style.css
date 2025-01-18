@@ -4,6 +4,14 @@ body, h2, input, button, footer {
     padding: 0;
 }
 
+input[type="checkbox"] {
+  -webkit-appearance: checkbox;
+  -moz-appearance: checkbox;
+  appearance: checkbox;
+  width: auto;
+  height: auto;
+  opacity: 1;
+}
 
 
 button:disabled {
@@ -320,12 +328,12 @@ body {
 @media (min-width: 200px) and (max-width: 768px) {
     .orderInfo {
         margin-bottom: 25px !important; /* Remove padding */
+        padding:0px;
     }
 }
 
-
 /* Hidden Checkboxes */
-input[type="checkbox"] {
+.product input[type="checkbox"] {
     display: none;
 }
 
