@@ -24,6 +24,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Perform initial validation on page load
     validateFields();
+
+    // Attach event listener to checkout button
+    const checkoutButton = document.getElementById("checkoutButton");
+    if (checkoutButton) {
+        checkoutButton.addEventListener("click", handleCheckout);
+    }
 });
 
 // Initialize customerData in sessionStorage
@@ -126,4 +132,148 @@ function validateFields() {
         checkoutButton.disabled = true; // Disable checkout button
     }
 }
+
+// Handle the checkout process
+async function handleCheckout(event) {
+    event.preventDefault();
+
+    const customerData = JSON.parse(decodeURIComponent(sessionStorage.getItem("customerData") || "{}"));
+    const cartData = sessionStorage.getItem("cartData")
+        ? JSON.parse(decodeURIComponent(sessionStorage.getItem("cartData")))
+        : [];
+
+    const total = document.getElementById("total").textContent.replace("$", "");
+
+    if (!customerData.name || !customerData.phone || !cartData.length || !customerData.paymentMethod) {
+        alert("Please fill out all required fields and ensure the cart has items.");
+        return;
+    }
+
+    const orderPayload = {
+        ...customerData,
+        items: cartData,
+        total,
+    };
+
+    try {
+        const response = await fetch("https://eft3wrtpad.execute-api.us-west-2.amazonaws.com/prod/checkout", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(orderPayload),
+        });
+
+        const result = await response.json();
+        if (response.ok) {
+            alert("Order submitted successfully!");
+            console.log("API Response:", result);
+        } else {
+            console.error("Error response from API:", result);
+            alert("Failed to submit order. Please try again.");
+        }
+    } catch (error) {
+        console.error("Network error:", error);
+        alert("An error occurred while submitting the order.");
+    }
+}
+
+
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    const paymentMethodSelect = document.getElementById("paymentMethod");
+    const sections = {
+        "credit-card": document.getElementById("creditCardForm"),
+        crypto: document.getElementById("cryptoWallets"),
+        generalHelp: document.getElementById("generalHelp"), // Example for a default help section
+    };
+
+    // Hide all sections initially
+    function hideAllSections() {
+        Object.values(sections).forEach((section) => {
+            if (section) {
+                section.style.display = "none";
+            }
+        });
+    }
+
+    // Show the relevant section
+    function showSection(sectionId) {
+        if (sections[sectionId]) {
+            sections[sectionId].style.display = "block";
+        }
+    }
+
+    // Handle dropdown change event
+    paymentMethodSelect.addEventListener("change", (event) => {
+        const selectedValue = event.target.value;
+
+        hideAllSections(); // Hide all sections
+        if (selectedValue) {
+            showSection(selectedValue); // Show only the relevant section
+        }
+    });
+
+    // Initialize by hiding all sections
+    hideAllSections();
+});
+
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    const paymentMethodSelect = document.getElementById("paymentMethod");
+    const creditCardForm = document.getElementById("creditCardForm");
+    const cryptoWallets = document.getElementById("cryptoWallets");
+    const generalHelp = document.getElementById("generalHelp");
+    const CODHelp = document.getElementById("CODHelp");
+
+    // Function to reset and hide all sections
+    function hideAllSections() {
+        creditCardForm.style.display = "none";
+        cryptoWallets.style.display = "none";
+        generalHelp.style.display = "none";
+        CODHelp.style.display = "none";
+    }
+
+    // Function to show the appropriate section based on the selected payment method
+    function updateAccordionVisibility() {
+        hideAllSections(); // Ensure all sections are hidden first
+        const selectedMethod = paymentMethodSelect.value;
+
+        if (selectedMethod === "credit-card") {
+            creditCardForm.style.display = "block";
+        } else if (selectedMethod === "crypto") {
+            cryptoWallets.style.display = "block";
+        } else if (selectedMethod === "cash") {
+            CODHelp.style.display = "block"; // Show Cash On Delivery panel
+        } else if (
+            selectedMethod === "zelle" ||
+            selectedMethod === "cashapp" ||
+            selectedMethod === "venmo" ||
+            selectedMethod === "paypal"
+        ) {
+            generalHelp.style.display = "block";
+        } else {
+            console.warn("No valid payment method selected.");
+        }
+    }
+
+    // Load the saved method from sessionStorage before initializing visibility
+    const savedMethod = sessionStorage.getItem("selectedPaymentMethod");
+    if (savedMethod) {
+        paymentMethodSelect.value = savedMethod; // Apply saved selection
+    }
+
+    // Initialize visibility on page load
+    updateAccordionVisibility();
+
+    // Update visibility when the payment method is changed
+    paymentMethodSelect.addEventListener("change", () => {
+        sessionStorage.setItem("selectedPaymentMethod", paymentMethodSelect.value);
+        updateAccordionVisibility();
+    });
+});
 

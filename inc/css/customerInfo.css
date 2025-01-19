@@ -1,24 +1,3 @@
-/* Delivery Form Grid Layout */
-
-.customer-info {
-  display: grid;
-  grid-template-columns: 1fr 1fr; /* Default: two columns */
-  gap: 20px;
-  padding: 20px;
-  max-width: 800px;
-  margin: 0 auto;
-  background-color: #fff;
-  border-radius: 8px;
-}
-
-/* Force single column under 768px */
-@media (max-width: 768px) {
-  .customer-info {
-    grid-template-columns: 1fr!important;
-  }
-}
-
-
 #checkoutButton {
     height: 90px;           /* Adjust height as needed */
     margin: 0 25%;          /* 25% margin on left and right */
@@ -63,6 +42,11 @@
     border-radius: 5px;
     font-size: 1rem;
 }
+
+
+
+
+
 
 #specialInstructions {
     height: 100px;
@@ -126,37 +110,238 @@
     }
 }
 
-/* Additional style for very narrow screens (250px to 360px) */
-@media only screen and (min-width: 250px) and (max-width: 360px) {
+
+
+/* Delivery Form Grid Layout */
+.customer-info {
+    /*gap: 20px;*/
+    /*display: grid;*/
+    /*grid-template-columns: 1fr 1fr; [> default: two columns <]*/
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #fff;
+    border-radius: 8px;
+    font-family: Marvel; /* Apply Marvel font to the entire grid */
+}
+
+.customer-info label {
+    font-family: Marvel;
+    font-weight: bold; /* Improve label readability */
+}
+
+@media (min-width: 769px) {
     .customer-info {
-        grid-template-columns: 1fr; /* Force single column on tiny screens */
+        gap: 20px;
+        display: grid;
+        grid-template-columns: 1fr 1fr; /* default: two columns */
+    }
+}
+
+/* Force single column under 768px */
+@media (max-width: 768px) {
+    .customer-info {
+        grid-template-columns: 1fr; /* Single column layout */
+    }
+}
+
+/* Additional style for very narrow screens (250px to 430px) */
+@media only screen and (max-width: 430px) {
+    .customer-info {
+        grid-template-columns: 1fr; /* Ensure single-column layout */
         width: 90%;
         max-width: 350px;
         margin: 0 auto;
-        padding: 0px;
+        padding: 10px; /* Adjust padding for smaller screens */
         box-sizing: border-box;
     }
+
     .orderInfo {
-        border: 0px;
-        padding: 0px;
+        border: 0;
+        padding: 0;
     }
+
     .customer-info input,
     .customer-info textarea {
-        width: 100%;
+        width: 100%; /* Ensure full width for inputs */
         box-sizing: border-box;
+        font-size: 0.8rem; /* Consistent smaller font size for inputs */
     }
-    #minOrderMessage { 
-        font-size: .7em!important;
-        size: .7em!important;
+
+    #minOrderMessage {
+        font-size: 0.7rem; /* Smaller font size for message */
+        text-align: right;
+    }
+
+    #name,
+    #address {
+        width: 100%; /* Full width for larger inputs */
+        max-width: none; /* Remove any parent constraints */
+    }
+
+    #phone,
+    #city {
+        width: 100%; /* Ensure uniform width for all inputs */
+    }
+
+    /* Placeholder text size adjustments */
+    input::placeholder,
+    textarea::placeholder {
+        font-size: 0.7rem; /* Smaller placeholder text */
+    },
+    h1 {
+   font-size:1.2em!important; 
+    }
+    .tab-container {margin: 0px 25px 10px 25px;}
+}
+
+@media only screen and (max-width: 430px) {
+    .promo-optin {
+        font-size:.9em;
         position:relative;
-        text-align:right;
+        left:-0px;
+        min-width:250px;
+    }
+}
+
+/* Promo Opt-In Styling */
+.promo-optin {
+    display: flex;
+    gap: 1rem; /* Space between labels and checkboxes */
+    align-items: center; /* Align vertically */
+    flex-wrap: wrap; /* Ensure wrapping on small screens */
+}
+
+
+
+
+
+
+/* Common Styles for Accordion Sections */
+.accordion-section {
+    max-width: 1024px; /* Set maximum width */
+    margin: 20px auto; /* Center horizontally and add vertical spacing */
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Specific Style for CODHelp Section */
+#CODHelp {
+    background-color: #fff9e6; /* Light yellow for cash-specific section */
+    border-color: #ffc107; /* Golden border */
+}
+
+#CODHelp h3 {
+    color: #d39e00;
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+#CODHelp p {
+    color: #856404;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+
+/* Adjust alignment for smaller screens */
+@media (max-width: 1024px) {
+    .accordion-section {
+        padding: 35px; /* Slightly reduce padding for smaller screens */
     }
 }
 
 
-.promo-optin {
-  display: flex;
-  gap: 1rem;            /* Space between each label+checkbox */
-  align-items: center;  /* Vertically center checkboxes with labels */
+/* Credit Card Form Styling */
+#creditCardForm {
+    background-color: #eaf6ff;
+    border-color: #007bff;
+}
+
+#creditCardForm h3 {
+    color: #0056b3;
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+#creditCardForm label {
+    font-weight: bold;
+    color: #333;
+}
+
+.cardElement {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+}
+
+#creditCardForm .golden-lock {
+    color: #ffc107;
+    margin-left: 10px;
+}
+
+/* Crypto Wallets Styling */
+#cryptoWallets {
+    background-color: #fff8e6;
+    border-color: #ffc107;
+}
+
+#cryptoWallets h3 {
+    color: #e68a00;
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+#cryptoWallets ul {
+    padding: 0;
+    list-style: none;
+}
+
+#cryptoWallets li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+#cryptoWallets li:last-child {
+    border-bottom: none;
+}
+
+.copy-address {
+    color: #007bff;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.copy-address:hover {
+    color: #0056b3;
+}
+
+/* General Help Section Styling */
+#generalHelp {
+    background-color: #e9f7ef;
+    border-color: #28a745;
+}
+
+#generalHelp h3 {
+    color: #1e7e34;
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+#generalHelp p {
+    color: #155724;
+    font-size: 1rem;
+    margin: 10px 0;
 }
 

@@ -23,12 +23,12 @@
     <!-- Customer Information -->
     <div class="customer-info">
         <div class="info-row">
-            <label for="name">Name:</label>
+            <label for="name full-width">Name:</label>
             <input type="text" id="name" name="name" required autocomplete="name" placeholder="Full Name">
         </div>
 
         <div class="info-row">
-            <label for="phone">Phone:</label>
+            <label for="phone full-width">Phone:</label>
             <input type="tel" id="phone" name="phone" required autocomplete="tel" placeholder="Phone Number">
         </div>
 
@@ -39,29 +39,33 @@
 
         <!-- Promo Opt-In Checkboxes -->
         <div class="info-row full-width"> 
-          <label>Send me occasional weed specials via:</label>
+          <label>Preferred communication method:</label>
           <div class="promo-optin">
-            <label for="promo_sms">
-              <input type="checkbox" id="promo_sms" name="promo_sms" checked />
-              SMS
-            </label>
-            <label for="promo_email">
-              <input type="checkbox" id="promo_email" name="promo_email" checked />
-              Email
-            </label>
-            <label for="promo_whatsapp">
-              <input type="checkbox" id="promo_whatsapp" name="promo_whatsapp" checked />
-              WhatsApp
-            </label>
-          </div>
+              <label for="promo_email">
+                <input type="radio" id="promo_email" name="promo_optin" value="email" checked />
+                Email
+              </label>
+              <label for="promo_sms">
+                <input type="radio" id="promo_sms" name="promo_optin" value="sms" />
+                SMS
+              </label>
+              <label for="promo_whatsapp">
+                <input type="radio" id="promo_whatsapp" name="promo_optin" value="whatsapp" />
+                WhatsApp
+              </label>
+              <label for="promo_call">
+                <input type="radio" id="promo_call" name="promo_optin" value="call" />
+               Call 
+              </label>
+            </div>
         </div>
 
-        <div class="info-row">
+        <div class="info-row" full-width>
             <label for="address">Address:</label>
             <textarea id="address" name="address" required autocomplete="street-address" placeholder="Street Address"></textarea>
         </div>
 
-        <div class="info-row">
+        <div class="info-row" full-width>
             <label for="city">City:</label>
             <input type="text" id="city" name="city" required autocomplete="address-level2" placeholder="City">
         </div>
@@ -89,7 +93,7 @@
         </select>
     </div>
 
-    <div id="accordionContent" style="margin-top: 20px;">
+    <div id="accordionContent">
 
         <div id="creditCardForm" class="accordion-section" style="display: none;">
             <h3><i class="fas fa-credit-card alignright"></i> Enter Your Credit Card Details</h3>
@@ -149,9 +153,26 @@
 
         </div>
     </div>
+    <div id="CODHelp" class="accordion-section" style="display: none;">
+        <h3><i class="fas fa-money-bill-wave"></i> Cash On Delivery (COD)</h3>
+        <p>
+            Enjoy the simplest and most private way to pay for your order with <strong>Cash On Delivery</strong>. 
+            No need to create an account or share sensitive financial details—just have your cash ready when your order arrives.
+        </p>
+        <p>
+            After placing your order, check your email for the order status. If you have any questions or need assistance, 
+            feel free to call us at <strong>(833)289-3627</strong>.
+        </p>
+    </div>
     <div id="generalHelp" class="accordion-section" style="display: none;">
-        <h3><i class="fas fa-phone-alt"></i> Need Assistance?</h3>
-        <p>After placing your order, check your email for order status. Feel free to call us at (833)289-3627 for assistance.</p>
+        <h3><i class="fas fa-phone-alt"></i> Peer-to-Peer Payment</h3>
+            <p>
+            These systems allow individuals to transfer money directly to one another using a smartphone app or online interface.
+            They are designed for convenient and fast transfers between users, often with minimal or no fees for basic transactions.
+            After placing your order, check your email for order status. Peer-to-peer payments can be handled over the phone or directly with the driver 
+            when your order arrives.  
+            Feel free to call us at (833)289-3627 for assistance.
+            </p>
     </div>
     <!-- Submit Button -->
     <button id="checkoutButton" disabled>Checkout</button>
