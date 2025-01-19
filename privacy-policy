@@ -1,2 +1,116 @@
-Privacy policy...
-We never share your personal info.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Doap Privacy Policy - Your Privacy Matters">
+    <title>Privacy Policy - Doap</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="inc/css/style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            /* background-color: #f8f9fa; */
+            background-color: #fff;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2 {
+            text-align: center;
+            color: #007BFF;
+        }
+        h1 {
+            font-size: 2.2rem;
+        }
+        h2 {
+            font-size: 1.8rem;
+            margin-top: 20px;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        ul li {
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+        }
+        ul li i {
+            margin-right: 10px;
+            color: #007BFF;
+        }
+        .highlight {
+            color: #28a745;
+            font-weight: bold;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <div class="header" style="background-color:#fff;">
+        <div class="logo-title-container">
+            <a href="/simple.php" target="_SELF" title="Call Norcal Doap Doap!">
+                <img src="/images/logos/doap-logo-wording.png" alt="Doap Logo" class="doap-logo">
+            </a>
+            <div class="text-container">
+                <a class="nodec" href="/simple.php" target="_SELF">
+                    <h1 id="cityName">Doap</h1>
+                </a>
+                <a href="tel:8332893627" class="phone-number nodec">833-289-3627</a>
+            </div>
+        </div>
+        <div class="menu-title nodec">
+            <a style="text-decoration:none!important;" class="nodec" href="/simple.php" target="_SELF">
+                <h2 class="menu-title-text nodec">Delivering Organic Awesome Pot</h2>
+            </a>
+        </div>
+    </div>
+
+    <!-- Privacy Policy Content -->
+    <div class="container">
+        <h1><i class="fas fa-shield-alt"></i> Privacy Policy</h1>
+        <p>
+            At <strong class="highlight">DOAP</strong>, we go above and beyond to respect your privacy. From our seamless 
+            <span class="highlight">"no account needed"</span> ordering process to our 
+            <span class="highlight">"no-knock" discreet deliveries</span>, every part of our service is designed with your comfort and security in mind. 
+            Plus, enjoy <span class="highlight">Visual ID age verification</span> right at your door—no need to send personal ID ahead of time.
+        </p>
+        <h2><i class="fas fa-lock"></i> Our Privacy Commitments</h2>
+        <ul>
+            <li><i class="fas fa-user-secret"></i> <strong>Anonymous Ordering:</strong> You can place your order without creating an account, ensuring your personal data stays private.</li>
+            <li><i class="fas fa-truck"></i> <strong>Discreet Deliveries:</strong> Enjoy "no-knock" delivery service that respects your privacy and ensures a smooth, confidential experience.</li>
+            <li><i class="fas fa-id-badge"></i> <strong>Visual ID Verification:</strong> Age verification happens quickly and securely at the time of delivery. No need to upload or send your ID ahead of time.</li>
+            <li><i class="fas fa-database"></i> <strong>Minimal Data Storage:</strong> We collect only what’s necessary to process your order and ensure a fantastic experience.</li>
+        </ul>
+        <h2><i class="fas fa-thumbs-up"></i> Why Choose DOAP?</h2>
+        <ul>
+            <li><i class="fas fa-check-circle"></i> <strong>No-Hassle Privacy:</strong> From browsing to checkout, we make it easy to shop without compromising your personal information.</li>
+            <li><i class="fas fa-hand-holding-heart"></i> <strong>Customer-Centric Service:</strong> We respect your time, privacy, and preferences to provide a service that’s truly DOAP.</li>
+            <li><i class="fas fa-leaf"></i> <strong>Green and Clean:</strong> Not just organic products—our technology and practices are sustainable and ethical.</li>
+        </ul>
+        <h2><i class="fas fa-phone-alt"></i> Need Assistance?</h2>
+        <p>
+            Have questions? Reach out to us at <a href="tel:8332893627">833-289-3627</a>, and we’ll be happy to help. Your privacy is our promise.
+        </p>
+        <div class="footer">
+            <p>Thank you for choosing DOAP! <a href="/simple.php">Return to Home</a></p>
+        </div>
+    </div>
+</body>
+</html>
+
