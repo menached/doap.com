@@ -32,23 +32,3 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?php include('/inc/php/og_meta.php'); ?>
 
-<script>
-    import { subdomainData } from './data.js'; // Ensure this path is correct
-
-    document.addEventListener("DOMContentLoaded", () => {
-        const hostname = window.location.hostname.split('.')[0].toLowerCase();
-
-        let title = "Norcal Doap"; // Default title
-        if (hostname === "localhost") {
-            title = "Developing Doap";
-        } else {
-            const subdomainInfo = subdomainData.find(entry => entry.subdomain === hostname);
-            if (subdomainInfo && subdomainInfo.city) {
-                title = `${subdomainInfo.city} Doap`;
-            }
-        }
-
-        document.title = title;
-        console.log(`Document title set to: "${title}"`);
-    });
-</script>

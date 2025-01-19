@@ -896,3 +896,27 @@ button:hover {
     text-decoration: none; /* Remove underline on hover */
 }
 
+
+
+
+.flying-text {
+    position: absolute;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #007BFF; /* Blue color */
+    animation: fly 1.5s ease-out forwards;
+    pointer-events: none;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+}
+
+@keyframes fly {
+    0% {
+        opacity: 1;
+        transform: translate(0, 0);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(0, -200px);
+    }
+}
+

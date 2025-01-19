@@ -126,3 +126,60 @@ document.addEventListener("DOMContentLoaded", () => {
     validateFields();
 });
 
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    const flyingTextContainer = document.getElementById("flying-text-container");
+
+    function showFlyingText(text, x, y) {
+        const flyingText = document.createElement("div");
+        flyingText.textContent = text;
+        flyingText.className = "flying-text";
+
+        // Set position near the clicked button
+        flyingText.style.left = `${x}px`;
+        flyingText.style.top = `${y}px`;
+
+        flyingTextContainer.appendChild(flyingText);
+
+        // Remove the text after the animation ends
+        flyingText.addEventListener("animationend", () => {
+            flyingTextContainer.removeChild(flyingText);
+        });
+    }
+
+    // Attach event listener to "Add to Cart" buttons
+    const addToCartButtons = document.querySelectorAll(".add-to-cart-button");
+    addToCartButtons.forEach(button => {
+        button.addEventListener("click", (event) => {
+            const rect = event.target.getBoundingClientRect();
+            const x = rect.left + rect.width / 2; // Center horizontally
+            const y = rect.top; // Start above the button
+
+            showFlyingText("Added to cart", x, y);
+
+            // Optional: Add your existing cart logic here
+        });
+    });
+});
+
+
+    //import { subdomainData } from './data.js'; // Ensure this path is correct
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const hostname = window.location.hostname.split('.')[0].toLowerCase();
+
+        let title = "Norcal Doap"; // Default title
+        if (hostname === "localhost") {
+            title = "Developing Doap";
+        } else {
+            const subdomainInfo = subdomainData.find(entry => entry.subdomain === hostname);
+            if (subdomainInfo && subdomainInfo.city) {
+                title = `${subdomainInfo.city} Doap`;
+            }
+        }
+
+        document.title = title;
+        console.log(`Document title set to: "${title}"`);
+    });
+

@@ -15,8 +15,16 @@ document.addEventListener("DOMContentLoaded", () => {
         phoneNumberElement.textContent = cityData.phone;
         phoneNumberElement.href = `tel:${cityData.phone.replace(/-/g, '')}`;
         console.log(`Minimum Order for ${cityData.city}: $${cityData.minimumOrder}`);
+
+        // Set the browser tab title
+        document.title = `${cityData.city} Doap`;
+        console.log(`Tab title set to: "${document.title}"`);
     } else {
         console.warn("Subdomain not found in data.");
+
+        // Set a default tab title if subdomain is not found
+        document.title = "Doap";
+        console.log(`Tab title set to default: "${document.title}"`);
     }
 
     console.group("Session and Cookie Status");
@@ -40,7 +48,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }, {});
     //console.log("Cookies:", cookies);
 
-
-
     console.groupEnd(); // Close the console group
 });
+
