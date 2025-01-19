@@ -17,16 +17,25 @@ export function initCookieConsent() {
             },
             type: "opt-in",
             content: {
-                message: "We use cookies to enhance your experience.",
+                message: "At DOAP, we go out of our way to respect your privacy. Enjoy 'no account needed' ordering and 'no-knock' discreet deliveries that make our service truly DOAP!",
                 dismiss: "Got it!",
                 allow: "Allow Cookies",
                 deny: "Decline",
                 link: "Learn more",
                 href: "/privacy-policy"
             },
+            elements: {
+                messagelink: '<span id="cookie-message" class="marvel-font">{{message}}</span> <a aria-label="learn more about cookies" tabindex="0" class="cc-link" href="{{href}}" target="_blank">{{link}}</a>'
+            },
             onInitialise: handleConsentChange,
             onStatusChange: handleConsentChange,
         });
+
+        // Load Marvel font dynamically
+        const link = document.createElement("link");
+        link.href = "https://fonts.googleapis.com/css2?family=Marvel:wght@400;700&display=swap";
+        link.rel = "stylesheet";
+        document.head.appendChild(link);
     });
 }
 
@@ -73,7 +82,6 @@ export function syncCookiesToSession() {
         });
     }
 }
-
 
 // Clear cookies if consent is revoked
 function clearCookies() {

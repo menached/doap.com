@@ -803,3 +803,96 @@ button:hover {
     border-bottom: 1px solid #ddd; /* Optional separator */
 }
 
+
+@import url('https://fonts.googleapis.com/css2?family=Marvel:wght@400;700&display=swap');
+
+/* Cookie Banner Styling */
+.cookie-banner {
+    background-color: #1a1a1a;
+    color: #f5f5f5;
+    font-family: 'Marvel', sans-serif; /* Apply Marvel font */
+    padding: 15px;
+    border-radius: 5px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.cookie-banner .marvel-font {
+    font-family: 'Marvel', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: #f5f5f5;
+}
+
+.cookie-banner button {
+    background-color: #f1d600;
+    border: none;
+    color: #000;
+    padding: 10px 20px;
+    margin: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.cookie-banner button:hover {
+    background-color: #e0c000;
+}
+
+.cookie-banner .cc-link {
+    color: #f1d600;
+    text-decoration: underline;
+}
+
+.cookie-banner .cc-link:hover {
+    text-decoration: none;
+}
+
+
+.marvel-font {
+    font-family: 'Marvel', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: #f5f5f5;
+}
+
+
+/* Apply Marvel font to the cookie consent elements */
+.cc-link, .cc-btn {
+    font-family: 'Marvel', sans-serif;
+    font-size: 1rem; /* Adjust size if needed */
+    font-weight: 400; /* Regular weight */
+    color: #f5f5f5; /* Default text color */
+}
+
+/* Optional: Additional styling for buttons */
+.cc-btn {
+    background-color: #f1d600; /* Button background */
+    color: #000; /* Button text color */
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem; /* Button text size */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Button hover effect */
+.cc-btn:hover {
+    background-color: #e0c000; /* Darker yellow on hover */
+}
+
+/* Link styling */
+.cc-link {
+    text-decoration: underline;
+    color: #f1d600; /* Yellow text color */
+}
+
+.cc-link:hover {
+    text-decoration: none; /* Remove underline on hover */
+}
+

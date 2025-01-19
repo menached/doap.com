@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.1/cookieconsent.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.1/cookieconsent.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css2?family=Marvel&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Marvel:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script type="module" src="/inc/js/headerManager.js" defer></script>
     <script type="module" src="/inc/js/formHandler.js" defer></script>
@@ -31,3 +31,24 @@
     <link rel="stylesheet" href="/inc/css/zipFormStyle.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?php include('/inc/php/og_meta.php'); ?>
+
+<script>
+    import { subdomainData } from './data.js'; // Ensure this path is correct
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const hostname = window.location.hostname.split('.')[0].toLowerCase();
+
+        let title = "Norcal Doap"; // Default title
+        if (hostname === "localhost") {
+            title = "Developing Doap";
+        } else {
+            const subdomainInfo = subdomainData.find(entry => entry.subdomain === hostname);
+            if (subdomainInfo && subdomainInfo.city) {
+                title = `${subdomainInfo.city} Doap`;
+            }
+        }
+
+        document.title = title;
+        console.log(`Document title set to: "${title}"`);
+    });
+</script>
