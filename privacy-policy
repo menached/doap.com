@@ -4,15 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Doap Privacy Policy - Your Privacy Matters">
-    <title>Privacy Policy - Doap</title>
+    <title id="page-title">Privacy Policy - DOAP</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="inc/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Marvel&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            /* background-color: #f8f9fa; */
             background-color: #fff;
             color: #333;
         }
@@ -25,6 +25,7 @@
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
         h1, h2 {
+            font-family: 'Marvel', sans-serif;
             text-align: center;
             color: #007BFF;
         }
@@ -61,6 +62,33 @@
     </style>
 </head>
 <body>
+    <script>
+        const domainsInfo = {
+            "alamo.doap.com": {
+                city: "Alamo",
+                phone: "833-289-3627",
+                description: "Delivering Organic Awesome Pot"
+            },
+            "walnutcreek.doap.com": {
+                city: "Walnut Creek",
+                phone: "833-289-3627",
+                description: "Delivering Organic Awesome Pot"
+            },
+            "dublin.doap.com": {
+                city: "Dublin",
+                phone: "833-289-3627",
+                description: "Delivering Organic Awesome Pot"
+            }
+        };
+
+        const currentDomain = window.location.hostname;
+        const siteInfo = domainsInfo[currentDomain] || { city: "Doap", phone: "833-289-3627", description: "Delivering Organic Awesome Pot" };
+
+        document.getElementById("page-title").innerText = `Privacy Policy - ${siteInfo.city}`;
+        document.getElementById("cityName").innerText = siteInfo.city;
+        document.querySelector(".menu-title-text").innerText = siteInfo.description;
+    </script>
+
     <!-- Header Section -->
     <div class="header" style="background-color:#fff;">
         <div class="logo-title-container">
@@ -71,7 +99,7 @@
                 <a class="nodec" href="/simple.php" target="_SELF">
                     <h1 id="cityName">Doap</h1>
                 </a>
-                <a href="tel:8332893627" class="phone-number nodec">833-289-3627</a>
+                <a href="tel:8332893627" class="phone-number nodec" id="phone-number">833-289-3627</a>
             </div>
         </div>
         <div class="menu-title nodec">
@@ -105,7 +133,7 @@
         </ul>
         <h2><i class="fas fa-phone-alt"></i> Need Assistance?</h2>
         <p>
-            Have questions? Reach out to us at <a href="tel:8332893627">833-289-3627</a>, and we’ll be happy to help. Your privacy is our promise.
+            Have questions? Reach out to us at <a href="tel:8332893627" id="phone-number-link">833-289-3627</a>, and we’ll be happy to help. Your privacy is our promise.
         </p>
         <div class="footer">
             <p>Thank you for choosing DOAP! <a href="/simple.php">Return to Home</a></p>

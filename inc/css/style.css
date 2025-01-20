@@ -53,6 +53,11 @@ button:disabled {
     outline: none;
 }
 
+.customer-info input,
+.customer-info textarea{
+    font-family: 'Poppins'!important;
+}
+
 
 .orderInfo { 
     padding:10px; 
@@ -144,7 +149,17 @@ button:disabled {
 }
 
 
-h1, h2, h3, .Marvelfont {
+h1, h2, h3, h4 {
+    font-family: 'Marvel', sans-serif; /* Apply Marvel font to tab text */
+    font-size: 1.2em;
+}
+
+label {
+    font-size: 1.4em;
+    font-weight: 700;
+}
+
+.Marvelfont {
     font-family: 'Marvel', sans-serif; /* Apply Marvel font to tab text */
 }
 
@@ -168,7 +183,7 @@ h3 {font-size:1.8em;font-weight: bold;}
 /* Body and General Styling */
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
+    font-family: 'Poppins', sans-serif;
     line-height: 1.6;
     background-color: #ffffff;
     color: #333;
@@ -399,7 +414,7 @@ body {
     color: #333;
     padding: 20px 10px;
     text-align: center;
-    font-family: 'Marvel', Arial, sans-serif;
+    font-family: 'Marvel', sans-serif;
     font-size: 0.9rem;
     border-top: 0px solid #ddd;
 }

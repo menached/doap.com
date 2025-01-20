@@ -11,6 +11,7 @@
     justify-content: center;
     max-width: 1290px; /* Match the width of `.zip-form-container` */
     margin-bottom: 10px;
+    font-family: 'Poppins', sans-serif;
 }
 
 
@@ -24,7 +25,7 @@
     background-color: darkgreen;
     color: #fff;
     font-weight: 700;
-    font-family: Marvel;
+    font-family: Marvel, sans-serif;
     border: none;           /* Remove border */
     border-radius: 10px;    /* Rounded corners */
     cursor: pointer;        /* Pointer cursor for interactivity */
@@ -83,13 +84,29 @@
 }
 
 /* Payment Label */
-.payment-section label {
+.payment-section label, 
+.customer-info label {
+    font-family: 'Poppins', sans-serif;
     font-weight: bold;
     font-size: 1rem;
     display: block;
     margin-bottom: 10px;
     color: #333;
 }
+
+.item-quantity label{
+    font-size:.7em;
+}
+
+#cartContainer > div.orderInfo > div.customer-info > div:nth-child(4) > label { font-size : 1.2em;}
+
+.customer-info input,
+.customer-info textarea,
+.payment-section select {
+    font-family: 'Poppins', sans-serif; /* Use Poppins for form fields */
+}
+
+
 
 /* Payment Select */
 .payment-section select {
@@ -146,6 +163,11 @@
 .customer-info label {
     font-family: Marvel;
     font-weight: bold; /* Improve label readability */
+}
+.customer-info input,
+.customer-info textarea,
+.payment-section select {
+    font-family: 'Poppins', sans-serif;/* Consistent smaller font size for inputs */
 }
 
 @media (min-width: 769px) {
@@ -249,6 +271,13 @@
 
 
 
+.accordion-section h3,
+#CODHelp h3,
+#creditCardForm h3,
+#cryptoWallets h3,
+#generalHelp h3 {
+    font-family: 'Marvel', sans-serif; /* Apply Marvel font for section titles */
+}
 
 
 
