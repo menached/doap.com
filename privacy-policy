@@ -97,7 +97,7 @@
             </a>
             <div class="text-container">
                 <a class="nodec" href="/simple.php" target="_SELF">
-                    <h1 id="cityName">Doap</h1>
+                    <h1 id="cityName" class="marvel-font">Doap</h1>
                 </a>
                 <a href="tel:8332893627" class="phone-number nodec" id="phone-number">833-289-3627</a>
             </div>

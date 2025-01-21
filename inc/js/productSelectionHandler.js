@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Handle empty cart
         if (cartData.length === 0) {
-            selectedItemsList.innerHTML = `<span class="no-items">No items selected yet.</span>`;
+            selectedItemsList.innerHTML = `<span class="no-items">Cart empty.</span>`;
             selectedItemsList.classList.add("empty");
             minOrderMessage.textContent = `Minimum order is $${minimumOrderValue.toFixed(2)}.`;
             minOrderMessage.style.color = "red";

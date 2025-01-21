@@ -183,3 +183,201 @@ document.addEventListener("DOMContentLoaded", () => {
         console.log(`Document title set to: "${title}"`);
     });
 
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    const copyElements = document.querySelectorAll(".copy-address");
+    const copyMessage = document.getElementById("copyMessage");
+
+    copyElements.forEach(element => {
+        element.addEventListener("click", () => {
+            const address = element.getAttribute("data-address");
+
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(address)
+                    .then(() => {
+                        showCopyFeedback("Address copied!", element);
+                    })
+                    .catch(err => {
+                        console.error("Error copying text: ", err);
+                    });
+            } else {
+                // Fallback for older browsers
+                const textArea = document.createElement("textarea");
+                textArea.value = address;
+                document.body.appendChild(textArea);
+                textArea.select();
+                try {
+                    document.execCommand("copy");
+                    showCopyFeedback("Address copied!", element);
+                } catch (err) {
+                    console.error("Error copying text: ", err);
+                }
+                document.body.removeChild(textArea);
+            }
+        });
+    });
+
+    function showCopyFeedback(message, element) {
+        if (copyMessage) {
+            copyMessage.textContent = message;
+            copyMessage.style.display = "block";
+
+            setTimeout(() => {
+                copyMessage.style.display = "none";
+            }, 2000);
+        }
+
+        element.style.color = "green";
+        element.style.fontWeight = "bold";
+
+        setTimeout(() => {
+            element.style.color = "";
+            element.style.fontWeight = "";
+        }, 2000);
+    }
+});
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    const button = document.getElementById("checkoutButton");
+    const modal = document.getElementById("hoverModal");
+
+    button.addEventListener("mouseenter", () => {
+        if (button.disabled) {
+            const rect = button.getBoundingClientRect();
+            modal.style.display = "block";
+            modal.style.top = `${rect.top - modal.offsetHeight}px`;
+            modal.style.left = `${rect.left + rect.width / 2 - modal.offsetWidth / 2}px`;
+        }
+    });
+
+    button.addEventListener("mouseleave", () => {
+        modal.style.display = "none";
+    });
+});
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    const cartContainer = document.getElementById("cartContainer");
+    const cartItemsList = document.getElementById("selectedItemsList");
+    const totalElement = document.getElementById("total");
+
+    // Helper function to toggle visibility
+    function updateCartVisibility() {
+        const total = parseFloat(totalElement.textContent.replace("$", "")) || 0;
+        if (total > 0) {
+            cartContainer.style.display = "block"; // Show cart
+        } else {
+            cartContainer.style.display = "none"; // Hide cart
+        }
+    }
+
+    // Listen for changes in the cart total
+    const observer = new MutationObserver(() => {
+        updateCartVisibility(); // Update visibility when cart total changes
+    });
+
+    if (totalElement) {
+        observer.observe(totalElement, { childList: true, subtree: true });
+    }
+
+    // Example: Adding items to the cart
+    const addToCartButtons = document.querySelectorAll(".add-to-cart-button");
+    addToCartButtons.forEach(button => {
+        button.addEventListener("click", () => {
+            // Update the cart total dynamically for demonstration
+            const currentTotal = parseFloat(totalElement.textContent.replace("$", "")) || 0;
+            const itemPrice = parseFloat(button.getAttribute("data-price"));
+            totalElement.textContent = `$${(currentTotal + itemPrice).toFixed(2)}`;
+        });
+    });
+
+    // Initial visibility check
+    updateCartVisibility();
+});
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    const cartContainer = document.getElementById("cartContainer");
+    const addToCartButtons = document.querySelectorAll(".add-to-cart-button");
+
+    addToCartButtons.forEach(button => {
+        button.addEventListener("click", () => {
+            // Optional: Update cart total or add the item to the cart here
+            
+            // Scroll to the cart container
+            cartContainer.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+    });
+});
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    const productImages = document.querySelectorAll(".product .item img");
+    const modalOverlay = document.createElement("div");
+    const modal = document.createElement("div");
+
+    modalOverlay.className = "product-modal-overlay";
+    modal.className = "product-modal";
+
+    modal.innerHTML = `
+        <button class="product-modal-close">&times;</button>
+        <img src="" alt="Product Image" />
+        <h3></h3>
+        <p></p>
+    `;
+
+    document.body.appendChild(modalOverlay);
+    document.body.appendChild(modal);
+
+    const closeModal = () => {
+        modalOverlay.style.display = "none";
+        modal.style.display = "none";
+    };
+
+    modalOverlay.addEventListener("click", closeModal);
+    modal.querySelector(".product-modal-close").addEventListener("click", closeModal);
+
+    productImages.forEach(image => {
+        const product = image.closest(".item");
+        const title = product.querySelector(".item-title").textContent;
+        const description = product.dataset.description;
+
+        const showModal = () => {
+            modal.querySelector("img").src = image.src;
+            modal.querySelector("h3").textContent = title;
+            modal.querySelector("p").innerHTML = description;
+
+            modal.style.display = "block";
+            modalOverlay.style.display = "block";
+
+            // Ensure the modal is centered
+            modal.style.top = "50%";
+            modal.style.left = "50%";
+            modal.style.transform = "translate(-50%, -50%)";
+        };
+
+        // For mobile and desktop: Use click for showing the modal
+        image.addEventListener("click", showModal);
+
+        // For desktop only: Use hover for showing the modal
+        if (!isMobileDevice()) {
+            image.addEventListener("mouseenter", showModal); // Desktop hover
+            image.addEventListener("mouseleave", closeModal); // Hide modal on mouse leave
+        }
+    });
+
+    // Utility function to detect mobile devices
+    function isMobileDevice() {
+        return /Mobi|Android|iPhone|iPad|iPod/.test(navigator.userAgent);
+    }
+});
+
+
+
+
