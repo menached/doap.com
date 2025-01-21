@@ -319,9 +319,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 document.addEventListener("DOMContentLoaded", () => {
-    const productImages = document.querySelectorAll(".product .item img");
+    const magnifyIcons = document.querySelectorAll(".magnify-icon");
     const modalOverlay = document.createElement("div");
     const modal = document.createElement("div");
+
+    const cart = []; // Array to store cart items
 
     modalOverlay.className = "product-modal-overlay";
     modal.className = "product-modal";
@@ -341,8 +343,8 @@ document.addEventListener("DOMContentLoaded", () => {
         modal.style.display = "none";
     };
 
-    const showModal = (image, title, description) => {
-        modal.querySelector("img").src = image.src;
+    const showModal = (imageSrc, title, description) => {
+        modal.querySelector("img").src = imageSrc;
         modal.querySelector("h3").textContent = title;
         modal.querySelector("p").innerHTML = description;
 
@@ -354,13 +356,14 @@ document.addEventListener("DOMContentLoaded", () => {
         modal.style.transform = "translate(-50%, -50%)";
     };
 
-    productImages.forEach(image => {
-        const product = image.closest(".item");
+    magnifyIcons.forEach(icon => {
+        const product = icon.closest(".item");
+        const imageSrc = product.querySelector("img").src;
         const title = product.querySelector(".item-title").textContent;
         const description = product.dataset.description;
 
-        image.addEventListener("mouseenter", () => showModal(image, title, description));
-        image.addEventListener("mouseleave", (event) => {
+        icon.addEventListener("mouseenter", () => showModal(imageSrc, title, description));
+        icon.addEventListener("mouseleave", (event) => {
             const relatedElement = event.relatedTarget;
             if (!modal.contains(relatedElement) && relatedElement !== modalOverlay) {
                 closeModal();
@@ -369,7 +372,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         modal.addEventListener("mouseleave", (event) => {
             const relatedElement = event.relatedTarget;
-            if (!image.contains(relatedElement) && relatedElement !== modalOverlay) {
+            if (!icon.contains(relatedElement) && relatedElement !== modalOverlay) {
                 closeModal();
             }
         });
@@ -377,6 +380,57 @@ document.addEventListener("DOMContentLoaded", () => {
 
     modalOverlay.addEventListener("click", closeModal);
     modal.querySelector(".product-modal-close").addEventListener("click", closeModal);
+
+    const weightSelectors = document.querySelectorAll(".weight-select");
+    const addToCartButtons = document.querySelectorAll(".add-to-cart-button");
+
+    weightSelectors.forEach((weightSelect) => {
+        const priceDisplay = weightSelect.closest(".item-details").querySelector(".item-price");
+        const addToCartButton = weightSelect.closest(".item-details").querySelector(".add-to-cart-button");
+
+        const updatePrice = () => {
+            const selectedOption = weightSelect.options[weightSelect.selectedIndex];
+            const unitPrice = parseFloat(selectedOption.dataset.price);
+
+            // Update the price display and add-to-cart button
+            priceDisplay.textContent = `$${unitPrice.toFixed(2)}`;
+            addToCartButton.dataset.price = unitPrice.toFixed(2);
+            addToCartButton.dataset.weight = selectedOption.value; // Update the weight in data attributes
+        };
+
+        weightSelect.addEventListener("change", updatePrice);
+
+        // Initial price calculation
+        updatePrice();
+    });
+
+    addToCartButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+            const productName = button.dataset.productName;
+            const productWeight = button.dataset.weight;
+            const productPrice = button.dataset.price;
+
+            // Construct the item title for the cart
+            const cartItemTitle = `${productName} - ${productWeight} grams`;
+
+            // Check if this specific weight is already in the cart
+            const existingCartItem = cart.find(
+                (item) => item.title === cartItemTitle && item.price === productPrice
+            );
+
+            if (existingCartItem) {
+                // Increment quantity if the same weight exists
+                existingCartItem.quantity += 1;
+            } else {
+                // Add a new item to the cart
+                cart.push({ title: cartItemTitle, quantity: 1, price: productPrice });
+            }
+
+            // Log the cart to the console (or update the UI in real use cases)
+            console.log("Cart:", cart);
+            alert(`Added ${cartItemTitle} for $${productPrice} to the cart.`);
+        });
+    });
 });
 
 

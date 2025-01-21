@@ -4,41 +4,60 @@
     <div class="item-list">
 
         <div class="product flash">
-            <label class="item" data-description="<p>Dive into a bowl of this <span class=marvel-font-bold>DOAP</span> strain Red Velvet Zoap, highly crystalized and beautifully trimmed, this one combines smoothness with delicious flavors and a potent uplifting buzz.</p>"> 
-                <input type="checkbox" name="item" value="Top Shelf Hydro">
-                <img src="/images/products/flower/hyrdoponic-flower.webp" alt="Top Shelf Hydro">
+            <label class="item" data-description="<p>Dive into a bowl of this <span class=marvel-font-bold>DOAP</span> strain Red Velvet Zoap, highly crystalized and beautifully trimmed, this one combines smoothness with delicious flavors and a potent uplifting buzz.</p>">
+                <input type="checkbox" name="item" value="Top Shelf Hydro" hidden>
+                <div class="image-container">
+                    <img src="/images/products/flower/hyrdoponic-flower.webp" alt="Top Shelf Hydro">
+                </div>
                 <div class="item-details">
                     <p class="item-title">Top Shelf Hydro</p>
                     <div class="item-weight">
-                        <label for="weight-select">Weight:</label>
-                        <select id="weight-select" class="weight-select">
+                        <label for="weight-select-hydro">Weight:</label>
+                        <select id="weight-select-hydro" class="weight-select">
                             <option value="3.5" data-price="50">3.5 grams - $50</option>
                             <option value="7" data-price="90">7 grams - $90</option>
                             <option value="14" data-price="150">14 grams - $150</option>
                             <option value="28" data-price="250">28 grams - $250</option>
                         </select>
                     </div>
-                    <div class="item-quantity product-quantity-size">
-                        <input type="hidden" id="quantity-top-shelf-hydro" class="quantity" value="1" name="quantity-top-shelf-hydro">
-                    </div>
+                    <input type="number" id="quantity-top-shelf-hydro" class="quantity" value="1" hidden>
                     <p class="item-price" id="price-top-shelf-hydro">$50.00</p>
-                    <span class="add-to-cart-button" data-product-name="Top Shelf Hydro" data-price="50">Add to Cart</span>
+                    <div class="action-buttons">
+                        <span class="add-to-cart-button" data-product-name="Top Shelf Hydro" data-price="50" data-weight="3.5">Add to Cart</span>
+                        <span class="magnify-icon">
+                            <i class="fas fa-magnifying-glass"></i>
+                        </span>
+                    </div>
                 </div>
             </label>
         </div>
 
+
         <div class="product flash">
             <label class="item" data-description="Get the best value with our Small Bud Special, offering <span class='marvel-font-bold'>DOAP</span> flavor and potency in every ounce.">
-                <input type="checkbox" name="item" value="Small Bud Special|115">
-                <img src="/images/products/flower/small-bud-special.webp" alt="Small Bud Special">
+                <input type="checkbox" name="item" value="Small Bud Special|115" hidden>
+                <div class="image-container">
+                    <img src="/images/products/flower/small-bud-special.webp" alt="Small Bud Special">
+                </div>
                 <div class="item-details">
                     <p class="item-title">Small Bud Special</p>
-                    <div class="item-quantity product-quantity-size">
-                        <label for="quantity-small-bud-special" >Qty:</label>
-                        <input type="number" id="quantity-small-bud-special" class="quantity" min="1" max="99" value="1" name="quantity-premium-prerolls">
+                    <div class="item-weight">
+                        <label for="weight-select-small-bud">Weight:</label>
+                        <select id="weight-select-small-bud" class="weight-select">
+                            <option value="3.5" data-price="50">3.5 grams - $50</option>
+                            <option value="7" data-price="90">7 grams - $90</option>
+                            <option value="14" data-price="150">14 grams - $150</option>
+                            <option value="28" data-price="250">28 grams - $250</option>
+                        </select>
                     </div>
-                    <p class="item-price">$75.00</p>
-                    <span class="add-to-cart-button" data-product-name="Small Bud Special" data-price="75">Add to Cart</span>
+                    <input type="number" id="quantity-small-bud-special" class="quantity" value="1" hidden>
+                    <p class="item-price" id="price-small-bud-special">$50.00</p>
+                    <div class="action-buttons">
+                        <span class="add-to-cart-button" data-product-name="Small Bud Special" data-price="50" data-weight="3.5">Add to Cart</span>
+                        <span class="magnify-icon">
+                            <i class="fas fa-magnifying-glass"></i>
+                        </span>
+                    </div>
                 </div>
             </label>
         </div>

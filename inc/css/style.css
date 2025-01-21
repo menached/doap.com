@@ -4,9 +4,6 @@ body, h2, input, button, footer {
     padding: 0;
 }
 
-
-
-
 /* General Modal Styling */
 .product-modal {
     position: fixed;
@@ -89,6 +86,57 @@ body, h2, input, button, footer {
     }
 }
 
+
+
+/* Action buttons container */
+.action-buttons {
+    display: flex;
+    justify-content: center; /* Center-align the buttons */
+    align-items: center;
+    gap: 10px; /* Add space between buttons */
+    margin-top: 10px;
+}
+
+.add-to-cart-button {
+    background-color: #007bff; /* Blue button */
+    color: white;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease;
+}
+
+.add-to-cart-button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Position the magnify icon */
+.magnify-icon {
+    background-color: rgba(0, 0, 0, 0.7); /* Dark semi-transparent background */
+    color: #fff; /* White icon */
+    border-radius: 50%;
+    padding: 8px; /* Increase padding for better visual appearance */
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.magnify-icon:hover {
+    background-color: rgba(255, 255, 255, 0.9); /* Light background on hover */
+    color: #000; /* Black icon on hover */
+    transform: scale(1.1); /* Slightly enlarge on hover */
+}
+
+.magnify-icon i {
+    font-size: 16px; /* Adjust icon size */
+}
+
+
+
 /* Portrait Mode Adjustments */
 @media (max-width: 768px) and (orientation: portrait) {
     .product-modal {
@@ -100,6 +148,18 @@ body, h2, input, button, footer {
 
 
 
+
+
+
+.image-container {
+    position: relative; /* Create a positioning context */
+}
+
+
+/* Hide the quantity input */
+.quantity {
+    display: none;
+}
 
 
 input[type="checkbox"] {
@@ -775,22 +835,6 @@ font-size:.8em;
     border-radius: 5px;
 }
 
-/* Remove hover effect */
-.add-to-cart-button {
-    background-color: #007BFF; /* Default background color */
-    color: white;
-    padding: 10px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    text-align: center;
-    font-size: 1rem;
-    transition: background-color 0.3s ease; /* Smooth background transition */
-}
-
-.add-to-cart-button:hover {
-    background-color: #007BFF; /* Keep the same background color on hover */
-    color: white; /* Keep the same text color */
-}
 
 /* Click effect (flash when clicked) */
 .add-to-cart-button:active {
