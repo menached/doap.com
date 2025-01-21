@@ -9,12 +9,20 @@
                 <img src="/images/products/flower/hyrdoponic-flower.webp" alt="Top Shelf Hydro">
                 <div class="item-details">
                     <p class="item-title">Top Shelf Hydro</p>
-                    <div class="item-quantity product-quantity-size">
-                        <label for="quantity-top-shelf-hydro" >Qty:</label>
-                        <input type="number" id="quantity-top-shelf-hydro" class="quantity" min="1" max="99" value="1" name="quantity-premium-prerolls">
+                    <div class="item-weight">
+                        <label for="weight-select">Weight:</label>
+                        <select id="weight-select" class="weight-select">
+                            <option value="3.5" data-price="50">3.5 grams - $50</option>
+                            <option value="7" data-price="90">7 grams - $90</option>
+                            <option value="14" data-price="150">14 grams - $150</option>
+                            <option value="28" data-price="250">28 grams - $250</option>
+                        </select>
                     </div>
-                    <p class="item-price">$75.00</p>
-                    <span class="add-to-cart-button" data-product-name="Top Shelf Hydro" data-price="75">Add to Cart</span>
+                    <div class="item-quantity product-quantity-size">
+                        <input type="hidden" id="quantity-top-shelf-hydro" class="quantity" value="1" name="quantity-top-shelf-hydro">
+                    </div>
+                    <p class="item-price" id="price-top-shelf-hydro">$50.00</p>
+                    <span class="add-to-cart-button" data-product-name="Top Shelf Hydro" data-price="50">Add to Cart</span>
                 </div>
             </label>
         </div>

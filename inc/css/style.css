@@ -7,7 +7,7 @@ body, h2, input, button, footer {
 
 
 
-/* Modal Styling */
+/* General Modal Styling */
 .product-modal {
     position: fixed;
     top: 50%;
@@ -19,9 +19,11 @@ body, h2, input, button, footer {
     padding: 15px;
     width: 80%; /* Default width */
     max-width: 400px;
+    max-height: 90%; /* Ensure the modal doesn't exceed the viewport height */
+    overflow-y: auto; /* Enable scrolling for content */
     z-index: 1000;
-    display: none; /* Hidden by default */
     text-align: center;
+    display: none; /* Hidden by default */
 }
 
 .product-modal img {
@@ -65,46 +67,34 @@ body, h2, input, button, footer {
     color: #333;
 }
 
-/* Responsive Adjustments */
-@media (max-width: 768px) and (orientation: portrait) {
+/* Landscape Mode Adjustments */
+@media (max-width: 768px) and (orientation: landscape) {
     .product-modal {
-        width: 90%; /* Shrink width for portrait mobile */
-        max-width: none; /* Disable max width */
+        width: 70%; /* Shrink width for landscape mode */
+        max-height: 80%; /* Reduce height for landscape */
         padding: 10px; /* Reduce padding */
     }
 
     .product-modal img {
-        width: 80%; /* Reduce image size */
+        width: 70%; /* Adjust image size */
         margin: 0 auto 10px; /* Center image */
     }
 
     .product-modal h3 {
-        font-size: 1.2rem; /* Smaller title font */
+        font-size: 1.2rem; /* Adjust font size for title */
     }
 
     .product-modal p {
-        font-size: 0.9rem; /* Smaller paragraph font */
+        font-size: 0.9rem; /* Adjust font size for description */
     }
 }
 
-@media (max-width: 768px) and (orientation: landscape) {
+/* Portrait Mode Adjustments */
+@media (max-width: 768px) and (orientation: portrait) {
     .product-modal {
-        width: 70%; /* Further shrink width for landscape mode */
-        max-width: none; /* Disable max width */
-        padding: 8px; /* Reduce padding */
-    }
-
-    .product-modal img {
-        width: 70%; /* Reduce image size further */
-        margin: 0 auto 8px; /* Center image */
-    }
-
-    .product-modal h3 {
-        font-size: 1rem; /* Smaller title font */
-    }
-
-    .product-modal p {
-        font-size: 0.8rem; /* Smaller paragraph font */
+        width: 90%;
+        max-height: 90%;
+        padding: 15px;
     }
 }
 

@@ -317,6 +317,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
+
 document.addEventListener("DOMContentLoaded", () => {
     const productImages = document.querySelectorAll(".product .item img");
     const modalOverlay = document.createElement("div");
@@ -340,44 +341,69 @@ document.addEventListener("DOMContentLoaded", () => {
         modal.style.display = "none";
     };
 
-    modalOverlay.addEventListener("click", closeModal);
-    modal.querySelector(".product-modal-close").addEventListener("click", closeModal);
+    const showModal = (image, title, description) => {
+        modal.querySelector("img").src = image.src;
+        modal.querySelector("h3").textContent = title;
+        modal.querySelector("p").innerHTML = description;
+
+        modal.style.display = "block";
+        modalOverlay.style.display = "block";
+
+        modal.style.top = "50%";
+        modal.style.left = "50%";
+        modal.style.transform = "translate(-50%, -50%)";
+    };
 
     productImages.forEach(image => {
         const product = image.closest(".item");
         const title = product.querySelector(".item-title").textContent;
         const description = product.dataset.description;
 
-        const showModal = () => {
-            modal.querySelector("img").src = image.src;
-            modal.querySelector("h3").textContent = title;
-            modal.querySelector("p").innerHTML = description;
+        image.addEventListener("mouseenter", () => showModal(image, title, description));
+        image.addEventListener("mouseleave", (event) => {
+            const relatedElement = event.relatedTarget;
+            if (!modal.contains(relatedElement) && relatedElement !== modalOverlay) {
+                closeModal();
+            }
+        });
 
-            modal.style.display = "block";
-            modalOverlay.style.display = "block";
-
-            // Ensure the modal is centered
-            modal.style.top = "50%";
-            modal.style.left = "50%";
-            modal.style.transform = "translate(-50%, -50%)";
-        };
-
-        // For mobile and desktop: Use click for showing the modal
-        image.addEventListener("click", showModal);
-
-        // For desktop only: Use hover for showing the modal
-        if (!isMobileDevice()) {
-            image.addEventListener("mouseenter", showModal); // Desktop hover
-            image.addEventListener("mouseleave", closeModal); // Hide modal on mouse leave
-        }
+        modal.addEventListener("mouseleave", (event) => {
+            const relatedElement = event.relatedTarget;
+            if (!image.contains(relatedElement) && relatedElement !== modalOverlay) {
+                closeModal();
+            }
+        });
     });
 
-    // Utility function to detect mobile devices
-    function isMobileDevice() {
-        return /Mobi|Android|iPhone|iPad|iPod/.test(navigator.userAgent);
-    }
+    modalOverlay.addEventListener("click", closeModal);
+    modal.querySelector(".product-modal-close").addEventListener("click", closeModal);
 });
 
 
 
+
+document.addEventListener("DOMContentLoaded", () => {
+    const weightSelect = document.getElementById("weight-select");
+    const quantityInput = document.getElementById("quantity-top-shelf-hydro");
+    const priceDisplay = document.getElementById("price-top-shelf-hydro");
+    const addToCartButton = document.querySelector(".add-to-cart-button");
+
+    const updatePrice = () => {
+        const selectedOption = weightSelect.options[weightSelect.selectedIndex];
+        const unitPrice = parseFloat(selectedOption.dataset.price); // Get price from selected option
+        const quantity = parseInt(quantityInput.value, 10) || 1; // Default to 1 if input is invalid
+        const totalPrice = unitPrice * quantity;
+
+        // Update the price display and add-to-cart button
+        priceDisplay.textContent = `$${totalPrice.toFixed(2)}`;
+        addToCartButton.dataset.price = totalPrice.toFixed(2);
+    };
+
+    // Add event listeners
+    weightSelect.addEventListener("change", updatePrice);
+    quantityInput.addEventListener("input", updatePrice);
+
+    // Initial price calculation
+    updatePrice();
+});
 
