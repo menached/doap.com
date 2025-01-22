@@ -4,6 +4,20 @@ body, h2, input, button, footer {
     padding: 0;
 }
 
+.discover-other-awesome-places {
+    max-width: 1300px; /* Ensure the paragraph doesn't exceed the max width */
+    text-align: center;
+    margin: 0 auto; /* Center the paragraph */
+    padding: 0px 15px 15px 15px; /* Top: 30px, Right: 5px, Bottom: 25px, Left: 5px */
+    padding: 10px 0; /* Reduce padding */
+    gap: 10px; /* Less gap between tabs */
+    margin: 0 auto;
+    background: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
 .item-quantity select {
     padding: 5px;
     font-size: 1rem;
@@ -186,9 +200,8 @@ button:disabled {
     /*border:2px dashed #ff0000;*/
     /*background-color:#fff;*/
     padding: 0px 15px 15px 15px; /* Top: 30px, Right: 5px, Bottom: 25px, Left: 5px */
-    margin: 0px 5px 0px 5px; /* Top: 30px, Right: 5px, Bottom: 25px, Left: 5px */
+    margin: 0px 5px 20px 5px; /* Top: 30px, Right: 5px, Bottom: 25px, Left: 5px */
     /*border-radius:8px;*/
-    margin: 0px 0px 20px 0px;
 }
 
 /* Center alignment for the header */

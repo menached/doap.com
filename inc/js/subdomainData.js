@@ -7,6 +7,12 @@ export const weightBasedProducts = {
             8: { label: "1 oz. (28 grams)", price: 250 },
         },
     },
+    "Small Bud Special": {
+        weights: {
+            4: { label: "1/2 oz. (14 grams)", price: 75 },
+            8: { label: "1 oz. (28 grams)", price: 150 },
+        },
+    },
 };
 
 
