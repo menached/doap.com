@@ -66,6 +66,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Function to add an item to the cart
+    // Function to add an item to the cart
     function addToCart(button) {
         const product = button.closest(".product");
         const productName = button.getAttribute("data-product-name");
