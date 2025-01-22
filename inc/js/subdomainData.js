@@ -1,3 +1,17 @@
+export const weightBasedProducts = {
+    "Top Shelf Hydro": {
+        weights: {
+            1: { label: "1/8 oz. (3.5 grams)", price: 50 },
+            2: { label: "1/4 oz. (7 grams)", price: 90 },
+            4: { label: "1/2 oz. (14 grams)", price: 150 },
+            8: { label: "1 oz. (28 grams)", price: 250 },
+        },
+    },
+};
+
+
+
+
 export const subdomainData = [
     {
         subdomain: "alamo",

@@ -66,7 +66,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Function to add an item to the cart
-    // Function to add an item to the cart
     function addToCart(button) {
         const product = button.closest(".product");
         const productName = button.getAttribute("data-product-name");
@@ -129,4 +128,31 @@ document.addEventListener("DOMContentLoaded", () => {
     updateButtonState();
     updateCartDisplay();
 });
+
+
+
+
+function renderProductQuantityOptions(productName, quantityElement) {
+    if (weightBasedProducts[productName]) {
+        const weights = weightBasedProducts[productName].weights;
+
+        // Clear existing options
+        quantityElement.innerHTML = "";
+
+        // Add weight-based options
+        for (const [key, value] of Object.entries(weights)) {
+            const option = document.createElement("option");
+            option.value = key;
+            option.textContent = `${value.label} - $${value.price}`;
+            option.setAttribute("data-price", value.price);
+            quantityElement.appendChild(option);
+        }
+    } else {
+        // Default fallback for products without weight-based options
+        quantityElement.innerHTML = `
+            <option value="1" data-price="50">1</option>
+            <option value="2" data-price="100">2</option>
+        `;
+    }
+}
 
