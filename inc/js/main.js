@@ -319,3 +319,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
+document.addEventListener("DOMContentLoaded", () => {
+    const quantitySelect = document.getElementById("quantity-top-shelf-hydro");
+    const itemPriceElement = document.querySelector(".item-price");
+    const addToCartButton = document.querySelector(".add-to-cart-button");
+
+    quantitySelect.addEventListener("change", () => {
+        const selectedOption = quantitySelect.options[quantitySelect.selectedIndex];
+        const selectedPrice = selectedOption.getAttribute("data-price");
+
+        // Update the price display
+        itemPriceElement.textContent = `$${selectedPrice}`;
+        itemPriceElement.setAttribute("data-base-price", selectedPrice);
+
+        // Update the Add to Cart button data
+        addToCartButton.setAttribute("data-price", selectedPrice);
+    });
+});
+

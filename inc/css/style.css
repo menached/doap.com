@@ -4,6 +4,15 @@ body, h2, input, button, footer {
     padding: 0;
 }
 
+.item-quantity select {
+    padding: 5px;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+
+
 /*.add-to-cart-button.disabled {*/
     /*background-color: #ccc;*/
     /*color: #666;*/

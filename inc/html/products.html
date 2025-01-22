@@ -10,11 +10,13 @@
                 <div class="item-details">
                     <p class="item-title">Top Shelf Hydro</p>
                     <div class="item-quantity product-quantity-size">
-                        <label for="quantity-top-shelf-hydro"> 1/8 oz.(3.5g) Qty:</label>
-                        <input type="number" id="quantity-top-shelf-hydro" class="quantity" min="1" max="8" value="1" name="quantity-top-shelf-hydro">
-                        <span class="magnify-icon">
-                            <i class="fas fa-magnifying-glass"></i>
-                        </span>
+                        <label for="quantity-top-shelf-hydro"></label>
+                        <select id="quantity-top-shelf-hydro" class="quantity" name="quantity-top-shelf-hydro">
+                            <option value="1" data-price="50">1/8 oz. (3.5 grams)</option>
+                            <option value="2" data-price="90">1/4 oz. (7 grams)</option>
+                            <option value="4" data-price="150">1/2 oz. (14 grams)</option>
+                            <option value="8" data-price="250">28 grams (1 oz.)</option>
+                        </select>
                     </div>
                     <p class="item-price" data-base-price="50">$50.00</p>
                     <span class="add-to-cart-button" data-product-name="Top Shelf Hydro" data-price="50">Add to Cart</span>
