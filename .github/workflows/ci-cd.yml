@@ -79,7 +79,7 @@ jobs:
           # aws s3 sync . s3://www.doap.com/ --exclude ".git/*"
 
           echo "Invalidating CloudFront cache..."
-          aws cloudfront create-invalidation --distribution-id E3MM919ZQPQJTL --paths "/*"
+          #aws cloudfront create-invalidation --distribution-id E3MM919ZQPQJTL --paths "/*"
 
       # Step 8: Debug Deployment
       - name: Debug Deployment
