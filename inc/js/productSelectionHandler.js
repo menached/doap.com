@@ -1,3 +1,5 @@
+import { weightBasedProducts } from './subdomainData.js';
+
 document.addEventListener("DOMContentLoaded", () => {
     const addToCartButtons = document.querySelectorAll(".add-to-cart-button");
 
@@ -132,14 +134,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-function renderProductQuantityOptions(productName, quantityElement) {
-    if (weightBasedProducts[productName]) {
-        const weights = weightBasedProducts[productName].weights;
+function renderProductQuantityOptions(productName, quantityElement, basePriceElement, addToCartButton) {
+    const productData = weightBasedProducts[productName];
+    if (productData && productData.weights) {
+        const weights = productData.weights;
 
         // Clear existing options
         quantityElement.innerHTML = "";
 
-        // Add weight-based options
+        // Populate dropdown options from weightBasedProducts
         for (const [key, value] of Object.entries(weights)) {
             const option = document.createElement("option");
             option.value = key;
@@ -147,12 +150,22 @@ function renderProductQuantityOptions(productName, quantityElement) {
             option.setAttribute("data-price", value.price);
             quantityElement.appendChild(option);
         }
+
+        // Attach change event listener to update the price
+        quantityElement.addEventListener("change", () => {
+            const selectedValue = quantityElement.value;
+            const selectedPrice = weights[selectedValue]?.price || basePriceElement.dataset.basePrice;
+
+            // Update displayed price
+            basePriceElement.textContent = `$${selectedPrice}`;
+            basePriceElement.setAttribute("data-base-price", selectedPrice);
+
+            // Update Add to Cart button data
+            if (addToCartButton) {
+                addToCartButton.setAttribute("data-price", selectedPrice);
+            }
+        });
     } else {
-        // Default fallback for products without weight-based options
-        quantityElement.innerHTML = `
-            <option value="1" data-price="50">1</option>
-            <option value="2" data-price="100">2</option>
-        `;
+        console.warn(`No weight-based options found for product: ${productName}`);
     }
 }
-
