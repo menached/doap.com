@@ -188,4 +188,3 @@ document.addEventListener("DOMContentLoaded", () => {
     updateCartDisplay();
     attachAddToCartListeners();  // Attach "Add to Cart" button listeners
 });
-

@@ -301,163 +301,151 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-document.addEventListener("DOMContentLoaded", () => {
-    const cartContainer = document.getElementById("cartContainer");
-    const addToCartButtons = document.querySelectorAll(".add-to-cart-button");
+//document.addEventListener("DOMContentLoaded", () => {
+    //const cartContainer = document.getElementById("cartContainer");
+    //const addToCartButtons = document.querySelectorAll(".add-to-cart-button");
 
-    addToCartButtons.forEach(button => {
-        button.addEventListener("click", () => {
-            // Optional: Update cart total or add the item to the cart here
+    //addToCartButtons.forEach(button => {
+        //button.addEventListener("click", () => {
+            //// Optional: Update cart total or add the item to the cart here
             
-            // Scroll to the cart container
-            cartContainer.scrollIntoView({ behavior: "smooth", block: "start" });
-        });
-    });
-});
+            //// Scroll to the cart container
+            //cartContainer.scrollIntoView({ behavior: "smooth", block: "start" });
+        //});
+    //});
+//});
+
+
 
 
 
 
 document.addEventListener("DOMContentLoaded", () => {
-    const magnifyIcons = document.querySelectorAll(".magnify-icon");
-    const modalOverlay = document.createElement("div");
-    const modal = document.createElement("div");
-
-    const cart = []; // Array to store cart items
-
-    modalOverlay.className = "product-modal-overlay";
-    modal.className = "product-modal";
-
-    modal.innerHTML = `
-        <button class="product-modal-close">&times;</button>
-        <img src="" alt="Product Image" />
-        <h3></h3>
-        <p></p>
-    `;
-
-    document.body.appendChild(modalOverlay);
-    document.body.appendChild(modal);
-
-    const closeModal = () => {
-        modalOverlay.style.display = "none";
-        modal.style.display = "none";
-    };
-
-    const showModal = (imageSrc, title, description) => {
-        modal.querySelector("img").src = imageSrc;
-        modal.querySelector("h3").textContent = title;
-        modal.querySelector("p").innerHTML = description;
-
-        modal.style.display = "block";
-        modalOverlay.style.display = "block";
-
-        modal.style.top = "50%";
-        modal.style.left = "50%";
-        modal.style.transform = "translate(-50%, -50%)";
-    };
-
-    magnifyIcons.forEach(icon => {
-        const product = icon.closest(".item");
-        const imageSrc = product.querySelector("img").src;
-        const title = product.querySelector(".item-title").textContent;
-        const description = product.dataset.description;
-
-        icon.addEventListener("mouseenter", () => showModal(imageSrc, title, description));
-        icon.addEventListener("mouseleave", (event) => {
-            const relatedElement = event.relatedTarget;
-            if (!modal.contains(relatedElement) && relatedElement !== modalOverlay) {
-                closeModal();
-            }
-        });
-
-        modal.addEventListener("mouseleave", (event) => {
-            const relatedElement = event.relatedTarget;
-            if (!icon.contains(relatedElement) && relatedElement !== modalOverlay) {
-                closeModal();
-            }
-        });
-    });
-
-    modalOverlay.addEventListener("click", closeModal);
-    modal.querySelector(".product-modal-close").addEventListener("click", closeModal);
-
-    const weightSelectors = document.querySelectorAll(".weight-select");
     const addToCartButtons = document.querySelectorAll(".add-to-cart-button");
 
-    weightSelectors.forEach((weightSelect) => {
-        const priceDisplay = weightSelect.closest(".item-details").querySelector(".item-price");
-        const addToCartButton = weightSelect.closest(".item-details").querySelector(".add-to-cart-button");
+    // Function to retrieve cart data from sessionStorage
+    function getCartData() {
+        try {
+            return sessionStorage.getItem("cartData")
+                ? JSON.parse(decodeURIComponent(sessionStorage.getItem("cartData")))
+                : [];
+        } catch (error) {
+            console.error("Failed to parse cartData:", error);
+            return [];
+        }
+    }
 
-        const updatePrice = () => {
-            const selectedOption = weightSelect.options[weightSelect.selectedIndex];
-            const unitPrice = parseFloat(selectedOption.dataset.price);
+    // Function to save cart data to sessionStorage
+    function saveCartData(cartData) {
+        sessionStorage.setItem("cartData", encodeURIComponent(JSON.stringify(cartData)));
+    }
 
-            // Update the price display and add-to-cart button
-            priceDisplay.textContent = `$${unitPrice.toFixed(2)}`;
-            addToCartButton.dataset.price = unitPrice.toFixed(2);
-            addToCartButton.dataset.weight = selectedOption.value; // Update the weight in data attributes
-        };
+    // Function to update button states based on cart data
+    function updateButtonState() {
+        const cartData = getCartData();
 
-        weightSelect.addEventListener("change", updatePrice);
+        addToCartButtons.forEach(button => {
+            const productName = button.getAttribute("data-product-name");
+            const isInCart = cartData.some(item => item.name === productName);
 
-        // Initial price calculation
-        updatePrice();
-    });
-
-    addToCartButtons.forEach((button) => {
-        button.addEventListener("click", () => {
-            const productName = button.dataset.productName;
-            const productWeight = button.dataset.weight;
-            const productPrice = button.dataset.price;
-
-            // Construct the item title for the cart
-            const cartItemTitle = `${productName} - ${productWeight} grams`;
-
-            // Check if this specific weight is already in the cart
-            const existingCartItem = cart.find(
-                (item) => item.title === cartItemTitle && item.price === productPrice
-            );
-
-            if (existingCartItem) {
-                // Increment quantity if the same weight exists
-                existingCartItem.quantity += 1;
+            if (isInCart) {
+                button.disabled = true;
+                button.textContent = "In Cart"; // Optional: Change button text
+                button.classList.add("disabled"); // Add a disabled styling class
             } else {
-                // Add a new item to the cart
-                cart.push({ title: cartItemTitle, quantity: 1, price: productPrice });
+                button.disabled = false;
+                button.textContent = "Add to Cart";
+                button.classList.remove("disabled");
             }
-
-            // Log the cart to the console (or update the UI in real use cases)
-            console.log("Cart:", cart);
-            alert(`Added ${cartItemTitle} for $${productPrice} to the cart.`);
         });
+    }
+
+    // Function to dynamically update cart UI
+    function updateCartUI() {
+        const cartData = getCartData();
+        const cartList = document.getElementById("selectedItemsList");
+        const totalElement = document.getElementById("total");
+        let totalPrice = 0;
+
+        // Clear cart list
+        cartList.innerHTML = "";
+
+        // Populate cart items
+        cartData.forEach(item => {
+            totalPrice += item.price * item.quantity;
+            const li = document.createElement("li");
+            li.innerHTML = `
+                ${item.name} - $${item.price.toFixed(2)} x ${item.quantity}
+                <span class="remove-item" data-product-name="${item.name}" style="color: red; cursor: pointer;">Remove</span>
+            `;
+            cartList.appendChild(li);
+        });
+
+        // Update total price
+        totalElement.textContent = `$${totalPrice.toFixed(2)}`;
+    }
+
+    // Function to add an item to the cart
+    function addToCart(button) {
+        const product = button.closest(".product");
+        const productName = button.getAttribute("data-product-name");
+        const price = parseFloat(button.getAttribute("data-price"));
+        const quantityInput = product.querySelector(".quantity");
+        const quantity = quantityInput ? parseInt(quantityInput.value, 10) : 1;
+
+        console.log(`Adding product: ${productName}, Quantity: ${quantity}`); // Debugging log
+        console.trace(); // Trace the event flow to check duplicates
+
+        let cartData = getCartData();
+
+        // Check if the product is already in the cart
+        const existingProductIndex = cartData.findIndex(item => item.name === productName);
+        if (existingProductIndex !== -1) {
+            cartData[existingProductIndex].quantity += quantity; // Increment quantity
+        } else {
+            cartData.push({ name: productName, price, quantity });
+        }
+
+        saveCartData(cartData); // Save updated cart data
+        updateButtonState(); // Update button states
+        updateCartUI(); // Update cart UI
+    }
+
+    // Function to remove an item from the cart
+    function removeFromCart(productName) {
+        let cartData = getCartData();
+
+        // Remove the item from the cart
+        cartData = cartData.filter(item => item.name !== productName);
+
+        saveCartData(cartData); // Save updated cart data
+        updateButtonState(); // Update button states
+        updateCartUI(); // Update cart UI
+    }
+
+    // Ensure no duplicate event listeners are attached
+    addToCartButtons.forEach(button => {
+        button.removeEventListener("click", handleAddToCart); // Remove existing listeners
+        button.addEventListener("click", handleAddToCart); // Attach new listener
+        console.log(`Event listener attached to: ${button.getAttribute("data-product-name")}`); // Log listener attachment
     });
-});
 
+    // Wrapper function to handle adding to cart
+    function handleAddToCart(event) {
+        const button = event.currentTarget;
+        addToCart(button);
+    }
 
+    // Attach event listener to dynamically handle "Remove from Cart" buttons
+    document.addEventListener("click", (e) => {
+        if (e.target.classList.contains("remove-item")) {
+            const productName = e.target.getAttribute("data-product-name");
+            removeFromCart(productName); // Remove the item from the cart
+        }
+    });
 
-
-document.addEventListener("DOMContentLoaded", () => {
-    const weightSelect = document.getElementById("weight-select");
-    const quantityInput = document.getElementById("quantity-top-shelf-hydro");
-    const priceDisplay = document.getElementById("price-top-shelf-hydro");
-    const addToCartButton = document.querySelector(".add-to-cart-button");
-
-    const updatePrice = () => {
-        const selectedOption = weightSelect.options[weightSelect.selectedIndex];
-        const unitPrice = parseFloat(selectedOption.dataset.price); // Get price from selected option
-        const quantity = parseInt(quantityInput.value, 10) || 1; // Default to 1 if input is invalid
-        const totalPrice = unitPrice * quantity;
-
-        // Update the price display and add-to-cart button
-        priceDisplay.textContent = `$${totalPrice.toFixed(2)}`;
-        addToCartButton.dataset.price = totalPrice.toFixed(2);
-    };
-
-    // Add event listeners
-    weightSelect.addEventListener("change", updatePrice);
-    quantityInput.addEventListener("input", updatePrice);
-
-    // Initial price calculation
-    updatePrice();
+    // Initialize button states and cart UI on page load
+    updateButtonState();
+    updateCartUI();
 });
 

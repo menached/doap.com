@@ -4,146 +4,68 @@ body, h2, input, button, footer {
     padding: 0;
 }
 
-/* General Modal Styling */
-.product-modal {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    padding: 15px;
-    width: 80%; /* Default width */
-    max-width: 400px;
-    max-height: 90%; /* Ensure the modal doesn't exceed the viewport height */
-    overflow-y: auto; /* Enable scrolling for content */
-    z-index: 1000;
-    text-align: center;
-    display: none; /* Hidden by default */
-}
+/*.add-to-cart-button.disabled {*/
+    /*background-color: #ccc;*/
+    /*color: #666;*/
+    /*cursor: not-allowed;*/
+    /*pointer-events: none;*/
+/*}*/
 
-.product-modal img {
-    width: 100%;
-    border-radius: 8px;
-    margin-bottom: 15px;
-}
-
-.product-modal h3 {
-    font-family: 'Marvel', sans-serif;
-    font-size: 1.5rem;
-    margin-bottom: 10px;
-}
-
-.product-modal p {
-    font-family: Arial, sans-serif;
-    font-size: 1rem;
-    color: #333;
-}
-
-.product-modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 999;
-    display: none; /* Hidden by default */
-}
-
-/* Close Button */
-.product-modal-close {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: transparent;
-    border: none;
-    font-size: 1.5rem;
-    cursor: pointer;
-    color: #333;
-}
-
-/* Landscape Mode Adjustments */
-@media (max-width: 768px) and (orientation: landscape) {
-    .product-modal {
-        width: 70%; /* Shrink width for landscape mode */
-        max-height: 80%; /* Reduce height for landscape */
-        padding: 10px; /* Reduce padding */
-    }
-
-    .product-modal img {
-        width: 70%; /* Adjust image size */
-        margin: 0 auto 10px; /* Center image */
-    }
-
-    .product-modal h3 {
-        font-size: 1.2rem; /* Adjust font size for title */
-    }
-
-    .product-modal p {
-        font-size: 0.9rem; /* Adjust font size for description */
-    }
-}
-
-
-
-/* Action buttons container */
-.action-buttons {
-    display: flex;
-    justify-content: center; /* Center-align the buttons */
-    align-items: center;
-    gap: 10px; /* Add space between buttons */
-    margin-top: 10px;
-}
-
+/* Default button styles */
 .add-to-cart-button {
-    background-color: #007bff; /* Blue button */
+    background-color: #007BFF; /* Blue */
     color: white;
-    padding: 8px 15px;
+    padding: 10px 15px;
     border-radius: 5px;
     cursor: pointer;
-    text-align: center;
-    font-size: 0.9rem;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+/* Hover state for buttons */
 .add-to-cart-button:hover {
-    background-color: #0056b3; /* Darker blue on hover */
+    background-color: #0056b3; /* Darker blue */
 }
 
-/* Position the magnify icon */
+/* Disabled button styling */
+.add-to-cart-button:disabled, .add-to-cart-button.disabled {
+    background-color: #ccc; /* Grey */
+    color: #666;
+    cursor: not-allowed;
+}
+
+
+/* Click effect (flash when clicked) */
+.add-to-cart-button:active {
+    background-color: #0056b3; /* Darker blue when clicked */
+    transform: scale(0.95); /* Slightly shrink on click */
+}
+
+
+
+
+
+
+/* Style the magnifying glass icon */
 .magnify-icon {
-    background-color: rgba(0, 0, 0, 0.7); /* Dark semi-transparent background */
-    color: #fff; /* White icon */
-    border-radius: 50%;
-    padding: 8px; /* Increase padding for better visual appearance */
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    margin-left: 8px; /* Add space between the input and the icon */
+    color: #555; /* Default color */
+    font-size: 0.8rem; /* Make the icon smaller */
+    cursor: pointer;
+    transition: color 0.3s ease, transform 0.2s ease; /* Smooth hover effects */
 }
 
 .magnify-icon:hover {
-    background-color: rgba(255, 255, 255, 0.9); /* Light background on hover */
-    color: #000; /* Black icon on hover */
-    transform: scale(1.1); /* Slightly enlarge on hover */
+    color: #000; /* Darker color on hover */
+    transform: scale(1.2); /* Slightly enlarge the icon */
 }
 
-.magnify-icon i {
-    font-size: 16px; /* Adjust icon size */
-}
-
-
-
-/* Portrait Mode Adjustments */
-@media (max-width: 768px) and (orientation: portrait) {
-    .product-modal {
-        width: 90%;
-        max-height: 90%;
-        padding: 15px;
-    }
+/* Align the icon and input properly */
+.item-quantity {
+    display: flex;
+    align-items: center;
 }
 
 
@@ -151,14 +73,41 @@ body, h2, input, button, footer {
 
 
 
-.image-container {
-    position: relative; /* Create a positioning context */
+
+
+
+
+
+
+
+
+
+
+
+
+.footerstuff {
+    margin: 0 auto; /* Center the content horizontally */
+    padding-left: 10%;
+    padding-right: 10%;
+    max-width: 1300px; /* Limit the maximum width of the content */
+    box-sizing: border-box; /* Ensure padding is included in the width calculation */
 }
 
+.footerparagraph {
+    max-width: 1300px; /* Ensure the paragraph doesn't exceed the max width */
+    text-align: center;
+    margin: 0 auto; /* Center the paragraph */
+}
 
-/* Hide the quantity input */
-.quantity {
-    display: none;
+.doapfooter {
+    text-align: center;
+    background-color: #f9f9f9; /* Optional: Add a background color for the footer */
+    padding: 20px 0; /* Add vertical spacing */
+}
+
+.footer-note {
+    font-size: 0.9rem; /* Optional: Adjust font size */
+    color: #666; /* Optional: Set a light text color */
 }
 
 
@@ -828,18 +777,22 @@ font-size:.8em;
     gap: 8px;
 }
 
+
+input[type="number"].quantity {
+    height: 30px; /* Adjust the height as needed */
+    padding: 5px; /* Optional: Adjust padding for better content alignment */
+    font-size: 1rem; /* Optional: Increase font size for readability */
+    border: 1px solid #ccc; /* Optional: Add a subtle border */
+    border-radius: 5px; /* Optional: Add rounded corners */
+    box-sizing: border-box; /* Ensure padding and border are included in height */
+}
+
+
 .item-quantity input[type="number"] {
     width: 50px;
     text-align: center;
     border: 1px solid #ddd;
     border-radius: 5px;
-}
-
-
-/* Click effect (flash when clicked) */
-.add-to-cart-button:active {
-    background-color: #0056b3; /* Darker blue when clicked */
-    transform: scale(0.95); /* Slightly shrink on click */
 }
 
 /* Responsive product grid */
@@ -1091,27 +1044,6 @@ font-size:.8em;
     100% {
         opacity: 0;
         transform: translate(0, -200px);
-    }
-}
-
-
-
-
-
-/* For screens 768px and above */
-@media (min-width: 868px) {
-    #aboutmsg {
-        margin-left: 200px;
-        margin-right: 200px;
-        text-align:center;
-    }
-}
-
-/* For screens 767px and below */
-@media (max-width: 867px) {
-    #aboutmsg {
-        margin-left: 20px;
-        margin-right: 20px;
     }
 }
 
