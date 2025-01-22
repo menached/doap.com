@@ -1,190 +1,131 @@
-import { getCookie, setCookie } from './cookieManager.js';
-import { subdomainData } from './data.js';
-
 document.addEventListener("DOMContentLoaded", () => {
     const addToCartButtons = document.querySelectorAll(".add-to-cart-button");
 
-    // Function to update cart display in cartsection.html
-    function updateCartDisplay() {
-        let cartData = [];
+    // Function to retrieve cart data from sessionStorage
+    function getCartData() {
         try {
-            cartData = sessionStorage.getItem("cartData")
+            return sessionStorage.getItem("cartData")
                 ? JSON.parse(decodeURIComponent(sessionStorage.getItem("cartData")))
                 : [];
         } catch (error) {
-            console.error("Failed to parse cartData from sessionStorage:", error);
-            cartData = [];
+            console.error("Failed to parse cartData:", error);
+            return [];
         }
+    }
 
-        const siteData = sessionStorage.getItem("siteData")
-            ? JSON.parse(decodeURIComponent(sessionStorage.getItem("siteData")))
-            : { minimumOrder: 0 };
+    // Function to save cart data to sessionStorage
+    function saveCartData(cartData) {
+        sessionStorage.setItem("cartData", encodeURIComponent(JSON.stringify(cartData)));
+    }
+
+    // Function to update button states based on cart data
+    function updateButtonState() {
+        const cartData = getCartData();
+
+        addToCartButtons.forEach(button => {
+            const productName = button.getAttribute("data-product-name");
+            const isInCart = cartData.some(item => item.name === productName);
+
+            if (isInCart) {
+                button.disabled = true;
+                button.textContent = "In Cart"; // Optional: Change button text
+                button.classList.add("disabled"); // Add a disabled styling class
+            } else {
+                button.disabled = false;
+                button.textContent = "Add to Cart";
+                button.classList.remove("disabled");
+            }
+        });
+    }
+
+    // Function to update cart display in cartsection.html
+    function updateCartDisplay() {
+        const cartData = getCartData();
+        console.log("Cart Data during display update:", cartData); // Debugging cart data
 
         const selectedItemsList = document.getElementById("selectedItemsList");
-        const minOrderMessage = document.getElementById("minOrderMessage");
-        const cartSection = document.querySelector(".cart-section");
-
+        const totalElement = document.getElementById("total");
         let totalPrice = 0;
-        const minimumOrderValue = parseFloat(siteData.minimumOrder) || 0;
 
-        // Handle empty cart
-        if (cartData.length === 0) {
-            selectedItemsList.innerHTML = `<span class="no-items">Cart empty.</span>`;
-            selectedItemsList.classList.add("empty");
-            minOrderMessage.textContent = `Minimum order is $${minimumOrderValue.toFixed(2)}.`;
-            minOrderMessage.style.color = "red";
-            cartSection.style.border = "1px dashed #ff0000";
-            document.getElementById("total").textContent = `$0.00`;
-            return;
-        }
-
-        selectedItemsList.classList.remove("empty");
+        // Clear existing cart items
         selectedItemsList.innerHTML = "";
-        cartData.forEach((item) => {
-            totalPrice += item.price * item.quantity;
+
+        // Populate cart items
+        cartData.forEach(item => {
+            totalPrice += item.price * item.quantity; // Calculate total price
             const li = document.createElement("li");
             li.innerHTML = `
                 ${item.name} - $${item.price.toFixed(2)} x ${item.quantity}
-                <span style="color: red; cursor: pointer;" class="remove-item" data-product-name="${item.name}">X</span>
+                <span class="remove-item" data-product-name="${item.name}" style="color: red; cursor: pointer;">Remove</span>
             `;
             selectedItemsList.appendChild(li);
         });
 
-        document.getElementById("total").textContent = `$${totalPrice.toFixed(2)}`;
+        // Update total price in the UI
+        totalElement.textContent = `$${totalPrice.toFixed(2)}`;
+    }
 
-        if (totalPrice >= minimumOrderValue) {
-            minOrderMessage.textContent = "🚚 Free 1hr Delivery! 🚀";
-            minOrderMessage.style.color = "#28a745";  // Bright green
-            minOrderMessage.style.backgroundColor = "#e9f7ef";  // Light green background
-            minOrderMessage.style.borderRadius = "5px";
-            cartSection.style.border = "1px dashed #28a745";
+    // Function to add an item to the cart
+    function addToCart(button) {
+        const product = button.closest(".product");
+        const productName = button.getAttribute("data-product-name");
+        const price = parseFloat(button.getAttribute("data-price"));
+        const quantityInput = product.querySelector(".quantity");
+        const quantity = quantityInput ? parseInt(quantityInput.value, 10) : 1;
+
+        let cartData = getCartData();
+
+        // Ensure only one instance of the product exists in the cart
+        const existingProductIndex = cartData.findIndex(item => item.name === productName);
+        if (existingProductIndex !== -1) {
+            // Update quantity of the existing product
+            cartData[existingProductIndex].quantity += quantity;
         } else {
-            const difference = minimumOrderValue - totalPrice;
-            minOrderMessage.textContent = `$${difference.toFixed(2)} shy of free delivery!`;
-            minOrderMessage.style.color = "#ff6f00";  // A more readable amber orange
-            minOrderMessage.style.backgroundColor = "#fff3cd";  // Light amber background
-            minOrderMessage.style.padding = "5px";  // Padding for breathing room
-            minOrderMessage.style.borderRadius = "5px";  // Rounded corners
-            cartSection.style.border = "1px dashed #ff6f00";
+            // Add new product
+            cartData.push({ name: productName, price, quantity });
         }
 
-        document.querySelectorAll(".remove-item").forEach((removeButton) => {
-            removeButton.addEventListener("click", (e) => {
-                e.stopPropagation();
-                const productName = removeButton.dataset.productName;
-                removeItemFromCart(productName);
-            });
-        });
+        console.log("Cart Data after addition:", cartData); // Debugging cart data
+
+        saveCartData(cartData); // Save updated cart data
+        updateButtonState(); // Update button states
+        updateCartDisplay(); // Update cart UI
     }
 
-    // Function to remove an item from cart
-    function removeItemFromCart(productName) {
-        let cartData = [];
-        try {
-            cartData = JSON.parse(decodeURIComponent(sessionStorage.getItem("cartData") || "[]"));
-        } catch (error) {
-            console.error("Failed to parse cartData during removal:", error);
-            cartData = [];
-        }
+    // Function to remove an item from the cart
+    function removeFromCart(productName) {
+        let cartData = getCartData();
 
+        // Remove the item completely from the cart
         cartData = cartData.filter(item => item.name !== productName);
-        sessionStorage.setItem("cartData", encodeURIComponent(JSON.stringify(cartData)));
 
-        if (getCookie("cookieconsent_status") === "allow") {
-            setCookie("cartData", cartData, 7); // Pass the plain array; setCookie handles encoding
+        saveCartData(cartData); // Save updated cart data
+        updateButtonState(); // Update button states
+        updateCartDisplay(); // Update cart UI
+    }
+
+    // Attach event listeners to "Add to Cart" buttons
+    addToCartButtons.forEach(button => {
+        button.removeEventListener("click", handleAddToCart);
+        button.addEventListener("click", handleAddToCart);
+    });
+
+    // Wrapper function to handle adding to cart
+    function handleAddToCart(event) {
+        const button = event.currentTarget;
+        addToCart(button);
+    }
+
+    // Attach event listener to dynamically handle "Remove from Cart" buttons
+    document.addEventListener("click", (e) => {
+        if (e.target.classList.contains("remove-item")) {
+            const productName = e.target.getAttribute("data-product-name");
+            removeFromCart(productName); // Remove the item from the cart
         }
+    });
 
-        console.log(`Removed ${productName} from cart.`);
-        updateCartDisplay();
-        highlightCartItems();
-    }
-
-    // Highlight products that are in the cart
-    function highlightCartItems() {
-        let cartData = [];
-        try {
-            cartData = sessionStorage.getItem("cartData")
-                ? JSON.parse(decodeURIComponent(sessionStorage.getItem("cartData")))
-                : [];
-        } catch (error) {
-            console.error("Failed to parse cartData during highlight:", error);
-            cartData = [];
-        }
-
-        const productItems = document.querySelectorAll(".product");
-        productItems.forEach(item => {
-            const productName = item.querySelector(".item-title").textContent.trim();
-            const cartItem = cartData.find(cartItem => cartItem.name === productName);
-
-            if (cartItem) {
-                item.classList.add("in-cart");  // Add highlight class if in cart
-            } else {
-                item.classList.remove("in-cart");  // Remove highlight class if not in cart
-            }
-        });
-    }
-
-    // Listen only to "Add to Cart" button clicks
-    function attachAddToCartListeners() {
-        addToCartButtons.forEach(button => {
-            button.addEventListener("click", (e) => {
-                e.stopPropagation(); // Prevent event bubbling
-                const product = button.closest(".product"); // Get the closest product container
-                const productName = product.querySelector(".item-title").textContent.trim();
-                const price = parseFloat(button.dataset.price);
-                const quantityInput = product.querySelector(".item-quantity input");
-                const selectedQuantity = quantityInput ? parseInt(quantityInput.value) : 1;
-
-                let cartData = sessionStorage.getItem("cartData")
-                    ? JSON.parse(decodeURIComponent(sessionStorage.getItem("cartData")))
-                    : [];
-
-                const existingProductIndex = cartData.findIndex(item => item.name === productName);
-                if (existingProductIndex !== -1) {
-                    cartData[existingProductIndex].quantity += selectedQuantity;  // Increment quantity
-                    console.log(`Incremented quantity for ${productName} to ${cartData[existingProductIndex].quantity}`);
-                } else {
-                    const selectedProduct = {
-                        name: productName,
-                        price: price,
-                        quantity: selectedQuantity
-                    };
-                    cartData.push(selectedProduct);
-                    console.log(`Added new product to cart:`, selectedProduct);
-                }
-
-                sessionStorage.setItem("cartData", encodeURIComponent(JSON.stringify(cartData)));
-
-                if (getCookie("cookieconsent_status") === "allow") {
-                    setCookie("cartData", cartData, 7); // Pass the plain array; setCookie handles encoding
-                }
-
-                updateCartDisplay();
-                highlightCartItems();  // Apply highlights after updating the cart
-            });
-        });
-    }
-
-    // Restore cart highlights on load
-    function restoreHighlightsOnLoad() {
-        let cartData = [];
-        try {
-            if (sessionStorage.getItem("cartData")) {
-                cartData = JSON.parse(decodeURIComponent(sessionStorage.getItem("cartData")));
-            } else if (getCookie("cartData")) {
-                cartData = JSON.parse(decodeURIComponent(getCookie("cartData")));
-                sessionStorage.setItem("cartData", encodeURIComponent(JSON.stringify(cartData)));
-            }
-        } catch (error) {
-            console.error("Failed to parse cartData during restore:", error);
-            cartData = [];
-        }
-
-        highlightCartItems();
-    }
-
-    // Initial cart display and product highlight
-    restoreHighlightsOnLoad();
+    // Initialize button states and cart UI on page load
+    updateButtonState();
     updateCartDisplay();
-    attachAddToCartListeners();  // Attach "Add to Cart" button listeners
 });
+
