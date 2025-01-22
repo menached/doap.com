@@ -1,4 +1,4 @@
-// data.js
+// data.js 
 export const defaultPhoneNumber = "833-289-3627";
 
 export const areaMinimum = {
