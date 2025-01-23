@@ -81,64 +81,79 @@ function initializeCustomerData() {
 }
 
 // Initialize siteData in sessionStorage
-// Initialize siteData in sessionStorage
 function initializeSiteData() {
     const hostname = window.location.hostname.split('.')[0].toLowerCase();
 
-    // Check if siteData already exists in sessionStorage
-    if (!sessionStorage.getItem("siteData")) {
-        const siteData = subdomainData.find(entry => entry.subdomain === hostname);
+    // First, check if siteData exists in sessionStorage
+    let siteDataString = sessionStorage.getItem("siteData");
 
-        if (siteData) {
-            // Store the siteData in sessionStorage
-            sessionStorage.setItem("siteData", encodeURIComponent(JSON.stringify(siteData)));
-            console.log("Site data initialized:", siteData);
+    if (!siteDataString) {
+        // If not found, check in localStorage
+        siteDataString = localStorage.getItem("siteData");
+
+        if (!siteDataString) {
+            // If not found in localStorage, look up from `subdomainData`
+            const siteData = subdomainData.find(entry => entry.subdomain === hostname);
+
+            if (siteData) {
+                siteDataString = JSON.stringify(siteData);
+
+                // Save to both sessionStorage and localStorage for future use
+                sessionStorage.setItem("siteData", encodeURIComponent(siteDataString));
+                localStorage.setItem("siteData", siteDataString);
+                console.log("Initialized siteData from subdomainData:", siteData);
+            } else {
+                // Default siteData if subdomain is not found
+                const defaultSiteData = {
+                    subdomain: "unknown",
+                    city: "Unknown",
+                    phone: "N/A",
+                    minimumOrder: 0,
+                };
+                siteDataString = JSON.stringify(defaultSiteData);
+
+                sessionStorage.setItem("siteData", encodeURIComponent(siteDataString));
+                localStorage.setItem("siteData", siteDataString);
+                console.warn(`Subdomain "${hostname}" not found. Using default siteData.`);
+            }
         } else {
-            // Default to an unknown site configuration
-            console.warn(`Subdomain "${hostname}" not found in subdomainData. Using default siteData.`);
-            const defaultSiteData = {
-                subdomain: "unknown",
-                city: "Unknown",
-                phone: "N/A",
-                minimumOrder: 0,
-            };
-            sessionStorage.setItem("siteData", encodeURIComponent(JSON.stringify(defaultSiteData)));
+            // If found in localStorage, move it to sessionStorage
+            sessionStorage.setItem("siteData", encodeURIComponent(siteDataString));
+            console.log("Loaded siteData from localStorage into sessionStorage.");
         }
     } else {
-        // Log existing siteData from sessionStorage
-        try {
-            const existingSiteData = JSON.parse(decodeURIComponent(sessionStorage.getItem("siteData")));
-            console.log("Existing siteData loaded from sessionStorage:", existingSiteData);
-        } catch (error) {
-            console.error("Failed to parse existing siteData from sessionStorage:", error);
-        }
+        console.log("Existing siteData already in sessionStorage:", JSON.parse(decodeURIComponent(siteDataString)));
     }
 }
 
+
 function displayMinimumOrder() {
-    const siteDataString = sessionStorage.getItem("siteData");
+    const siteDataString = sessionStorage.getItem("siteData") || localStorage.getItem("siteData");
 
     if (siteDataString) {
         try {
             const siteData = JSON.parse(decodeURIComponent(siteDataString));
             const minimumOrderElement = document.getElementById("minimumOrder");
             if (minimumOrderElement) {
-                minimumOrderElement.textContent = `$${siteData.minimumOrder.toFixed(2)}`;
-                console.log("Minimum Order displayed:", siteData.minimumOrder);
+                minimumOrderElement.textContent = `Minimum order is $${siteData.minimumOrder.toFixed(2)}`;
+                console.log("Displayed Minimum Order:", siteData.minimumOrder);
+            } else {
+                console.warn("#minimumOrder element not found.");
             }
         } catch (error) {
-            console.error("Error parsing siteData for display:", error);
+            console.error("Failed to parse siteData for minimum order display:", error);
         }
     } else {
-        console.warn("Site data not found in sessionStorage.");
+        console.warn("siteData not found in storage.");
     }
 }
 
-// Call this function after initializing siteData
+// Call the function on page load
 document.addEventListener("DOMContentLoaded", () => {
-    initializeSiteData();
+    initializeSiteData(); // Ensure siteData is initialized
     displayMinimumOrder();
 });
+
 
 
 // Update customerData in sessionStorage and cookies

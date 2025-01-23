@@ -92,6 +92,7 @@ function clearCookies() {
 
 // Initialize default sessionStorage data
 function initializeSessionData() {
+    initializeSiteData();
     initializeCartData();
     initializeCustomerData();
 }
