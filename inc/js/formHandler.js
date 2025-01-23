@@ -81,26 +81,37 @@ function initializeCustomerData() {
 }
 
 // Initialize siteData in sessionStorage
+// Initialize siteData in sessionStorage
 function initializeSiteData() {
+    const hostname = window.location.hostname.split('.')[0].toLowerCase();
+
+    // Check if siteData already exists in sessionStorage
     if (!sessionStorage.getItem("siteData")) {
-        const hostname = window.location.hostname.split('.')[0].toLowerCase();
         const siteData = subdomainData.find(entry => entry.subdomain === hostname);
 
         if (siteData) {
+            // Store the siteData in sessionStorage
             sessionStorage.setItem("siteData", encodeURIComponent(JSON.stringify(siteData)));
-            console.log("siteData set in sessionStorage:", siteData);
+            console.log("Site data initialized:", siteData);
         } else {
-            console.warn(`Subdomain "${hostname}" not found in subdomainData. Setting default siteData.`);
-            sessionStorage.setItem("siteData", encodeURIComponent(JSON.stringify({
+            // Default to an unknown site configuration
+            console.warn(`Subdomain "${hostname}" not found in subdomainData. Using default siteData.`);
+            const defaultSiteData = {
                 subdomain: "unknown",
                 city: "Unknown",
                 phone: "N/A",
-                minimumOrder: 0
-            })));
+                minimumOrder: 0,
+            };
+            sessionStorage.setItem("siteData", encodeURIComponent(JSON.stringify(defaultSiteData)));
         }
     } else {
-        const existingSiteData = JSON.parse(decodeURIComponent(sessionStorage.getItem("siteData")));
-        console.log("Existing siteData already in sessionStorage:", existingSiteData);
+        // Log existing siteData from sessionStorage
+        try {
+            const existingSiteData = JSON.parse(decodeURIComponent(sessionStorage.getItem("siteData")));
+            console.log("Existing siteData loaded from sessionStorage:", existingSiteData);
+        } catch (error) {
+            console.error("Failed to parse existing siteData from sessionStorage:", error);
+        }
     }
 }
 
