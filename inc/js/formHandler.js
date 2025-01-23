@@ -115,6 +115,32 @@ function initializeSiteData() {
     }
 }
 
+function displayMinimumOrder() {
+    const siteDataString = sessionStorage.getItem("siteData");
+
+    if (siteDataString) {
+        try {
+            const siteData = JSON.parse(decodeURIComponent(siteDataString));
+            const minimumOrderElement = document.getElementById("minimumOrder");
+            if (minimumOrderElement) {
+                minimumOrderElement.textContent = `$${siteData.minimumOrder.toFixed(2)}`;
+                console.log("Minimum Order displayed:", siteData.minimumOrder);
+            }
+        } catch (error) {
+            console.error("Error parsing siteData for display:", error);
+        }
+    } else {
+        console.warn("Site data not found in sessionStorage.");
+    }
+}
+
+// Call this function after initializing siteData
+document.addEventListener("DOMContentLoaded", () => {
+    initializeSiteData();
+    displayMinimumOrder();
+});
+
+
 // Update customerData in sessionStorage and cookies
 function updateCustomerDataInStorage() {
     const customerData = {
