@@ -13,6 +13,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     console.log("Initializing siteData...");
     initializeSiteData();
+    updateMinimumOrderMessage(); // Update the minimum order message
+
 
     // Add event listeners for customer form fields to update session storage
     const customerInputs = document.querySelectorAll(".customer-info input, .customer-info textarea");
@@ -152,6 +154,7 @@ function displayMinimumOrder() {
 document.addEventListener("DOMContentLoaded", () => {
     initializeSiteData(); // Ensure siteData is initialized
     displayMinimumOrder();
+    updateMinimumOrderMessage(); // Update the minimum order message
 });
 
 
@@ -421,5 +424,54 @@ export function updateCustomerDataInSession() {
     // Save to localStorage for persistence
     localStorage.setItem("customerData", JSON.stringify(customerData));
     console.log("Updated customerData in localStorage:", customerData);
+}
+
+
+
+
+function updateMinimumOrderMessage() {
+    const minOrderMessageElement = document.getElementById("minOrderMessage");
+    const siteDataString = sessionStorage.getItem("siteData") || localStorage.getItem("siteData");
+
+    if (siteDataString) {
+        try {
+            const siteData = JSON.parse(decodeURIComponent(siteDataString));
+            if (minOrderMessageElement) {
+                minOrderMessageElement.textContent = `Minimum order is $${siteData.minimumOrder.toFixed(2)}.`;
+                console.log("Updated minimum order message:", siteData.minimumOrder);
+            } else {
+                console.warn("Element with ID #minOrderMessage not found.");
+            }
+        } catch (error) {
+            console.error("Failed to parse siteData for minimum order message:", error);
+        }
+    } else {
+        console.warn("siteData not found in storage. Default message will remain.");
+    }
+}
+
+
+
+
+
+function updateCityPlaceholder() {
+    const cityInput = document.getElementById("city");
+    const siteDataString = sessionStorage.getItem("siteData") || localStorage.getItem("siteData");
+
+    if (siteDataString && cityInput) {
+        try {
+            const siteData = JSON.parse(decodeURIComponent(siteDataString));
+            if (siteData.city) {
+                cityInput.setAttribute("placeholder", siteData.city); // Set placeholder to the subdomain city name
+                console.log("Updated city input placeholder to:", siteData.city);
+            } else {
+                console.warn("City value not found in siteData. Placeholder remains as 'City'.");
+            }
+        } catch (error) {
+            console.error("Failed to parse siteData for city placeholder:", error);
+        }
+    } else {
+        console.warn("siteData not found in storage or city input element is missing.");
+    }
 }
 

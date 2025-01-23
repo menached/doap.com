@@ -95,6 +95,8 @@ function initializeSessionData() {
     initializeSiteData();
     initializeCartData();
     initializeCustomerData();
+    updateMinimumOrderMessage(); // Update the minimum order message
+
 }
 
 // Initialize cartData in sessionStorage
