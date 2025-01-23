@@ -432,13 +432,27 @@ export function updateCustomerDataInSession() {
 function updateMinimumOrderMessage() {
     const minOrderMessageElement = document.getElementById("minOrderMessage");
     const siteDataString = sessionStorage.getItem("siteData") || localStorage.getItem("siteData");
+    const totalElement = document.getElementById("total");
 
-    if (siteDataString) {
+    if (siteDataString && totalElement) {
         try {
             const siteData = JSON.parse(decodeURIComponent(siteDataString));
+            const minimumOrder = siteData.minimumOrder || 0; // Default to $0 if not found
+            const cartTotal = parseFloat(totalElement.textContent.replace("$", "")) || 0;
+
             if (minOrderMessageElement) {
-                minOrderMessageElement.textContent = `Minimum order is $${siteData.minimumOrder.toFixed(2)}.`;
-                console.log("Updated minimum order message:", siteData.minimumOrder);
+                if (cartTotal >= minimumOrder) {
+                    // Minimum order met
+                    minOrderMessageElement.textContent = `Minimum order of $${minimumOrder.toFixed(2)} met.`;
+                    minOrderMessageElement.style.color = "green";
+                } else {
+                    // Minimum order not met
+                    const amountNeeded = (minimumOrder - cartTotal).toFixed(2);
+                    minOrderMessageElement.textContent = `Minimum order is $${minimumOrder.toFixed(2)}. Add $${amountNeeded} more to meet it.`;
+                    minOrderMessageElement.style.color = "red";
+                }
+
+                console.log("Updated minimum order message:", { minimumOrder, cartTotal });
             } else {
                 console.warn("Element with ID #minOrderMessage not found.");
             }
@@ -446,7 +460,7 @@ function updateMinimumOrderMessage() {
             console.error("Failed to parse siteData for minimum order message:", error);
         }
     } else {
-        console.warn("siteData not found in storage. Default message will remain.");
+        console.warn("siteData or totalElement not found in storage. Default message will remain.");
     }
 }
 
