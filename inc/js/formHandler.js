@@ -429,7 +429,7 @@ export function updateCustomerDataInSession() {
 
 
 
-function updateMinimumOrderMessage() {
+export function updateMinimumOrderMessage() {
     const minOrderMessageElement = document.getElementById("minOrderMessage");
     const siteDataString = sessionStorage.getItem("siteData") || localStorage.getItem("siteData");
     const totalElement = document.getElementById("total");
