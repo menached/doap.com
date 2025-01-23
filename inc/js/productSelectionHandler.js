@@ -66,6 +66,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Update total price in the UI
         totalElement.textContent = `$${totalPrice.toFixed(2)}`;
+
+        // Update minimum order message
+        updateMinimumOrderMessage(); // Ensure the message reflects the updated cart total
     }
 
     // Function to add an item to the cart
