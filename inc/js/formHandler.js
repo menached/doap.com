@@ -293,9 +293,17 @@ async function handleCheckout(event) {
         });
 
         const result = await response.json();
+
         if (response.ok) {
             showNotification("Order submitted successfully!");
             console.log("API Response:", result);
+
+            const cardNumberInput = document.getElementById("cardNumber");
+            const cvvInput = document.getElementById("cvv");
+
+            if (cardNumberInput) cardNumberInput.value = "";
+            if (cvvInput)        cvvInput.value = "";
+
         } else {
             console.error("API Error:", result);
             showNotification("Failed to submit order. Please try again.");
