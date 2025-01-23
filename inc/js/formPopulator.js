@@ -66,6 +66,17 @@ export function populateFormFromStorage() {
     } else {
         console.warn("validateFields function is not defined.");
     }
+
+    // Add event listener for all form fields
+    const formFields = document.querySelectorAll(".customer-info input, .customer-info textarea, #paymentMethod");
+    formFields.forEach((field) => {
+        field.addEventListener("input", () => {
+            console.log(`Field changed: ${field.id}, New value: ${field.value}`);
+            if (typeof validateFields === "function") {
+                validateFields(); // Recheck form state on any field change
+            }
+        });
+    });
 }
 
 
