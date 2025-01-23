@@ -58,6 +58,14 @@ export function populateFormFromStorage() {
     });
 
     console.log("Form population completed.");
+
+    // Trigger validateFields to recheck form state
+    if (typeof validateFields === "function") {
+        validateFields(); // Ensure validation runs after population
+        console.log("Validation triggered after form population.");
+    } else {
+        console.warn("validateFields function is not defined.");
+    }
 }
 
 
