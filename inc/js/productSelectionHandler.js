@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
             totalPrice += item.price * item.quantity; // Calculate total price
             const li = document.createElement("li");
             li.innerHTML = `
-                ${item.name} - $${item.price.toFixed(2)} x ${item.quantity}
+                ${item.name} - ${item.weight || ''} $${item.price.toFixed(2)}
                 <span class="remove-item" data-product-name="${item.name}" style="color: red; cursor: pointer;">Remove</span>
             `;
             selectedItemsList.appendChild(li);
@@ -72,19 +72,22 @@ document.addEventListener("DOMContentLoaded", () => {
         const product = button.closest(".product");
         const productName = button.getAttribute("data-product-name");
         const price = parseFloat(button.getAttribute("data-price"));
-        const quantityInput = product.querySelector(".quantity");
-        const quantity = quantityInput ? parseInt(quantityInput.value, 10) : 1;
+        const quantityElement = product.querySelector(".quantity");
+        const quantity = quantityElement ? parseInt(quantityElement.value, 10) : 1;
+        const weight = quantityElement?.selectedOptions[0]?.textContent.split(" - ")[0] || ""; // Extract weight from dropdown
 
         let cartData = getCartData();
 
         // Ensure only one instance of the product exists in the cart
-        const existingProductIndex = cartData.findIndex(item => item.name === productName);
+        const existingProductIndex = cartData.findIndex(
+            item => item.name === productName && item.weight === weight
+        );
         if (existingProductIndex !== -1) {
             // Update quantity of the existing product
             cartData[existingProductIndex].quantity += quantity;
         } else {
-            // Add new product
-            cartData.push({ name: productName, price, quantity });
+            // Add new product with weight
+            cartData.push({ name: productName, price, quantity, weight });
         }
 
         console.log("Cart Data after addition:", cartData); // Debugging cart data
@@ -126,46 +129,59 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // Initialize button states and cart UI on page load
+    // Function to render product quantity options for weight-based products
+    function renderProductQuantityOptions(productName, quantityElement, basePriceElement, addToCartButton) {
+        const productData = weightBasedProducts[productName];
+        if (productData && productData.weights) {
+            const weights = productData.weights;
+
+            // Clear existing options
+            quantityElement.innerHTML = "";
+
+            // Populate dropdown options from weightBasedProducts
+            for (const [key, value] of Object.entries(weights)) {
+                const option = document.createElement("option");
+                option.value = key;
+                option.textContent = `${value.label} - $${value.price}`;
+                option.setAttribute("data-price", value.price);
+                quantityElement.appendChild(option);
+            }
+
+            // Attach change event listener to update the price
+            quantityElement.addEventListener("change", () => {
+                const selectedValue = quantityElement.value;
+                const selectedPrice = weights[selectedValue]?.price || basePriceElement.dataset.basePrice;
+
+                // Update displayed price
+                basePriceElement.textContent = `$${selectedPrice}`;
+                basePriceElement.setAttribute("data-base-price", selectedPrice);
+
+                // Update Add to Cart button data
+                if (addToCartButton) {
+                    addToCartButton.setAttribute("data-price", selectedPrice);
+                }
+            });
+        } else {
+            console.warn(`No weight-based options found for product: ${productName}`);
+        }
+    }
+
+    // Initialize dropdowns and buttons on page load
+    const productElements = document.querySelectorAll(".product");
+
+    productElements.forEach(product => {
+        const productName = product.querySelector(".item-title").textContent.trim();
+        const quantityElement = product.querySelector(".quantity");
+        const basePriceElement = product.querySelector(".item-price");
+        const addToCartButton = product.querySelector(".add-to-cart-button");
+
+        if (quantityElement && basePriceElement && addToCartButton) {
+            renderProductQuantityOptions(productName, quantityElement, basePriceElement, addToCartButton);
+        }
+    });
+
+    // Initialize button states and cart UI
     updateButtonState();
     updateCartDisplay();
 });
 
-
-
-
-function renderProductQuantityOptions(productName, quantityElement, basePriceElement, addToCartButton) {
-    const productData = weightBasedProducts[productName];
-    if (productData && productData.weights) {
-        const weights = productData.weights;
-
-        // Clear existing options
-        quantityElement.innerHTML = "";
-
-        // Populate dropdown options from weightBasedProducts
-        for (const [key, value] of Object.entries(weights)) {
-            const option = document.createElement("option");
-            option.value = key;
-            option.textContent = `${value.label} - $${value.price}`;
-            option.setAttribute("data-price", value.price);
-            quantityElement.appendChild(option);
-        }
-
-        // Attach change event listener to update the price
-        quantityElement.addEventListener("change", () => {
-            const selectedValue = quantityElement.value;
-            const selectedPrice = weights[selectedValue]?.price || basePriceElement.dataset.basePrice;
-
-            // Update displayed price
-            basePriceElement.textContent = `$${selectedPrice}`;
-            basePriceElement.setAttribute("data-base-price", selectedPrice);
-
-            // Update Add to Cart button data
-            if (addToCartButton) {
-                addToCartButton.setAttribute("data-price", selectedPrice);
-            }
-        });
-    } else {
-        console.warn(`No weight-based options found for product: ${productName}`);
-    }
-}
