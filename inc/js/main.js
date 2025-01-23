@@ -134,16 +134,49 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Function to check if all required fields are filled
     function validateFields() {
-        let allFilled = true;
+        let customerData = {};
+        let cartData = [];
 
-        requiredFields.forEach((field) => {
-            if (!field.value.trim()) {
-                allFilled = false;
+        try {
+            const customerDataString = localStorage.getItem("customerData");
+            if (customerDataString) {
+                customerData = JSON.parse(decodeURIComponent(customerDataString));
             }
-        });
+        } catch (error) {
+            console.error("Failed to parse customerData:", error);
+        }
 
-        // Enable or disable the button based on the validation
-        checkoutButton.disabled = !allFilled;
+        try {
+            const cartDataString = localStorage.getItem("cartData");
+            if (cartDataString) {
+                cartData = JSON.parse(decodeURIComponent(cartDataString));
+            }
+        } catch (error) {
+            console.error("Failed to parse cartData:", error);
+        }
+
+        const allRequiredFilled = customerData.name && customerData.phone && customerData.email &&
+            customerData.address && customerData.city && customerData.paymentMethod;
+
+        const cartHasItems = cartData.length > 0;
+
+        const cartContainer = document.querySelector("#cartContainer");
+        const checkoutButton = document.getElementById("checkoutButton");
+
+        if (allRequiredFilled && cartHasItems) {
+            cartContainer.style.border = "2px solid #28a745"; // Green border if valid
+            checkoutButton.disabled = false; // Enable checkout button
+        } else {
+            cartContainer.style.border = "1px dashed #ff0000"; // Red border if invalid
+            checkoutButton.disabled = true; // Disable checkout button
+        }
+
+        console.log("Validation status:", {
+            allRequiredFilled,
+            cartHasItems,
+            customerData,
+            cartData,
+        });
     }
 
     // Add event listeners to all required fields

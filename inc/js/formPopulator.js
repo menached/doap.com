@@ -67,16 +67,26 @@ export function populateFormFromStorage() {
         console.warn("validateFields function is not defined.");
     }
 
-    // Add event listener for all form fields
+    // Add dynamic validation for all fields
+    attachDynamicValidation();
+}
+
+function attachDynamicValidation() {
     const formFields = document.querySelectorAll(".customer-info input, .customer-info textarea, #paymentMethod");
     formFields.forEach((field) => {
-        field.addEventListener("input", () => {
-            console.log(`Field changed: ${field.id}, New value: ${field.value}`);
-            if (typeof validateFields === "function") {
-                validateFields(); // Recheck form state on any field change
-            }
-        });
+        field.addEventListener("input", handleFieldChange);
     });
+
+    console.log("Dynamic validation attached to all fields.");
+}
+
+function handleFieldChange(event) {
+    console.log(`Field changed: ${event.target.id}, New value: ${event.target.value}`);
+    if (typeof validateFields === "function") {
+        validateFields();
+    } else {
+        console.warn("validateFields function is not defined.");
+    }
 }
 
 
