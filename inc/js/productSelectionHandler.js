@@ -1,5 +1,6 @@
 import { weightBasedProducts } from './subdomainData.js';
 //import { saveCartData } from './formHandler.js';
+import { updateMinimumOrderMessage } from './formHandler.js';
 
 document.addEventListener("DOMContentLoaded", () => {
     const addToCartButtons = document.querySelectorAll(".add-to-cart-button");
