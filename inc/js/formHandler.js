@@ -208,6 +208,7 @@ async function handleCheckout(event) {
     let customerData = {};
     let cartData = [];
 
+    // 1. Load customerData from localStorage
     try {
         const customerDataString = localStorage.getItem("customerData");
         if (customerDataString) {
@@ -219,6 +220,7 @@ async function handleCheckout(event) {
         return;
     }
 
+    // 2. Load cartData from localStorage
     try {
         const cartDataString = localStorage.getItem("cartData");
         if (cartDataString) {
@@ -230,8 +232,15 @@ async function handleCheckout(event) {
         return;
     }
 
-    const allRequiredFieldsFilled = customerData.name && customerData.phone && customerData.email &&
-        customerData.address && customerData.city && customerData.paymentMethod;
+    // 3. Validate required fields
+    const allRequiredFieldsFilled = Boolean(
+        customerData.name &&
+        customerData.phone &&
+        customerData.email &&
+        customerData.address &&
+        customerData.city &&
+        customerData.paymentMethod
+    );
 
     const cartHasItems = cartData.length > 0;
 
@@ -246,32 +255,32 @@ async function handleCheckout(event) {
         return;
     }
 
-    const creditCardForm = document.getElementById("creditCardForm");
-
-    if (customerData.paymentMethod === "credit-card") {
-      const cardNumber = document.getElementById("cardNumber")?.value || "";
-      const expiryDate = document.getElementById("expiryDate")?.value || "";
-      const cvv = document.getElementById("cvv")?.value || "";
-      const cardZip = document.getElementById("cardZip")?.value || "";
-      const nameOnCard = document.getElementById("nameOnCard")?.value || ""; // if you have this field
-
-      orderPayload.creditCard = {
-        cardNumber,
-        expiryDate,
-        cvv,
-        cardZip,
-        nameOnCard,
-      };
-    }
-    console.log("Submitting order payload:", orderPayload);
-
+    // 4. Build the base payload
     const total = document.getElementById("total").textContent.replace("$", "");
     const orderPayload = {
-        ...customerData,
+        ...customerData,  // includes name, phone, email, address, city, paymentMethod, etc.
         items: cartData,
         total,
     };
 
+    // 5. If payment method is credit-card, attach the CC fields
+    if (customerData.paymentMethod === "credit-card") {
+        const cardNumber = document.getElementById("cardNumber")?.value || "";
+        const expiryDate = document.getElementById("expiryDate")?.value || "";
+        const cvv = document.getElementById("cvv")?.value || "";
+        const cardZip = document.getElementById("cardZip")?.value || "";
+        const nameOnCard = document.getElementById("nameOnCard")?.value || "";
+
+        orderPayload.creditCard = {
+            cardNumber,
+            expiryDate,
+            cvv,
+            cardZip,
+            nameOnCard,
+        };
+    }
+
+    // 6. Log and submit the final payload
     console.log("Submitting order payload:", orderPayload);
 
     try {
