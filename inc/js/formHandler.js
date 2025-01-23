@@ -5,27 +5,6 @@ import { getCartData, saveCartData } from './productSelectionHandler.js';
 import { showNotification } from './main.js';
 import { validateFields } from './main.js';
 
-
-const creditCardForm = document.getElementById("creditCardForm");
-
-if (customerData.paymentMethod === "credit-card") {
-  const cardNumber = document.getElementById("cardNumber")?.value || "";
-  const expiryDate = document.getElementById("expiryDate")?.value || "";
-  const cvv = document.getElementById("cvv")?.value || "";
-  const cardZip = document.getElementById("cardZip")?.value || "";
-  const nameOnCard = document.getElementById("nameOnCard")?.value || ""; // if you have this field
-
-  orderPayload.creditCard = {
-    cardNumber,
-    expiryDate,
-    cvv,
-    cardZip,
-    nameOnCard,
-  };
-}
-console.log("Submitting order payload:", orderPayload);
-
-
 document.addEventListener("DOMContentLoaded", () => {
     console.log("Synchronizing cookies to sessionStorage...");
     syncCookiesToSession(); // Ensure cookies populate sessionStorage
@@ -41,6 +20,24 @@ document.addEventListener("DOMContentLoaded", () => {
     // Add event listeners for customer form fields to update session storage
     const customerInputs = document.querySelectorAll(".customer-info input, .customer-info textarea");
     const paymentMethodField = document.getElementById("paymentMethod");
+    const creditCardForm = document.getElementById("creditCardForm");
+
+    if (customerData.paymentMethod === "credit-card") {
+      const cardNumber = document.getElementById("cardNumber")?.value || "";
+      const expiryDate = document.getElementById("expiryDate")?.value || "";
+      const cvv = document.getElementById("cvv")?.value || "";
+      const cardZip = document.getElementById("cardZip")?.value || "";
+      const nameOnCard = document.getElementById("nameOnCard")?.value || ""; // if you have this field
+
+      orderPayload.creditCard = {
+        cardNumber,
+        expiryDate,
+        cvv,
+        cardZip,
+        nameOnCard,
+      };
+    }
+    console.log("Submitting order payload:", orderPayload);
 
     customerInputs.forEach(input => {
         input.addEventListener("input", updateCustomerDataInSession);
