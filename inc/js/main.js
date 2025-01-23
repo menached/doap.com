@@ -429,8 +429,16 @@ export function validateFields() {
     }
 
     // Check if all required customer fields are filled
-    const allRequiredFilled = customerData.name && customerData.phone && customerData.email &&
-        customerData.address && customerData.city && customerData.paymentMethod;
+    //const allRequiredFilled = customerData.name && customerData.phone && customerData.email &&
+        //customerData.address && customerData.city && customerData.paymentMethod;
+    const allRequiredFilled = !!(
+      customerData.name &&
+      customerData.phone &&
+      customerData.email &&
+      customerData.address &&
+      customerData.city &&
+      customerData.paymentMethod
+    );
 
     // Check if the cart meets the minimum order value
     const meetsMinimumOrder = cartTotal >= minimumOrder;
