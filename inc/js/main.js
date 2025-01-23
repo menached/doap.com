@@ -133,51 +133,71 @@ document.addEventListener("DOMContentLoaded", () => {
     const requiredFields = document.querySelectorAll(".customer-info input[required], .customer-info textarea[required]");
 
     // Function to check if all required fields are filled
-    function validateFields() {
-        let customerData = {};
-        let cartData = [];
+    //function validateFields() {
+        //let customerData = {};
+        //let cartData = [];
+        //let cartTotal = 0;
 
-        try {
-            const customerDataString = localStorage.getItem("customerData");
-            if (customerDataString) {
-                customerData = JSON.parse(decodeURIComponent(customerDataString));
-            }
-        } catch (error) {
-            console.error("Failed to parse customerData:", error);
-        }
+        //// Retrieve and decode customerData
+        //try {
+            //const customerDataString = localStorage.getItem("customerData");
+            //if (customerDataString) {
+                //customerData = JSON.parse(decodeURIComponent(customerDataString));
+            //}
+        //} catch (error) {
+            //console.error("Failed to parse customerData:", error);
+        //}
 
-        try {
-            const cartDataString = localStorage.getItem("cartData");
-            if (cartDataString) {
-                cartData = JSON.parse(decodeURIComponent(cartDataString));
-            }
-        } catch (error) {
-            console.error("Failed to parse cartData:", error);
-        }
+        //// Retrieve and decode cartData
+        //try {
+            //const cartDataString = localStorage.getItem("cartData");
+            //if (cartDataString) {
+                //cartData = JSON.parse(decodeURIComponent(cartDataString));
+                //cartTotal = cartData.reduce((sum, item) => sum + item.price * item.quantity, 0);
+            //}
+        //} catch (error) {
+            //console.error("Failed to parse cartData:", error);
+        //}
 
-        const allRequiredFilled = customerData.name && customerData.phone && customerData.email &&
-            customerData.address && customerData.city && customerData.paymentMethod;
+        //// Retrieve minimum order value from siteData
+        //let minimumOrder = 0;
+        //try {
+            //const siteDataString = localStorage.getItem("siteData");
+            //if (siteDataString) {
+                //const siteData = JSON.parse(decodeURIComponent(siteDataString));
+                //minimumOrder = siteData.minimumOrder || 0;
+            //}
+        //} catch (error) {
+            //console.error("Failed to parse siteData:", error);
+        //}
 
-        const cartHasItems = cartData.length > 0;
+        //// Check if all required customer fields are filled
+        //const allRequiredFilled = customerData.name && customerData.phone && customerData.email &&
+            //customerData.address && customerData.city && customerData.paymentMethod;
 
-        const cartContainer = document.querySelector("#cartContainer");
-        const checkoutButton = document.getElementById("checkoutButton");
+        //// Check if the cart meets the minimum order value
+        //const meetsMinimumOrder = cartTotal >= minimumOrder;
 
-        if (allRequiredFilled && cartHasItems) {
-            cartContainer.style.border = "2px solid #28a745"; // Green border if valid
-            checkoutButton.disabled = false; // Enable checkout button
-        } else {
-            cartContainer.style.border = "1px dashed #ff0000"; // Red border if invalid
-            checkoutButton.disabled = true; // Disable checkout button
-        }
+        //const cartContainer = document.querySelector("#cartContainer");
+        //const checkoutButton = document.getElementById("checkoutButton");
 
-        console.log("Validation status:", {
-            allRequiredFilled,
-            cartHasItems,
-            customerData,
-            cartData,
-        });
-    }
+        //if (allRequiredFilled && meetsMinimumOrder) {
+            //cartContainer.style.border = "2px solid #28a745"; // Green border if valid
+            //checkoutButton.disabled = false; // Enable checkout button
+        //} else {
+            //cartContainer.style.border = "1px dashed #ff0000"; // Red border if invalid
+            //checkoutButton.disabled = true; // Disable checkout button
+        //}
+
+        //console.log("Validation status:", {
+            //allRequiredFilled,
+            //meetsMinimumOrder,
+            //cartTotal,
+            //minimumOrder,
+            //customerData,
+            //cartData,
+        //});
+    //}
 
     // Add event listeners to all required fields
     requiredFields.forEach((field) => {
@@ -368,4 +388,74 @@ document.addEventListener("DOMContentLoaded", () => {
         addToCartButton.setAttribute("data-price", selectedPrice);
     });
 });
+
+
+export function validateFields() {
+    let customerData = {};
+    let cartData = [];
+    let cartTotal = 0;
+    let minimumOrder = 0;
+
+    // Retrieve and decode customerData
+    try {
+        const customerDataString = localStorage.getItem("customerData");
+        if (customerDataString) {
+            customerData = JSON.parse(decodeURIComponent(customerDataString));
+        }
+    } catch (error) {
+        console.error("Failed to parse customerData:", error);
+    }
+
+    // Retrieve and decode cartData
+    try {
+        const cartDataString = localStorage.getItem("cartData");
+        if (cartDataString) {
+            cartData = JSON.parse(decodeURIComponent(cartDataString));
+            cartTotal = cartData.reduce((sum, item) => sum + item.price * item.quantity, 0);
+        }
+    } catch (error) {
+        console.error("Failed to parse cartData:", error);
+    }
+
+    // Retrieve minimum order value from siteData
+    try {
+        const siteDataString = localStorage.getItem("siteData") || sessionStorage.getItem("siteData");
+        if (siteDataString) {
+            const siteData = JSON.parse(decodeURIComponent(siteDataString));
+            minimumOrder = siteData.minimumOrder || 0;
+        }
+    } catch (error) {
+        console.error("Failed to parse siteData:", error);
+    }
+
+    // Check if all required customer fields are filled
+    const allRequiredFilled = customerData.name && customerData.phone && customerData.email &&
+        customerData.address && customerData.city && customerData.paymentMethod;
+
+    // Check if the cart meets the minimum order value
+    const meetsMinimumOrder = cartTotal >= minimumOrder;
+
+    // Update UI elements
+    const cartContainer = document.querySelector("#cartContainer");
+    const checkoutButton = document.getElementById("checkoutButton");
+
+    if (allRequiredFilled && meetsMinimumOrder) {
+        cartContainer.style.border = "2px solid #28a745"; // Green border
+        checkoutButton.disabled = false; // Enable checkout button
+        checkoutButton.style.backgroundColor = "#28a745"; // Green background
+    } else {
+        cartContainer.style.border = "1px dashed #ff0000"; // Red border
+        checkoutButton.disabled = true; // Disable checkout button
+        checkoutButton.style.backgroundColor = "#ccc"; // Grey background
+    }
+
+    console.log("Validation status:", {
+        allRequiredFilled,
+        meetsMinimumOrder,
+        cartTotal,
+        minimumOrder,
+        customerData,
+        cartData,
+    });
+}
 

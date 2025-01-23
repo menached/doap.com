@@ -3,6 +3,7 @@ import { subdomainData } from './data.js';
 import { syncCookiesToSession } from './consentHandler.js';
 import { getCartData, saveCartData } from './productSelectionHandler.js';
 import { showNotification } from './main.js';
+import { validateFields } from './main.js';
 
 document.addEventListener("DOMContentLoaded", () => {
     console.log("Synchronizing cookies to sessionStorage...");
@@ -24,11 +25,36 @@ document.addEventListener("DOMContentLoaded", () => {
         input.addEventListener("input", updateCustomerDataInSession);
     });
 
-    paymentMethodField.addEventListener("change", updateCustomerDataInSession);
+    if (paymentMethodField) {
+        paymentMethodField.addEventListener("change", updateCustomerDataInSession);
+    }
+    
     const checkoutButton = document.getElementById("checkoutButton");
     if (checkoutButton) {
         checkoutButton.addEventListener("click", handleCheckout);
     }
+
+
+        // Validate on customer input changes
+    customerInputs.forEach((input) => {
+        input.addEventListener("input", validateFields);
+    });
+
+    // Validate on payment method change
+    if (paymentMethodField) {
+        paymentMethodField.addEventListener("change", validateFields);
+    }
+
+    // Validate on cart total changes
+    const totalElement = document.getElementById("total");
+    const observer = new MutationObserver(() => {
+        validateFields(); // Revalidate when cart total changes
+    });
+
+    if (totalElement) {
+        observer.observe(totalElement, { childList: true, subtree: true });
+    }
+
 
     validateFields(); // Validate fields on page load
 });
@@ -173,63 +199,6 @@ function updateCustomerDataInStorage() {
 
     localStorage.setItem("customerData", encodeURIComponent(JSON.stringify(customerData)));
     console.log("Customer data saved to localStorage:", customerData);
-}
-
-//function saveCartData(cartData) {
-    //localStorage.setItem("cartData", encodeURIComponent(JSON.stringify(cartData)));
-    //console.log("Cart data saved to localStorage:", cartData);
-//}
-
-
-// Validate all fields, including payment method
-function validateFields() {
-    let customerData = {};
-    let cartData = [];
-
-    // Retrieve and decode customerData
-    try {
-        const customerDataString = localStorage.getItem("customerData");
-        if (customerDataString) {
-            customerData = JSON.parse(decodeURIComponent(customerDataString));
-        }
-    } catch (error) {
-        console.error("Failed to parse customerData:", error);
-    }
-
-    // Retrieve and decode cartData
-    try {
-        const cartDataString = localStorage.getItem("cartData");
-        if (cartDataString) {
-            cartData = JSON.parse(decodeURIComponent(cartDataString));
-        }
-    } catch (error) {
-        console.error("Failed to parse cartData:", error);
-    }
-
-    // Check if all required customer fields are filled
-    const allRequiredFilled = customerData.name && customerData.phone && customerData.email &&
-        customerData.address && customerData.city && customerData.paymentMethod;
-
-    // Check if the cart has items
-    const cartHasItems = cartData.length > 0;
-
-    const cartContainer = document.querySelector("#cartContainer");
-    const checkoutButton = document.getElementById("checkoutButton");
-
-    if (allRequiredFilled && cartHasItems) {
-        cartContainer.style.border = "2px solid #28a745"; // Green border if valid
-        checkoutButton.disabled = false; // Enable checkout button
-    } else {
-        cartContainer.style.border = "1px dashed #ff0000"; // Red border if invalid
-        checkoutButton.disabled = true; // Disable checkout button
-    }
-
-    console.log("Validation status:", {
-        allRequiredFilled,
-        cartHasItems,
-        customerData,
-        cartData,
-    });
 }
 
 // Handle the checkout process
