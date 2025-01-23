@@ -123,6 +123,7 @@ document.addEventListener("DOMContentLoaded", () => {
         saveCartData(cartData); // Save updated cart data
         updateButtonState(); // Update button states
         updateCartDisplay(); // Update cart UI
+        updateMinimumOrderMessage(); // Update minimum order message
     }
 
     // Attach event listeners to "Add to Cart" buttons
