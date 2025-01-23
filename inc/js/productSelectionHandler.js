@@ -6,8 +6,8 @@ document.addEventListener("DOMContentLoaded", () => {
     // Function to retrieve cart data from sessionStorage
     function getCartData() {
         try {
-            return sessionStorage.getItem("cartData")
-                ? JSON.parse(decodeURIComponent(sessionStorage.getItem("cartData")))
+            return localStorage.getItem("cartData")
+                ? JSON.parse(decodeURIComponent(localStorage.getItem("cartData")))
                 : [];
         } catch (error) {
             console.error("Failed to parse cartData:", error);
@@ -17,21 +17,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Function to save cart data to sessionStorage
     function saveCartData(cartData) {
-        sessionStorage.setItem("cartData", encodeURIComponent(JSON.stringify(cartData)));
+        localStorage.setItem("cartData", encodeURIComponent(JSON.stringify(cartData)));
     }
 
     // Function to update button states based on cart data
     function updateButtonState() {
         const cartData = getCartData();
 
-        addToCartButtons.forEach(button => {
+        document.querySelectorAll(".add-to-cart-button").forEach((button) => {
             const productName = button.getAttribute("data-product-name");
-            const isInCart = cartData.some(item => item.name === productName);
+            const isInCart = cartData.some((item) => item.name === productName);
 
             if (isInCart) {
                 button.disabled = true;
-                button.textContent = "In Cart"; // Optional: Change button text
-                button.classList.add("disabled"); // Add a disabled styling class
+                button.textContent = "In Cart";
+                button.classList.add("disabled");
             } else {
                 button.disabled = false;
                 button.textContent = "Add to Cart";
@@ -43,8 +43,6 @@ document.addEventListener("DOMContentLoaded", () => {
     // Function to update cart display in cartsection.html
     function updateCartDisplay() {
         const cartData = getCartData();
-        console.log("Cart Data during display update:", cartData); // Debugging cart data
-
         const selectedItemsList = document.getElementById("selectedItemsList");
         const totalElement = document.getElementById("total");
         let totalPrice = 0;
@@ -53,11 +51,13 @@ document.addEventListener("DOMContentLoaded", () => {
         selectedItemsList.innerHTML = "";
 
         // Populate cart items
-        cartData.forEach(item => {
-            totalPrice += item.price * item.quantity; // Calculate total price
+        cartData.forEach((item) => {
+            const linePrice = item.price * item.quantity; // Correct line item price
+            totalPrice += linePrice; // Add to total price
+
             const li = document.createElement("li");
             li.innerHTML = `
-                ${item.name} - ${item.weight || ''} $${item.price.toFixed(2)}
+                ${item.name} - ${item.weight || ''} $${item.price.toFixed(2)} x ${item.quantity} = $${linePrice.toFixed(2)}
                 <span class="remove-item" data-product-name="${item.name}" style="color: red; cursor: pointer;">Remove</span>
             `;
             selectedItemsList.appendChild(li);
@@ -71,26 +71,37 @@ document.addEventListener("DOMContentLoaded", () => {
     function addToCart(button) {
         const product = button.closest(".product");
         const productName = button.getAttribute("data-product-name");
-        const price = parseFloat(button.getAttribute("data-price"));
+        const basePrice = parseFloat(button.getAttribute("data-price")); // Per-unit price
         const quantityElement = product.querySelector(".quantity");
-        const quantity = quantityElement ? parseInt(quantityElement.value, 10) : 1;
-        const weight = quantityElement?.selectedOptions[0]?.textContent.split(" - ")[0] || ""; // Extract weight from dropdown
+        let quantity = 1; // Default quantity
+        let weight = ""; // Default weight for non-dropdown products
+
+        if (quantityElement) {
+            if (quantityElement.tagName.toLowerCase() === "select") {
+                // For dropdown-based products (sold by weight)
+                weight = quantityElement.selectedOptions[0]?.textContent.split(" - ")[0] || "";
+            } else {
+                // For quantity-based products (sold in units)
+                quantity = parseInt(quantityElement.value, 10) || 1; // Ensure quantity is at least 1
+            }
+        }
 
         let cartData = getCartData();
 
         // Ensure only one instance of the product exists in the cart
         const existingProductIndex = cartData.findIndex(
-            item => item.name === productName && item.weight === weight
+            (item) => item.name === productName && item.weight === weight
         );
+
         if (existingProductIndex !== -1) {
-            // Update quantity of the existing product
+            // Increment quantity for existing entry
             cartData[existingProductIndex].quantity += quantity;
         } else {
-            // Add new product with weight
-            cartData.push({ name: productName, price, quantity, weight });
+            // Add new product
+            cartData.push({ name: productName, price: basePrice, quantity, weight });
         }
 
-        console.log("Cart Data after addition:", cartData); // Debugging cart data
+        console.log("Cart Data after addition:", cartData);
 
         saveCartData(cartData); // Save updated cart data
         updateButtonState(); // Update button states
@@ -141,9 +152,9 @@ document.addEventListener("DOMContentLoaded", () => {
             // Populate dropdown options from weightBasedProducts
             for (const [key, value] of Object.entries(weights)) {
                 const option = document.createElement("option");
-                option.value = key;
+                option.value = key; // Use key for identification only
                 option.textContent = `${value.label} - $${value.price}`;
-                option.setAttribute("data-price", value.price);
+                option.setAttribute("data-price", value.price); // Per-unit price
                 quantityElement.appendChild(option);
             }
 
@@ -161,8 +172,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     addToCartButton.setAttribute("data-price", selectedPrice);
                 }
             });
-        } else {
-            console.warn(`No weight-based options found for product: ${productName}`);
         }
     }
 
@@ -184,4 +193,71 @@ document.addEventListener("DOMContentLoaded", () => {
     updateButtonState();
     updateCartDisplay();
 });
+
+
+
+function updateCustomerDataInStorage() {
+    const customerData = {
+        name: document.getElementById("name")?.value || "",
+        phone: document.getElementById("phone")?.value || "",
+        email: document.getElementById("email")?.value || "",
+        address: document.getElementById("address")?.value || "",
+        city: document.getElementById("city")?.value || "",
+        specialInstructions: document.getElementById("specialInstructions")?.value || "",
+        paymentMethod: document.getElementById("paymentMethod")?.value || ""
+    };
+
+    // Save to localStorage for persistence across tabs and sessions
+    localStorage.setItem("customerData", JSON.stringify(customerData));
+    console.log("Updated customerData in localStorage:", customerData);
+
+    // Optionally save to cookies if consent is given
+    if (getCookie("cookieconsent_status") === "allow") {
+        setCookie("customerData", customerData, 7);
+        console.log("Updated customerData in cookies:", customerData);
+    }
+}
+
+//function updateCustomerDataInStorage() {
+    //const customerData = {
+        //name: document.getElementById("name")?.value || "",
+        //phone: document.getElementById("phone")?.value || "",
+        //email: document.getElementById("email")?.value || "",
+        //address: document.getElementById("address")?.value || "",
+        //city: document.getElementById("city")?.value || "",
+        //specialInstructions: document.getElementById("specialInstructions")?.value || "",
+    //};
+
+    //localStorage.setItem("customerData", JSON.stringify(customerData));
+    //console.log("Updated Customer Data in Storage:", customerData);
+//}
+
+
+
+//document.querySelectorAll(".customer-info input, .customer-info textarea").forEach((input) => {
+    //input.addEventListener("input", updateCustomerDataInStorage);
+//});
+
+document.querySelectorAll("#customerForm input, #customerForm textarea").forEach((input) => {
+    input.addEventListener("input", updateCustomerDataInStorage);
+});
+
+
+
+
+export function getCartData() {
+    try {
+        return localStorage.getItem("cartData")
+            ? JSON.parse(decodeURIComponent(localStorage.getItem("cartData")))
+            : [];
+    } catch (error) {
+        console.error("Failed to parse cartData:", error);
+        return [];
+    }
+}
+
+
+export function saveCartData(cartData) {
+    localStorage.setItem("cartData", encodeURIComponent(JSON.stringify(cartData)));
+}
 

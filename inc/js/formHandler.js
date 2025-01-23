@@ -1,6 +1,8 @@
 import { setCookie, getCookie } from './cookieManager.js';
 import { subdomainData } from './data.js';
 import { syncCookiesToSession } from './consentHandler.js';
+import { getCartData, saveCartData } from './productSelectionHandler.js';
+import { showNotification } from './main.js';
 
 document.addEventListener("DOMContentLoaded", () => {
     console.log("Synchronizing cookies to sessionStorage...");
@@ -34,20 +36,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Initialize customerData in sessionStorage
 function initializeCustomerData() {
-    if (!sessionStorage.getItem("customerData")) {
-        const customerCookie = getCookie("customerData");
+    // Check if customerData exists in localStorage
+    if (!localStorage.getItem("customerData")) {
+        const customerCookie = getCookie("customerData"); // Fallback to cookies
         if (customerCookie) {
             try {
                 const parsedCustomerData = JSON.parse(decodeURIComponent(customerCookie));
-                sessionStorage.setItem("customerData", encodeURIComponent(JSON.stringify(parsedCustomerData)));
-                console.log("Loaded customerData from cookies into sessionStorage:", parsedCustomerData);
+                localStorage.setItem("customerData", JSON.stringify(parsedCustomerData)); // Save to localStorage
+                console.log("Loaded customerData from cookies into localStorage:", parsedCustomerData);
                 return; // Prevent further initialization
             } catch (error) {
                 console.error("Failed to parse customerData from cookies:", error);
             }
         }
 
-        // Set default data if no cookies or session data exists
+        // Set default data if no cookies or localStorage data exists
         const defaultCustomerData = {
             name: "",
             phone: "",
@@ -57,11 +60,11 @@ function initializeCustomerData() {
             specialInstructions: "",
             paymentMethod: "" // Initialize payment method as empty
         };
-        sessionStorage.setItem("customerData", encodeURIComponent(JSON.stringify(defaultCustomerData)));
-        console.warn("Default customerData set in sessionStorage.");
+        localStorage.setItem("customerData", JSON.stringify(defaultCustomerData));
+        console.warn("Default customerData set in localStorage.");
     } else {
-        const existingCustomerData = JSON.parse(decodeURIComponent(sessionStorage.getItem("customerData")));
-        console.log("Existing customerData already in sessionStorage:", existingCustomerData);
+        const existingCustomerData = JSON.parse(localStorage.getItem("customerData"));
+        console.log("Existing customerData already in localStorage:", existingCustomerData);
     }
 }
 
@@ -90,7 +93,7 @@ function initializeSiteData() {
 }
 
 // Update customerData in sessionStorage and cookies
-function updateCustomerDataInSession() {
+function updateCustomerDataInStorage() {
     const customerData = {
         name: document.getElementById("name")?.value || "",
         phone: document.getElementById("phone")?.value || "",
@@ -101,19 +104,40 @@ function updateCustomerDataInSession() {
         paymentMethod: document.getElementById("paymentMethod")?.value || ""
     };
 
-    sessionStorage.setItem("customerData", encodeURIComponent(JSON.stringify(customerData)));
-    console.log("Updated customerData in sessionStorage:", JSON.parse(decodeURIComponent(sessionStorage.getItem("customerData"))));
+    // Save to localStorage for persistence across tabs and sessions
+    localStorage.setItem("customerData", JSON.stringify(customerData));
+    console.log("Updated customerData in localStorage:", customerData);
 
+    // Optionally save to cookies if consent is given
     if (getCookie("cookieconsent_status") === "allow") {
-        console.log("Cookies before sync:", document.cookie);
         setCookie("customerData", customerData, 7);
         console.log("Updated customerData in cookies:", customerData);
     }
-    console.log("SessionStorage after cookie sync:", JSON.parse(decodeURIComponent(sessionStorage.getItem("customerData"))));
-
-    // Validate fields after update
-    validateFields();
 }
+
+
+
+//function updateCustomerDataInStorage() {
+    //const customerData = {
+        //name: document.getElementById("name")?.value || "",
+        //phone: document.getElementById("phone")?.value || "",
+        //email: document.getElementById("email")?.value || "",
+        //address: document.getElementById("address")?.value || "",
+        //city: document.getElementById("city")?.value || "",
+        //specialInstructions: document.getElementById("specialInstructions")?.value || "",
+        //paymentMethod: document.getElementById("paymentMethod")?.value || ""
+    //};
+
+    //// Save to localStorage for persistence across tabs and sessions
+    //localStorage.setItem("customerData", JSON.stringify(customerData));
+    //console.log("Updated customerData in localStorage:", customerData);
+
+    //// Optionally save to cookies if required
+    //if (getCookie("cookieconsent_status") === "allow") {
+        //setCookie("customerData", customerData, 7);
+        //console.log("Updated customerData in cookies:", customerData);
+    //}
+//}
 
 // Validate all fields, including payment method
 function validateFields() {
@@ -137,23 +161,34 @@ function validateFields() {
 async function handleCheckout(event) {
     event.preventDefault();
 
-    const customerData = JSON.parse(decodeURIComponent(sessionStorage.getItem("customerData") || "{}"));
-    const cartData = sessionStorage.getItem("cartData")
-        ? JSON.parse(decodeURIComponent(sessionStorage.getItem("cartData")))
-        : [];
+    // Retrieve customer data from localStorage
+    const customerData = JSON.parse(localStorage.getItem("customerData") || "{}");
+    console.log("Customer Data from localStorage:", customerData);
 
-    const total = document.getElementById("total").textContent.replace("$", "");
+    // Validate required fields
+    const allRequiredFieldsFilled = customerData.name && customerData.phone && customerData.email &&
+        customerData.address && customerData.city;
 
-    if (!customerData.name || !customerData.phone || !cartData.length || !customerData.paymentMethod) {
-        alert("Please fill out all required fields and ensure the cart has items.");
+    const cartData = getCartData();
+    const cartHasItems = cartData && cartData.length > 0;
+
+    console.log("All Required Fields Filled:", allRequiredFieldsFilled);
+    console.log("Cart Has Items:", cartHasItems);
+
+    if (!allRequiredFieldsFilled || !cartHasItems) {
+        showNotification("Please fill out all required fields and ensure the cart has items.");
         return;
     }
 
+    // Prepare order payload
+    const total = document.getElementById("total").textContent.replace("$", "");
     const orderPayload = {
         ...customerData,
         items: cartData,
         total,
     };
+
+    console.log("Submitting Order Payload:", orderPayload);
 
     try {
         const response = await fetch("https://eft3wrtpad.execute-api.us-west-2.amazonaws.com/prod/checkout", {
@@ -166,18 +201,17 @@ async function handleCheckout(event) {
 
         const result = await response.json();
         if (response.ok) {
-            alert("Order submitted successfully!");
+            showNotification("Order submitted successfully!");
             console.log("API Response:", result);
         } else {
             console.error("Error response from API:", result);
-            alert("Failed to submit order. Please try again.");
+            showNotification("Failed to submit order. Please try again.");
         }
     } catch (error) {
         console.error("Network error:", error);
-        alert("An error occurred while submitting the order.");
+        showNotification("An error occurred while submitting the order.");
     }
 }
-
 
 
 
@@ -276,4 +310,24 @@ document.addEventListener("DOMContentLoaded", () => {
         updateAccordionVisibility();
     });
 });
+
+
+
+
+
+export function updateCustomerDataInSession() {
+    const customerData = {
+        name: document.getElementById("name")?.value || "",
+        phone: document.getElementById("phone")?.value || "",
+        email: document.getElementById("email")?.value || "",
+        address: document.getElementById("address")?.value || "",
+        city: document.getElementById("city")?.value || "",
+        specialInstructions: document.getElementById("specialInstructions")?.value || "",
+        paymentMethod: document.getElementById("paymentMethod")?.value || ""
+    };
+
+    // Save to localStorage for persistence
+    localStorage.setItem("customerData", JSON.stringify(customerData));
+    console.log("Updated customerData in localStorage:", customerData);
+}
 

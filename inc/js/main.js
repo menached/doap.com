@@ -2,6 +2,22 @@
 import { initCookieConsent } from './consentHandler.js';
 import { populateFormFromStorage } from './formPopulator.js';
 import { subdomainData } from './subdomainData.js';
+import { updateCustomerDataInSession } from './formHandler.js';
+
+
+export function showNotification(message) {
+    const modal = document.getElementById("notification-modal");
+    const messageElement = document.getElementById("notification-message");
+    const closeButton = document.getElementById("close-notification");
+
+    messageElement.textContent = message;
+    modal.style.display = "block";
+
+    closeButton.addEventListener("click", () => {
+        modal.style.display = "none";
+    });
+}
+
 
 document.addEventListener("DOMContentLoaded", () => {
     initCookieConsent();
@@ -66,11 +82,24 @@ document.addEventListener("DOMContentLoaded", () => {
         console.log(`Customer Info Complete: ${allFilled}, Partially Filled: ${partiallyFilled}, Payment Method: ${paymentMethod}, Cart Total: $${cartTotal}, Minimum: $${minimumOrder}`);
     }
 
-    // Listen for changes in customer info inputs
     const customerInputs = document.querySelectorAll(".customer-info input, .customer-info textarea");
-    customerInputs.forEach(input => {
-        input.addEventListener("input", updateCartBorderColor);
+
+    customerInputs.forEach((input) => {
+        input.addEventListener("input", updateCustomerDataInSession);
+        input.addEventListener("input", updateCartBorderColor); // Add both event listeners
     });
+
+
+    //const customerInputs = document.querySelectorAll(".customer-info input, .customer-info textarea");
+    //customerInputs.forEach(input => {
+        //input.addEventListener("input", updateCustomerDataInSession);
+    //});
+
+    //// Listen for changes in customer info inputs
+    //const customerInputs = document.querySelectorAll(".customer-info input, .customer-info textarea");
+    //customerInputs.forEach(input => {
+        //input.addEventListener("input", updateCartBorderColor);
+    //});
 
     // Listen for cart total changes
     const totalElement = document.getElementById("total");
@@ -240,7 +269,6 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-
 document.addEventListener("DOMContentLoaded", () => {
     const button = document.getElementById("checkoutButton");
     const modal = document.getElementById("hoverModal");
@@ -258,7 +286,6 @@ document.addEventListener("DOMContentLoaded", () => {
         modal.style.display = "none";
     });
 });
-
 
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -285,37 +312,9 @@ document.addEventListener("DOMContentLoaded", () => {
         observer.observe(totalElement, { childList: true, subtree: true });
     }
 
-    // Example: Adding items to the cart
-    //const addToCartButtons = document.querySelectorAll(".add-to-cart-button");
-    //addToCartButtons.forEach(button => {
-        //button.addEventListener("click", () => {
-            //// Update the cart total dynamically for demonstration
-            //const currentTotal = parseFloat(totalElement.textContent.replace("$", "")) || 0;
-            //const itemPrice = parseFloat(button.getAttribute("data-price"));
-            //totalElement.textContent = `$${(currentTotal + itemPrice).toFixed(2)}`;
-        //});
-    //});
-
     // Initial visibility check
     updateCartVisibility();
 });
-
-
-//document.addEventListener("DOMContentLoaded", () => {
-    //const cartContainer = document.getElementById("cartContainer");
-    //const addToCartButtons = document.querySelectorAll(".add-to-cart-button");
-
-    //addToCartButtons.forEach(button => {
-        //button.addEventListener("click", () => {
-            //// Optional: Update cart total or add the item to the cart here
-            
-            //// Scroll to the cart container
-            //cartContainer.scrollIntoView({ behavior: "smooth", block: "start" });
-        //});
-    //});
-//});
-
-
 
 
 
@@ -337,26 +336,3 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-//function renderProductQuantityOptions(productName, quantityElement) {
-    //if (weightBasedProducts[productName]) {
-        //const weights = weightBasedProducts[productName].weights;
-
-        //// Clear existing options
-        //quantityElement.innerHTML = "";
-
-        //// Add weight-based options
-        //for (const [key, value] of Object.entries(weights)) {
-            //const option = document.createElement("option");
-            //option.value = key;
-            //option.textContent = `${value.label} - $${value.price}`;
-            //option.setAttribute("data-price", value.price);
-            //quantityElement.appendChild(option);
-        //}
-    //} else {
-        //// Default fallback for products without weight-based options
-        //quantityElement.innerHTML = `
-            //<option value="1" data-price="50">1</option>
-            //<option value="2" data-price="100">2</option>
-        //`;
-    //}
-//}

@@ -15,27 +15,38 @@ export function populateFormFromStorage() {
     formPopulated = true;
 
     let customerData = {};
+
     try {
-        const customerDataString = sessionStorage.getItem("customerData");
+        // Prioritize localStorage for customer data
+        const customerDataString = localStorage.getItem("customerData");
         if (customerDataString) {
-            customerData = JSON.parse(decodeURIComponent(customerDataString));
-            console.log("Loaded customerData from sessionStorage:", customerData);
+            customerData = JSON.parse(customerDataString);
+            console.log("Loaded customerData from localStorage:", customerData);
         } else {
-            console.warn("customerData not found in sessionStorage. Checking cookies...");
-            const customerCookie = getCookie("customerData");
-            if (customerCookie) {
-                customerData = JSON.parse(decodeURIComponent(customerCookie));
-                console.log("Loaded customerData from cookies:", customerData);
-                // Save to sessionStorage for future use
-                sessionStorage.setItem("customerData", encodeURIComponent(JSON.stringify(customerData)));
+            // Fallback to sessionStorage
+            const sessionCustomerDataString = sessionStorage.getItem("customerData");
+            if (sessionCustomerDataString) {
+                customerData = JSON.parse(decodeURIComponent(sessionCustomerDataString));
+                console.log("Loaded customerData from sessionStorage:", customerData);
+            } else {
+                // Fallback to cookies
+                const customerCookie = getCookie("customerData");
+                if (customerCookie) {
+                    customerData = JSON.parse(decodeURIComponent(customerCookie));
+                    console.log("Loaded customerData from cookies:", customerData);
+
+                    // Save the data to localStorage for future use
+                    localStorage.setItem("customerData", JSON.stringify(customerData));
+                    sessionStorage.setItem("customerData", encodeURIComponent(JSON.stringify(customerData)));
+                }
             }
         }
     } catch (error) {
         console.error("Failed to parse customerData:", error);
-        customerData = {}; // Fallback to empty object
+        customerData = {}; // Fallback to an empty object
     }
 
-    // Populate the form fields with the data
+    // Populate the form fields with the loaded customer data
     Object.keys(customerData).forEach((key) => {
         const inputField = document.getElementById(key);
         if (inputField) {
