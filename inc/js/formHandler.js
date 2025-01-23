@@ -464,6 +464,9 @@ function updateCityPlaceholder() {
             if (siteData.city) {
                 cityInput.setAttribute("placeholder", siteData.city); // Set placeholder to the subdomain city name
                 console.log("Updated city input placeholder to:", siteData.city);
+
+                // Trigger validation
+                validateFields();
             } else {
                 console.warn("City value not found in siteData. Placeholder remains as 'City'.");
             }
