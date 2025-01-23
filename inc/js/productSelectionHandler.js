@@ -1,4 +1,5 @@
 import { weightBasedProducts } from './subdomainData.js';
+//import { saveCartData } from './formHandler.js';
 
 document.addEventListener("DOMContentLoaded", () => {
     const addToCartButtons = document.querySelectorAll(".add-to-cart-button");
@@ -16,9 +17,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Function to save cart data to sessionStorage
-    function saveCartData(cartData) {
-        localStorage.setItem("cartData", encodeURIComponent(JSON.stringify(cartData)));
-    }
+    //function saveCartData(cartData) {
+        //localStorage.setItem("cartData", encodeURIComponent(JSON.stringify(cartData)));
+    //}
 
     // Function to update button states based on cart data
     function updateButtonState() {
@@ -195,7 +196,6 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-
 function updateCustomerDataInStorage() {
     const customerData = {
         name: document.getElementById("name")?.value || "",
@@ -218,31 +218,10 @@ function updateCustomerDataInStorage() {
     }
 }
 
-//function updateCustomerDataInStorage() {
-    //const customerData = {
-        //name: document.getElementById("name")?.value || "",
-        //phone: document.getElementById("phone")?.value || "",
-        //email: document.getElementById("email")?.value || "",
-        //address: document.getElementById("address")?.value || "",
-        //city: document.getElementById("city")?.value || "",
-        //specialInstructions: document.getElementById("specialInstructions")?.value || "",
-    //};
-
-    //localStorage.setItem("customerData", JSON.stringify(customerData));
-    //console.log("Updated Customer Data in Storage:", customerData);
-//}
-
-
-
-//document.querySelectorAll(".customer-info input, .customer-info textarea").forEach((input) => {
-    //input.addEventListener("input", updateCustomerDataInStorage);
-//});
 
 document.querySelectorAll("#customerForm input, #customerForm textarea").forEach((input) => {
     input.addEventListener("input", updateCustomerDataInStorage);
 });
-
-
 
 
 export function getCartData() {
@@ -259,5 +238,6 @@ export function getCartData() {
 
 export function saveCartData(cartData) {
     localStorage.setItem("cartData", encodeURIComponent(JSON.stringify(cartData)));
+    console.log("Cart data saved to localStorage:", cartData);
 }
 

@@ -23,16 +23,28 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     paymentMethodField.addEventListener("change", updateCustomerDataInSession);
-
-    // Perform initial validation on page load
-    validateFields();
-
-    // Attach event listener to checkout button
     const checkoutButton = document.getElementById("checkoutButton");
     if (checkoutButton) {
         checkoutButton.addEventListener("click", handleCheckout);
     }
+
+    validateFields(); // Validate fields on page load
 });
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    const checkoutButton = document.getElementById("checkoutButton");
+
+    if (checkoutButton) {
+        checkoutButton.addEventListener("click", handleCheckout);
+        console.log("handleCheckout attached to checkoutButton");
+    } else {
+        console.error("Checkout button not found in DOM.");
+    }
+
+    validateFields(); // Run initial validation on page load
+});
+
 
 // Initialize customerData in sessionStorage
 function initializeCustomerData() {
@@ -104,83 +116,112 @@ function updateCustomerDataInStorage() {
         paymentMethod: document.getElementById("paymentMethod")?.value || ""
     };
 
-    // Save to localStorage for persistence across tabs and sessions
-    localStorage.setItem("customerData", JSON.stringify(customerData));
-    console.log("Updated customerData in localStorage:", customerData);
-
-    // Optionally save to cookies if consent is given
-    if (getCookie("cookieconsent_status") === "allow") {
-        setCookie("customerData", customerData, 7);
-        console.log("Updated customerData in cookies:", customerData);
-    }
+    localStorage.setItem("customerData", encodeURIComponent(JSON.stringify(customerData)));
+    console.log("Customer data saved to localStorage:", customerData);
 }
 
-
-
-//function updateCustomerDataInStorage() {
-    //const customerData = {
-        //name: document.getElementById("name")?.value || "",
-        //phone: document.getElementById("phone")?.value || "",
-        //email: document.getElementById("email")?.value || "",
-        //address: document.getElementById("address")?.value || "",
-        //city: document.getElementById("city")?.value || "",
-        //specialInstructions: document.getElementById("specialInstructions")?.value || "",
-        //paymentMethod: document.getElementById("paymentMethod")?.value || ""
-    //};
-
-    //// Save to localStorage for persistence across tabs and sessions
-    //localStorage.setItem("customerData", JSON.stringify(customerData));
-    //console.log("Updated customerData in localStorage:", customerData);
-
-    //// Optionally save to cookies if required
-    //if (getCookie("cookieconsent_status") === "allow") {
-        //setCookie("customerData", customerData, 7);
-        //console.log("Updated customerData in cookies:", customerData);
-    //}
+//function saveCartData(cartData) {
+    //localStorage.setItem("cartData", encodeURIComponent(JSON.stringify(cartData)));
+    //console.log("Cart data saved to localStorage:", cartData);
 //}
+
 
 // Validate all fields, including payment method
 function validateFields() {
-    const customerData = JSON.parse(decodeURIComponent(sessionStorage.getItem("customerData") || "{}"));
+    let customerData = {};
+    let cartData = [];
+
+    // Retrieve and decode customerData
+    try {
+        const customerDataString = localStorage.getItem("customerData");
+        if (customerDataString) {
+            customerData = JSON.parse(decodeURIComponent(customerDataString));
+        }
+    } catch (error) {
+        console.error("Failed to parse customerData:", error);
+    }
+
+    // Retrieve and decode cartData
+    try {
+        const cartDataString = localStorage.getItem("cartData");
+        if (cartDataString) {
+            cartData = JSON.parse(decodeURIComponent(cartDataString));
+        }
+    } catch (error) {
+        console.error("Failed to parse cartData:", error);
+    }
+
+    // Check if all required customer fields are filled
     const allRequiredFilled = customerData.name && customerData.phone && customerData.email &&
         customerData.address && customerData.city && customerData.paymentMethod;
+
+    // Check if the cart has items
+    const cartHasItems = cartData.length > 0;
 
     const cartContainer = document.querySelector("#cartContainer");
     const checkoutButton = document.getElementById("checkoutButton");
 
-    if (allRequiredFilled) {
+    if (allRequiredFilled && cartHasItems) {
         cartContainer.style.border = "2px solid #28a745"; // Green border if valid
         checkoutButton.disabled = false; // Enable checkout button
     } else {
         cartContainer.style.border = "1px dashed #ff0000"; // Red border if invalid
         checkoutButton.disabled = true; // Disable checkout button
     }
+
+    console.log("Validation status:", {
+        allRequiredFilled,
+        cartHasItems,
+        customerData,
+        cartData,
+    });
 }
 
 // Handle the checkout process
 async function handleCheckout(event) {
-    event.preventDefault();
+    event.preventDefault(); // Prevent default form submission
 
-    // Retrieve customer data from localStorage
-    const customerData = JSON.parse(localStorage.getItem("customerData") || "{}");
-    console.log("Customer Data from localStorage:", customerData);
+    let customerData = {};
+    let cartData = [];
 
-    // Validate required fields
-    const allRequiredFieldsFilled = customerData.name && customerData.phone && customerData.email &&
-        customerData.address && customerData.city;
-
-    const cartData = getCartData();
-    const cartHasItems = cartData && cartData.length > 0;
-
-    console.log("All Required Fields Filled:", allRequiredFieldsFilled);
-    console.log("Cart Has Items:", cartHasItems);
-
-    if (!allRequiredFieldsFilled || !cartHasItems) {
-        showNotification("Please fill out all required fields and ensure the cart has items.");
+    try {
+        const customerDataString = localStorage.getItem("customerData");
+        if (customerDataString) {
+            customerData = JSON.parse(decodeURIComponent(customerDataString));
+        }
+    } catch (error) {
+        console.error("Failed to retrieve customerData:", error);
+        showNotification("Error retrieving customer data. Please refresh and try again.");
         return;
     }
 
-    // Prepare order payload
+    try {
+        const cartDataString = localStorage.getItem("cartData");
+        if (cartDataString) {
+            cartData = JSON.parse(decodeURIComponent(cartDataString));
+        }
+    } catch (error) {
+        console.error("Failed to retrieve cartData:", error);
+        showNotification("Error retrieving cart data. Please refresh and try again.");
+        return;
+    }
+
+    const allRequiredFieldsFilled = customerData.name && customerData.phone && customerData.email &&
+        customerData.address && customerData.city && customerData.paymentMethod;
+
+    const cartHasItems = cartData.length > 0;
+
+    if (!allRequiredFieldsFilled || !cartHasItems) {
+        showNotification("Please fill out all required fields and ensure the cart has items.");
+        console.log("Validation failed:", {
+            allRequiredFieldsFilled,
+            cartHasItems,
+            customerData,
+            cartData,
+        });
+        return;
+    }
+
     const total = document.getElementById("total").textContent.replace("$", "");
     const orderPayload = {
         ...customerData,
@@ -188,7 +229,7 @@ async function handleCheckout(event) {
         total,
     };
 
-    console.log("Submitting Order Payload:", orderPayload);
+    console.log("Submitting order payload:", orderPayload);
 
     try {
         const response = await fetch("https://eft3wrtpad.execute-api.us-west-2.amazonaws.com/prod/checkout", {
@@ -204,7 +245,7 @@ async function handleCheckout(event) {
             showNotification("Order submitted successfully!");
             console.log("API Response:", result);
         } else {
-            console.error("Error response from API:", result);
+            console.error("API Error:", result);
             showNotification("Failed to submit order. Please try again.");
         }
     } catch (error) {
@@ -212,7 +253,6 @@ async function handleCheckout(event) {
         showNotification("An error occurred while submitting the order.");
     }
 }
-
 
 
 
