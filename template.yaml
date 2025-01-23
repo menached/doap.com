@@ -1,5 +1,5 @@
 AWSTemplateFormatVersion: "2010-09-09"
-Description: CloudFormation template to send HTML email alerts using SES and SNS, and store orders in S3.
+Description: CloudFormation template that will send HTML email alerts using SES and SNS, and store orders in S3.
 
 Resources:
   LambdaExecutionRole:
