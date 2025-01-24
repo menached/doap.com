@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Create the submit button
     const button = document.createElement("button");
     button.type = "submit";
+    button.id = "zipform"; // Assigning the id
     button.textContent = "Find a closer Agency";
 
     // Style hover effect for the button

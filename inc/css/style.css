@@ -5,6 +5,124 @@ body, h2, input, button, footer {
 }
 
 
+/* General zip-form-container styling */
+.zip-form-container {
+    display: flex;
+    justify-content: center;
+}
+
+.zip-form-container form {
+    width: 100%; /* Default width */
+    max-width: 1200px; /* Optional: Limit max width for larger screens */
+}
+
+/* Specific rule for screens between 400px and 475px */
+@media (min-width: 400px) and (max-width: 475px) {
+    .zip-form-container form {
+        width: 90%!important; /* Set form width to 90% */
+    }
+    .zip-form-container button { 
+        font-size:.7em!important;
+    }
+}
+
+
+
+.zip-form, .zip-form-container {
+    max-width: 1310px; /* Limits the width */
+}
+
+/* General zip-form styling */
+.zip-form {
+    display: flex;
+    gap: 10px; /* Spacing between input and button */
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 1200px; /* Optional max width for larger screens */
+    margin: 0 auto; /* Center the form */
+}
+
+.zip-form input {
+    flex: 3; /* Default: input takes up 3/4 of the space */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.zip-form button {
+    flex: 1; /* Default: button takes up 1/4 of the space */
+    max-width: 200px; /* Ensure it doesn't exceed this width */
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    text-align: center;
+    cursor: pointer;
+    background-color: #007BFF; /* Default button color */
+    transition: background-color 0.3s ease;
+    margin: 0; /* Default no margins */
+}
+
+.zip-form button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* For screens narrower than 300px */
+@media (max-width: 299px) {
+    .zip-form {
+        flex-direction: column; /* Stack the input and button vertically */
+        gap: 5px; /* Smaller gap for very narrow screens */
+    }
+
+    .zip-form input,
+    .zip-form button {
+        width: 100%; /* Make both input and button full width */
+    }
+}
+
+/* For screens between 300px and 400px */
+@media (min-width: 300px) and (max-width: 399px) {
+    .zip-form button {
+        margin: 0; /* Ensure no margins for the button */
+    }
+
+    .zip-form {
+        flex-direction: column; /* Stack the input and button vertically */
+        gap: 5px; /* Smaller gap */
+    }
+
+    .zip-form input,
+    .zip-form button {
+        width: 100%; /* Full width for both input and button */
+    }
+}
+
+/* For screens 600px and wider */
+@media (min-width: 600px) {
+    .zip-form input {
+        flex: 2; /* Input takes up 2/3 of the space */
+    }
+
+    .zip-form button {
+        flex: 1; /* Button takes up 1/3 of the space */
+    }
+}
+
+
+
+
+
+
+@media (max-width: 1350px) {
+    .doapfooter {
+        margin-left: 18px !important;
+        margin-right: 18px !important;
+    }
+}
+
+
 #sendingOrderModal {
     display: none; /* Hidden by default */
     position: fixed;
@@ -521,9 +639,6 @@ body {
 #cartForm, .fromElsewhere {
     max-width: 1250px; /* Limits the width */
 }
-.zip-form, .zip-form-container {
-    max-width: 1310px; /* Limits the width */
-}
 
 
 #cartContainer {
@@ -925,56 +1040,6 @@ input[type="number"].quantity {
         grid-template-columns: 1fr; /* 1 column on mobile */
     }
 }
-
-
-
-
-.zip-form-container {
-    display: flex;
-    justify-content: center;
-}
-
-.zip-form {
-    display: flex; /* Make form elements inline */
-    width: 100%;
-    max-width: 1200px; /* Optional: limit max width */
-    gap: 10px; /* Add some spacing between the input and button */
-}
-
-.zip-form input {
-    flex: 3; /* 3/4 width of the form */
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box;
-}
-
-.zip-form button {
-    flex: 1; /* 1/4 width of the form */
-    max-width: 200px; /* Optional: set a maximum width for the button */
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    color: white;
-    text-align: center;
-    cursor: pointer;
-}
-
-.zip-form button:hover {
-    background-color: #0056b3; /* Darker blue on hover */
-}
-
-@media (max-width: 600px) {
-    .zip-form {
-        flex-direction: column; /* Stack input and button vertically */
-    }
-
-    .zip-form input,
-    .zip-form button {
-        width: 100%;
-    }
-}
-
 
 
 
