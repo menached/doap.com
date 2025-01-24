@@ -119,8 +119,10 @@
                 <div class="item-details">
                     <p class="item-title">Kief Dipped Preroll</p>
                     <div class="item-quantity product-quantity-size">
-                        <label for="quantity-kief-dipped-preroll-1">Qty:</label>
-                        <input type="number" id="quantity-kief-dipped-preroll-1" class="quantity" min="1" max="99" value="1" name="quantity-kief-dipped-preroll">
+                            <select id="quantity-kief-dipped-preroll-1" class="quantity" name="quantity-kief-dipped-preroll-1">
+                                <option value="1" data-price="20">1 joint</option>
+                                <option value="3" data-price="50">3 joints</option>
+                            </select>
                         <span class="magnify-icon">
                             <i class="fas fa-magnifying-glass"></i>
                         </span>
@@ -137,113 +139,69 @@
 <!-- Tab content for Edibles -->
 <div class="tab-content" id="edibles">
     <div class="item-list">
-        <!-- Product 1: THC Gummy Bears - 100mg Bag -->
+
+        <!-- Product 1: THC Gummy Bears -->
         <div class="product">
-            <label class="item">
-                <input type="checkbox" name="item" value="THC Gummy Bears - 100mg Bag|30">
-                <img src="/images/products/edibles/gummies.webp" alt="THC Gummy Bears - 100mg Bag">
+            <label class="item" data-description="Awesome gummies!">
+                <img src="/images/products/edibles/gummy-bears.webp" alt="THC Gummy Bears">
                 <div class="item-details">
-                    <p class="item-title">THC Gummy Bears - 100mg Bag</p>
+                    <p class="item-title">THC Gummy Bears</p>
                     <div class="item-quantity product-quantity-size">
-                        <label for="quantity-bears-100mg" >Qty:</label>
-                        <input type="number" id="quantity-bears-100mg" class="quantity" min="1" max="99" value="1" name="quantity-bears-100mg">
+                        <label for="quantity-gummy-bears"></label>
+                        <select id="quantity-gummy-bears" class="quantity" name="quantity-gummy-bears">
+                            <option value="1" data-price="25">100mg - $25</option>
+                            <option value="2" data-price="80">1200mg - $80</option>
+                        </select>
                     </div>
-                    <p class="item-price">$30.00</p>
-                    <span class="add-to-cart-button" data-product-name="THC Gummy Bears - 100mg Bag" data-price="30">Add to Cart</span>
+                    <p class="item-price">$<span id="price-gummy-bears">25.00</span></p>
+                    <span class="add-to-cart-button" data-product-name="THC Gummy Bears" data-price="0.00">Add to Cart</span>
                 </div>
                 <div class="added-to-cart" style="display: none;">Added to Cart</div>
             </label>
         </div>
 
-        <!-- Product 2: THC Gummy Bears - 1200mg Bag -->
+
+        <!-- Product 2: THC Gummy Worms -->
         <div class="product">
-            <label class="item">
-                <input type="checkbox" name="item" value="THC Gummy Bears - 1200mg Bag|80">
-                <img src="/images/products/edibles/gummies.webp" alt="THC Gummy Bears - 1200mg Bag">
+            <label class="item" data-description="Awesome gummies!">
+                <img src="/images/products/edibles/gummy-worms.webp" alt="THC Gummy Worms">
                 <div class="item-details">
-                    <p class="item-title">THC Gummy Bears - 1200mg Bag</p>
+                    <p class="item-title">THC Gummy Worms</p>
                     <div class="item-quantity product-quantity-size">
-                        <label for="quantity-bears-1200mg" >Qty:</label>
-                        <input type="number" id="quantity-bears-1200mg" class="quantity" min="1" max="99" value="1" name="quantity-bears-1200mg">
+                        <label for="quantity-gummy-worms"></label>
+                        <select id="quantity-gummy-worms" class="quantity" name="quantity-gummy-worms">
+                            <option value="1" data-price="25">100mg - $25</option>
+                            <option value="2" data-price="80">1200mg - $80</option>
+                        </select>
                     </div>
-                    <p class="item-price">$80.00</p>
-                    <span class="add-to-cart-button" data-product-name="THC Gummy Bears - 1200mg Bag" data-price="80">Add to Cart</span>
+                    <p class="item-price">$<span id="price-gummy-worms">25.00</span></p>
+                    <span class="add-to-cart-button" data-product-name="THC Gummy Worms" data-price="25.00">Add to Cart</span>
                 </div>
                 <div class="added-to-cart" style="display: none;">Added to Cart</div>
             </label>
         </div>
 
-        <!-- Product 3: THC Gummy Worms - 100mg Bag -->
+
+        <!-- Product 3: THC Gummy Rings -->
         <div class="product">
-            <label class="item">
-                <input type="checkbox" name="item" value="THC Gummy Worms - 100mg Bag|30">
-                <img src="/images/products/edibles/gummies.webp" alt="THC Gummy Worms - 100mg Bag">
+            <label class="item" data-description="Awesome gummies!">
+                <img src="/images/products/edibles/gummy-rings.webp" alt="THC Gummy Rings">
                 <div class="item-details">
-                    <p class="item-title">THC Gummy Worms - 100mg Bag</p>
+                    <p class="item-title">THC Gummy Rings</p>
                     <div class="item-quantity product-quantity-size">
-                        <label for="quantity-worms-100mg" >Qty:</label>
-                        <input type="number" id="quantity-worms-100mg" class="quantity" min="1" max="99" value="1" name="quantity-worms-100mg">
+                        <label for="quantity-gummy-rings"></label>
+                        <select id="quantity-gummy-rings" class="quantity" name="quantity-gummy-rings">
+                            <option value="1" data-price="25">100mg - $25</option>
+                            <option value="2" data-price="80">1200mg - $80</option>
+                        </select>
                     </div>
-                    <p class="item-price">$30.00</p>
-                    <span class="add-to-cart-button" data-product-name="THC Gummy Worms - 100mg Bag" data-price="30">Add to Cart</span>
+                    <p class="item-price">$<span id="price-gummy-rings">25.00</span></p>
+                    <span class="add-to-cart-button" data-product-name="THC Gummy Rings" data-price="25.00">Add to Cart</span>
                 </div>
                 <div class="added-to-cart" style="display: none;">Added to Cart</div>
             </label>
         </div>
 
-        <!-- Product 4: THC Gummy Worms - 1200mg Bag -->
-        <div class="product">
-            <label class="item">
-                <input type="checkbox" name="item" value="THC Gummy Worms - 1200mg Bag|80">
-                <img src="/images/products/edibles/gummies.webp" alt="THC Gummy Worms - 1200mg Bag">
-                <div class="item-details">
-                    <p class="item-title">THC Gummy Worms - 1200mg Bag</p>
-                    <div class="item-quantity product-quantity-size">
-                        <label for="quantity-worms-1200mg" >Qty:</label>
-                        <input type="number" id="quantity-worms-1200mg" class="quantity" min="1" max="99" value="1" name="quantity-worms-1200mg">
-                    </div>
-                    <p class="item-price">$80.00</p>
-                    <span class="add-to-cart-button" data-product-name="THC Gummy Worms - 1200mg Bag" data-price="80">Add to Cart</span>
-                </div>
-                <div class="added-to-cart" style="display: none;">Added to Cart</div>
-            </label>
-        </div>
-
-        <!-- Product 5: THC Peach Rings - 100mg Bag -->
-        <div class="product">
-            <label class="item">
-                <input type="checkbox" name="item" value="THC Peach Rings - 100mg Bag|30">
-                <img src="/images/products/edibles/gummies.webp" alt="THC Peach Rings - 100mg Bag">
-                <div class="item-details">
-                    <p class="item-title">THC Peach Rings - 100mg Bag</p>
-                    <div class="item-quantity product-quantity-size">
-                        <label for="quantity-rings-100mg" >Qty:</label>
-                        <input type="number" id="quantity-rings-100mg" class="quantity" min="1" max="99" value="1" name="quantity-rings-100mg">
-                    </div>
-                    <p class="item-price">$30.00</p>
-                    <span class="add-to-cart-button" data-product-name="THC Peach Rings - 100mg Bag" data-price="30">Add to Cart</span>
-                </div>
-                <div class="added-to-cart" style="display: none;">Added to Cart</div>
-            </label>
-        </div>
-
-        <!-- Product 6: THC Peach Rings - 1200mg Bag -->
-        <div class="product">
-            <label class="item">
-                <input type="checkbox" name="item" value="THC Peach Rings - 1200mg Bag|80">
-                <img src="/images/products/edibles/gummies.webp" alt="THC Peach Rings - 1200mg Bag">
-                <div class="item-details">
-                    <p class="item-title">THC Peach Rings - 1200mg Bag</p>
-                    <div class="item-quantity product-quantity-size">
-                        <label for="quantity-rings-1200mg" >Qty:</label>
-                        <input type="number" id="quantity-rings-1200mg" class="quantity" min="1" max="99" value="1" name="quantity-rings-1200mg">
-                    </div>
-                    <p class="item-price">$80.00</p>
-                    <span class="add-to-cart-button" data-product-name="THC Peach Rings - 1200mg Bag" data-price="80">Add to Cart</span>
-                </div>
-                <div class="added-to-cart" style="display: none;">Added to Cart</div>
-            </label>
-        </div>
     </div>
 </div> <!-- End Edibles -->
 

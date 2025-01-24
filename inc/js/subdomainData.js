@@ -1,6 +1,6 @@
 export const weightBasedProducts = {
     "Top Shelf Hydro": {
-        thumbnail: "http://localhost.doap.com/images/products/flower/hyrdoponic-flower.webp", // Add the thumbnail URL
+        thumbnail: "/images/products/flower/hyrdoponic-flower.webp", // Add the thumbnail URL
         weights: {
             1: { label: "1/8 oz. (3.5 grams)", price: 50 },
             2: { label: "1/4 oz. (7 grams)", price: 90 },
@@ -9,14 +9,14 @@ export const weightBasedProducts = {
         },
     },
     "Small Bud Special": {
-        thumbnail: "http://localhost.doap.com/images/products/flower/small-bud-special.webp", // Add the thumbnail URL
+        thumbnail: "/images/products/flower/small-bud-special.webp", // Add the thumbnail URL
         weights: {
             4: { label: "1/2 oz. (14 grams)", price: 75 },
             8: { label: "1 oz. (28 grams)", price: 150 },
         },
     },
     "Organic Greenhouse Flower": {
-        thumbnail: "http://localhost.doap.com/images/products/flower/greenhouse-flower.webp", // Add the thumbnail URL
+        thumbnail: "/images/products/flower/greenhouse-flower.webp", // Add the thumbnail URL
         weights: {
             1: { label: "1/8 oz. (3.5 grams)", price: 30 },
             2: { label: "1/4 oz. (7 grams)", price: 55 },
@@ -25,7 +25,7 @@ export const weightBasedProducts = {
         },
     },
     "Premium Quality Hybrid Prerolls": {
-        thumbnail: "http://localhost.doap.com/images/products/flower/2-joints.webp", // Add the thumbnail URL
+        thumbnail: "/images/products/flower/2-joints.webp", // Add the thumbnail URL
         weights: {
             1: { label: "1 Joint", price: 15.00 },
             2: { label: "2 Joints", price: 28.00 },
@@ -40,9 +40,37 @@ export const weightBasedProducts = {
         },
     },
     "Bakers Dozen Prerolled Cone Joints": {
-        thumbnail: "http://localhost.doap.com/images/products/flower/13-joints.webp", // Add the thumbnail URL
+        thumbnail: "/images/products/flower/13-joints.webp", // Add the thumbnail URL
         weights: {
             1: { label: "13 Joints", price: 100.00 },
+        },
+    },
+    "THC Gummy Bears": {
+        thumbnail: "/images/products/edibles/gummy-bears.webp", // Add the thumbnail URL
+        weights: {
+            1: { label: "100mg bag", price: 25.00 },
+            2: { label: "1200mg bag", price: 80.00 },
+        },
+    },
+    "THC Gummy Worms": {
+        thumbnail: "/images/products/edibles/gummy-worms.webp", // Add the thumbnail URL
+        weights: {
+            1: { label: "100mg bag", price: 25.00 },
+            2: { label: "1200mg bag", price: 80.00 },
+        },
+    },
+    "THC Gummy Rings": {
+        thumbnail: "/images/products/edibles/gummy-rings.webp", // Add the thumbnail URL
+        weights: {
+            1: { label: "100mg bag", price: 25.00 },
+            2: { label: "1200mg bag", price: 80.00 },
+        },
+    },
+    "Kief Dipped Preroll": {
+        thumbnail: "/images/products/flower/kief-dipped-prerolls.webp", // Add the thumbnail URL
+        weights: {
+            1: { label: "1 joint", price: 20.00 },
+            2: { label: "3 joints", price: 50.00 },
         },
     },
 };
