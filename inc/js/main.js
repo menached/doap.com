@@ -90,17 +90,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 
-    //const customerInputs = document.querySelectorAll(".customer-info input, .customer-info textarea");
-    //customerInputs.forEach(input => {
-        //input.addEventListener("input", updateCustomerDataInSession);
-    //});
-
-    //// Listen for changes in customer info inputs
-    //const customerInputs = document.querySelectorAll(".customer-info input, .customer-info textarea");
-    //customerInputs.forEach(input => {
-        //input.addEventListener("input", updateCartBorderColor);
-    //});
-
     // Listen for cart total changes
     const totalElement = document.getElementById("total");
     const observer = new MutationObserver(() => {
@@ -130,82 +119,29 @@ export function getCityDataFromHostname() {
 
 document.addEventListener("DOMContentLoaded", () => {
     const checkoutButton = document.getElementById("checkoutButton");
-    const requiredFields = document.querySelectorAll(".customer-info input[required], .customer-info textarea[required]");
 
-    // Function to check if all required fields are filled
-    //function validateFields() {
-        //let customerData = {};
-        //let cartData = [];
-        //let cartTotal = 0;
+    checkoutButton.addEventListener("click", async () => {
+        const isValid = validateFields();
+        if (!isValid) return;
 
-        //// Retrieve and decode customerData
-        //try {
-            //const customerDataString = localStorage.getItem("customerData");
-            //if (customerDataString) {
-                //customerData = JSON.parse(decodeURIComponent(customerDataString));
-            //}
-        //} catch (error) {
-            //console.error("Failed to parse customerData:", error);
-        //}
-
-        //// Retrieve and decode cartData
-        //try {
-            //const cartDataString = localStorage.getItem("cartData");
-            //if (cartDataString) {
-                //cartData = JSON.parse(decodeURIComponent(cartDataString));
-                //cartTotal = cartData.reduce((sum, item) => sum + item.price * item.quantity, 0);
-            //}
-        //} catch (error) {
-            //console.error("Failed to parse cartData:", error);
-        //}
-
-        //// Retrieve minimum order value from siteData
-        //let minimumOrder = 0;
-        //try {
-            //const siteDataString = localStorage.getItem("siteData");
-            //if (siteDataString) {
-                //const siteData = JSON.parse(decodeURIComponent(siteDataString));
-                //minimumOrder = siteData.minimumOrder || 0;
-            //}
-        //} catch (error) {
-            //console.error("Failed to parse siteData:", error);
-        //}
-
-        //// Check if all required customer fields are filled
-        //const allRequiredFilled = customerData.name && customerData.phone && customerData.email &&
-            //customerData.address && customerData.city && customerData.paymentMethod;
-
-        //// Check if the cart meets the minimum order value
-        //const meetsMinimumOrder = cartTotal >= minimumOrder;
-
-        //const cartContainer = document.querySelector("#cartContainer");
-        //const checkoutButton = document.getElementById("checkoutButton");
-
-        //if (allRequiredFilled && meetsMinimumOrder) {
-            //cartContainer.style.border = "2px solid #28a745"; // Green border if valid
-            //checkoutButton.disabled = false; // Enable checkout button
-        //} else {
-            //cartContainer.style.border = "1px dashed #ff0000"; // Red border if invalid
-            //checkoutButton.disabled = true; // Disable checkout button
-        //}
-
-        //console.log("Validation status:", {
-            //allRequiredFilled,
-            //meetsMinimumOrder,
-            //cartTotal,
-            //minimumOrder,
-            //customerData,
-            //cartData,
-        //});
-    //}
-
-    // Add event listeners to all required fields
-    requiredFields.forEach((field) => {
-        field.addEventListener("input", validateFields);
+        showNotification("Sending your order, please wait...");
+        
+        try {
+            const response = await processOrder();
+            if (response.message === 'Order processed successfully!') {
+                showNotification("Order Completed Successfully!");
+            } else {
+                throw new Error("Unexpected response");
+            }
+        } catch (error) {
+            showNotification("Error processing order. Please try again.");
+            console.error(error);
+        }
     });
 
-    // Initial validation check
-    validateFields();
+    async function processOrder() {
+        return new Promise((resolve) => setTimeout(() => resolve({ message: "Order processed successfully!" }), 2000));
+    }
 });
 
 
@@ -466,4 +402,90 @@ export function validateFields() {
         cartData,
     });
 }
+
+
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    const targetElement = document.querySelector("body > div.page-wrapper > footer > div:nth-child(1) > div");
+
+    // Check if the target element exists
+    if (!targetElement) {
+        console.warn("Target element not found.");
+        return;
+    }
+
+    // Function to check if customer info is complete
+    function isCustomerInfoComplete() {
+        const customerData = {
+            name: document.getElementById("name")?.value || "",
+            phone: document.getElementById("phone")?.value || "",
+            email: document.getElementById("email")?.value || "",
+            address: document.getElementById("address")?.value || "",
+            city: document.getElementById("city")?.value || "",
+        };
+
+        // Check if all required fields are filled
+        return Object.values(customerData).every((value) => value.trim() !== "");
+    }
+
+    // Function to update visibility of the target element
+    function updateElementVisibility() {
+        if (isCustomerInfoComplete()) {
+            targetElement.style.display = "none"; // Hide element
+            console.log("Customer Info Complete. Hiding target element.");
+        } else {
+            targetElement.style.display = "block"; // Show element
+            console.log("Customer Info Incomplete. Showing target element.");
+        }
+    }
+
+    // Attach event listeners to input fields to trigger visibility updates
+    const customerInputs = document.querySelectorAll(".customer-info input, .customer-info textarea");
+    customerInputs.forEach((input) => {
+        input.addEventListener("input", updateElementVisibility);
+    });
+
+    // Run the visibility update on page load
+    updateElementVisibility();
+});
+
+
+
+
+function showSendingOrderModal() {
+    const sendingOrderModal = document.getElementById("sendingOrderModal");
+    if (sendingOrderModal) {
+        sendingOrderModal.style.display = "block"; // Make the modal visible
+    }
+}
+
+function hideSendingOrderModal() {
+    const sendingOrderModal = document.getElementById("sendingOrderModal");
+    if (sendingOrderModal) {
+        sendingOrderModal.style.display = "none"; // Hide the modal
+    }
+}
+
+// Example usage in the checkout process
+document.getElementById("checkoutButton").addEventListener("click", async () => {
+    showSendingOrderModal(); // Show the "Sending Order" modal
+
+    try {
+        // Simulate order processing (replace with real API call)
+        const response = await processOrder();
+        hideSendingOrderModal(); // Hide the "Sending Order" modal
+
+        if (response.message === 'Order processed successfully!') {
+            showNotification("Order Completed Successfully!");
+        } else {
+            throw new Error("Unexpected response from server");
+        }
+    } catch (error) {
+        hideSendingOrderModal(); // Ensure the modal is hidden on error
+        showNotification("Processing order. Please wait...");
+        console.error(error);
+    }
+});
 

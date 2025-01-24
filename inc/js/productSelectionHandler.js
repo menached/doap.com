@@ -54,13 +54,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Populate cart items
         cartData.forEach((item) => {
-            const linePrice = item.price * item.quantity; // Correct line item price
-            totalPrice += linePrice; // Add to total price
+            const linePrice = item.price * item.quantity;
+            totalPrice += linePrice;
 
             const li = document.createElement("li");
             li.innerHTML = `
                 ${item.name} - ${item.weight || ''} $${item.price.toFixed(2)} x ${item.quantity} = $${linePrice.toFixed(2)}
-                <span class="remove-item" data-product-name="${item.name}" style="color: red; cursor: pointer;">Remove</span>
+                <span class="remove-item" data-product-name="${item.name}" style="cursor: pointer;">
+                    <i class="fas fa-trash"></i>
+                </span>
             `;
             selectedItemsList.appendChild(li);
         });
@@ -68,9 +70,32 @@ document.addEventListener("DOMContentLoaded", () => {
         // Update total price in the UI
         totalElement.textContent = `$${totalPrice.toFixed(2)}`;
 
-        // Update minimum order message
-        updateMinimumOrderMessage(); // Ensure the message reflects the updated cart total
+        // Update minimum order message (if applicable)
+        updateMinimumOrderMessage();
     }
+
+    // Attach a single event listener to the parent container
+    document.addEventListener("click", (event) => {
+        // Check if the clicked element is the trash icon or its parent span
+        if (event.target.matches(".remove-item, .remove-item i")) {
+            const productName = event.target.closest(".remove-item").getAttribute("data-product-name");
+            removeFromCart(productName);
+        }
+    });
+
+    // Function to remove an item from the cart
+    function removeFromCart(productName) {
+        let cartData = getCartData();
+
+        // Remove the item completely from the cart
+        cartData = cartData.filter(item => item.name !== productName);
+
+        saveCartData(cartData); // Save updated cart data
+        updateCartDisplay(); // Refresh the cart UI
+    }
+
+
+
 
     // Function to add an item to the cart
     function addToCart(button) {

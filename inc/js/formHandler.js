@@ -205,6 +205,21 @@ function updateCustomerDataInStorage() {
 async function handleCheckout(event) {
     event.preventDefault(); // Prevent default form submission
 
+    const sendingOrderModal = document.createElement("div");
+    sendingOrderModal.id = "sendingOrderModal";
+    sendingOrderModal.style.position = "fixed";
+    sendingOrderModal.style.top = "50%";
+    sendingOrderModal.style.left = "50%";
+    sendingOrderModal.style.transform = "translate(-50%, -50%)";
+    sendingOrderModal.style.backgroundColor = "rgba(0, 0, 0, 0.8)";
+    sendingOrderModal.style.color = "white";
+    sendingOrderModal.style.padding = "20px";
+    sendingOrderModal.style.borderRadius = "10px";
+    sendingOrderModal.style.zIndex = "1000";
+    sendingOrderModal.style.textAlign = "center";
+    sendingOrderModal.textContent = "Sending your order...";
+    document.body.appendChild(sendingOrderModal);
+
     let customerData = {};
     let cartData = [];
 
@@ -217,6 +232,7 @@ async function handleCheckout(event) {
     } catch (error) {
         console.error("Failed to retrieve customerData:", error);
         showNotification("Error retrieving customer data. Please refresh and try again.");
+        document.body.removeChild(sendingOrderModal); // Remove modal on error
         return;
     }
 
@@ -229,6 +245,7 @@ async function handleCheckout(event) {
     } catch (error) {
         console.error("Failed to retrieve cartData:", error);
         showNotification("Error retrieving cart data. Please refresh and try again.");
+        document.body.removeChild(sendingOrderModal); // Remove modal on error
         return;
     }
 
@@ -252,37 +269,30 @@ async function handleCheckout(event) {
             customerData,
             cartData,
         });
+        document.body.removeChild(sendingOrderModal); // Remove modal on error
         return;
     }
 
     // 4. Build the base payload
     const total = document.getElementById("total").textContent.replace("$", "");
     const orderPayload = {
-        ...customerData,  // includes name, phone, email, address, city, paymentMethod, etc.
+        ...customerData,
         items: cartData,
         total,
     };
 
-    // 5. If payment method is credit-card, attach the CC fields
+    // 5. Attach credit card details if applicable
     if (customerData.paymentMethod === "credit-card") {
-        const cardNumber = document.getElementById("cardNumber")?.value || "";
-        const expiryDate = document.getElementById("expiryDate")?.value || "";
-        const cvv = document.getElementById("cvv")?.value || "";
-        const cardZip = document.getElementById("cardZip")?.value || "";
-        const nameOnCard = document.getElementById("nameOnCard")?.value || "";
-
         orderPayload.creditCard = {
-            cardNumber,
-            expiryDate,
-            cvv,
-            cardZip,
-            nameOnCard,
+            cardNumber: document.getElementById("cardNumber")?.value || "",
+            expiryDate: document.getElementById("expiryDate")?.value || "",
+            cvv: document.getElementById("cvv")?.value || "",
+            cardZip: document.getElementById("cardZip")?.value || "",
+            nameOnCard: document.getElementById("nameOnCard")?.value || "",
         };
     }
 
-    // 6. Log and submit the final payload
-    console.log("Submitting order payload:", orderPayload);
-
+    // 6. Submit the order
     try {
         const response = await fetch("https://eft3wrtpad.execute-api.us-west-2.amazonaws.com/prod/checkout", {
             method: "POST",
@@ -297,13 +307,6 @@ async function handleCheckout(event) {
         if (response.ok) {
             showNotification("Order submitted successfully!");
             console.log("API Response:", result);
-
-            const cardNumberInput = document.getElementById("cardNumber");
-            const cvvInput = document.getElementById("cvv");
-
-            if (cardNumberInput) cardNumberInput.value = "";
-            if (cvvInput)        cvvInput.value = "";
-
         } else {
             console.error("API Error:", result);
             showNotification("Failed to submit order. Please try again.");
@@ -311,7 +314,10 @@ async function handleCheckout(event) {
     } catch (error) {
         console.error("Network error:", error);
         showNotification("An error occurred while submitting the order.");
+    } finally {
+        document.body.removeChild(sendingOrderModal); // Always remove modal after processing
     }
+
 }
 
 

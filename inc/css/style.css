@@ -5,6 +5,67 @@ body, h2, input, button, footer {
 }
 
 
+#sendingOrderModal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent background */
+    color: white; /* Text color */
+    padding: 20px; /* Add padding */
+    border-radius: 10px; /* Rounded corners */
+    z-index: 1000; /* High z-index to appear above other elements */
+    text-align: center;
+    font-size: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional shadow for depth */
+}
+
+#sendingOrderModal .modal-content {
+    animation: fadeIn 0.3s ease; /* Optional fade-in animation */
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+
+
+.remove-item i {
+    color: red;
+    font-size: 1.2rem;
+    transition: color 0.3s;
+}
+
+.remove-item i:hover {
+    color: darkred;
+}
+
+
+#sendingOrderModal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    z-index: 1000;
+}
+
+#sendingOrderModal.visible {
+    display: block;
+}
+
+
 #notification-modal {
     display: none;
     position: fixed;
@@ -152,11 +213,20 @@ body, h2, input, button, footer {
     margin: 0 auto; /* Center the paragraph */
 }
 
+
+/* Footer Styling */
 .doapfooter {
-    text-align: center;
-    background-color: #f9f9f9; /* Optional: Add a background color for the footer */
+    background-color: #fff; /* Optional: Add a background color for the footer */
+    color: #333;
+    /*background-color: #f9f9f9; [> Optional: Add a background color for the footer <]*/
+    /*padding: 20px 10px;*/
     padding: 20px 0; /* Add vertical spacing */
+    text-align: center;
+    font-family: 'Marvel', sans-serif;
+    font-size: 0.9rem;
+    border-top: 0px solid #ddd;
 }
+
 
 .footer-note {
     font-size: 0.9rem; /* Optional: Adjust font size */
@@ -567,16 +637,6 @@ body {
     font-size: 1rem;
 }
 
-/* Footer Styling */
-.doapfooter {
-    background-color: #f9f9f9;
-    color: #333;
-    padding: 20px 10px;
-    text-align: center;
-    font-family: 'Marvel', sans-serif;
-    font-size: 0.9rem;
-    border-top: 0px solid #ddd;
-}
 
 .githublink,
 .footer-link {
