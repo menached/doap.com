@@ -73,6 +73,27 @@ export const weightBasedProducts = {
             2: { label: "3 joints", price: 50.00 },
         },
     },
+    "Solventless Disposable Vape": {
+        thumbnail: "/images/products/concentrates/half-gram-disposable.webp", // Add the thumbnail URL
+        weights: {
+            1: { label: "1 Vape Pen", price: 50.00 },
+            2: { label: "3 Vape Pens", price: 120.00 },
+        },
+    },
+    "Doap 1g Vape Cartridge": {
+        thumbnail: "/images/products/concentrates/half-gram-disposable.webp", // Add the thumbnail URL
+        weights: {
+            1: { label: "1 Vape Cart", price: 45.00 },
+            2: { label: "3 Vape Carts", price: 120.00 },
+        },
+    },
+    "Live Rosin 1g Vape Cart": {
+        thumbnail: "/images/products/concentrates/doap-rosin-vape-1.webp", // Add the thumbnail URL
+        weights: {
+            1: { label: "1 Vape Cart", price: 60.00 },
+            2: { label: "3 Vape Carts", price: 150.00 },
+        },
+    },
 };
 
 
