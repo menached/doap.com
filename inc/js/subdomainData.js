@@ -13,6 +13,15 @@ export const weightBasedProducts = {
             8: { label: "1 oz. (28 grams)", price: 150 },
         },
     },
+    "Organic Greenhouse Flower": {
+        weights: {
+            1: { label: "1/8 oz. (3.5 grams)", price: 30 },
+            2: { label: "1/4 oz. (7 grams)", price: 55 },
+            4: { label: "1/2 oz. (14 grams)", price: 100 },
+            8: { label: "1 oz. (28 grams)", price: 180 },
+        },
+    },
+
 };
 
 
