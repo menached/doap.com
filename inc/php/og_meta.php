@@ -99,8 +99,8 @@ $defaultData = [
 // Retrieve the domain details or use the default
 $domainDetails = $domainData[strtolower($subdomain)] ?? $defaultData;
 
-// Check for a specific pathname to customize further
-$customTitle = $domainDetails['customTitle'];
+// Define dynamic title
+$customTitle = $domainDetails['customTitle'] ?? "{$domainDetails['city']} Cannabis Delivery";
 if ($subdomain === "www" && $_SERVER['REQUEST_URI'] === "/simple.php") {
     $customTitle = "Directory Of Agencies & Providers";
 }
@@ -109,8 +109,10 @@ if ($subdomain === "www" && $_SERVER['REQUEST_URI'] === "/simple.php") {
 $cityName = htmlspecialchars($domainDetails['city'], ENT_QUOTES, 'UTF-8');
 $description = htmlspecialchars($domainDetails['description'], ENT_QUOTES, 'UTF-8');
 $phone = htmlspecialchars($domainDetails['phone'], ENT_QUOTES, 'UTF-8');
-$imageUrl = "https://{$subdomain}.doap.com/images/banners/{$subdomain}doapbanner.webp";
-$imageUrl = file_exists($imagePath) ? $imagePath : 'https://default-image-url.com/fallback-image.webp';
+
+// Check for image existence
+$imagePath = $_SERVER['DOCUMENT_ROOT'] . "/images/banners/{$subdomain}doapbanner.webp";
+$imageUrl = file_exists($imagePath) ? "https://{$subdomain}.doap.com/images/banners/{$subdomain}doapbanner.webp" : 'https://default-image-url.com/fallback-image.webp';
 
 $logoUrl = "https://{$subdomain}.doap.com/images/doap-logo-wording.png";
 
@@ -131,4 +133,3 @@ echo <<<HTML
 <meta name="twitter:site" content="Call us at {$phone}">
 HTML;
 ?>
-
