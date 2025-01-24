@@ -96,6 +96,7 @@ $defaultData = [
     "customTitle" => "Cannabis Delivery Service" // Default title
 ];
 
+
 // Retrieve the domain details or use the default
 $domainDetails = $domainData[strtolower($subdomain)] ?? $defaultData;
 
@@ -110,9 +111,10 @@ $cityName = htmlspecialchars($domainDetails['city'], ENT_QUOTES, 'UTF-8');
 $description = htmlspecialchars($domainDetails['description'], ENT_QUOTES, 'UTF-8');
 $phone = htmlspecialchars($domainDetails['phone'], ENT_QUOTES, 'UTF-8');
 
-// Check for image existence
-$imagePath = $_SERVER['DOCUMENT_ROOT'] . "/images/banners/{$subdomain}doapbanner.webp";
-$imageUrl = file_exists($imagePath) ? "https://{$subdomain}.doap.com/images/banners/{$subdomain}doapbanner.webp" : 'https://default-image-url.com/fallback-image.webp';
+// Check for subdomain-specific banner image
+$imageFileName = "{$subdomain}doapbanner.webp";
+$imagePath = $_SERVER['DOCUMENT_ROOT'] . "/images/banners/{$imageFileName}"; // Server path
+$imageUrl = file_exists($imagePath) ? "https://{$subdomain}.doap.com/images/banners/{$imageFileName}" : 'https://default-image-url.com/fallback-image.webp';
 
 $logoUrl = "https://{$subdomain}.doap.com/images/doap-logo-wording.png";
 
