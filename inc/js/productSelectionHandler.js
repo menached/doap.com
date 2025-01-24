@@ -58,8 +58,9 @@ document.addEventListener("DOMContentLoaded", () => {
             totalPrice += linePrice;
 
             const li = document.createElement("li");
+
             li.innerHTML = `
-                ${item.name} ${item.weight || ''} = $${linePrice.toFixed(2)}
+                ${item.name} ${item.weight || ''} (Qty: ${item.quantity}) = $${linePrice.toFixed(2)}
                 <span class="remove-item" data-product-name="${item.name}" style="color: red; cursor: pointer;">Remove</span>
             `;
 
