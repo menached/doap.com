@@ -114,7 +114,7 @@ $phone = htmlspecialchars($domainDetails['phone'], ENT_QUOTES, 'UTF-8');
 // Check for subdomain-specific banner image
 $imageFileName = "{$subdomain}doapbanner.webp";
 $imagePath = $_SERVER['DOCUMENT_ROOT'] . "/images/banners/{$imageFileName}"; // Server path
-$imageUrl = file_exists($imagePath) ? "https://{$subdomain}.doap.com/images/banners/{$imageFileName}" : 'https://default-image-url.com/fallback-image.webp';
+$imageUrl = file_exists($imagePath) ? "https://{$subdomain}.doap.com/images/banners/{$imageFileName}" : 'https://www.doap.com/images/banners/doap-og-banner.webp';
 
 $logoUrl = "https://{$subdomain}.doap.com/images/doap-logo-wording.png";
 
