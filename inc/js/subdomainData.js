@@ -101,6 +101,45 @@ export const weightBasedProducts = {
             2: { label: "3 grams", price: 80.00 },
         },
     },
+    "Bakers Dozen Prerolled Cone Joints": {
+        thumbnail: "/images/products/flower/13-joints.webp", // Add the thumbnail URL
+        weights: {
+            1: { label: "13 joints", price: 100.00 },
+        },
+    },
+    "Vape and Flower Bundle": {
+        thumbnail: "/images/products/concentrates/cart-and-flower-bundle-324x324.jpeg", // Add the thumbnail URL
+        weights: {
+            1: { label: "1g Cart, 1 Battery & 3.5g flower", price: 100.00 },
+        },
+    },
+    "Space Tubaroos": {
+        thumbnail: "/images/products/edibles/tubaroos.webp", // Add the thumbnail URL
+        weights: {
+            1: { label: "900mg Bag", price: 30.00 },
+            2: { label: "2x 900mg Bags", price: 50.00 },
+        },
+    },
+    "Premium Potency THC Syrup": {
+        thumbnail: "/images/products/edibles/tubaroos.webp", // Add the thumbnail URL
+        weights: {
+            1: { label: "900mg Bag", price: 30.00 },
+            2: { label: "2x 900mg Bags", price: 50.00 },
+        },
+    },
+    "Premium Potency THC Syrup": {
+        thumbnail: "/images/products/edibles/syrup1.webp", // Add the thumbnail URL
+        weights: {
+            1: { label: "900mg Bag", price: 30.00 },
+            2: { label: "2x 900mg Bags", price: 50.00 },
+        },
+    },
+    "GP Variety Sample Pack": {
+        thumbnail: "/images/products/edibles/gp-variety-sample-pack.webp", // Add the thumbnail URL
+        weights: {
+            1: { label: "100mg Bag", price: 10.00 },
+        },
+    },
 };
 
 

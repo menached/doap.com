@@ -17,6 +17,9 @@
                             <option value="1" data-price="150">1/2 oz. (14 grams)</option>
                             <option value="1" data-price="250">28 grams (1 oz.)</option>
                         </select>
+                        <span class="magnify-icon">
+                            <i class="fas fa-magnifying-glass"></i>
+                        </span>
                     </div>
                     <p class="item-price" data-base-price="50">$50.00</p>
                     <span class="add-to-cart-button" data-product-name="Top Shelf Hydro" data-price="50">Add to Cart</span>
@@ -38,6 +41,9 @@
                             <option value="1" data-price="150">1/2 oz. (14 grams)</option>
                             <option value="1" data-price="250">28 grams (1 oz.)</option>
                         </select>
+                        <span class="magnify-icon">
+                            <i class="fas fa-magnifying-glass"></i>
+                        </span>
                     </div>
                     <p class="item-price" data-base-price="75">$75.00</p>
                     <span class="add-to-cart-button" data-product-name="Small Bud Special" data-price="75">Add to Cart</span>
@@ -59,6 +65,9 @@
                             <option value="4" data-price="100">1/2 oz. (14 grams) - $100</option>
                             <option value="8" data-price="180">28 grams (1 oz.) - $180</option>
                         </select>
+                        <span class="magnify-icon">
+                            <i class="fas fa-magnifying-glass"></i>
+                        </span>
                     </div>
                     <p class="item-price" data-base-price="30">$30.00</p>
                     <span class="add-to-cart-button" data-product-name="Organic Greenhouse Flower" data-price="30">Add to Cart</span>
@@ -86,6 +95,9 @@
                             <option value="9" data-price="78">9 Joints - $78</option>
                             <option value="10" data-price="80">10 Joints - $80</option>
                         </select>
+                        <span class="magnify-icon">
+                            <i class="fas fa-magnifying-glass"></i>
+                        </span>
                     </div>
                     <p class="item-price" data-base-price="15">$15.00</p>
                     <span class="add-to-cart-button" data-product-name="Premium Quality Hybrid Prerolls" data-price="15">Add to Cart</span>
@@ -100,8 +112,9 @@
                 <div class="item-details">
                     <p class="item-title">Bakers Dozen Prerolled Cone Joints</p>
                     <div class="item-quantity product-quantity-size">
-                        <label for="quantity-bakers-dozen-joints">Qty:</label>
-                        <input type="number" id="quantity-bakers-dozen-joints" class="quantity" min="1" max="99" value="1" name="quantity-bakers-dozen-joints">
+                        <select id="quantity-bakers-dozen-joints" class="quantity" name="quantity-bakers-dozen-joints">
+                            <option value="1" data-price="100">13 Joints</option>
+                        </select>
                         <span class="magnify-icon">
                             <i class="fas fa-magnifying-glass"></i>
                         </span>
@@ -152,6 +165,9 @@
                             <option value="1" data-price="25">100mg - $25</option>
                             <option value="2" data-price="80">1200mg - $80</option>
                         </select>
+                        <span class="magnify-icon">
+                            <i class="fas fa-magnifying-glass"></i>
+                        </span>
                     </div>
                     <p class="item-price">$<span id="price-gummy-bears">25.00</span></p>
                     <span class="add-to-cart-button" data-product-name="THC Gummy Bears" data-price="0.00">Add to Cart</span>
@@ -173,6 +189,9 @@
                             <option value="1" data-price="25">100mg - $25</option>
                             <option value="2" data-price="80">1200mg - $80</option>
                         </select>
+                        <span class="magnify-icon">
+                            <i class="fas fa-magnifying-glass"></i>
+                        </span>
                     </div>
                     <p class="item-price">$<span id="price-gummy-worms">25.00</span></p>
                     <span class="add-to-cart-button" data-product-name="THC Gummy Worms" data-price="25.00">Add to Cart</span>
@@ -194,9 +213,75 @@
                             <option value="1" data-price="25">100mg - $25</option>
                             <option value="2" data-price="80">1200mg - $80</option>
                         </select>
+                        <span class="magnify-icon">
+                            <i class="fas fa-magnifying-glass"></i>
+                        </span>
                     </div>
                     <p class="item-price">$<span id="price-gummy-rings">25.00</span></p>
                     <span class="add-to-cart-button" data-product-name="THC Gummy Rings" data-price="25.00">Add to Cart</span>
+                </div>
+                <div class="added-to-cart" style="display: none;">Added to Cart</div>
+            </label>
+        </div>
+
+        <!-- Product 4: Space Tubaroos -->
+        <div class="product">
+            <label class="item" data-description="Out-of-this-world treats!">
+                <img src="/images/products/edibles/tubaroos.webp" alt="Space Tubaroos">
+                <div class="item-details">
+                    <p class="item-title">Space Tubaroos</p>
+                    <div class="item-quantity product-quantity-size">
+                        <label for="quantity-space-tubaroos"></label>
+                        <select id="quantity-space-tubaroos" class="quantity" name="quantity-space-tubaroos">
+                            <option value="1" data-price="30">1 for $30</option>
+                            <option value="2" data-price="50">2 for $50</option>
+                        </select>
+                        <span class="magnify-icon">
+                            <i class="fas fa-magnifying-glass"></i>
+                        </span>
+                    </div>
+                    <p class="item-price">$<span id="price-space-tubaroos">30.00</span></p>
+                    <span class="add-to-cart-button" data-product-name="Space Tubaroos" data-price="30">Add to Cart</span>
+                </div>
+                <div class="added-to-cart" style="display: none;">Added to Cart</div>
+            </label>
+        </div>
+
+
+        <!-- Product: Premium Potency THC Syrup -->
+        <div class="product">
+            <label class="item" data-description="Available via Pre-order only. This THC syrup is known for its high purity and quality, ensuring a clean and safe experience. It can be consumed directly or mixed with beverages, offering versatility in its use. The product’s unique selling point is its high concentration of THC, providing a powerful and long-lasting effect, making it ideal for both recreational and medicinal use.">
+                <img src="/images/products/edibles/syrup1.webp" alt="Premium Potency THC Syrup">
+                <div class="item-details">
+                    <p class="item-title">Premium Potency THC Syrup</p>
+                    <div class="item-quantity product-quantity-size">
+                        <label for="quantity-thc-syrup"></label>
+                        <select id="quantity-thc-syrup" class="quantity" name="quantity-thc-syrup">
+                            <option value="1" data-price="25">500mg - $25</option>
+                            <option value="2" data-price="45">1000mg - $45</option>
+                        </select>
+                    </div>
+                    <p class="item-price">$<span id="price-thc-syrup">25.00</span></p>
+                    <span class="add-to-cart-button" data-product-name="Premium Potency THC Syrup" data-price="25">Pre-order Now</span>
+                </div>
+                <div class="added-to-cart" style="display: none;">Added to Cart</div>
+            </label>
+        </div>
+
+
+        <!-- Product: GP Variety Sample Pack -->
+        <div class="product">
+            <label class="item" data-description="The GP Variety Sample Pack offers 30mg of delicious gummies, with 5mg per piece. Perfect for trying out a smaller dose at an affordable price.">
+                <img src="/images/products/edibles/gp-variety-sample-pack.webp" alt="GP Variety Sample Pack">
+                <div class="item-details">
+                    <p class="item-title">GP Variety Sample Pack</p>
+                    <div class="item-quantity product-quantity-size">
+                        <select id="quantity-gp-variety-pack" class="quantity" name="quantity-gp-variety-pack">
+                            <option value="1" data-price="10">30mg (5mg x 6 pieces) - $10</option>
+                        </select>
+                    </div>
+                    <p class="item-price">$<span id="price-gp-variety-pack">10.00</span></p>
+                    <span class="add-to-cart-button" data-product-name="GP Variety Sample Pack" data-price="10">Add to Cart</span>
                 </div>
                 <div class="added-to-cart" style="display: none;">Added to Cart</div>
             </label>
@@ -221,6 +306,9 @@
                         <select id="quantity-solventless-vape-1" class="quantity" name="quantity-solventless-vape-1">
                             <option value="1" data-price="50">1/2 gram cart</option>
                         </select>
+                        <span class="magnify-icon">
+                            <i class="fas fa-magnifying-glass"></i>
+                        </span>
                     </div>
                     <p class="item-price">$50.00</p>
                     <span class="add-to-cart-button" data-product-name="Solventless Disposable Vape" data-price="50">Add to Cart</span>
@@ -240,6 +328,9 @@
                         <select id="quantity-doap-vape-cartridge" class="quantity" name="quantity-doap-vape-cartridge">
                             <option value="1" data-price="45">1g cart</option>
                         </select>
+                        <span class="magnify-icon">
+                            <i class="fas fa-magnifying-glass"></i>
+                        </span>
                     </div>
                     <p class="item-price">$45.00</p>
                     <span class="add-to-cart-button" data-product-name="Doap 1g Vape Cartridge" data-price="45">Add to Cart</span>
@@ -259,6 +350,9 @@
                         <select id="quantity-live-rosin-vape" class="quantity" name="quantity-live-rosin-vape">
                             <option value="1" data-price="60">1g cart</option>
                         </select>
+                        <span class="magnify-icon">
+                            <i class="fas fa-magnifying-glass"></i>
+                        </span>
                     </div>
                     <p class="item-price">$60.00</p>
                     <span class="add-to-cart-button" data-product-name="Live Rosin 1g Vape Cart" data-price="60">Add to Cart</span>
@@ -278,6 +372,9 @@
                         <select id="quantity-nug-rum-badder" class="quantity" name="quantity-nug-rum-badder">
                             <option value="1" data-price="30">1g</option>
                         </select>
+                        <span class="magnify-icon">
+                            <i class="fas fa-magnifying-glass"></i>
+                        </span>
                     </div>
                     <p class="item-price">$30.00</p>
                     <span class="add-to-cart-button" data-product-name="Nug Rum Badder" data-price="30">Add to Cart</span>
@@ -288,14 +385,18 @@
 
         <div class="product">
             <!-- Vape and Flower Bundle -->
-            <label class="item">
+            <label class="item" data-description="The perfect pairing: a premium vape cart, a doap vape battery, and an 1/8 of top-shelf flower!">
                 <input type="checkbox" name="item" value="Vape and Flower Bundle|100">
                 <img src="/images/products/concentrates/cart-and-flower-bundle-324x324.jpeg" alt="Vape and Flower Bundle">
                 <div class="item-details">
                     <p class="item-title">Vape and Flower Bundle</p>
                     <div class="item-quantity product-quantity-size">
-                        <label for="quantity-vape-flower-bundle" >Qty:</label>
-                        <input type="number" id="quantity-vape-flower-bundle" class="quantity" min="1" max="99" value="1" name="quantity-vape-flower-bundle">
+                        <select id="quantity-vape-flower-bundle" class="quantity" name="quantity-vape-flower-bundle">
+                            <option value="1" data-price="100">1g cart, 1 batt, 3.5g flower</option>
+                        </select>
+                        <span class="magnify-icon">
+                            <i class="fas fa-magnifying-glass"></i>
+                        </span>
                     </div>
                     <p class="item-price">$100.00</p>
                     <span class="add-to-cart-button" data-product-name="Vape and Flower Bundle" data-price="100">Add to Cart</span>
