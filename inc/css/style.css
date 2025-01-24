@@ -6,31 +6,64 @@ body, h2, input, button, footer {
 
 
 #floatingModal {
-    position: fixed; /* Make it follow the user during scrolling */
-    bottom: 20px; /* Position at the bottom of the viewport */
-    right: 20px; /* Position at the right of the viewport */
-    background-color: #007BFF; /* Modal background color */
-    color: white; /* Text color */
-    padding: 10px 15px; /* Add some padding */
-    border-radius: 5px; /* Rounded corners */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a shadow for depth */
-    z-index: 1000; /* Ensure it stays above other elements */
-    font-size: 1rem; /* Adjust font size */
-    text-align: center; /* Center the content */
-    cursor: pointer; /* Show pointer cursor for interactivity */
-    transition: transform 0.3s ease; /* Optional animation for appearing */
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #007BFF;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    font-size: 1rem;
+    text-align: center;
+    cursor: pointer;
+    display: none; /* Hidden by default */
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    animation: jiggle 1.5s infinite ease-in-out;
 }
 
 #floatingModal a {
-    color: white; /* Ensure the link is visible */
-    text-decoration: none; /* Remove underline from link */
-    font-weight: bold; /* Make the text stand out */
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
 }
 
 #floatingModal:hover {
-    background-color: #0056b3; /* Darker blue on hover */
+    background-color: #0056b3;
 }
 
+@keyframes jiggle {
+    0%, 100% {
+        transform: translate(0, 0); /* No movement */
+    }
+    25% {
+        transform: translate(2px, -2px); /* Slight upward-right movement */
+    }
+    50% {
+        transform: translate(-2px, 2px); /* Slight downward-left movement */
+    }
+    75% {
+        transform: translate(2px, 2px); /* Slight downward-right movement */
+    }
+}
+
+#cartThumbnails {
+    display: flex;
+    flex-wrap: wrap; /* Allow thumbnails to wrap if needed */
+    margin-top: 10px; /* Space above thumbnails */
+    gap: 5px; /* Space between thumbnails */
+    justify-content: center;
+}
+
+#cartThumbnails img {
+    width: 30px; /* Set thumbnail width */
+    height: 30px; /* Set thumbnail height */
+    object-fit: cover; /* Maintain aspect ratio, crop overflow */
+    border-radius: 3px; /* Optional: rounded corners */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+}
 
 
 

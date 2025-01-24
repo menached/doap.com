@@ -49,29 +49,41 @@ document.addEventListener("DOMContentLoaded", () => {
         const totalElement = document.getElementById("total");
         let totalPrice = 0;
 
-        // Clear existing cart items
-        selectedItemsList.innerHTML = "";
+        selectedItemsList.innerHTML = ""; // Clear existing items
 
-        // Populate cart items
+        // Loop through cart data to generate list items
         cartData.forEach((item) => {
             const linePrice = item.price * item.quantity;
             totalPrice += linePrice;
 
+            // Create list item for each cart entry
             const li = document.createElement("li");
+            li.style.display = "flex";
+            li.style.alignItems = "center";
+            li.style.marginBottom = "10px";
 
-            li.innerHTML = `
-                ${item.name} ${item.weight || ''} (Qty: ${item.quantity}) = $${linePrice.toFixed(2)}
-                <span class="remove-item" data-product-name="${item.name}" style="color: red; cursor: pointer;">Remove</span>
-            `;
+            // Add product details
+            const productDetails = document.createElement("span");
+            productDetails.textContent = `${item.name} ${item.weight || ''} $${linePrice.toFixed(2)}`;
+            productDetails.style.flex = "1";
+            li.appendChild(productDetails);
 
+            // Add remove button with trashcan icon
+            const removeButton = document.createElement("span");
+            removeButton.innerHTML = `<i class="fas fa-trash-alt"></i>`; // Trashcan icon
+            removeButton.className = "remove-item";
+            removeButton.setAttribute("data-product-name", item.name);
+            removeButton.style.color = "red";
+            removeButton.style.cursor = "pointer";
+            removeButton.style.marginLeft = "10px";
+            li.appendChild(removeButton);
+
+            // Append the list item to the selectedItemsList
             selectedItemsList.appendChild(li);
         });
 
-        // Update total price in the UI
+        // Update total price
         totalElement.textContent = `$${totalPrice.toFixed(2)}`;
-
-        // Update minimum order message (if applicable)
-        updateMinimumOrderMessage();
     }
 
     // Attach a single event listener to the parent container
@@ -118,6 +130,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
         let cartData = getCartData();
 
+        // Retrieve product details from weightBasedProducts
+        const productData = weightBasedProducts[productName];
+        const thumbnail = productData?.thumbnail || ""; // Default to empty string if thumbnail is not defined
+
         // Ensure only one instance of the product exists in the cart
         const existingProductIndex = cartData.findIndex(
             (item) => item.name === productName && item.weight === weight
@@ -128,7 +144,13 @@ document.addEventListener("DOMContentLoaded", () => {
             cartData[existingProductIndex].quantity += quantity;
         } else {
             // Add new product
-            cartData.push({ name: productName, price: basePrice, quantity, weight });
+            cartData.push({
+                name: productName,
+                price: basePrice,
+                quantity,
+                weight,
+                thumbnail, // Add the thumbnail property
+            });
         }
 
         console.log("Cart Data after addition:", cartData);

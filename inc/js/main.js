@@ -4,6 +4,7 @@ import { populateFormFromStorage } from './formPopulator.js';
 import { subdomainData } from './subdomainData.js';
 import { updateCustomerDataInSession } from './formHandler.js';
 
+floatingModal.classList.add("show");
 
 export function showNotification(message) {
     const modal = document.getElementById("notification-modal");
@@ -491,47 +492,71 @@ document.getElementById("checkoutButton").addEventListener("click", async () => 
 
 
 
-
 document.addEventListener("DOMContentLoaded", function () {
     const floatingModal = document.getElementById("floatingModal");
     const cartLink = document.getElementById("cartLink");
+    const cartThumbnails = document.getElementById("cartThumbnails");
+    const cartContainer = document.getElementById("cartContainer"); // Example container
 
-    // Function to get the cart item count
-    function getCartItemCount() {
+    // Function to get cart data
+    function getCartData() {
         try {
-            // Retrieve and decode the cart data from localStorage
             const cartData = localStorage.getItem("cartData");
-            const decodedData = cartData ? JSON.parse(decodeURIComponent(cartData)) : [];
-            
-            // Calculate the total item count
-            return decodedData.reduce((total, item) => total + (item.quantity || 0), 0);
+            return cartData ? JSON.parse(decodeURIComponent(cartData)) : [];
         } catch (error) {
             console.error("Error parsing cart data:", error);
-            return 0; // Return 0 if there's an error
+            return [];
         }
     }
 
-    // Function to update the modal
+    // Function to update the floating modal
     function updateFloatingModal() {
-        const itemCount = getCartItemCount();
+        const cartData = getCartData();
+        const itemCount = cartData.reduce((total, item) => total + (item.quantity || 0), 0);
+
         if (itemCount > 0) {
+            // Update modal link text
             cartLink.textContent = `${itemCount} ${itemCount === 1 ? "Item" : "Items"} in Cart`;
+
+            // Populate thumbnails
+            cartThumbnails.innerHTML = ""; // Clear existing thumbnails
+            cartData.forEach(item => {
+                if (item.thumbnail) { // Ensure the item has a thumbnail property
+                    const img = document.createElement("img");
+                    img.src = item.thumbnail; // Use the item's thumbnail URL
+                    img.alt = item.name || "Cart Item"; // Fallback alt text
+                    cartThumbnails.appendChild(img);
+                }
+            });
+
             floatingModal.style.display = "block"; // Show the modal
+            floatingModal.style.opacity = "1"; // Fade-in effect
         } else {
-            floatingModal.style.display = "none"; // Hide the modal
+            floatingModal.style.opacity = "0"; // Fade-out effect
+            setTimeout(() => (floatingModal.style.display = "none"), 300); // Hide after fade-out
         }
     }
 
-    // Update modal on page load
-    updateFloatingModal();
-
-    // Example: Add an event listener to cart updates
-    document.addEventListener("cartUpdated", updateFloatingModal);
-
-    // Smooth scrolling to the cart section
+    // Smooth scroll to cart
     cartLink.addEventListener("click", (e) => {
         e.preventDefault();
         document.getElementById("cartAnchor").scrollIntoView({ behavior: "smooth" });
     });
+
+    // Observer to detect changes in the cart
+    const observer = new MutationObserver(() => {
+        updateFloatingModal(); // Update modal when cart changes
+    });
+
+    // Attach observer to the cart container
+    if (cartContainer) {
+        observer.observe(cartContainer, { childList: true, subtree: true });
+    }
+
+    // Initial update on page load
+    updateFloatingModal();
+
+    // Example event for manual updates (e.g., adding/removing items programmatically)
+    document.addEventListener("cartUpdated", updateFloatingModal);
 });
 
