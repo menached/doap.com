@@ -59,11 +59,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const li = document.createElement("li");
             li.innerHTML = `
-                ${item.name} - ${item.weight || ''} $${item.price.toFixed(2)} x ${item.quantity} = $${linePrice.toFixed(2)}
-                <span class="remove-item" data-product-name="${item.name}" style="cursor: pointer;">
-                    <i class="fas fa-trash"></i>
-                </span>
+                ${item.name} ${item.weight || ''} = $${linePrice.toFixed(2)}
+                <span class="remove-item" data-product-name="${item.name}" style="color: red; cursor: pointer;">Remove</span>
             `;
+
             selectedItemsList.appendChild(li);
         });
 
