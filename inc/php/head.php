@@ -31,5 +31,5 @@
     <link rel="stylesheet" href="/inc/css/customerInfo.css">
     <link rel="stylesheet" href="/inc/css/zipFormStyle.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <?php include('/inc/php/og_meta.php'); ?>
+    <?php include('./inc/php/og_meta.php'); ?>
 
