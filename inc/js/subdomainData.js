@@ -21,6 +21,20 @@ export const weightBasedProducts = {
             8: { label: "1 oz. (28 grams)", price: 180 },
         },
     },
+    "Premium Quality Hybrid Prerolls": {
+        "weights": {
+            "1": { "label": "1 Joint", "price": 15.00 },
+            "2": { "label": "2 Joints", "price": 28.00 },
+            "3": { "label": "3 Joints", "price": 39.00 },
+            "4": { "label": "4 Joints", "price": 48.00 },
+            "5": { "label": "5 Joints", "price": 55.00 },
+            "6": { "label": "6 Joints", "price": 60.00 },
+            "7": { "label": "7 Joints", "price": 65.00 },
+            "8": { "label": "8 Joints", "price": 72.00 },
+            "9": { "label": "9 Joints", "price": 78.00 },
+            "10": { "label": "10 Joints", "price": 80.00 },
+        },
+    },
 
 };
 
