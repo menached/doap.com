@@ -81,7 +81,7 @@ export const weightBasedProducts = {
         },
     },
     "Doap 1g Vape Cartridge": {
-        thumbnail: "/images/products/concentrates/half-gram-disposable.webp", // Add the thumbnail URL
+        thumbnail: "/images/products/concentrates/single-vape-cart.webp", // Add the thumbnail URL
         weights: {
             1: { label: "1 Vape Cart", price: 45.00 },
             2: { label: "3 Vape Carts", price: 120.00 },
@@ -92,6 +92,13 @@ export const weightBasedProducts = {
         weights: {
             1: { label: "1 Vape Cart", price: 60.00 },
             2: { label: "3 Vape Carts", price: 150.00 },
+        },
+    },
+    "Nug Rum Badder": {
+        thumbnail: "/images/products/concentrates/badder.webp", // Add the thumbnail URL
+        weights: {
+            1: { label: "1 gram", price: 30.00 },
+            2: { label: "3 grams", price: 80.00 },
         },
     },
 };
