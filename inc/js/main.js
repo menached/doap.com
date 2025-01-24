@@ -489,3 +489,49 @@ document.getElementById("checkoutButton").addEventListener("click", async () => 
     }
 });
 
+
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    const floatingModal = document.getElementById("floatingModal");
+    const cartLink = document.getElementById("cartLink");
+
+    // Function to get the cart item count
+    function getCartItemCount() {
+        try {
+            // Retrieve and decode the cart data from localStorage
+            const cartData = localStorage.getItem("cartData");
+            const decodedData = cartData ? JSON.parse(decodeURIComponent(cartData)) : [];
+            
+            // Calculate the total item count
+            return decodedData.reduce((total, item) => total + (item.quantity || 0), 0);
+        } catch (error) {
+            console.error("Error parsing cart data:", error);
+            return 0; // Return 0 if there's an error
+        }
+    }
+
+    // Function to update the modal
+    function updateFloatingModal() {
+        const itemCount = getCartItemCount();
+        if (itemCount > 0) {
+            cartLink.textContent = `${itemCount} ${itemCount === 1 ? "Item" : "Items"} in Cart`;
+            floatingModal.style.display = "block"; // Show the modal
+        } else {
+            floatingModal.style.display = "none"; // Hide the modal
+        }
+    }
+
+    // Update modal on page load
+    updateFloatingModal();
+
+    // Example: Add an event listener to cart updates
+    document.addEventListener("cartUpdated", updateFloatingModal);
+
+    // Smooth scrolling to the cart section
+    cartLink.addEventListener("click", (e) => {
+        e.preventDefault();
+        document.getElementById("cartAnchor").scrollIntoView({ behavior: "smooth" });
+    });
+});
+
