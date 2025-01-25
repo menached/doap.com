@@ -81,7 +81,7 @@ export const weightBasedProducts = {
         },
     },
     "Doap 1g Vape Cartridge": {
-        thumbnail: "/images/products/concentrates/single-vape-carts.webp", // Add the thumbnail URL
+        thumbnail: "/images/products/concentrates/vape-cart.webp", // Add the thumbnail URL
         weights: {
             1: { label: "1 Vape Cart", price: 45.00 },
             2: { label: "3 Vape Carts", price: 120.00 },
@@ -161,8 +161,8 @@ export const weightBasedProducts = {
             3: { label: "3 Pipes", price: 65.00 },
         },
     },
-    "Vape Battery": {
-        thumbnail: "/images/products/concentrates/The-DOAP-Vape-Pen-Battery-510thread-wCharger-1yrWarranty-2-1.jpeg",
+    "Vape Battery w/ USB Charger": {
+        thumbnail: "/images/products/accessories/vape-pen-battery.webp",
         weights: {
             1: { label: "1 Unit", price: 40.00 },
             2: { label: "2 Units", price: 75.00 },
