@@ -87,6 +87,12 @@ export const weightBasedProducts = {
             2: { label: "3 Vape Carts", price: 120.00 },
         },
     },
+    "2 Vape Carts + Battery": {
+        thumbnail: "/images/products/concentrates/2vape-carts-and-a-battery-100-300x300.webp", // Add the thumbnail URL
+        weights: {
+            1: { label: "2x Carts + Batt", price: 100.00 },
+        },
+    },
     "Live Rosin 1g Vape Cart": {
         thumbnail: "/images/products/concentrates/doap-rosin-vape-1.webp", // Add the thumbnail URL
         weights: {
@@ -140,6 +146,57 @@ export const weightBasedProducts = {
             1: { label: "100mg Bag", price: 10.00 },
         },
     },
+    "Bic Lighter": {
+        thumbnail: "/images/products/accessories/bic-lighter.webp", // Add the thumbnail URL
+        weights: {
+            1: { label: "Small", price: 3.00 },
+            2: { label: "Large", price: 4.00 },
+        },
+    },
+    "Glass Weed Pipe": {
+        thumbnail: "/images/products/accessories/glass-pipe.webp",
+        weights: {
+            1: { label: "1 Pipe", price: 25.00 },
+            2: { label: "2 Pipes", price: 45.00 },
+            3: { label: "3 Pipes", price: 65.00 },
+        },
+    },
+    "Vape Battery": {
+        thumbnail: "/images/products/concentrates/The-DOAP-Vape-Pen-Battery-510thread-wCharger-1yrWarranty-2-1.jpeg",
+        weights: {
+            1: { label: "1 Unit", price: 40.00 },
+            2: { label: "2 Units", price: 75.00 },
+            3: { label: "3 Units", price: 110.00 },
+        },
+    },
+    "Zig-Zag Rolling Papers": {
+        thumbnail: "/images/products/accessories/zig-zag-rolling-papers.webp",
+        weights: {
+            1: { label: "Single Wide (SW)", price: 4.50 },
+            2: { label: "1 ¼ Size", price: 4.50 },
+            3: { label: "1 ½ Size", price: 5.00 },
+            4: { label: "King Size", price: 5.00 },
+            5: { label: "King Size Slim", price: 5.00 },
+        },
+    },
+    "Weed Grinder": {
+        thumbnail: "/images/products/accessories/grinder.webp",
+        weights: {
+            1: { label: "1 Grinder", price: 20.00 },
+            2: { label: "2 Grinders", price: 35.00 },
+        },
+    },
+    "Doap T-Shirt": {
+        thumbnail: "/images/products/accessories/doap-tshirt.webp",
+        weights: {
+            1: { label: "Small", price: 15.00 },
+            2: { label: "Med", price: 16.00 },
+            3: { label: "Large", price: 17.00 },
+            4: { label: "XL", price: 18.00 },
+            5: { label: "XXL", price: 19.00 },
+        },
+    },
+
 };
 
 

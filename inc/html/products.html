@@ -407,14 +407,18 @@
 
         <div class="product">
             <!-- 2 Vape Carts + Battery -->
-            <label class="item">
+            <label class="item" data-description="Includes two premium vape cartridges and a reusable battery. Perfect for those who enjoy high-quality concentrates.">
                 <input type="checkbox" name="item" value="2 Vape Carts + Battery|100">
                 <img src="/images/products/concentrates/2vape-carts-and-a-battery-100-300x300.webp" alt="2 Vape Carts + Battery">
                 <div class="item-details">
                     <p class="item-title">2 Vape Carts + Battery</p>
                     <div class="item-quantity product-quantity-size">
-                        <label for="quantity-2-vape-carts-battery" >Qty:</label>
-                        <input type="number" id="quantity-2-vape-carts-battery" class="quantity" min="1" max="99" value="1" name="quantity-2-vape-carts-battery">
+                        <select id="quantity-2-vape-carts-battery" class="quantity" name="quantity-2-vape-carts-battery">
+                            <option value="1" data-price="100">2x1g Carts + Batt - $100.00</option>
+                        </select>
+                        <span class="magnify-icon">
+                            <i class="fas fa-magnifying-glass"></i>
+                        </span>
                     </div>
                     <p class="item-price">$100.00</p>
                     <span class="add-to-cart-button" data-product-name="2 Vape Carts + Battery" data-price="100">Add to Cart</span>
@@ -431,33 +435,43 @@
     <div class="item-list">
 
         <div class="product">
-            <!-- LoKey Multi-Voltage KeyFob Vape Battery -->
-            <label class="item">
-                <input type="checkbox" name="item" value="Vape Battery|40">
+            <label class="item" data-description="A high-quality rechargeable vape battery with built-in USB charger and a 1-year warranty.">
+                <input type="checkbox" name="item" value="Vape Battery w/ USB Charger|40">
                 <img src="/images/products/concentrates/The-DOAP-Vape-Pen-Battery-510thread-wCharger-1yrWarranty-2-1.jpeg" alt="Doap Vape Pen - Rechargeable">
                 <div class="item-details">
-                    <p class="item-title">Vape Battery w/ Built-in USB Charger</p>
+                    <p class="item-title">Vape Battery w/ USB Charger</p>
                     <div class="item-quantity product-quantity-size">
-                        <label for="quantity-lokey-vape-battery-1" >Qty:</label>
-                        <input type="number" id="quantity-lokey-vape-battery-1" class="quantity" min="1" max="99" value="1" name="quantity-lokey-vape-battery">
+                        <select id="quantity-lokey-vape-battery" class="quantity" name="quantity-lokey-vape-battery">
+                            <option value="1" data-price="40.00">1 Unit - $40.00</option>
+                            <option value="2" data-price="75.00">2 Units - $75.00</option>
+                            <option value="3" data-price="110.00">3 Units - $110.00</option>
+                        </select>
+                        <span class="magnify-icon">
+                            <i class="fas fa-magnifying-glass"></i>
+                        </span>
                     </div>
                     <p class="item-price">$40.00</p>
-                    <span class="add-to-cart-button" data-product-name="Vape Battery" data-price="40">Add to Cart</span>
+                    <span class="add-to-cart-button" data-product-name="Vape Battery w/ USB Charger" data-price="40">Add to Cart</span>
                 </div>
                 <div class="added-to-cart" style="display: none;">Added to Cart</div>
             </label>
         </div>
 
         <div class="product">
-            <!-- Glass Weed Pipe -->
-            <label class="item">
+            <label class="item" data-description="Handcrafted high-quality glass weed pipe, perfect for smooth and clean hits.">
                 <input type="checkbox" name="item" value="Glass Weed Pipe|25">
                 <img src="/images/products/accessories/glass-pipe.webp" alt="Glass Weed Pipe - High-Quality Glass">
                 <div class="item-details">
                     <p class="item-title">Glass Weed Pipe</p>
                     <div class="item-quantity product-quantity-size">
-                        <label for="quantity-glass-weed-pipe" >Qty:</label>
-                        <input type="number" id="quantity-glass-weed-pipe" class="quantity" min="1" max="99" value="1" name="quantity-glass-weed-pipe">
+                        <select id="quantity-glass-weed-pipe" class="quantity" name="quantity-glass-weed-pipe">
+                            <option value="1" data-price="25.00">1 Pipe - $25.00</option>
+                            <option value="2" data-price="45.00">2 Pipes - $45.00</option>
+                            <option value="3" data-price="65.00">3 Pipes - $65.00</option>
+                        </select>
+                        <span class="magnify-icon">
+                            <i class="fas fa-magnifying-glass"></i>
+                        </span>
                     </div>
                     <p class="item-price">$25.00</p>
                     <span class="add-to-cart-button" data-product-name="Glass Weed Pipe" data-price="25">Add to Cart</span>
@@ -466,77 +480,106 @@
             </label>
         </div>
 
+<!-- Zig-Zag Rolling Papers -->
+<div class="product">
+    <label class="item" data-description="Zig-Zag Rolling Papers in a variety of sizes to suit your rolling needs.">
+        <input type="checkbox" name="item" value="Zig-Zag Rolling Papers|4.50">
+        <img src="/images/products/accessories/zig-zag-rolling-papers.webp" alt="Zig-Zag Rolling Papers">
+        <div class="item-details">
+            <p class="item-title">Zig-Zag Rolling Papers</p>
+            <div class="item-quantity product-quantity-size">
+                <select id="size-zig-zag-papers" class="quantity" name="size-zig-zag-papers">
+                    <option value="1" data-price="4.50">Single Wide (SW) - $4.50</option>
+                    <option value="2" data-price="4.50">1 ¼ Size - $4.50</option>
+                    <option value="3" data-price="5.00">1 ½ Size - $5.00</option>
+                    <option value="4" data-price="5.00">King Size - $5.00</option>
+                    <option value="5" data-price="5.00">King Size Slim - $5.00</option>
+                </select>
+                <span class="magnify-icon">
+                    <i class="fas fa-magnifying-glass"></i>
+                </span>
+            </div>
+            <p class="item-price">$4.50</p>
+            <span class="add-to-cart-button" data-product-name="Zig-Zag Rolling Papers" data-price="4.50">Add to Cart</span>
+        </div>
+        <div class="added-to-cart" style="display: none;">Added to Cart</div>
+    </label>
+</div>
+
+<!-- Weed Grinder -->
+<div class="product">
+    <label class="item" data-description="Durable and efficient weed grinder for a consistent grind every time.">
+        <input type="checkbox" name="item" value="Weed Grinder|20">
+        <img src="/images/products/accessories/grinder.webp" alt="Weed Grinder">
+        <div class="item-details">
+            <p class="item-title">Weed Grinder</p>
+            <div class="item-quantity product-quantity-size">
+                <select id="quantity-weed-grinder" class="quantity" name="quantity-weed-grinder">
+                    <option value="1" data-price="20.00">1 Grinder - $20.00</option>
+                    <option value="2" data-price="35.00">2 Grinders - $35.00</option>
+                </select>
+                <span class="magnify-icon">
+                    <i class="fas fa-magnifying-glass"></i>
+                </span>
+            </div>
+            <p class="item-price">$20.00</p>
+            <span class="add-to-cart-button" data-product-name="Weed Grinder" data-price="20">Add to Cart</span>
+        </div>
+        <div class="added-to-cart" style="display: none;">Added to Cart</div>
+    </label>
+</div>
+
+
         <div class="product">
-            <!-- Weed Grinder -->
-            <label class="item">
-                <input type="checkbox" name="item" value="Weed Grinder|20">
-                <img src="/images/products/accessories/grinder.webp" alt="Weed Grinder - High-Quality Grinder">
+            <!-- Bic Lighter -->
+            <label class="item" data-description="Reliable and long-lasting Bic Lighter, the perfect companion for your smoking needs.">
+                <input type="checkbox" name="item" value="Bic Lighter|3">
+                <img src="/images/products/accessories/bic-lighter.webp" alt="Bic Lighter">
                 <div class="item-details">
-                    <p class="item-title">Weed Grinder</p>
+                    <p class="item-title">Bic Lighter</p>
                     <div class="item-quantity product-quantity-size">
-                        <label for="quantity-weed-grinder" >Qty:</label>
-                        <input type="number" id="quantity-weed-grinder" class="quantity" min="1" max="99" value="1" name="quantity-weed-grinder">
+                        <select id="quantity-bic-lighter" class="quantity" name="quantity-bic-lighter">
+                            <option value="1" data-price="3.00">1 Lighter - $3.00</option>
+                            <option value="2" data-price="6.00">2 Lighters - $6.00</option>
+                            <option value="3" data-price="9.00">3 Lighters - $9.00</option>
+                        </select>
+                        <span class="magnify-icon">
+                            <i class="fas fa-magnifying-glass"></i>
+                        </span>
                     </div>
-                    <p class="item-price">$20.00</p>
-                    <span class="add-to-cart-button" data-product-name="Weed Grinder" data-price="20">Add to Cart</span>
+                    <p class="item-price">$3.00</p>
+                    <span class="add-to-cart-button" data-product-name="Bic Lighter" data-price="3">Add to Cart</span>
                 </div>
                 <div class="added-to-cart" style="display: none;">Added to Cart</div>
             </label>
         </div>
 
-<div class="product">
-    <!-- Zig-Zag Rolling Papers -->
-    <label class="item">
-        <input type="checkbox" name="item" value="Zig-Zag Rolling Papers|4.5">
-        <img src="/images/products/accessories/zig-zag-rolling-papers.webp" alt="Zig-Zag Rolling Papers">
-        <div class="item-details">
-            <p class="item-title">Zig-Zag Rolling Papers</p>
-            <div class="item-quantity product-quantity-size">
-                <label for="quantity-zig-zag-papers" >Qty:</label>
-                <input type="number" id="quantity-zig-zag-papers" class="quantity" min="1" max="99" value="1" name="quantity-zig-zag-papers">
-            </div>
-            <p class="item-price">$4.50</p>
-            <span class="add-to-cart-button" data-product-name="Zig-Zag Rolling Papers" data-price="4.5">Add to Cart</span>
-        </div>
-        <div class="added-to-cart" style="display: none;">Added to Cart</div>
-    </label>
-</div>
 
-<div class="product">
-    <!-- Bic Lighter -->
-    <label class="item">
-        <input type="checkbox" name="item" value="Bic Lighter|3">
-        <img src="/images/products/accessories/bic-lighter.webp" alt="Bic Lighter">
-        <div class="item-details">
-            <p class="item-title">Bic Lighter</p>
-            <div class="item-quantity product-quantity-size">
-                <label for="quantity-bic-lighter" >Qty:</label>
-                <input type="number" id="quantity-bic-lighter" class="quantity" min="1" max="99" value="1" name="quantity-bic-lighter">
-            </div>
-            <p class="item-price">$3.00</p>
-            <span class="add-to-cart-button" data-product-name="Bic Lighter" data-price="3">Add to Cart</span>
+        <div class="product">
+            <!-- Doap T-Shirt -->
+            <label class="item" data-description="Show off your love for Doap with this stylish and comfortable T-Shirt. Available in multiple sizes.">
+                <input type="checkbox" name="item" value="Doap T-Shirt|15">
+                <img src="/images/products/accessories/doap-tshirt.webp" alt="Doap T-Shirt">
+                <div class="item-details">
+                    <p class="item-title">Doap T-Shirt</p>
+                    <div class="item-quantity product-quantity-size">
+                        <select id="size-doap-tshirt" class="quantity" name="size-doap-tshirt">
+                            <option value="1" data-price="15.00">Small - $15.00</option>
+                            <option value="2" data-price="16.00">Medium - $16.00</option>
+                            <option value="3" data-price="17.00">Large - $17.00</option>
+                            <option value="4" data-price="18.00">XL - $18.00</option>
+                            <option value="5" data-price="19.00">XXL - $19.00</option>
+                        </select>
+                        <span class="magnify-icon">
+                            <i class="fas fa-magnifying-glass"></i>
+                        </span>
+                    </div>
+                    <p class="item-price">$15.00</p>
+                    <span class="add-to-cart-button" data-product-name="Doap T-Shirt" data-price="15">Add to Cart</span>
+                </div>
+                <div class="added-to-cart" style="display: none;">Added to Cart</div>
+            </label>
         </div>
-        <div class="added-to-cart" style="display: none;">Added to Cart</div>
-    </label>
-</div>
-
-<div class="product">
-    <!-- Doap T-Shirt -->
-    <label class="item">
-        <input type="checkbox" name="item" value="Doap T-Shirt|15">
-        <img src="/images/products/accessories/doap-tshirt.webp" alt="Doap T-Shirt">
-        <div class="item-details">
-            <p class="item-title">Doap T-Shirt</p>
-            <div class="item-quantity product-quantity-size">
-                <label for="quantity-doap-tshirt" >Qty:</label>
-                <input type="number" id="quantity-doap-tshirt" class="quantity" min="1" max="99" value="1" name="quantity-doap-tshirt">
-            </div>
-            <p class="item-price">$15.00</p>
-            <span class="add-to-cart-button" data-product-name="Doap T-Shirt" data-price="15">Add to Cart</span>
-        </div>
-        <div class="added-to-cart" style="display: none;">Added to Cart</div>
-    </label>
-</div>
 
     </div>
 </div> <!-- End Accessories -->

@@ -5,6 +5,49 @@ body, h2, input, button, footer {
 }
 
 
+
+
+.product-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  max-width: 400px;
+  width: 80%;
+  border-radius: 8px;
+  box-shadow: 0 2px 15px rgba(0,0,0,0.2);
+  z-index: 1001;
+  padding: 20px;
+}
+
+.product-modal-content {
+  position: relative;
+}
+
+.close-btn {
+  position: absolute;
+  right: 10px;
+  top: 5px;
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+
+.modal-backdrop {
+  position: fixed;
+  top: 0; 
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 1000;
+}
+
+
+
+
+
+
 #floatingModal {
     position: fixed;
     bottom: 20px;

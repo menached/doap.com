@@ -560,3 +560,66 @@ document.addEventListener("DOMContentLoaded", function () {
     document.addEventListener("cartUpdated", updateFloatingModal);
 });
 
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  const magnifyIcons  = document.querySelectorAll(".magnify-icon");
+  const productModal  = document.getElementById("productModal");
+  const modalBackdrop = document.getElementById("modalBackdrop");
+  const modalClose    = document.getElementById("modalClose");
+  const modalTitle    = document.getElementById("modalTitle");
+  const modalPrice    = document.getElementById("modalPrice");
+  const modalDesc     = document.getElementById("modalDescription");
+
+  let modalTimer; // We'll store our timeout here
+
+  function showModal(label) {
+    const inputElem = label.querySelector("input");
+    let productName = "";
+    let productPrice = "";
+
+    if (inputElem && inputElem.value.includes("|")) {
+      [productName, productPrice] = inputElem.value.split("|");
+    } else {
+      productName  = label.querySelector(".item-title")?.textContent.trim() || "Unnamed";
+      productPrice = label.querySelector(".item-price")?.textContent.trim() || "$0.00";
+    }
+
+    const descHTML = label.getAttribute("data-description") || "No description.";
+    modalTitle.textContent = productName;
+    if (!productPrice.startsWith("$")) {
+      productPrice = "$" + productPrice;
+    }
+    modalPrice.textContent = productPrice;
+    modalDesc.innerHTML = descHTML;
+
+    // Show modal + backdrop
+    productModal.style.display = "block";
+    modalBackdrop.style.display = "block";
+
+    // Clear any old timer, then set a fresh 5-second timer to hide the modal
+    clearTimeout(modalTimer);
+    modalTimer = setTimeout(() => hideModal(), 5000);
+  }
+
+  function hideModal() {
+    productModal.style.display = "none";
+    modalBackdrop.style.display = "none";
+    // Also clear the timer so it doesn't fire if modal is already closed
+    clearTimeout(modalTimer);
+  }
+
+  // Show modal on click
+  magnifyIcons.forEach(icon => {
+    icon.addEventListener("click", () => {
+      const label = icon.closest("label.item");
+      if (label) showModal(label);
+    });
+  });
+
+  // Hide modal on X or backdrop click
+  modalClose.addEventListener("click", hideModal);
+  modalBackdrop.addEventListener("click", hideModal);
+});
+
