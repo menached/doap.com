@@ -81,7 +81,7 @@ export const weightBasedProducts = {
         },
     },
     "Doap 1g Vape Cartridge": {
-        thumbnail: "/images/products/concentrates/single-vape-cart.webp", // Add the thumbnail URL
+        thumbnail: "/images/products/concentrates/single-vape-carts.webp", // Add the thumbnail URL
         weights: {
             1: { label: "1 Vape Cart", price: 45.00 },
             2: { label: "3 Vape Carts", price: 120.00 },
