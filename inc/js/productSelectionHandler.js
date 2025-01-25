@@ -161,6 +161,10 @@ document.addEventListener("DOMContentLoaded", () => {
         updateMinimumOrderMessage(); // Update minimum order message
     }
 
+
+
+
+
     // Function to remove an item from the cart
     function removeFromCart(productName) {
         let cartData = getCartData();

@@ -171,11 +171,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const addToCartButtons = document.querySelectorAll(".add-to-cart-button");
     addToCartButtons.forEach(button => {
         button.addEventListener("click", (event) => {
+            
             const rect = event.target.getBoundingClientRect();
             const x = rect.left + rect.width / 2; // Center horizontally
             const y = rect.top; // Start above the button
 
             showFlyingText("Added to cart", x, y);
+            
 
             // Optional: Add your existing cart logic here
         });
@@ -622,4 +624,10 @@ document.addEventListener("DOMContentLoaded", () => {
   modalClose.addEventListener("click", hideModal);
   modalBackdrop.addEventListener("click", hideModal);
 });
+
+
+
+
+
+
 
