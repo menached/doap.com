@@ -261,11 +261,22 @@ Resources:
 
                                               .msg-title {
                                                   font-family: 'Marvel', sans-serif; /* Apply Marvel font */
-                                                  font-size: 2.5rem; /* Larger font size */
+                                                  font-size: 2.5rem; /* Default larger font size */
                                                   font-weight: bold;
                                                   margin: 0;
                                                   color: #333; /* Ensure a strong title color */
                                               }
+
+                                              @media only screen and (max-width: 480px) {
+                                                  .msg-title {
+                                                      font-size: 1.6rem; /* Smaller font size for mobile portrait view */
+                                                  }
+                                                  ul li {
+                                                      font-size: 0.9rem; /* Reduce product list font size */
+                                                      line-height: 1.3; /* Adjust line height for readability */
+                                                  }
+                                              }
+
                                               .msg-email-logo {
                                                   width: 75px;
                                                   height: auto;
@@ -294,8 +305,9 @@ Resources:
                                               strong {
                                                   font-weight: bold;
                                               }
+
                                               .bigPfont { 
-                                                font-size:1.2em; 
+                                                  font-size: 1.2em; 
                                               }
                                           </style>
                                       </head>
@@ -310,10 +322,8 @@ Resources:
                                               <!-- Email Content -->
                                               <div class="msg-content">
                                                   <p class="bigPfont"><strong>Order Number:</strong> ${orderNumber}</p>
-                                                 
                                                   <p>Hi ${firstName},</p>
                                                   <p>Your order is being processed! Expect delivery in about an hour. </p>
-
                                                   <i>Review your order details below for accuracy.</i>
                                                   <p><strong>Name:</strong> ${name}</p>
                                                   <p><strong>Phone:</strong> ${phone}</p>
@@ -327,7 +337,6 @@ Resources:
                                                   </ul>
 
                                                   <p><strong>Total:</strong> ${total}</p>
-
                                                   <p><strong>Payment Method:</strong> ${paymentMethod}</p>
                                                   <p>${paymentMethodMessage}</p>
                                                   <p><strong>Special Instructions:</strong> ${specialInstructions}</p>
@@ -346,118 +355,131 @@ Resources:
 
 
 
-
                   // Send notification email to the backoffice team
                   const sesBackofficeParams = {
-                  Source: process.env.SENDER_EMAIL,
-                  Destination: { ToAddresses: ["info@doap.com"] },
-                  Message: {
-                      Subject: { Data: `${city} Doap - New Order Alert` },
-                      Body: {
-                          Html: {
-                              Data: `
-                                  <html>
-                                  <head>
-                                      <style>
-                                          @import url('https://fonts.googleapis.com/css2?family=Marvel&display=swap');
-                                          
-                                          body {
-                                              font-family: 'Marvel', sans-serif;
-                                              font-size: 16px;
-                                              color: #333;
-                                              margin: 0;
-                                              padding: 0;
-                                          }
+                      Source: process.env.SENDER_EMAIL,
+                      Destination: { ToAddresses: ["info@doap.com"] },
+                      Message: {
+                          Subject: { Data: `${city} Doap - New Order Alert` },
+                          Body: {
+                              Html: {
+                                  Data: `
+                                      <html>
+                                      <head>
+                                          <style>
+                                              @import url('https://fonts.googleapis.com/css2?family=Marvel&display=swap');
+                                              
+                                              body {
+                                                  font-family: 'Marvel', sans-serif;
+                                                  font-size: 16px;
+                                                  color: #333;
+                                                  margin: 0;
+                                                  padding: 0;
+                                              }
 
-                                          .msg-email-container {
-                                              max-width: 600px;
-                                              margin: 0 auto;
-                                              padding: 20px;
-                                              background-color: #f9f9f9;
-                                              border: 1px solid #ddd;
-                                              border-radius: 8px;
-                                              box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-                                          }
+                                              .msg-email-container {
+                                                  max-width: 600px;
+                                                  margin: 0 auto;
+                                                  padding: 20px;
+                                                  background-color: #f9f9f9;
+                                                  border: 1px solid #ddd;
+                                                  border-radius: 8px;
+                                                  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                                              }
 
-                                          .msg-header {
-                                              display: flex;
-                                              justify-content: space-between;
-                                              align-items: center;
-                                              margin-bottom: 20px;
-                                          }
+                                              .msg-header {
+                                                  display: flex;
+                                                  justify-content: space-between;
+                                                  align-items: center;
+                                                  margin-bottom: 20px;
+                                              }
 
-                                          .msg-title {
-                                              font-family: 'Marvel', sans-serif;
-                                              font-size: 2.5rem;
-                                              font-weight: bold;
-                                              margin: 0;
-                                              color: #333;
-                                          }
-                                          .msg-email-logo {
-                                              width: 75px;
-                                              height: auto;
-                                              margin-left: 20px;
-                                              float: right;
-                                          }
+                                              .msg-title {
+                                                  font-family: 'Marvel', sans-serif;
+                                                  font-size: 2.5rem; /* Default larger font size */
+                                                  font-weight: bold;
+                                                  margin: 0;
+                                                  color: #333; /* Strong title color */
+                                              }
 
-                                          p {
-                                              margin: 10px 0;
-                                          }
+                                              @media only screen and (max-width: 480px) {
+                                                .msg-title {
+                                                  font-size: 1.6rem; /* Smaller font size for mobile portrait view */
+                                                }
+                                                
+                                                ul li {
+                                                  font-size: 0.9rem; /* Reduce product list font size */
+                                                  line-height: 1.3; /* Adjust line height for readability */
+                                                }
+                                              }
 
-                                          ul {
-                                              padding: 0;
-                                              margin: 10px 0;
-                                              list-style: none;
-                                          }
+                                              .msg-email-logo {
+                                                  width: 75px;
+                                                  height: auto;
+                                                  margin-left: 20px;
+                                                  float: right;
+                                              }
 
-                                          ul li {
-                                              margin: 5px 0;
-                                          }
+                                              p {
+                                                  margin: 10px 0;
+                                              }
 
-                                          .msg-content {
-                                              clear: both;
-                                          }
+                                              ul {
+                                                  padding: 0;
+                                                  margin: 10px 0;
+                                                  list-style: none;
+                                              }
 
-                                          strong {
-                                              font-weight: bold;
-                                          }
-                                      </style>
-                                  </head>
-                                  <body>
-                                      <div class="msg-email-container">
-                                          <!-- Header Section -->
-                                          <div class="msg-header">
-                                              <h2 class="msg-title">${city} Doap </h2>
-                                              <img alt="Doap Logo" class="msg-email-logo" src="https://doap.com/images/logos/doap-logo-ind.png" />
+                                              ul li {
+                                                  margin: 5px 0;
+                                              }
+
+                                              .msg-content {
+                                                  clear: both;
+                                              }
+
+                                              strong {
+                                                  font-weight: bold;
+                                              }
+                                          </style>
+                                      </head>
+                                      <body>
+                                          <div class="msg-email-container">
+                                              <!-- Header Section -->
+                                              <div class="msg-header">
+                                                  <h2 class="msg-title">${city} Doap</h2>
+                                                  <img alt="Doap Logo" class="msg-email-logo" src="https://doap.com/images/logos/doap-logo-ind.png" />
+                                              </div>
+
+                                              <!-- Email Content -->
+                                              <div class="msg-content">
+                                                  <p><strong>Order Number:</strong> ${orderNumber}</p>
+                                                  <p><strong>Customer Name:</strong> ${name}</p>
+                                                  <p><strong>Phone:</strong> ${phone}</p>
+                                                  <p><strong>Email:</strong> ${email}</p>
+                                                  <p><strong>Delivery Address:</strong> ${address}, ${city}</p>
+
+                                                  <p><strong>Special Instructions: </strong>${specialInstructions}</p>
+                                                  
+                                                  <p><strong>Order Summary:</strong></p>
+                                                  <ul>
+                                                      ${items.map(item => `<li>${item.name} (x${item.quantity}) - $${(item.quantity * item.price).toFixed(2)}</li>`).join('')}
+                                                  </ul>
+
+                                                  <p><strong>Total:</strong> ${total}</p>
+                                                  <p><strong>Payment Method:</strong> ${paymentMethod}</p>
+                                                  <p><strong>Timestamp:</strong> ${timestamp}</p>
+                                              </div>
                                           </div>
-
-                                          <!-- Email Content -->
-                                          <div class="msg-content">
-                                              <p><strong>Order Number:</strong> ${orderNumber}</p>
-                                              <p><strong>Customer Name:</strong> ${name}</p>
-                                              <p><strong>Phone:</strong> ${phone}</p>
-                                              <p><strong>Email:</strong> ${email}</p>
-                                              <p><strong>Delivery Address:</strong> ${address}, ${city}</p>
-
-                                              <p><strong>Order Summary:</strong></p>
-                                              <p><strong>Special Instructions: </strong>${specialInstructions}</p>
-                                              <ul>
-                                                  ${items.map(item => `<li>${item.name} (x${item.quantity}) - $${(item.quantity * item.price).toFixed(2)}</li>`).join('')}
-                                              </ul>
-
-                                              <p><strong>Total:</strong> ${total}</p>
-                                              <p><strong>Payment Method:</strong> ${paymentMethod}</p>
-                                              <p><strong>Timestamp:</strong> ${timestamp}</p>
-                                          </div>
-                                      </div>
-                                  </body>
-                                  </html>
-                              `,
+                                      </body>
+                                      </html>
+                                  `,
+                              },
                           },
                       },
-                  },
-              };
-              await ses.sendEmail(sesBackofficeParams).promise();
+                  };
+                  await ses.sendEmail(sesBackofficeParams).promise();
+
 
                   return {
                       statusCode: 200,
