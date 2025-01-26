@@ -565,14 +565,20 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
+import { weightBasedProducts } from './subdomainData.js';
+
 document.addEventListener("DOMContentLoaded", () => {
-  const magnifyIcons  = document.querySelectorAll(".magnify-icon");
-  const productModal  = document.getElementById("productModal");
+  const magnifyIcons = document.querySelectorAll(".magnify-icon");
+  const productModal = document.getElementById("productModal");
   const modalBackdrop = document.getElementById("modalBackdrop");
-  const modalClose    = document.getElementById("modalClose");
-  const modalTitle    = document.getElementById("modalTitle");
-  const modalPrice    = document.getElementById("modalPrice");
-  const modalDesc     = document.getElementById("modalDescription");
+  const modalClose = document.getElementById("modalClose");
+  const modalTitle = document.getElementById("modalTitle");
+  const modalPrice = document.getElementById("modalPrice");
+  const modalDesc = document.getElementById("modalDescription");
+  const modalThumbnail = document.createElement("img"); // Create image element
+  modalThumbnail.id = "modalThumbnail";
+  modalThumbnail.className = "thumbnail-image";
+  modalTitle.parentElement.insertBefore(modalThumbnail, modalTitle.nextSibling); // Add after title
 
   let modalTimer; // We'll store our timeout here
 
@@ -584,7 +590,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (inputElem && inputElem.value.includes("|")) {
       [productName, productPrice] = inputElem.value.split("|");
     } else {
-      productName  = label.querySelector(".item-title")?.textContent.trim() || "Unnamed";
+      productName = label.querySelector(".item-title")?.textContent.trim() || "Unnamed";
       productPrice = label.querySelector(".item-price")?.textContent.trim() || "$0.00";
     }
 
@@ -595,6 +601,16 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     modalPrice.textContent = productPrice;
     modalDesc.innerHTML = descHTML;
+
+    // Fetch and set product thumbnail from weightBasedProducts
+    const productData = weightBasedProducts[productName];
+    if (productData && productData.thumbnail) {
+      modalThumbnail.src = productData.thumbnail;
+      modalThumbnail.style.display = "block"; // Ensure the thumbnail is visible
+    } else {
+      modalThumbnail.src = "/images/default-thumbnail.jpg"; // Fallback image
+      modalThumbnail.style.display = "block";
+    }
 
     // Show modal + backdrop
     productModal.style.display = "block";
@@ -624,7 +640,6 @@ document.addEventListener("DOMContentLoaded", () => {
   modalClose.addEventListener("click", hideModal);
   modalBackdrop.addEventListener("click", hideModal);
 });
-
 
 
 

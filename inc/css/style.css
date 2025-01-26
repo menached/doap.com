@@ -6,6 +6,125 @@ body, h2, input, button, footer {
 
 
 
+/* Center and style the canvas */
+#savingsGraph {
+  display: block;
+  margin: 0 auto; /* Center the canvas horizontally */
+  max-width: 100%; /* Ensure it doesn't overflow */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: subtle shadow for the graph */
+}
+
+/* Ensure outer and inner boxes align properly */
+.label-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px;
+  margin: 10px auto;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  max-width: 500px; /* Ensure it's not too wide */
+}
+
+.item-details {
+  text-align: center;
+  padding: 10px;
+  margin: 10px 0;
+}
+
+/* Avoid overlapping of inner elements */
+.item-title, .item-price {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+/* Ensure proper alignment of the image */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+
+
+#productModal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  background-color: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  width: 90%; /* Adjust width for responsiveness */
+  max-width: 400px; /* Make the modal narrower */
+  padding: 20px;
+}
+
+.product-modal-content {
+  position: relative;
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  width: 90%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#modalClose {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+  cursor: pointer;
+}
+
+.thumbnail-image {
+  display: block; /* Ensure the image occupies its own line */
+  margin: 0 auto 10px auto; /* Center the image and add spacing below */
+  width: 200px; /* Set image width */
+  height: auto; /* Maintain aspect ratio */
+  border-radius: 10px; /* Optional: Rounded corners */
+  object-fit: cover;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for emphasis */
+}
+
+#modalTitle {
+  font-size: 1.8rem;
+  margin: 10px 0;
+  font-family: 'Marvel', sans-serif;
+  text-align: center; /* Center-align the title */
+}
+
+.modal-price-container {
+  margin-top: 10px;
+  font-size: 1.2rem;
+  color: #333;
+  text-align: center; /* Center-align the price */
+}
+
+#modalDescription {
+  margin-top: 20px;
+  font-size: 1rem;
+  color: #555;
+  line-height: 1.5;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid #ddd;
+  margin: 20px 0;
+}
+
+
 /* Container for flying elements (positioned absolutely over entire screen) */
 #flying-leaf-container {
   position: fixed;
