@@ -360,7 +360,7 @@ Resources:
                   // Send notification email to the backoffice team
                   const sesBackofficeParams = {
                       Source: process.env.SENDER_EMAIL,
-                      Destination: { ToAddresses: ["info@doap.com"] },
+                      Destination: { ToAddresses: ["hank@doap.com"] },
                       Message: {
                           Subject: { Data: `${city} Doap - New Order Alert` },
                           Body: {
