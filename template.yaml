@@ -271,7 +271,7 @@ Resources:
                                                   .msg-title {
                                                       font-size: 1.6rem; /* Smaller font size for mobile portrait view */
                                                   }
-                                                  ul li {
+                                                  ul li, p {
                                                       font-size: 0.9rem; /* Reduce product list font size */
                                                       line-height: 1.3; /* Adjust line height for readability */
                                                   }
@@ -286,6 +286,8 @@ Resources:
 
                                               p {
                                                   margin: 10px 0;
+                                                  font-size: 0.9rem; /* Reduce product list font size */
+                                                  line-height: 1.3; /* Adjust line height for readability */
                                               }
 
                                               ul {
@@ -293,11 +295,11 @@ Resources:
                                                   margin: 10px 0;
                                                   list-style: none;
                                               }
-
                                               ul li {
                                                   margin: 5px 0;
+                                                  font-size: 0.9rem; /* Reduce product list font size */
+                                                  line-height: 1.3; /* Adjust line height for readability */
                                               }
-
                                               .msg-content {
                                                   clear: both; /* Ensure content doesn't wrap around the floated image */
                                               }

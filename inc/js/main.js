@@ -646,3 +646,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
+
+
+
+// Function to close the modal
+function closeModal() {
+    const modal = document.getElementById("productModal");
+    if (modal) {
+        modal.style.display = "none"; // Hide the modal
+    }
+}
+
+// Add event listener to the "close" button
+const closeButton = document.getElementById("modalClose");
+if (closeButton) {
+    closeButton.addEventListener("click", closeModal);
+}
+
+// Add event listener for the "Escape" key
+document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") { // Check if 'Escape' key is pressed
+        closeModal(); // Call the close function
+    }
+});
+

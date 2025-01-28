@@ -127,17 +127,9 @@ export const weightBasedProducts = {
         },
     },
     "Premium Potency THC Syrup": {
-        thumbnail: "/images/products/edibles/tubaroos.webp", // Add the thumbnail URL
-        weights: {
-            1: { label: "900mg Bag", price: 30.00 },
-            2: { label: "2x 900mg Bags", price: 50.00 },
-        },
-    },
-    "Premium Potency THC Syrup": {
         thumbnail: "/images/products/edibles/syrup1.webp", // Add the thumbnail URL
         weights: {
-            1: { label: "900mg Bag", price: 30.00 },
-            2: { label: "2x 900mg Bags", price: 50.00 },
+            1: { label: "1000mg bottle", price: 45.00 },
         },
     },
     "GP Variety Sample Pack": {
