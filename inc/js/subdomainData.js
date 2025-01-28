@@ -100,7 +100,7 @@ export const weightBasedProducts = {
             2: { label: "3 Vape Carts", price: 150.00 },
         },
     },
-    "Nug Rum Badder": {
+    "Nug Run Badder": {
         thumbnail: "/images/products/concentrates/badder.webp", // Add the thumbnail URL
         weights: {
             1: { label: "1 gram", price: 30.00 },
@@ -116,7 +116,7 @@ export const weightBasedProducts = {
     "Vape and Flower Bundle": {
         thumbnail: "/images/products/concentrates/cart-and-flower-bundle-324x324.jpeg", // Add the thumbnail URL
         weights: {
-            1: { label: "1g Cart, 1 Battery & 3.5g flower", price: 100.00 },
+            1: { label: "1g Cart, Batt & 3.5g weed", price: 100.00 },
         },
     },
     "Space Tubaroos": {
