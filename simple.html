@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+    <head> 
+    
+    <title>Burlingame Doap</title>
+        <!-- Google Tag Manager -->
+        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-TSJ7XFHN');</script>
+        <!-- End Google Tag Manager -->
+
+        <script>
+            const hostname = window.location.hostname;
+            const subdomain = hostname.split('.')[0];
+        </script>
+        
+    <!-- Cookie Stuff -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.1/cookieconsent.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.1/cookieconsent.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css2?family=Marvel:wght@400;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Marvel:wght@400;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        <script type="module" src="/inc/js/headerManager.js" defer></script>
+        <script type="module" src="/inc/js/formHandler.js" defer></script>
+        <script type="module" src="/inc/js/tabHandler.js" defer></script>
+        <script type="module" src="/inc/js/productSelectionHandler.js" defer></script>
+        <script type="module" src="/inc/js/main.js" defer></script>
+        <script type="module" src="/inc/js/subdomainData.js" defer></script>
+        <script type="module" src="/inc/js/formPopulator.js" defer></script>
+        <script src="/inc/js/shopzipFinder.js" defer></script>
+        <link rel="stylesheet" href="/inc/css/style.css">
+        <link rel="stylesheet" href="/inc/css/customerInfo.css">
+        <link rel="stylesheet" href="/inc/css/zipFormStyle.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <?php //include('./inc/php/og_meta.php'); ?>
+        <?php //include 'inc/php/head.php'; ?> 
+    </head>
+
+    <body>
+
+        <!-- Google Tag Manager (noscript) -->
+        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TSJ7XFHN"
+        height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+        <!-- End Google Tag Manager (noscript) -->
+
+        <div class="page-wrapper">
+            <div class="main-content">
+                <?php //include 'inc/html/header.html'; ?>
+                <?php //include 'inc/php/shop.php'; ?>
+            </div>
+
+            <footer class="doapfooter">
+                <div>
+                    <div class="discover-other-awesome-places">     
+                    <h3>Discover Other Awesome Places</h3>
+                    <div id="aboutmsg" class="footerstuff">
+                        <div class="footerparagraph">
+                            If you're someone who values premium quality and exceptional value, then 
+                            <span class="marvel-font-bold">DOAP</span> is tailor-made for you.
+                            We've taken care of the taxes and delivery fees. Also, no need to go through the hassle of registration - 
+                            all you have to do is confirm that you're over 21 when your order arrives!  
+                            Our efficient delivery system ensures that your order will be with you in no time, usually within an hour.
+                        </div>
+                    </div>
+                    <div class="zip-form-container"> </div>
+                    </div>
+                    <strong>DevOps & Platforms</strong> - 
+                    <a href="https://devopsandplatforms.com" target="_blank" class="footer-link">devopsandplatforms.com</a>
+                </div>
+                <div>
+                    <a href="https://github.com/menached/doap.com" target="_blank" class="githublink">
+                        Explore the project on GitHub
+                    </a>
+                </div>
+                <div class="footer-note">
+                    &copy; <span id="year"></span> DevOps & Platforms. All rights reserved.
+                </div>
+                <div id="agencyIdDisplay"></div>
+                <div id="flying-text-container" style="position: fixed; top: 0; left: 0; width: 100%; pointer-events: none;"></div>
+            </footer>
+
+
+            <div id="notification-modal" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); padding: 20px; background: white; box-shadow: 0 4px 6px rgba(0,0,0,0.1); border-radius: 8px; z-index: 1000;">
+                <p id="notification-message" style="margin: 0; padding: 0; font-size: 1rem;"></p>
+                <button id="close-notification" style="margin-top: 10px; padding: 5px 10px; font-size: 1rem;">OK</button>
+            </div>
+
+
+            <div id="sendingOrderModal" class="modal">
+                <div class="modal-content">
+                    <p>Sending your order...</p>
+                </div>
+            </div>
+
+
+            <!-- Floating Modal -->
+            <div id="floatingModal" style="display: none;">
+                <a href="#cartAnchor" id="cartLink">0 Items in Cart</a>
+                <div id="cartThumbnails"></div> <!-- Container for thumbnails -->
+            </div>
+
+
+
+
+            <div id="flying-leaf-container"></div>
+
+            <div id="productModal" class="product-modal" style="display:none;">
+              <div class="product-modal-content">
+                <span id="modalClose" class="close-btn">&times;</span>
+                <h2 id="modalTitle"></h2>
+                <div class="modal-price-container">
+                  <p id="modalPrice"></p>
+                </div>
+                <hr>
+                <div id="modalDescription"></div>
+              </div>
+            </div>
+
+
+
+            <?php //include 'inc/html/footer.html'; ?>
+        </div>
+    </body>
+</html>
