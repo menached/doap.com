@@ -9,6 +9,7 @@
 !privacy-policy
 !privacy-policy.html
 !simple.php
+!simple.html
 
 # Allow specific files in the "inc" directory
 !inc/

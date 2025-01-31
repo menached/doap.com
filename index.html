@@ -1,997 +1,521 @@
-
 <!DOCTYPE html>
-<html>
-    <head> 
-        <title>Doap</title>
-    <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-TSJ7XFHN');</script>
-    <!-- End Google Tag Manager -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="DOAP is many things to many people.">
 
-    <script>
-        const hostname = window.location.hostname;
-        const subdomain = hostname.split('.')[0];
-    </script>
-    
-<!-- Cookie Stuff -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.1/cookieconsent.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.1/cookieconsent.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css2?family=Marvel:wght@400;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Marvel:wght@400;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script type="module" src="/inc/js/headerManager.js" defer></script>
-    <script type="module" src="/inc/js/formHandler.js" defer></script>
-    <script type="module" src="/inc/js/tabHandler.js" defer></script>
-    <script type="module" src="/inc/js/productSelectionHandler.js" defer></script>
-    <script type="module" src="/inc/js/main.js" defer></script>
-    <script type="module" src="/inc/js/subdomainData.js" defer></script>
-    <script type="module" src="/inc/js/formPopulator.js" defer></script>
-    <script src="/inc/js/shopzipFinder.js" defer></script>
-    <link rel="stylesheet" href="/inc/css/style.css">
-    <link rel="stylesheet" href="/inc/css/customerInfo.css">
-    <link rel="stylesheet" href="/inc/css/zipFormStyle.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta property="og:title" content="Burlingame Cannabis Delivery">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://burlingame.doap.com/index.html">
-<meta property="og:description" content="Burlingame Doap offers premium organic pot delivery, 9am to 9pm daily, covering Burlingame and nearby areas.">
-<meta property="og:image" content="https://burlingame.doap.com/images/banners/burlingamedoapbanner.webp">
-<meta property="og:locale" content="en-US" />
-<meta property="og:logo" content="https://burlingame.doap.com/images/doap-logo-wording.png" />
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Burlingame Cannabis Delivery">
-<meta name="twitter:description" content="Burlingame Doap offers premium organic pot delivery, 9am to 9pm daily, covering Burlingame and nearby areas.">
-<meta name="twitter:image" content="https://burlingame.doap.com/images/banners/burlingamedoapbanner.webp">
-<meta name="twitter:site" content="Call us at 925-601-1234">
- </head>
-    <body>
+    <meta property="og:title" content="The Doap Directory" />
+    <meta property="og:description" content="DOAP stuff, DOAP ideas, and DOAP solutions!" />
+    <meta property="og:image" content="https://www.doap.com/images/banners/happy-delivery.webp" />
+    <meta property="og:url" content="https://www.doap.com/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
 
-        <!-- Google Tag Manager (noscript) -->
-        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TSJ7XFHN"
-        height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-        <!-- End Google Tag Manager (noscript) -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="https://www.doap.com/images/banners/happy-delivery.webp" />
 
-        <div class="page-wrapper">
-            <div class="main-content">
-                <div class="header" style="background-color:#fff;">
-    <div class="logo-title-container">
-        <a href="/index.html" target="_SELF" title="Call Norcal Doap Doap!">
-            <img src="/images/logos/doap-logo-wording.png" alt="Doap Logo" class="doap-logo">
-        </a>
-        <div class="text-container">
-            <a class="nodec" href="/index.html" target="_SELF">
-                <h1 id="cityName" class="marvel-font">Doap</h1>
-            </a>
-            <a href="tel:8332893627" class="phone-number nodec marvel-font">833-289-3627</a>
-        </div>
-    </div>
-    <div class="menu-title nodec">
-        <a style="text-decoration:none!important;" class="nodec" href="/index.html" target="_SELF">
-            <h2 class="menu-title-text nodec">Delivering Organic Awesome Pot</h2>
-        </a>
-    </div>
-</div>
+    <title>The Doap Directory - 833-289-3627</title>
+    <link rel="apple-touch-icon" href="/images/logos/doap-square-180x180.png">
+    <link rel="canonical" href="https://www.doap.com/">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 
-<script type="module">
-    import { subdomainData } from './inc/js/subdomainData.js';
+    <!-- Consolidated and Enhanced CSS -->
+<!-- Consolidated and Enhanced CSS -->
+<style>
+    /* GLOBAL RESETS & BODY STYLING */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        text-decoration: none;
+    }
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #fff;
+        color: #333;
+        text-align: center;
+        line-height: 1.4;
+    }
+    a {
+        color: #333;
+        transition: color 0.3s;
+    }
+    a:hover {
+        color: #555;
+    }
+    img {
+        display: block;
+        max-width: 100%;
+        height: auto;
+    }
 
-    document.addEventListener("DOMContentLoaded", () => {
-        const cityNameElement = document.getElementById("cityName");
-        const phoneNumberElement = document.querySelector(".phone-number");
-        const hostname = window.location.hostname.split('.')[0].toLowerCase();
+    /* HEADINGS */
+    h1 {
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+    }
+    h2 {
+        font-size: 1.4rem;
+        margin-bottom: 0.5rem;
+    }
+    h3 {
+        font-size: 1.2rem;
+        margin-bottom: 0.5rem;
+    }
 
-        const cityData = subdomainData.find(entry => entry.subdomain === hostname);
-        if (cityData) {
-            cityNameElement.textContent = cityData.city + ' Doap';
-            phoneNumberElement.textContent = cityData.phone;
-            phoneNumberElement.href = `tel:${cityData.phone.replace(/-/g, '')}`;
-        } else {
-            console.warn("Subdomain not found in data.");
+    /* WRAPPER FOR THE TOP 3 "BOXES" - SINGLE COLUMN STACKED */
+    .wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        max-width: 1200px;           /* Optional max width */
+        margin: 0 auto;
+        border-left: 2px solid #ccc; /* Borders on both sides */
+        border-right: 2px solid #ccc;
+        padding: 20px;
+    }
+
+    /* EACH BOX / CONTAINER */
+    .container {
+        width: 100%;
+        max-width: 900px; /* keep them narrower than the border width if desired */
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        border-radius: 8px;
+        background: linear-gradient(white, #f0f0f0);
+        padding: 20px;
+        margin: 0 auto;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* LOGO STYLING */
+    .logo {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 1rem;
+        width: 100%; /* Ensure the logo container takes full width */
+        max-width:240px;
+    }
+    .logo img {
+        max-width: 100%; /* Adjust to fit within the container */
+        height: auto;
+    }
+
+    /* CONTACT INFO */
+    .contact-info {
+        margin: 10px 0 20px 0;
+        font-size: 1rem;
+    }
+    .contact-info a {
+        color: #007BFF;
+    }
+    .contact-info a:hover {
+        color: #0056b3;
+    }
+
+    /* ZIP FORM STYLING */
+    .zip-form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+        width: 100%;
+        max-width: 400px;
+    }
+    .zip-form input[type="text"] {
+        width: 100%;
+        padding: 15px;
+        font-size: 1.2rem;
+        border: 2px solid #007BFF;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        transition: box-shadow 0.3s, border-color 0.3s;
+    }
+    .zip-form input[type="text"]:focus {
+        outline: none;
+        border-color: #0056b3;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+    .buttonsubmit {
+        width: 100%;
+        padding: 15px;
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: white;
+        background-color: #007BFF;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        transition: background-color 0.3s, box-shadow 0.3s;
+    }
+    .buttonsubmit:hover {
+        background-color: #0056b3;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+    .buttonsubmit:active {
+        background-color: #004080;
+    }
+
+    .agecheck-container {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+    }
+    .agecheck-label {
+        font-size: 0.9rem;
+    }
+
+    /* SERVICES LIST & NEXTCLOUD APPS LIST */
+    .services-list,
+    .nextcloud-apps-list {
+        list-style: none;
+        padding: 0;
+        margin: 20px auto;
+        max-width: 400px;
+        text-align: left;
+        font-size: 1rem;
+    }
+    .services-list li,
+    .nextcloud-apps-list li {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+    .services-list i,
+    .nextcloud-apps-list i {
+        color: #007BFF;
+        margin-right: 10px;
+        font-size: 1.2rem;
+    }
+
+    /* TIKTOK BUTTON */
+    .tiktok-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px 20px;
+        font-size: 1rem;
+        font-weight: bold;
+        color: #fff;
+        background-color: #FF0050; /* TikTok brand color */
+        border: none;
+        border-radius: 25px;
+        cursor: pointer;
+        text-decoration: none;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        margin-top: 20px;
+    }
+    .tiktok-button i {
+        margin-right: 10px;
+        font-size: 1.2rem;
+    }
+    .tiktok-button:hover {
+        background-color: #E60045;
+        transform: scale(1.05);
+    }
+    .tiktok-button:active {
+        background-color: #CC0040;
+        transform: scale(0.98);
+    }
+
+    /* HOVER-ZOOM ON IMAGES */
+    .zoom-image {
+        transition: transform 0.3s ease;
+    }
+    .zoom-image:hover {
+        transform: scale(1.05);
+    }
+
+    /* RESPONSIVE */
+    @media only screen and (max-width: 1024px) {
+        .wrapper {
+            flex-direction: column;
+        }
+        .zip-form {
+            width: 90%;
+            max-width: 400px;
+        }
+        .buttonsubmit,
+        .zip-form input[type="text"] {
+            width: 100%;
+            margin-top: 10px;
+        }
+    }
+</style>
+
+    <!-- Additional Head Styles (if any) -->
+    <style>
+        h1 {font-size:1.3em;font-family: Marvel;}
+        h2 {font-size:1.2em;font-family: Marvel;}
+        h3 {font-size:1.4em;font-family: Marvel;}
+        p {text-align: left;}
+        .contact-panel{text-align:center;}
+    </style>
+
+    <style>
+        .nextcloud-apps-list {
+            list-style: none; /* Remove default bullets */
+            padding: 0;
+            margin: 20px auto;
+            text-align: left; /* Align text */
+            max-width: 400px; /* Optional: restrict width for centering */
+            font-size: .7rem; /* Slightly larger text */
         }
 
-        console.log("Header script initialized successfully.");
-    });
-</script>
+        .nextcloud-apps-list li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px; /* Space between items */
+            line-height: 1.5;
+        }
 
-                    <!-- Tabs -->
-    <div class="tab-container">
-        <div class="tab active" data-tab="flower">Flower</div>
-        <div class="tab" data-tab="concentrates">Concentrates</div>
-        <div class="tab" data-tab="edibles">Edibles</div>
-        <div class="tab" data-tab="accessories">Accessories</div>
-    </div>
-
-
-            <div id="productsAndCartWrapper"> 
-    <form id="cartForm"><!-- "Doap Menu" -->
-<!-- Tab content for Flower -->
-<div class="tab-content active" id="flower">
-    <div class="item-list">
-
-        <div class="product flash">
-            <label class="item" data-description="<p>Dive into a bowl of this <span class=marvel-font-bold>DOAP</span> strain Red Velvet Zoap, highly crystalized and beautifully trimmed, this one combines smoothness with delicious flavors and a potent uplifting buzz. </p><p> Save 25% when you get an ounce instead of buying the equivalent weight in eighths. </p>">
-                <input type="checkbox" name="item" value="Top Shelf Hydro">
-                <img src="/images/products/flower/hyrdoponic-flower.webp" alt="1/8 oz Top Shelf Hydro">
-                <div class="item-details">
-                    <p class="item-title">Top Shelf Hydro</p>
-                    <div class="item-quantity product-quantity-size">
-                        <label for="quantity-top-shelf-hydro"></label>
-                        <select id="quantity-top-shelf-hydro" class="quantity" name="quantity-top-shelf-hydro">
-                            <option value="1" data-price="50">1/8 oz. (3.5 grams)</option>
-                            <option value="1" data-price="90">1/4 oz. (7 grams)</option>
-                            <option value="1" data-price="150">1/2 oz. (14 grams)</option>
-                            <option value="1" data-price="250">28 grams (1 oz.)</option>
-                        </select>
-                        <span class="magnify-icon">
-                            <i class="fas fa-magnifying-glass"></i>
-                        </span>
-                    </div>
-                    <p class="item-price" data-base-price="50">$50.00</p>
-                    <span class="add-to-cart-button" data-product-name="Top Shelf Hydro" data-price="50">Add to Cart</span>
-                </div>
-            </label>
-        </div>
-
-
-        <div class="product flash">
-            <label class="item" data-description="<p>Get the best value with our Small Bud Special, offering <span class='marvel-font-bold'>DOAP</span> flavor and potency in every ounce.</p><p>A half oz. is just $75 bucks delivered!  If you're the type to roll doobies this is a great way to go.</p>">
-                <input type="checkbox" name="item" value="Small Bud Special|75">
-                <img src="/images/products/flower/small-bud-special.webp" alt="Small Bud Special">
-                <div class="item-details">
-                    <p class="item-title">Small Bud Special</p>
-                    <div class="item-quantity product-quantity-size">
-                        
-                        <label for="quantity-small-bud-special"></label>
-                        <select id="quantity-small-bud-special" class="quantity" name="quantity-small-bud-special">
-                            <option value="1" data-price="150">1/2 oz. (14 grams)</option>
-                            <option value="1" data-price="250">28 grams (1 oz.)</option>
-                        </select>
-                        <span class="magnify-icon">
-                            <i class="fas fa-magnifying-glass"></i>
-                        </span>
-                    </div>
-                    <p class="item-price" data-base-price="75">$75.00</p>
-                    <span class="add-to-cart-button" data-product-name="Small Bud Special" data-price="75">Add to Cart</span>
-                </div>
-            </label>
-        </div>
-
-        <div class="product flash">
-            <label class="item" data-description="<p>Try this Organic Greenhouse Flower, it's grown locally in the fertile foothills of Paradise CA. </p><p> Its <span class='marvel-font'>DOAP</span> organic awesome pot!  Save 25% by getting an ounce instead of the equivalent weight in eighths.</p>">
-                <input type="checkbox" name="item" value="Organic Greenhouse Flower|30">
-                <img src="/images/products/flower/greenhouse-flower.webp" alt="Organic Greenhouse Flower">
-                <div class="item-details">
-                    <p class="item-title">Organic Greenhouse Flower</p>
-                    <div class="item-quantity product-quantity-size">
-                        <label for="quantity-organic-greenhouse-flower"></label>
-                        <select id="quantity-organic-greenhouse-flower" class="quantity" name="quantity-organic-greenhouse-flower">
-                            <option value="1" data-price="30">1/8 oz. (3.5 grams) - $30</option>
-                            <option value="2" data-price="55">1/4 oz. (7 grams) - $55</option>
-                            <option value="4" data-price="100">1/2 oz. (14 grams) - $100</option>
-                            <option value="8" data-price="180">28 grams (1 oz.) - $180</option>
-                        </select>
-                        <span class="magnify-icon">
-                            <i class="fas fa-magnifying-glass"></i>
-                        </span>
-                    </div>
-                    <p class="item-price" data-base-price="30">$30.00</p>
-                    <span class="add-to-cart-button" data-product-name="Organic Greenhouse Flower" data-price="30">Add to Cart</span>
-                </div>
-            </label>
-        </div>
-
-        <div class="product">
-            <label class="item" data-description="<p>Our Prerolls are made from a blends of both Sativa and Indica strains and pack a powerful punch!  Each joint contains 1.5g of crumbly top shelf flower. </p><p>Enjoy a consistently <span class='marvel-font'>DOAP</span> smoking experience with these doobies!  </p><p>Save 25% on a 10 pack!($80) or go big and get the Bakers Dozen for $100!</p>">
-                <input type="checkbox" name="item" value="Premium Quality Hybrid Prerolls|15">
-                <img src="/images/products/flower/single-prerolled-cone-joint.webp" alt="Premium Quality Hybrid Prerolls">
-                <div class="item-details">
-                    <p class="item-title">Premium Quality Hybrid Prerolls</p>
-                    <div class="item-quantity product-quantity-size">
-                        <label for="quantity-premium-prerolls"></label>
-                        <select id="quantity-premium-prerolls" class="quantity" name="quantity-premium-prerolls">
-                            <option value="1" data-price="15">1 Joint - $15</option>
-                            <option value="2" data-price="28">2 Joints - $28</option>
-                            <option value="3" data-price="39">3 Joints - $39</option>
-                            <option value="4" data-price="48">4 Joints - $48</option>
-                            <option value="5" data-price="55">5 Joints - $55</option>
-                            <option value="6" data-price="60">6 Joints - $60</option>
-                            <option value="7" data-price="65">7 Joints - $65</option>
-                            <option value="8" data-price="72">8 Joints - $72</option>
-                            <option value="9" data-price="78">9 Joints - $78</option>
-                            <option value="10" data-price="80">10 Joints - $80</option>
-                        </select>
-                        <span class="magnify-icon">
-                            <i class="fas fa-magnifying-glass"></i>
-                        </span>
-                    </div>
-                    <p class="item-price" data-base-price="15">$15.00</p>
-                    <span class="add-to-cart-button" data-product-name="Premium Quality Hybrid Prerolls" data-price="15">Add to Cart</span>
-                </div>
-            </label>
-        </div>
-
-        <div class="product">
-            <label class="item" data-description="<p>Indulge in the ultimate <span class='marvel-font'>DOAP</span>ness with our Bakers Dozen of Top Shelf Prerolled Cone Joints, perfectly crafted for smooth and satisfying enjoyment.</p>">
-                <input type="checkbox" name="item" value="Bakers Dozen Prerolled Cone Joints|100">
-                <img src="/images/products/flower/2-joints.webp" alt="Bakers Dozen Prerolled Cone Joints">
-                <div class="item-details">
-                    <p class="item-title">Bakers Dozen Prerolled Cone Joints</p>
-                    <div class="item-quantity product-quantity-size">
-                        <select id="quantity-bakers-dozen-joints" class="quantity" name="quantity-bakers-dozen-joints">
-                            <option value="1" data-price="100">13 Joints</option>
-                        </select>
-                        <span class="magnify-icon">
-                            <i class="fas fa-magnifying-glass"></i>
-                        </span>
-                    </div>
-                    <p class="item-price" data-base-price="100">$100.00</p>
-                    <span class="add-to-cart-button" data-product-name="Bakers Dozen Prerolled Cone Joints" data-price="100">Add to Cart</span>
-                </div>
-            </label>
-        </div>
-
-        <div class="product">
-            <label class="item" data-description="<p>Take your experience to the next level with Kief Dipped Prerolls, a <span class='marvel-font'>DOAP</span> combination of potency and flavor.</p>">
-                <input type="checkbox" name="item" value="Kief Dipped Preroll|20">
-                <img src="/images/products/flower/kief-dipped-prerolls.webp" alt="Kief Dipped Preroll">
-                <div class="item-details">
-                    <p class="item-title">Kief Dipped Preroll</p>
-                    <div class="item-quantity product-quantity-size">
-                            <select id="quantity-kief-dipped-preroll-1" class="quantity" name="quantity-kief-dipped-preroll-1">
-                                <option value="1" data-price="20">1 joint</option>
-                                <option value="3" data-price="50">3 joints</option>
-                            </select>
-                        <span class="magnify-icon">
-                            <i class="fas fa-magnifying-glass"></i>
-                        </span>
-                    </div>
-                    <p class="item-price" data-base-price="20">$20.00</p>
-                    <span class="add-to-cart-button" data-product-name="Kief Dipped Preroll" data-price="20">Add to Cart</span>
-                </div>
-            </label>
-        </div>
-
-    </div>
-</div> <!-- End Flower -->
-
-<!-- Tab content for Edibles -->
-<div class="tab-content" id="edibles">
-    <div class="item-list">
-
-        <!-- Product 1: THC Gummy Bears -->
-        <div class="product">
-            <label class="item" data-description="<p>Each <span class=marvel-font-bold>DOAP</span> gummy bear is infused with 5mg of premium organic THC oil, delivering a balanced and consistent experience.</p> <p>Choose between two sizes, a smaller 100mg sampler pack, or the monster 1200mg pack for a significant discount.</p><p>By Green Privilege(GP)</p>">
-                <img src="/images/products/edibles/gummy-bears.webp" alt="THC Gummy Bears">
-                <div class="item-details">
-                    <p class="item-title">THC Gummy Bears</p>
-                    <div class="item-quantity product-quantity-size">
-                        <label for="quantity-gummy-bears"></label>
-                        <select id="quantity-gummy-bears" class="quantity" name="quantity-gummy-bears">
-                            <option value="1" data-price="25">100mg - $25</option>
-                            <option value="2" data-price="80">1200mg - $80</option>
-                        </select>
-                        <span class="magnify-icon">
-                            <i class="fas fa-magnifying-glass"></i>
-                        </span>
-                    </div>
-                    <p class="item-price">$<span id="price-gummy-bears">25.00</span></p>
-                    <span class="add-to-cart-button" data-product-name="THC Gummy Bears" data-price="0.00">Add to Cart</span>
-                </div>
-                <div class="added-to-cart" style="display: none;">Added to Cart</div>
-            </label>
-        </div>
-
-
-        <!-- Product 2: THC Gummy Worms -->
-        <div class="product">
-            <label class="item" data-description="<p>Each of these <span class=marvel-font-bold>DOAP</span> tasty gummy worms are infused with 20mg of premium organic THC oil each, delivering a balanced and consistent experience.</p> <p>Choose between two sizes, a smaller 100mg sampler pack, or the monster 1200mg pack for a significant discount.</p><p>By Green Privilege(GP)</p>">
-                <img src="/images/products/edibles/gummy-worms.webp" alt="THC Gummy Worms">
-                <div class="item-details">
-                    <p class="item-title">THC Gummy Worms</p>
-                    <div class="item-quantity product-quantity-size">
-                        <label for="quantity-gummy-worms"></label>
-                        <select id="quantity-gummy-worms" class="quantity" name="quantity-gummy-worms">
-                            <option value="1" data-price="25">100mg - $25</option>
-                            <option value="2" data-price="80">1200mg - $80</option>
-                        </select>
-                        <span class="magnify-icon">
-                            <i class="fas fa-magnifying-glass"></i>
-                        </span>
-                    </div>
-                    <p class="item-price">$<span id="price-gummy-worms">25.00</span></p>
-                    <span class="add-to-cart-button" data-product-name="THC Gummy Worms" data-price="25.00">Add to Cart</span>
-                </div>
-                <div class="added-to-cart" style="display: none;">Added to Cart</div>
-            </label>
-        </div>
-
-
-        <!-- Product 3: THC Gummy Rings -->
-        <div class="product">
-            <label class="item" data-description="<p>Each of these tasty <span class=marvel-font-bold>DOAP</span> gummy rings are infused with 40mg of premium organic THC oil each, delivering a balanced and consistent experience.</p> <p>Choose between two sizes, a smaller 100mg sampler pack, or the monster 1200mg pack for a significant discount.</p><p>By Green Privilege(GP)</p>">
-                <img src="/images/products/edibles/gummy-rings.webp" alt="THC Gummy Rings">
-                <div class="item-details">
-                    <p class="item-title">THC Gummy Rings</p>
-                    <div class="item-quantity product-quantity-size">
-                        <label for="quantity-gummy-rings"></label>
-                        <select id="quantity-gummy-rings" class="quantity" name="quantity-gummy-rings">
-                            <option value="1" data-price="25">100mg - $25</option>
-                            <option value="2" data-price="80">1200mg - $80</option>
-                        </select>
-                        <span class="magnify-icon">
-                            <i class="fas fa-magnifying-glass"></i>
-                        </span>
-                    </div>
-                    <p class="item-price">$<span id="price-gummy-rings">25.00</span></p>
-                    <span class="add-to-cart-button" data-product-name="THC Gummy Rings" data-price="25.00">Add to Cart</span>
-                </div>
-                <div class="added-to-cart" style="display: none;">Added to Cart</div>
-            </label>
-        </div>
-
-        <!-- Product 4: Space Tubaroos -->
-        <div class="product">
-            <label class="item" data-description="<p>Blast off into a cosmic journey of deliciousness whenever the urge may strike.  Check out our Space Tubaroos, a <span class=marvel-font-bold>DOAP</span> gummy that is totally tubular!</p><p>Each Tubaroo is packed with 60mg of THC.  With a total of 900mg of THC in each bag, Space Tubaroos are the perfect edible to take with you on the go.</p><p>Single for $30 or two packs for $50</p>">
-                <img src="/images/products/edibles/tubaroos.webp" alt="Space Tubaroos">
-                <div class="item-details">
-                    <p class="item-title">Space Tubaroos</p>
-                    <div class="item-quantity product-quantity-size">
-                        <label for="quantity-space-tubaroos"></label>
-                        <select id="quantity-space-tubaroos" class="quantity" name="quantity-space-tubaroos">
-                            <option value="1" data-price="30">1 for $30</option>
-                            <option value="2" data-price="50">2 for $50</option>
-                        </select>
-                        <span class="magnify-icon">
-                            <i class="fas fa-magnifying-glass"></i>
-                        </span>
-                    </div>
-                    <p class="item-price">$<span id="price-space-tubaroos">30.00</span></p>
-                    <span class="add-to-cart-button" data-product-name="Space Tubaroos" data-price="30">Add to Cart</span>
-                </div>
-                <div class="added-to-cart" style="display: none;">Added to Cart</div>
-            </label>
-        </div>
-
-
-        <!-- Product: Premium Potency THC Syrup -->
-        <div class="product">
-            <label class="item" data-description="<p><i>Available via Pre-order only.</i> This THC syrup is infused with activated canabinoids and is known for its high purity and quality.</p><p>It can be consumed directly or mixed with beverages, offering versatility in its use.</p><p>The product’s unique selling point is its high concentration of THC, providing a powerful and long-lasting effect, making it ideal for both recreational and medicinal use.">
-                <img src="/images/products/edibles/syrup1.webp" alt="Premium Potency THC Syrup">
-                <div class="item-details">
-                    <p class="item-title">Premium Potency THC Syrup</p>
-                    <div class="item-quantity product-quantity-size">
-                        <label for="quantity-thc-syrup"></label>
-                        <select id="quantity-thc-syrup" class="quantity" name="quantity-thc-syrup">
-                            <option value="1" data-price="45">1000mg - $45</option>
-                        </select>
-                        <span class="magnify-icon">
-                            <i class="fas fa-magnifying-glass"></i>
-                        </span>
-                    </div>
-                    <p class="item-price">$<span id="price-thc-syrup">45.00</span></p>
-                    <span class="add-to-cart-button" data-product-name="Premium Potency THC Syrup" data-price="25">Pre-order Now</span>
-                </div>
-                <div class="added-to-cart" style="display: none;">Added to Cart</div>
-            </label>
-        </div>
-
-
-        <!-- Product: GP Variety Sample Pack -->
-        <div class="product">
-            <label class="item" data-description="<p>This GP Variety Sample Pack offers 30mg of delicious gummies, with 5mg per piece.</p><p>Perfect for trying out a smaller dose at an affordable price.</p><p>by Green Privilege(GP)">
-                <img src="/images/products/edibles/gp-variety-sample-pack.webp" alt="GP Variety Sample Pack">
-                <div class="item-details">
-                    <p class="item-title">GP Variety Sample Pack</p>
-                    <div class="item-quantity product-quantity-size">
-                        <select id="quantity-gp-variety-pack" class="quantity" name="quantity-gp-variety-pack">
-                            <option value="1" data-price="10">30mg (5mg x 6 pieces) - $10</option>
-                        </select>
-                        <span class="magnify-icon">
-                            <i class="fas fa-magnifying-glass"></i>
-                        </span>
-                    </div>
-                    <p class="item-price">$<span id="price-gp-variety-pack">10.00</span></p>
-                    <span class="add-to-cart-button" data-product-name="GP Variety Sample Pack" data-price="10">Add to Cart</span>
-                </div>
-                <div class="added-to-cart" style="display: none;">Added to Cart</div>
-            </label>
-        </div>
-
-    </div>
-</div> <!-- End Edibles -->
-
-
-<!-- Tab content for Concentrates -->
-<div class="tab-content" id="concentrates">
-    <div class="item-list">
-
-        <div class="product">
-            <!-- Solventless Disposable Vape -->
-            <label class="item" data-description="<p>With solventless options, you get a vape cartridge that doesn't undergo chemical extraction.</p><p>Nor does it lose its terpene content from the chemicals that strip that plant of its natural compounds.</p>">
-                <input type="checkbox" name="item" value="Solventless Disposable Vape|50">
-                <img src="/images/products/concentrates/half-gram-disposable.webp" alt="Solventless Disposable Vape">
-                <div class="item-details">
-                    <p class="item-title">Solventless Disposable Vape</p>
-                    <div class="item-quantity product-quantity-size">
-                        <select id="quantity-solventless-vape-1" class="quantity" name="quantity-solventless-vape-1">
-                            <option value="1" data-price="50">1/2 gram cart</option>
-                        </select>
-                        <span class="magnify-icon">
-                            <i class="fas fa-magnifying-glass"></i>
-                        </span>
-                    </div>
-                    <p class="item-price">$50.00</p>
-                    <span class="add-to-cart-button" data-product-name="Solventless Disposable Vape" data-price="50">Add to Cart</span>
-                </div>
-                <div class="added-to-cart" style="display: none;">Added to Cart</div>
-            </label>
-        </div>
-
-        <div class="product">
-            <!-- Doap 1g Vape Cartridge -->
-            <label class="item" data-description="<p>These Delta-9 THC cartridges are what most people are thinking of when they hear “weed cart.” </p>
-                <p>Our premium Delta-9 THC cartridges are meticulously crafted for a perfect balance of potency, purity, and flavor. Infused with natural terpenes, they offer rich, authentic flavors alongside smooth, consistent effects. </p>
-                <p>Put simply the taste great and pack a whollop. <span class=marvel-font-bold>DOAP!</span> </p> ">
-                <input type="checkbox" name="item" value="Doap 1g Vape Cartridge|45">
-                <img src="images/products/concentrates/vape-cart.webp" alt="Doap 1g Vape Cartridge">
-                <div class="item-details">
-                    <p class="item-title">Doap 1g Vape Cartridge</p>
-                    <div class="item-quantity product-quantity-size">
-                        <select id="quantity-doap-vape-cartridge" class="quantity" name="quantity-doap-vape-cartridge">
-                            <option value="1" data-price="45">1g cart</option>
-                        </select>
-                        <span class="magnify-icon">
-                            <i class="fas fa-magnifying-glass"></i>
-                        </span>
-                    </div>
-                    <p class="item-price">$45.00</p>
-                    <span class="add-to-cart-button" data-product-name="Doap 1g Vape Cartridge" data-price="45">Add to Cart</span>
-                </div>
-                <div class="added-to-cart" style="display: none;">Added to Cart</div>
-            </label>
-        </div>
-
-        <div class="product">
-            <!-- Live Rosin 1g Vape Cart -->
-            <label class="item" data-description="<p>Choose between <i>Moon Coin</i> (indica) or <i>Permanent Marker</i> (sativa)</p>
-                <p>Experience the pure essence of cannabis with our Fresh from the Garden Live Rosin Vape Cart.  A full gram known for its potency and flavor profile.</p>
-                <p>Live rosin vape carts are made with cannabis concentrate obtained from fresh, flash-frozen material.</p>">
-                <input type="checkbox" name="item" value="Live Rosin 1g Vape Cart|60">
-                <img src="/images/products/concentrates/doap-rosin-vape-1.webp" alt="Live Rosin 1g Vape Cart">
-                <div class="item-details">
-                    <p class="item-title">Live Rosin 1g Vape Cart</p>
-                    <div class="item-quantity product-quantity-size">
-                        <select id="quantity-live-rosin-vape" class="quantity" name="quantity-live-rosin-vape">
-                            <option value="1" data-price="60">1g cart</option>
-                        </select>
-                        <span class="magnify-icon">
-                            <i class="fas fa-magnifying-glass"></i>
-                        </span>
-                    </div>
-                    <p class="item-price">$60.00</p>
-                    <span class="add-to-cart-button" data-product-name="Live Rosin 1g Vape Cart" data-price="60">Add to Cart</span>
-                </div>
-                <div class="added-to-cart" style="display: none;">Added to Cart</div>
-            </label>
-        </div>
-
-        <div class="product">
-            <!-- Nug Run Badder -->
-            <label class="item" data-description="<p>Nug run is a <span class=marvel-font-bold>DOAP</span> kind of cannabis concentrate that's produced using only small nuggets from high-grade flower.</p><p>Some other concentrates rely on cannabis trim product like leaves and stems, but the nug run label means a given product is made with only the most potent parts of the plant.</p><p>This is a rich and flavorful concentrate for premium dabbing.</p>">
-                <input type="checkbox" name="item" value="Nug Run Badder|30">
-                <img src="/images/products/concentrates/badder.webp" alt="Nug Run Badder">
-                <div class="item-details">
-                    <p class="item-title">Nug Run Badder</p>
-                    <div class="item-quantity product-quantity-size">
-                        <select id="quantity-nug-run-badder" class="quantity" name="quantity-nug-run-badder">
-                            <option value="1" data-price="30">1g</option>
-                        </select>
-                        <span class="magnify-icon">
-                            <i class="fas fa-magnifying-glass"></i>
-                        </span>
-                    </div>
-                    <p class="item-price">$30.00</p>
-                    <span class="add-to-cart-button" data-product-name="Nug Run Badder" data-price="30">Add to Cart</span>
-                </div>
-                <div class="added-to-cart" style="display: none;">Added to Cart</div>
-            </label>
-        </div>
-
-        <div class="product">
-            <!-- Vape and Flower Bundle -->
-            <label class="item" data-description="<p>For those who like smokin' it and vapin' it, we offer the Vape and Flower Bundle!</p>
-                <p>It combines a 1g Delta-9 THC cartridge, a rechargeable 510-thread battery, and an eighth of our top-shelf hydroponic flower. </p>">
-                <input type="checkbox" name="item" value="Vape and Flower Bundle|100">
-                <img src="/images/products/concentrates/cart-and-flower-bundle-324x324.jpeg" alt="Vape and Flower Bundle">
-                <div class="item-details">
-                    <p class="item-title">Vape and Flower Bundle</p>
-                    <div class="item-quantity product-quantity-size">
-                        <select id="quantity-vape-flower-bundle" class="quantity" name="quantity-vape-flower-bundle">
-                            <option value="1" data-price="100">1g cart, 1 batt, 3.5g flower</option>
-                        </select>
-                        <span class="magnify-icon">
-                            <i class="fas fa-magnifying-glass"></i>
-                        </span>
-                    </div>
-                    <p class="item-price">$100.00</p>
-                    <span class="add-to-cart-button" data-product-name="Vape and Flower Bundle" data-price="100">Add to Cart</span>
-                </div>
-                <div class="added-to-cart" style="display: none;">Added to Cart</div>
-            </label>
-        </div>
-
-        <div class="product">
-            <!-- 2 Vape Carts + Battery -->
-            <label class="item" data-description="<p>This bundle includes two Delta 9 THC premium vape cartridges and a rechargable 510 thread battery pack.</p>">
-                <input type="checkbox" name="item" value="2 Vape Carts + Battery|100">
-                <img src="/images/products/concentrates/2vape-carts-and-a-battery-100-300x300.webp" alt="2 Vape Carts + Battery">
-                <div class="item-details">
-                    <p class="item-title">2 Vape Carts + Battery</p>
-                    <div class="item-quantity product-quantity-size">
-                        <select id="quantity-2-vape-carts-battery" class="quantity" name="quantity-2-vape-carts-battery">
-                            <option value="1" data-price="100">2x1g Carts + Batt - $100.00</option>
-                        </select>
-                        <span class="magnify-icon">
-                            <i class="fas fa-magnifying-glass"></i>
-                        </span>
-                    </div>
-                    <p class="item-price">$100.00</p>
-                    <span class="add-to-cart-button" data-product-name="2 Vape Carts + Battery" data-price="100">Add to Cart</span>
-                </div>
-                <div class="added-to-cart" style="display: none;">Added to Cart</div>
-            </label>
-        </div>
-
-    </div>
-</div> <!-- End Concentrates -->
-
-<!-- Tab content for Accessories -->
-<div class="tab-content" id="accessories">
-    <div class="item-list">
-
-        <div class="product">
-            <label class="item" data-description="<p>A high-quality rechargeable vape battery with built-in USB charger and a 1-year warranty.</p>">
-                <input type="checkbox" name="item" value="Vape Battery w/ USB Charger|40">
-                <img src="/images/products/accessories/vape-pen-battery.webp" alt="Doap Vape Pen - Rechargeable">
-                <div class="item-details">
-                    <p class="item-title">Vape Battery w/ USB Charger</p>
-                    <div class="item-quantity product-quantity-size">
-                        <select id="quantity-lokey-vape-battery" class="quantity" name="quantity-lokey-vape-battery">
-                            <option value="1" data-price="40.00">1 Unit - $40.00</option>
-                            <option value="2" data-price="75.00">2 Units - $75.00</option>
-                            <option value="3" data-price="110.00">3 Units - $110.00</option>
-                        </select>
-                        <span class="magnify-icon">
-                            <i class="fas fa-magnifying-glass"></i>
-                        </span>
-                    </div>
-                    <p class="item-price">$40.00</p>
-                    <span class="add-to-cart-button" data-product-name="Vape Battery w/ USB Charger" data-price="40">Add to Cart</span>
-                </div>
-                <div class="added-to-cart" style="display: none;">Added to Cart</div>
-            </label>
-        </div>
-
-        <div class="product">
-            <label class="item" data-description="<p>A Handcrafted high-quality glass weed pipe, with intense color patterns and easy clean design.</p><p>This pipe has thick glass with good carb placement. Another great feature is it has flat spots where they should be so it doesnt roll off the table. </p>">
-                <input type="checkbox" name="item" value="Glass Weed Pipe|25">
-                <img src="/images/products/accessories/glass-pipe.webp" alt="Glass Weed Pipe - High-Quality Glass">
-                <div class="item-details">
-                    <p class="item-title">Glass Weed Pipe</p>
-                    <div class="item-quantity product-quantity-size">
-                        <select id="quantity-glass-weed-pipe" class="quantity" name="quantity-glass-weed-pipe">
-                            <option value="1" data-price="25.00">1 Pipe - $25.00</option>
-                            <option value="2" data-price="45.00">2 Pipes - $45.00</option>
-                            <option value="3" data-price="65.00">3 Pipes - $65.00</option>
-                        </select>
-                        <span class="magnify-icon">
-                            <i class="fas fa-magnifying-glass"></i>
-                        </span>
-                    </div>
-                    <p class="item-price">$25.00</p>
-                    <span class="add-to-cart-button" data-product-name="Glass Weed Pipe" data-price="25">Add to Cart</span>
-                </div>
-                <div class="added-to-cart" style="display: none;">Added to Cart</div>
-            </label>
-        </div>
-
-<!-- Zig-Zag Rolling Papers -->
-<div class="product">
-    <label class="item" data-description="<p>Zig-Zag Rolling Papers in a variety of sizes to suit your rolling needs.</p>">
-        <input type="checkbox" name="item" value="Zig-Zag Rolling Papers|4.50">
-        <img src="/images/products/accessories/zig-zag-rolling-papers.webp" alt="Zig-Zag Rolling Papers">
-        <div class="item-details">
-            <p class="item-title">Zig-Zag Rolling Papers</p>
-            <div class="item-quantity product-quantity-size">
-                <select id="size-zig-zag-papers" class="quantity" name="size-zig-zag-papers">
-                    <option value="1" data-price="4.50">Single Wide (SW) - $4.50</option>
-                    <option value="2" data-price="4.50">1 ¼ Size - $4.50</option>
-                    <option value="3" data-price="5.00">1 ½ Size - $5.00</option>
-                    <option value="4" data-price="5.00">King Size - $5.00</option>
-                    <option value="5" data-price="5.00">King Size Slim - $5.00</option>
-                </select>
-                <span class="magnify-icon">
-                    <i class="fas fa-magnifying-glass"></i>
-                </span>
+        .nextcloud-apps-list i {
+            color: #007BFF; /* Icon color */
+            margin-right: 10px; /* Space between icon and text */
+            font-size: 1.4rem; /* Slightly larger icon */
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        
+        <!-- First Box -->
+        <div class="container">
+            <div class="logo">
+                <a href="https://www.doap.com/" title="Enter your zipcode in the form and start shopping now! 1hr service!">
+                    <img src="/images/logos/doap-logo-ind.png" alt="Directory Of Agencies & Providers" loading="lazy">
+                </a>
             </div>
-            <p class="item-price">$4.50</p>
-            <span class="add-to-cart-button" data-product-name="Zig-Zag Rolling Papers" data-price="4.50">Add to Cart</span>
-        </div>
-        <div class="added-to-cart" style="display: none;">Added to Cart</div>
-    </label>
-</div>
-
-<!-- Weed Grinder -->
-<div class="product">
-    <label class="item" data-description="<p>Durable and efficient medium sized weed grinder for a consistent grind every time. </p><p>It's big enough to keep your hands from cramping and small enough for a permanent home in your weed kit.</p>">
-        <input type="checkbox" name="item" value="Weed Grinder|20">
-        <img src="/images/products/accessories/grinder.webp" alt="Weed Grinder">
-        <div class="item-details">
-            <p class="item-title">Weed Grinder</p>
-            <div class="item-quantity product-quantity-size">
-                <select id="quantity-weed-grinder" class="quantity" name="quantity-weed-grinder">
-                    <option value="1" data-price="20.00">1 Grinder - $20.00</option>
-                    <option value="2" data-price="35.00">2 Grinders - $35.00</option>
-                </select>
-                <span class="magnify-icon">
-                    <i class="fas fa-magnifying-glass"></i>
-                </span>
+            <div class="contact-info">
+                <h2>Directory Of Agencies & Providers</h2>
+                <div>Phone: <a href="tel:833-289-3627">833-289-3627</a></div>
+                <div>Email: <a href="mailto:info@doap.com">info@doap.com</a></div>
             </div>
-            <p class="item-price">$20.00</p>
-            <span class="add-to-cart-button" data-product-name="Weed Grinder" data-price="20">Add to Cart</span>
-        </div>
-        <div class="added-to-cart" style="display: none;">Added to Cart</div>
-    </label>
-</div>
-
-
-        <div class="product">
-            <!-- Bic Lighter -->
-            <label class="item" data-description="<p>Reliable and long-lasting Bic Lighter, the perfect companion for your smoking needs.</p>">
-                <input type="checkbox" name="item" value="Bic Lighter|3">
-                <img src="/images/products/accessories/bic-lighter.webp" alt="Bic Lighter">
-                <div class="item-details">
-                    <p class="item-title">Bic Lighter</p>
-                    <div class="item-quantity product-quantity-size">
-                        <select id="quantity-bic-lighter" class="quantity" name="quantity-bic-lighter">
-                            <option value="1" data-price="3.00">1 Lighter - $3.00</option>
-                            <option value="2" data-price="6.00">2 Lighters - $6.00</option>
-                            <option value="3" data-price="9.00">3 Lighters - $9.00</option>
-                        </select>
-                        <span class="magnify-icon">
-                            <i class="fas fa-magnifying-glass"></i>
-                        </span>
-                    </div>
-                    <p class="item-price">$3.00</p>
-                    <span class="add-to-cart-button" data-product-name="Bic Lighter" data-price="3">Add to Cart</span>
+            
+            <!-- **Embedded Zip Finder Form** -->
+            <form class="zip-form">
+                <input type="text" placeholder="Enter ZIP Code or City/Town" class="userInput" required>
+                <button class="buttonsubmit" type="submit">Start Shopping!</button>
+                <div class="agecheck-container">
+                    <input type="checkbox" id="agecheck" checked>
+                    <label for="agecheck" class="agecheck-label">Yes, I'm 21</label>
                 </div>
-                <div class="added-to-cart" style="display: none;">Added to Cart</div>
-            </label>
+                <p class="message"></p>
+            </form>
+            
+            <img src="/images/banners/happy-delivery.webp" alt="Doap Banner" class="zoom-image" loading="lazy" style="margin-top: 20px;">
         </div>
 
-
-        <div class="product">
-            <!-- Doap T-Shirt -->
-            <label class="item" data-description="<p>Show off your love for Doap with this stylish and comfortable T-Shirt. Available in multiple sizes.</p>">
-                <input type="checkbox" name="item" value="Doap T-Shirt|15">
-                <img src="/images/products/accessories/doap-tshirt.webp" alt="Doap T-Shirt">
-                <div class="item-details">
-                    <p class="item-title">Doap T-Shirt</p>
-                    <div class="item-quantity product-quantity-size">
-                        <select id="size-doap-tshirt" class="quantity" name="size-doap-tshirt">
-                            <option value="1" data-price="15.00">Small - $15.00</option>
-                            <option value="2" data-price="16.00">Medium - $16.00</option>
-                            <option value="3" data-price="17.00">Large - $17.00</option>
-                            <option value="4" data-price="18.00">XL - $18.00</option>
-                            <option value="5" data-price="19.00">XXL - $19.00</option>
-                        </select>
-                        <span class="magnify-icon">
-                            <i class="fas fa-magnifying-glass"></i>
-                        </span>
-                    </div>
-                    <p class="item-price">$15.00</p>
-                    <span class="add-to-cart-button" data-product-name="Doap T-Shirt" data-price="15">Add to Cart</span>
-                </div>
-                <div class="added-to-cart" style="display: none;">Added to Cart</div>
-            </label>
-        </div>
-
-    </div>
-</div> <!-- End Accessories -->
-
-
-        <div id="cartContainer"> 
-<form id=\"cartForm\">
-<!-- Cart Section -->
-<div class="cart-section">
-    <div style="display: flex; justify-content: space-between; align-items: center;">
-        <h3 id=cartAnchor>Cart:</h3>
-        <span id="minOrderMessage" style="font-size: 0.9rem; font-weight: bold; color: red;">
-            Minimum order is $0.
-        </span>
-    </div>
-    <ul id="selectedItemsList">
-        <li class="no-items" style="background-color: transparent; padding: 10px 0px; text-align: center;">
-            No items selected yet.
-        </li>
-    </ul>
-    <div id="totalPriceRow">
-        <span>Total Price:</span>
-        <span id="total">$0</span>
-    </div>
-</div>
-
-<div class="orderInfo"> 
-    <!-- Customer Information -->
-    <div class="customer-info">
-        <div class="info-row">
-            <label for="name full-width" class="customer-info-label">Name:</label>
-            <input type="text" id="name" name="name" required autocomplete="name" placeholder="Full Name" class="customer-input-element">
-        </div>
-
-        <div class="info-row">
-            <label for="phone full-width" class="customer-info-label">Phone:</label>
-            <input type="tel" id="phone" name="phone" required autocomplete="tel" placeholder="Phone Number" class="customer-input-element">
-        </div>
-
-        <div class="info-row full-width">
-            <label for="email" class="customer-info-label">Email:</label>
-            <input type="email" id="email" name="email" required autocomplete="email" placeholder="Email Address" class="customer-input-element">
-        </div>
-
-        <!-- Promo Opt-In Checkboxes -->
-        <div class="info-row full-width"> 
-          <label class="customer-info-label">Preferred communication method:</label>
-          <div class="promo-optin">
-              <label for="promo_email" class="promo" class="customer-info-label">
-                <input type="radio" id="promo_email" name="promo_optin" value="email" class="customer-input-element" checked />
-                Email
-              </label>
-              <label for="promo_sms" class="promo">
-                <input type="radio" id="promo_sms" name="promo_optin" value="sms" class="customer-input-element"/>
-                SMS
-              </label>
-              <label for="promo_call" class="promo">
-                <input type="radio" id="promo_call" name="promo_optin" value="call" class="customer-input-element"/>
-               Call 
-              </label>
+        <!-- Second Box -->
+        <div class="container">
+            <div class="logo">
+                <a href="https://homebase.doap.com/" title="Providing cutting-edge solutions for scalable infrastructure, automation, and development pipelines.">
+                    <img src="/images/logos/doap-logo-ind.png" alt="DevOps And Platforms" loading="lazy">
+                </a>
             </div>
-        </div>
-
-        <div class="info-row" full-width>
-            <label for="address" class="customer-info-label">Address:</label>
-            <textarea id="address" name="address" required autocomplete="street-address" placeholder="Street Address" class="customer-input-element"></textarea>
-        </div>
-
-        <div class="info-row" full-width>
-            <label for="city" class="customer-info-label">City:</label>
-            <input type="text" id="city" name="city" required autocomplete="address-level2" placeholder="City" class="customer-input-element">
-        </div>
-
-        <div class="info-row full-width">
-            <label for="specialInstructions" class="customer-info-label">Special Instructions:</label>
-            <textarea id="specialInstructions" name="specialInstructions" placeholder="Add any specific delivery notes here..." autocomplete="off" class="customer-input-element"></textarea>
-        </div>
-    </div>
-
-    <!-- Payment Method -->
-    <div class="payment-section">
-        <label for="paymentMethod" class="customer-info-label">
-            <i class="fas fa-cash-register alignright"></i> Payment Method:
-        </label>
-        <select id="paymentMethod" name="paymentMethod" class="customer-input-element" required>
-            <option value="" style="font-family:sans-serif" class="customer-input-element" selected>Select Payment Method</option>
-            <option value="cash" class="customer-input-element">Cash</option>
-            <option value="credit-card" class="customer-input-element">Credit Card</option>
-            <option value="crypto" class="customer-input-element">Crypto</option>
-            <option value="zelle" class="customer-input-element">Zelle</option>
-            <option value="venmo" class="customer-input-element">Venmo</option>
-            <option value="paypal" class="customer-input-element">PayPal</option>
-            <option value="cashapp" class="customer-input-element">Cashapp</option>
-        </select>
-    </div>
-
-    <div id="accordionContent">
-
-        <div id="creditCardForm" class="accordion-section" style="display: none;">
-            <h3><i class="fas fa-credit-card alignright"></i> Enter Your Credit Card Details</h3>
-            <p class="aligncenter">
-                <label for="nameOnCard" class="customer-info-label">Name on card:</label>
-                <input type="text" id="nameOnCard" placeholder="Joe Q. Public" class="customer-input-element cardElement"/> 
+            <div class="contact-info">
+                <h2><a href="https://homebase.doap.com" style="color:#007BFF;">DevOps And Platforms</a></h2>
+                <div><a href="mailto:info@devopsandplatforms.com">info@devopsandplatforms.com</a></div>
+            </div>
+            <h3>Join Doap HQ!</h3>
+            <p style="margin:0 auto 20px auto; max-width:500px;">
+                For a free 1g account on Doap HQ, email a request to info@devopsandplatforms.com with 
+                <strong>SUBSCRIBE</strong> in the subject.
             </p>
-            <p class="aligncenter">
-                <label for="cardNumber" class="customer-info-label">Card Number:</label>
-                <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" class="cardElement customer-input-element" /> <i class="fas fa-lock golden-lock"></i>
-            </p>
-            <p class="cardbits">
-                <label for="expiryDate" class="customer-info-label">Expiration Date:</label>
-                <input type="text" id="expiryDate" placeholder="MM/YY" class="cardElement customer-input-element" />
 
-                <label for="cvv" class="customer-info-label">CVV:</label>
-                <input type="text" id="cvv" placeholder="123" class="cardElement customer-input-element" />
-            </p>
-            <p class="cardbits">
-                <label for="cardZip" class="customer-info-label">Zip:</label>
-                <input type="text" id="cardZip" placeholder="9XXXX" class="cardElement customer-input-element" />
-            </p>
-        </div>
-
-        <div id="cryptoWallets" class="accordion-section" style="display: none;">
-            <h3>Crypto Wallet Addresses</h3>
-            <ul style="list-style: none; padding: 0; margin: 0;">
-                <li>
-                    <i class="fab fa-bitcoin"></i>
-                    <strong>Bitcoin (BTC):</strong>
-                    <span class="copy-address small-text" data-address="bc1q28m9z95qzfjap7tamagnhlrk8nu332l7mlyjzr" style="cursor: pointer; color: blue;">
-                       Copy 
-                    </span>
-                </li>
-                <li>
-                    <i class="fab fa-ethereum"></i>
-                    <strong>Ethereum (ETH):</strong>
-                    <span class="copy-address small-text" data-address="0xf38ab68ae630bacd769cfc34fbcf3f7c0504f97a" style="cursor: pointer; color: blue;">
-                       Copy 
-                    </span>
-                </li>
-                <li>
-                    <i class="fa fa-dog"></i>
-                    <strong>Doge (DOGE):</strong>
-                    <span class="copy-address small-text" data-address="DKx7uayMeVmd8Zuy3PgGSRB8XjUVt3ndeT" style="cursor: pointer; color: blue;">
-                       Copy 
-                    </span>
-                </li>
-                <li>
-                    <i class="fa fa-wallet"></i>
-                    <strong>Litecoin (LTC):</strong>
-                    <span class="copy-address small-text" data-address="ltc1q97cz898tgwqh23j44kf5nsaggg84j2vw666jqr" style="cursor: pointer; color: blue;">
-                       Copy 
-                    </span>
-                </li>
+            <h3>DOAP HQ Features</h3>
+            <ul class="nextcloud-apps-list">
+                <li><i class="fas fa-file"></i> Files – Store, share, and manage files securely</li>
+                <li><i class="fas fa-users"></i> Contacts – Manage and sync your address book</li>
+                <li><i class="fas fa-calendar"></i> Calendar – Keep track of events and appointments</li>
+                <li><i class="fas fa-envelope"></i> Mail – Connect your email for centralized access</li>
+                <li><i class="fas fa-comments"></i> Talk – Real-time chat, audio, and video communication</li>
+                <li><i class="fas fa-tasks"></i> Tasks – Organize and manage to-do lists</li>
+                <li><i class="fas fa-photo-video"></i> Photos – Share and organize your photo collections</li>
+                <li><i class="fas fa-map-marked-alt"></i> Maps – Navigate with integrated mapping and GPS tools</li>
+                <li><i class="fas fa-location-arrow"></i> GPS Tracking – Manage and monitor location data</li>
+                <li><i class="fas fa-shield-alt"></i> Security – Two-factor authentication and activity monitoring</li>
+                <li><i class="fas fa-cloud-upload-alt"></i> External Storage – Integrate with Dropbox, Google Drive, and more</li>
+                <li><i class="fas fa-chart-line"></i> Dashboard – Overview of activities, notifications, and settings</li>
             </ul>
-            <!-- Temporary Copy Confirmation Message -->
-            <div id="copyMessage" class="small-text" style="display: none; color: green; font-weight: bold; margin-top: 10px;"></div>
+        </div>
 
+        <!-- Third Box -->
+        <div class="container">
+            <div class="logo">
+                <a href="https://tiktok.com/@doapydave" title="Doap on TikTok.">
+                    <img src="/images/logos/doap-logo-ind.png" alt="DOAP on TikTok" loading="lazy">
+                </a>
+            </div>
+            <div class="contact-info">
+                <h2><a href="https://tiktok.com/@doapydave">Dreaming Of American Prosperity</a></h2>
+                <div><a href="mailto:info@inthingslimited.com">info@inthingslimited.com</a></div>
+            </div>
+            <p class="message"></p>
+            <a href="https://tiktok.com/@doapydave">
+                <img style="max-width:300px; margin: 20px auto;" src="/images/gravatars/dreaming-of-american-prosperity.jpeg" alt="Doap Banner" loading="lazy">
+            </a>
+            <a href="https://tiktok.com/@doapydave" target="_blank" class="tiktok-button">
+                <i class="fab fa-tiktok"></i> Subscribe on TikTok
+            </a>
         </div>
     </div>
-    <div id="CODHelp" class="accordion-section" style="display: none;">
-        <h3><i class="fas fa-money-bill-wave"></i> Cash On Delivery (COD)</h3>
-        <p>
-            Enjoy the simplest and most private way to pay for your order with <strong>Cash On Delivery</strong>. 
-            No need to create an account or share sensitive financial details—just have your cash ready when your order arrives.
-        </p>
-        <p>
-            After placing your order, check your email for the order status. If you have any questions or need assistance, 
-            feel free to call us at <strong>(833)289-3627</strong>.
-        </p>
-    </div>
-    <div id="generalHelp" class="accordion-section" style="display: none;">
-        <h3><i class="fas fa-phone-alt"></i> Peer-to-Peer Payment</h3>
-            <p>
-            These systems allow individuals to transfer money directly to one another using a smartphone app or online interface.
-            They are designed for convenient and fast transfers between users, often with minimal or no fees for basic transactions.
-            After placing your order, check your email for order status. Peer-to-peer payments can be handled over the phone or directly with the driver 
-            when your order arrives.  
-            Feel free to call us at (833)289-3627 for assistance.
-            </p>
-    </div>
-    <!-- Submit Button -->
-    <button id="checkoutButton">Checkout</button>
-</div>
-</form>
-</div>
 
+    <!-- JavaScript for Zip Finder -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Select all forms with the class 'zip-form'
+            const forms = document.querySelectorAll('.zip-form');
 
-<div id="hoverModal" class="modal">
-    <div class="modal-content">
-        <p>Add items to the cart and fill out delivery info. No account necessary!</p>
-    </div>
-</div>
-
-    </div>
-
-
-    <div id="popupMessage" class="popup hidden">
-        <p id="popupText">Order Processed Successfully!</p>
-    </div>
-
-<script type="module">
-document.addEventListener("DOMContentLoaded", () => {
-    const tabs = document.querySelectorAll(".tab");
-    const tabContents = document.querySelectorAll(".tab-content");
-
-    // Show all categories on page load
-    tabContents.forEach(content => content.classList.add("active"));
-
-    tabs.forEach((tab) => {
-        tab.addEventListener("click", () => {
-            // Hide all categories
-            tabContents.forEach(content => content.classList.remove("active"));
-
-            // Show only the selected category
-            const contentId = tab.dataset.tab;
-            const targetContent = document.getElementById(contentId);
-            if (targetContent) {
-                targetContent.classList.add("active");
+            if (!forms.length) {
+                console.error("No forms with class 'zip-form' found.");
+                return;
             }
+
+            forms.forEach(form => {
+                form.addEventListener('submit', function (event) {
+                    event.preventDefault(); // Prevent default form submission
+
+                    const input = form.querySelector('.userInput');
+                    const message = form.querySelector('.message');
+
+                    const userInput = input.value.trim().toLowerCase();
+                    if (!userInput) {
+                        message.textContent = "Please enter a valid ZIP Code or city.";
+                        return;
+                    }
+
+                    // ZIP Data Mapping and redirection logic
+                    const zipData = [
+                        { 
+                            zip: [94507], 
+                            city: ["Alamo", "Blackhawk", "Tassajara"], 
+                            url: "https://alamo.doap.com/simple.php" 
+                        },
+                        { 
+                            zip: [94568, 94552, 94586], 
+                            city: ["Dublin", "Sunol"], 
+                            url: "https://dublin.doap.com/simple.php" 
+                        },
+                        { 
+                            zip: [
+                                94002, 94005, 94010, 94011, 94014, 94015, 94019, 94022, 94025, 94027,
+                                94028, 94030, 94038, 94044, 94061, 94062, 94063, 94065, 94066, 94070,
+                                94080, 94112, 94128, 94134, 94301, 94401, 94402, 94403, 94404
+                            ], 
+                            city: ["Burlingame", "El Granada", "Moss Beach", "Montara"], 
+                            url: "https://burlingame.doap.com/simple.php" 
+                        },
+                        { 
+                            zip: [94536, 94538, 94539, 94555], 
+                            city: ["Castro Valley", "Newark", "Union City"], 
+                            url: "https://castrovalley.doap.com/simple.php" 
+                        },
+                        { 
+                            zip: [94022, 94023, 94024, 94040, 94041, 94042, 94043, 94085, 94086, 94087, 
+                                  94088, 94089, 94301, 94302, 94303, 94304, 94305, 94306, 94309, 94401, 
+                                  94402, 94403, 94404, 95002, 95008, 95009, 95011, 95013, 95014, 95015, 
+                                  95030, 95031, 95032, 95035, 95036, 95042, 95044, 95050, 95051, 95052, 
+                                  95054, 95055, 95056, 95101, 95102, 95103, 95106, 95108, 95109, 95110, 
+                                  95111, 95112, 95113, 95115, 95116, 95117, 95118, 95119, 95120, 95121, 
+                                  95122, 95123, 95124, 95125, 95126, 95127, 95128, 95129, 95130, 95131, 
+                                  95132, 95133, 95134, 95135, 95136, 95138, 95139, 95140, 95141, 95148, 
+                                  95150, 95151, 95152, 95153, 95154, 95155, 95156, 95157, 95158, 95159, 
+                                  95160, 95161, 95164, 95170, 95172, 95173, 95191, 95192, 95193, 95194, 
+                                  95196, 95391
+                            ], 
+                            city: ["Campbell", "Monte Sereno", "Saratoga"], 
+                            url: "https://campbell.doap.com/simple.php" 
+                        },
+                        { 
+                            zip: [94528, 94547, 94552, 94556, 94619, 94605, 94516, 94575], 
+                            city: ["Concord", "Clayton", "Pacheco"], 
+                            url: "https://concord.doap.com/simple.php" 
+                        },
+                        { 
+                            zip: [94506, 94526], 
+                            city: ["Danville", "Diablo"], 
+                            url: "https://danville.doap.com/simple.php" 
+                        },
+                        { 
+                            zip: [94568, 94552, 94586], 
+                            city: ["Dublin", "Sunol"], 
+                            url: "https://dublin.doap.com/simple.php" 
+                        },
+                        { 
+                            zip: [94402, 94403, 94002, 94030, 94070, 94404, 94065, 94066, 94080, 94063, 94128, 94401, 94015, 94044, 94134, 94014, 94124], 
+                            city: ["Hillsborough", "Belmont", "Millbrae"], 
+                            url: "https://hillsborough.doap.com/simple.php" 
+                        },
+                        { 
+                            zip: [94549, 94583, 94553, 94598, 94575, 94556, 94708, 94707, 94709, 94618, 94704, 94517, 94720, 94705, 94710, 94712, 94702, 94703], 
+                            city: ["Lafayette", "Moraga"], 
+                            url: "https://lafayette.doap.com/simple.php" 
+                        },
+                        { 
+                            zip: [94550, 94551], 
+                            city: ["Livermore", "Altamont"], 
+                            url: "https://livermore.doap.com/simple.php" 
+                        },
+                        { 
+                            zip: [94618, 94705, 94708, 94563, 94611], 
+                            city: ["Orinda", "El Sobrante", "Pinole"], 
+                            url: "https://orinda.doap.com/simple.php" 
+                        },
+                        { 
+                            zip: [94512, 94513, 94565, 94509, 94514], 
+                            city: ["Pittsburg", "Bay Point"], 
+                            url: "https://pittsburg.doap.com/simple.php" 
+                        },
+                        { 
+                            zip: [94597, 94523, 94553, 94528, 94575], 
+                            city: ["Pleasant Hill", "Martinez", "Crockett"], 
+                            url: "https://pleasanthill.doap.com/simple.php" 
+                        },
+                        { 
+                            zip: [94528, 94583, 94582, 94517], 
+                            city: ["San Ramon", "Dougherty"], 
+                            url: "https://sanramon.doap.com/simple.php" 
+                        },
+                        { 
+                            zip: [94598, 94595, 94596], 
+                            city: ["Walnut Creek", "Rossmoor"], 
+                            url: "https://walnutcreek.doap.com/simple.php" 
+                        }
+                    ];
+
+                    let found = false;
+
+                    for (const data of zipData) {
+                        if (data.zip.includes(parseInt(userInput)) || data.city.some(c => c.toLowerCase() === userInput)) {
+                            window.location.href = data.url;
+                            found = true;
+                            console.log(`Match found for "${userInput}": Redirecting to ${data.url}`);
+                            break;
+                        }
+                    }
+
+                    if (!found) {
+                        message.textContent = "No agency in your area.";
+                        message.style.color = "red"; // Make the message stand out
+                        console.log("No matching location found.");
+                    }
+                });
+            });
+
+            console.log("Zip Finder initialized successfully.");
         });
-    });
-});
-
-</script>
-
-
-            </div>
-            <footer class="doapfooter">
-    <div>
-        <div class="discover-other-awesome-places">     
-        <h3>Discover Other Awesome Places</h3>
-        <div id="aboutmsg" class="footerstuff">
-            <div class="footerparagraph">
-                If you're someone who values premium quality and exceptional value, then 
-                <span class="marvel-font-bold">DOAP</span> is tailor-made for you.
-                We've taken care of the taxes and delivery fees. Also, no need to go through the hassle of registration - 
-                all you have to do is confirm that you're over 21 when your order arrives!  
-                Our efficient delivery system ensures that your order will be with you in no time, usually within an hour.
-            </div>
-        </div>
-        <div class="zip-form-container"> </div>
-        </div>
-        <strong>DevOps & Platforms</strong> - 
-        <a href="https://devopsandplatforms.com" target="_blank" class="footer-link">devopsandplatforms.com</a>
-    </div>
-    <div>
-        <a href="https://github.com/menached/doap.com" target="_blank" class="githublink">
-            Explore the project on GitHub
-        </a>
-    </div>
-    <div class="footer-note">
-        &copy; <span id="year"></span> DevOps & Platforms. All rights reserved.
-    </div>
-    <div id="agencyIdDisplay"></div>
-    <div id="flying-text-container" style="position: fixed; top: 0; left: 0; width: 100%; pointer-events: none;"></div>
-</footer>
-
-
-<div id="notification-modal" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); padding: 20px; background: white; box-shadow: 0 4px 6px rgba(0,0,0,0.1); border-radius: 8px; z-index: 1000;">
-    <p id="notification-message" style="margin: 0; padding: 0; font-size: 1rem;"></p>
-    <button id="close-notification" style="margin-top: 10px; padding: 5px 10px; font-size: 1rem;">OK</button>
-</div>
-
-
-<div id="sendingOrderModal" class="modal">
-    <div class="modal-content">
-        <p>Sending your order...</p>
-    </div>
-</div>
-
-
-<!-- Floating Modal -->
-<div id="floatingModal" style="display: none;">
-    <a href="#cartAnchor" id="cartLink">0 Items in Cart</a>
-    <div id="cartThumbnails"></div> <!-- Container for thumbnails -->
-</div>
-
-
-
-
-<div id="flying-leaf-container"></div>
-
-<div id="productModal" class="product-modal" style="display:none;">
-  <div class="product-modal-content">
-    <span id="modalClose" class="close-btn">&times;</span>
-    <h2 id="modalTitle"></h2>
-    <div class="modal-price-container">
-      <p id="modalPrice"></p>
-    </div>
-    <hr>
-    <div id="modalDescription"></div>
-  </div>
-</div>
-        </div>
-    </body>
+    </script>
+</body>
 </html>
 

@@ -1,0 +1,657 @@
+
+/* Base font size */
+body {
+    font-size: 16px; /* Default size */
+    line-height: 1.5; /* Comfortable line height */
+}
+
+/* Tiny screens (less than 400px, e.g., small phones) */
+@media (max-width: 399px) {
+    body {
+        font-size: 14px; /* Slightly smaller for very small screens */
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    h2 {
+        font-size: 1.3rem;
+    }
+
+    h3 {
+        font-size: 1.1rem;
+    }
+
+    p {
+        font-size: 0.9rem;
+    }
+    .customer-info-label, .payment-section {
+        font-size: 1.1rem!important;
+    }
+    .customer-input-element {
+        font-size: 0.9rem;
+    }
+    #cartContainer > div.orderInfo > div.customer-info > div:nth-child(4) > label{font-size:1rem!important;}
+    .promo {
+        font-size:.9rem!important;
+    }
+    .promo-optin {
+        font-size:.9em!important;
+    }
+}
+
+/* Small screens (400px to 767px, e.g., most phones) */
+@media (min-width: 400px) and (max-width: 767px) {
+    body {
+        font-size: 15px; /* Slightly larger than tiny */
+    }
+
+    h1 {
+        font-size: 1.75rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    h3 {
+        font-size: 1.25rem;
+    }
+
+    p {
+        font-size: 1rem;
+    }
+    .customer-info-label, .payment-section {
+        font-size: 1.35rem;
+    }
+    .customer-input-element {
+        font-size: 1rem;
+    }
+    #cartContainer > div.orderInfo > div.customer-info > div:nth-child(4) > label{
+        font-size:1rem!important;
+    }
+    .promo .promo-optin {
+        font-size:.7em!important;
+        padding:0px;margin:0px;
+    }
+    .promo-optin {
+        min-width:300px!important;
+        padding:0px!important;margin:0px!important;
+    }
+}
+
+/* Medium screens (768px to 1023px, e.g., tablets) */
+@media (min-width: 768px) and (max-width: 1023px) {
+    body {
+        font-size: 16px; /* Standard base size for medium screens */
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.75rem;
+    }
+
+    h3 {
+        font-size: 1.5rem;
+    }
+
+    p {
+        font-size: 1.1rem;
+    }
+    .customer-info-label, .payment-section {
+        font-size: 1.7rem!important;
+    }
+    .customer-input-element {
+        font-size: 1.2rem;
+    }
+    #cartContainer > div.orderInfo > div.customer-info > div:nth-child(4) > label {
+        font-size:1.2rem!important;
+    }
+    .promo .promo-optin {
+        font-size:.7em!important;
+        padding:0px;margin:0px;
+    }
+    .promo-optin {
+        min-width:300px!important;
+        padding:0px!important;margin:0px!important;
+    }
+}
+
+/* Large screens (1024px to 1440px, e.g., laptops and desktops) */
+@media (min-width: 1024px) and (max-width: 1440px) {
+    body {
+        font-size: 18px; /* Comfortable reading size for larger screens */
+    }
+
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    h2 {
+        font-size: 2.25rem;
+    }
+
+    h3 {
+        font-size: 2rem;
+    }
+
+    p {
+        font-size: 1.2rem;
+    }
+    .customer-info-label, .payment-section {
+        font-size: 2.0rem!important;
+    }
+    .customer-input-element {
+        font-size: 1.5rem;
+    }
+    #cartContainer > div.orderInfo > div.customer-info > div:nth-child(4) > label {
+        font-size:1.4rem!important;
+    }
+    .promo .promo-optin {
+        font-size:.7em!important;
+        padding:0px;margin:0px;
+    }
+    .promo-optin {
+        min-width:300px!important;
+        padding:0px!important;margin:0px!important;
+    }
+}
+
+/* Extra-large screens (1441px and above, e.g., large desktops or TVs) */
+@media (min-width: 1441px) {
+    body {
+        font-size: 20px; /* Larger font size for very large screens */
+    }
+
+    h1 {
+        font-size: 3rem;
+    }
+
+    h2 {
+        font-size: 2.5rem;
+    }
+
+    h3 {
+        font-size: 2.25rem;
+    }
+
+    p {
+        font-size: 1.3rem;
+    }
+    .customer-info-label, .payment-section {
+        font-size: 2.5rem!important;
+    }
+    .customer-input-element {
+        font-size: 1.5rem;
+    }
+    #cartContainer > div.orderInfo > div.customer-info > div:nth-child(4) > label {
+        font-size:1.4rem!important;
+    }
+    .promo {
+        font-size:1.4rem!important;
+        padding:0px;margin:0px;
+    }
+}
+
+
+#cvv {width:80px;}
+
+.promo-optin {
+    font-family: 'Poppins' sans-serif;
+    min-width:250px;
+}
+
+.customer-info-label, .payment-section {
+    font-family:Marvel;
+}
+
+.customer-input-element {
+    /*font-size:1em;*/
+}
+
+
+.tab-container {
+    flex-wrap: wrap; /* Allow the tabs to wrap on smaller screens */
+    padding: 10px 0; /* Reduce padding */
+    gap: 10px; /* Less gap between tabs */
+    margin: 0 auto;
+    background: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    max-width: 1290px; /* Match the width of `.zip-form-container` */
+    margin-bottom: 10px;
+    font-family: 'Poppins', sans-serif;
+}
+
+
+button, .add-to-cart-button {
+    /*font-family:Marvel, sans-serif;*/
+}
+button, .add-to-cart-button {
+    font-family:sans-serif;
+    /*font-family:Marvel, sans-serif;*/
+}
+
+/* Modal container (hidden by default) */
+.modal {
+    position: absolute;
+    bottom: 110%; /* Position it above the button */
+    left: 50%;
+    transform: translateX(-50%);
+    display: none; /* Hidden by default */
+    z-index: 1000;
+}
+
+/* Modal content */
+.modal-content {
+    background: linear-gradient(145deg, #ffffff, #f0f0f0);
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    font-family: Arial, sans-serif;
+    text-align: center;
+    font-size: 1rem;
+    color: #333;
+    white-space: nowrap;
+}
+
+/* Add a subtle animation */
+.modal-content {
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+#checkoutButton:hover {
+    background-color: darkgreen;
+}
+
+
+#checkoutButton {
+    font-family: sans-serif;
+    height: 90px;           /* Adjust height as needed */
+    margin: 0 25%;          /* 25% margin on left and right */
+    width: 50%;             /* Ensure button width fits the layout */
+    background-color: green;
+    color: #fff;
+    font-weight: 700;
+    /*font-family: Marvel, sans-serif;*/
+    border: none;           /* Remove border */
+    border-radius: 10px;    /* Rounded corners */
+    cursor: pointer;        /* Pointer cursor for interactivity */
+}
+#checkoutButton:disabled {
+    background-color: #ccc; /* Greyed-out look for disabled state */
+    cursor: not-allowed;    /* Prevent pointer cursor */
+    opacity: 0.6;           /* Reduced opacity */
+}
+
+.info-row {
+    display: flex;
+    flex-direction: column;
+}
+
+.info-row.full-width {
+    grid-column: span 2;  /* Make the input span both columns */
+}
+
+/*.customer-info label {*/
+    /*font-weight: bold;*/
+/*}*/
+
+/*.customer-info input,*/
+/*.customer-info textarea {*/
+    /*padding: 10px;*/
+    /*border: 1px solid #ddd;*/
+    /*border-radius: 5px;*/
+    /*font-size: 1rem;*/
+/*}*/
+
+#specialInstructions {
+    height: 100px;
+}
+
+
+/* Payment Section Styling */
+.payment-section {
+    max-width: 800px;       /* Same width as .customer-info */
+    margin: 0 auto;         /* Center horizontally */
+    padding: 20px;          /* Same padding for consistency */
+    background-color: inherit;  
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+/* Payment Label */
+.payment-section label, 
+.customer-info label {
+    /*font-family: 'Poppins', sans-serif;*/
+    /*font-size: 1rem;*/
+    display: block;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.item-quantity label, #totalPriceRow{
+    font-size:1em;
+}
+
+
+/* Payment Select */
+.payment-section select {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+    box-sizing: border-box;
+}
+
+/* Focus state for select */
+.payment-section select:focus {
+    border-color: #81b622;  /* Lime green border on focus */
+    outline: none;
+}
+
+/* Mobile responsiveness (up to 768px) */
+@media (max-width: 768px) {
+    .payment-section {
+        padding: 15px;  /* Slightly reduced padding for mobile */
+    }
+    .payment-section select {
+        font-size: 0.9rem; /* Slightly smaller font size for mobile */
+    }
+}
+
+/* Add specific style for the submit button between 400px and 768px */
+@media (min-width: 400px) and (max-width: 768px) {
+    #checkoutButton {
+        margin-bottom: 10px; /* Add 10px bottom margin */
+    }
+    #cartContainer {
+        padding-bottom: 20px; /* Add 20px bottom margin */
+    }
+}
+
+
+
+/* Delivery Form Grid Layout */
+.customer-info {
+    /*gap: 20px;*/
+    /*display: grid;*/
+    /*grid-template-columns: 1fr 1fr; [> default: two columns <]*/
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #fff;
+    border-radius: 8px;
+    /*font-family: Marvel; [> Apply Marvel font to the entire grid <]*/
+}
+
+.customer-info label {
+    /*font-family: Marvel;*/
+}
+
+.customer-info input,
+.customer-info textarea,
+.payment-section select {
+    /*font-family: 'Poppins', sans-serif;[> Consistent smaller font size for inputs <]*/
+}
+
+@media (min-width: 769px) {
+    .customer-info {
+        gap: 20px;
+        display: grid;
+        grid-template-columns: 1fr 1fr; /* default: two columns */
+    }
+}
+
+
+/* Force single column under 768px */
+@media (max-width: 768px) {
+    .customer-info {
+        grid-template-columns: 1fr; /* Single column layout */
+    }
+}
+
+
+/* Additional style for very narrow screens (250px to 430px) */
+@media only screen and (max-width: 430px) {
+    .customer-info {
+        grid-template-columns: 1fr; /* Ensure single-column layout */
+        width: 90%;
+        max-width: 350px;
+        margin: 0 auto;
+        padding: 10px; /* Adjust padding for smaller screens */
+        box-sizing: border-box;
+    }
+
+    .orderInfo {
+        border: 0;
+        padding: 0;
+    }
+
+    .customer-info input,
+    .customer-info textarea {
+        width: 100%; /* Ensure full width for inputs */
+        box-sizing: border-box;
+        font-size: 0.8rem; /* Consistent smaller font size for inputs */
+    }
+
+    #minOrderMessage {
+        font-size: 0.6rem!important; /* Smaller font size for message */
+        text-align: right;
+    }
+
+    #name,
+    #address {
+        width: 100%; /* Full width for larger inputs */
+        max-width: none; /* Remove any parent constraints */
+    }
+
+    #phone,
+    #city {
+        width: 100%; /* Ensure uniform width for all inputs */
+    }
+
+    /* Placeholder text size adjustments */
+    input::placeholder,
+    textarea::placeholder {
+        font-size: 0.7rem; /* Smaller placeholder text */
+    },
+    h1 {
+   font-size:1.2em!important; 
+    }
+    .tab-container {
+        margin: 0px 25px 10px 25px; 
+    }
+}
+
+/* Compact styling for tabs on smaller screens */
+@media (max-width: 430px) {
+    .tab-container {
+        padding: 5px 5px; /* Smaller padding for left and right */
+    }
+
+    .tab {
+        font-size: 0.7em !important; /* Reduce font size */
+        padding: 5px 5px !important; /* Compact padding for tabs */
+        flex: 1; /* Ensure tabs adjust their width */
+        text-align: center; /* Center-align text */
+    }
+}
+
+
+
+/* Promo Opt-In Styling */
+.promo-optin {
+    display: flex;
+    gap: 1rem; /* Space between labels and checkboxes */
+    align-items: center; /* Align vertically */
+    flex-wrap: wrap; /* Ensure wrapping on small screens */
+}
+
+.promo {
+    /*font-family: 'Poppins', sans-serif!important; */
+}
+
+.accordion-section h3,
+#CODHelp h3,
+#creditCardForm h3,
+#cryptoWallets h3,
+#generalHelp h3 {
+    /*font-family: 'Marvel', sans-serif; [> Apply Marvel font for section titles <]*/
+}
+
+
+
+/* Common Styles for Accordion Sections */
+.accordion-section {
+    max-width: 1024px; /* Set maximum width */
+    margin: 20px auto; /* Center horizontally and add vertical spacing */
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Specific Style for CODHelp Section */
+#CODHelp {
+    background-color: #e9f7ef; /* Light yellow for cash-specific section */
+    border-color: #28a745; /* Golden border */
+}
+
+#CODHelp h3 {
+    color: #1e7e34;
+    /*font-size: 1.5rem;*/
+    margin-bottom: 15px;
+}
+
+#CODHelp p {
+    color: #856404;
+    /*font-size: 1rem;*/
+    /*line-height: 1.6;*/
+}
+
+
+/* Adjust alignment for smaller screens */
+@media (max-width: 1024px) {
+    .accordion-section {
+        padding: 35px; /* Slightly reduce padding for smaller screens */
+    }
+}
+
+
+/* Credit Card Form Styling */
+#creditCardForm {
+    background-color: #e9f7ef;
+    border-color: #28a745;
+}
+
+#creditCardForm h3 {
+    color: #1e7e34;
+    margin-bottom: 15px;
+}
+
+#creditCardForm label {
+    color: #000;
+}
+
+
+@media (max-width: 640px) {
+    .cardElement {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        margin-bottom: 15px;
+        box-sizing: border-box;
+    }
+}
+
+#creditCardForm .golden-lock {
+    color: #ffc107;
+    margin-left: 10px;
+}
+
+/* Crypto Wallets Styling */
+#cryptoWallets {
+    /*background-color: #fff8e6;*/
+    border-color: #ffc107;
+}
+
+#cryptoWallets h3 {
+    /*color: #e68a00;*/
+    /*font-size: 1.5rem;*/
+    margin-bottom: 15px;
+}
+
+#cryptoWallets ul {
+    padding: 0;
+    list-style: none;
+}
+
+#cryptoWallets li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+#cryptoWallets li:last-child {
+    border-bottom: none;
+}
+
+.copy-address {
+    color: #007bff;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.copy-address:hover {
+    color: #0056b3;
+}
+
+/* General Help Section Styling */
+#generalHelp {
+    background-color: #e9f7ef;
+    border-color: #28a745;
+}
+
+#generalHelp h3 {
+    color: #1e7e34;
+    /*font-size: 1.5rem;*/
+    margin-bottom: 15px;
+}
+
+#generalHelp p {
+    color: #155724;
+    /*font-size: 1rem;*/
+    margin: 10px 0;
+}
+
