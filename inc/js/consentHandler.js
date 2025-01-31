@@ -19,9 +19,8 @@ export function initCookieConsent() {
             content: {
                 message: `
                 <div id="cookie-message-container">
-                    <img src="/images/gravatars/doap-budtender-150x150.png" height="70" width="70" class="cookie-image">
                     <span id="cookie-message" class="poppins-font-light">
-                        We will never share your personal info but We love sharing our cookies! 🍪  Accept cookies and we’ll add a **free chocolate chip cookie** to your first order!
+                        We will never share your personal information but we do love to share our yummy DOAP cookies! 🍪  Click accept and we’ll add a **free chocolate chip cookie** to your first order!
                     </span>
                 </div>
                 `,

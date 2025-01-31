@@ -5,95 +5,6 @@ body, h2, input, button, footer {
 }
 
 
-/* Outer wrapper to ensure full centering */
-#cookie-wrapper {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-}
-
-/* Centers and properly aligns text and image */
-#cookie-message-container {
-    display: flex;
-    align-items: center;
-    gap: 12px; /* Space between image and text */
-    max-width: 600px; /* Keeps it from stretching too wide */
-    text-align: left; /* Prevents weird multi-column breaks */
-}
-
-/* Prevents image from resizing and ensures alignment */
-.cookie-image {
-    flex-shrink: 0;
-    width: 70px;
-    height: 70px;
-    border-radius: 50%; /* Optional: Circular image */
-}
-
-/* Ensures text stays properly formatted and doesn't break oddly */
-#cookie-text {
-    max-width: 500px;
-    font-size: 1em;
-    line-height: 1.4;
-    text-align: left;
-}
-
-/*[> Fix for compliance buttons staying aligned below <]*/
-/*.cc-compliance {*/
-    /*text-align: center;*/
-    /*width: 100%;*/
-/*}*/
-
-
-/* Centers the entire cookie consent block on all screen sizes */
-#cookie-message {
-    display: flex;
-    justify-content: center; /* Centers horizontally */
-    align-items: center;
-    width: 100%;
-}
-
-/* Centers the text & image inside the container */
-/*#cookie-message-container {*/
-    /*display: flex;*/
-    /*align-items: center;*/
-    /*gap: 12px; [> Adds spacing between image and text <]*/
-    /*max-width: 600px; [> Prevents it from stretching too wide <]*/
-    /*background: rgba(0, 0, 0, 0.8); [> Optional: Background for better visibility <]*/
-    /*padding: 10px 15px;*/
-    /*border-radius: 10px; [> Optional: Rounded corners <]*/
-/*}*/
-
-/* Prevents image from shrinking and ensures alignment */
-.cookie-image {
-    flex-shrink: 0;
-    width: 70px;
-    height: 70px;
-    border-radius: 50%; /* Optional: Circular image */
-}
-
-/* Ensures that everything is centered on larger screens */
-@media (min-width: 1150px) {
-    #cookie-message {
-        display: flex;
-        justify-content: center;
-    }
-}
-
-
-
-
-
-.cc-btn.cc-allow {
-    background-color: #d2691e; /* Chocolate chip cookie brown */
-    color: white;
-    font-weight: bold;
-}
-
-.cc-btn.cc-allow:hover {
-    background-color: #a0522d; /* Darker brown */
-}
-
-
 
 /* Center and style the canvas */
 #savingsGraph {
@@ -993,11 +904,21 @@ body {
 }
 
 
+/*#cartContainer {*/
+    /*border:1px dashed #ff0000;*/
+    /*padding:10px;*/
+    /*border-radius:10px;*/
+    /*background-color:#fff;*/
+    /*max-width:1300px!important;*/
+/*}*/
 #cartContainer {
-    border:1px dashed #ff0000;
-    padding:10px;
-    border-radius:10px;
-    background-color:#fff;
+    border: 1px dashed #ff0000;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #fff;
+    max-width: 1290px !important;
+    margin: 0 auto; /* Centers the div */
+    display: block; /* Ensures proper behavior */
 }
 
 
@@ -1520,51 +1441,22 @@ input[type="number"].quantity {
 
 
 
-/* Ensure the entire cookie message and buttons are properly centered */
-#cookie-message-container {
-    display: flex;
-    align-items: center;
-    gap: 12px; /* Space between image and text */
-    max-width: 600px; /* Prevents it from stretching too wide */
-    text-align: left;
-    margin: 0 auto; /* Center the container horizontally */
-}
-
-/* Ensure buttons align properly */
-.cc-compliance {
-    display: flex;
-    justify-content: center; /* Centers buttons */
-    width: 100%;
-    margin-top: 10px; /* Adjust spacing from message */
-}
-
-/* Style buttons so they fit within available space */
-.cc-btn {
-    padding: 10px 15px;
-    font-size: 1em;
-    border-radius: 5px;
-    flex-grow: 1; /* Ensures they distribute evenly */
-    max-width: 250px; /* Prevents them from being too wide */
-}
-
-
-
 /* Apply Marvel font to the cookie consent elements */
 .cc-link, .cc-btn {
     color: #000; /* Default text color */
 }
 
-/*[> Optional: Additional styling for buttons <]*/
-/*.cc-btn {*/
-    /*background-color: #f1d600; [> Button background <]*/
-    /*color: #000; [> Button text color <]*/
-    /*padding: 10px 15px;*/
-    /*border: none;*/
-    /*border-radius: 5px;*/
-    /*font-size: 1rem; [> Button text size <]*/
-    /*cursor: pointer;*/
-    /*transition: background-color 0.3s ease;*/
-/*}*/
+/* Optional: Additional styling for buttons */
+.cc-btn {
+    background-color: #f1d600; /* Button background */
+    color: #000; /* Button text color */
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem; /* Button text size */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
 
 /* Button hover effect */
 .cc-btn:hover {
