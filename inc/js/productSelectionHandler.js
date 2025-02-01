@@ -31,13 +31,17 @@ document.addEventListener("DOMContentLoaded", () => {
             const isInCart = cartData.some((item) => item.name === productName);
 
             if (isInCart) {
-                button.disabled = true;
+                button.disabled = false;  // Allow re-clicking to add another
                 button.textContent = "In Cart";
                 button.classList.add("disabled");
+                button.classList.add("clickable");  // Add a class for pointer cursor
+                button.title = "Click to add another";  // Tooltip message
             } else {
                 button.disabled = false;
                 button.textContent = "Add to Cart";
                 button.classList.remove("disabled");
+                button.classList.remove("clickable");  // Remove pointer cursor
+                button.title = "";  // Clear tooltip message
             }
         });
     }

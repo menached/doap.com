@@ -4,6 +4,24 @@ body, h2, input, button, footer {
     padding: 0;
 }
 
+/* When the button is clickable (greyed out but still active) */
+.add-to-cart-button.clickable {
+    cursor: pointer;
+}
+
+/* Disabled button styling */
+.add-to-cart-button:disabled, 
+.add-to-cart-button.disabled {
+    background-color: #ccc;  /* Grey */
+    color: #666;
+}
+
+/* When the button is greyed out but still clickable, show pointer */
+.add-to-cart-button:not(:disabled):not(.disabled).clickable {
+    background-color: #ccc;  /* Grey */
+    color: #666;
+    cursor: pointer;  /* Allow clicking */
+}
 
 
 /* Center and style the canvas */
@@ -521,12 +539,6 @@ hr {
     background-color: #0056b3; /* Darker blue */
 }
 
-/* Disabled button styling */
-.add-to-cart-button:disabled, .add-to-cart-button.disabled {
-    background-color: #ccc; /* Grey */
-    color: #666;
-    cursor: not-allowed;
-}
 
 
 /* Click effect (flash when clicked) */

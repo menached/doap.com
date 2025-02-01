@@ -11,8 +11,8 @@ export const weightBasedProducts = {
     "Small Bud Special": {
         thumbnail: "/images/products/flower/small-bud-special.webp", // Add the thumbnail URL
         weights: {
-            4: { label: "1/2 oz. (14 grams)", price: 75 },
-            8: { label: "1 oz. (28 grams)", price: 150 },
+            4: { label: "1/2 oz. (14 grams)", price: 50 },
+            8: { label: "1 oz. (28 grams)", price: 100 },
         },
     },
     "Organic Greenhouse Flower": {
@@ -27,16 +27,8 @@ export const weightBasedProducts = {
     "Premium Quality Hybrid Prerolls": {
         thumbnail: "/images/products/flower/2-joints.webp", // Add the thumbnail URL
         weights: {
-            1: { label: "1 Joint", price: 15.00 },
-            2: { label: "2 Joints", price: 28.00 },
-            3: { label: "3 Joints", price: 39.00 },
-            4: { label: "4 Joints", price: 48.00 },
-            5: { label: "5 Joints", price: 55.00 },
-            6: { label: "6 Joints", price: 60.00 },
-            7: { label: "7 Joints", price: 65.00 },
-            8: { label: "8 Joints", price: 72.00 },
-            9: { label: "9 Joints", price: 78.00 },
-            10: { label: "10 Joints", price: 80.00 },
+            1: { label: "1 Joint", price: 10.00 },
+            6: { label: "6 Joints", price: 50.00 },
         },
     },
     "Bakers Dozen Prerolled Cone Joints": {
